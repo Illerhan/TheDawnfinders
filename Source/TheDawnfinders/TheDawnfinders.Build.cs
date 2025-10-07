@@ -14,7 +14,8 @@ public class TheDawnfinders : ModuleRules
 			"Engine", 
 			"InputCore",
 			"OnlineSubsystem",
-			"OnlineSubsystemUtils" 
+			"OnlineSubsystemUtils",
+			"UMG" 
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
