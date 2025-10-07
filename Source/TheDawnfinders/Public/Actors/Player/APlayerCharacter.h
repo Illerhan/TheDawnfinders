@@ -20,6 +20,15 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 
+	UPROPERTY(BlueprintReadOnly)
+	FVector CurrentPlayerInput;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool NoRotation;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool NoInputMovement;
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
