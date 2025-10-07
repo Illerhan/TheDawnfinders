@@ -6,6 +6,16 @@
 #include "GameFramework/Character.h"
 #include "APlayerCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class EPlayerState : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Running UMETA(DisplayName = "Running"),
+	Crouching UMETA(DisplayName = "Crouching"),
+	UsingEquipment UMETA(DisplayName = "Using Equipment"),
+	Dead UMETA(DisplayName = "Dead")
+};
+
 UCLASS()
 class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter
 {
@@ -23,11 +33,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;
 
-	UPROPERTY(BlueprintReadWrite)
-	bool NoRotation;
-
-	UPROPERTY(BlueprintReadWrite)
-	bool NoInputMovement;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EPlayerState CurrentState;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -39,4 +46,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RotateCharacter();
 
+	UFUNCTION(BlueprintCallable)
+	void ManageRun(bool Input);
 };

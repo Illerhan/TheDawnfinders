@@ -2,6 +2,8 @@
 
 
 #include "Actors/Player/APlayerCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 AAPlayerCharacter::AAPlayerCharacter()
@@ -14,7 +16,8 @@ AAPlayerCharacter::AAPlayerCharacter()
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 }
 
 void AAPlayerCharacter::Tick(float DeltaTime)
@@ -33,7 +36,7 @@ void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
-	if (NoInputMovement) return;
+	if (CurrentState == EPlayerState::UsingEquipment) return;
 
 	CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
@@ -50,8 +53,8 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 void AAPlayerCharacter::RotateCharacter()
 {
-	if (NoRotation) return;
-	if (CurrentPlayerInput.Length() < 1.f) return;
+	if (CurrentState == EPlayerState::UsingEquipment) return;
+	if (CurrentPlayerInput.Length() < 10.f) return;
 	if (GetVelocity().Length() < 100.f) return;
 
 	FVector Direction = GetVelocity();
@@ -67,6 +70,20 @@ void AAPlayerCharacter::RotateCharacter()
 		SetActorRelativeRotation(NewRotation);
 	}
 }
+
+void AAPlayerCharacter::ManageRun(bool Input)
+{
+	if (Input) {
+		CurrentState = EPlayerState::Running;
+		GetCharacterMovement()->MaxWalkSpeed = 700.0f;
+	}
+	else {
+		if(CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
+		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+	}
+}
+
+
 
 
 
