@@ -4,24 +4,42 @@
 #include "Components/UInventoryComponent.h"
 
 
-UUInventoryComponent::UUInventoryComponent()
+UInventoryComponent::UInventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
 
-void UUInventoryComponent::BeginPlay()
+void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
 
-void UUInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UUInventoryComponent::Throw()
+
+
+
+FInventorySlot UInventoryComponent::GetCurrentSlot_Implementation()
+{
+	return FInventorySlot();
+}
+
+FInventorySlot UInventoryComponent::ChangeCurrentSlot_Implementation(bool IndexGoUp)
+{
+	return FInventorySlot();
+}
+
+void UInventoryComponent::AddNewItem_Implementation(UItemData* NewItem)
+{
+
+}
+
+void UInventoryComponent::Throw_Implementation()
 {
 	
 }
