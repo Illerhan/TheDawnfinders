@@ -5,6 +5,7 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
 
 void ULobbyWidget::NativeConstruct()
 {
@@ -34,7 +35,13 @@ void ULobbyWidget::NativeConstruct()
     {
         CreateSessionButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnCreateSessionClicked);
     }
+    if (StartGameButton)
+    {
+        StartGameButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnStartGameClicked);
+    }
 
+    UpdateStartGame();
+    
     // Timer pour mettre à jour le compte de joueurs toutes les secondes
     GetWorld()->GetTimerManager().SetTimer(
         PlayerCountTimerHandle,
@@ -94,6 +101,43 @@ void ULobbyWidget::OnCreateSessionClicked()
         false,  // Pas de serveur dédié
         true    // Utiliser les lobbies Steam
     );
+    UGameplayStatics::OpenLevel(this, FName("Lvl_TopDown"),false,"listen?");
+}
+
+void ULobbyWidget::OnStartGameClicked()
+{
+    if (!SessionSubsystem)
+    {
+        UE_LOG(LogTemp, Error, TEXT("SessionSubsystem is null"));
+        return;
+    }
+
+    // Vérifier qu'on est bien le serveur
+    APlayerController* PC = GetWorld()->GetFirstPlayerController();
+    if (!PC)
+    {
+        UE_LOG(LogTemp, Error, TEXT("PlayerController is null"));
+        return;
+    }
+
+    // Seul le serveur peut lancer la partie
+    if (!PC->HasAuthority())
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Only the host can start the game"));
+        return;
+    }
+
+    // ServerTravel pour emmener tous les clients avec nous
+
+    this->RemoveFromParent();
+    PC->bShowMouseCursor = false;
+
+    
+    
+    FString MapPath = TEXT("/Game/Maps/L_Test");
+    GetWorld()->ServerTravel(MapPath, true);
+    
+    UE_LOG(LogTemp, Error, TEXT("ServerTravel called to: %s"), *MapPath);
 }
 
 void ULobbyWidget::OnSessionCreated(bool bWasSuccessful)
@@ -108,7 +152,7 @@ void ULobbyWidget::OnSessionCreated(bool bWasSuccessful)
             InviteFriendsButton->SetIsEnabled(true);
         }
 
-        // Vous pouvez changer de map vers le lobby ici
+        
         // UGameplayStatics::OpenLevel(this, FName("LobbyMap"));
     }
     else
@@ -147,5 +191,15 @@ void ULobbyWidget::UpdatePlayerCount()
     else
     {
         PlayerCountText->SetText(FText::FromString(TEXT("No Active Session")));
+    }
+}
+
+void ULobbyWidget::UpdateStartGame()
+{
+    if (StartGameButton)
+    {
+        APlayerController* PC = GetWorld()->GetFirstPlayerController();
+        bool bIsServer = PC && PC->HasAuthority();
+        StartGameButton->SetVisibility(bIsServer ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
     }
 }

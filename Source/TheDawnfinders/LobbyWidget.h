@@ -30,6 +30,11 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* CreateSessionButton;
 
+	// Bouton pour demarrer la partie
+	UPROPERTY(meta = (BindWidget))
+	class UButton* StartGameButton;
+
+
 	// Texte affichant le nombre de joueurs
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* PlayerCountText;
@@ -45,10 +50,15 @@ private:
 	void OnCreateSessionClicked();
 
 	UFUNCTION()
+	void OnStartGameClicked();
+
+	UFUNCTION()
 	void OnSessionCreated(bool bWasSuccessful);
 
 	UFUNCTION()
 	void OnSessionJoined(bool bWasSuccessful);
 
 	void UpdatePlayerCount();
+
+	void UpdateStartGame();
 };
