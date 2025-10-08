@@ -13,6 +13,16 @@ AAPlayerCharacter::AAPlayerCharacter()
 
 }
 
+void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
+{
+
+}
+
+void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
+{
+
+}
+
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -81,6 +91,23 @@ void AAPlayerCharacter::ManageRun(bool Input)
 		if(CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
 		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	}
+}
+
+AActor* AAPlayerCharacter::GetNearestInteractible()
+{
+	float bestDist = INT_MAX;
+	AActor* pickedInteractible = nullptr;
+
+	for (AActor* Interactible : InteractiblesAtRange) {
+		float currentDist = (Interactible->GetActorLocation() - GetActorLocation()).Length();
+
+		if (currentDist < bestDist) {
+			pickedInteractible = Interactible;
+			bestDist = currentDist;
+		}
+	}
+	
+	return pickedInteractible;
 }
 
 
