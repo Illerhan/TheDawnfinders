@@ -15,12 +15,12 @@ AAPlayerCharacter::AAPlayerCharacter()
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
 {
-
+	InteractiblesAtRange.Add(Interactible);
 }
 
 void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
 {
-
+	InteractiblesAtRange.Remove(Interactible);
 }
 
 void AAPlayerCharacter::BeginPlay()
