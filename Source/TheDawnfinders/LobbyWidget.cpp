@@ -134,8 +134,8 @@ void ULobbyWidget::OnStartGameClicked()
 
     
     
-    FString MapPath = TEXT("/Game/Maps/L_Test");
-    GetWorld()->ServerTravel(MapPath, true);
+    FString MapPath = TEXT("L_Test");
+    GetWorld()->ServerTravel(MapPath + "?listen", true);
     
     UE_LOG(LogTemp, Error, TEXT("ServerTravel called to: %s"), *MapPath);
 }
