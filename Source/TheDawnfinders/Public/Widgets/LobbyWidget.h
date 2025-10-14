@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "SessionManagerSubsystem.h"
+#include "GameFramework/SessionManagerSubsystem.h"
 #include "LobbyWidget.generated.h"
 
 /**

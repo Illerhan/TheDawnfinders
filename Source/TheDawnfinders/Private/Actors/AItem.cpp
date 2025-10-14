@@ -13,7 +13,7 @@ AItem::AItem()
 
 void AItem::Interact_Implementation(AActor* Interactor)
 {
-
+	
 }
 
 // Called when the game starts or when spawned
