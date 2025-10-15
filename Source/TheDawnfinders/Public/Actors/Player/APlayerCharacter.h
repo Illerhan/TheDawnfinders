@@ -30,6 +30,17 @@ public:
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
 
+	UFUNCTION(Server, Reliable)
+	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
+
+	UFUNCTION()
+	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Inventory")
+	UInventoryComponent* Inventory;
+
+	
+
 protected:
 	virtual void BeginPlay() override;
 	
@@ -41,9 +52,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
-
-	UPROPERTY(BlueprintReadOnly)
-	TArray<AActor*> InteractiblesAtRange;
+	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	bool IsReadyForRPCs() const;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -60,6 +72,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetNearestInteractible();
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> InteractiblesAtRange;
 
 
 };

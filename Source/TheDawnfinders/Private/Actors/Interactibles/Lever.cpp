@@ -24,14 +24,15 @@ void ALever::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ALever::Interaction_Implementation()
+void ALever::Interaction(AAPlayerCharacter* Player)
 {
 	if (bCanBeUsed)
 	{
 		if (LinkedObject->bCanMove)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("moving %s") , *LinkedObject->GetName());
 			LinkedObject->DoMovement();
-			Super::Interaction_Implementation();
+			Super::Interaction(Player);
 		}
 	}
 }

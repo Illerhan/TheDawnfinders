@@ -11,7 +11,6 @@ AMovableObjects::AMovableObjects()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	this->bReplicates = true;
-	this->bReplicateUsingRegisteredSubObjectList = true;
 	AActor::SetReplicateMovement(true);
 }
 
@@ -33,12 +32,15 @@ void AMovableObjects::BeginPlay()
 void AMovableObjects::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Timeline.TickTimeline(DeltaTime);
+	if (HasAuthority())
+		Timeline.TickTimeline(DeltaTime);
 	
 }
 
 void AMovableObjects::DoMovement()
 {
+	if (!HasAuthority()) return;
+	
 	if (MoveCurve)
 	{
 		Timeline.AddInterpFloat(MoveCurve,TimelineProgress);
@@ -46,6 +48,8 @@ void AMovableObjects::DoMovement()
 		Timeline.PlayFromStart();
 		Timeline.SetTimelineFinishedFunc(TimelineFinished);
 		bCanMove = false;
+
+		UE_LOG(LogTemp, Warning, TEXT("[SERVER] DoMovement called"));
 	}
 }
 

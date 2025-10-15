@@ -32,16 +32,18 @@ public:
 	UPROPERTY()
 	bool bCanBeUsed = true;
 	
+	UFUNCTION(BlueprintCallable,Category="Interactibles")
+	virtual void Interaction(AAPlayerCharacter* Player);
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(Server, Unreliable)
-	void Interaction();
+
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void Interact_Implementation(AActor* Interactor) override { Interaction(); };
+	virtual void Interact_Implementation(AActor* Interactor) override;
 };

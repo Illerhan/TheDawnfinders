@@ -27,5 +27,5 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	virtual void Interaction_Implementation() override;
+	virtual void Interaction(AAPlayerCharacter* Player) override;
 };

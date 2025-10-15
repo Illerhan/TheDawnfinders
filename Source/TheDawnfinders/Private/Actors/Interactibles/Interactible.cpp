@@ -15,20 +15,36 @@ AInteractibleObjects::AInteractibleObjects()
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(FName("SphereCollider"));
 	RootComponent = SphereCollider;
 	SphereCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
+	SphereCollider->SetGenerateOverlapEvents(true);
+	bReplicates = true;
 }
 
 void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (Cast<AAPlayerCharacter>(OtherActor) != nullptr)
-			Cast<AAPlayerCharacter>(OtherActor)->Execute_AddInteractibleAtRange(OtherActor,this);
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
+	if (Player && Player->IsLocallyControlled())
+	{
+		// This now runs on the client, directly modifying their local array
+		Player->InteractiblesAtRange.Add(this);
+		UE_LOG(LogTemp, Log, TEXT("Added interactible locally on client"));
+	}
 }
 
 void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (Cast<AAPlayerCharacter>(OtherActor) != nullptr)
-		Cast<AAPlayerCharacter>(OtherActor)->Execute_RemoveInteractibleAtRange(OtherActor,this);
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
+	if (Player && Player->IsLocallyControlled())
+	{
+		Player->InteractiblesAtRange.Remove(this);
+		UE_LOG(LogTemp, Log, TEXT("Removed interactible locally on client"));
+	}
+}
+
+void AInteractibleObjects::Interaction(AAPlayerCharacter* Player)
+{
+	
 }
 
 // Called when the game starts or when spawned
@@ -40,8 +56,12 @@ void AInteractibleObjects::BeginPlay()
 	
 }
 
-void AInteractibleObjects::Interaction_Implementation()
+void AInteractibleObjects::Interact_Implementation(AActor* Interact)
 {
+	
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interact);
+	if (Player)
+		Player->TryInteract(this,Player);
 	UE_LOG(LogTemp, Warning, TEXT("Interacted with a %s") , *GetName());
 }
 

@@ -18,7 +18,7 @@ public:
 	int Quantity;
 
 	FInventorySlot()
-		: Quantity(0), ItemData(nullptr)
+		:  ItemData(nullptr), Quantity()
 	{
 	}
 };

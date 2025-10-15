@@ -2,6 +2,8 @@
 
 
 #include "Actors/Player/APlayerCharacter.h"
+
+#include "Actors/Interactibles/Interactible.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -10,6 +12,9 @@ AAPlayerCharacter::AAPlayerCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	bReplicates = true;
+	AActor::SetReplicateMovement(true);
 
 }
 
@@ -23,11 +28,31 @@ void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interac
 	InteractiblesAtRange.Remove(Interactible);
 }
 
+void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible,AAPlayerCharacter* Player)
+{
+	if (!Interactible || !Interactible->bCanBeUsed)
+		return;
+	
+	if (Interactible)
+	{
+		Interactible->Interaction(Player);
+	}
+}
+
+void AAPlayerCharacter::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hello"));
+	if (InteractibleObject)
+		ServerInteract(InteractibleObject,Player);
+}
+
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	Inventory = FindComponentByClass<UInventoryComponent>();
+	ensure(Inventory);
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+	
 }
 
 void AAPlayerCharacter::Tick(float DeltaTime)
@@ -95,7 +120,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
 AActor* AAPlayerCharacter::GetNearestInteractible()
 {
-	float bestDist = INT_MAX;
+	float bestDist = FLT_MAX;
 	AActor* pickedInteractible = nullptr;
 
 	for (AActor* Interactible : InteractiblesAtRange) {
@@ -110,7 +135,38 @@ AActor* AAPlayerCharacter::GetNearestInteractible()
 	return pickedInteractible;
 }
 
+void AAPlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+    
+	UE_LOG(LogTemp, Warning, TEXT("[SERVER] %s POSSESSED by %s"), 
+		*GetName(), 
+		NewController ? *NewController->GetName() : TEXT("None"));
+    
+	// Verify RPC readiness
+	if (IsReadyForRPCs())
+	{
+		UE_LOG(LogTemp, Log, TEXT("[SERVER] %s is ready for RPCs"), *GetName());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("[SERVER] %s is NOT ready for RPCs!"), *GetName());
+	}
+}
 
-
-
-
+void AAPlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+    
+	UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s PlayerState replicated. Controller: %s"), 
+		*GetName(), 
+		GetController() ? *GetController()->GetName() : TEXT("None"));
+}
+bool AAPlayerCharacter::IsReadyForRPCs() const
+{
+	// For Server RPCs to work, the pawn must:
+	// 1. Have a valid controller
+	// 2. The controller must be a PlayerController (for client->server RPCs)
+	return GetController() != nullptr && 
+		   Cast<APlayerController>(GetController()) != nullptr;
+}

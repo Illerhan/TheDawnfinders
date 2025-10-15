@@ -47,6 +47,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(Blueprintable)
+	UFUNCTION(Blueprintable,Category="MovableObjects")
 	virtual void DoMovement();
+
 };
