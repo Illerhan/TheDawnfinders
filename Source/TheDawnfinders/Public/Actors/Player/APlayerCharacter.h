@@ -15,6 +15,7 @@ enum class EPlayerState : uint8
 	None UMETA(DisplayName = "None"),
 	Running UMETA(DisplayName = "Running"),
 	Crouching UMETA(DisplayName = "Crouching"),
+	Dodging UMETA(DisplayName = "Dodging"),
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
 	Dead UMETA(DisplayName = "Dead")
 };
@@ -44,6 +45,8 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
+	UPROPERTY(BlueprintReadOnly)
+	float DodgeTimer;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -57,6 +60,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
+
+	UFUNCTION(BlueprintCallable)
+	void Dodge();
+
+	void ActualiseDodge(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetNearestInteractible();

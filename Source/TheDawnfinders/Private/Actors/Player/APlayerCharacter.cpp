@@ -35,6 +35,10 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	RotateCharacter();
+
+	if (CurrentState == EPlayerState::Dodging) {
+		ActualiseDodge(DeltaTime);
+	}
 }
 
 void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -46,7 +50,7 @@ void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
-	if (CurrentState == EPlayerState::UsingEquipment) return;
+	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
 
 	CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
@@ -63,7 +67,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 void AAPlayerCharacter::RotateCharacter()
 {
-	if (CurrentState == EPlayerState::UsingEquipment) return;
+	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
 	if (CurrentPlayerInput.Length() < 10.f) return;
 	if (GetVelocity().Length() < 100.f) return;
 
@@ -83,6 +87,8 @@ void AAPlayerCharacter::RotateCharacter()
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
+	if (CurrentState == EPlayerState::Dodging) return;
+
 	if (Input) {
 		CurrentState = EPlayerState::Running;
 		GetCharacterMovement()->MaxWalkSpeed = 700.0f;
@@ -91,6 +97,34 @@ void AAPlayerCharacter::ManageRun(bool Input)
 		if(CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
 		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	}
+}
+
+void AAPlayerCharacter::Dodge()
+{
+	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
+
+	CurrentState = EPlayerState::Dodging;
+	DodgeTimer = 0;
+}
+
+void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
+{
+	DodgeTimer += DeltaTime;
+	if (DodgeTimer > 0.5f) {
+		CurrentState = EPlayerState::None;
+		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+		return;
+	}
+
+	GetCharacterMovement()->MaxWalkSpeed = 1000.0f;
+
+	FVector FinalVector = CurrentPlayerInput;
+	FinalVector.Normalize();
+
+	FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
+	FinalVector = Rotation.RotateVector(FinalVector);
+
+	AddMovementInput(FinalVector, 1.0f, false);
 }
 
 AActor* AAPlayerCharacter::GetNearestInteractible()
