@@ -38,8 +38,22 @@ public:
 	UPROPERTY(EditAnywhere)
 	UStaticMesh* ItemMeshAsset;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
+	bool bShouldLevitate = true;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
+	float LevitationAmplitude = 20.f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
+	float LevitationSpeed = 2.f;
+
 	UFUNCTION(BlueprintCallable)
 	void Initialise();
 
 	virtual void Interaction(AAPlayerCharacter* Player) override;
+
+private:
+
+	float LevitationTime = 0.f;
+	FVector InitialeLocation;
 };

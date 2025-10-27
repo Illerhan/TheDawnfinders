@@ -13,7 +13,8 @@ AItem::AItem()
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
 	ItemMesh->SetupAttachment(SphereCollider);
-	
+	if (ItemData && ItemData->ItemMesh)
+	ItemMesh->SetStaticMesh(ItemData->ItemMesh);	
 }
 
 void AItem::OnConstruction(const FTransform& Transform)
@@ -31,6 +32,7 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Error, TEXT("Static Mesh : %s"),*ItemMesh->GetStaticMesh().GetFullName());
+	InitialeLocation = GetActorLocation();
 		
 }
 
@@ -38,6 +40,20 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bShouldLevitate)
+	{
+		 LevitationTime += DeltaTime;
+
+		float ZOffset = FMath::Sin(LevitationTime * LevitationSpeed) * LevitationAmplitude;
+
+		FVector NewLocation = InitialeLocation + FVector(0, 0, ZOffset);
+		SetActorLocation(NewLocation);
+
+		FRotator NewRotation = GetActorRotation();
+		NewRotation.Yaw += DeltaTime * 30.f;
+		SetActorRotation(NewRotation);
+	}
 
 }
 
