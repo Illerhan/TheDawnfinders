@@ -3,24 +3,35 @@
 
 #include "Actors/AItem.h"
 
+#include "Actors/Player/APlayerCharacter.h"
+#include "GeometryCollection/GeometryCollectionParticlesData.h"
+
 // Sets default values
 AItem::AItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
+	ItemMesh->SetupAttachment(SphereCollider);
+	
 }
 
-void AItem::Interact_Implementation(AActor* Interactor)
+void AItem::OnConstruction(const FTransform& Transform)
 {
-
+	Super::OnConstruction(Transform);
+    
+	if (ItemData && ItemData->ItemMesh)
+	{
+		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
+	}
 }
 
 // Called when the game starts or when spawned
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	UE_LOG(LogTemp, Error, TEXT("Static Mesh : %s"),*ItemMesh->GetStaticMesh().GetFullName());
+		
 }
 
 // Called every frame
@@ -30,8 +41,17 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Initialise_Implementation(UItemData* Data)
+void AItem::Interaction(AAPlayerCharacter* Player)
 {
-	ItemData = Data;
+	Player->Inventory->AddNewItem(ItemData);
+	
+	Super::Interaction(Player);
+
+	Destroy();
+}
+
+void AItem::Initialise()
+{
+
 }
 

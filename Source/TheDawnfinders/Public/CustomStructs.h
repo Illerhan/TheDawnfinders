@@ -15,10 +15,20 @@ public:
 	UItemData* ItemData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Quantity;
+	int32 Quantity;
 
 	FInventorySlot()
-		: Quantity(0), ItemData(nullptr)
+		:  ItemData(nullptr), Quantity()
 	{
+	}
+
+	bool operator==(const FInventorySlot& Other) const
+	{
+		return ItemData == Other.ItemData && Quantity == Other.Quantity;
+	}
+
+	bool operator!=(const FInventorySlot& Other) const
+	{
+		return !(*this == Other);
 	}
 };

@@ -8,6 +8,13 @@
 #include "DataAssets/ItemData.h"
 #include "UInventoryComponent.generated.h"
 
+
+
+class UItemData;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChanging, const TArray<FInventorySlot>&, CurrentSlots, int32,
+                                             CurrentSlotIndex);
+
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
 {
@@ -15,28 +22,60 @@ class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
 
 public:	
 	UInventoryComponent();
-
-protected:
+	
 	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintReadWrite)
-	TArray<FInventorySlot> InventorySlots;
-
-	UPROPERTY(BlueprintReadWrite)
-	int CurrentSlotIndex;
-
-public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	FInventorySlot GetCurrentSlot();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeTimeProps) const override;
+	virtual bool IsSupportedForNetworking() const override {return true;}
+	
+	UPROPERTY(ReplicatedUsing=OnRep_InventorySlots,EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TArray<FInventorySlot> InventorySlots;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	FInventorySlot ChangeCurrentSlot(bool IndexGoUp);
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentSlotIndex,BlueprintReadWrite, Category="Inventory")
+	int CurrentSlotIndex;
+	
+	UPROPERTY(BlueprintAssignable,Category = "Inventory")
+	FOnInventoryChanging OnInventoryChanging;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFUNCTION()
+	void OnRep_InventorySlots();
+
+	UFUNCTION()
+	void OnRep_CurrentSlotIndex();
+
+
+	// ==== Inventory player action functions ====
+
+	/**
+	 * @param UItemData* New Item
+	 * 
+	 * Add item in the player inventory
+	 */
+	UFUNCTION(BlueprintCallable,Category="Inventory")
 	void AddNewItem(UItemData* NewItem);
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	void ServerAddNewItem(UItemData* NewItem);
+
+	/**
+	 * Throw the current slot's item on the ground
+	 */
+	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void Throw();
+
+	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	void ServerThrow();
+
+	UFUNCTION(BlueprintCallable,Category = "Inventory")
+	FInventorySlot GetCurrentSlot();
+	
+	UFUNCTION(BlueprintCallable, Category="Inventory")
+	FInventorySlot ChangeCurrentSlot(bool IndexGoUp);
+
+	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	void ServerChangeCurrentSlot(bool IndexGoUp);
+
+protected:
+	void BroadcastInventoryChange();
 };

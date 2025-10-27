@@ -15,7 +15,6 @@ enum class EPlayerState : uint8
 	None UMETA(DisplayName = "None"),
 	Running UMETA(DisplayName = "Running"),
 	Crouching UMETA(DisplayName = "Crouching"),
-	Dodging UMETA(DisplayName = "Dodging"),
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
 	Dead UMETA(DisplayName = "Dead")
 };
@@ -31,6 +30,17 @@ public:
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
 
+	UFUNCTION(Server, Reliable)
+	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
+
+	UFUNCTION()
+	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Inventory")
+	UInventoryComponent* Inventory;
+
+	
+
 protected:
 	virtual void BeginPlay() override;
 	
@@ -42,11 +52,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
-
-	UPROPERTY(BlueprintReadOnly)
-	TArray<AActor*> InteractiblesAtRange;
-	UPROPERTY(BlueprintReadOnly)
-	float DodgeTimer;
+	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	bool IsReadyForRPCs() const;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -62,12 +71,10 @@ public:
 	void ManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
-	void Dodge();
-
-	void ActualiseDodge(float DeltaTime);
-
-	UFUNCTION(BlueprintCallable)
 	AActor* GetNearestInteractible();
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> InteractiblesAtRange;
 
 
 };

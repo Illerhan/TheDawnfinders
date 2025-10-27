@@ -120,7 +120,7 @@ void USessionManagerSubsystem::FindAdvancedSession(int32 MaxResults, bool bUseLa
     SessionSearch = MakeShareable(new FOnlineSessionSearch());
     SessionSearch->MaxSearchResults = MaxResults;
     SessionSearch->bIsLanQuery = bUseLan;
-    SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
+    SessionSearch->QuerySettings.Set(SEARCH_KEYWORDS, FString(TEXT("PRESENCESEARCH")), EOnlineComparisonOp::Equals);
 
     const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController();
     if (!LocalPlayer)

@@ -6,6 +6,8 @@
 #include "Engine/DataAsset.h"
 #include "ItemData.generated.h"
 
+class AItem;
+
 UENUM(BlueprintType)
 enum class EItemType : uint8 {
 	Equipment UMETA(DisplayName = "Weapon"),
@@ -40,4 +42,7 @@ public :
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	UTexture2D* ItemIcon;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	TSubclassOf<AItem> ItemClass;
 };
