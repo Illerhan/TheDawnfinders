@@ -43,7 +43,7 @@ void AItem::Tick(float DeltaTime)
 
 void AItem::Interaction(AAPlayerCharacter* Player)
 {
-	Player->Inventory->AddNewItem(ItemData);
+	Player->InventoryComponent->AddNewItem(ItemData);
 	
 	Super::Interaction(Player);
 

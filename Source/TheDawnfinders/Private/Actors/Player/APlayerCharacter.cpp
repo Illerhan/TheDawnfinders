@@ -10,12 +10,10 @@
 // Sets default values
 AAPlayerCharacter::AAPlayerCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
 	bReplicates = true;
 	AActor::SetReplicateMovement(true);
-
 }
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
@@ -49,8 +47,12 @@ void AAPlayerCharacter::TryInteract(AInteractibleObjects* InteractibleObject, AA
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Inventory = FindComponentByClass<UInventoryComponent>();
-	ensure(Inventory);
+	InventoryComponent = FindComponentByClass<UInventoryComponent>();
+	ensure(InventoryComponent);
+
+	StaminaComponent = FindComponentByClass<UStaminaComponent>();
+	ensure(StaminaComponent);
+
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	
 }
@@ -69,7 +71,6 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 
