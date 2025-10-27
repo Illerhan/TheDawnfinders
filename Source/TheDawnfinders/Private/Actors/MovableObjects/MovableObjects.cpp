@@ -45,6 +45,7 @@ void AMovableObjects::DoMovement()
 	{
 		Timeline.AddInterpFloat(MoveCurve,TimelineProgress);
 		Timeline.SetLooping(false);
+		Timeline.SetPlayRate(MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration);
 		Timeline.PlayFromStart();
 		Timeline.SetTimelineFinishedFunc(TimelineFinished);
 		bCanMove = false;

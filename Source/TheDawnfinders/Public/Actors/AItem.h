@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Actors/Interactibles/Interactible.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/IInteractible.h"
 #include "DataAssets/ItemData.h"
 #include "AItem.generated.h"
 

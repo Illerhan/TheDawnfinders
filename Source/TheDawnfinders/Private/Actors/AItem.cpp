@@ -4,7 +4,6 @@
 #include "Actors/AItem.h"
 
 #include "Actors/Player/APlayerCharacter.h"
-#include "GeometryCollection/GeometryCollectionParticlesData.h"
 
 // Sets default values
 AItem::AItem()
