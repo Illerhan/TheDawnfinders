@@ -32,6 +32,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ReloadStamina(float quantity);
 
+	UPROPERTY(BlueprintAssignable)
+	FOnStaminaChange OnStaminaChange;
+
 private :
 
 	float CurrentStamina = 100.f;

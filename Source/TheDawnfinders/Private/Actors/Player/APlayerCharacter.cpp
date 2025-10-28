@@ -14,6 +14,10 @@ AAPlayerCharacter::AAPlayerCharacter()
 	
 	bReplicates = true;
 	AActor::SetReplicateMovement(true);
+
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
+	StaminaComponent = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
+	//InventoryComponent->SetupAttachment(RootComponent);
 }
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
@@ -47,11 +51,6 @@ void AAPlayerCharacter::TryInteract(AInteractibleObjects* InteractibleObject, AA
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	InventoryComponent = FindComponentByClass<UInventoryComponent>();
-	ensure(InventoryComponent);
-
-	StaminaComponent = FindComponentByClass<UStaminaComponent>();
-	ensure(StaminaComponent);
 
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	

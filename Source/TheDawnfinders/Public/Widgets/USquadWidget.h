@@ -22,7 +22,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ActualiseSquadInfos();
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<USquadMemberWidget*> SquadMemberWidgets;
 
 };

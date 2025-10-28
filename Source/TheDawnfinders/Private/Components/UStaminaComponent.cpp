@@ -19,8 +19,6 @@ void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Log, TEXT("Current Stamina : %f"), CurrentStamina);
-
 	if (CurrentReloadDelay > 0) {
 		CurrentReloadDelay -= DeltaTime;
 		return;
@@ -35,6 +33,8 @@ void UStaminaComponent::UseStamina(float quantity)
 	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
 
 	CurrentReloadDelay = ReloadDelay;
+
+	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
 }
 
 bool UStaminaComponent::VerifyHasStamina()
@@ -48,11 +48,15 @@ void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, f
 	CurrentMaxStamina = MaxStamina;
 	ReloadSpeed = ReloadSpd;
 	ReloadDelay = ReloadDl;
+
+	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
 }
 
 void UStaminaComponent::ReloadStamina(float quantity)
 {
 	CurrentStamina += quantity;
 	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
+
+	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
 }
 
