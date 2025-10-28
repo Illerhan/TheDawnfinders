@@ -32,6 +32,7 @@ void USquadWidget::NativeDestruct()
 }
 
 
+
 void USquadWidget::ActualiseSquadInfos()
 {
 	AGameStateBase* GS = GetWorld()->GetGameState();
@@ -43,8 +44,6 @@ void USquadWidget::ActualiseSquadInfos()
 	for (int i = 0; i < GS->PlayerArray.Num(); i++) {
 		APlayerState* PS = GS->PlayerArray[i];
 		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-
-		UE_LOG(LogTemp, Log, TEXT("%f"), CustomPS->CurrentStamina);
 
 		SquadMemberWidgets[i]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina);
 	}
