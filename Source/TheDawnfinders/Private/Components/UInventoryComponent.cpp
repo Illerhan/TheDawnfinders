@@ -166,11 +166,25 @@ void UInventoryComponent::ServerThrow_Implementation()
 		if (DroppedItem)
 		{
 			DroppedItem->ItemData = CurrentSlot.ItemData;
+
+			if (DroppedItem->ItemMesh && CurrentSlot.ItemData->ItemMesh)
+			{
+				DroppedItem->ItemMesh->SetStaticMesh(CurrentSlot.ItemData->ItemMesh);
+
+				DroppedItem->ItemMesh->SetSimulatePhysics(false);
+				DroppedItem->ItemMesh->SetEnableGravity(false);
+				DroppedItem->ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+				
+				UE_LOG(LogTemp, Log, TEXT("Mesh set for dropped item: %s"), *CurrentSlot.ItemData->ItemMesh->GetName());
+			}
+
+			DroppedItem->bShouldLevitate = true;
+			
 			if (UPrimitiveComponent* RootComponent = Cast<UPrimitiveComponent>(DroppedItem->GetRootComponent()))
 			{
 				if (RootComponent->IsSimulatingPhysics())
 				{
-					FVector ThrowDirection = GetOwner()->GetActorForwardVector() + FVector(0,0,0.5f);
+					FVector ThrowDirection = GetOwner()->GetActorForwardVector() + FVector(0,0,0.25f);
 					RootComponent->AddImpulse(ThrowDirection*500.f,NAME_None,true);
 				}
 				UE_LOG(LogTemp, Log, TEXT("Item thrown from slot %d: %s"), CurrentSlotIndex, *CurrentSlot.ItemData->ItemName);

@@ -32,8 +32,11 @@ public:
 	UPROPERTY()
 	bool bCanBeUsed = true;
 	
-	UFUNCTION(BlueprintCallable,Category="Interactibles")
+	UFUNCTION(BlueprintCallable,Blueprintable,Category="Interactibles")
 	virtual void Interaction(AAPlayerCharacter* Player);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
+	void BP_OnInteraction(AAPlayerCharacter* Player);
 	
 protected:
 	// Called when the game starts or when spawned

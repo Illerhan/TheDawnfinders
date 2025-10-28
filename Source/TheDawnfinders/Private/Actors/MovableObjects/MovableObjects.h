@@ -31,7 +31,10 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Timeline")
 	bool bCanMove = true;
-
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Timeline");
+	float MovementDuration;
+	
 	UFUNCTION()
 	void HandleProgress(float value);
 

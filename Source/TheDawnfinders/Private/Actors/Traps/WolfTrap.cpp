@@ -3,7 +3,6 @@
 
 #include "WolfTrap.h"
 
-#include "AssetTypeActions/AssetDefinition_SoundBase.h"
 
 
 // Sets default values

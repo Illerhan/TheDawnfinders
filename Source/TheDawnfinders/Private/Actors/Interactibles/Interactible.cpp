@@ -44,7 +44,7 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 
 void AInteractibleObjects::Interaction(AAPlayerCharacter* Player)
 {
-	
+	BP_OnInteraction(Player);
 }
 
 // Called when the game starts or when spawned
