@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UStaminaComponent.h"
 #include "Interfaces/IPlayer.h"
 #include "APlayerCharacter.generated.h"
 
@@ -15,6 +16,7 @@ enum class EPlayerState : uint8
 	Running UMETA(DisplayName = "Running"),
 	Crouching UMETA(DisplayName = "Crouching"),
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
+	Dodging UMETA(DisplayName = "Dodging"),
 	Dead UMETA(DisplayName = "Dead")
 };
 
@@ -27,6 +29,7 @@ public:
 	AAPlayerCharacter();
 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
+
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
 
 	UFUNCTION(Server, Reliable)
@@ -38,8 +41,11 @@ public:
 	UFUNCTION()
 	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Inventory")
-	UInventoryComponent* Inventory;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UInventoryComponent* InventoryComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaminaComponent* StaminaComponent;
 
 	UPROPERTY()
 	AInteractibleObjects* CurrentInteractible = nullptr;
@@ -62,6 +68,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
+
+	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -79,6 +87,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
+
+	UFUNCTION(BlueprintCallable)
+	void Dodge();
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseDodge(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetNearestInteractible();

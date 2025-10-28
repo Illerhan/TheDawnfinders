@@ -41,12 +41,12 @@ void UInventoryBarWidget::TryBindToInventory()
     }
 
     AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn);
-    if (!PlayerCharacter || !PlayerCharacter->Inventory)
+    if (!PlayerCharacter || !PlayerCharacter->InventoryComponent)
     {
         return;
     }
 
-    InventoryComponentRef = PlayerCharacter->Inventory;
+    InventoryComponentRef = PlayerCharacter->InventoryComponent;
 
     // Bind TOUJOURS côté client
     InventoryComponentRef->OnInventoryChanging.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
