@@ -3,7 +3,6 @@
 
 #include "Lever.h"
 
-
 // Sets default values
 ALever::ALever()
 {
@@ -26,15 +25,46 @@ void ALever::Tick(float DeltaTime)
 
 void ALever::Interaction(AAPlayerCharacter* Player)
 {
-	if (bCanBeUsed)
+	if (!bCanBeUsed || LinkedObjects.Num() == 0) return;
+
+	if (bRequiresHold)
 	{
-		if (LinkedObject->bCanMove)
+		StartHoldInteraction(Player);
+	}
+	
+	else
+	{
+	for (AMovableObjects* const Object : LinkedObjects)
+		if (Object && Object->bCanMove)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("moving %s") , *LinkedObject->GetName());
-			LinkedObject->DoMovement();
+			UE_LOG(LogTemp, Warning, TEXT("moving %s") , *Object->GetName());
+			Object->DoMovement();
 			Super::Interaction(Player);
 		}
 	}
 }
+void ALever::StartHoldInteraction(AAPlayerCharacter* Player)
+{
+	for (AMovableObjects* const Object : LinkedObjects)
+	{
+		ADoors* Door = Cast<ADoors>(Object);
+		if (Door)
+		{
+			Door->StartOpening();
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] Lever starting door opening"));
+		}
+	}
+}
 
-         
+void ALever::StopHoldInteraction(AAPlayerCharacter* Player)
+{
+	for (AMovableObjects* Object : LinkedObjects)
+	{
+		ADoors* Door = Cast<ADoors>(Object);
+		if (Door)
+		{
+			Door->StopOpening();
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] Closing door: %s"), *Door->GetName());
+		}
+	}
+}

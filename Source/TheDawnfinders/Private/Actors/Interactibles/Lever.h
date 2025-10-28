@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Interactible.h"
 #include "Actors/MovableObjects/MovableObjects.h"
+#include "Actors/MovableObjects/Doors.h"
 #include "Lever.generated.h"
 
 UCLASS()
@@ -15,10 +16,12 @@ class THEDAWNFINDERS_API ALever : public AInteractibleObjects
 public:
 	// Sets default values for this actor's properties
 	ALever();
-
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Interactibles")
-	AMovableObjects* LinkedObject;
+	TArray<AMovableObjects*> LinkedObjects;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
+	bool bRequiresHold = false;
 
 protected:
 	// Called when the game starts or when spawned
@@ -28,4 +31,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void Interaction(AAPlayerCharacter* Player) override;
+	void StartHoldInteraction(AAPlayerCharacter* Player);
+	void StopHoldInteraction(AAPlayerCharacter* Player);
+
+
+private:
+	bool bIsBeingHeld;
 };

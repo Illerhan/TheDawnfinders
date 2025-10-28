@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/UInventoryComponent.h"
-#include "Interfaces/IInteractible.h"
 #include "Interfaces/IPlayer.h"
 #include "APlayerCharacter.generated.h"
 
@@ -33,12 +32,23 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
 
+	UFUNCTION(Server, Reliable)
+	void ServerStopInteract(ALever* Lever, AAPlayerCharacter* Player);
+	
 	UFUNCTION()
 	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Inventory")
 	UInventoryComponent* Inventory;
 
+	UPROPERTY()
+	AInteractibleObjects* CurrentInteractible = nullptr;
+
+	UFUNCTION(BlueprintCallable)
+	void StartInteract();
+	UFUNCTION(BlueprintCallable)
+	void StopInteract();
+	
 	
 
 protected:

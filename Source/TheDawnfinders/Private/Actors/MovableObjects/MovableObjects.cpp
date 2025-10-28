@@ -2,6 +2,8 @@
 
 
 #include "MovableObjects.h"
+
+#include "Doors.h"
 // Sets default values
 
 
@@ -62,7 +64,17 @@ void AMovableObjects::HandleProgress(float value)
 
 void AMovableObjects::OnTimeLineFinished()
 {
-	EndPosition = StartPosition;
-	StartPosition = GetActorLocation();
-	bCanMove  = true;
+	ADoors* Door = Cast<ADoors>(this);
+	if (Door)
+	{
+		Door->bIsFullyOpen = true;
+		UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
+	}
+	else
+	{
+		// Comportement normal pour les autres objets
+		EndPosition = StartPosition;
+		StartPosition = GetActorLocation();
+		bCanMove = true;
+	}
 }
