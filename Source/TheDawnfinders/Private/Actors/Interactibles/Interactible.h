@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
 #include "Interactible.generated.h"
@@ -18,7 +18,7 @@ public:
 	AInteractibleObjects();
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
-	USphereComponent* SphereCollider;
+	UCapsuleComponent* CapsuleCollider;
 	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 

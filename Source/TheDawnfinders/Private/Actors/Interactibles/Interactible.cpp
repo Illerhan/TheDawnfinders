@@ -12,10 +12,12 @@ AInteractibleObjects::AInteractibleObjects()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	SphereCollider = CreateDefaultSubobject<USphereComponent>(FName("SphereCollider"));
-	RootComponent = SphereCollider;
-	SphereCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
-	SphereCollider->SetGenerateOverlapEvents(true);
+	
+	
+	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("SphereCollider"));
+	RootComponent = CapsuleCollider;
+	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
+	CapsuleCollider->SetGenerateOverlapEvents(true);
 	bReplicates = true;
 }
 
@@ -51,8 +53,8 @@ void AInteractibleObjects::Interaction(AAPlayerCharacter* Player)
 void AInteractibleObjects::BeginPlay()
 {
 	Super::BeginPlay();
-	SphereCollider->OnComponentBeginOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapBegin);
-	SphereCollider->OnComponentEndOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapEnd);
+	CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapBegin);
+	CapsuleCollider->OnComponentEndOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapEnd);
 	
 }
 

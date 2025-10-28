@@ -11,7 +11,7 @@ AItem::AItem()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
-	ItemMesh->SetupAttachment(SphereCollider);
+	ItemMesh->SetupAttachment(CapsuleCollider);
 	if (ItemData && ItemData->ItemMesh)
 	ItemMesh->SetStaticMesh(ItemData->ItemMesh);	
 }
