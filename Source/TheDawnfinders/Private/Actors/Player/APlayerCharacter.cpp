@@ -168,7 +168,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
 	if (Input) {
 		CurrentState = EPlayerState::Running;
-		GetCharacterMovement()->MaxWalkSpeed = 700.0f;
+		GetCharacterMovement()->MaxWalkSpeed = 800.0f;
 	}
 	else {
 		if(CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
