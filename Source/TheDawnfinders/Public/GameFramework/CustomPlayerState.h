@@ -9,6 +9,7 @@
 
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnInfoChange, const float, hp, const float, maxHp, const float, stam, const float, maxStam);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInfoChange);
+DECLARE_DYNAMIC_DELEGATE(FOnInfoChangeLocal);
 
 UCLASS()
 class THEDAWNFINDERS_API ACustomPlayerState : public APlayerState
@@ -19,6 +20,10 @@ public :
 	virtual void BeginPlay() override;
 
 	FOnInfoChange OnInfoChange;
+	FOnInfoChangeLocal OnInfoChangeLocal;
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseLocalStamina(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseStamina(float current, float max);

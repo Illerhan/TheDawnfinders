@@ -25,6 +25,9 @@ public:
 	void ServerChangeStamina(float newStamina);
 
 	UFUNCTION(BlueprintCallable)
+	void ChangeLocalStamina();
+
+	UFUNCTION(BlueprintCallable)
 	bool VerifyHasStamina();
 
 	UFUNCTION(BlueprintCallable)

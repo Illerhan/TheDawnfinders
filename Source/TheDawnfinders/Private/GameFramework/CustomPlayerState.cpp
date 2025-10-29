@@ -11,31 +11,20 @@
 void ACustomPlayerState::BeginPlay()
 {
 	bReplicates = true;
-
-	APlayerController* PC = GetPlayerController();
-	if (!PC) return;
-	
-	ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
-	if (!HUD) return;
-
-	UMainWidget* MainWidget = Cast<UMainWidget>(HUD->MainWidget);
-	if (!MainWidget) return;
-
-	//GetWorld()->GetGameState()->PlayerArray;
-
-
-
-	APawn* PlayerPawn = PC->GetPawn();
-	if (!PlayerPawn) return;
-	
-	AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(PlayerPawn);
-	if (!PlayerCharacter || !PlayerCharacter->StaminaComponent) return;
-	
-	//PlayerCharacter->StaminaComponent->OnStaminaChange.AddUniqueDynamic(this, &ACustomPlayerState::ActualiseStamina);
 }
 
-//void ACustomPlayerState::GetRepLifetimeReplicatedProps()
 
+// CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
+void ACustomPlayerState::ActualiseLocalStamina(float current, float max)
+{
+	CurrentStamina = current;
+	CurrentMaxStamina = max;
+
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
+
+// CALLED ON THE SERVER TO ACTUALISE FOR ALL
 void ACustomPlayerState::ActualiseStamina(float current, float max)
 {
 	CurrentStamina = current;
@@ -44,6 +33,7 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 	OnRep_StaminaChange();
 }
 
+// CALLED ON THE SERVER TO ACTUALISE FOR ALL
 void ACustomPlayerState::ActualiseHealth(float current, float max)
 {
 	CurrentHealth = current;

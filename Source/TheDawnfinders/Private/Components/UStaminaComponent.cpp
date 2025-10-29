@@ -6,6 +6,7 @@
 #include "GameFramework/CustomPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
+
 UStaminaComponent::UStaminaComponent()
 {
 	CurrentStamina = CurrentMaxStamina;
@@ -14,6 +15,15 @@ UStaminaComponent::UStaminaComponent()
 void UStaminaComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	InitialiseComponent(100, 10, 2);
 }
 
 void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -29,6 +39,29 @@ void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		ReloadStamina(DeltaTime * ReloadSpeed);
 }
 
+
+void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
+{
+	CurrentStamina = MaxStamina;
+	CurrentMaxStamina = MaxStamina;
+	ReloadSpeed = ReloadSpd;
+	ReloadDelay = ReloadDl;
+
+	// If is not server
+	if (!GetOwner()->HasAuthority()) {
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	// If is server
+	ServerChangeStamina_Implementation(CurrentStamina);
+}
+
+
+#pragma region Main Stamina Functions
+
 void UStaminaComponent::UseStamina(float quantity)
 {
 	CurrentStamina -= quantity;
@@ -37,6 +70,9 @@ void UStaminaComponent::UseStamina(float quantity)
 	CurrentReloadDelay = ReloadDelay;
 
 	if (!GetOwner()->HasAuthority()) {
+
+		ChangeLocalStamina();
+
 		ServerChangeStamina(CurrentStamina);
 		return;
 	}
@@ -44,6 +80,36 @@ void UStaminaComponent::UseStamina(float quantity)
 	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
+
+// RETURNS TRUE IF HAS STAMINA
+bool UStaminaComponent::VerifyHasStamina()
+{
+	return CurrentStamina > 0;
+}
+
+
+// CALLED IN THE UPDATE AFTER A CERTAIN DELAY
+void UStaminaComponent::ReloadStamina(float quantity)
+{
+	CurrentStamina += quantity;
+	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
+
+	if (!GetOwner()->HasAuthority()) {
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	ServerChangeStamina_Implementation(CurrentStamina);
+}
+
+#pragma endregion
+
+
+#pragma region Network Functions
+
+// CALLED TO CHANGE THE UI INFORMATIONS FOR ALL THE OTHER SQUAD MEMBERS
 void UStaminaComponent::ServerChangeStamina_Implementation(float newStamina)
 {
 	AActor* Owner = GetOwner();
@@ -55,40 +121,29 @@ void UStaminaComponent::ServerChangeStamina_Implementation(float newStamina)
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC) return;
 
+	if (!PC->PlayerState) return;
+
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseStamina(newStamina, CurrentMaxStamina);
 }
 
-bool UStaminaComponent::VerifyHasStamina()
+
+// CALLED TO CHANGE THE UI INFORMATIONS INSTANTLY IN LOCAL
+void UStaminaComponent::ChangeLocalStamina()
 {
-	return CurrentStamina > 0;
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalStamina(CurrentStamina, CurrentMaxStamina);
 }
 
-void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
-{
-	CurrentStamina = MaxStamina;
-	CurrentMaxStamina = MaxStamina;
-	ReloadSpeed = ReloadSpd;
-	ReloadDelay = ReloadDl;
-
-	if (!GetOwner()->HasAuthority()) {
-		ServerChangeStamina(CurrentStamina);
-		return;
-	}
-
-	ServerChangeStamina_Implementation(CurrentStamina);
-}
-
-void UStaminaComponent::ReloadStamina(float quantity)
-{
-	CurrentStamina += quantity;
-	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
-
-	if (!GetOwner()->HasAuthority()) {
-		ServerChangeStamina(CurrentStamina);
-		return;
-	}
-
-	ServerChangeStamina_Implementation(CurrentStamina);
-}
-
+#pragma endregion 

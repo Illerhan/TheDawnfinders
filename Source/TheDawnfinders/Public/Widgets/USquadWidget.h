@@ -29,5 +29,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void BindNewPlayerState();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddNewSquadMember();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void RemoveSquadMember();
+
 	FTimerHandle BindDelayTimerHandle;
 };
