@@ -3,12 +3,14 @@
 #include "Widgets/USquadWidget.h"
 #include "GameFramework/GameStateBase.h"
 #include "GameFramework/CustomPlayerState.h"
+#include "GameFramework/CustomGameState.h"
 #include "GameFramework/CustomHUD.h"
 #include "GameFramework/PlayerState.h"
 
 
 void USquadWidget::NativeConstruct()
 {
+	BindAllCurrentPlayerStates();
 }
 
 void USquadWidget::NativeDestruct()
@@ -19,8 +21,12 @@ void USquadWidget::NativeDestruct()
 	APlayerState* PS = PC->PlayerState;
 	if (!PS) return;
 
+	ACustomGameState* CustomGS = Cast<ACustomGameState>(GetWorld()->GetGameState());
+	if (!CustomGS) return;
+
 	ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
 	CustomPS->OnInfoChange.RemoveDynamic(this, &USquadWidget::ActualiseSquadInfos);
+	CustomGS->OnPlayerListChanged.RemoveDynamic(this, &USquadWidget::BindNewPlayerState);
 }
 
 
@@ -28,10 +34,18 @@ void USquadWidget::NativeDestruct()
 void USquadWidget::ActualiseSquadInfos()
 {
 	AGameStateBase* GS = GetWorld()->GetGameState();
-	if (!GS)
-		return;
+	if (!GS) return;
 
 	if (SquadMemberWidgets.Num() == 0) return;
+
+	if (GetOwningPlayer()->HasAuthority())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Je suis le SERVEUR (HasAuthority == true)"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Je suis le CLIENT (HasAuthority == false)"));
+	}
 
 	for (int i = 0; i < GS->PlayerArray.Num(); i++) {
 		APlayerState* PS = GS->PlayerArray[i];
@@ -44,7 +58,26 @@ void USquadWidget::ActualiseSquadInfos()
 void USquadWidget::BindAllCurrentPlayerStates()
 {
 	AGameStateBase* GS = GetWorld()->GetGameState();
-	if (!GS) return;
+	if (!GS) 
+	{ 
+		GetWorld()->GetTimerManager().SetTimer(BindDelayTimerHandle, this, &USquadWidget::BindAllCurrentPlayerStates, 0.1f, false);
+		return; 
+	}
+
+	ACustomGameState* CustomGS = Cast<ACustomGameState>(GS);
+	if (!CustomGS)
+	{
+		GetWorld()->GetTimerManager().SetTimer(BindDelayTimerHandle, this, &USquadWidget::BindAllCurrentPlayerStates, 0.1f, false);
+		return;
+	}
+
+	if (CustomGS->PlayerArray.Num() == 0)
+	{
+		GetWorld()->GetTimerManager().SetTimer(BindDelayTimerHandle, this, &USquadWidget::BindAllCurrentPlayerStates, 0.1f, false);
+		return;
+	}
+
+	CustomGS->OnPlayerListChanged.AddUniqueDynamic(this, &USquadWidget::BindNewPlayerState);
 
 	for (int i = 0; i < GS->PlayerArray.Num(); i++) {
 		APlayerState* PS = GS->PlayerArray[i];

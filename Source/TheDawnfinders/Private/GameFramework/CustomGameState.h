@@ -11,10 +11,11 @@
  * 
  */
 UCLASS()
-class THEDAWNFINDERS_API ACustomGameState : public AGameState
+class THEDAWNFINDERS_API ACustomGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 
+public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerListChanged);
@@ -24,8 +25,4 @@ class THEDAWNFINDERS_API ACustomGameState : public AGameState
 
 	virtual void AddPlayerState(APlayerState* Player) override;
 	virtual void RemovePlayerState(APlayerState* Player) override;
-
-private:
-	UFUNCTION()
-	void OnRep_PlayerArrayChanged();
 };

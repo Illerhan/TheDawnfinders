@@ -10,7 +10,7 @@
 void ACustomGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME_CONDITION_NOTIFY(ACustomGameState, PlayerArray, COND_None,  REPNOTIFY_Always)
+	//DOREPLIFETIME_CONDITION_NOTIFY(ACustomGameState, PlayerArray, COND_None,  REPNOTIFY_Always)
 }
 
 void ACustomGameState::AddPlayerState(APlayerState* Player)
@@ -22,10 +22,5 @@ void ACustomGameState::AddPlayerState(APlayerState* Player)
 void ACustomGameState::RemovePlayerState(APlayerState* Player)
 {
 	Super::RemovePlayerState(Player);
-	OnPlayerListChanged.Broadcast();
-}
-
-void ACustomGameState::OnRep_PlayerArrayChanged()
-{
 	OnPlayerListChanged.Broadcast();
 }

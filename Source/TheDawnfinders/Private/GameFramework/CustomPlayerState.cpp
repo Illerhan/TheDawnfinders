@@ -56,7 +56,7 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME_CONDITION(ACustomPlayerState, CurrentStamina, COND_SkipOwner);
+	DOREPLIFETIME(ACustomPlayerState, CurrentStamina);
 }
 
 void ACustomPlayerState::OnRep_StaminaChange()
