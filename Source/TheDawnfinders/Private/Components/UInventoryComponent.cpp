@@ -75,7 +75,6 @@ void UInventoryComponent::AddNewItem(UItemData* NewItem)
 
 void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 {
-
 	if (!NewItem)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AddNewItem: NewItem is null"));
@@ -116,8 +115,8 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 		UE_LOG(LogTemp, Log, TEXT("New slot created for item (total slots: %d)"), NewSlots.Num());
 	}
 	InventorySlots=NewSlots;
-	BroadcastInventoryChange();
 
+	BroadcastInventoryChange();
 }
 
 

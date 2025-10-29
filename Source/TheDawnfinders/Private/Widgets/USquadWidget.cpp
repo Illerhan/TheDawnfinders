@@ -9,20 +9,12 @@
 
 void USquadWidget::NativeConstruct()
 {
-	APlayerController* PC = GetOwningPlayer();
-	if (!PC) return;
-
-	APlayerState* PS = PC->PlayerState;
-	if (!PS) return;
-
-	ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-	CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
 }
 
 void USquadWidget::NativeDestruct()
 {
 	APlayerController* PC = GetOwningPlayer();
-	if (!PC) return;
+	if (!PC || !PC->IsLocalController()) return;
 
 	APlayerState* PS = PC->PlayerState;
 	if (!PS) return;
@@ -47,4 +39,30 @@ void USquadWidget::ActualiseSquadInfos()
 
 		SquadMemberWidgets[i]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina);
 	}
+}
+
+void USquadWidget::BindAllCurrentPlayerStates()
+{
+	AGameStateBase* GS = GetWorld()->GetGameState();
+	if (!GS) return;
+
+	for (int i = 0; i < GS->PlayerArray.Num(); i++) {
+		APlayerState* PS = GS->PlayerArray[i];
+		if (!PS) return;
+
+		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
+		CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
+	}
+}
+
+void USquadWidget::BindNewPlayerState()
+{
+	AGameStateBase* GS = GetWorld()->GetGameState();
+	if (!GS) return;
+
+	APlayerState* PS = GS->PlayerArray[GS->PlayerArray.Num() - 1];
+	if (!PS) return;
+
+	ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
+	CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
 }

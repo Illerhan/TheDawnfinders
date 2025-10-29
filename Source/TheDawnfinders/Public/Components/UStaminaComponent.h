@@ -7,8 +7,6 @@
 #include "UStaminaComponent.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnStaminaChange, float, CurrentStamina, float, MaxStamina);
-
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UStaminaComponent : public UActorComponent
 {
@@ -23,6 +21,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UseStamina(float quantity);
 
+	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	void ServerChangeStamina(float newStamina);
+
 	UFUNCTION(BlueprintCallable)
 	bool VerifyHasStamina();
 
@@ -31,9 +32,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ReloadStamina(float quantity);
-
-	UPROPERTY(BlueprintAssignable)
-	FOnStaminaChange OnStaminaChange;
 
 private :
 

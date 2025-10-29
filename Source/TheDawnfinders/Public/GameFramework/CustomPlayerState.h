@@ -26,8 +26,10 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max);
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentMaxStamina;
@@ -37,4 +39,7 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentMaxHealth;
+
+	UFUNCTION()
+	void OnRep_StaminaChange();
 };
