@@ -223,6 +223,26 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 }
 
 
+// IF THE PLAYER IS EQUIPPE WITH A CONSUMMABLE, USES IT IF POSSIBLE
+void AAPlayerCharacter::UseCurrentItem()
+{
+	FInventorySlot slotInfos = InventoryComponent->GetCurrentSlot();
+
+	if (slotInfos.ItemData->ItemType != EItemType::Consumable) return;
+
+	switch (slotInfos.ItemData->ConsumableEffectType) {
+		case EConsumableEffectType::Heal :
+			HealthComponent->Heal(slotInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
+			break;
+
+		case EConsumableEffectType::OpenDoor :
+
+			break;
+	}
+}
+
+
 AActor* AAPlayerCharacter::GetNearestInteractible()
 {
 	float bestDist = FLT_MAX;

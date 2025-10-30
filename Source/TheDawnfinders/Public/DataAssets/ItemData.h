@@ -12,13 +12,18 @@ UENUM(BlueprintType)
 enum class EItemType : uint8 {
 	Equipment UMETA(DisplayName = "Weapon"),
 	Valuable UMETA(DisplayName = "Valuable"),
-	Key UMETA(DisplayName = "Key"),
+	Consumable UMETA(DisplayName = "Consumable"),
 	Ammo UMETA(DisplayName = "Ammo"),
 };
 
-/**
- * 
- */
+UENUM(BlueprintType)
+enum class EConsumableEffectType : uint8 {
+	Heal UMETA(DisplayName = "Heal"),
+	OpenDoor UMETA(DisplayName = "OpenDoor")
+};
+
+
+
 UCLASS(BlueprintType)
 class THEDAWNFINDERS_API UItemData : public UPrimaryDataAsset
 {
@@ -45,4 +50,10 @@ public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<AItem> ItemClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
+	EConsumableEffectType ConsumableEffectType;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
+	int ConsumableEffectPower;
 };

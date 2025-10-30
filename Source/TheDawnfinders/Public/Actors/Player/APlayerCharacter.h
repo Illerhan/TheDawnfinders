@@ -66,6 +66,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StopInteract();
 
+	UFUNCTION(BlueprintCallable)
+	AActor* GetNearestInteractible();
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> InteractiblesAtRange;
+
 
 // Damageable Behavior
 public:
@@ -111,10 +117,5 @@ public:
 	void ActualiseDodge(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	AActor* GetNearestInteractible();
-
-	UPROPERTY(BlueprintReadOnly)
-	TArray<AActor*> InteractiblesAtRange;
-
-
+	void UseCurrentItem();
 };

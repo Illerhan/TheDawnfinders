@@ -120,6 +120,37 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 }
 
 
+
+// === Remove current item ===
+
+// CALLED WHEN WE USE A CONSUMMABLE, REMOVE ONE INSTANCE OF IT AND ACTUALISE THE INVENTORY SLOT
+void UInventoryComponent::RemoveCurrentItem()
+{
+	if (!GetOwner()->HasAuthority())
+	{
+		ServerRemoveCurrentItem();
+		return;
+	}
+
+	ServerRemoveCurrentItem_Implementation();
+}
+
+
+void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
+{
+	TArray<FInventorySlot> NewSlots = InventorySlots;;
+
+	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
+	CurrentSlot.Quantity--;
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
+
+	InventorySlots = NewSlots;
+
+	BroadcastInventoryChange();
+}
+
+
+
 // === Throw items ===
 
 void UInventoryComponent::Throw()
