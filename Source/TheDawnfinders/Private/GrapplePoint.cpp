@@ -134,7 +134,7 @@ bool AGrapplePoint::HasLineOfSight(AAPlayerCharacter* Player) const
 	}
 #endif
 	
-	return bHit;
+	return !bHit;
 }
 
 void AGrapplePoint::ServerTeleportPlayer_Implementation(AAPlayerCharacter* Player)
