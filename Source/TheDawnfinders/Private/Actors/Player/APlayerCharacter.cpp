@@ -228,6 +228,7 @@ void AAPlayerCharacter::UseCurrentItem()
 {
 	FInventorySlot slotInfos = InventoryComponent->GetCurrentSlot();
 
+	if (slotInfos.ItemData == nullptr) return;
 	if (slotInfos.ItemData->ItemType != EItemType::Consumable) return;
 
 	switch (slotInfos.ItemData->ConsumableEffectType) {
