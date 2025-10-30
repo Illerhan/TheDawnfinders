@@ -29,6 +29,9 @@ public :
 	void ActualiseStamina(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
+	void ActualiseLocalHealth(float current, float max);
+
+	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max);
 
 	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)

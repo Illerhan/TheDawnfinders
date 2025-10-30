@@ -24,6 +24,17 @@ void ACustomPlayerState::ActualiseLocalStamina(float current, float max)
 }
 
 
+// CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
+void ACustomPlayerState::ActualiseLocalHealth(float current, float max)
+{
+	CurrentHealth = current;
+	CurrentMaxHealth = max;
+
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
+
+
 // CALLED ON THE SERVER TO ACTUALISE FOR ALL
 void ACustomPlayerState::ActualiseStamina(float current, float max)
 {

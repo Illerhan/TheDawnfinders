@@ -18,6 +18,7 @@ AAPlayerCharacter::AAPlayerCharacter()
 
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
 	StaminaComponent = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
 	//InventoryComponent->SetupAttachment(RootComponent);
 }
 
@@ -145,20 +146,20 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 void AAPlayerCharacter::RotateCharacter()
 {
 	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
-	if (CurrentPlayerInput.Length() < 10.f) return;
+	if (CurrentPlayerInput.Length() < 0.15f) return;
 	if (GetVelocity().Length() < 100.f) return;
 
 	FVector Direction = GetVelocity();
 	Direction.Normalize();
 
 	double radAngle = atan2(Direction.Y, Direction.X);
-	FRotator AimedRotation = FRotator(0, FMath::RadiansToDegrees(radAngle), 0);
+	FRotator AimedRotation = FRotator(0, FMath::RadiansToDegrees(radAngle) - 90, 0);
 
 	if (GetMesh()) {
 		FRotator CurrentRotation = GetMesh()->GetRelativeRotation();
 		FRotator NewRotation = FMath::RInterpTo(CurrentRotation, AimedRotation, 1.f, 1.f);
 
-		SetActorRelativeRotation(NewRotation);
+		GetMesh()->SetRelativeRotation(NewRotation);
 	}
 }
 

@@ -6,8 +6,10 @@
 #include "GameFramework/Character.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
+#include "Components/UHealthComponent.h"
 #include "Interfaces/IPlayer.h"
 #include "APlayerCharacter.generated.h"
+
 
 UENUM(BlueprintType)
 enum class EPlayerState : uint8
@@ -46,6 +48,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaminaComponent* StaminaComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UHealthComponent* HealthComponent;
 
 	UPROPERTY()
 	AInteractibleObjects* CurrentInteractible = nullptr;
