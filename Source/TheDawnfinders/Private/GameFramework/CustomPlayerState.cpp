@@ -64,3 +64,8 @@ void ACustomPlayerState::OnRep_StaminaChange()
 {
 	OnInfoChange.Broadcast();
 }
+
+void ACustomPlayerState::OnRep_HealthChange()
+{
+	OnInfoChange.Broadcast();
+}

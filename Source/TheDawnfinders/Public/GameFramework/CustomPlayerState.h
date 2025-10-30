@@ -42,7 +42,7 @@ public :
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxStamina;
 
-	UPROPERTY(BlueprintReadOnly, Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_HealthChange)
 	float CurrentHealth;
 
 	UPROPERTY(BlueprintReadOnly, Replicated)
@@ -50,4 +50,7 @@ public :
 
 	UFUNCTION()
 	void OnRep_StaminaChange();
+
+	UFUNCTION()
+	void OnRep_HealthChange();
 };

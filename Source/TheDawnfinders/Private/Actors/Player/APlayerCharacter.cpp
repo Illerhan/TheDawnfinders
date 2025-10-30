@@ -19,8 +19,10 @@ AAPlayerCharacter::AAPlayerCharacter()
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
 	StaminaComponent = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
-	//InventoryComponent->SetupAttachment(RootComponent);
 }
+
+
+#pragma region Interaction Functions
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
 {
@@ -101,6 +103,16 @@ void AAPlayerCharacter::StopInteract()
 	}
 }
 
+#pragma endregion
+
+
+
+void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
+{
+	HealthComponent->TakeDamage(quantity);
+}
+
+
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -108,6 +120,7 @@ void AAPlayerCharacter::BeginPlay()
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	
 }
+
 
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
@@ -119,6 +132,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 		ActualiseDodge(DeltaTime);
 	}
 }
+
 
 void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -163,6 +177,7 @@ void AAPlayerCharacter::RotateCharacter()
 	}
 }
 
+
 void AAPlayerCharacter::ManageRun(bool Input)
 {
 	if (CurrentState == EPlayerState::Dodging) return;
@@ -177,6 +192,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
 	}
 }
 
+
 void AAPlayerCharacter::Dodge()
 {
 	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
@@ -184,6 +200,7 @@ void AAPlayerCharacter::Dodge()
 	CurrentState = EPlayerState::Dodging;
 	DodgeTimer = 0;
 }
+
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
@@ -205,6 +222,7 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 	AddMovementInput(FinalVector, 1.0f, false);
 }
 
+
 AActor* AAPlayerCharacter::GetNearestInteractible()
 {
 	float bestDist = FLT_MAX;
@@ -221,6 +239,7 @@ AActor* AAPlayerCharacter::GetNearestInteractible()
 	
 	return pickedInteractible;
 }
+
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
@@ -241,6 +260,7 @@ void AAPlayerCharacter::PossessedBy(AController* NewController)
 	}
 }
 
+
 void AAPlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
@@ -249,6 +269,8 @@ void AAPlayerCharacter::OnRep_PlayerState()
 		*GetName(), 
 		GetController() ? *GetController()->GetName() : TEXT("None"));
 }
+
+
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
 	// For Server RPCs to work, the pawn must:

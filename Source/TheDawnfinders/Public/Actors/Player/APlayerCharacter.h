@@ -8,6 +8,7 @@
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Interfaces/IPlayer.h"
+#include "Interfaces/IDamageable.h"
 #include "APlayerCharacter.generated.h"
 
 
@@ -23,13 +24,26 @@ enum class EPlayerState : uint8
 };
 
 UCLASS()
-class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface
+class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface, public IDamageable
 {
 	GENERATED_BODY()
 
+// Components + Constructor
 public:
 	AAPlayerCharacter();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UInventoryComponent* InventoryComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaminaComponent* StaminaComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UHealthComponent* HealthComponent;
+
+
+// Interact Behavior
+public :
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
 
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
@@ -43,25 +57,22 @@ public:
 	UFUNCTION()
 	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-	UInventoryComponent* InventoryComponent;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-	UStaminaComponent* StaminaComponent;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-	UHealthComponent* HealthComponent;
-
 	UPROPERTY()
 	AInteractibleObjects* CurrentInteractible = nullptr;
 
 	UFUNCTION(BlueprintCallable)
 	void StartInteract();
+
 	UFUNCTION(BlueprintCallable)
 	void StopInteract();
-	
+
+
+// Damageable Behavior
+public:
+	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 	
 
+// Movement + State
 protected:
 	virtual void BeginPlay() override;
 	
