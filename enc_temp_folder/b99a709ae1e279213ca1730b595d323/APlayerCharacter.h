@@ -88,9 +88,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;
 
-	UPROPERTY(BlueprintReadOnly)
-	FVector PreviousPlayerInput;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 

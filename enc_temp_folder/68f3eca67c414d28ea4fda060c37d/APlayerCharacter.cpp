@@ -146,10 +146,6 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 	CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
-	if (CurrentPlayerInput.Length() > 0.5f) {
-		PreviousPlayerInput = CurrentPlayerInput;
-	}
-
 	FVector FinalVector = FVector(-Input.X, Input.Y, 0);
 	FinalVector.Normalize();
 	//FinalVector = GetActorTransform().TransformVector(FinalVector);
@@ -220,9 +216,10 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
 	DodgeTimer += DeltaTime;
 
-	GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
+	GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(1200.0f, 200.0f, DodgeTimer * 1.2f);
 
-	FVector FinalVector = PreviousPlayerInput;
+
+	FVector FinalVector = CurrentPlayerInput;
 	FinalVector.Normalize();
 
 	FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
