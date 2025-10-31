@@ -29,6 +29,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
 	float MaxGrappleDistance = 1500.f;
 
+	UPROPERTY()
+	bool bIsGrappling = false;
+	
+	UPROPERTY()
+	AAPlayerCharacter* GrapplingPlayer = nullptr;
+	
+	UPROPERTY()
+	FVector GrappleStartLocation;
+
+	UPROPERTY()
+	FVector GrappleTargetLocation;
+	
+	UPROPERTY()
+	float GrappleElapsedTime = 0.f;
+
+	UPROPERTY(EditAnywhere, Category = "Grapple|SmoothMove")
+	float GrappleMoveDuration = 0.75f; 
+
+	void StartSmoothGrapple(AAPlayerCharacter* Player);
+
+	void UpdateSmoothGrapple(float DeltaTime);
+
 	virtual void Interaction(AAPlayerCharacter* Player) override;
 
 	

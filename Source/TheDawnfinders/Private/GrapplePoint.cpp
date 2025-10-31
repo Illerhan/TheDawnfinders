@@ -17,6 +17,41 @@ AGrapplePoint::AGrapplePoint()
 	GrappleMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+void AGrapplePoint::StartSmoothGrapple(AAPlayerCharacter* Player)
+{
+	if (!Player) return;
+
+	bIsGrappling = true;
+	GrapplingPlayer = Player;
+	GrappleElapsedTime = 0.f;
+
+	GrappleStartLocation = Player->GetActorLocation();
+	GrappleTargetLocation = GetActorLocation() + TeleportOffset;
+
+	UE_LOG(LogTemp, Log, TEXT("GrapplePoint: Smooth grapple started"));
+}
+
+void AGrapplePoint::UpdateSmoothGrapple(float DeltaTime)
+{
+	if (!bIsGrappling || !GrapplingPlayer)
+		return;
+
+	GrappleElapsedTime += DeltaTime;
+
+	float Alpha = FMath::Clamp(GrappleElapsedTime / GrappleMoveDuration, 0.f, 1.f);
+	float SmoothAlpha = FMath::InterpEaseInOut(0.f, 1.f, Alpha, 2.f); // adoucit le mouvement
+
+	FVector NewLocation = FMath::Lerp(GrappleStartLocation, GrappleTargetLocation, SmoothAlpha);
+	GrapplingPlayer->SetActorLocation(NewLocation, true);
+
+	if (Alpha >= 1.f)
+	{
+		bIsGrappling = false;
+		GrapplingPlayer = nullptr;
+		UE_LOG(LogTemp, Log, TEXT("GrapplePoint: Grapple complete"));
+	}
+}
+
 void AGrapplePoint::Interaction(AAPlayerCharacter* Player)
 {
 	Super::Interaction(Player);
@@ -158,27 +193,11 @@ void AGrapplePoint::ServerTeleportPlayer_Implementation(AAPlayerCharacter* Playe
 		return;
 	}
 
-	FVector TeleportLocation = GetActorLocation() + TeleportOffset;
+	StartSmoothGrapple(Player);
 
-	bool bSuccess = Player->SetActorLocation(
-		TeleportLocation,
-		false,
-		nullptr,
-		ETeleportType::TeleportPhysics
-		);
-
-	if (bSuccess)
-	{
-		UE_LOG(LogTemp, Log, TEXT("GrapplePoint: Player teleported to %s"), 
-			   *TeleportLocation.ToString());
-		OnGrappleUsed(Player);
-
-		ClientPlayGrappleEffects();
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("GrapplePoint: Failed to teleport player"));
-	}
+	OnGrappleUsed(Player);
+	ClientPlayGrappleEffects();
+	
 }
 
 void AGrapplePoint::ClientPlayGrappleEffects_Implementation()
@@ -190,5 +209,10 @@ void AGrapplePoint::ClientPlayGrappleEffects_Implementation()
 void AGrapplePoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (bIsGrappling)
+	{
+		UpdateSmoothGrapple(DeltaTime);
+	}
+	
 }
 
