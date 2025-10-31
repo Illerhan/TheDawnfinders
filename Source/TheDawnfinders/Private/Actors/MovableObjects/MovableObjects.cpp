@@ -22,6 +22,9 @@ void AMovableObjects::BeginPlay()
 	Super::BeginPlay();
 
 	StartPosition = GetActorLocation();
+	
+	EndPosition = GetActorLocation() + EndPosition;
+	
 
 	if (MoveCurve)
 	{
