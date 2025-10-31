@@ -5,6 +5,7 @@
 
 #include "Actors/Interactibles/Interactible.h"
 #include "Actors/Interactibles/Lever.h"
+#include "Actors/Interactibles/ZiplineInteractible.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -249,7 +250,19 @@ void AAPlayerCharacter::UseCurrentItem()
 		case EConsumableEffectType::OpenDoor :
 
 			break;
+		case EConsumableEffectType::PlaceZipline:
+			{
+				if (!HasAuthority())
+				{
+					ServerUseZiplineItem(slotInfos.ItemData);
+					return;
+				}
+
+				ServerUseZiplineItem_Implementation(slotInfos.ItemData);
+				break;
+			}
 	}
+	
 }
 
 void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
@@ -355,4 +368,30 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 		CurrentState = EPlayerState::None;
 	}
 	BP_OnMontageEnded(Montage, bInterrupted);
+}
+
+void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
+{
+	if (!ZiplineItem || !ZiplineItem->ZiplineClass) // On ajoute ZiplineClass dans l’ItemData
+		return;
+
+	FVector SpawnLoc = GetActorLocation() + GetMesh()->GetForwardVector() * 50.f + FVector(0,0,0.f);
+	FRotator SpawnRot = GetActorRotation();
+
+	FActorSpawnParameters Params;
+	Params.Owner = this;
+	Params.Instigator = this;
+
+	AZiplineInteractible* NewZip = GetWorld()->SpawnActor<AZiplineInteractible>(
+		ZiplineItem->ZiplineClass,
+		SpawnLoc,
+		SpawnRot,
+		Params
+	);
+
+	if (NewZip)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Zipline placed by %s"), *GetName());
+		InventoryComponent->RemoveCurrentItem();
+	}
 }

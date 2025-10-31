@@ -1,86 +1,157 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-
+﻿// AZiplinePoint.cpp
 #include "ZiplineInteractible.h"
+#include "Actors/Player/APlayerCharacter.h"
+#include "Net/UnrealNetwork.h"
+#include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
-
-// Sets default values
 AZiplineInteractible::AZiplineInteractible()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
+
 }
 
-// Called when the game starts or when spawned
 void AZiplineInteractible::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (HasAuthority())
+	{
+		TryLinkToNearbyZipline();
+	}
 }
 
-// Called every frame
 void AZiplineInteractible::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bIsTravelling)
+		UpdateTravel(DeltaTime);
 }
 
-void AZiplineInteractible::CheckZiplineInteractibleInRange()
+void AZiplineInteractible::TryLinkToNearbyZipline()
 {
-}
+	if (!HasAuthority()) return;
 
-bool AZiplineInteractible::IsInLigneOfSight(AZiplineInteractible* otherZipline)
-{
+	TArray<AActor*> FoundZiplines;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AZiplineInteractible::StaticClass(), FoundZiplines);
 
-	if (!otherZipline || !GetWorld()) return false;
-
-	FVector Start = otherZipline->GetActorLocation() + FVector(0, 0, 80.f);
-	FVector End = GetActorLocation();
-
-	FHitResult HitResult;
-	FCollisionQueryParams QueryParams;
-	QueryParams.AddIgnoredActor(otherZipline);
-	QueryParams.AddIgnoredActor(this);
-	QueryParams.bTraceComplex = true;
-
-	bool bHit = GetWorld()->LineTraceSingleByChannel(
-		HitResult,
-		Start,
-		End,
-		ECC_Visibility,
-		QueryParams
-		);
-
-#if WITH_EDITOR
-	if (GEngine)
+	for (AActor* Actor : FoundZiplines)
 	{
-		DrawDebugLine(
-			GetWorld(),
-			Start,
-			End,
-			bHit ? FColor::Red : FColor::Green,
-			false,
-			2.0f,
-			0,
-			2.0f
-		);
+		AZiplineInteractible* Other = Cast<AZiplineInteractible>(Actor);
+		if (!Other || Other == this) continue;
+		if (Other->LinkedZipline != nullptr) continue;
 
-		if (bHit && HitResult.GetActor())
+		float Dist = FVector::Dist(GetActorLocation(), Other->GetActorLocation());
+		if (Dist <= LinkRange)
 		{
-			DrawDebugSphere(
-				GetWorld(),
-				HitResult.ImpactPoint,
-				25.f,
-				12,
-				FColor::Orange,
-				false,
-				2.0f
-			);
-			UE_LOG(LogTemp, Warning, TEXT("GrapplePoint: Line trace blocked by %s"), 
-				   *HitResult.GetActor()->GetName());
+			LinkedZipline = Other;
+			Other->LinkedZipline = this;
+
+			UE_LOG(LogTemp, Log, TEXT("Ziplines linked: %s <-> %s"), *GetName(), *Other->GetName());
+			return;
 		}
 	}
-#endif
-	
-	return !bHit;
+
+	UE_LOG(LogTemp, Log, TEXT("%s found no zipline to link"), *GetName());
 }
 
+void AZiplineInteractible::Interaction(AAPlayerCharacter* Player)
+{
+	Super::Interaction(Player);
+
+	if (!LinkedZipline)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Zipline has no link!"));
+		return;
+	}
+
+	if (!HasAuthority())
+	{
+		ServerStartTravel(Player);
+		return;
+	}
+
+	StartTravel(Player);
+}
+
+void AZiplineInteractible::ServerStartTravel_Implementation(AAPlayerCharacter* Player)
+{
+	if (!LinkedZipline) return;
+	StartTravel(Player);
+}
+
+void AZiplineInteractible::StartTravel(AAPlayerCharacter* Player)
+{
+	if (!LinkedZipline || !Player) return;
+
+	bIsTravelling = true;
+	TravellingPlayer = Player;
+	TravelTimer = 0.f;
+
+	StartLocation = Player->GetActorLocation() + TeleportOffset;
+	EndLocation = LinkedZipline->GetActorLocation() + TeleportOffset;
+
+	if (UCharacterMovementComponent* MoveComp = Player->GetCharacterMovement())
+	{
+		MoveComp->DisableMovement();
+		MoveComp->SetComponentTickEnabled(false);
+	}
+
+	MulticastStartTravel(Player, StartLocation, EndLocation);
+}
+
+void AZiplineInteractible::UpdateTravel(float DeltaTime)
+{
+	if (!TravellingPlayer) return;
+
+	TravelTimer += DeltaTime;
+	float Alpha = FMath::Clamp(TravelTimer / TravelDuration, 0.f, 1.f);
+	float SmoothAlpha = FMath::InterpEaseInOut(0.f, 1.f, Alpha, 2.f);
+
+	FVector NewLoc = FMath::Lerp(StartLocation, EndLocation, SmoothAlpha);
+	TravellingPlayer->SetActorLocation(NewLoc, true);
+
+	if (Alpha >= 1.f)
+		EndTravel();
+}
+
+void AZiplineInteractible::EndTravel()
+{
+	bIsTravelling = false;
+
+	if (TravellingPlayer)
+	{
+		if (UCharacterMovementComponent* MoveComp = TravellingPlayer->GetCharacterMovement())
+		{
+			MoveComp->SetComponentTickEnabled(true);
+			MoveComp->SetMovementMode(MOVE_Walking);
+		}
+	}
+
+	TravellingPlayer = nullptr;
+}
+
+void AZiplineInteractible::ClientPlayTravelEffects_Implementation()
+{
+	// TODO: ajouter VFX/SFX pour le déplacement
+}
+
+void AZiplineInteractible::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AZiplineInteractible, LinkedZipline);
+}
+
+void AZiplineInteractible::MulticastStartTravel_Implementation(AAPlayerCharacter* Player, FVector Start, FVector End)
+{
+	TravellingPlayer = Player;
+	StartLocation = Start;
+	EndLocation = End;
+	TravelTimer = 0.f;
+	bIsTravelling = true;
+
+	ClientPlayTravelEffects();
+}

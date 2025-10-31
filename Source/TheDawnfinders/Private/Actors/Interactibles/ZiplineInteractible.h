@@ -1,10 +1,10 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Interactible.h"
+#include "Actors/Interactibles/Interactible.h"
 #include "ZiplineInteractible.generated.h"
+
+class AAPlayerCharacter;
 
 UCLASS()
 class THEDAWNFINDERS_API AZiplineInteractible : public AInteractibleObjects
@@ -12,29 +12,59 @@ class THEDAWNFINDERS_API AZiplineInteractible : public AInteractibleObjects
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AZiplineInteractible();
 
-	UPROPERTY(Blueprintable)
-	bool bLinked = false;
-
-	UPROPERTY(Blueprintable)
-	AZiplineInteractible* LinkedZipline = nullptr;
-
-	UPROPERTY(Blueprintable)
-	float ZiplineRange;
-
-	
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void CheckZiplineInteractibleInRange();
+	// --- ZIPLINE SETUP ---
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zipline")
+	float LinkRange = 2000.f; // distance max pour se relier
 
-	bool IsInLigneOfSight(AZiplineInteractible* otherZipline);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zipline")
+	FVector TeleportOffset = FVector(0, 0, 80);
 
+	UPROPERTY(Replicated)
+	AZiplineInteractible* LinkedZipline = nullptr;
+
+	UFUNCTION(BlueprintCallable, Category = "Zipline")
+	void TryLinkToNearbyZipline();
+
+	// --- INTERACTION ---
+	virtual void Interaction(AAPlayerCharacter* Player) override;
+
+protected:
+	virtual void BeginPlay() override;
+
+	// --- TRAVEL ---
+	UPROPERTY()
+	bool bIsTravelling = false;
+
+	UPROPERTY()
+	AAPlayerCharacter* TravellingPlayer = nullptr;
+
+	UPROPERTY()
+	FVector StartLocation;
+
+	UPROPERTY()
+	FVector EndLocation;
+
+	UPROPERTY()
+	float TravelTimer = 0.f;
+
+	UPROPERTY(EditAnywhere, Category = "Zipline")
+	float TravelDuration = 1.5f;
+
+	void StartTravel(AAPlayerCharacter* Player);
+	void UpdateTravel(float DeltaTime);
+	void EndTravel();
+
+	// RPC
+	UFUNCTION(Server, Reliable)
+	void ServerStartTravel(AAPlayerCharacter* Player);
+
+	UFUNCTION(Client, Reliable)
+	void ClientPlayTravelEffects();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastStartTravel(AAPlayerCharacter* Player, FVector Start, FVector End);
 };

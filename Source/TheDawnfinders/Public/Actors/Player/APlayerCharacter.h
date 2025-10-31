@@ -139,4 +139,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category="Animation")
 	void BP_OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(Server, Reliable)
+	void ServerUseZiplineItem(UItemData* ZiplineItem);
 };
