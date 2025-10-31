@@ -88,6 +88,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;
 
+	UPROPERTY(BlueprintReadOnly)
+	FVector PreviousPlayerInput;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 
@@ -111,11 +114,29 @@ public:
 	void ManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
-	void Dodge();
+	void StartDodge();
+
+	UFUNCTION(BlueprintCallable)
+	void EndDodge();
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseDodge(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
 	void UseCurrentItem();
+
+	UFUNCTION(Server, Reliable)
+	void ServerPlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION(NetMulticast,Reliable)
+	void MulticastPlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION()
+	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(BlueprintImplementableEvent, Category="Animation")
+	void BP_OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 };

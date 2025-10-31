@@ -146,6 +146,10 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 	CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
+	if (CurrentPlayerInput.Length() > 0.5f) {
+		PreviousPlayerInput = CurrentPlayerInput;
+	}
+
 	FVector FinalVector = FVector(-Input.X, Input.Y, 0);
 	FinalVector.Normalize();
 	//FinalVector = GetActorTransform().TransformVector(FinalVector);
@@ -193,7 +197,8 @@ void AAPlayerCharacter::ManageRun(bool Input)
 }
 
 
-void AAPlayerCharacter::Dodge()
+
+void AAPlayerCharacter::StartDodge()
 {
 	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
 
@@ -202,18 +207,22 @@ void AAPlayerCharacter::Dodge()
 }
 
 
+
+void AAPlayerCharacter::EndDodge()
+{
+	CurrentState = EPlayerState::None;
+	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+}
+
+
+
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
 	DodgeTimer += DeltaTime;
-	if (DodgeTimer > 0.5f) {
-		CurrentState = EPlayerState::None;
-		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
-		return;
-	}
 
-	GetCharacterMovement()->MaxWalkSpeed = 1000.0f;
+	GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
 
-	FVector FinalVector = CurrentPlayerInput;
+	FVector FinalVector = PreviousPlayerInput;
 	FinalVector.Normalize();
 
 	FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
@@ -241,6 +250,36 @@ void AAPlayerCharacter::UseCurrentItem()
 
 			break;
 	}
+}
+
+void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
+{
+	if (!Montage || !GetMesh()) return;
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (!AnimInstance) return;
+
+	AnimInstance->Montage_Play(Montage);
+	FOnMontageEnded EndDelegate;
+	EndDelegate.BindUObject(this, &AAPlayerCharacter::OnMontageEnded);
+	AnimInstance->Montage_SetEndDelegate(EndDelegate, Montage);
+}
+
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
+{
+	if (!HasAuthority())
+	{
+		ServerPlayMontage(Montage);
+	}else
+	{
+		MulticastPlayMontage(Montage);
+	}
+}
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
+{
+	if (Montage)
+		MulticastPlayMontage(Montage);
 }
 
 
@@ -301,3 +340,19 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 		   Cast<APlayerController>(GetController()) != nullptr;
 }
 
+void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+	if (!Montage) return;
+
+	UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
+		*GetName(),
+		*Montage->GetName(),
+		bInterrupted ? TEXT("true") : TEXT("false"));
+
+	// Exemple de logique générique :
+	if (CurrentState == EPlayerState::UsingEquipment)
+	{
+		CurrentState = EPlayerState::None;
+	}
+	BP_OnMontageEnded(Montage, bInterrupted);
+}
