@@ -26,7 +26,8 @@ public:
 	FOnTimelineEvent TimelineFinished;
 
 	FVector StartPosition;
-	UPROPERTY(Blueprintable,BlueprintReadWrite,EditAnywhere,Category="Timeline")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Transform", 
+	meta = (MakeEditWidget = true))
 	FVector EndPosition;
 
 	UPROPERTY(EditAnywhere, Category="Timeline")
