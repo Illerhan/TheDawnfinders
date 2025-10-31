@@ -124,4 +124,19 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UseCurrentItem();
+
+	UFUNCTION(Server, Reliable)
+	void ServerPlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION(NetMulticast,Reliable)
+	void MulticastPlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayMontage(UAnimMontage* Montage);
+
+	UFUNCTION()
+	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(BlueprintImplementableEvent, Category="Animation")
+	void BP_OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 };

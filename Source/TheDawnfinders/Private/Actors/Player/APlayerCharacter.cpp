@@ -252,6 +252,36 @@ void AAPlayerCharacter::UseCurrentItem()
 	}
 }
 
+void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
+{
+	if (!Montage || !GetMesh()) return;
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (!AnimInstance) return;
+
+	AnimInstance->Montage_Play(Montage);
+	FOnMontageEnded EndDelegate;
+	EndDelegate.BindUObject(this, &AAPlayerCharacter::OnMontageEnded);
+	AnimInstance->Montage_SetEndDelegate(EndDelegate, Montage);
+}
+
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
+{
+	if (!HasAuthority())
+	{
+		ServerPlayMontage(Montage);
+	}else
+	{
+		MulticastPlayMontage(Montage);
+	}
+}
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
+{
+	if (Montage)
+		MulticastPlayMontage(Montage);
+}
+
 
 AActor* AAPlayerCharacter::GetNearestInteractible()
 {
@@ -310,3 +340,19 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 		   Cast<APlayerController>(GetController()) != nullptr;
 }
 
+void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+	if (!Montage) return;
+
+	UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
+		*GetName(),
+		*Montage->GetName(),
+		bInterrupted ? TEXT("true") : TEXT("false"));
+
+	// Exemple de logique générique :
+	if (CurrentState == EPlayerState::UsingEquipment)
+	{
+		CurrentState = EPlayerState::None;
+	}
+	BP_OnMontageEnded(Montage, bInterrupted);
+}
