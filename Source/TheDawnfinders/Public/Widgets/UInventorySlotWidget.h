@@ -25,15 +25,12 @@ public :
 	UPROPERTY(BlueprintReadWrite, meta =(BindWidget))
 	UCanvasPanel* CanvasPanel;
 
-	//UPROPERTY(BlueprintReadWrite, meta =(BindWidget))
-	//UWidgetAnimation* Select;
-
 	UPROPERTY(BlueprintReadWrite, Category="InventorySlot")
-	bool bISlotSelected = false;
+	bool bIsSlotSelected = false;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ActualiseVisuals(FInventorySlot Data, bool IsSelected);
-	virtual void ActualiseVisuals_Implementation(FInventorySlot Data, bool IsSelected);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateVisuals(FInventorySlot Data, bool IsSelected);
+	void ActualiseSlotColor(FInventorySlot Data);
 };

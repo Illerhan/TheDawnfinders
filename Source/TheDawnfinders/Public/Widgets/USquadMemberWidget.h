@@ -17,6 +17,4 @@ class THEDAWNFINDERS_API USquadMemberWidget : public UUserWidget
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ActualiseWidget(float currentHealth, float maxHealth, float currentStamina, float maxStamina);
-
-
 };

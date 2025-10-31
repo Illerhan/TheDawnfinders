@@ -26,7 +26,9 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-// ===== REPLICATION =====
+
+
+#pragma region Replication
 
 void UInventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
@@ -60,7 +62,10 @@ void UInventoryComponent::BroadcastInventoryChange()
 	OnInventoryChanging.Broadcast(InventorySlots,CurrentSlotIndex);
 }
 
-// === Add items ===
+#pragma endregion
+
+
+#pragma region Add / Remove Item
 
 void UInventoryComponent::AddNewItem(UItemData* NewItem)
 {
@@ -85,7 +90,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 
 	bool bItemAdded = false;
 
-	for (int32 i =0; i<InventorySlots.Num(); i++)
+	for (int32 i = 0; i < InventorySlots.Num(); i++)
 	{
 		FInventorySlot& Slot = NewSlots[i];
 
@@ -114,14 +119,11 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 		NewSlots.Add(NewSlot);
 		UE_LOG(LogTemp, Log, TEXT("New slot created for item (total slots: %d)"), NewSlots.Num());
 	}
-	InventorySlots=NewSlots;
+	InventorySlots = NewSlots;
 
 	BroadcastInventoryChange();
 }
 
-
-
-// === Remove current item ===
 
 // CALLED WHEN WE USE A CONSUMMABLE, REMOVE ONE INSTANCE OF IT AND ACTUALISE THE INVENTORY SLOT
 void UInventoryComponent::RemoveCurrentItem()
@@ -149,9 +151,10 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 	BroadcastInventoryChange();
 }
 
+#pragma endregion
 
 
-// === Throw items ===
+#pragma region Throw Item
 
 void UInventoryComponent::Throw()
 {
@@ -191,8 +194,8 @@ void UInventoryComponent::ServerThrow_Implementation()
 			SpawnLocation,
 			SpawnRotation,
 			SpawnInfo
-			);
-		
+		);
+
 		if (DroppedItem)
 		{
 			DroppedItem->ItemData = CurrentSlot.ItemData;
@@ -204,18 +207,18 @@ void UInventoryComponent::ServerThrow_Implementation()
 				DroppedItem->ItemMesh->SetSimulatePhysics(false);
 				DroppedItem->ItemMesh->SetEnableGravity(false);
 				DroppedItem->ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-				
+
 				UE_LOG(LogTemp, Log, TEXT("Mesh set for dropped item: %s"), *CurrentSlot.ItemData->ItemMesh->GetName());
 			}
 
 			DroppedItem->bShouldLevitate = true;
-			
+
 			if (UPrimitiveComponent* RootComponent = Cast<UPrimitiveComponent>(DroppedItem->GetRootComponent()))
 			{
 				if (RootComponent->IsSimulatingPhysics())
 				{
-					FVector ThrowDirection = GetOwner()->GetActorForwardVector() + FVector(0,0,0.25f);
-					RootComponent->AddImpulse(ThrowDirection*500.f,NAME_None,true);
+					FVector ThrowDirection = GetOwner()->GetActorForwardVector() + FVector(0, 0, 0.25f);
+					RootComponent->AddImpulse(ThrowDirection * 500.f, NAME_None, true);
 				}
 				UE_LOG(LogTemp, Log, TEXT("Item thrown from slot %d: %s"), CurrentSlotIndex, *CurrentSlot.ItemData->ItemName);
 			}
@@ -231,7 +234,7 @@ void UInventoryComponent::ServerThrow_Implementation()
 
 		CurrentSlot.Quantity--;
 
-		if (CurrentSlot.Quantity <=0)
+		if (CurrentSlot.Quantity <= 0)
 		{
 			CurrentSlot.ItemData = nullptr;
 			CurrentSlot.Quantity = 0;
@@ -240,6 +243,11 @@ void UInventoryComponent::ServerThrow_Implementation()
 		BroadcastInventoryChange();
 	}
 }
+
+#pragma endregion
+
+
+
 FInventorySlot UInventoryComponent::GetCurrentSlot()
 {
 	if (InventorySlots.IsValidIndex(CurrentSlotIndex))
@@ -249,6 +257,7 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	}
 	return FInventorySlot();
 }
+
 
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp)
 {
