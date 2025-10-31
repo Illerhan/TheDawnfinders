@@ -4,43 +4,43 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UStaminaComponent.generated.h"
+#include "UHealthComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
-class THEDAWNFINDERS_API UStaminaComponent : public UActorComponent
+class THEDAWNFINDERS_API UHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UStaminaComponent();
+	UHealthComponent();
 	
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
-	void UseStamina(float quantity);
+	void InitialiseComponent(float MaxHealth);
+
+	UFUNCTION(BlueprintCallable)
+	void Heal(float quantity);
+
+	UFUNCTION(BlueprintCallable)
+	void TakeDamage(float quantity);
+
+	UFUNCTION(BlueprintCallable)
+	void Die();
 
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
-	void ServerChangeStamina(float newStamina);
+	void ServerChangeHealth(float newHealth);
 
 	UFUNCTION(BlueprintCallable)
-	void ChangeLocalStamina();
+	void LocalChangeHealth();
 
-	UFUNCTION(BlueprintCallable)
-	bool VerifyHasStamina();
-
-	UFUNCTION(BlueprintCallable)
-	void InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl);
-
-	UFUNCTION(BlueprintCallable)
-	void ReloadStamina(float quantity);
+	UPROPERTY(BlueprintReadOnly)
+	bool IsDead;
 
 private :
 
-	float CurrentStamina = 100.f;
-	float CurrentMaxStamina = 100.f;
-	float ReloadSpeed = 10.f;
-	float ReloadDelay = 2.f;
-	float CurrentReloadDelay = 0.f;
+	float CurrentHealth = 100.f;
+	float CurrentMaxHealth = 100.f;
 };

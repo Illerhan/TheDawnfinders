@@ -3,7 +3,9 @@
 
 #include "Components/UStaminaComponent.h"
 #include "Math/UnrealMathUtility.h"
+#include "GameFramework/CustomPlayerState.h"
 #include "Net/UnrealNetwork.h"
+
 
 UStaminaComponent::UStaminaComponent()
 {
@@ -13,6 +15,15 @@ UStaminaComponent::UStaminaComponent()
 void UStaminaComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	InitialiseComponent(100, 10, 2);
 }
 
 void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -24,23 +35,10 @@ void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;
 	}
 
-	ReloadStamina(DeltaTime * ReloadSpeed);
+	if(CurrentStamina < CurrentMaxStamina)
+		ReloadStamina(DeltaTime * ReloadSpeed);
 }
 
-void UStaminaComponent::UseStamina(float quantity)
-{
-	CurrentStamina -= quantity;
-	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
-
-	CurrentReloadDelay = ReloadDelay;
-
-	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
-}
-
-bool UStaminaComponent::VerifyHasStamina()
-{
-	return CurrentStamina > 0;
-}
 
 void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
 {
@@ -49,14 +47,103 @@ void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, f
 	ReloadSpeed = ReloadSpd;
 	ReloadDelay = ReloadDl;
 
-	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
+	// If is not server
+	if (!GetOwner()->HasAuthority()) {
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	// If is server
+	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
+
+#pragma region Main Stamina Functions
+
+void UStaminaComponent::UseStamina(float quantity)
+{
+	CurrentStamina -= quantity;
+	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
+
+	CurrentReloadDelay = ReloadDelay;
+
+	if (!GetOwner()->HasAuthority()) {
+
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	ServerChangeStamina_Implementation(CurrentStamina);
+}
+
+
+// RETURNS TRUE IF HAS STAMINA
+bool UStaminaComponent::VerifyHasStamina()
+{
+	return CurrentStamina > 0;
+}
+
+
+// CALLED IN THE UPDATE AFTER A CERTAIN DELAY
 void UStaminaComponent::ReloadStamina(float quantity)
 {
 	CurrentStamina += quantity;
 	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
 
-	OnStaminaChange.Broadcast(CurrentStamina, CurrentMaxStamina);
+	if (!GetOwner()->HasAuthority()) {
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
+#pragma endregion
+
+
+#pragma region Network Functions
+
+// CALLED TO CHANGE THE UI INFORMATIONS FOR ALL THE OTHER SQUAD MEMBERS
+void UStaminaComponent::ServerChangeStamina_Implementation(float newStamina)
+{
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseStamina(newStamina, CurrentMaxStamina);
+}
+
+
+// CALLED TO CHANGE THE UI INFORMATIONS INSTANTLY IN LOCAL
+void UStaminaComponent::ChangeLocalStamina()
+{
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalStamina(CurrentStamina, CurrentMaxStamina);
+}
+
+#pragma endregion 

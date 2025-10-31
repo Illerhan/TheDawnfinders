@@ -7,9 +7,7 @@
 #include "Widgets/USquadMemberWidget.h"
 #include "USquadWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class THEDAWNFINDERS_API USquadWidget : public UUserWidget
 {
@@ -25,4 +23,17 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<USquadMemberWidget*> SquadMemberWidgets;
 
+	UFUNCTION(BlueprintCallable)
+	void BindAllCurrentPlayerStates();
+
+	UFUNCTION(BlueprintCallable)
+	void BindNewPlayerState();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddNewSquadMember();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void RemoveSquadMember();
+
+	FTimerHandle BindDelayTimerHandle;
 };

@@ -47,29 +47,31 @@ public:
 
 	// ==== Inventory player action functions ====
 
-	/**
-	 * @param UItemData* New Item
-	 * 
-	 * Add item in the player inventory
-	 */
 	UFUNCTION(BlueprintCallable,Category="Inventory")
 	void AddNewItem(UItemData* NewItem);
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerAddNewItem(UItemData* NewItem);
 
-	/**
-	 * Throw the current slot's item on the ground
-	 */
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void RemoveCurrentItem();
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
+	void ServerRemoveCurrentItem();
+
+
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void Throw();
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerThrow();
 
+
 	UFUNCTION(BlueprintCallable,Category = "Inventory")
 	FInventorySlot GetCurrentSlot();
 	
+
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	FInventorySlot ChangeCurrentSlot(bool IndexGoUp);
 

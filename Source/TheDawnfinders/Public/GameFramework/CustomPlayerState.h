@@ -9,6 +9,7 @@
 
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnInfoChange, const float, hp, const float, maxHp, const float, stam, const float, maxStam);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInfoChange);
+DECLARE_DYNAMIC_DELEGATE(FOnInfoChangeLocal);
 
 UCLASS()
 class THEDAWNFINDERS_API ACustomPlayerState : public APlayerState
@@ -19,22 +20,37 @@ public :
 	virtual void BeginPlay() override;
 
 	FOnInfoChange OnInfoChange;
+	FOnInfoChangeLocal OnInfoChangeLocal;
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseLocalStamina(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseStamina(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
+	void ActualiseLocalHealth(float current, float max);
+
+	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max);
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
 
-	UPROPERTY(BlueprintReadOnly)
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxStamina;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing = OnRep_HealthChange)
 	float CurrentHealth;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxHealth;
+
+	UFUNCTION()
+	void OnRep_StaminaChange();
+
+	UFUNCTION()
+	void OnRep_HealthChange();
 };

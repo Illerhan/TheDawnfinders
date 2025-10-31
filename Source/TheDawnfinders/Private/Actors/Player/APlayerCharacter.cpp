@@ -18,8 +18,11 @@ AAPlayerCharacter::AAPlayerCharacter()
 
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
 	StaminaComponent = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
-	//InventoryComponent->SetupAttachment(RootComponent);
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
 }
+
+
+#pragma region Interaction Functions
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
 {
@@ -100,6 +103,16 @@ void AAPlayerCharacter::StopInteract()
 	}
 }
 
+#pragma endregion
+
+
+
+void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
+{
+	HealthComponent->TakeDamage(quantity);
+}
+
+
 void AAPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -107,6 +120,7 @@ void AAPlayerCharacter::BeginPlay()
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	
 }
+
 
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
@@ -118,6 +132,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 		ActualiseDodge(DeltaTime);
 	}
 }
+
 
 void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -145,22 +160,23 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 void AAPlayerCharacter::RotateCharacter()
 {
 	if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
-	if (CurrentPlayerInput.Length() < 10.f) return;
+	if (CurrentPlayerInput.Length() < 0.15f) return;
 	if (GetVelocity().Length() < 100.f) return;
 
 	FVector Direction = GetVelocity();
 	Direction.Normalize();
 
 	double radAngle = atan2(Direction.Y, Direction.X);
-	FRotator AimedRotation = FRotator(0, FMath::RadiansToDegrees(radAngle), 0);
+	FRotator AimedRotation = FRotator(0, FMath::RadiansToDegrees(radAngle) - 90, 0);
 
 	if (GetMesh()) {
 		FRotator CurrentRotation = GetMesh()->GetRelativeRotation();
 		FRotator NewRotation = FMath::RInterpTo(CurrentRotation, AimedRotation, 1.f, 1.f);
 
-		SetActorRelativeRotation(NewRotation);
+		GetMesh()->SetRelativeRotation(NewRotation);
 	}
 }
+
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
@@ -168,13 +184,14 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
 	if (Input) {
 		CurrentState = EPlayerState::Running;
-		GetCharacterMovement()->MaxWalkSpeed = 700.0f;
+		GetCharacterMovement()->MaxWalkSpeed = 800.0f;
 	}
 	else {
 		if(CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
 		GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	}
 }
+
 
 void AAPlayerCharacter::Dodge()
 {
@@ -183,6 +200,7 @@ void AAPlayerCharacter::Dodge()
 	CurrentState = EPlayerState::Dodging;
 	DodgeTimer = 0;
 }
+
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
@@ -204,6 +222,28 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 	AddMovementInput(FinalVector, 1.0f, false);
 }
 
+
+// IF THE PLAYER IS EQUIPPE WITH A CONSUMMABLE, USES IT IF POSSIBLE
+void AAPlayerCharacter::UseCurrentItem()
+{
+	FInventorySlot slotInfos = InventoryComponent->GetCurrentSlot();
+
+	if (slotInfos.ItemData == nullptr) return;
+	if (slotInfos.ItemData->ItemType != EItemType::Consumable) return;
+
+	switch (slotInfos.ItemData->ConsumableEffectType) {
+		case EConsumableEffectType::Heal :
+			HealthComponent->Heal(slotInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
+			break;
+
+		case EConsumableEffectType::OpenDoor :
+
+			break;
+	}
+}
+
+
 AActor* AAPlayerCharacter::GetNearestInteractible()
 {
 	float bestDist = FLT_MAX;
@@ -220,6 +260,7 @@ AActor* AAPlayerCharacter::GetNearestInteractible()
 	
 	return pickedInteractible;
 }
+
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
@@ -240,6 +281,7 @@ void AAPlayerCharacter::PossessedBy(AController* NewController)
 	}
 }
 
+
 void AAPlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
@@ -248,6 +290,8 @@ void AAPlayerCharacter::OnRep_PlayerState()
 		*GetName(), 
 		GetController() ? *GetController()->GetName() : TEXT("None"));
 }
+
+
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
 	// For Server RPCs to work, the pawn must:

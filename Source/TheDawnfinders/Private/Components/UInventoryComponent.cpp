@@ -75,7 +75,6 @@ void UInventoryComponent::AddNewItem(UItemData* NewItem)
 
 void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 {
-
 	if (!NewItem)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AddNewItem: NewItem is null"));
@@ -116,9 +115,40 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 		UE_LOG(LogTemp, Log, TEXT("New slot created for item (total slots: %d)"), NewSlots.Num());
 	}
 	InventorySlots=NewSlots;
-	BroadcastInventoryChange();
 
+	BroadcastInventoryChange();
 }
+
+
+
+// === Remove current item ===
+
+// CALLED WHEN WE USE A CONSUMMABLE, REMOVE ONE INSTANCE OF IT AND ACTUALISE THE INVENTORY SLOT
+void UInventoryComponent::RemoveCurrentItem()
+{
+	if (!GetOwner()->HasAuthority())
+	{
+		ServerRemoveCurrentItem();
+		return;
+	}
+
+	ServerRemoveCurrentItem_Implementation();
+}
+
+
+void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
+{
+	TArray<FInventorySlot> NewSlots = InventorySlots;;
+
+	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
+	CurrentSlot.Quantity--;
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
+
+	InventorySlots = NewSlots;
+
+	BroadcastInventoryChange();
+}
+
 
 
 // === Throw items ===
