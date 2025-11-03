@@ -21,7 +21,12 @@ class THEDAWNFINDERS_API UInventoryBarWidget : public UUserWidget
 public :
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category="Inventory")
 	void ActualiseWidget(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
-	virtual void ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowWidget();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HideWidget();
 
 	
 	

@@ -14,6 +14,8 @@ class UItemData;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChanging, const TArray<FInventorySlot>&, CurrentSlots, int32,
                                              CurrentSlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryOpenInput);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseInput);
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
@@ -35,8 +37,14 @@ public:
 	UPROPERTY(ReplicatedUsing=OnRep_CurrentSlotIndex,BlueprintReadWrite, Category="Inventory")
 	int CurrentSlotIndex;
 	
-	UPROPERTY(BlueprintAssignable,Category = "Inventory")
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
 	FOnInventoryChanging OnInventoryChanging;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
+	FOnInventoryOpenInput OnInventoryOpenInput;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
+	FOnInventoryCloseInput OnInventoryCloseInput;
 
 	UFUNCTION()
 	void OnRep_InventorySlots();
@@ -71,12 +79,19 @@ public:
 	UFUNCTION(BlueprintCallable,Category = "Inventory")
 	FInventorySlot GetCurrentSlot();
 	
-
 	UFUNCTION(BlueprintCallable, Category="Inventory")
-	FInventorySlot ChangeCurrentSlot(bool IndexGoUp);
+	FInventorySlot ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
-	void ServerChangeCurrentSlot(bool IndexGoUp);
+	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
+
+
+// Sort Functions
+public :
+	UFUNCTION(BlueprintCallable)
+	void SortInventory();
+
+	TArray<FInventorySlot> GetAllSlotsOfType(EItemType Type);
 
 protected:
 	void BroadcastInventoryChange();

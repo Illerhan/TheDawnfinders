@@ -4,6 +4,16 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "Widgets/UInventorySlotWidget.h"
 
+void UInventoryBarWidget::ShowWidget_Implementation()
+{
+
+}
+
+void UInventoryBarWidget::HideWidget_Implementation()
+{
+
+}
+
 void UInventoryBarWidget::NativeConstruct()
 {
     Super::NativeConstruct();

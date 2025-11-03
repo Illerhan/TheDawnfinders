@@ -39,6 +39,7 @@ void UInventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	DOREPLIFETIME(UInventoryComponent, CurrentSlotIndex);
 }
 
+
 void UInventoryComponent::OnRep_InventorySlots()
 {
 	UE_LOG(LogTemp, Warning, TEXT("[%s] InventorySlots called by %s"),
@@ -48,6 +49,7 @@ void UInventoryComponent::OnRep_InventorySlots()
 	OnInventoryChanging.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
+
 void UInventoryComponent::OnRep_CurrentSlotIndex()
 {
 	UE_LOG(LogTemp, Warning, TEXT("[%s] CurrentSlotIndex called by %s"),
@@ -56,6 +58,7 @@ void UInventoryComponent::OnRep_CurrentSlotIndex()
 				   );
 	OnInventoryChanging.Broadcast(InventorySlots, CurrentSlotIndex);
 }
+
 
 void UInventoryComponent::BroadcastInventoryChange()
 {
@@ -121,7 +124,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 	}
 	InventorySlots = NewSlots;
 
-	BroadcastInventoryChange();
+	SortInventory();
 }
 
 
@@ -148,7 +151,7 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 
 	InventorySlots = NewSlots;
 
-	BroadcastInventoryChange();
+	SortInventory();
 }
 
 #pragma endregion
@@ -247,52 +250,107 @@ void UInventoryComponent::ServerThrow_Implementation()
 #pragma endregion
 
 
+#pragma region Others
 
 FInventorySlot UInventoryComponent::GetCurrentSlot()
 {
 	if (InventorySlots.IsValidIndex(CurrentSlotIndex))
 	{
 		return InventorySlots[CurrentSlotIndex];
-		
+
 	}
 	return FInventorySlot();
 }
 
 
-FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp)
+FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
 	if (!GetOwner()->HasAuthority())
 	{
-		ServerChangeCurrentSlot(IndexGoUp);
+		ServerChangeCurrentSlot(IndexGoUp, ForcedIndex);
 		return GetCurrentSlot();
 	}
-	ServerChangeCurrentSlot_Implementation(IndexGoUp);
+	ServerChangeCurrentSlot_Implementation(IndexGoUp, ForcedIndex);
 	return GetCurrentSlot();
 }
 
-void UInventoryComponent::ServerChangeCurrentSlot_Implementation(bool IndexGoUp)
+
+void UInventoryComponent::ServerChangeCurrentSlot_Implementation(bool IndexGoUp, int ForcedIndex)
 {
-	if (InventorySlots.Num()==0)
+	if (InventorySlots.Num() == 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ChangeCurrentSlot: No slots available"));
 		return;
 	}
-	
-	int32 OldIndex = CurrentSlotIndex;
 
-	if (IndexGoUp)
-	{
-		CurrentSlotIndex = (CurrentSlotIndex + 1) % InventorySlots.Num();
+	if (ForcedIndex != -1) {
+		CurrentSlotIndex = ForcedIndex;
 	}
 	else
 	{
-		CurrentSlotIndex = (CurrentSlotIndex - 1 + InventorySlots.Num()) % InventorySlots.Num();
+		int32 OldIndex = CurrentSlotIndex;
+
+		if (IndexGoUp)
+		{
+			CurrentSlotIndex = (CurrentSlotIndex + 1) % InventorySlots.Num();
+		}
+		else
+		{
+			CurrentSlotIndex = (CurrentSlotIndex - 1 + InventorySlots.Num()) % InventorySlots.Num();
+		}
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("Current slot changed from %d to %d"), OldIndex, CurrentSlotIndex);
-
 	BroadcastInventoryChange();
-
 }
 
 
+void UInventoryComponent::SortInventory()
+{
+	TArray<FInventorySlot> SortedInventory;
+
+	// Weapons 
+	TArray<FInventorySlot> WeaponsSlots = GetAllSlotsOfType(EItemType::Equipment);
+	for (int i = 0; i < WeaponsSlots.Num(); i++) {
+		SortedInventory.Add(WeaponsSlots[i]);
+	}
+
+	// Consummables
+	TArray<FInventorySlot> ConsummableSlots = GetAllSlotsOfType(EItemType::Consumable);
+	for (int i = 0; i < ConsummableSlots.Num(); i++) {
+		SortedInventory.Add(ConsummableSlots[i]);
+	}
+
+	// Valuables
+	TArray<FInventorySlot> ValuableSlots = GetAllSlotsOfType(EItemType::Valuable);
+	for (int i = 0; i < ValuableSlots.Num(); i++) {
+		SortedInventory.Add(ValuableSlots[i]);
+	}
+
+	// Empty
+	for (int i = 0; i < InventorySlots.Num(); i++) {
+		if (InventorySlots[i].ItemData != nullptr) continue;
+		SortedInventory.Add(InventorySlots[i]);
+	}
+	
+	InventorySlots = SortedInventory;
+
+	UE_LOG(LogTemp, Log, TEXT("Sorted Inventory"));
+
+	BroadcastInventoryChange();
+}
+
+TArray<FInventorySlot> UInventoryComponent::GetAllSlotsOfType(EItemType Type)
+{
+	TArray<FInventorySlot> Result;
+
+	for (int i = 0; i < InventorySlots.Num(); i++) {
+		if (InventorySlots[i].ItemData == nullptr) continue;
+		if (InventorySlots[i].ItemData->ItemType != Type) continue;
+
+		Result.Add(InventorySlots[i]);
+	}
+
+	return Result;
+}
+
+#pragma endregion
