@@ -149,6 +149,10 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 	if (CurrentPlayerInput.Length() > 0.5f) {
 		PreviousPlayerInput = CurrentPlayerInput;
 	}
+	else {
+		AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+		return;
+	}
 
 	FVector FinalVector = FVector(-Input.X, Input.Y, 0);
 	FinalVector.Normalize();
