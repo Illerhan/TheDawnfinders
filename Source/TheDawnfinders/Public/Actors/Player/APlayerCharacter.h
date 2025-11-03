@@ -40,6 +40,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UHealthComponent* HealthComponent;
+//
+
 
 
 // Interact Behavior
@@ -107,8 +109,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
 
-	UFUNCTION(BlueprintCallable)
-	void RotateCharacter();
+	//UFUNCTION(BlueprintCallable)
+	//void RotateCharacter();
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
