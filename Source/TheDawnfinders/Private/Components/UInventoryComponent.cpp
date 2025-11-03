@@ -105,7 +105,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 			UE_LOG(LogTemp, Log, TEXT("Item added to empty slot %d"), i);
 			break;
 		}
-		else if (Slot.ItemData == NewItem)
+		else if (Slot.ItemData == NewItem && Slot.Quantity < NewItem->MaxStackingCapacity)
 		{
 			Slot.Quantity++;
 			bItemAdded = true;
@@ -333,8 +333,6 @@ void UInventoryComponent::SortInventory()
 	}
 	
 	InventorySlots = SortedInventory;
-
-	UE_LOG(LogTemp, Log, TEXT("Sorted Inventory"));
 
 	BroadcastInventoryChange();
 }

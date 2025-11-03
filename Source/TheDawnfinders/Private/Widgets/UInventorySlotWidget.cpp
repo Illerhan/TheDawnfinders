@@ -20,3 +20,7 @@ void UInventorySlotWidget::ActualiseSlotColor_Implementation(FInventorySlot Data
 void UInventorySlotWidget::InitialiseWidget_Implementation(int Index)
 {
 }
+
+void UInventorySlotWidget::ActualiseSlotCounter_Implementation(FInventorySlot Data)
+{
+}

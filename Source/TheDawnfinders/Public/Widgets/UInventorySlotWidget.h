@@ -39,5 +39,8 @@ public :
 	void ActualiseSlotColor(FInventorySlot Data);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ActualiseSlotCounter(FInventorySlot Data);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void InitialiseWidget(int Index);
 };
