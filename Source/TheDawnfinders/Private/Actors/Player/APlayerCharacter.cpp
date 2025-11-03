@@ -14,6 +14,20 @@ AAPlayerCharacter::AAPlayerCharacter()
     // Réplication Actor + mouvement (utile pour ACharacter)
     bReplicates = true;
     SetReplicateMovement(true);
+    GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Exponential;
+    GetCharacterMovement()->bNetworkSmoothingComplete = false;
+    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.100f;
+    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.033f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.040f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.033f;
+    
+    // Interpolation plus agressive
+    GetCharacterMovement()->NetworkMaxSmoothUpdateDistance = 128.0f;
+    GetCharacterMovement()->NetworkNoSmoothUpdateDistance = 256.0f;
+    
+    // Augmenter la fréquence pour les mouvements critiques
+    SetNetUpdateFrequency(100.0f);
+    SetMinNetUpdateFrequency(50.0f);
 
     
 
@@ -133,6 +147,12 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    
+    if (GetLocalRole() == ROLE_SimulatedProxy)
+    {
+        return;
+    }
+
     // --- Plus aucune rotation Mesh/Actor ici ---
     // Tu gères la rotation en Blueprint (input Turn/Look et/ou CharacterMovement).
 
@@ -172,40 +192,54 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
-    
-    if (!HasAuthority())
-    {
-        // Update locally so AnimBP sees the change immediately
-        CurrentState = Input ? EPlayerState::Running : EPlayerState::None;
-        GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
-
-        ServerManageRun(Input);
-        return;
-    }
-
-
     if (CurrentState == EPlayerState::Dodging) return;
 
-    if (Input)
+    // Si on est sur le serveur, on applique normalement
+    if (HasAuthority())
     {
-        CurrentState = EPlayerState::Running;
-        GetCharacterMovement()->MaxWalkSpeed = 800.0f;
+        if (Input)
+        {
+            CurrentState = EPlayerState::Running;
+            GetCharacterMovement()->MaxWalkSpeed = 800.0f;
+        }
+        else
+        {
+            if (CurrentState == EPlayerState::Running)
+                CurrentState = EPlayerState::None;
+
+            GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        }
     }
     else
     {
-        if (CurrentState == EPlayerState::Running)
-            CurrentState = EPlayerState::None;
-
-        GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        // Client: uniquement prédiction visuelle locale (vitesse)
+        // Ne PAS toucher à CurrentState, il sera répliqué par le serveur
+        GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
+        
+        // Demander au serveur
+        ServerManageRun(Input);
     }
 }
-
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
     UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
         *GetName(),
         GetController() ? *GetController()->GetName() : TEXT("None"));
-
+    switch(CurrentState)
+    {
+    case EPlayerState::Running:
+        GetCharacterMovement()->MaxWalkSpeed = 800.0f;
+        break;
+    case EPlayerState::None:
+        GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        break;
+    case EPlayerState::Dodging:
+        // Géré par ActualiseDodge
+        break;
+    default:
+        GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        break;
+    }
     // You can add logic here to update animations, movement speed, etc.
 }
 
