@@ -4,6 +4,7 @@
 #include "Actors/Interactibles/Lever.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Net/UnrealNetwork.h"
 
 
 AAPlayerCharacter::AAPlayerCharacter()
@@ -13,6 +14,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     // Réplication Actor + mouvement (utile pour ACharacter)
     bReplicates = true;
     SetReplicateMovement(true);
+
+    
 
     // Composants perso (inchangés)
     InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
@@ -30,6 +33,13 @@ AAPlayerCharacter::AAPlayerCharacter()
      GetCharacterMovement()->RotationRate = FRotator(0.f, 720.f, 0.f);
 }
 
+
+void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(AAPlayerCharacter, CurrentState);
+}
 
 
 #pragma region Interaction Functions
@@ -159,8 +169,21 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     AddMovementInput(FinalVector, 1.0f, true);
 }
 
+
 void AAPlayerCharacter::ManageRun(bool Input)
 {
+    
+    if (!HasAuthority())
+    {
+        // Update locally so AnimBP sees the change immediately
+        CurrentState = Input ? EPlayerState::Running : EPlayerState::None;
+        GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
+
+        ServerManageRun(Input);
+        return;
+    }
+
+
     if (CurrentState == EPlayerState::Dodging) return;
 
     if (Input)
@@ -170,10 +193,33 @@ void AAPlayerCharacter::ManageRun(bool Input)
     }
     else
     {
-        if (CurrentState == EPlayerState::Running) CurrentState = EPlayerState::None;
+        if (CurrentState == EPlayerState::Running)
+            CurrentState = EPlayerState::None;
+
         GetCharacterMovement()->MaxWalkSpeed = 400.0f;
     }
 }
+
+void AAPlayerCharacter::OnRep_CurrentPlayerState()
+{
+    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
+        *GetName(),
+        GetController() ? *GetController()->GetName() : TEXT("None"));
+
+    // You can add logic here to update animations, movement speed, etc.
+}
+
+
+bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
+{
+    return true;
+}
+
+void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
+{
+    ManageRun(Input); // Call the same logic on the server
+}
+
 
 void AAPlayerCharacter::StartDodge()
 {

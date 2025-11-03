@@ -93,10 +93,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentPlayerState,EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 
-	float DodgeTimer;
+	UFUNCTION()
+	void OnRep_CurrentPlayerState();	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -112,8 +113,13 @@ public:
 	//UFUNCTION(BlueprintCallable)
 	//void RotateCharacter();
 
+	
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerManageRun(bool Input);
+
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
+
 
 	UFUNCTION(BlueprintCallable)
 	void StartDodge();
