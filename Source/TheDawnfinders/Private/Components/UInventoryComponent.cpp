@@ -129,6 +129,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 	InventorySlots = NewSlots;
 
 	SortInventory();
+	VerifyCurrentOverloadCount();
 }
 
 
@@ -155,6 +156,7 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 	InventorySlots = NewSlots;
 
 	SortInventory();
+	VerifyCurrentOverloadCount();
 }
 
 #pragma endregion
@@ -269,6 +271,8 @@ void UInventoryComponent::SelectSlotByAngle(int angle)
 void UInventoryComponent::VerifyCurrentOverloadCount()
 {
 	int Current = GetCurrentOverloadCount();
+
+	UE_LOG(LogTemp, Log, TEXT("%d"), Current);
 
 	if (Current == PreviousOverloadCount) return;
 

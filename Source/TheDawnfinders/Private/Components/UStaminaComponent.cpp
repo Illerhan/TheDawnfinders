@@ -25,7 +25,7 @@ void UStaminaComponent::BeginPlay()
 	if (!PC || !PC->IsLocalController()) return;
 
 	AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(PawnOwner);
-	PlayerCharacter->InventoryComponent->OnOverloadCountChange.AddUniqueDynamic(this, &UStaminaComponent::ActualiseCurrentOverloadCount);
+	PlayerCharacter->InventoryComponent->OnOverloadCountChange.AddDynamic(this, &UStaminaComponent::ActualiseCurrentOverloadCount);
 
 	InitialiseComponent(100, 10, 2);
 }
