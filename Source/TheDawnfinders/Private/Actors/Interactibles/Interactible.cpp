@@ -18,6 +18,10 @@ AInteractibleObjects::AInteractibleObjects()
 	RootComponent = CapsuleCollider;
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
+
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
+	StaticMesh->SetupAttachment(CapsuleCollider);
+	
 	bReplicates = true;
 }
 

@@ -19,6 +19,9 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
 	UCapsuleComponent* CapsuleCollider;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Mesh")
+	UStaticMeshComponent* StaticMesh;
 	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 

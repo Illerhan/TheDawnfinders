@@ -19,7 +19,8 @@ enum class EItemType : uint8 {
 UENUM(BlueprintType)
 enum class EConsumableEffectType : uint8 {
 	Heal UMETA(DisplayName = "Heal"),
-	OpenDoor UMETA(DisplayName = "OpenDoor")
+	OpenDoor UMETA(DisplayName = "OpenDoor"),
+	PlaceZipline UMETA(DisplayName = "PlaceZipline"),
 };
 
 
@@ -59,4 +60,8 @@ public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
 	int ConsumableEffectPower;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zipline")
+	TSubclassOf<class AZiplineInteractible> ZiplineClass;
+	
 };

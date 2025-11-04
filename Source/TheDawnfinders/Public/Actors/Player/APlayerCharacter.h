@@ -40,6 +40,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UHealthComponent* HealthComponent;
+//
+
 
 
 // Interact Behavior
@@ -91,10 +93,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentPlayerState,EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 
-	float DodgeTimer;
+	UFUNCTION()
+	void OnRep_CurrentPlayerState();	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -107,11 +110,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
 
-	UFUNCTION(BlueprintCallable)
-	void RotateCharacter();
+	//UFUNCTION(BlueprintCallable)
+	//void RotateCharacter();
+
+	
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
+
 
 	UFUNCTION(BlueprintCallable)
 	void StartDodge();
@@ -139,4 +147,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category="Animation")
 	void BP_OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(Server, Reliable)
+	void ServerUseZiplineItem(UItemData* ZiplineItem);
 };
