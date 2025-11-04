@@ -132,6 +132,7 @@ void AAPlayerCharacter::StopInteract()
 
 #pragma endregion
 
+
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
     HealthComponent->TakeDamage(quantity);
@@ -194,6 +195,8 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 }
 
 
+#pragma region Run
+
 void AAPlayerCharacter::ManageRun(bool Input)
 {
     if (CurrentState == EPlayerState::Dodging) return;
@@ -224,6 +227,8 @@ void AAPlayerCharacter::ManageRun(bool Input)
         ServerManageRun(Input);
     }
 }
+
+
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
     UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
@@ -253,11 +258,16 @@ bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
     return true;
 }
 
+
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 {
     ManageRun(Input); // Call the same logic on the server
 }
 
+#pragma endregion
+
+
+#pragma region Dodge
 
 void AAPlayerCharacter::StartDodge()
 {
@@ -266,11 +276,13 @@ void AAPlayerCharacter::StartDodge()
     DodgeTimer = 0;
 }
 
+
 void AAPlayerCharacter::EndDodge()
 {
     CurrentState = EPlayerState::None;
     GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 }
+
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
@@ -284,6 +296,9 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 
     AddMovementInput(FinalVector, 1.0f, false);
 }
+
+#pragma endregion
+
 
 // IF THE PLAYER IS EQUIPPED WITH A CONSUMABLE, USES IT IF POSSIBLE
 void AAPlayerCharacter::UseCurrentItem()

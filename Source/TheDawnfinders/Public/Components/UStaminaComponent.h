@@ -36,8 +36,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ReloadStamina(float quantity);
 
-private :
+	UFUNCTION(BlueprintCallable)
+	void ActualiseCurrentOverloadCount(int NewCount);
 
+	int CurrentOverloadCount = 0;
+
+
+private :
 	float CurrentStamina = 100.f;
 	float CurrentMaxStamina = 100.f;
 	float ReloadSpeed = 10.f;

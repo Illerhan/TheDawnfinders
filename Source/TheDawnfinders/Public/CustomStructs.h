@@ -17,14 +17,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Quantity;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsOverloadSlot;
+
 	FInventorySlot()
-		:  ItemData(nullptr), Quantity()
-	{
-	}
+	:  ItemData(nullptr), Quantity(), IsOverloadSlot(false)
+	{}
 
 	bool operator==(const FInventorySlot& Other) const
 	{
-		return ItemData == Other.ItemData && Quantity == Other.Quantity;
+		return ItemData == Other.ItemData && Quantity == Other.Quantity && IsOverloadSlot == Other.IsOverloadSlot;
 	}
 
 	bool operator!=(const FInventorySlot& Other) const

@@ -14,7 +14,6 @@ void UInventorySlotWidget::ActualiseVisuals_Implementation(FInventorySlot Data, 
 
 void UInventorySlotWidget::ActualiseSlotColor_Implementation(FInventorySlot Data)
 {
-
 }
 
 void UInventorySlotWidget::InitialiseWidget_Implementation(int Index)

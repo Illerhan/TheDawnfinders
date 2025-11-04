@@ -16,6 +16,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChanging, const TArray<
                                              CurrentSlotIndex);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryOpenInput);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseInput);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOverloadCountChange, const int32, newCount);
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
@@ -36,7 +37,16 @@ public:
 
 	UPROPERTY(ReplicatedUsing=OnRep_CurrentSlotIndex,BlueprintReadWrite, Category="Inventory")
 	int CurrentSlotIndex;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	int OverloadBaseCount = 3;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	int InventorySlotCount = 10;
 	
+
+// ==== Delegates & Rep Notify ====
+public :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
 	FOnInventoryChanging OnInventoryChanging;
 
@@ -46,6 +56,9 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
 	FOnInventoryCloseInput OnInventoryCloseInput;
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
+	FOnOverloadCountChange OnOverloadCountChange;
+
 	UFUNCTION()
 	void OnRep_InventorySlots();
 
@@ -53,8 +66,8 @@ public:
 	void OnRep_CurrentSlotIndex();
 
 
-	// ==== Inventory player action functions ====
-
+// ==== Inventory player action functions ====
+public :
 	UFUNCTION(BlueprintCallable,Category="Inventory")
 	void AddNewItem(UItemData* NewItem);
 
@@ -76,23 +89,30 @@ public:
 	void ServerThrow();
 
 
-	UFUNCTION(BlueprintCallable,Category = "Inventory")
-	FInventorySlot GetCurrentSlot();
-	
-	UFUNCTION(BlueprintCallable, Category="Inventory")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FInventorySlot ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
-	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
 	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
 
-// Sort Functions
+// ==== Others ====
 public :
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void SortInventory();
 
-	TArray<FInventorySlot> GetAllSlotsOfType(EItemType Type);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FInventorySlot GetCurrentSlot();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void VerifyCurrentOverloadCount();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	int GetCurrentOverloadCount();
 
 protected:
 	void BroadcastInventoryChange();
+
+private :
+	int PreviousOverloadCount = 0;
 };

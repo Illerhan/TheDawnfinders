@@ -5,6 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Net/UnrealNetwork.h"
+#include "Actors/Player/APlayerCharacter.h"
 
 
 UStaminaComponent::UStaminaComponent()
@@ -22,6 +23,9 @@ void UStaminaComponent::BeginPlay()
 	if (!PawnOwner) return;
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
+
+	AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(PawnOwner);
+	PlayerCharacter->InventoryComponent->OnOverloadCountChange.AddUniqueDynamic(this, &UStaminaComponent::ActualiseCurrentOverloadCount);
 
 	InitialiseComponent(100, 10, 2);
 }
@@ -64,7 +68,7 @@ void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, f
 
 void UStaminaComponent::UseStamina(float quantity)
 {
-	CurrentStamina -= quantity;
+	CurrentStamina -= quantity * (1 + CurrentOverloadCount);
 	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
 
 	CurrentReloadDelay = ReloadDelay;
@@ -147,3 +151,13 @@ void UStaminaComponent::ChangeLocalStamina()
 }
 
 #pragma endregion 
+
+
+#pragma region Others
+
+void UStaminaComponent::ActualiseCurrentOverloadCount(int NewCount)
+{
+	CurrentOverloadCount = NewCount;
+}
+
+#pragma endregion
