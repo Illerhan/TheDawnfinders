@@ -105,6 +105,9 @@ public :
 	FInventorySlot GetCurrentSlot();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SelectSlotByAngle(int angle);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void VerifyCurrentOverloadCount();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

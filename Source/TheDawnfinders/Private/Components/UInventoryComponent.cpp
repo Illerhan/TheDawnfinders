@@ -258,6 +258,14 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 }
 
 
+void UInventoryComponent::SelectSlotByAngle(int angle)
+{
+	int Index = (angle / 360.f) * InventorySlotCount;
+
+	ChangeCurrentSlot(true, Index);
+}
+
+
 void UInventoryComponent::VerifyCurrentOverloadCount()
 {
 	int Current = GetCurrentOverloadCount();
