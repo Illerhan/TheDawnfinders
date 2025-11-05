@@ -31,18 +31,24 @@ public:
 	FVector EndPosition;
 
 	UPROPERTY(EditAnywhere, Category="Timeline")
-	bool bCanMove = true;
+	mutable bool bCanMove = true;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Timeline");
 	float MovementDuration;
 	
+	bool bIsMovingForward;
+	float CurrentTimelineProgress;
+	float LastReverseTime;
+	float ReverseCooldown;
+
 	UFUNCTION()
 	void HandleProgress(float value);
 
 	UFUNCTION()
 	void OnTimeLineFinished();
+	bool CanReverse() const;
+	float GetTimelineProgress() const;
 
-	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -53,5 +59,5 @@ public:
 
 	UFUNCTION(Blueprintable,Category="MovableObjects")
 	virtual void DoMovement();
-
+	void DoReverseMovement();
 };
