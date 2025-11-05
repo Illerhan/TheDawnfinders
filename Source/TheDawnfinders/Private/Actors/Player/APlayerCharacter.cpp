@@ -227,7 +227,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
     {
         // Client: uniquement prédiction visuelle locale (vitesse)
         // Ne PAS toucher à CurrentState, il sera répliqué par le serveur
-        GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
+        //GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
         
         // Demander au serveur
         ServerManageRun(Input);
@@ -286,7 +286,7 @@ void AAPlayerCharacter::StartDodge()
 void AAPlayerCharacter::EndDodge()
 {
     CurrentState = EPlayerState::None;
-    GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+    //GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 }
 
 

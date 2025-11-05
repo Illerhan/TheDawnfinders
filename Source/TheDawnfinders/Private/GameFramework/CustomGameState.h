@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "GameFramework/GameState.h"
 #include "CustomGameState.generated.h"
