@@ -55,11 +55,16 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<AItem> ItemClass;
 
+// Consumable
+public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
 	EConsumableEffectType ConsumableEffectType;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
 	int ConsumableEffectPower;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
+	float NeededHoldDuration;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zipline")
 	TSubclassOf<class AZiplineInteractible> ZiplineClass;

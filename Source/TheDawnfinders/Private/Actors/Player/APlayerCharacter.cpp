@@ -3,6 +3,12 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "Actors/Interactibles/Lever.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
+
+#include "Components/UInventoryComponent.h"
+#include "Components/UStaminaComponent.h"
+#include "Components/UHealthComponent.h"
+#include "Components/UItemComponent.h"
+
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 
@@ -29,12 +35,12 @@ AAPlayerCharacter::AAPlayerCharacter()
     SetNetUpdateFrequency(100.0f);
     SetMinNetUpdateFrequency(50.0f);
 
-    
-
-    // Composants perso (inchangés)
+    // Components 
     InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
     StaminaComponent   = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
     HealthComponent    = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
+    ItemComponent      = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
+
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
@@ -313,8 +319,10 @@ void AAPlayerCharacter::UseCurrentItem()
             HealthComponent->Heal(slotInfos.ItemData->ConsumableEffectPower);
             InventoryComponent->RemoveCurrentItem();
             break;
+
         case EConsumableEffectType::OpenDoor:
             break;
+
         case EConsumableEffectType::PlaceZipline:
         {
             if (!HasAuthority())
