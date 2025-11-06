@@ -21,4 +21,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void RemoveInteractibleAtRange(AActor* Interactible);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
+	void ShowProgress(float CurrentValue);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
+	void HideProgress();
 };

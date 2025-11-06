@@ -5,6 +5,7 @@
 #include "Components/UItemComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
+#include "Interfaces/IPlayer.h"
 
 
 UItemComponent::UItemComponent()
@@ -31,11 +32,21 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!GetOwner()) return;
+
 	// If the player is currently maintaining the use button
 	if (!IsUsingItem) return;
 	if (ItemUseTimer > 0) 
 	{
 		ItemUseTimer -= DeltaTime;
+		if (GetOwner()->Implements<UPlayerInterface>())
+		{
+			IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+			if (PlayerInterface)
+			{
+				PlayerInterface->ShowProgress_Implementation(ItemUseTimer);
+			}
+		}
 		return;
 	}
 
@@ -66,6 +77,11 @@ void UItemComponent::DoMainAction()
 void UItemComponent::UseConsumable()
 {
 	IsUsingItem = false;
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->HideProgress_Implementation();
+	}
 
 	switch (EquippedItem.ItemData->ConsumableEffectType)
 	{
@@ -94,6 +110,12 @@ void UItemComponent::UseConsumable()
 void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->HideProgress_Implementation();
+	}
 
 	IsUsingItem = false;
 }

@@ -8,7 +8,9 @@
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
+#include "Components/WidgetComponent.h"
 
+#include "Widgets/UWorldProgressBar.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 
@@ -36,10 +38,12 @@ AAPlayerCharacter::AAPlayerCharacter()
     SetMinNetUpdateFrequency(50.0f);
 
     // Components 
-    InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
-    StaminaComponent   = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
-    HealthComponent    = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
-    ItemComponent      = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
+    InventoryComponent   = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
+    StaminaComponent     = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
+    HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
+    ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
+    ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
+    ProgressBarComponent->SetupAttachment(GetMesh());
 
 
     // ---------- ROTATION PAR DÉFAUT ----------
@@ -72,6 +76,16 @@ void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactib
 void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
 {
     InteractiblesAtRange.Remove(Interactible);
+}
+
+void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
+{
+    ProgressBarWidget->ActualiseProgress(CurrentValue);
+}
+
+void AAPlayerCharacter::HideProgress_Implementation()
+{
+    ProgressBarWidget->Hide();
 }
 
 void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
@@ -148,6 +162,10 @@ void AAPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
     GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+
+    ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
+
+    UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
 
 void AAPlayerCharacter::Tick(float DeltaTime)

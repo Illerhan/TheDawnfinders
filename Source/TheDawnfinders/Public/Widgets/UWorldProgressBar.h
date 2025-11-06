@@ -22,7 +22,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Hide();
 
-private :
-	UPROPERTY()
+protected :
+	UPROPERTY(BlueprintReadOnly)
 	float StartValue;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool IsDisplayed;
 };

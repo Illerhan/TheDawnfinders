@@ -12,6 +12,9 @@ class UInventoryComponent;
 class UHealthComponent;
 class UStaminaComponent;
 class UItemComponent;
+class UWidgetComponent;
+class UWorldProgressBar;
+
 
 UENUM(BlueprintType)
 enum class EPlayerState : uint8
@@ -45,13 +48,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UItemComponent* ItemComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UWidgetComponent* ProgressBarComponent;
+
 
 // Interact Behavior
 public :
-	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
-
-	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
-
 	UFUNCTION(Server, Reliable)
 	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
 
@@ -75,6 +77,16 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
+
+// Player Interface
+public : 
+	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
+
+	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
+
+	virtual void ShowProgress_Implementation(float CurrentValue) override;
+
+	virtual void HideProgress_Implementation() override;
 
 
 // Damageable Behavior
@@ -152,4 +164,10 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void ServerUseZiplineItem(UItemData* ZiplineItem);
+
+
+// Private References
+private :
+	UPROPERTY()
+	UWorldProgressBar* ProgressBarWidget;
 };
