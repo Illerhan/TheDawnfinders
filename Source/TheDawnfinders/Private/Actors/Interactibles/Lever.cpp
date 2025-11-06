@@ -37,8 +37,17 @@ void ALever::Interaction(AAPlayerCharacter* Player)
 	for (AMovableObjects* const Object : LinkedObjects)
 		if (Object && Object->bCanMove)
 		{
+			bool bReverse = Object->CanReverse();
 			UE_LOG(LogTemp, Warning, TEXT("moving %s") , *Object->GetName());
-			Object->DoMovement();
+			if (bReverse && Object->bIsMovingForward)
+			{
+				Object->DoReverseMovement();
+			}
+			else
+			{
+				Object->DoMovement();
+			}
+			
 			Super::Interaction(Player);
 		}
 	}
