@@ -31,6 +31,7 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	// If the player is currently maintaining the use button
 	if (!IsUsingItem) return;
 	if (ItemUseTimer > 0) 
 	{
@@ -44,6 +45,7 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 #pragma region Main Action
 
+// CALLED WHEN THE INPUT TO USE THE CURRENT ITEM STARTS
 void UItemComponent::DoMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
@@ -88,6 +90,7 @@ void UItemComponent::UseConsumable()
 	}
 }
 
+// CALLED WHEN THE INPUT TO USE THE CURRENT ITEM ENDS
 void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
