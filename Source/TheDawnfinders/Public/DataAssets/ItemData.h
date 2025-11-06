@@ -75,11 +75,11 @@ public :
 	TArray<float> BaseComboDamages;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<UAnimMontage> BaseComboAnims;
+	TArray<UAnimMontage*> BaseComboAnims;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	TArray<float> HeavyComboDamages;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<UAnimMontage> HeavyComboAnims;
+	TArray<UAnimMontage*> HeavyComboAnims;
 };
