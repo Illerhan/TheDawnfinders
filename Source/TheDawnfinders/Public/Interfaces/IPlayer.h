@@ -27,4 +27,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
 	void HideProgress();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
+	void SetEquippedMesh(UStaticMesh* NewMesh);
 };

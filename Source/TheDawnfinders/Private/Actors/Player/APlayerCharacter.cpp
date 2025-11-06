@@ -9,6 +9,7 @@
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 #include "Widgets/UWorldProgressBar.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -44,7 +45,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
     ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
     ProgressBarComponent->SetupAttachment(GetMesh());
-
+    WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
+    WeaponMeshComponent->SetupAttachment(GetMesh());
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
@@ -86,6 +88,11 @@ void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 void AAPlayerCharacter::HideProgress_Implementation()
 {
     ProgressBarWidget->Hide();
+}
+
+void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh)
+{
+    WeaponMeshComponent->SetStaticMesh(NewMesh);
 }
 
 void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)

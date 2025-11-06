@@ -14,6 +14,7 @@ class UStaminaComponent;
 class UItemComponent;
 class UWidgetComponent;
 class UWorldProgressBar;
+class UStaticMeshComponent;
 
 
 UENUM(BlueprintType)
@@ -51,6 +52,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UWidgetComponent* ProgressBarComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaticMeshComponent* WeaponMeshComponent;
+
 
 // Interact Behavior
 public :
@@ -78,6 +82,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
 
+
 // Player Interface
 public : 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
@@ -87,6 +92,8 @@ public :
 	virtual void ShowProgress_Implementation(float CurrentValue) override;
 
 	virtual void HideProgress_Implementation() override;
+
+	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
 
 
 // Damageable Behavior

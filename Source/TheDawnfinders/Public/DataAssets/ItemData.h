@@ -68,5 +68,18 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zipline")
 	TSubclassOf<class AZiplineInteractible> ZiplineClass;
-	
+
+// Weapon
+public :
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+	TArray<float> BaseComboDamages;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+	TArray<UAnimMontage> BaseComboAnims;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+	TArray<float> HeavyComboDamages;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+	TArray<UAnimMontage> HeavyComboAnims;
 };

@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Actors/Player/APlayerCharacter.h"
 #include "Components/UItemComponent.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Interfaces/IPlayer.h"
+
 
 
 UItemComponent::UItemComponent()
@@ -160,12 +161,18 @@ void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int Cu
 
 void UItemComponent::EquipWeapon()
 {
-
+	if (GetOwner()->Implements<UPlayerInterface>()) {
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.ItemData->ItemMesh);
+	}
 }
 
 void UItemComponent::UnequipWeapon()
 {
-
+	if (GetOwner()->Implements<UPlayerInterface>()) {
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->SetEquippedMesh_Implementation(NULL);
+	}
 }
 
 #pragma endregion
