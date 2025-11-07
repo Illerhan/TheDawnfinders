@@ -45,7 +45,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
-    LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
+    // LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
+    // LightComponent->SetupAttachment(GetMesh());
 
 
     // ---------- ROTATION PAR DÉFAUT ----------

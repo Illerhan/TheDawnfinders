@@ -17,16 +17,26 @@ class THEDAWNFINDERS_API UPlayerLightComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UPlayerLightComponent();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Light")
+	USceneComponent* LightRoot;
+		
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category="Lantern")
 	float LightIntensity;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float LightRadius;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Lantern")
+	UPROPERTY(ReplicatedUsing = OnRep_LightOn, BlueprintReadWrite, EditAnywhere, Category="Lantern")
 	bool bLightOn;
 
+	UFUNCTION(BlueprintCallable, Category = "Light")
+	void TurnLightOn();
+
+	UFUNCTION(BlueprintCallable, Category = "Light")
+	void TurnLightOff();
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	bool bVivianiteUsed;
 
@@ -53,11 +63,22 @@ public:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION(BlueprintCallable)
-	void TurnLightOn();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UFUNCTION(Server, Reliable)
+	void Server_TurnLightOn();
+
+	UFUNCTION(Server, Reliable)
+	void Server_TurnLightOff();
+
+	// Appelé quand bLightOn change (pour réplication)
+	UFUNCTION()
+	void OnRep_LightOn();
+
+	// Applique visuellement l'état de la lumière
+	void ApplyLightState();
 
 public:
 	// Called every frame
