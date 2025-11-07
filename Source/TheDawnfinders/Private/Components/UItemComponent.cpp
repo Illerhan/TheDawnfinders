@@ -192,15 +192,24 @@ void UItemComponent::WeaponMainAction()
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 	
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment) return;
-	
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex++]);
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
-	//PlayerInterface->OnMontageEnd.AddUniqueDynamic(this, &UItemComponent::AttackAnimEnd);
+	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment) {
+		PressedAttackInput = true;
+		return;
+	};
 
-	if (ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num()) {
+	if (PressedAttackInput) {
+		PressedAttackInput = false;
+		if (++ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num()) {
+			ComboIndex = 0;
+		}
+	}
+	else {
 		ComboIndex = 0;
 	}
+	
+	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex]);
+	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	//PlayerInterface->OnMontageEnd.AddUniqueDynamic(this, &UItemComponent::AttackAnimEnd);
 }
 
 
@@ -211,6 +220,11 @@ void UItemComponent::AttackAnimEnd()
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
 	//PlayerInterface->OnMontageEnd.RemoveAll(this);
+
+	if (PressedAttackInput) {
+		WeaponMainAction();
+		return;
+	}
 }
 
 
