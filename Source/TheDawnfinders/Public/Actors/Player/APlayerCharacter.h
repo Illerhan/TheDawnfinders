@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PlayerLightComponent.h"
+#include "Components/PlayerLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"

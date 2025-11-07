@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PlayerLightComponent.h"
+#include "Components/PlayerLightComponent.h"
 #include "Actors/Interactibles/Interactible.h"
 #include "Net/UnrealNetwork.h"
 #include "BurnableObjects.generated.h"
