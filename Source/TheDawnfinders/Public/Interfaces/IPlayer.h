@@ -18,6 +18,8 @@ enum class EPlayerState : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMontageEnd);
 
+class UItemData;
+
 
 UINTERFACE(MinimalAPI, Blueprintable)
 class UPlayerInterface : public UInterface
@@ -50,6 +52,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void SetEquippedMesh(UStaticMesh* NewMesh);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
+	UItemData* GetEquippedItem();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void PlayAttackMontage(UAnimMontage* AttackMontage);

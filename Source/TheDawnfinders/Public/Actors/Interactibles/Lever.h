@@ -32,6 +32,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void Interaction(AAPlayerCharacter* Player) override;
 	void StartHoldInteraction(AAPlayerCharacter* Player);
+	virtual void StopInteraction(AAPlayerCharacter* Player) override;
 	void StopHoldInteraction(AAPlayerCharacter* Player);
 
 

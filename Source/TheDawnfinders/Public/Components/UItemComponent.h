@@ -52,6 +52,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex);
 
+	UFUNCTION(BlueprintCallable)
+	UItemData* GetEquippedItem();
+
 	UFUNCTION()
 	void AttackAnimEnd();
 

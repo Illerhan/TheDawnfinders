@@ -65,6 +65,13 @@ void ALever::StartHoldInteraction(AAPlayerCharacter* Player)
 	}
 }
 
+
+void ALever::StopInteraction(AAPlayerCharacter* Player)
+{
+	StopHoldInteraction(Player);
+}
+
+
 void ALever::StopHoldInteraction(AAPlayerCharacter* Player)
 {
 	for (AMovableObjects* Object : LinkedObjects)

@@ -69,7 +69,6 @@ void UInteractionComponent::StartInteract()
         else
         {
             TryInteract(Interactible, Cast<AAPlayerCharacter>(GetOwner()));
-            CurrentInteractible = nullptr;    // Pas besoin de tracker pour toggle
         }
     }
 }
@@ -99,21 +98,17 @@ void UInteractionComponent::StopInteract()
 {
     if (CurrentInteractible)
     {
-        ALever* Lever = Cast<ALever>(CurrentInteractible);
-        if (Lever && Lever->bRequiresHold)
-        {
-            ServerStopInteract(Lever, Cast<AAPlayerCharacter>(GetOwner()));
-        }
+        ServerStopInteract(CurrentInteractible, Cast<AAPlayerCharacter>(GetOwner()));
         CurrentInteractible = nullptr;
     }
 }
 
-void UInteractionComponent::ServerStopInteract_Implementation(ALever* Lever, AAPlayerCharacter* Player)
+void UInteractionComponent::ServerStopInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
 {
-    if (!Lever || !Player)
+    if (!Interactible || !Player)
         return;
 
-    Lever->StopHoldInteraction(Player);
+    Interactible->StopInteraction(Player);
 }
 
 #pragma endregion

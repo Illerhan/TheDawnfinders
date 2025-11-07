@@ -127,6 +127,11 @@ void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh)
     WeaponMeshComponent->SetStaticMesh(NewMesh);
 }
 
+UItemData* AAPlayerCharacter::GetEquippedItem_Implementation()
+{
+    return ItemComponent->GetEquippedItem();
+}
+
 EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
 {
     return CurrentState;

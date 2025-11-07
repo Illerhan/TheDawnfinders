@@ -82,6 +82,8 @@ public :
 
 	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
 
+	virtual UItemData* GetEquippedItem_Implementation() override;
+
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
 	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;

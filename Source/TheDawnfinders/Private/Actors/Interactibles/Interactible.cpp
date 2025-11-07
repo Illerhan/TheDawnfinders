@@ -50,7 +50,11 @@ void AInteractibleObjects::Interaction(AAPlayerCharacter* Player)
 	BP_OnInteraction(Player);
 }
 
-// Called when the game starts or when spawned
+void AInteractibleObjects::StopInteraction(AAPlayerCharacter* Player)
+{
+	BP_OnStopInteraction(Player);
+}
+
 void AInteractibleObjects::BeginPlay()
 {
 	Super::BeginPlay();
@@ -59,16 +63,24 @@ void AInteractibleObjects::BeginPlay()
 	
 }
 
+
 void AInteractibleObjects::Interact_Implementation(AActor* Interact)
 {
-	
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interact);
 	if (Player)
 		Player->InteractionComponent->TryInteract(this,Player);
 	UE_LOG(LogTemp, Warning, TEXT("Interacted with a %s") , *GetName());
 }
 
-// Called every frame
+
+void AInteractibleObjects::StopInteract_Implementation(AActor* Interactor)
+{
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
+	if (Player)
+		StopInteraction(Player);
+}
+
+
 void AInteractibleObjects::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

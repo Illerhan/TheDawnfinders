@@ -166,6 +166,11 @@ void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int Cu
 	}
 }
 
+UItemData* UItemComponent::GetEquippedItem()
+{
+	return EquippedItem.ItemData;
+}
+
 void UItemComponent::EquipWeapon()
 {
 	if (GetOwner()->Implements<UPlayerInterface>()) {

@@ -40,7 +40,7 @@ public :
 	void StopInteract();
 
 	UFUNCTION(Server, Reliable)
-	void ServerStopInteract(ALever* Lever, AAPlayerCharacter* Player);
+	void ServerStopInteract(AInteractibleObjects* Interactible, AAPlayerCharacter* Player);
 
 	UFUNCTION()
 	void TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player);
