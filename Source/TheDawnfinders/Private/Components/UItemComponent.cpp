@@ -71,6 +71,12 @@ void UItemComponent::DoMainAction()
 		}
 		
 		UseConsumable();
+		return;
+	}
+
+	if (EquippedItem.ItemData->ItemType == EItemType::Equipment)
+	{
+		WeaponMainAction();
 	}
 }
 
@@ -106,6 +112,7 @@ void UItemComponent::UseConsumable()
 		}
 	}
 }
+
 
 // CALLED WHEN THE INPUT TO USE THE CURRENT ITEM ENDS
 void UItemComponent::StopMainAction()
@@ -174,5 +181,37 @@ void UItemComponent::UnequipWeapon()
 		PlayerInterface->SetEquippedMesh_Implementation(NULL);
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Use Weapon
+
+void UItemComponent::WeaponMainAction()
+{
+	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+	
+	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment) return;
+	
+	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex++]);
+	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	PlayerInterface->OnMontageEnd.AddUniqueDynamic(this, &UItemComponent::AttackAnimEnd);
+
+	if (ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num()) {
+		ComboIndex = 0;
+	}
+}
+
+
+void UItemComponent::AttackAnimEnd()
+{
+	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+
+	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
+	PlayerInterface->OnMontageEnd.RemoveAll(this);
+}
+
 
 #pragma endregion

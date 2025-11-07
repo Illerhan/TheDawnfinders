@@ -17,17 +17,6 @@ class UWorldProgressBar;
 class UStaticMeshComponent;
 
 
-UENUM(BlueprintType)
-enum class EPlayerState : uint8
-{
-	None UMETA(DisplayName = "None"),
-	Running UMETA(DisplayName = "Running"),
-	Crouching UMETA(DisplayName = "Crouching"),
-	UsingEquipment UMETA(DisplayName = "Using Equipment"),
-	Dodging UMETA(DisplayName = "Dodging"),
-	Dead UMETA(DisplayName = "Dead")
-};
-
 UCLASS()
 class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface, public IDamageable
 {
@@ -95,6 +84,12 @@ public :
 
 	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
 
+	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
+
+	virtual void SetCurrentPlayerState(EPlayerState NewState) override;
+
+	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
+
 
 // Damageable Behavior
 public:
@@ -118,7 +113,9 @@ protected:
 	EPlayerState CurrentState;
 
 	UFUNCTION()
-	void OnRep_CurrentPlayerState();	float DodgeTimer;
+	void OnRep_CurrentPlayerState();	
+	
+	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;

@@ -5,6 +5,20 @@
 #include "IPlayer.generated.h"
 
 
+UENUM(BlueprintType)
+enum class EPlayerState : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Running UMETA(DisplayName = "Running"),
+	Crouching UMETA(DisplayName = "Crouching"),
+	UsingEquipment UMETA(DisplayName = "Using Equipment"),
+	Dodging UMETA(DisplayName = "Dodging"),
+	Dead UMETA(DisplayName = "Dead")
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMontageEnd);
+
+
 UINTERFACE(MinimalAPI, Blueprintable)
 class UPlayerInterface : public UInterface
 {
@@ -16,6 +30,12 @@ class IPlayerInterface
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	EPlayerState GetCurrentPlayerState();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void SetCurrentPlayerState(EPlayerState NewState);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void AddInteractibleAtRange(AActor* Interactible);
 
@@ -28,6 +48,11 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
 	void HideProgress();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void SetEquippedMesh(UStaticMesh* NewMesh);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
+	void PlayAttackMontage(UAnimMontage* AttackMontage);
+
+	FOnMontageEnd OnMontageEnd;
 };

@@ -95,6 +95,21 @@ void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh)
     WeaponMeshComponent->SetStaticMesh(NewMesh);
 }
 
+EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
+{
+    return CurrentState;
+}
+
+void AAPlayerCharacter::SetCurrentPlayerState(EPlayerState NewState)
+{
+    CurrentState = NewState;
+}
+
+void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage)
+{
+    PlayAnimMontage(AttackMontage);
+}
+
 void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
 {
     if (!Interactible || !Interactible->bCanBeUsed)

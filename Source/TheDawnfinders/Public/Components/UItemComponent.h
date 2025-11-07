@@ -63,6 +63,12 @@ private :
 	UFUNCTION()
 	void UseConsumable();
 
+	UFUNCTION()
+	void WeaponMainAction();
+
+	UFUNCTION()
+	void AttackAnimEnd();
+
 
 // Private Variables
 private :
@@ -74,6 +80,9 @@ private :
 
 	UPROPERTY()
 	bool IsUsingItem;
+
+	UPROPERTY()
+	int ComboIndex;
 
 
 // Private References
