@@ -3,6 +3,7 @@
 
 #include "PlayerLightComponent.h"
 
+#include "VectorUtil.h"
 #include "Actors/Player/APlayerCharacter.h"
 
 
@@ -21,6 +22,7 @@ UPlayerLightComponent::UPlayerLightComponent()
 
 	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("LightEmitter"));
 	PointLight->SetupAttachment(ProtectionZone);
+	PointLight->SetIntensity(0.f);
 
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 
@@ -50,6 +52,13 @@ void UPlayerLightComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 			Player->RemoveProtectionZone();
 		}
 	}
+}
+
+void UPlayerLightComponent::TurnLightOn()
+{
+	bLightOn = true;
+	PointLight->SetIntensity(LightIntensity);
+	PointLight->SetSourceRadius(LightRadius);
 }
 
 // Called when the game starts

@@ -53,6 +53,8 @@ public:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UFUNCTION(BlueprintCallable)
+	void TurnLightOn();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
