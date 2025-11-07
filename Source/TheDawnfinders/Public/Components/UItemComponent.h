@@ -82,6 +82,9 @@ private :
 	bool IsUsingItem;
 
 	UPROPERTY()
+	bool PressedAttackInput;
+
+	UPROPERTY()
 	int ComboIndex;
 
 

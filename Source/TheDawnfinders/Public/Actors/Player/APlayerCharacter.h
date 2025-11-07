@@ -7,9 +7,9 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
+#include "Components/UInventoryComponent.h"
 #include "APlayerCharacter.generated.h"
 
-class UInventoryComponent;
 class UHealthComponent;
 class UStaminaComponent;
 class UItemComponent;
@@ -174,14 +174,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PlayMontage(UAnimMontage* Montage);
 
+	UFUNCTION(Server, Reliable)
+	void ServerUseZiplineItem(UItemData* ZiplineItem);
+
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 
-	UFUNCTION(BlueprintImplementableEvent, Category="Animation")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 
-	UFUNCTION(Server, Reliable)
-	void ServerUseZiplineItem(UItemData* ZiplineItem);
+	UFUNCTION()
+	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
+	void BP_OnMontageNotifyBegin(FName NotifyName);
 
 
 // Private References
