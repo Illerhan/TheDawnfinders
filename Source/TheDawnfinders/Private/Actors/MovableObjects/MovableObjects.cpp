@@ -1,9 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "MovableObjects.h"
-
-#include "Doors.h"
+#include "Actors/MovableObjects/MovableObjects.h"
+#include "Actors/MovableObjects/Doors.h"
 // Sets default values
 
 
