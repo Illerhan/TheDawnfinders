@@ -1,11 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "Interactible.h"
-
+#include "Actors/Interactibles/Interactible.h"
 #include "Actors/Player/APlayerCharacter.h"
-#include "GameFramework/GameSession.h"
-#include "Interfaces/IPlayer.h"
+
 
 // Sets default values
 AInteractibleObjects::AInteractibleObjects()

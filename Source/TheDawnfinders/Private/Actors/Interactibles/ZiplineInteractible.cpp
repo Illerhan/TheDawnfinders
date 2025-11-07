@@ -1,5 +1,7 @@
 ﻿// AZiplinePoint.cpp
-#include "ZiplineInteractible.h"
+
+#include "Actors/Interactibles/ZiplineInteractible.h"
+
 #include "Actors/Player/APlayerCharacter.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"

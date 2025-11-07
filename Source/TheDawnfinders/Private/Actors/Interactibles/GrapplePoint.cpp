@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GrapplePoint.h"
+#include "Actors/Interactibles/GrapplePoint.h"
 
 #include "Actors/Player/APlayerCharacter.h"
 #include "Components/UInventoryComponent.h"
