@@ -27,6 +27,8 @@ class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerIn
 // Components + Constructor
 public:
 	AAPlayerCharacter();
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UInventoryComponent* InventoryComponent;
@@ -111,6 +113,7 @@ protected:
 	UFUNCTION()
 	void OnRep_CurrentPlayerState();	
 	
+	UPROPERTY()
 	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
@@ -119,22 +122,14 @@ protected:
 
 
 public:	
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
-
-	//UFUNCTION(BlueprintCallable)
-	//void RotateCharacter();
-
 	
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ServerManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
-
 
 	UFUNCTION(BlueprintCallable)
 	void StartDodge();
@@ -145,9 +140,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ActualiseDodge(float DeltaTime);
 
-	UFUNCTION(BlueprintCallable)
-	void UseCurrentItem();
+	UFUNCTION(Server, Reliable)
+	void ServerUseZiplineItem(UItemData* ZiplineItem);
 
+
+// Montage Methods
+public :
 	UFUNCTION(Server, Reliable)
 	void ServerPlayMontage(UAnimMontage* Montage);
 
@@ -156,9 +154,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayMontage(UAnimMontage* Montage);
-
-	UFUNCTION(Server, Reliable)
-	void ServerUseZiplineItem(UItemData* ZiplineItem);
 
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
