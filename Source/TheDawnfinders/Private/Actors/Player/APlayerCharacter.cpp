@@ -8,12 +8,11 @@
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
-#include "Components/WidgetComponent.h"
 #include "Components/StaticMeshComponent.h"
-
-#include "Widgets/UWorldProgressBar.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
+#include "Widgets/UWorldProgressBar.h"
 
 
 AAPlayerCharacter::AAPlayerCharacter()
@@ -47,6 +46,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
+    LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
+
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
@@ -274,6 +275,31 @@ void AAPlayerCharacter::ManageRun(bool Input)
     }
 }
 
+
+bool AAPlayerCharacter::IsProtectedFromCurse() const
+{
+        return ProtectionZoneAmount > 0;
+}
+
+void AAPlayerCharacter::AddProtectionZone()
+{
+    if (HasAuthority())
+    {
+        ProtectionZoneAmount++;
+        // If need to add more logic
+        //OnRep_ProtectionZoneChanged();
+    }
+}
+
+void AAPlayerCharacter::RemoveProtectionZone()
+{
+    if (HasAuthority())
+    {
+        ProtectionZoneAmount--;
+        // If need to add more logic
+        //OnRep_ProtectionChanged();
+    }
+}
 
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {

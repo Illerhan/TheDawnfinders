@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlayerLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
@@ -44,6 +45,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* WeaponMeshComponent;
 
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
+	UPlayerLightComponent* LightComponent;
+	
 
 // Interact Behavior
 public :
@@ -71,7 +75,17 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
 
+	UPROPERTY(Replicated)
+	int32 ProtectionZoneAmount;
 
+	UFUNCTION(BlueprintCallable)
+	bool IsProtectedFromCurse() const;
+
+	UFUNCTION(BlueprintCallable)
+	void AddProtectionZone();
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveProtectionZone();
 // Player Interface
 public : 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;

@@ -4,6 +4,7 @@
 #include "GrapplePoint.h"
 
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/UInventoryComponent.h"
 
 
 // Sets default values
