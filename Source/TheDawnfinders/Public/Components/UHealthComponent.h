@@ -39,8 +39,25 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool IsDead;
 
+	UPROPERTY(Replicated)
+	int32 ProtectionZoneAmount;
+
+	UFUNCTION(BlueprintCallable)
+	bool IsProtectedFromCurse() const;
+
+	UFUNCTION(BlueprintCallable)
+	void AddProtectionZone();
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveProtectionZone();
+
+	void ApplyCurse();
+
 private :
 
+	float MaxHealth;
+	float MinimumMaxHP;
+	float CurseRatio;
 	float CurrentHealth = 100.f;
 	float CurrentMaxHealth = 100.f;
 };

@@ -52,7 +52,7 @@ void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
 	{
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
 		{
-			Player->AddProtectionZone();
+			Player->HealthComponent()->AddProtectionZone(this);
 		}
 	}
 }
@@ -64,7 +64,7 @@ void UPlayerLightComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	{
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
 		{
-			Player->RemoveProtectionZone();
+			Player->HealthComponent()->RemoveProtectionZone();
 		}
 	}
 }

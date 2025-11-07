@@ -49,6 +49,44 @@ void UHealthComponent::InitialiseComponent(float MaxHealth)
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
+#pragma region Curse
+
+bool UHealthComponent::IsProtectedFromCurse() const
+{
+	return ProtectionZoneAmount > 0;
+}
+
+void UHealthComponent::AddProtectionZone()
+{
+	if (GetOwner()->HasAuthority())
+	{
+		ProtectionZoneAmount++;
+		// If need to add more logic
+		//OnRep_ProtectionZoneChanged();
+	}
+}
+
+void UHealthComponent::RemoveProtectionZone()
+{
+	if (GetOwner()->HasAuthority())
+	{
+		ProtectionZoneAmount--;
+		// If need to add more logic
+		//OnRep_ProtectionChanged();
+	}
+}
+
+void UHealthComponent::ApplyCurse()
+{
+	if (IsProtectedFromCurse()) return;
+
+	if (CurrentMaxHealth <= MinimumMaxHP) return;
+
+	CurrentHealth -= MaxHealth * CurseRatio;
+}
+
+
+#pragma endregion
 
 #pragma region Main Health Functions
 

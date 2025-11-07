@@ -75,17 +75,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
 
-	UPROPERTY(Replicated)
-	int32 ProtectionZoneAmount;
-
-	UFUNCTION(BlueprintCallable)
-	bool IsProtectedFromCurse() const;
-
-	UFUNCTION(BlueprintCallable)
-	void AddProtectionZone();
-
-	UFUNCTION(BlueprintCallable)
-	void RemoveProtectionZone();
+	
 // Player Interface
 public : 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;

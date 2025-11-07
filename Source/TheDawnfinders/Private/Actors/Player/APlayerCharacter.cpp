@@ -275,32 +275,6 @@ void AAPlayerCharacter::ManageRun(bool Input)
     }
 }
 
-
-bool AAPlayerCharacter::IsProtectedFromCurse() const
-{
-        return ProtectionZoneAmount > 0;
-}
-
-void AAPlayerCharacter::AddProtectionZone()
-{
-    if (HasAuthority())
-    {
-        ProtectionZoneAmount++;
-        // If need to add more logic
-        //OnRep_ProtectionZoneChanged();
-    }
-}
-
-void AAPlayerCharacter::RemoveProtectionZone()
-{
-    if (HasAuthority())
-    {
-        ProtectionZoneAmount--;
-        // If need to add more logic
-        //OnRep_ProtectionChanged();
-    }
-}
-
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
     UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
