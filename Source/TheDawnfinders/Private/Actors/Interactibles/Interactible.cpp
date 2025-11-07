@@ -32,7 +32,7 @@ void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 	if (Player && Player->IsLocallyControlled())
 	{
 		// This now runs on the client, directly modifying their local array
-		Player->InteractiblesAtRange.Add(this);
+		Player->AddInteractibleAtRange_Implementation(this);
 		UE_LOG(LogTemp, Log, TEXT("Added interactible locally on client"));
 	}
 }
@@ -43,7 +43,7 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
 	if (Player && Player->IsLocallyControlled())
 	{
-		Player->InteractiblesAtRange.Remove(this);
+		Player->RemoveInteractibleAtRange_Implementation(this);
 		UE_LOG(LogTemp, Log, TEXT("Removed interactible locally on client"));
 	}
 }
@@ -67,7 +67,7 @@ void AInteractibleObjects::Interact_Implementation(AActor* Interact)
 	
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interact);
 	if (Player)
-		Player->TryInteract(this,Player);
+		Player->InteractionComponent->TryInteract(this,Player);
 	UE_LOG(LogTemp, Warning, TEXT("Interacted with a %s") , *GetName());
 }
 

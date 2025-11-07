@@ -1,12 +1,11 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
-#include "Actors/Interactibles/Interactible.h"
-#include "Actors/Interactibles/Lever.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
+#include "Components/UInteractionComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -41,6 +40,7 @@ AAPlayerCharacter::AAPlayerCharacter()
     StaminaComponent     = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
     HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
+    InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("AC_Interaction"));
     ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
@@ -72,12 +72,12 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
 {
-    InteractiblesAtRange.Add(Interactible);
+    InteractionComponent->AddInteractible(Interactible);
 }
 
 void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
 {
-    InteractiblesAtRange.Remove(Interactible);
+    InteractionComponent->RemoveInteractible(Interactible);
 }
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
@@ -108,68 +108,6 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
 void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage)
 {
     PlayMontage(AttackMontage);
-}
-
-void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
-{
-    if (!Interactible || !Interactible->bCanBeUsed)
-        return;
-
-    Interactible->Interaction(Player);
-}
-
-void AAPlayerCharacter::ServerStopInteract_Implementation(ALever* Lever, AAPlayerCharacter* Player)
-{
-    if (!Lever || !Player)
-        return;
-
-    Lever->StopHoldInteraction(Player);
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Stop interaction called for %s"), *Lever->GetName());
-}
-
-void AAPlayerCharacter::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
-{
-    UE_LOG(LogTemp, Warning, TEXT("Hello"));
-    if (InteractibleObject)
-        ServerInteract(InteractibleObject, Player);
-}
-
-void AAPlayerCharacter::StartInteract()
-{
-    AActor* NereastInteractible = GetNearestInteractible();
-    AInteractibleObjects* Interactible = Cast<AInteractibleObjects>(NereastInteractible);
-
-    if (Interactible && Interactible->bCanBeUsed)
-    {
-        CurrentInteractible = Interactible;
-        ALever* Lever = Cast<ALever>(Interactible);
-        if (Lever && Lever->bCanBeUsed)
-        {
-            TryInteract(Interactible, this);
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Started hold interaction with %s"), *Interactible->GetName());
-        }
-        else
-        {
-            TryInteract(Interactible, this);
-            CurrentInteractible = nullptr; // Pas besoin de tracker pour toggle
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Single interaction with %s"), *Interactible->GetName());
-        }
-    }
-}
-
-void AAPlayerCharacter::StopInteract()
-{
-    if (CurrentInteractible)
-    {
-        ALever* Lever = Cast<ALever>(CurrentInteractible);
-        if (Lever && Lever->bRequiresHold)
-        {
-            // Arrête l'interaction maintenue
-            ServerStopInteract(Lever, this);
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Stopped hold interaction with %s"), *Lever->GetName());
-        }
-        CurrentInteractible = nullptr;
-    }
 }
 
 #pragma endregion
@@ -437,22 +375,6 @@ void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
         MulticastPlayMontage(Montage);
 }
 
-AActor* AAPlayerCharacter::GetNearestInteractible()
-{
-    float bestDist = FLT_MAX;
-    AActor* pickedInteractible = nullptr;
-
-    for (AActor* Interactible : InteractiblesAtRange)
-    {
-        float currentDist = (Interactible->GetActorLocation() - GetActorLocation()).Length();
-        if (currentDist < bestDist)
-        {
-            pickedInteractible = Interactible;
-            bestDist = currentDist;
-        }
-    }
-    return pickedInteractible;
-}
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {

@@ -8,6 +8,7 @@
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
 
 class UHealthComponent;
@@ -43,38 +44,17 @@ public:
 	UWidgetComponent* ProgressBarComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UInteractionComponent* InteractionComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* WeaponMeshComponent;
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
 	UPlayerLightComponent* LightComponent;
 	
 
-// Interact Behavior
+// Curse
 public :
-	UFUNCTION(Server, Reliable)
-	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
-
-	UFUNCTION(Server, Reliable)
-	void ServerStopInteract(ALever* Lever, AAPlayerCharacter* Player);
-	
-	UFUNCTION()
-	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
-
-	UPROPERTY()
-	AInteractibleObjects* CurrentInteractible = nullptr;
-
-	UFUNCTION(BlueprintCallable)
-	void StartInteract();
-
-	UFUNCTION(BlueprintCallable)
-	void StopInteract();
-
-	UFUNCTION(BlueprintCallable)
-	AActor* GetNearestInteractible();
-
-	UPROPERTY(BlueprintReadOnly)
-	TArray<AActor*> InteractiblesAtRange;
-
 	UPROPERTY(Replicated)
 	int32 ProtectionZoneAmount;
 
@@ -86,6 +66,8 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
+
+
 // Player Interface
 public : 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
@@ -105,7 +87,7 @@ public :
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
 
 
-// Damageable Behavior
+// Damageable Interface
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 	
@@ -134,6 +116,7 @@ protected:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	bool IsReadyForRPCs() const;
+
 
 public:	
 	virtual void Tick(float DeltaTime) override;
