@@ -196,7 +196,7 @@ void UItemComponent::WeaponMainAction()
 	
 	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex++]);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
-	PlayerInterface->OnMontageEnd.AddUniqueDynamic(this, &UItemComponent::AttackAnimEnd);
+	//PlayerInterface->OnMontageEnd.AddUniqueDynamic(this, &UItemComponent::AttackAnimEnd);
 
 	if (ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num()) {
 		ComboIndex = 0;
@@ -210,7 +210,7 @@ void UItemComponent::AttackAnimEnd()
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
-	PlayerInterface->OnMontageEnd.RemoveAll(this);
+	//PlayerInterface->OnMontageEnd.RemoveAll(this);
 }
 
 

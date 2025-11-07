@@ -52,6 +52,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex);
 
+	UFUNCTION()
+	void AttackAnimEnd();
+
 
 private :
 	UFUNCTION()
@@ -65,9 +68,6 @@ private :
 
 	UFUNCTION()
 	void WeaponMainAction();
-
-	UFUNCTION()
-	void AttackAnimEnd();
 
 
 // Private Variables

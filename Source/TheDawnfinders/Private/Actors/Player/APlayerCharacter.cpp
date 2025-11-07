@@ -100,14 +100,14 @@ EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
     return CurrentState;
 }
 
-void AAPlayerCharacter::SetCurrentPlayerState(EPlayerState NewState)
+void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewState)
 {
     CurrentState = NewState;
 }
 
 void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage)
 {
-    PlayAnimMontage(AttackMontage);
+    PlayMontage(AttackMontage);
 }
 
 void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
@@ -469,6 +469,7 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
     if (CurrentState == EPlayerState::UsingEquipment)
     {
         CurrentState = EPlayerState::None;
+        ItemComponent->AttackAnimEnd();
     }
 
     BP_OnMontageEnded(Montage, bInterrupted);

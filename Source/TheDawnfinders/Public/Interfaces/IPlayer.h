@@ -53,6 +53,4 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void PlayAttackMontage(UAnimMontage* AttackMontage);
-
-	FOnMontageEnd OnMontageEnd;
 };

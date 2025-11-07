@@ -86,7 +86,7 @@ public :
 
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
-	virtual void SetCurrentPlayerState(EPlayerState NewState) override;
+	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
 
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
 

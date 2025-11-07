@@ -55,6 +55,7 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<AItem> ItemClass;
 
+
 // Consumable
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
@@ -68,6 +69,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zipline")
 	TSubclassOf<class AZiplineInteractible> ZiplineClass;
+
 
 // Weapon
 public :
