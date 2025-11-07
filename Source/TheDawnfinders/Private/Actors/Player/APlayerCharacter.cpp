@@ -4,7 +4,6 @@
 #include "Actors/Interactibles/Lever.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
-#include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
@@ -409,11 +408,15 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
     if (!AnimInstance) return;
 
+    AnimInstance->StopAllMontages(0.1f);
     AnimInstance->Montage_Play(Montage);
+
+    AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
     FOnMontageEnded EndDelegate;
     EndDelegate.BindUObject(this, &AAPlayerCharacter::OnMontageEnded);
-    AnimInstance->Montage_SetEndDelegate(EndDelegate, Montage);
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
+    AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &AAPlayerCharacter::OnMontageNotifyBegin);
 }
 
 void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
@@ -500,6 +503,12 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 
     BP_OnMontageEnded(Montage, bInterrupted);
 }
+
+void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
+{
+    BP_OnMontageNotifyBegin(NotifyName);
+}
+
 
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
 {
