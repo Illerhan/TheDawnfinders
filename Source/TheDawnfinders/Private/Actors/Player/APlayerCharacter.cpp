@@ -1,12 +1,11 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
-#include "Actors/Interactibles/Interactible.h"
-#include "Actors/Interactibles/Lever.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
+#include "Components/UInteractionComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -41,13 +40,15 @@ AAPlayerCharacter::AAPlayerCharacter()
     StaminaComponent     = CreateDefaultSubobject<UStaminaComponent>(TEXT("AC_Stamina"));
     HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
+    InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("AC_Interaction"));
     ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
+    ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
+    ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
     // LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
     // LightComponent->SetupAttachment(GetMesh());
-
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
@@ -61,6 +62,42 @@ AAPlayerCharacter::AAPlayerCharacter()
 }
 
 
+void AAPlayerCharacter::BeginPlay()
+{
+    Super::BeginPlay();
+    GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+
+    ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
+
+
+    ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
+    ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
+    
+
+    UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
+}
+
+
+void AAPlayerCharacter::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+
+
+    if (GetLocalRole() == ROLE_SimulatedProxy)
+    {
+        return;
+    }
+
+    // --- Plus aucune rotation Mesh/Actor ici ---
+    // Tu gères la rotation en Blueprint (input Turn/Look et/ou CharacterMovement).
+
+    if (CurrentState == EPlayerState::Dodging)
+    {
+        ActualiseDodge(DeltaTime);
+    }
+}
+
+
 void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -69,16 +106,16 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 
-#pragma region Interaction Functions
+#pragma region Interface Functions
 
 void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible)
 {
-    InteractiblesAtRange.Add(Interactible);
+    InteractionComponent->AddInteractible(Interactible);
 }
 
 void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
 {
-    InteractiblesAtRange.Remove(Interactible);
+    InteractionComponent->RemoveInteractible(Interactible);
 }
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
@@ -96,6 +133,11 @@ void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh)
     WeaponMeshComponent->SetStaticMesh(NewMesh);
 }
 
+UItemData* AAPlayerCharacter::GetEquippedItem_Implementation()
+{
+    return ItemComponent->GetEquippedItem();
+}
+
 EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
 {
     return CurrentState;
@@ -111,104 +153,13 @@ void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMon
     PlayMontage(AttackMontage);
 }
 
-void AAPlayerCharacter::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
-{
-    if (!Interactible || !Interactible->bCanBeUsed)
-        return;
-
-    Interactible->Interaction(Player);
-}
-
-void AAPlayerCharacter::ServerStopInteract_Implementation(ALever* Lever, AAPlayerCharacter* Player)
-{
-    if (!Lever || !Player)
-        return;
-
-    Lever->StopHoldInteraction(Player);
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Stop interaction called for %s"), *Lever->GetName());
-}
-
-void AAPlayerCharacter::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
-{
-    UE_LOG(LogTemp, Warning, TEXT("Hello"));
-    if (InteractibleObject)
-        ServerInteract(InteractibleObject, Player);
-}
-
-void AAPlayerCharacter::StartInteract()
-{
-    AActor* NereastInteractible = GetNearestInteractible();
-    AInteractibleObjects* Interactible = Cast<AInteractibleObjects>(NereastInteractible);
-
-    if (Interactible && Interactible->bCanBeUsed)
-    {
-        CurrentInteractible = Interactible;
-        ALever* Lever = Cast<ALever>(Interactible);
-        if (Lever && Lever->bCanBeUsed)
-        {
-            TryInteract(Interactible, this);
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Started hold interaction with %s"), *Interactible->GetName());
-        }
-        else
-        {
-            TryInteract(Interactible, this);
-            CurrentInteractible = nullptr; // Pas besoin de tracker pour toggle
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Single interaction with %s"), *Interactible->GetName());
-        }
-    }
-}
-
-void AAPlayerCharacter::StopInteract()
-{
-    if (CurrentInteractible)
-    {
-        ALever* Lever = Cast<ALever>(CurrentInteractible);
-        if (Lever && Lever->bRequiresHold)
-        {
-            // Arrête l'interaction maintenue
-            ServerStopInteract(Lever, this);
-            UE_LOG(LogTemp, Log, TEXT("[CLIENT] Stopped hold interaction with %s"), *Lever->GetName());
-        }
-        CurrentInteractible = nullptr;
-    }
-}
-
-#pragma endregion
-
-
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
     HealthComponent->TakeDamage(quantity);
 }
 
-void AAPlayerCharacter::BeginPlay()
-{
-    Super::BeginPlay();
-    GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+#pragma endregion
 
-    ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
-
-    UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
-}
-
-void AAPlayerCharacter::Tick(float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-
-    
-    if (GetLocalRole() == ROLE_SimulatedProxy)
-    {
-        return;
-    }
-
-    // --- Plus aucune rotation Mesh/Actor ici ---
-    // Tu gères la rotation en Blueprint (input Turn/Look et/ou CharacterMovement).
-
-    if (CurrentState == EPlayerState::Dodging)
-    {
-        ActualiseDodge(DeltaTime);
-    }
-}
 
 void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -216,20 +167,24 @@ void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
     // Laisse tes bindings BP gérer le Turn (AddControllerYawInput) et le Move.
 }
 
+
+#pragma region Movement / Run
+
+
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
     if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging)
         return;
 
-	CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
+    CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
-	if (CurrentPlayerInput.Length() > 0.5f) {
-		PreviousPlayerInput = CurrentPlayerInput;
-	}
-	else {
-		AddMovementInput(FVector(0, 0, 0), 1.0f, true);
-		return;
-	}
+    if (CurrentPlayerInput.Length() > 0.5f) {
+        PreviousPlayerInput = CurrentPlayerInput;
+    }
+    else {
+        AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+        return;
+    }
 
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
     FinalVector.Normalize();
@@ -241,8 +196,6 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     AddMovementInput(FinalVector, 1.0f, true);
 }
 
-
-#pragma region Run
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
@@ -274,6 +227,35 @@ void AAPlayerCharacter::ManageRun(bool Input)
         ServerManageRun(Input);
     }
 }
+
+
+bool AAPlayerCharacter::IsProtectedFromCurse() const
+{
+    return ProtectionZoneAmount > 0;
+}
+
+
+void AAPlayerCharacter::AddProtectionZone()
+{
+    if (HasAuthority())
+    {
+        ProtectionZoneAmount++;
+        // If need to add more logic
+        //OnRep_ProtectionZoneChanged();
+    }
+}
+
+
+void AAPlayerCharacter::RemoveProtectionZone()
+{
+    if (HasAuthority())
+    {
+        ProtectionZoneAmount--;
+        // If need to add more logic
+        //OnRep_ProtectionChanged();
+    }
+}
+
 
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
@@ -346,35 +328,7 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 #pragma endregion
 
 
-// IF THE PLAYER IS EQUIPPED WITH A CONSUMABLE, USES IT IF POSSIBLE
-void AAPlayerCharacter::UseCurrentItem()
-{
-    FInventorySlot slotInfos = InventoryComponent->GetCurrentSlot();
-    if (slotInfos.ItemData == nullptr) return;
-    if (slotInfos.ItemData->ItemType != EItemType::Consumable) return;
-
-    switch (slotInfos.ItemData->ConsumableEffectType)
-    {
-        case EConsumableEffectType::Heal:
-            HealthComponent->Heal(slotInfos.ItemData->ConsumableEffectPower);
-            InventoryComponent->RemoveCurrentItem();
-            break;
-
-        case EConsumableEffectType::OpenDoor:
-            break;
-
-        case EConsumableEffectType::PlaceZipline:
-        {
-            if (!HasAuthority())
-            {
-                ServerUseZiplineItem(slotInfos.ItemData);
-                return;
-            }
-            ServerUseZiplineItem_Implementation(slotInfos.ItemData);
-            break;
-        }
-    }
-}
+#pragma region Montages
 
 void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
 {
@@ -394,6 +348,7 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &AAPlayerCharacter::OnMontageNotifyBegin);
 }
 
+
 void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
 {
     if (!HasAuthority())
@@ -406,28 +361,43 @@ void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
     }
 }
 
+
 void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
 {
     if (Montage)
         MulticastPlayMontage(Montage);
 }
 
-AActor* AAPlayerCharacter::GetNearestInteractible()
-{
-    float bestDist = FLT_MAX;
-    AActor* pickedInteractible = nullptr;
 
-    for (AActor* Interactible : InteractiblesAtRange)
+void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+    if (!Montage) return;
+
+    UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
+        *GetName(),
+        *Montage->GetName(),
+        bInterrupted ? TEXT("true") : TEXT("false"));
+
+    if (CurrentState == EPlayerState::UsingEquipment)
     {
-        float currentDist = (Interactible->GetActorLocation() - GetActorLocation()).Length();
-        if (currentDist < bestDist)
-        {
-            pickedInteractible = Interactible;
-            bestDist = currentDist;
-        }
+        CurrentState = EPlayerState::None;
+        ItemComponent->AttackAnimEnd();
     }
-    return pickedInteractible;
+
+    BP_OnMontageEnded(Montage, bInterrupted);
 }
+
+
+void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
+{
+    BP_OnMontageNotifyBegin(NotifyName);
+}
+
+#pragma endregion
+
+
+#pragma region Others
+
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
@@ -458,30 +428,7 @@ void AAPlayerCharacter::OnRep_PlayerState()
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
     return GetController() != nullptr &&
-           Cast<APlayerController>(GetController()) != nullptr;
-}
-
-void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
-{
-    if (!Montage) return;
-
-    UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
-        *GetName(),
-        *Montage->GetName(),
-        bInterrupted ? TEXT("true") : TEXT("false"));
-
-    if (CurrentState == EPlayerState::UsingEquipment)
-    {
-        CurrentState = EPlayerState::None;
-        ItemComponent->AttackAnimEnd();
-    }
-
-    BP_OnMontageEnded(Montage, bInterrupted);
-}
-
-void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
-{
-    BP_OnMontageNotifyBegin(NotifyName);
+        Cast<APlayerController>(GetController()) != nullptr;
 }
 
 
@@ -494,7 +441,7 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
     FRotator SpawnRot = GetActorRotation();
 
     FActorSpawnParameters Params;
-    Params.Owner      = this;
+    Params.Owner = this;
     Params.Instigator = this;
 
     AZiplineInteractible* NewZip = GetWorld()->SpawnActor<AZiplineInteractible>(
@@ -510,3 +457,20 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
         InventoryComponent->RemoveCurrentItem();
     }
 }
+
+
+void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
+{
+    ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
+
+    ThrowablePreviewMeshComponent->SetHiddenInGame(false);
+    ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
+}
+
+void AAPlayerCharacter::HideThrowPreview()
+{
+    ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+#pragma endregion
+

@@ -7,6 +7,7 @@
 #include "ItemData.generated.h"
 
 class AItem;
+class AThrowableObject;
 
 UENUM(BlueprintType)
 enum class EItemType : uint8 {
@@ -19,8 +20,9 @@ enum class EItemType : uint8 {
 UENUM(BlueprintType)
 enum class EConsumableEffectType : uint8 {
 	Heal UMETA(DisplayName = "Heal"),
-	OpenDoor UMETA(DisplayName = "OpenDoor"),
 	PlaceZipline UMETA(DisplayName = "PlaceZipline"),
+	ThrowObject UMETA(DisplayName = "ThrowObject"),
+	None UMETA(DisplayName = "None")
 };
 
 
@@ -67,8 +69,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
 	float NeededHoldDuration;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zipline")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	TSubclassOf<class AZiplineInteractible> ZiplineClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
+	TSubclassOf<class AThrowableObject> ThrowedObjectClass;
 
 
 // Weapon

@@ -8,6 +8,7 @@
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
 
 class UHealthComponent;
@@ -26,6 +27,8 @@ class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerIn
 // Components + Constructor
 public:
 	AAPlayerCharacter();
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UInventoryComponent* InventoryComponent;
@@ -43,14 +46,33 @@ public:
 	UWidgetComponent* ProgressBarComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UInteractionComponent* InteractionComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* WeaponMeshComponent;
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
 	UPlayerLightComponent* LightComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaticMeshComponent* ThrowablePreviewMeshComponent;
 	
 
-// Interact Behavior
+// Curse
 public :
+	UPROPERTY(Replicated)
+	int32 ProtectionZoneAmount;
+
+	UFUNCTION(BlueprintCallable)
+	bool IsProtectedFromCurse() const;
+
+	UFUNCTION(BlueprintCallable)
+	void AddProtectionZone();
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveProtectionZone();
+
+
 	UFUNCTION(Server, Reliable)
 	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
 
@@ -88,6 +110,8 @@ public :
 
 	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
 
+	virtual UItemData* GetEquippedItem_Implementation() override;
+
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
 	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
@@ -95,7 +119,7 @@ public :
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
 
 
-// Damageable Behavior
+// Damageable Interface
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 	
@@ -119,29 +143,23 @@ protected:
 	UFUNCTION()
 	void OnRep_CurrentPlayerState();	
 	
+	UPROPERTY()
 	float DodgeTimer;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	bool IsReadyForRPCs() const;
 
-public:	
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:	
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
-
-	//UFUNCTION(BlueprintCallable)
-	//void RotateCharacter();
-
 	
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ServerManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
-
 
 	UFUNCTION(BlueprintCallable)
 	void StartDodge();
@@ -152,9 +170,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ActualiseDodge(float DeltaTime);
 
-	UFUNCTION(BlueprintCallable)
-	void UseCurrentItem();
+	UFUNCTION(Server, Reliable)
+	void ServerUseZiplineItem(UItemData* ZiplineItem);
 
+
+// Montage Methods
+public :
 	UFUNCTION(Server, Reliable)
 	void ServerPlayMontage(UAnimMontage* Montage);
 
@@ -163,9 +184,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayMontage(UAnimMontage* Montage);
-
-	UFUNCTION(Server, Reliable)
-	void ServerUseZiplineItem(UItemData* ZiplineItem);
 
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
@@ -178,6 +196,15 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageNotifyBegin(FName NotifyName);
+
+
+// Others
+private :
+	UFUNCTION()
+	void DisplayThrowPreview(FVector Position, float Range);
+
+	UFUNCTION()
+	void HideThrowPreview();
 
 
 // Private References

@@ -3,6 +3,7 @@
 
 #include "Components/UItemComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Interfaces/IPlayer.h"
@@ -13,6 +14,7 @@ UItemComponent::UItemComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
+
 
 void UItemComponent::BeginPlay()
 {
@@ -29,6 +31,7 @@ void UItemComponent::BeginPlay()
 	InventoryComponent->OnInventoryChanging.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
 }
 
+
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -36,22 +39,9 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	if (!GetOwner()) return;
 
 	// If the player is currently maintaining the use button
-	if (!IsUsingItem) return;
-	if (ItemUseTimer > 0) 
-	{
-		ItemUseTimer -= DeltaTime;
-		if (GetOwner()->Implements<UPlayerInterface>())
-		{
-			IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-			if (PlayerInterface)
-			{
-				PlayerInterface->ShowProgress_Implementation(ItemUseTimer);
-			}
-		}
-		return;
-	}
+	ActualiseUseProgress(DeltaTime);
 
-	UseConsumable();
+	ActualisePreviewThrow(DeltaTime);
 }
 
 
@@ -80,6 +70,28 @@ void UItemComponent::DoMainAction()
 	}
 }
 
+
+void UItemComponent::ActualiseUseProgress(float DeltaTime)
+{
+	if (!IsUsingItem) return;
+	if (ItemUseTimer > 0)
+	{
+		ItemUseTimer -= DeltaTime;
+		if (GetOwner()->Implements<UPlayerInterface>())
+		{
+			IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+			if (PlayerInterface)
+			{
+				PlayerInterface->ShowProgress_Implementation(ItemUseTimer);
+			}
+		}
+		return;
+	}
+
+	UseConsumable();
+}
+
+
 // CALLED TO APPLY THE CONSUMABLE EFFECT
 void UItemComponent::UseConsumable()
 {
@@ -97,19 +109,30 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
-		case EConsumableEffectType::OpenDoor:
-			break;
-
 		case EConsumableEffectType::PlaceZipline:
-		{
 			/*if (PlayerCharacter->HasAuthority())
 			{
 				ServerUseZiplineItem(slotInfos.ItemData);
 				return;
 			}
-			ServerUseZiplineItem_Implementation(slotInfos.ItemData);
-			break;*/
-		}
+			ServerUseZiplineItem_Implementation(slotInfos.ItemData);*/
+			break;
+
+		case EConsumableEffectType::ThrowObject:
+			if (!IsPreviewingThrow) return;
+
+			float Progress = ThrowPreviewTimer / 2.f;
+			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
+			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
+			FVector FinalPos = FMath::Lerp(Pos1, Pos2, Progress);
+
+			AThrowableObject* ThrowedObject =
+				GetWorld()->SpawnActor<AThrowableObject>(EquippedItem.ItemData->ThrowedObjectClass, GetOwner()->GetActorLocation(), FRotator(0.f, 0.f, 0.f));
+			if (ThrowedObject) {
+				ThrowedObject->Initialise(FinalPos);
+				InventoryComponent->RemoveCurrentItem();
+			}
+			break;
 	}
 }
 
@@ -138,14 +161,57 @@ void UItemComponent::DoSecondaryAction()
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
 
+	// Throw Preview
+	if (EquippedItem.ItemData->ItemType == EItemType::Consumable 
+		&& EquippedItem.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject) {
+		StartPreviewThrow();
+	}
+}
 
+void UItemComponent::StartPreviewThrow()
+{
+	if (IsPreviewingThrow) return;
+	IsPreviewingThrow = true;
 
+	ThrowPreviewTimer = 0;
+}
+
+void UItemComponent::ActualisePreviewThrow(float DeltaTime)
+{
+	if (!IsPreviewingThrow) return;
+	if (EquippedItem.ItemData == nullptr) {
+		StopPreviewThrow();
+		return;
+	}
+	if (EquippedItem.ItemData->ThrowedObjectClass == nullptr) {
+		StopPreviewThrow();
+		return;
+	}
+
+	ThrowPreviewTimer += DeltaTime;
+	float Progress = ThrowPreviewTimer / 2.f;
+	FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 200.f;
+	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
+	FVector FinalPos = FMath::Lerp(Pos1, Pos2, Progress);
+
+	AThrowableObject* Throwable = EquippedItem.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
+	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
+}
+
+void UItemComponent::StopPreviewThrow()
+{
+	if (!IsPreviewingThrow) return;
+	IsPreviewingThrow = false;
+
+	ThrowPreviewTimer = 0;
+	OnThrowHidePreview.Broadcast();
 }
 
 void UItemComponent::StopSecondaryAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
 
+	StopPreviewThrow();
 }
 
 #pragma endregion
@@ -164,6 +230,11 @@ void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int Cu
 	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment) {
 		EquipWeapon();
 	}
+}
+
+UItemData* UItemComponent::GetEquippedItem()
+{
+	return EquippedItem.ItemData;
 }
 
 void UItemComponent::EquipWeapon()

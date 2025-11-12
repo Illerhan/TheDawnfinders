@@ -38,18 +38,20 @@ public:
 	UFUNCTION(BlueprintCallable,Blueprintable,Category="Interactibles")
 	virtual void Interaction(AAPlayerCharacter* Player);
 
+	UFUNCTION(BlueprintCallable, Blueprintable, Category = "Interactibles")
+	virtual void StopInteraction(AAPlayerCharacter* Player);
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
 	void BP_OnInteraction(AAPlayerCharacter* Player);
-	
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
+	void BP_OnStopInteraction(AAPlayerCharacter* Player);
 
 
 public:
-	// Called every frame
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void Interact_Implementation(AActor* Interactor) override;
+	virtual void StopInteract_Implementation(AActor* Interactor) override;
 };
