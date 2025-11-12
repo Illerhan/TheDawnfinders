@@ -35,7 +35,7 @@ void ALock::Interaction(AAPlayerCharacter* Player)
 	PlayerTemp = Player;
 
 	IsInteracting = true;
-	InteractionTimer = 1.f;
+	InteractionTimer = 2.f;
 }
 
 void ALock::StopInteraction(AAPlayerCharacter* Player)
@@ -48,6 +48,10 @@ void ALock::StopInteraction(AAPlayerCharacter* Player)
 void ALock::Unlock()
 {
 	IsInteracting = false;
+
+	for (int i = 0; i < LinkedObjects.Num(); i++) {
+		LinkedObjects[i]->DoMovement();
+	}
 
 	Destroy();
 }
