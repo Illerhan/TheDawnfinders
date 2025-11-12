@@ -17,7 +17,6 @@ ADoors::ADoors()
 void ADoors::StartOpening()
 {
 	if (!HasAuthority()) return;
-
 	if (!MoveCurve) return;
 
 	bCanMove = false;
