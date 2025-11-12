@@ -115,8 +115,6 @@ void ABurnableObjects::ExtinguishObject()
             }
         }
 
-        UE_LOG(LogTemp, Log, TEXT("%s has been extinguished (Health remaining: %.1f/%.1f)"), 
-               *GetName(), CurrentHealth, MaxHealth);
     }
 }
 
@@ -163,9 +161,6 @@ void ABurnableObjects::OnHealthDepleted()
 
 void ABurnableObjects::OnRep_CurrentHealth()
 {
-
-    UE_LOG(LogTemp, Log, TEXT("%s health updated: %.1f/%.1f (%.1f%%)"), 
-           *GetName(), CurrentHealth, MaxHealth, GetHealthPercentage() * 100.0f);
     
     // Mettre à jour les effets visuels selon la vie
     if (LightComponent && LightComponent->PointLight)

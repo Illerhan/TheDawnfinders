@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "UHealthComponent.generated.h"
 
 
@@ -14,7 +15,7 @@ class THEDAWNFINDERS_API UHealthComponent : public UActorComponent
 
 public:	
 	UHealthComponent();
-	
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -39,8 +40,11 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool IsDead;
 
-	UPROPERTY(Replicated)
-	int32 ProtectionZoneAmount;
+	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
+	int32 ProtectionZoneAmount = 0;
+	
+	UFUNCTION()
+	void OnRep_ProtectionZoneAmount();
 
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
@@ -51,13 +55,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
 
-	void ApplyCurse();
+	void ApplyCurse(float DeltaTime);
 
 private :
 
 	float MaxHealth;
-	float MinimumMaxHP;
-	float CurseRatio;
+	float MinimumMaxHP = 20.f;
+	float CurseRatio= 0.02;
+	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
+	UPROPERTY(Replicated)
 	float CurrentMaxHealth = 100.f;
 };
