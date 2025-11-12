@@ -5,6 +5,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "DataAssets/ItemData.h"
 #include "Interfaces/IPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 
 ALock::ALock()
@@ -52,6 +53,19 @@ void ALock::Unlock()
 	for (int i = 0; i < LinkedObjects.Num(); i++) {
 		LinkedObjects[i]->DoMovement();
 	}
+
+
+	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
+	{
+		if (APawn* Pawn = PC->GetPawn())
+		{
+			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
+			{
+				PlayerCharacter->InventoryComponent->RemoveCurrentItem();
+			}
+		}
+	}
+
 
 	Destroy();
 }
