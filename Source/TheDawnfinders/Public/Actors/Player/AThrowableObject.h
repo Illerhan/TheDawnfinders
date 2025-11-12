@@ -1,0 +1,59 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "AThrowableObject.generated.h"
+
+UENUM(BlueprintType)
+enum class EThrowableEffectType : uint8 {
+	Explodes UMETA(DisplayName = "Explodes"),
+	PlayLoudSound UMETA(DisplayName = "PlayLoudSound")
+};
+
+
+UCLASS()
+class THEDAWNFINDERS_API AThrowableObject : public AActor
+{
+	GENERATED_BODY()
+	
+public:	
+	AThrowableObject();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable)
+	void Initialise(FVector FinalPos);
+
+	UFUNCTION(BlueprintCallable)
+	void ActualisePosition();
+
+	UFUNCTION(BlueprintCallable)
+	void DoCollisionEffect();
+
+
+public :
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float ThrowDuration;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	EThrowableEffectType EffectType;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float EffectRange;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float EffectPower;
+
+
+private :
+	UPROPERTY()
+	FVector StartPos;
+
+	UPROPERTY()
+	FVector EndPos;
+
+	UPROPERTY()
+	float ProgressTimer;
+};

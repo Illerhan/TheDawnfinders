@@ -3,6 +3,7 @@
 
 #include "Components/UItemComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Interfaces/IPlayer.h"
@@ -13,6 +14,7 @@ UItemComponent::UItemComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
+
 
 void UItemComponent::BeginPlay()
 {
@@ -28,6 +30,7 @@ void UItemComponent::BeginPlay()
 
 	InventoryComponent->OnInventoryChanging.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
 }
+
 
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -97,19 +100,23 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
-		case EConsumableEffectType::OpenDoor:
-			break;
-
 		case EConsumableEffectType::PlaceZipline:
-		{
 			/*if (PlayerCharacter->HasAuthority())
 			{
 				ServerUseZiplineItem(slotInfos.ItemData);
 				return;
 			}
-			ServerUseZiplineItem_Implementation(slotInfos.ItemData);
-			break;*/
-		}
+			ServerUseZiplineItem_Implementation(slotInfos.ItemData);*/
+			break;
+
+		case EConsumableEffectType::ThrowObject:
+			AThrowableObject* ThrowedObject =
+				GetWorld()->SpawnActor<AThrowableObject>(EquippedItem.ItemData->ThrowedObjectClass, GetOwner()->GetActorLocation(), FRotator(0.f, 0.f, 0.f));
+			if (ThrowedObject) {
+				ThrowedObject->Initialise(GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 1000.f);
+				InventoryComponent->RemoveCurrentItem();
+			}
+			break;
 	}
 }
 
