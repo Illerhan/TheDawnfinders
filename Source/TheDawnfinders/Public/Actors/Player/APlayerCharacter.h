@@ -71,13 +71,6 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
-
-
-	UFUNCTION(Server, Reliable)
-	void ServerInteract(AInteractibleObjects* Interactible,AAPlayerCharacter* Player);
-
-	UFUNCTION(Server, Reliable)
-	void ServerStopInteract(ALever* Lever, AAPlayerCharacter* Player);
 	
 	UFUNCTION()
 	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
