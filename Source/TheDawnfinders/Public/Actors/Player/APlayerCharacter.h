@@ -53,6 +53,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
 	UPlayerLightComponent* LightComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaticMeshComponent* ThrowablePreviewMeshComponent;
 	
 
 // Curse
@@ -168,6 +171,15 @@ public :
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageNotifyBegin(FName NotifyName);
+
+
+// Others
+private :
+	UFUNCTION()
+	void DisplayThrowPreview(FVector Position, float Range);
+
+	UFUNCTION()
+	void HideThrowPreview();
 
 
 // Private References

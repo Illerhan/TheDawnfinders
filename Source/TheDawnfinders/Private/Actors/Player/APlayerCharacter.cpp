@@ -45,9 +45,10 @@ AAPlayerCharacter::AAPlayerCharacter()
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
+    ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
+    ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
     // LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
     // LightComponent->SetupAttachment(GetMesh());
-
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
@@ -67,6 +68,11 @@ void AAPlayerCharacter::BeginPlay()
     GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 
     ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
+
+
+    ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
+    ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
+    
 
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
@@ -392,6 +398,7 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 #pragma region Others
 
+
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
     Super::PossessedBy(NewController);
@@ -449,6 +456,20 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
         UE_LOG(LogTemp, Log, TEXT("Zipline placed by %s"), *GetName());
         InventoryComponent->RemoveCurrentItem();
     }
+}
+
+
+void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
+{
+    ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
+
+    ThrowablePreviewMeshComponent->SetHiddenInGame(false);
+    ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
+}
+
+void AAPlayerCharacter::HideThrowPreview()
+{
+    ThrowablePreviewMeshComponent->SetHiddenInGame(true);
 }
 
 #pragma endregion

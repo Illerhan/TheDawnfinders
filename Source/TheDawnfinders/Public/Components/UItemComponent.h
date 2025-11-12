@@ -9,6 +9,8 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemStartUse);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemEndUse);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnThrowPreviewDisplay, FVector, Position, float, Range);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnThrowHidePreview);
 
 class UHealthComponent;
 class UInventoryComponent;
@@ -34,6 +36,12 @@ public :
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnItemStartUse OnItemEndUse;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnThrowPreviewDisplay OnThrowPreviewDisplay;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnThrowHidePreview OnThrowHidePreview;
 
 
 public :
@@ -67,10 +75,22 @@ private :
 	void UnequipWeapon();
 
 	UFUNCTION()
+	void ActualiseUseProgress(float DeltaTime);
+
+	UFUNCTION()
 	void UseConsumable();
 
 	UFUNCTION()
 	void WeaponMainAction();
+
+	UFUNCTION()
+	void StartPreviewThrow();
+
+	UFUNCTION()
+	void ActualisePreviewThrow(float DeltaTime);
+
+	UFUNCTION()
+	void StopPreviewThrow();
 
 
 // Private Variables
@@ -83,6 +103,12 @@ private :
 
 	UPROPERTY()
 	bool IsUsingItem;
+
+	UPROPERTY()
+	float ThrowPreviewTimer;
+
+	UPROPERTY()
+	bool IsPreviewingThrow;
 
 	UPROPERTY()
 	bool PressedAttackInput;
