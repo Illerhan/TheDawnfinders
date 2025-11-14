@@ -16,6 +16,7 @@ UPlayerLightComponent::UPlayerLightComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("Root"));
+	//LightRoot->SetupAttachment(GetOwner()->GetRootComponent());
 	
 	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
 	PointLight->SetupAttachment(LightRoot);
@@ -28,8 +29,6 @@ UPlayerLightComponent::UPlayerLightComponent()
 	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
 	ProtectionZone->SetHiddenInGame(!bLightOn);
 	ProtectionZone->SetupAttachment(PointLight);
-	
-	
 	
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 	LightMesh->SetupAttachment(LightRoot);
@@ -165,6 +164,7 @@ void UPlayerLightComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	LightRoot->SetupAttachment(GetOwner()->GetRootComponent());
 	if (GetOwnerRole() == ROLE_Authority)
 	{
 		ProtectionZone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapBegin);

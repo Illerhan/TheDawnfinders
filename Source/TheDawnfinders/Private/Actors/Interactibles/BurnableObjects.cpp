@@ -8,11 +8,6 @@ ABurnableObjects::ABurnableObjects()
     PrimaryActorTick.bCanEverTick = true;
     
     LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(FName("AC_Light"));
-    
-    if (LightComponent && LightComponent->ProtectionZone)
-    {
-        LightComponent->ProtectionZone->SetupAttachment(RootComponent);
-    }
 
     bIsBurning = false;
     CurrentHealth = MaxHealth;
