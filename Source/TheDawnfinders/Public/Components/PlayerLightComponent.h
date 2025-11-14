@@ -15,6 +15,8 @@ class THEDAWNFINDERS_API UPlayerLightComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(Exec)
+	void DebugProtectionZone();
 	// Sets default values for this component's properties
 	UPlayerLightComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

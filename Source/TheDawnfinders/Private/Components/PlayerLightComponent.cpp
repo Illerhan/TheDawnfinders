@@ -2,11 +2,9 @@
 
 
 #include "Components/PlayerLightComponent.h"
-
-#include <gsl/pointers>
-
-#include "VectorUtil.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/UHealthComponent.h"
+
 #include "Net/UnrealNetwork.h"
 
 
@@ -19,16 +17,19 @@ UPlayerLightComponent::UPlayerLightComponent()
 
 	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("Root"));
 	
-	ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
-	ProtectionZone->SetupAttachment(LightRoot);
+	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
+	PointLight->SetupAttachment(LightRoot);
 	
+	ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
+	ProtectionZone->SetGenerateOverlapEvents(true);
 	ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
 	ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
 	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
-
-	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
-	PointLight->SetupAttachment(LightRoot);
+	ProtectionZone->SetHiddenInGame(!bLightOn);
+	ProtectionZone->SetupAttachment(PointLight);
+	
+	
 	
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 	LightMesh->SetupAttachment(LightRoot);
@@ -52,7 +53,11 @@ void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
 	{
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
 		{
-			Player->AddProtectionZone();
+			Player->HealthComponent->AddProtectionZone();
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] OVERLAP BEGIN - %s entered %s protection zone. Amount: %d"),
+				*Player->GetName(),
+				*GetOwner()->GetName(),
+				Player->HealthComponent->ProtectionZoneAmount);
 		}
 	}
 }
@@ -64,14 +69,17 @@ void UPlayerLightComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	{
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
 		{
-			Player->RemoveProtectionZone();
+			Player->HealthComponent->RemoveProtectionZone();
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] OVERLAP END - %s left %s protection zone. Amount: %d"),
+				*Player->GetName(),
+				*GetOwner()->GetName(),
+				Player->HealthComponent->ProtectionZoneAmount);
 		}
 	}
 }
 
 void UPlayerLightComponent::ApplyLightState()
 {
-	
 	if (PointLight)
 	{
 		if (bLightOn)
@@ -79,11 +87,71 @@ void UPlayerLightComponent::ApplyLightState()
 			PointLight->SetIntensity(LightIntensity);
 			PointLight->SetSourceRadius(LightRadius);
 			PointLight->SetVisibility(true);
+
+			// Self-protection add
+			if (AAPlayerCharacter* OwnerPlayer = Cast<AAPlayerCharacter>(GetOwner()))
+			{
+				OwnerPlayer->HealthComponent->AddProtectionZone();
+				UE_LOG(LogTemp, Warning, TEXT("[SERVER] %s turned light ON - Self protection. Amount: %d"),
+					*OwnerPlayer->GetName(),
+					OwnerPlayer->HealthComponent->ProtectionZoneAmount);
+			}
+			
+			// Other protection add (EXCLUDE OWNER)
+			if (ProtectionZone && GetOwner()->HasAuthority())
+			{
+				TArray<AActor*> OverlappingActors;
+				ProtectionZone->GetOverlappingActors(OverlappingActors, AAPlayerCharacter::StaticClass());
+                
+				for (AActor* Actor : OverlappingActors)
+				{
+					// SKIP THE OWNER - they already got self-protection above
+					if (Actor == GetOwner()) continue;
+					
+					if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
+					{
+						Player->HealthComponent->AddProtectionZone();
+						UE_LOG(LogTemp, Warning, TEXT("[SERVER] Light turned ON - Adding protection for %s. Amount: %d"),
+							*Player->GetName(),
+							Player->HealthComponent->ProtectionZoneAmount);
+					}
+				}
+			}
 		}
 		else
 		{
 			PointLight->SetIntensity(0.f);
 			PointLight->SetVisibility(false);
+			
+			if (ProtectionZone && GetOwner()->HasAuthority())
+			{
+				// Self-protection removed
+				if (AAPlayerCharacter* OwnerPlayer = Cast<AAPlayerCharacter>(GetOwner()))
+				{
+					OwnerPlayer->HealthComponent->RemoveProtectionZone();
+					UE_LOG(LogTemp, Warning, TEXT("[SERVER] %s turned light OFF - Removing self protection. Amount: %d"),
+						*OwnerPlayer->GetName(),
+						OwnerPlayer->HealthComponent->ProtectionZoneAmount);
+				}
+
+				// Other protection removed (EXCLUDE OWNER)
+				TArray<AActor*> OverlappingActors;
+				ProtectionZone->GetOverlappingActors(OverlappingActors, AAPlayerCharacter::StaticClass());
+                
+				for (AActor* Actor : OverlappingActors)
+				{
+					// SKIP THE OWNER - they already got self-protection removed above
+					if (Actor == GetOwner()) continue;
+					
+					if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
+					{
+						Player->HealthComponent->RemoveProtectionZone();
+						UE_LOG(LogTemp, Warning, TEXT("[SERVER] Light turned OFF - Removing protection for %s. Amount: %d"),
+							*Player->GetName(),
+							Player->HealthComponent->ProtectionZoneAmount);
+					}
+				}
+			}
 		}
 	}
 
@@ -162,3 +230,25 @@ void UPlayerLightComponent::OnRep_LightOn()
 	ApplyLightState();
 }
 
+void UPlayerLightComponent::DebugProtectionZone()
+{
+	if (!ProtectionZone) return;
+    
+	TArray<AActor*> OverlappingActors;
+	ProtectionZone->GetOverlappingActors(OverlappingActors);
+    
+	UE_LOG(LogTemp, Error, TEXT("=== DEBUG %s Protection Zone ==="), *GetOwner()->GetName());
+	UE_LOG(LogTemp, Error, TEXT("Light On: %s"), bLightOn ? TEXT("YES") : TEXT("NO"));
+	UE_LOG(LogTemp, Error, TEXT("Collision Enabled: %d"), (int32)ProtectionZone->GetCollisionEnabled());
+	UE_LOG(LogTemp, Error, TEXT("Overlapping Actors: %d"), OverlappingActors.Num());
+    
+	for (AActor* Actor : OverlappingActors)
+	{
+		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
+		{
+			UE_LOG(LogTemp, Error, TEXT("  - Player: %s, Protection Amount: %d"),
+				*Player->GetName(),
+				Player->HealthComponent->ProtectionZoneAmount);
+		}
+	}
+}

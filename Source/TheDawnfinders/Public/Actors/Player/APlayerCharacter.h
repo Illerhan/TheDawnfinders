@@ -71,8 +71,14 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
+	
+	UPROPERTY()
+	AInteractibleObjects* CurrentInteractible = nullptr;;
 
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> InteractiblesAtRange;
 
+	
 // Player Interface
 public : 
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
