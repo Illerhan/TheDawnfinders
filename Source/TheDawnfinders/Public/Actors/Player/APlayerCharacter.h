@@ -72,20 +72,8 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
 	
-	UFUNCTION()
-	void TryInteract(AInteractibleObjects* InteractibleObject,AAPlayerCharacter* Player);
-
 	UPROPERTY()
-	AInteractibleObjects* CurrentInteractible = nullptr;
-
-	UFUNCTION(BlueprintCallable)
-	void StartInteract();
-
-	UFUNCTION(BlueprintCallable)
-	void StopInteract();
-
-	UFUNCTION(BlueprintCallable)
-	AActor* GetNearestInteractible();
+	AInteractibleObjects* CurrentInteractible = nullptr;;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
