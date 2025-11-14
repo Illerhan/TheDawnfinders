@@ -57,13 +57,15 @@ public:
 
 	void ApplyCurse(float DeltaTime);
 
-private :
-
-	float MaxHealth;
-	float MinimumMaxHP = 20.f;
-	float CurseRatio= 0.02;
 	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
 	UPROPERTY(Replicated)
 	float CurrentMaxHealth = 100.f;
+
+private :
+
+	float MaxHealth = 100.f;
+	float MinimumMaxHP = 20.f;
+	float CurseRatio= 0.02;
+
 };

@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Player/APlayerCharacter.h"
+#include "Components/UHealthComponent.h"
 #include "GameFramework/PlayerState.h"
 #include "CustomPlayerState.generated.h"
 
@@ -29,10 +31,10 @@ public :
 	void ActualiseStamina(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
-	void ActualiseLocalHealth(float current, float max);
+	void ActualiseLocalHealth(float current, float max, float fixedMax);
 
 	UFUNCTION(BlueprintCallable)
-	void ActualiseHealth(float current, float max);
+	void ActualiseHealth(float current, float max, float fixedMax);
 
 	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
@@ -47,6 +49,9 @@ public :
 
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxHealth;
+
+	UPROPERTY(BlueprintReadOnly, Replicated)
+	float MaxHealth;
 
 	UFUNCTION()
 	void OnRep_StaminaChange();

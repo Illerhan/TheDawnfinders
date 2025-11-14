@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Widgets/USquadWidget.h"
+
+#include "Components/UHealthComponent.h"
 #include "GameFramework/GameStateBase.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "GameFramework/CustomGameState.h"
@@ -38,7 +40,7 @@ void USquadWidget::ActualiseSquadInfos()
 
 	APlayerController* LocalPC = GetOwningPlayer();
 	APlayerState* LocalPS = LocalPC->PlayerState;
-
+	AAPlayerCharacter* LocalCharacter = Cast<AAPlayerCharacter>(LocalPC->GetCharacter());
 	AGameStateBase* GS = GetWorld()->GetGameState();
 	if (!GS) return;
 
@@ -48,7 +50,7 @@ void USquadWidget::ActualiseSquadInfos()
 		if (PS != LocalPS) continue;
 
 		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-		SquadMemberWidgets[0]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina);
+		SquadMemberWidgets[0]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina,CustomPS->MaxHealth);
 
 		break;
 	}
@@ -60,7 +62,7 @@ void USquadWidget::ActualiseSquadInfos()
 		if (PS == LocalPS) continue;
 
 		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-		SquadMemberWidgets[WidgetIndex++]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina);
+		SquadMemberWidgets[WidgetIndex++]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina,CustomPS->MaxHealth);
 	}
 }
 
