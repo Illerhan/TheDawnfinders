@@ -54,7 +54,7 @@ void UItemComponent::DoMainAction()
 
 	if (EquippedItem.ItemData->ItemType == EItemType::Consumable) 
 	{
-		if (EquippedItem.ItemData->NeededHoldDuration != 0) {
+		if (EquippedItem.ItemData->NeededHoldDuration != 0 && !EquippedItem.ItemData->ContextualUse) {
 			ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
 			IsUsingItem = true;
 			return;
