@@ -35,8 +35,10 @@ void UHealthComponent::BeginPlay()
 	if (!PawnOwner) return;
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
-
 	InitialiseComponent(100);
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	if (!PSCustom) return;
+	PSCustom->MaxHealth = MaxHealth;
 }
 
 void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -126,8 +128,8 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 	ServerChangeHealth_Implementation(CurrentHealth);
 	
-	//UE_LOG(LogTemp, Log, TEXT("[SERVER] Current Health: %f, MaxHealth: %f, CurrentMaxHealth: %f"),
-	//	CurrentHealth, MaxHealth, CurrentMaxHealth);
+	UE_LOG(LogTemp, Log, TEXT("[SERVER] Current Health: %f, CurrentMaxHealth: %f, CurrentMaxHealth: %f"),
+		CurrentHealth, CurrentMaxHealth, CurrentMaxHealth);
 }
 
 
@@ -192,7 +194,7 @@ void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 	if (!PC->PlayerState) return;
 
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseHealth(newHealth, CurrentMaxHealth);
+	PSCustom->ActualiseHealth(newHealth, CurrentMaxHealth, MaxHealth);
 }
 
 
@@ -211,7 +213,7 @@ void UHealthComponent::LocalChangeHealth()
 	if (!PC->PlayerState) return;
 
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalHealth(CurrentHealth, CurrentMaxHealth);
+	PSCustom->ActualiseLocalHealth(CurrentHealth, CurrentMaxHealth, MaxHealth);
 }
 
 #pragma endregion 

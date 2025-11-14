@@ -3,6 +3,6 @@
 
 #include "Widgets/USquadMemberWidget.h"
 
-void USquadMemberWidget::ActualiseWidget_Implementation(float currentHealth, float maxHealth, float currentStamina, float maxStamina)
+void USquadMemberWidget::ActualiseWidget_Implementation(float currentHealth, float maxHealth, float currentStamina, float maxStamina, float currentMaxHealth)
 {
 }
