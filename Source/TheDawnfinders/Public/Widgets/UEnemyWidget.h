@@ -4,17 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "USquadMemberWidget.generated.h"
+#include "UEnemyWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
-class THEDAWNFINDERS_API USquadMemberWidget : public UUserWidget
+class THEDAWNFINDERS_API UEnemyWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseWidget(float currentHealth, float currentMaxHealth, float currentStamina, float maxStamina, float maxHealth);
+	void PlaySuspiciousAnim();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PlayAggressiveAnim();
 };

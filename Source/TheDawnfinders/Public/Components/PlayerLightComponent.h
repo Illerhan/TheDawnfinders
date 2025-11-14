@@ -33,6 +33,15 @@ public:
 	UPROPERTY(ReplicatedUsing = OnRep_LightOn, BlueprintReadWrite, EditAnywhere, Category="Lantern")
 	bool bLightOn;
 
+	UPROPERTY(Replicated,EditAnywhere, Category = "Lantern")
+	float MaxFuel;
+	
+	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
+	float FuelRemaining;
+
+	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
+	float FuelConsumption;
+
 	UFUNCTION(BlueprintCallable, Category = "Light")
 	void TurnLightOn();
 
@@ -83,7 +92,15 @@ protected:
 	void ApplyLightState();
 
 public:
+	void ConsumeFuel(float DeltaTime);
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+
+	bool HasFuel() const
+	{
+		return FuelRemaining > 0.0f;
+	}
+
+	
 };
