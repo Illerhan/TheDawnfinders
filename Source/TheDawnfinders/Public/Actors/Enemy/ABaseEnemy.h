@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "DataAssets/EnemyData.h"
 #include "ABaseEnemy.generated.h"
+
+
 
 UENUM(BlueprintType)
 enum class EEnemyState : uint8 {
@@ -23,4 +26,13 @@ public:
 	ABaseEnemy();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UEnemyData* EnemyData;
+
+	UFUNCTION(BlueprintCallable)
+	void DoAttack(UEnemyAttackData* AttackData);
+
+	UFUNCTION(BlueprintCallable)
+	void OnEndAttack(UAnimMontage* Montage, bool bInterrupted);
 };

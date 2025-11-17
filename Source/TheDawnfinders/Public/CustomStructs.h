@@ -5,6 +5,7 @@
 #include "DataAssets/ItemData.h"
 #include "CustomStructs.generated.h" 
 
+
 USTRUCT(BlueprintType)
 struct THEDAWNFINDERS_API FInventorySlot {
 
@@ -32,5 +33,35 @@ public:
 	bool operator!=(const FInventorySlot& Other) const
 	{
 		return !(*this == Other);
+	}
+};
+
+
+
+
+UENUM(BlueprintType)
+enum class EEnemyAttackTriggerType : uint8 {
+	None UMETA(DisplayName = "None"),
+	DistanceMin UMETA(DisplayName = "DistanceMin"),
+	DistanceMax UMETA(DisplayName = "DistanceMax"),
+	HealthMin UMETA(DisplayName = "HealthMin"),
+	HealthMax UMETA(DisplayName = "HealthMax")
+};
+
+USTRUCT(BlueprintType)
+struct THEDAWNFINDERS_API FEnemyAttackTrigger {
+
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EEnemyAttackTriggerType EnemyAttackTriggerType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Value;
+
+	FEnemyAttackTrigger()
+		: Value()
+	{
 	}
 };
