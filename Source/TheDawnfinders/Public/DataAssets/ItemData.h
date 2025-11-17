@@ -20,6 +20,7 @@ enum class EItemType : uint8 {
 UENUM(BlueprintType)
 enum class EConsumableEffectType : uint8 {
 	Heal UMETA(DisplayName = "Heal"),
+	Revive UMETA (DisplayName = "Revive"),
 	PlaceZipline UMETA(DisplayName = "PlaceZipline"),
 	ThrowObject UMETA(DisplayName = "ThrowObject"),
 	None UMETA(DisplayName = "None")

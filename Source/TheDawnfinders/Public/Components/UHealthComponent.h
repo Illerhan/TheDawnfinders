@@ -27,9 +27,15 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TakeDamage(float quantity);
+	
+	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	void Server_TakeDamage(float quantity, AActor* Origin);
 
 	UFUNCTION(BlueprintCallable)
 	void Die();
+
+	UFUNCTION(Server,Reliable,BlueprintCallable)
+	void Server_Revive();
 
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void ServerChangeHealth(float newHealth);
@@ -37,8 +43,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void LocalChangeHealth();
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing=OnRep_IsDead, BlueprintReadWrite)
 	bool IsDead;
+	
+	UFUNCTION()
+	void OnRep_IsDead();
 
 	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
 	int32 ProtectionZoneAmount = 0;

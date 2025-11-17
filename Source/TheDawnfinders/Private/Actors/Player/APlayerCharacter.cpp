@@ -103,6 +103,7 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
     DOREPLIFETIME(AAPlayerCharacter, CurrentState);
+    DOREPLIFETIME(AAPlayerCharacter, PlayerSpeed);
 }
 
 
@@ -170,6 +171,48 @@ void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 #pragma region Movement / Run
 
+void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
+{
+    if (HasAuthority())
+    {
+        // Sur le serveur, on change directement
+        PlayerSpeed = NewSpeed;
+        GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+        
+        UE_LOG(LogTemp, Log, TEXT("[SERVER] %s speed set to %.0f"), *GetName(), NewSpeed);
+    }
+    else
+    {
+        // Sur le client, on demande au serveur
+        ServerSetPlayerSpeed(NewSpeed);
+        
+        // Prédiction locale optionnelle (pour réactivité)
+        GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+    }
+}
+
+bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
+{
+    // Validation : empêcher les valeurs absurdes
+    return NewSpeed >= 0.0f && NewSpeed <= 2000.0f;
+}
+void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
+{
+    PlayerSpeed = NewSpeed;
+    GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+    
+    UE_LOG(LogTemp, Log, TEXT("[SERVER RPC] %s speed set to %.0f"), *GetName(), NewSpeed);
+}
+
+void AAPlayerCharacter::OnRep_PlayerSpeed()
+{
+    // Appliqué automatiquement sur tous les clients quand PlayerSpeed change
+    GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
+    
+    UE_LOG(LogTemp, Log, TEXT("[CLIENT] %s speed replicated to %.0f"), *GetName(), PlayerSpeed);
+}
+
+
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
@@ -207,14 +250,14 @@ void AAPlayerCharacter::ManageRun(bool Input)
         if (Input)
         {
             CurrentState = EPlayerState::Running;
-            GetCharacterMovement()->MaxWalkSpeed = 800.0f;
+            SetPlayerSpeed(800.f);
         }
         else
         {
             if (CurrentState == EPlayerState::Running)
                 CurrentState = EPlayerState::None;
 
-            GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+            SetPlayerSpeed(400.f);
         }
     }
     else
@@ -265,21 +308,41 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     switch(CurrentState)
     {
     case EPlayerState::Running:
-        GetCharacterMovement()->MaxWalkSpeed = 800.0f;
+        SetPlayerSpeed(800.f);
         break;
     case EPlayerState::None:
-        GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        SetPlayerSpeed(400.f);
         break;
     case EPlayerState::Dodging:
         // Géré par ActualiseDodge
         break;
+    case EPlayerState::Dead:
+        SetPlayerSpeed(100.f);
+        break;
     default:
-        GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+        SetPlayerSpeed(400.f);
         break;
     }
     // You can add logic here to update animations, movement speed, etc.
 }
 
+void AAPlayerCharacter::OnDeath()
+{
+    if (!HasAuthority())
+    {
+        CurrentState = EPlayerState::Dead;
+    }
+    SetPlayerSpeed(100.f);
+}
+
+void AAPlayerCharacter::OnRevive()
+{
+    if (!HasAuthority())
+    {
+        CurrentState = EPlayerState::None;
+    }
+    SetPlayerSpeed(400.f);
+}
 
 bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
 {
@@ -315,7 +378,7 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
+    SetPlayerSpeed(FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f));
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();

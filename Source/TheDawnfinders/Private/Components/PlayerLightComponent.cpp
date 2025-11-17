@@ -163,8 +163,8 @@ void UPlayerLightComponent::ApplyLightState()
 void UPlayerLightComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	LightRoot->SetupAttachment(GetOwner()->GetRootComponent());
+	
+	LightRoot->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	if (GetOwnerRole() == ROLE_Authority)
 	{
 		ProtectionZone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapBegin);

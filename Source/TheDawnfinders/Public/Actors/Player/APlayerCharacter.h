@@ -29,6 +29,7 @@ public:
 	AAPlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UInventoryComponent* InventoryComponent;
@@ -56,6 +57,18 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* ThrowablePreviewMeshComponent;
+
+	UPROPERTY(ReplicatedUsing = OnRep_PlayerSpeed)
+	float PlayerSpeed = 400.0f;
+
+	UFUNCTION()
+	void OnRep_PlayerSpeed();
+
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void SetPlayerSpeed(float NewSpeed);
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSetPlayerSpeed(float NewSpeed);
 	
 
 // Curse
@@ -122,7 +135,9 @@ protected:
 	EPlayerState CurrentState;
 
 	UFUNCTION()
-	void OnRep_CurrentPlayerState();	
+	void OnRep_CurrentPlayerState();
+
+	
 	
 	UPROPERTY()
 	float DodgeTimer;
@@ -131,6 +146,12 @@ protected:
 	virtual void OnRep_PlayerState() override;
 	bool IsReadyForRPCs() const;
 
+public:
+	UFUNCTION()
+	void OnDeath();
+	
+	UFUNCTION()
+	void OnRevive();
 
 public:	
 	UFUNCTION(BlueprintCallable)
