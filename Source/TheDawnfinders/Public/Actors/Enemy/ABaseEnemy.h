@@ -35,4 +35,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OnEndAttack(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION()
+	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
+	void BP_OnMontageNotifyBegin(FName NotifyName);
 };

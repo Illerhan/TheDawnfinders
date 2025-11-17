@@ -37,9 +37,15 @@ void ABaseEnemy::DoAttack(UEnemyAttackData* AttackData)
     FOnMontageEnded EndDelegate;
     EndDelegate.BindUObject(this, &ABaseEnemy::OnEndAttack);
     AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, AttackData->AttackAnimMontage);
+    AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
 }
 
 void ABaseEnemy::OnEndAttack(UAnimMontage* Montage, bool bInterrupted)
 {
     GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
+}
+
+void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
+{
+    BP_OnMontageNotifyBegin(NotifyName);
 }

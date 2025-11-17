@@ -32,6 +32,7 @@ public:
 	bool CanAttack;
 
 
+
 protected:
 	UFUNCTION()
 	bool VerifyTrigger(FEnemyAttackTrigger Trigger, TArray<AActor*> PlayersAtRange);
