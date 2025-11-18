@@ -136,9 +136,9 @@ void AMovableObjects::OnTimeLineFinished()
 	else
 	{
 		CurrentTimelineProgress = bIsMovingForward ? 1.0f : 0.0f;
+		EndPosition = StartPosition;
+		StartPosition = GetActorLocation();
 		
-		// Comportement normal pour les autres objets
-	
 		bCanMove = true;
 	}
 }

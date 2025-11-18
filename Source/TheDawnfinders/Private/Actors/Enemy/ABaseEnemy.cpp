@@ -49,3 +49,16 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
 {
     BP_OnMontageNotifyBegin(NotifyName);
 }
+
+
+void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
+    CurrentHealth -= Quantity;
+
+    if (CurrentHealth <= 0) {
+        Die();
+    }
+}
+
+void ABaseEnemy::Die() {
+    Destroy();
+}

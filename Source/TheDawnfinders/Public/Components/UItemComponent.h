@@ -16,7 +16,6 @@ class UHealthComponent;
 class UInventoryComponent;
 class AAPlayerCharacter;
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UItemComponent : public UActorComponent
 {
@@ -29,13 +28,25 @@ protected :
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-// Network
+private:
+	TArray<class AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead);
+
+public:
+	UFUNCTION(Server, Reliable)
+	void ServerRequestRevive(AAPlayerCharacter* TargetAlly);
+	
+	UFUNCTION()
+	void PerformeRevive(AAPlayerCharacter* TargetAlly);
+
+	// --------------------
+	// Events / Delegates
+	// --------------------
 public :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnItemStartUse OnItemStartUse;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnItemStartUse OnItemEndUse;
+	FOnItemEndUse OnItemEndUse;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnThrowPreviewDisplay OnThrowPreviewDisplay;
@@ -43,7 +54,7 @@ public :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnThrowHidePreview OnThrowHidePreview;
 
-
+// Main
 public :
 	UFUNCTION(BlueprintCallable)
 	void DoMainAction();
@@ -67,21 +78,28 @@ public :
 	void AttackAnimEnd();
 
 
-private :
+// Weapons related
+public :
 	UFUNCTION()
 	void EquipWeapon();
 
 	UFUNCTION()
 	void UnequipWeapon();
 
+	UFUNCTION(BlueprintCallable)
+	void DoLightAttack();
+
+	UFUNCTION(BlueprintCallable)
+	void DoHeavyAttack();
+
+
+// Others
+private :
 	UFUNCTION()
 	void ActualiseUseProgress(float DeltaTime);
 
 	UFUNCTION()
 	void UseConsumable();
-
-	UFUNCTION()
-	void WeaponMainAction();
 
 	UFUNCTION()
 	void StartPreviewThrow();
@@ -99,32 +117,39 @@ private :
 	FInventorySlot EquippedItem;
 
 	UPROPERTY()
-	float ItemUseTimer;
+	float ItemUseTimer = 0.f;
 
 	UPROPERTY()
-	bool IsUsingItem;
+	bool IsUsingItem = false;
 
 	UPROPERTY()
-	float ThrowPreviewTimer;
+	float ThrowPreviewTimer = 0.f;
 
 	UPROPERTY()
-	bool IsPreviewingThrow;
+	bool IsPreviewingThrow = false;
 
 	UPROPERTY()
-	bool PressedAttackInput;
+	bool PressedAttackInput = false;
 
 	UPROPERTY()
-	int ComboIndex;
+	bool PressedHeavyAttackInput = false;
+
+	UPROPERTY()
+	int ComboIndex = 0;
 
 
 // Private References
 private :
 	UPROPERTY()
-	UHealthComponent* HealthComponent;
+	UHealthComponent* HealthComponent = nullptr;
 
 	UPROPERTY()
-	UInventoryComponent* InventoryComponent;
+	UInventoryComponent* InventoryComponent = nullptr;
 
 	UPROPERTY()
-	AAPlayerCharacter* PlayerCharacter;
+	AAPlayerCharacter* PlayerCharacter = nullptr;
+
+	/** Cible de revive (peut être définie durant le processus de hold) */
+	UPROPERTY()
+	AAPlayerCharacter* Ally = nullptr;
 };

@@ -7,7 +7,7 @@ ABurnableObjects::ABurnableObjects()
 {
     PrimaryActorTick.bCanEverTick = true;
     
-    LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(FName("AC_Light"));
+    //LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(FName("AC_Light"));
 
     bIsBurning = false;
     CurrentHealth = MaxHealth;
@@ -47,16 +47,7 @@ void ABurnableObjects::ConsumeHealth(float DeltaTime)
     {
         CurrentHealth -= BurnRate * DeltaTime;
         CurrentHealth = FMath::Max(0.0f, CurrentHealth);
-
-        // Optionnel : ajuster l'intensité de la lumière selon la vie restante
-        if (LightComponent && LightComponent->PointLight)
-        {
-            float HealthPercentage = GetHealthPercentage();
-            // Vous pouvez ajuster l'intensité ou d'autres propriétés ici
-            // Par exemple : réduire l'intensité quand la vie diminue
-            // LightComponent->PointLight->SetIntensity(BaseIntensity * HealthPercentage);
-        }
-
+        
         // Si la vie atteint 0
         if (CurrentHealth <= 0.0f)
         {
@@ -67,8 +58,7 @@ void ABurnableObjects::ConsumeHealth(float DeltaTime)
 
 void ABurnableObjects::LightObject()
 {
-    if (!bIsBurning && HasAuthority())
-    {
+    if (!bIsBurning){
         // Vérifier qu'il reste de la vie
         if (CurrentHealth <= 0.0f)
         {
@@ -82,11 +72,7 @@ void ABurnableObjects::LightObject()
         if (LightComponent)
         {
             LightComponent->bLightOn = true;
-            if (LightComponent->PointLight)
-            {
-                LightComponent->PointLight->SetVisibility(true);
-                LightComponent->TurnLightOn();
-            }
+            LightComponent->ApplyLightState();
         }
 
         UE_LOG(LogTemp, Log, TEXT("%s is now burning (Health: %.1f/%.1f)"), 
@@ -142,12 +128,10 @@ void ABurnableObjects::OnHealthDepleted()
 {
     if (HasAuthority())
     {
-        UE_LOG(LogTemp, Warning, TEXT("%s health depleted - destroying object"), *GetName());
+        UE_LOG(LogTemp, Warning, TEXT("%s health depleted - destroyinqg object"), *GetName());
         
         // Éteindre la lumière
         ExtinguishObject();
-        
-        // Optionnel : ajouter des effets visuels/sonores avant destruction
         
         // Détruire l'acteur
         Destroy();
@@ -172,10 +156,6 @@ void ABurnableObjects::OnRep_IsBurning()
     if (LightComponent)
     {
         LightComponent->bLightOn = bIsBurning;
-        if (LightComponent->PointLight)
-        {
-            LightComponent->PointLight->SetVisibility(bIsBurning);
-            LightComponent->TurnLightOn();
-        }
+        LightComponent->ApplyLightState();
     }
 }
