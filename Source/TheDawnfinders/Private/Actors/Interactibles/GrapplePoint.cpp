@@ -27,6 +27,7 @@ void AGrapplePoint::StartSmoothGrapple(AAPlayerCharacter* Player)
 	GrappleElapsedTime = 0.f;
 
 	GrappleStartLocation = Player->GetActorLocation();
+	
 	GrappleTargetLocation = GetActorLocation() + TeleportOffset;
 
 	UE_LOG(LogTemp, Log, TEXT("GrapplePoint: Smooth grapple started"));
@@ -63,14 +64,6 @@ void AGrapplePoint::Interaction(AAPlayerCharacter* Player)
 	{
 		OnGrappleFailed(Player, TEXT("Grappin required"));
 		UE_LOG(LogTemp, Warning, TEXT("GrapplePoint: Player doesn't have grapple item"));
-		return;
-	}
-
-	float Distance = FVector::Dist(Player->GetActorLocation(),GetActorLocation());
-	if (Distance>MaxGrappleDistance)
-	{
-		OnGrappleFailed(Player, TEXT("Grapple out of range"));
-		UE_LOG(LogTemp, Warning, TEXT("GrapplePoint: Grapple out of range"));
 		return;
 	}
 

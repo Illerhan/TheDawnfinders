@@ -23,11 +23,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
 	UItemData* RequiredGrappleItem;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple",meta = (MakeEditWidget = true))
 	FVector TeleportOffset = FVector(0.f, 0.f, -50.f);
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
-	float MaxGrappleDistance = 1500.f;
 
 	UPROPERTY()
 	bool bIsGrappling = false;
