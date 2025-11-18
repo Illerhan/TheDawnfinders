@@ -1,51 +1,97 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Components/UInteractionComponent.h"
-#include "Net/UnrealNetwork.h"
 #include "Actors/Player/APlayerCharacter.h"
-
 #include "Actors/Interactibles/Interactible.h"
-#include "Actors/Interactibles/Lever.h"
-#include "Actors/Interactibles/ZiplineInteractible.h"
+#include "Components/UHealthComponent.h"
 
 
 UInteractionComponent::UInteractionComponent()
 {
-    PrimaryComponentTick.bCanEverTick = true;
-    SetIsReplicatedByDefault(true);
+	PrimaryComponentTick.bCanEverTick = true;
+	SetIsReplicatedByDefault(true);
+}
+
+void UInteractionComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerCharacter = Cast<AAPlayerCharacter>(GetOwner());
 }
 
 
-#pragma region Near Interactibles Management
+#pragma region Interactibles Management
 
 void UInteractionComponent::AddInteractible(AActor* Interactible)
 {
-    InteractiblesAtRange.Add(Interactible);
+	InteractiblesAtRange.Add(Interactible);
 }
-
 
 void UInteractionComponent::RemoveInteractible(AActor* Interactible)
 {
-    InteractiblesAtRange.Remove(Interactible);
+	InteractiblesAtRange.Remove(Interactible);
 }
-
 
 AActor* UInteractionComponent::GetNearestInteractible()
 {
-    float bestDist = FLT_MAX;
-    AActor* pickedInteractible = nullptr;
+	float BestDist = FLT_MAX;
+	AActor* BestActor = nullptr;
 
-    for (AActor* Interactible : InteractiblesAtRange)
-    {
-        float currentDist = (Interactible->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
-        if (currentDist < bestDist)
-        {
-            pickedInteractible = Interactible;
-            bestDist = currentDist;
-        }
-    }
-    return pickedInteractible;
+	for (AActor* Inter : InteractiblesAtRange)
+	{
+		float Dist = FVector::Dist(
+			Inter->GetActorLocation(),
+			PlayerCharacter->GetActorLocation()
+		);
+
+		if (Dist < BestDist)
+		{
+			BestDist = Dist;
+			BestActor = Inter;
+		}
+	}
+
+	return BestActor;
+}
+
+#pragma endregion
+
+
+#pragma region Players Nearby
+
+TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius, bool bOnlyDead) const
+{
+	TArray<AAPlayerCharacter*> Result;
+
+	if (!PlayerCharacter) return Result;
+
+	UWorld* World = GetWorld();
+	if (!World) return Result;
+
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
+	TArray<FOverlapResult> Overlaps;
+
+	bool Hit = World->OverlapMultiByChannel(
+		Overlaps,
+		PlayerCharacter->GetActorLocation(),
+		FQuat::Identity,
+		ECC_Pawn,
+		Sphere
+	);
+
+	if (!Hit) return Result;
+
+	for (const FOverlapResult& R : Overlaps)
+	{
+		AAPlayerCharacter* Other = Cast<AAPlayerCharacter>(R.GetActor());
+		if (!Other || Other == PlayerCharacter) continue;
+
+		if (bOnlyDead &&
+			Other->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+			continue;
+
+		Result.Add(Other);
+	}
+
+	return Result;
 }
 
 #pragma endregion
@@ -55,38 +101,95 @@ AActor* UInteractionComponent::GetNearestInteractible()
 
 void UInteractionComponent::StartInteract()
 {
-    AActor* NereastInteractible = GetNearestInteractible();
-    AInteractibleObjects* Interactible = Cast<AInteractibleObjects>(NereastInteractible);
+	if (!PlayerCharacter)
+		return;
 
-    if (Interactible && Interactible->bCanBeUsed)
-    {
-        CurrentInteractible = Interactible;
-        ALever* Lever = Cast<ALever>(Interactible);
-        if (Lever && Lever->bCanBeUsed)
-        {
-            TryInteract(Interactible, Cast<AAPlayerCharacter>(GetOwner()));
-        }
-        else
-        {
-            TryInteract(Interactible, Cast<AAPlayerCharacter>(GetOwner()));
-        }
-    }
+	// --- PRIORITÉ RELEVAGE ALLIÉ ---
+	TArray<AAPlayerCharacter*> Fallen = GetNearbyPlayers(150.f, true);
+
+	if (Fallen.Num() > 0)
+	{
+		AAPlayerCharacter* AllyFound = Fallen[0];
+		TryInteractAlly(AllyFound, PlayerCharacter);
+		return;
+	}
+
+	// --- SINON : OBJETS ---
+	AActor* Nearest = GetNearestInteractible();
+	AInteractibleObjects* Obj = Cast<AInteractibleObjects>(Nearest);
+
+	if (Obj && Obj->bCanBeUsed)
+	{
+		CurrentInteractible = Obj;
+		TryInteract(Obj, PlayerCharacter);
+	}
 }
-
 
 void UInteractionComponent::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
 {
-    if (InteractibleObject)
-        ServerInteract(InteractibleObject, Player);
+	if (!Player || !Player->IsLocallyControlled()) return;
+	if (InteractibleObject)
+		ServerInteract(InteractibleObject, Player);
 }
-
 
 void UInteractionComponent::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
 {
-    if (!Interactible || !Interactible->bCanBeUsed)
-        return;
+	if (!Interactible || !Interactible->bCanBeUsed)
+		return;
 
-    Interactible->Interaction(Player);
+	Interactible->Interaction(Player);
+}
+
+#pragma endregion
+
+
+#pragma region Ally Interaction (Revive)
+
+void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlayerCharacter* Player)
+{
+	if (!Player || !Player->IsLocallyControlled()) return;
+
+	if (AllyParam)
+		ServerStartRevive(AllyParam);
+}
+
+void UInteractionComponent::ServerStartRevive_Implementation(AAPlayerCharacter* AllyParam)
+{
+	if (!AllyParam) return;
+	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+		return;
+
+	CurrentReviveTarget = AllyParam;
+
+	// Timer 2 sec pour relever
+	GetWorld()->GetTimerManager().SetTimer(
+		ReviveTimer,
+		this,
+		&UInteractionComponent::CompleteRevive,
+		2.0f,
+		false
+	);
+}
+
+void UInteractionComponent::ServerCancelRevive_Implementation()
+{
+	GetWorld()->GetTimerManager().ClearTimer(ReviveTimer);
+	CurrentReviveTarget = nullptr;
+}
+
+void UInteractionComponent::CompleteRevive()
+{
+	if (CurrentReviveTarget)
+	{
+		CurrentReviveTarget->SetCurrentPlayerState_Implementation(EPlayerState::None);
+		
+		if (CurrentReviveTarget->HasAuthority())
+		{
+			CurrentReviveTarget->HealthComponent->Server_Revive();
+			CurrentReviveTarget->SetPlayerSpeed(400.f);
+		}
+		CurrentReviveTarget = nullptr;
+	}
 }
 
 #pragma endregion
@@ -96,19 +199,21 @@ void UInteractionComponent::ServerInteract_Implementation(AInteractibleObjects* 
 
 void UInteractionComponent::StopInteract()
 {
-    if (CurrentInteractible)
-    {
-        ServerStopInteract(CurrentInteractible, Cast<AAPlayerCharacter>(GetOwner()));
-        CurrentInteractible = nullptr;
-    }
+	// Annule le relevage si en cours
+	ServerCancelRevive();
+
+	// Annule interaction objet
+	if (CurrentInteractible)
+	{
+		ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		CurrentInteractible = nullptr;
+	}
 }
 
 void UInteractionComponent::ServerStopInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
 {
-    if (!Interactible || !Player)
-        return;
-
-    Interactible->StopInteraction(Player);
+	if (!Interactible || !Player) return;
+	Interactible->StopInteraction(Player);
 }
 
 #pragma endregion
