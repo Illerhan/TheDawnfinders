@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "DataAssets/EnemyData.h"
+#include "Interfaces/IDamageable.h"
 #include "ABaseEnemy.generated.h"
 
 
@@ -18,7 +19,7 @@ enum class EEnemyState : uint8 {
 
 
 UCLASS()
-class THEDAWNFINDERS_API ABaseEnemy : public ACharacter
+class THEDAWNFINDERS_API ABaseEnemy : public ACharacter, public IDamageable
 {
 	GENERATED_BODY()
 	
@@ -41,4 +42,15 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageNotifyBegin(FName NotifyName);
+
+
+// HEALTH
+public :
+	UPROPERTY(BlueprintReadOnly)
+	int CurrentHealth;
+
+	UFUNCTION(BlueprintCallable)
+	void Die();
+
+	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
 };

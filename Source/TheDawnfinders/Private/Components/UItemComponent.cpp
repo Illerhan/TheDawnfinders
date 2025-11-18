@@ -42,6 +42,8 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 void UItemComponent::DoMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen 
+		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) return;
 
 	if (EquippedItem.ItemData->ItemType == EItemType::Consumable) 
 	{
