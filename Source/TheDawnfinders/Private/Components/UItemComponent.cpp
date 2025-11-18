@@ -56,12 +56,13 @@ void UItemComponent::DoMainAction()
 				Ally = DeadPlayers[0]; // On cible le premier mort à portée
 			}
 			
-		if (EquippedItem.ItemData->NeededHoldDuration != 0 && !EquippedItem.ItemData->ContextualUse) {
-			ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
-			IsUsingItem = true;
-			return;
+			if (EquippedItem.ItemData->NeededHoldDuration != 0 && !EquippedItem.ItemData->ContextualUse)
+			{
+				ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
+				IsUsingItem = true;
+				return;
+			}
 		}
-
 		UseConsumable();
 		return;
 	}
