@@ -68,11 +68,6 @@ void UItemComponent::DoMainAction()
 		UseConsumable();
 		return;
 	}
-
-	if (EquippedItem.ItemData->ItemType == EItemType::Equipment)
-	{
-		WeaponMainAction();
-	}
 }
 
 void UItemComponent::ActualiseUseProgress(float DeltaTime)
@@ -168,6 +163,7 @@ void UItemComponent::StopMainAction()
 
 #pragma endregion
 
+
 #pragma region Secondary Action
 
 void UItemComponent::DoSecondaryAction()
@@ -231,6 +227,7 @@ void UItemComponent::StopSecondaryAction()
 
 #pragma endregion
 
+
 #pragma region Equip / Unequip
 
 void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex)
@@ -273,17 +270,21 @@ void UItemComponent::UnequipWeapon()
 
 #pragma endregion
 
+
 #pragma region Use Weapon
 
-void UItemComponent::WeaponMainAction()
+void UItemComponent::DoLightAttack()
 {
+	if (EquippedItem.ItemData == nullptr) return;
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 
 	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
+		PressedHeavyAttackInput = false;
 		return;
 	}
 
@@ -305,6 +306,39 @@ void UItemComponent::WeaponMainAction()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
 }
 
+void UItemComponent::DoHeavyAttack()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
+
+	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+
+	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
+	{
+		PressedAttackInput = false;
+		PressedHeavyAttackInput = true;
+		return;
+	}
+
+	if (PressedHeavyAttackInput)
+	{
+		PressedHeavyAttackInput = false;
+
+		if (++ComboIndex >= EquippedItem.ItemData->HeavyComboAnims.Num())
+		{
+			ComboIndex = 0;
+		}
+	}
+	else
+	{
+		ComboIndex = 0;
+	}
+
+	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->HeavyComboAnims[ComboIndex]);
+	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+}
+
 void UItemComponent::AttackAnimEnd()
 {
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
@@ -314,7 +348,7 @@ void UItemComponent::AttackAnimEnd()
 
 	if (PressedAttackInput)
 	{
-		WeaponMainAction();
+		DoLightAttack();
 	}
 }
 
