@@ -50,7 +50,6 @@ void UItemComponent::DoMainAction()
 		if (EquippedItem.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 		{
 			StartPreviewThrow();
-			return;
 		}
 
 		if (EquippedItem.ItemData->NeededHoldDuration != 0)
@@ -123,8 +122,6 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			UE_LOG(LogTemp, Display, TEXT("Throw"));
-
 			float Progress = ThrowPreviewTimer / 2.f;
 			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
 			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
@@ -153,6 +150,36 @@ void UItemComponent::UseConsumable()
 			PerformeRevive(Ally);
 		}
 		break;
+	}
+}
+
+void UItemComponent::StopMainAction()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->HideProgress_Implementation();
+	}
+
+	IsUsingItem = false;
+}
+
+#pragma endregion
+
+
+#pragma region Secondary Action
+
+void UItemComponent::DoSecondaryAction()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
+
+	if (EquippedItem.ItemData->ItemType == EItemType::Consumable &&
+		EquippedItem.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
+	{
+		StartPreviewThrow();
 	}
 }
 
@@ -196,38 +223,11 @@ void UItemComponent::StopPreviewThrow()
 	OnThrowHidePreview.Broadcast();
 }
 
-void UItemComponent::StopMainAction()
-{
-	if (EquippedItem.ItemData == nullptr) return;
-
-	// Throw throwable on release
-	if (IsPreviewingThrow) {
-		UseConsumable();
-	}
-
-	if (GetOwner()->Implements<UPlayerInterface>())
-	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
-	}
-
-	IsUsingItem = false;
-}
-
-#pragma endregion
-
-
-#pragma region Secondary Action
-
-void UItemComponent::DoSecondaryAction()
-{
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
-}
-
 void UItemComponent::StopSecondaryAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+
+	StopPreviewThrow();
 }
 
 #pragma endregion
