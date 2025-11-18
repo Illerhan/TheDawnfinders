@@ -54,7 +54,7 @@ public :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnThrowHidePreview OnThrowHidePreview;
 
-
+// Main
 public :
 	UFUNCTION(BlueprintCallable)
 	void DoMainAction();
@@ -78,21 +78,28 @@ public :
 	void AttackAnimEnd();
 
 
-private :
+// Weapons related
+public :
 	UFUNCTION()
 	void EquipWeapon();
 
 	UFUNCTION()
 	void UnequipWeapon();
 
+	UFUNCTION(BlueprintCallable)
+	void DoLightAttack();
+
+	UFUNCTION(BlueprintCallable)
+	void DoHeavyAttack();
+
+
+// Others
+private :
 	UFUNCTION()
 	void ActualiseUseProgress(float DeltaTime);
 
 	UFUNCTION()
 	void UseConsumable();
-
-	UFUNCTION()
-	void WeaponMainAction();
 
 	UFUNCTION()
 	void StartPreviewThrow();
@@ -123,6 +130,9 @@ private :
 
 	UPROPERTY()
 	bool PressedAttackInput = false;
+
+	UPROPERTY()
+	bool PressedHeavyAttackInput = false;
 
 	UPROPERTY()
 	int ComboIndex = 0;
