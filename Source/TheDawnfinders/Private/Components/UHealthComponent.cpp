@@ -24,6 +24,7 @@ void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UHealthComponent, CurrentHealth);
 	DOREPLIFETIME(UHealthComponent, CurrentMaxHealth);
 	DOREPLIFETIME(UHealthComponent, IsDead);
+	DOREPLIFETIME(UHealthComponent, CurseMaxHealth);
 }
 
 void UHealthComponent::BeginPlay()
@@ -47,6 +48,10 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	if (GetOwner()->HasAuthority())
 	{
 		ApplyCurse(DeltaTime);
+	}
+	if (GetOwner()->HasAuthority())
+	{
+		FallenLoseHP(DeltaTime);
 	}
 	
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -113,13 +118,14 @@ void UHealthComponent::RemoveProtectionZone()
 void UHealthComponent::ApplyCurse(float DeltaTime)
 {
 	// This should ONLY be called on the server now
+	if (IsFallen || IsDead) return;
 	if (!GetOwner()->HasAuthority()) return;
-	
 	if (IsProtectedFromCurse()) return;
 	if (CurrentMaxHealth <= MinimumMaxHP) return;
 
 	CurrentMaxHealth -= MaxHealth * CurseRatio * DeltaTime;
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
+	CurseMaxHealth = CurrentMaxHealth;
 	
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
@@ -129,8 +135,8 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 	ServerChangeHealth_Implementation(CurrentHealth);
 	
-	UE_LOG(LogTemp, Log, TEXT("[SERVER] Current Health: %f, CurrentMaxHealth: %f, CurrentMaxHealth: %f"),
-		CurrentHealth, CurrentMaxHealth, CurrentMaxHealth);
+	// UE_LOG(LogTemp, Log, TEXT("[SERVER] Current Health: %f, CurrentMaxHealth: %f, CurrentMaxHealth: %f"),
+	// 	CurrentHealth, CurrentMaxHealth, CurrentMaxHealth);
 }
 
 
@@ -157,7 +163,12 @@ void UHealthComponent::TakeDamage(float quantity)
 
 	if (CurrentHealth <= 0.0f)
 	{
-		Die();
+		if (IsFallen)
+		{
+			Die();
+			return;
+		}
+		Fallen();
 	}
 }
 void UHealthComponent::Server_TakeDamage_Implementation(float quantity, AActor* Origin)
@@ -166,7 +177,22 @@ void UHealthComponent::Server_TakeDamage_Implementation(float quantity, AActor* 
 	TakeDamage(quantity); // now the server path executes
 }
 
+void UHealthComponent::Fallen()
+{
+	IsFallen = true;
+	UE_LOG(LogTemp, Log, TEXT("La chuuuuuute"));
 
+	AActor* Owner = GetOwner();
+	if (!Owner || !Owner->HasAuthority()) return;
+
+	// Notifier le PlayerCharacter
+	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
+	{
+		PC->OnFallen();
+	}
+	CurrentMaxHealth = MaxHealth;
+	Heal(MaxHealth);
+}
 
 void UHealthComponent::Die()
 {
@@ -185,9 +211,11 @@ void UHealthComponent::Die()
 
 void UHealthComponent::Server_Revive_Implementation()
 {
-	if (!IsDead) return;
-	CurrentHealth = FMath::Clamp(CurrentMaxHealth /2.0f, 0.0f, CurrentMaxHealth);
+	if (!IsFallen) return;
+	CurrentMaxHealth = CurseMaxHealth;
+	CurrentHealth = FMath::Clamp(MinReviveHP,MinReviveHP,CurseMaxHealth);
 	ServerChangeHealth_Implementation(CurrentHealth);
+	IsFallen = false;
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
@@ -195,6 +223,7 @@ void UHealthComponent::Server_Revive_Implementation()
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
+		IsDead = false;
 	}
 	
 }
@@ -218,6 +247,21 @@ void UHealthComponent::Heal(float quantity)
 
 #pragma endregion
 
+#pragma region Death
+
+void UHealthComponent::FallenLoseHP(float DeltaTime)
+{
+	if (!IsFallen) return;
+	if (!GetOwner()->HasAuthority()) return;
+
+	TakeDamage(InjureDecreaseSpeed * MaxHealth * DeltaTime);
+	if (CurrentHealth<=0)
+	{
+		Die();	
+	}
+}
+
+#pragma endregion
 
 #pragma region Network Functions
 
@@ -259,6 +303,10 @@ void UHealthComponent::LocalChangeHealth()
 }
 
 void UHealthComponent::OnRep_IsDead()
+{
+}
+
+void UHealthComponent::OnRep_IsFallen()
 {
 }
 

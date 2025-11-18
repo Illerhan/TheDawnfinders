@@ -137,8 +137,7 @@ protected:
 	UFUNCTION()
 	void OnRep_CurrentPlayerState();
 
-	
-	
+
 	UPROPERTY()
 	float DodgeTimer;
 	
@@ -149,9 +148,22 @@ protected:
 public:
 	UFUNCTION()
 	void OnDeath();
+
+	UFUNCTION(Server, Reliable)
+	void Server_OnDied();
 	
 	UFUNCTION()
 	void OnRevive();
+
+	UFUNCTION(Server,Reliable)
+	void Server_OnRevive();
+
+	UFUNCTION()
+	void OnFallen();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_OnFallen();
+	
 
 public:	
 	UFUNCTION(BlueprintCallable)

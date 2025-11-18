@@ -316,9 +316,11 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     case EPlayerState::Dodging:
         // Géré par ActualiseDodge
         break;
-    case EPlayerState::Dead:
+    case EPlayerState::Fallen:
         SetPlayerSpeed(100.f);
         break;
+    case EPlayerState::Dead:
+        //
     default:
         SetPlayerSpeed(400.f);
         break;
@@ -326,22 +328,51 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     // You can add logic here to update animations, movement speed, etc.
 }
 
-void AAPlayerCharacter::OnDeath()
+void AAPlayerCharacter::OnFallen()
 {
     if (!HasAuthority())
     {
-        CurrentState = EPlayerState::Dead;
+        Server_OnFallen();
     }
+    CurrentState = EPlayerState::Fallen;
     SetPlayerSpeed(100.f);
+    
+}
+
+void AAPlayerCharacter::Server_OnFallen_Implementation()
+{
+    OnFallen(); // Re-appelle la version serveur
 }
 
 void AAPlayerCharacter::OnRevive()
 {
     if (!HasAuthority())
     {
-        CurrentState = EPlayerState::None;
+        Server_OnRevive();
     }
+    CurrentState = EPlayerState::None;
     SetPlayerSpeed(400.f);
+}
+
+void AAPlayerCharacter::Server_OnRevive_Implementation()
+{
+    OnRevive();
+}
+
+
+void AAPlayerCharacter::OnDeath()
+{
+    if (!HasAuthority())
+    {
+        Server_OnDied();
+    }
+    CurrentState = EPlayerState::Dead;
+    SetPlayerSpeed(0.f);
+}
+
+void AAPlayerCharacter::Server_OnDied_Implementation()
+{
+    OnDeath();
 }
 
 bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)

@@ -31,6 +31,7 @@ public:
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_TakeDamage(float quantity, AActor* Origin);
 
+	void Fallen();
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
@@ -45,9 +46,13 @@ public:
 
 	UPROPERTY(ReplicatedUsing=OnRep_IsDead, BlueprintReadWrite)
 	bool IsDead;
-	
+	UPROPERTY(ReplicatedUsing=OnRep_IsFallen, BlueprintReadWrite)
+	bool IsFallen;
+
 	UFUNCTION()
 	void OnRep_IsDead();
+	UFUNCTION()
+	void OnRep_IsFallen();
 
 	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
 	int32 ProtectionZoneAmount = 0;
@@ -65,11 +70,22 @@ public:
 	void RemoveProtectionZone();
 
 	void ApplyCurse(float DeltaTime);
-
+	
+	UFUNCTION(BlueprintCallable)
+	void FallenLoseHP(float DeltaTime);
+	
 	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
 	UPROPERTY(Replicated)
 	float CurrentMaxHealth = 100.f;
+	UPROPERTY(Replicated)
+	float CurseMaxHealth = 100.f;
+
+	UPROPERTY()
+	float MinReviveHP = 20.f;
+	
+	UPROPERTY(EditAnywhere)
+	float InjureDecreaseSpeed = 0.02f;
 
 private :
 

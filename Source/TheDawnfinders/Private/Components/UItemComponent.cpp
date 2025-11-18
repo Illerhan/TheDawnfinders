@@ -376,7 +376,7 @@ TArray<AAPlayerCharacter*> UItemComponent::GetNearbyPlayers(float Radius, bool b
 		if (bOnlyDead)
 		{
 			UHealthComponent* HC = PC->FindComponentByClass<UHealthComponent>();
-			if (!HC || !HC->IsDead)
+			if (!HC || PC->GetCurrentPlayerState_Implementation() != EPlayerState::Dead)
 				continue;
 		}
 
