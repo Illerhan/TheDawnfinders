@@ -10,7 +10,6 @@ AInteractibleObjects::AInteractibleObjects()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	
 	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("SphereCollider"));
 	RootComponent = CapsuleCollider;
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Overlap);

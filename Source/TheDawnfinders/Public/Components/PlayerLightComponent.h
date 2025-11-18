@@ -88,10 +88,13 @@ protected:
 	UFUNCTION()
 	void OnRep_LightOn();
 
-	// Applique visuellement l'état de la lumière
-	void ApplyLightState();
+	
 
 public:
+
+	// Applique visuellement l'état de la lumière
+	void ApplyLightState();
+	
 	void ConsumeFuel(float DeltaTime);
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
