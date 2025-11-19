@@ -10,7 +10,7 @@
 
 void ACustomPlayerState::BeginPlay()
 {
-	bReplicates = true;
+	Super::BeginPlay();
 }
 
 
@@ -30,6 +30,15 @@ void ACustomPlayerState::ActualiseLocalHealth(float current, float max,float fix
 	CurrentHealth = current;
 	CurrentMaxHealth = max;
 	MaxHealth = fixedMax;
+
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
+
+// CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
+void ACustomPlayerState::ActualiseLocalLantern(float current, float max)
+{
+	LanternPercent = (int)((current / max) * 100);
 
 	OnInfoChangeLocal.ExecuteIfBound();
 }
@@ -55,6 +64,14 @@ void ACustomPlayerState::ActualiseHealth(float current, float max,float fixedMax
 	OnRep_StaminaChange();
 }
 
+// CALLED ON THE SERVER TO ACTUALISE FOR ALL
+void ACustomPlayerState::ActualiseLantern(float current, float max)
+{
+	LanternPercent = (int)((current / max) * 100);
+
+	OnRep_LanternChange();
+}
+
 void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -62,12 +79,18 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	DOREPLIFETIME(ACustomPlayerState, CurrentStamina);
 }
 
+
 void ACustomPlayerState::OnRep_StaminaChange()
 {
 	OnInfoChange.Broadcast();
 }
 
 void ACustomPlayerState::OnRep_HealthChange()
+{
+	OnInfoChange.Broadcast();
+}
+
+void ACustomPlayerState::OnRep_LanternChange()
 {
 	OnInfoChange.Broadcast();
 }

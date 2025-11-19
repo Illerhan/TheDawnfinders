@@ -50,19 +50,22 @@ void USquadWidget::ActualiseSquadInfos()
 		if (PS != LocalPS) continue;
 
 		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-		SquadMemberWidgets[0]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina,CustomPS->MaxHealth);
+		SquadMemberWidgets[0]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, 
+			CustomPS->CurrentMaxStamina,CustomPS->MaxHealth, CustomPS->LanternPercent);
 
 		break;
 	}
 	
 	int WidgetIndex = 1;
+
 	// We actualise all the other spots
 	for (int i = 0; i < GS->PlayerArray.Num(); i++) {
 		APlayerState* PS = GS->PlayerArray[i];
 		if (PS == LocalPS) continue;
 
 		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-		SquadMemberWidgets[WidgetIndex++]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina,CustomPS->MaxHealth);
+		SquadMemberWidgets[WidgetIndex++]->ActualiseWidget(CustomPS->CurrentHealth, CustomPS->CurrentMaxHealth, 
+			CustomPS->CurrentStamina, CustomPS->CurrentMaxStamina,CustomPS->MaxHealth, 0);
 	}
 }
 

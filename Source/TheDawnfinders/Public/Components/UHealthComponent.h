@@ -51,6 +51,7 @@ public:
 
 	UFUNCTION()
 	void OnRep_IsDead();
+
 	UFUNCTION()
 	void OnRep_IsFallen();
 
@@ -76,8 +77,10 @@ public:
 	
 	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
+
 	UPROPERTY(Replicated)
 	float CurrentMaxHealth = 100.f;
+
 	UPROPERTY(Replicated)
 	float CurseMaxHealth = 100.f;
 
