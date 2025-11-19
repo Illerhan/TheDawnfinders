@@ -128,7 +128,7 @@ void UItemComponent::UseConsumable()
 			float Progress = ThrowPreviewTimer / 2.f;
 			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
 			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-			FVector FinalPos = FMath::Lerp(Pos1, Pos2, Progress);
+			FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
 
 			AThrowableObject* ThrowedObject =
 				GetWorld()->SpawnActor<AThrowableObject>(EquippedItem.ItemData->ThrowedObjectClass, 
@@ -179,7 +179,7 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 	float Progress = ThrowPreviewTimer / 2.f;
 	FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 200.f;
 	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-	FVector FinalPos = FMath::Lerp(Pos1, Pos2, Progress);
+	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
 
 	AThrowableObject* Throwable = EquippedItem.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
 
