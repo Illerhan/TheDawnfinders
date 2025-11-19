@@ -73,15 +73,18 @@ void UInventoryComponent::BroadcastInventoryChange()
 
 #pragma region Add / Remove Item
 
-void UInventoryComponent::AddNewItem(UItemData* NewItem)
+bool UInventoryComponent::AddNewItem(UItemData* NewItem)
 {
+	if (!HasRoomForItem(NewItem)) return false;
+
 	if (!GetOwner()->HasAuthority())
 	{
 		ServerAddNewItem(NewItem);
-		return;
+		return true;
 	}
 
 	ServerAddNewItem_Implementation(NewItem);
+	return true;
 }
 
 
@@ -132,6 +135,25 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 	VerifyCurrentOverloadCount();
 }
 
+
+bool UInventoryComponent::HasRoomForItem(UItemData* NewItem)
+{
+	for (int32 i = 0; i < InventorySlots.Num(); i++)
+	{
+		FInventorySlot& Slot = InventorySlots[i];
+
+		if (!Slot.ItemData)
+		{
+			return true;
+		}
+		else if (Slot.ItemData == NewItem && Slot.Quantity < NewItem->MaxStackingCapacity)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
 
 void UInventoryComponent::RemoveCurrentItem()
 {
