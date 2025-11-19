@@ -113,6 +113,12 @@ public :
 // ==== Others ====
 public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void OpenInventory();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void CloseInventory();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FInventorySlot GetCurrentSlot();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -129,4 +135,5 @@ protected:
 
 private :
 	int PreviousOverloadCount = 0;
+	bool IsOpened;
 };

@@ -320,6 +320,8 @@ int UInventoryComponent::GetCurrentOverloadCount()
 
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
+	if (!IsOpened) return GetCurrentSlot();
+
 	if (!GetOwner()->HasAuthority())
 	{
 		ServerChangeCurrentSlot(IndexGoUp, ForcedIndex);
@@ -478,6 +480,18 @@ void UInventoryComponent::SortItems()
 		InventorySlots[i].ItemData = NULL;
 		InventorySlots[i].Quantity = 0;
 	}
+}
+
+void UInventoryComponent::OpenInventory()
+{
+	IsOpened = true;
+	OnInventoryOpenInput.Broadcast();
+}
+
+void UInventoryComponent::CloseInventory()
+{
+	IsOpened = false;
+	OnInventoryCloseInput.Broadcast();
 }
 
 #pragma endregion
