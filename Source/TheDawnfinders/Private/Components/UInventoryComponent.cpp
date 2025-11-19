@@ -357,6 +357,14 @@ void UInventoryComponent::ServerChangeCurrentSlot_Implementation(bool IndexGoUp,
 
 void UInventoryComponent::SortInventory()
 {
+	SortByCategories();
+	SortItems();
+
+	BroadcastInventoryChange();
+}
+
+void UInventoryComponent::SortByCategories()
+{
 	TArray<FInventorySlot> SortedInventory;
 
 	// Weapons 
@@ -396,15 +404,80 @@ void UInventoryComponent::SortInventory()
 		if (InventorySlots[i].ItemData != nullptr) continue;
 		SortedInventory.Add(InventorySlots[i]);
 	}
-	
-	
+
+
+	// We apply the sort
+	for (int i = 0; i < SortedInventory.Num(); i++) {
+		InventorySlots[i].ItemData = SortedInventory[i].ItemData;
+		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
+	}
+}
+
+void UInventoryComponent::SortItems()
+{
+	TArray<FInventorySlot> SortedInventory;
+	TArray<bool> SortedSlots;
+	SortedSlots.Init(false, InventorySlots.Num());
+
+	for (int i = 0; i < InventorySlots.Num(); i++) {
+		if (InventorySlots[i].ItemData == nullptr) continue;
+		if (SortedSlots[i]) continue;
+
+		// if one stack capacity
+		if (InventorySlots[i].ItemData->MaxStackingCapacity <= 1) {
+			SortedInventory.Add(InventorySlots[i]);
+			continue;
+		}
+
+		// We get the other others items of the same type
+		TArray<FInventorySlot> SameItemSlots;
+		SameItemSlots.Init(InventorySlots[i], 1);
+
+		for (int j = i + 1; j < InventorySlots.Num(); j++) {
+			if (InventorySlots[j].ItemData != InventorySlots[i].ItemData) continue;
+
+			SortedSlots[j] = true;
+			SameItemSlots.Add(InventorySlots[j]);
+		}
+
+
+		// We try to stack them if possible
+		for (int j = 0; j < SameItemSlots.Num(); j++) {
+			if (SameItemSlots[j].Quantity == 0) continue;
+
+			// If the slot is already full
+			if (SameItemSlots[j].Quantity == SameItemSlots[j].ItemData->MaxStackingCapacity) 
+			{
+				SortedInventory.Add(SameItemSlots[j]);
+				continue;
+			}
+
+			// We try to stack the two slots
+			for (int k = j + 1; k < SameItemSlots.Num(); k++) {
+				if (SameItemSlots[j].Quantity == SameItemSlots[j].ItemData->MaxStackingCapacity) break;
+				if (SameItemSlots[k].Quantity <= 0) continue;
+
+				int FinalQuantity = SameItemSlots[k].Quantity + SameItemSlots[j].Quantity;
+				SameItemSlots[j].Quantity = FMath::Clamp(FinalQuantity, 0, SameItemSlots[j].ItemData->MaxStackingCapacity);
+				SameItemSlots[k].Quantity = FMath::Clamp(FinalQuantity - SameItemSlots[j].Quantity, 0, SameItemSlots[j].ItemData->MaxStackingCapacity);
+			}
+
+			UE_LOG(LogTemp, Display, TEXT("Stack First Slot = %d"), SameItemSlots[j].Quantity);
+
+			SortedInventory.Add(SameItemSlots[j]);
+		}
+	}
+
 	// We apply the sort
 	for (int i = 0; i < SortedInventory.Num(); i++) {
 		InventorySlots[i].ItemData = SortedInventory[i].ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
 	}
 
-	BroadcastInventoryChange();
+	for (int i = SortedInventory.Num(); i < InventorySlots.Num(); i++) {
+		InventorySlots[i].ItemData = NULL;
+		InventorySlots[i].Quantity = 0;
+	}
 }
 
 #pragma endregion

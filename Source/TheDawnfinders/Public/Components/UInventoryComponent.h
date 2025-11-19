@@ -98,11 +98,20 @@ public :
 	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
 
-// ==== Others ====
+// ==== Sorting ====
 public :
 	UFUNCTION()
 	void SortInventory();
 
+	UFUNCTION()
+	void SortByCategories();
+
+	UFUNCTION()
+	void SortItems();
+
+
+// ==== Others ====
+public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FInventorySlot GetCurrentSlot();
 
