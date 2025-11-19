@@ -10,7 +10,7 @@
 
 void ACustomPlayerState::BeginPlay()
 {
-	bReplicates = true;
+	Super::BeginPlay();
 }
 
 
