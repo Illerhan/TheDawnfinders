@@ -14,18 +14,9 @@ class THEDAWNFINDERS_API AItem : public AInteractibleObjects
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AItem();
 	virtual void OnConstruction(const FTransform& Transform) override;
-
-	//virtual void Interact_Implementation(AActor* Interactor) override;
-
-protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,meta=(ExposeOnSpawn="true"))

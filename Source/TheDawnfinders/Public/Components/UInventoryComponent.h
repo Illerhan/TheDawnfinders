@@ -69,11 +69,13 @@ public :
 // ==== Inventory player action functions ====
 public :
 	UFUNCTION(BlueprintCallable,Category="Inventory")
-	void AddNewItem(UItemData* NewItem);
+	bool AddNewItem(UItemData* NewItem);
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerAddNewItem(UItemData* NewItem);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool HasRoomForItem(UItemData* NewItem);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void RemoveCurrentItem();
