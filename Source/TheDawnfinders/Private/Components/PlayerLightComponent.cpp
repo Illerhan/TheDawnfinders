@@ -2,6 +2,7 @@
 
 #include "Components/PlayerLightComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "GameFramework/CustomPlayerState.h"
 #include "Components/UHealthComponent.h"
 #include "Net/UnrealNetwork.h"
 
@@ -57,7 +58,6 @@ void UPlayerLightComponent::BeginPlay()
 			);
 		}
 	}
-
 	
 	LightRoot->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	if (GetOwnerRole() == ROLE_Authority)
@@ -67,13 +67,30 @@ void UPlayerLightComponent::BeginPlay()
 	}
 
 	ApplyLightState();
+
+
+	// Actualises the local UI
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
 }
+
 
 void UPlayerLightComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (bLightOn && GetOwner()->HasAuthority())
+	if (bLightOn)
 	{
 		ConsumeFuel(DeltaTime);
 	}
@@ -88,6 +105,21 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 	{
 		TurnLightOff();
 	}
+
+	// Actualises the local UI
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
 }
 
 void UPlayerLightComponent::TurnLightOn()
@@ -143,6 +175,7 @@ void UPlayerLightComponent::ApplyLightState()
 	PointLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
 	PointLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
 	ProtectionZone->SetHiddenInGame(!bLightOn);
+
 
 	if (!GetOwner()->HasAuthority()) return;
 

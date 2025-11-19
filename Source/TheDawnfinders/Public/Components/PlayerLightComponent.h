@@ -17,7 +17,6 @@ class THEDAWNFINDERS_API UPlayerLightComponent : public UActorComponent
 public:
 	UFUNCTION(Exec)
 	void DebugProtectionZone();
-	// Sets default values for this component's properties
 	UPlayerLightComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -75,7 +74,6 @@ public:
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	UFUNCTION(Server, Reliable)

@@ -13,6 +13,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInfoChange);
 DECLARE_DYNAMIC_DELEGATE(FOnInfoChangeLocal);
 
+
 UCLASS()
 class THEDAWNFINDERS_API ACustomPlayerState : public APlayerState
 {
@@ -36,6 +37,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max, float fixedMax);
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseLocalLantern(float current, float max);
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseLantern(float current, float max);
+
 	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
 
@@ -53,9 +60,15 @@ public :
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float MaxHealth;
 
+	UPROPERTY(BlueprintReadOnly)
+	float LanternPercent = 100;
+
 	UFUNCTION()
 	void OnRep_StaminaChange();
 
 	UFUNCTION()
 	void OnRep_HealthChange();
+
+	UFUNCTION()
+	void OnRep_LanternChange();
 };
