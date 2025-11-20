@@ -15,10 +15,12 @@ class THEDAWNFINDERS_API UHealthComponent : public UActorComponent
 
 public:	
 	UHealthComponent();
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
+// === MAIN FUNCTIONS ===
+public : 
 	UFUNCTION(BlueprintCallable)
 	void InitialiseComponent(float MaxHealth);
 
@@ -31,36 +33,15 @@ public:
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_TakeDamage(float quantity, AActor* Origin);
 
-	void Fallen();
-	UFUNCTION(BlueprintCallable)
-	void Die();
-
-	UFUNCTION(Server,Reliable,BlueprintCallable)
-	void Server_Revive();
-
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void ServerChangeHealth(float newHealth);
 
 	UFUNCTION(BlueprintCallable)
 	void LocalChangeHealth();
 
-	UPROPERTY(ReplicatedUsing=OnRep_IsDead, BlueprintReadWrite)
-	bool IsDead;
-	UPROPERTY(ReplicatedUsing=OnRep_IsFallen, BlueprintReadWrite)
-	bool IsFallen;
 
-	UFUNCTION()
-	void OnRep_IsDead();
-
-	UFUNCTION()
-	void OnRep_IsFallen();
-
-	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
-	int32 ProtectionZoneAmount = 0;
-	
-	UFUNCTION()
-	void OnRep_ProtectionZoneAmount();
-
+// === CURSE === 
+public :
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
 
@@ -70,11 +51,41 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveProtectionZone();
 
+	UFUNCTION(BlueprintCallable)
 	void ApplyCurse(float DeltaTime);
-	
+
+
+// === DEATH ===
+public : 
+	UFUNCTION()
+	void Fallen();
+
 	UFUNCTION(BlueprintCallable)
 	void FallenLoseHP(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void Die();
+
+	UFUNCTION(Server,Reliable,BlueprintCallable)
+	void Server_Revive();
+
+
+// === NETWORK ===
+public :
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION()
+	void OnRep_IsDead();
+
+	UFUNCTION()
+	void OnRep_IsFallen();
 	
+	UFUNCTION()
+	void OnRep_ProtectionZoneAmount();
+
+
+// === PUBLIC PROPERTIES ===
+public :
 	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
 
@@ -84,16 +95,30 @@ public:
 	UPROPERTY(Replicated)
 	float CurseMaxHealth = 100.f;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	float MinReviveHP = 20.f;
-	
+
 	UPROPERTY(EditAnywhere)
 	float InjureDecreaseSpeed = 0.02f;
 
+	UPROPERTY(ReplicatedUsing = OnRep_IsDead, BlueprintReadWrite)
+	bool IsDead;
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
+	bool IsFallen;
+
+
+// === PRIVATE PROPERTIES ===
 private :
+	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
+	int32 ProtectionZoneAmount = 0;
 
+	UPROPERTY()
 	float MaxHealth = 100.f;
-	float MinimumMaxHP = 20.f;
-	float CurseRatio= 0.02;
 
+	UPROPERTY()
+	float MinimumMaxHP = 20.f;
+
+	UPROPERTY()
+	float CurseRatio= 0.02;
 };

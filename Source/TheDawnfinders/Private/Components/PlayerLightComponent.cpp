@@ -246,9 +246,7 @@ void UPlayerLightComponent::DebugProtectionZone()
 	{
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
 		{
-			UE_LOG(LogTemp, Error, TEXT("  - Player: %s, Protection Amount: %d"),
-				*Player->GetName(),
-				Player->HealthComponent->ProtectionZoneAmount);
+
 		}
 	}
 }
