@@ -13,4 +13,6 @@ UCLASS()
 class THEDAWNFINDERS_API ACustomGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	virtual void HandleSeamlessTravelPlayer(AController*& C) override;
 };

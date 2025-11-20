@@ -18,6 +18,9 @@ class THEDAWNFINDERS_API ACustomGameState : public AGameStateBase
 
 public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION(BlueprintCallable, Category = Lobby)
+	void GetPlayers(TArray<APlayerState*>& Players);
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerListChanged);
 

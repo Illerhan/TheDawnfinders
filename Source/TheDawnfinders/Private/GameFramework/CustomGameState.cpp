@@ -24,3 +24,8 @@ void ACustomGameState::RemovePlayerState(APlayerState* Player)
 	Super::RemovePlayerState(Player);
 	OnPlayerListChanged.Broadcast();
 }
+void ACustomGameState::GetPlayers(TArray<APlayerState*>& Players)
+{
+	for (auto PlayerState : PlayerArray)
+		Players.Add(PlayerState);
+}
