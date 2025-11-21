@@ -1,6 +1,6 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Components/PlayerLightComponent.h"
+#include "Components/UPlayerLightComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UHealthComponent.h"
@@ -34,14 +34,6 @@ UPlayerLightComponent::UPlayerLightComponent()
 	FuelConsumption = 5.f;
 
 	SetIsReplicatedByDefault(true);
-}
-
-void UPlayerLightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(UPlayerLightComponent, bLightOn);
-	DOREPLIFETIME(UPlayerLightComponent, FuelRemaining);
 }
 
 void UPlayerLightComponent::BeginPlay()
@@ -96,42 +88,28 @@ void UPlayerLightComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	}
 }
 
-void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
+void UPlayerLightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
-	FuelRemaining -= FuelConsumption * DeltaTime;
-	FuelRemaining = FMath::Max(FuelRemaining, 0.f);
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	if (FuelRemaining <= 0.f && bLightOn)
-	{
-		TurnLightOff();
-	}
-
-	// Actualises the local UI
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
-
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
-
-	if (!PC->PlayerState) return;
-
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	DOREPLIFETIME(UPlayerLightComponent, bLightOn);
+	DOREPLIFETIME(UPlayerLightComponent, FuelRemaining);
 }
+
+
+#pragma region Turn On / Off
 
 void UPlayerLightComponent::TurnLightOn()
 {
 	if (bLightOn) return;
 
+	// Server
 	if (GetOwner()->HasAuthority())
 	{
 		bLightOn = true;
 		ApplyLightState();
 	}
-	else
+	else   // Client
 	{
 		Server_TurnLightOn();
 	}
@@ -141,16 +119,18 @@ void UPlayerLightComponent::TurnLightOff()
 {
 	if (!bLightOn) return;
 
+	// Server
 	if (GetOwner()->HasAuthority())
 	{
 		bLightOn = false;
 		ApplyLightState();
 	}
-	else
+	else  // Client
 	{
 		Server_TurnLightOff();
 	}
 }
+
 
 void UPlayerLightComponent::Server_TurnLightOn_Implementation()
 {
@@ -162,10 +142,6 @@ void UPlayerLightComponent::Server_TurnLightOff_Implementation()
 	TurnLightOff();
 }
 
-void UPlayerLightComponent::OnRep_LightOn()
-{
-	ApplyLightState();
-}
 
 void UPlayerLightComponent::ApplyLightState()
 {
@@ -176,8 +152,7 @@ void UPlayerLightComponent::ApplyLightState()
 	PointLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
 	ProtectionZone->SetHiddenInGame(!bLightOn);
 
-
-	if (!GetOwner()->HasAuthority()) return;
+	if (!GetOwner()->HasAuthority()) return;    // Continue only if is server
 
 	if (AAPlayerCharacter* OwnerPlayer = Cast<AAPlayerCharacter>(GetOwner()))
 	{
@@ -201,6 +176,47 @@ void UPlayerLightComponent::ApplyLightState()
 		}
 	}
 }
+
+void UPlayerLightComponent::OnRep_LightOn()
+{
+	ApplyLightState();
+}
+
+#pragma endregion
+
+
+#pragma region Fuel + Protection
+
+void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
+{
+	// Server Changes values
+	if (GetOwner()->HasAuthority()) 
+	{
+		FuelRemaining -= FuelConsumption * DeltaTime;
+		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
+
+		if (FuelRemaining <= 0.f && bLightOn)
+		{
+			TurnLightOff();
+		}
+	}
+
+	// Actualises the local UI 
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+}
+
 
 void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -230,23 +246,5 @@ void UPlayerLightComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	}
 }
 
-void UPlayerLightComponent::DebugProtectionZone()
-{
-	if (!ProtectionZone) return;
+#pragma endregion
 
-	TArray<AActor*> OverlappingActors;
-	ProtectionZone->GetOverlappingActors(OverlappingActors);
-
-	UE_LOG(LogTemp, Error, TEXT("=== DEBUG %s Protection Zone ==="), *GetOwner()->GetName());
-	UE_LOG(LogTemp, Error, TEXT("Light On: %s"), bLightOn ? TEXT("YES") : TEXT("NO"));
-	UE_LOG(LogTemp, Error, TEXT("Collision Enabled: %d"), (int32)ProtectionZone->GetCollisionEnabled());
-	UE_LOG(LogTemp, Error, TEXT("Overlapping Actors: %d"), OverlappingActors.Num());
-
-	for (AActor* Actor : OverlappingActors)
-	{
-		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
-		{
-
-		}
-	}
-}
