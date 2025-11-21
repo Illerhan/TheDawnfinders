@@ -309,7 +309,7 @@ int UInventoryComponent::GetCurrentOverloadCount()
 
 	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - OverloadBaseCount; i--) {
 		if (InventorySlots[i].ItemData == nullptr) continue;
-		if (!InventorySlots[i].IsOverloadSlot) continue;
+		if (!InventorySlots[i].bIsOverloadSlot) continue;
 
 		Count++;
 	}
@@ -320,7 +320,7 @@ int UInventoryComponent::GetCurrentOverloadCount()
 
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
-	if (!IsOpened) return GetCurrentSlot();
+	if (!bIsOpened) return GetCurrentSlot();
 
 	if (!GetOwner()->HasAuthority())
 	{
@@ -484,13 +484,13 @@ void UInventoryComponent::SortItems()
 
 void UInventoryComponent::OpenInventory()
 {
-	IsOpened = true;
+	bIsOpened = true;
 	OnInventoryOpenInput.Broadcast();
 }
 
 void UInventoryComponent::CloseInventory()
 {
-	IsOpened = false;
+	bIsOpened = false;
 	OnInventoryCloseInput.Broadcast();
 }
 

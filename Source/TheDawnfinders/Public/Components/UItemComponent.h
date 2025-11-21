@@ -120,7 +120,7 @@ private :
 	float ItemUseTimer = 0.f;
 
 	UPROPERTY()
-	bool IsUsingItem = false;
+	bool bIsUsingItem = false;
 
 	UPROPERTY()
 	float ThrowPreviewTimer = 0.f;

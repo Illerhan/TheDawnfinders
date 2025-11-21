@@ -5,7 +5,7 @@
 void UWorldProgressBar::Show_Implementation(float CurrentValue)
 {
 	StartValue = CurrentValue;
-	IsDisplayed = true;
+	bIsDisplayed = true;
 
 }
 
@@ -17,5 +17,5 @@ void UWorldProgressBar::ActualiseProgress_Implementation(float CurrentValue)
 
 void UWorldProgressBar::Hide_Implementation()
 {
-	IsDisplayed = false;
+	bIsDisplayed = false;
 }
