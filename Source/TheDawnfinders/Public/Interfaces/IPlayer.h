@@ -32,6 +32,7 @@ class IPlayerInterface
 {
 	GENERATED_BODY()
 
+
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	EPlayerState GetCurrentPlayerState();
@@ -39,18 +40,24 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	void SetCurrentPlayerState(EPlayerState NewState);
 
+
+public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void AddInteractibleAtRange(AActor* Interactible);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void RemoveInteractibleAtRange(AActor* Interactible);
 
+
+public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
 	void ShowProgress(float CurrentValue);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ProgressBar")
 	void HideProgress();
 
+
+public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void SetEquippedMesh(UStaticMesh* NewMesh);
 
@@ -59,4 +66,12 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void PlayAttackMontage(UAnimMontage* AttackMontage);
+
+
+public :
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Protection")
+	void AddProtectionZone();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Protection")
+	void RemoveProtectionZone();
 };

@@ -154,6 +154,16 @@ void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMon
     PlayMontage(AttackMontage);
 }
 
+void AAPlayerCharacter::AddProtectionZone_Implementation()
+{
+    HealthComponent->AddProtectionZone();
+}
+
+void AAPlayerCharacter::RemoveProtectionZone_Implementation()
+{
+    HealthComponent->RemoveProtectionZone();
+}
+
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
     HealthComponent->TakeDamage(quantity);
@@ -277,27 +287,6 @@ bool AAPlayerCharacter::IsProtectedFromCurse() const
     return ProtectionZoneAmount > 0;
 }
 
-
-void AAPlayerCharacter::AddProtectionZone()
-{
-    if (HasAuthority())
-    {
-        ProtectionZoneAmount++;
-        // If need to add more logic
-        //OnRep_ProtectionZoneChanged();
-    }
-}
-
-
-void AAPlayerCharacter::RemoveProtectionZone()
-{
-    if (HasAuthority())
-    {
-        ProtectionZoneAmount--;
-        // If need to add more logic
-        //OnRep_ProtectionChanged();
-    }
-}
 
 
 void AAPlayerCharacter::OnRep_CurrentPlayerState()

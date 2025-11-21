@@ -16,9 +16,10 @@ class THEDAWNFINDERS_API UInteractionComponent : public UActorComponent
 
 public:
 	UInteractionComponent();
+	virtual void BeginPlay() override;
 
 
-// Interactibles at range management
+// === INTERCACTIBLES AT RANGE MANAGEMENT ===
 public:
 	UFUNCTION()
 	void AddInteractible(AActor* Interactible);
@@ -29,10 +30,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	AActor* GetNearestInteractible();
 
-	virtual void BeginPlay() override;
 
-
-// Do & Stop Interaction
+// === DO & STOP INTERACTION ===
 public:
 	UFUNCTION()
 	void TryInteractAlly(AAPlayerCharacter* Ally, AAPlayerCharacter* Player);
@@ -52,15 +51,18 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AInteractibleObjects* Interactible, AAPlayerCharacter* Player);
 
-	// --- Nouveau : Système de relevage (hold) ---
+// === REVIVE ===
+public:
 	UFUNCTION(Server, Reliable)
 	void ServerStartRevive(AAPlayerCharacter* Ally);
 
 	UFUNCTION(Server, Reliable)
 	void ServerCancelRevive();
 
+	UFUNCTION()
 	void CompleteRevive();
 
+	UFUNCTION(BlueprintCallable)
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
 
 

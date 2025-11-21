@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/PlayerLightComponent.h"
+#include "Components/UPlayerLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
@@ -78,12 +78,6 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
-
-	UFUNCTION(BlueprintCallable)
-	void AddProtectionZone();
-
-	UFUNCTION(BlueprintCallable)
-	void RemoveProtectionZone();
 	
 	UPROPERTY()
 	AInteractibleObjects* CurrentInteractible = nullptr;;
@@ -111,6 +105,10 @@ public :
 	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
 
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
+
+	virtual void AddProtectionZone_Implementation() override;
+
+	virtual void RemoveProtectionZone_Implementation() override;
 
 
 // Damageable Interface

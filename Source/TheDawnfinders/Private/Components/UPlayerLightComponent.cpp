@@ -222,13 +222,13 @@ void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (!GetOwner()->HasAuthority() || !bLightOn) return;
+	if (OtherActor == GetOwner()) return;
 
-	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
+	if (OtherActor->Implements<UPlayerInterface>())
 	{
-		if (Player != GetOwner())
-		{
-			Player->HealthComponent->AddProtectionZone();
-		}
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(OtherActor);
+
+		PlayerInterface->AddProtectionZone_Implementation();
 	}
 }
 
@@ -236,13 +236,13 @@ void UPlayerLightComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (!GetOwner()->HasAuthority() || !bLightOn) return;
+	if (OtherActor == GetOwner()) return;
 
-	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor))
+	if (OtherActor->Implements<UPlayerInterface>())
 	{
-		if (Player != GetOwner())
-		{
-			Player->HealthComponent->RemoveProtectionZone();
-		}
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(OtherActor);
+
+		PlayerInterface->RemoveProtectionZone_Implementation();
 	}
 }
 
