@@ -7,10 +7,5 @@
 
 void ACustomGameMode::HandleSeamlessTravelPlayer(AController*& C)
 {
-	
-	if (GetWorld())
-	{
-		Cast<AGameStateBase>(GetWorld()->GetGameState())->PlayerArray.Empty();
-	}
 	Super::HandleSeamlessTravelPlayer(C);
 }

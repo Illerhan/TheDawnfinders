@@ -36,4 +36,13 @@ public:
 	void RemoveSquadMember();
 
 	FTimerHandle BindDelayTimerHandle;
+	
+	UPROPERTY()
+	bool bAlreadyBound = false;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Squad")
+	int32 MaxSquadMembers = 4;
+
+private:
+	bool bWidgetsInitialized = false;
 };
