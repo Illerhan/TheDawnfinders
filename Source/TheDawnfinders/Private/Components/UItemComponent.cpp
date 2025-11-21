@@ -24,7 +24,7 @@ void UItemComponent::BeginPlay()
 	HealthComponent = PlayerCharacter->HealthComponent;
 	InventoryComponent = PlayerCharacter->InventoryComponent;
 
-	InventoryComponent->OnInventoryChanging.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
+	InventoryComponent->OnInventoryChange.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
 }
 
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

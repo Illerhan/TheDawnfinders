@@ -12,11 +12,11 @@
 
 class UItemData;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChanging, const TArray<FInventorySlot>&, CurrentSlots, int32,
-                                             CurrentSlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChange, const TArray<FInventorySlot>&, CurrentSlots, int32, CurrentSlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOverloadCountChange, const int32, newCount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryOpenInput);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseInput);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOverloadCountChange, const int32, newCount);
+
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
@@ -25,30 +25,18 @@ class THEDAWNFINDERS_API UInventoryComponent : public UActorComponent
 
 public:	
 	UInventoryComponent();
-	
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeTimeProps) const override;
 	virtual bool IsSupportedForNetworking() const override {return true;}
 	
-	UPROPERTY(ReplicatedUsing=OnRep_InventorySlots,EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TArray<FInventorySlot> InventorySlots;
-
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentSlotIndex,BlueprintReadWrite, Category="Inventory")
-	int CurrentSlotIndex;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
-	int OverloadBaseCount = 3;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
-	int InventorySlotCount = 10;
 	
 
-// ==== Delegates & Rep Notify ====
+// ==== DELEGATES + REP NOTIFIES ====
 public :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
-	FOnInventoryChanging OnInventoryChanging;
+	FOnInventoryChange OnInventoryChange;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
 	FOnInventoryOpenInput OnInventoryOpenInput;
@@ -66,7 +54,7 @@ public :
 	void OnRep_CurrentSlotIndex();
 
 
-// ==== Inventory player action functions ====
+// ==== PLAYER ACTIONS ====
 public :
 	UFUNCTION(BlueprintCallable,Category="Inventory")
 	bool AddNewItem(UItemData* NewItem);
@@ -83,13 +71,11 @@ public :
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
 	void ServerRemoveCurrentItem();
 
-
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void Throw();
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerThrow();
-
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FInventorySlot ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
@@ -98,7 +84,7 @@ public :
 	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
 
-// ==== Sorting ====
+// ==== SORTING ====
 public :
 	UFUNCTION()
 	void SortInventory();
@@ -110,7 +96,7 @@ public :
 	void SortItems();
 
 
-// ==== Others ====
+// ==== OTHERS ====
 public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void OpenInventory();
@@ -130,10 +116,27 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	int GetCurrentOverloadCount();
 
-protected:
-	void BroadcastInventoryChange();
 
+// === PROTECTED PROPERTIES ===
+public : 
+	UPROPERTY(ReplicatedUsing = OnRep_InventorySlots, EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TArray<FInventorySlot> InventorySlots;
+
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentSlotIndex, BlueprintReadWrite, Category = "Inventory")
+	int CurrentSlotIndex;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	int OverloadBaseCount = 3;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	int InventorySlotCount = 10;
+
+
+// === PRIVATE PROPERTIES === 
 private :
+	UPROPERTY()
 	int PreviousOverloadCount = 0;
+
+	UPROPERTY()
 	bool bIsOpened;
 };

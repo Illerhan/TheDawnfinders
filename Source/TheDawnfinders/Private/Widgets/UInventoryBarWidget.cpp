@@ -59,7 +59,7 @@ void UInventoryBarWidget::TryBindToInventory()
     InventoryComponentRef = PlayerCharacter->InventoryComponent;
 
     // Bind TOUJOURS côté client
-    InventoryComponentRef->OnInventoryChanging.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
+    InventoryComponentRef->OnInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
 
     // Forcer une update immédiate pour synchroniser avec l’état actuel
     ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
@@ -74,7 +74,7 @@ void UInventoryBarWidget::NativeDestruct()
 
     if (InventoryComponentRef)
     {
-        InventoryComponentRef->OnInventoryChanging.RemoveDynamic(this, &UInventoryBarWidget::ActualiseWidget);
+        InventoryComponentRef->OnInventoryChange.RemoveDynamic(this, &UInventoryBarWidget::ActualiseWidget);
         InventoryComponentRef = nullptr;
     }
 
