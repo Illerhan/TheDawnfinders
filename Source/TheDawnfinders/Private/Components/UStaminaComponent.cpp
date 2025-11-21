@@ -13,6 +13,7 @@ UStaminaComponent::UStaminaComponent()
 	CurrentStamina = CurrentMaxStamina;
 }
 
+
 void UStaminaComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -30,6 +31,7 @@ void UStaminaComponent::BeginPlay()
 	InitialiseComponent(100, 10, 2);
 }
 
+
 void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -44,27 +46,7 @@ void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 }
 
 
-void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
-{
-	CurrentStamina = MaxStamina;
-	CurrentMaxStamina = MaxStamina;
-	ReloadSpeed = ReloadSpd;
-	ReloadDelay = ReloadDl;
-
-	// If is not server
-	if (!GetOwner()->HasAuthority()) {
-		ChangeLocalStamina();
-
-		ServerChangeStamina(CurrentStamina);
-		return;
-	}
-
-	// If is server
-	ServerChangeStamina_Implementation(CurrentStamina);
-}
-
-
-#pragma region Main Stamina Functions
+#pragma region Main Functions
 
 void UStaminaComponent::UseStamina(float quantity)
 {
@@ -84,14 +66,6 @@ void UStaminaComponent::UseStamina(float quantity)
 	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
-
-// RETURNS TRUE IF HAS STAMINA
-bool UStaminaComponent::VerifyHasStamina()
-{
-	return CurrentStamina > 0;
-}
-
-
 // CALLED IN THE UPDATE AFTER A CERTAIN DELAY
 void UStaminaComponent::ReloadStamina(float quantity)
 {
@@ -108,10 +82,6 @@ void UStaminaComponent::ReloadStamina(float quantity)
 	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
-#pragma endregion
-
-
-#pragma region Network Functions
 
 // CALLED TO CHANGE THE UI INFORMATIONS FOR ALL THE OTHER SQUAD MEMBERS
 void UStaminaComponent::ServerChangeStamina_Implementation(float newStamina)
@@ -150,10 +120,36 @@ void UStaminaComponent::ChangeLocalStamina()
 	PSCustom->ActualiseLocalStamina(CurrentStamina, CurrentMaxStamina);
 }
 
-#pragma endregion 
+#pragma endregion
 
 
 #pragma region Others
+
+bool UStaminaComponent::VerifyHasStamina()
+{
+	return CurrentStamina > 0;
+}
+
+
+void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
+{
+	CurrentStamina = MaxStamina;
+	CurrentMaxStamina = MaxStamina;
+	ReloadSpeed = ReloadSpd;
+	ReloadDelay = ReloadDl;
+
+	// If is not server
+	if (!GetOwner()->HasAuthority()) {
+		ChangeLocalStamina();
+
+		ServerChangeStamina(CurrentStamina);
+		return;
+	}
+
+	// If is server
+	ServerChangeStamina_Implementation(CurrentStamina);
+}
+
 
 void UStaminaComponent::ActualiseCurrentOverloadCount(int NewCount)
 {

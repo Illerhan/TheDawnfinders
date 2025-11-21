@@ -37,7 +37,51 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	ActualisePreviewThrow(DeltaTime);
 }
 
-#pragma region Main Action
+
+#pragma region Equip
+
+void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex)
+{
+	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
+	{
+		UnequipWeapon();
+	}
+
+	EquippedItem = Slots[CurrentSlotIndex];
+
+	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
+	{
+		EquipWeapon();
+	}
+}
+
+UItemData* UItemComponent::GetEquippedItem()
+{
+	return EquippedItem.ItemData;
+}
+
+void UItemComponent::EquipWeapon()
+{
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.ItemData->ItemMesh);
+	}
+}
+
+void UItemComponent::UnequipWeapon()
+{
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->SetEquippedMesh_Implementation(nullptr);
+	}
+}
+
+#pragma endregion
+
+
+#pragma region Use - Main Action
 
 void UItemComponent::DoMainAction()
 {
@@ -156,6 +200,45 @@ void UItemComponent::UseConsumable()
 	}
 }
 
+void UItemComponent::StopMainAction()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+
+	// Throw throwable on release
+	if (IsPreviewingThrow) {
+		UseConsumable();
+	}
+
+	if (GetOwner()->Implements<UPlayerInterface>())
+	{
+		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
+		PlayerInterface->HideProgress_Implementation();
+	}
+
+	IsUsingItem = false;
+}
+
+#pragma endregion
+
+
+#pragma region Use - Secondary Action
+
+void UItemComponent::DoSecondaryAction()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
+}
+
+void UItemComponent::StopSecondaryAction()
+{
+	if (EquippedItem.ItemData == nullptr) return;
+}
+
+#pragma endregion
+
+
+#pragma region Throwable Items
+
 void UItemComponent::StartPreviewThrow()
 {
 	if (IsPreviewingThrow) return;
@@ -163,6 +246,7 @@ void UItemComponent::StartPreviewThrow()
 	IsPreviewingThrow = true;
 	ThrowPreviewTimer = 0;
 }
+
 
 void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 {
@@ -186,6 +270,7 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
 }
 
+
 void UItemComponent::StopPreviewThrow()
 {
 	if (!IsPreviewingThrow) return;
@@ -194,83 +279,6 @@ void UItemComponent::StopPreviewThrow()
 	ThrowPreviewTimer = 0;
 
 	OnThrowHidePreview.Broadcast();
-}
-
-void UItemComponent::StopMainAction()
-{
-	if (EquippedItem.ItemData == nullptr) return;
-
-	// Throw throwable on release
-	if (IsPreviewingThrow) {
-		UseConsumable();
-	}
-
-	if (GetOwner()->Implements<UPlayerInterface>())
-	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
-	}
-
-	IsUsingItem = false;
-}
-
-#pragma endregion
-
-
-#pragma region Secondary Action
-
-void UItemComponent::DoSecondaryAction()
-{
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
-}
-
-void UItemComponent::StopSecondaryAction()
-{
-	if (EquippedItem.ItemData == nullptr) return;
-}
-
-#pragma endregion
-
-
-#pragma region Equip / Unequip
-
-void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex)
-{
-	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
-	{
-		UnequipWeapon();
-	}
-
-	EquippedItem = Slots[CurrentSlotIndex];
-
-	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
-	{
-		EquipWeapon();
-	}
-}
-
-UItemData* UItemComponent::GetEquippedItem()
-{
-	return EquippedItem.ItemData;
-}
-
-void UItemComponent::EquipWeapon()
-{
-	if (GetOwner()->Implements<UPlayerInterface>())
-	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.ItemData->ItemMesh);
-	}
-}
-
-void UItemComponent::UnequipWeapon()
-{
-	if (GetOwner()->Implements<UPlayerInterface>())
-	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->SetEquippedMesh_Implementation(nullptr);
-	}
 }
 
 #pragma endregion
@@ -311,6 +319,7 @@ void UItemComponent::DoLightAttack()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
 }
 
+
 void UItemComponent::DoHeavyAttack()
 {
 	if (EquippedItem.ItemData == nullptr) return;
@@ -344,6 +353,7 @@ void UItemComponent::DoHeavyAttack()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
 }
 
+
 void UItemComponent::AttackAnimEnd()
 {
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
@@ -368,34 +378,30 @@ void UItemComponent::ServerRequestRevive_Implementation(AAPlayerCharacter* Targe
 	PerformeRevive(TargetAlly);
 }
 
-// Réalise réellement le revive côté serveur
+// REVIVE ON THE SERVER THE ALLY 
 void UItemComponent::PerformeRevive(AAPlayerCharacter* TargetAlly)
 {
 	if (!PlayerCharacter || !PlayerCharacter->HasAuthority()) return;
 	if (!TargetAlly || !TargetAlly->HealthComponent) return;
-
 	if (!TargetAlly->HealthComponent->IsDead) return;
 
-	
 	float Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), TargetAlly->GetActorLocation());
 	if (Distance > 300.f) return;
 
-	// Effectuer la résurrection
 	TargetAlly->HealthComponent->Server_Revive();
 	InventoryComponent->RemoveCurrentItem();
 }
+
+
 TArray<AAPlayerCharacter*> UItemComponent::GetNearbyPlayers(float Radius, bool bOnlyDead)
 {
 	TArray<AAPlayerCharacter*> Result;
 
-	if (!PlayerCharacter)
-		return Result;
+	if (!PlayerCharacter) return Result;
 
 	UWorld* World = GetWorld();
-	if (!World)
-		return Result;
+	if (!World) return Result;
 
-	// Paramètres de la sphère
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
 	TArray<FOverlapResult> Overlaps;
 
@@ -407,8 +413,7 @@ TArray<AAPlayerCharacter*> UItemComponent::GetNearbyPlayers(float Radius, bool b
 		Sphere
 	);
 
-	if (!bOverlap)
-		return Result;
+	if (!bOverlap) return Result;
 
 	for (const FOverlapResult& Hit : Overlaps)
 	{
@@ -416,7 +421,6 @@ TArray<AAPlayerCharacter*> UItemComponent::GetNearbyPlayers(float Radius, bool b
 		if (!PC || PC == PlayerCharacter)
 			continue;
 
-		// Filtrer selon l'état "mort"
 		if (bOnlyDead)
 		{
 			UHealthComponent* HC = PC->FindComponentByClass<UHealthComponent>();

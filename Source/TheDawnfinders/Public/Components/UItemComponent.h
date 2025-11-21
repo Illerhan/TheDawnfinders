@@ -23,38 +23,26 @@ class THEDAWNFINDERS_API UItemComponent : public UActorComponent
 
 public :	
 	UItemComponent();
-
-protected :
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-private:
-	TArray<class AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead);
 
+// === EQUIP ===
 public:
-	UFUNCTION(Server, Reliable)
-	void ServerRequestRevive(AAPlayerCharacter* TargetAlly);
-	
+	UFUNCTION(BlueprintCallable)
+	void SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex);
+
+	UFUNCTION(BlueprintCallable)
+	UItemData* GetEquippedItem();
+
 	UFUNCTION()
-	void PerformeRevive(AAPlayerCharacter* TargetAlly);
+	void EquipWeapon();
 
-	// --------------------
-	// Events / Delegates
-	// --------------------
-public :
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnItemStartUse OnItemStartUse;
+	UFUNCTION()
+	void UnequipWeapon();
 
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnItemEndUse OnItemEndUse;
 
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnThrowPreviewDisplay OnThrowPreviewDisplay;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnThrowHidePreview OnThrowHidePreview;
-
-// Main
+// === USE ITEMS ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void DoMainAction();
@@ -68,32 +56,20 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StopSecondaryAction();
 
-	UFUNCTION(BlueprintCallable)
-	void SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex);
 
-	UFUNCTION(BlueprintCallable)
-	UItemData* GetEquippedItem();
-
-	UFUNCTION()
-	void AttackAnimEnd();
-
-
-// Weapons related
+// === WEAPONS ===
 public :
-	UFUNCTION()
-	void EquipWeapon();
-
-	UFUNCTION()
-	void UnequipWeapon();
-
 	UFUNCTION(BlueprintCallable)
 	void DoLightAttack();
 
 	UFUNCTION(BlueprintCallable)
 	void DoHeavyAttack();
 
+	UFUNCTION()
+	void AttackAnimEnd();
 
-// Others
+
+// === OTHERS ===
 private :
 	UFUNCTION()
 	void ActualiseUseProgress(float DeltaTime);
@@ -110,8 +86,32 @@ private :
 	UFUNCTION()
 	void StopPreviewThrow();
 
+	UFUNCTION(Server, Reliable)
+	void ServerRequestRevive(AAPlayerCharacter* TargetAlly);
 
-// Private Variables
+	UFUNCTION()
+	void PerformeRevive(AAPlayerCharacter* TargetAlly);
+
+	UFUNCTION()
+	TArray<class AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead);
+
+
+// === DELEGATES ===
+public:
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnItemStartUse OnItemStartUse;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnItemEndUse OnItemEndUse;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnThrowPreviewDisplay OnThrowPreviewDisplay;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnThrowHidePreview OnThrowHidePreview;
+
+
+// === PRIVATE PROPERTIES ===
 private :
 	UPROPERTY()
 	FInventorySlot EquippedItem;
@@ -138,7 +138,7 @@ private :
 	int ComboIndex = 0;
 
 
-// Private References
+// === PRIVATE REFERENCES ===
 private :
 	UPROPERTY()
 	UHealthComponent* HealthComponent = nullptr;
@@ -149,7 +149,6 @@ private :
 	UPROPERTY()
 	AAPlayerCharacter* PlayerCharacter = nullptr;
 
-	/** Cible de revive (peut être définie durant le processus de hold) */
 	UPROPERTY()
 	AAPlayerCharacter* Ally = nullptr;
 };

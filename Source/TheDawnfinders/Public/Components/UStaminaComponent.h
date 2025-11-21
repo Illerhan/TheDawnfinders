@@ -14,12 +14,17 @@ class THEDAWNFINDERS_API UStaminaComponent : public UActorComponent
 
 public:	
 	UStaminaComponent();
-	
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
+// === MAIN FUNCTIONS ===
+public :
 	UFUNCTION(BlueprintCallable)
 	void UseStamina(float quantity);
+
+	UFUNCTION(BlueprintCallable)
+	void ReloadStamina(float quantity);
 
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void ServerChangeStamina(float newStamina);
@@ -27,25 +32,36 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ChangeLocalStamina();
 
-	UFUNCTION(BlueprintCallable)
-	bool VerifyHasStamina();
 
+// === OTHERS
+public :
 	UFUNCTION(BlueprintCallable)
 	void InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl);
 
 	UFUNCTION(BlueprintCallable)
-	void ReloadStamina(float quantity);
+	bool VerifyHasStamina();
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseCurrentOverloadCount(int NewCount);
 
+
+// === PRIVATE PROPERTIES === 
+private :
+	UPROPERTY()
 	int CurrentOverloadCount = 0;
 
-
-private :
+	UPROPERTY()
 	float CurrentStamina = 100.f;
+
+	UPROPERTY()
 	float CurrentMaxStamina = 100.f;
+
+	UPROPERTY()
 	float ReloadSpeed = 10.f;
+
+	UPROPERTY()
 	float ReloadDelay = 2.f;
+
+	UPROPERTY()
 	float CurrentReloadDelay = 0.f;
 };
