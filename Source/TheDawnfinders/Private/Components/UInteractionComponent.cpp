@@ -55,7 +55,50 @@ AActor* UInteractionComponent::GetNearestInteractible()
 #pragma endregion
 
 
-#pragma region Players Nearby
+#pragma region Start Interaction
+
+void UInteractionComponent::StartInteract()
+{
+	if (!PlayerCharacter)
+		return;
+
+	// We check if there is a player nearby to revive 
+	TArray<AAPlayerCharacter*> Fallen = GetNearbyPlayers(150.f, true);
+
+	if (Fallen.Num() > 0)
+	{
+		AAPlayerCharacter* AllyFound = Fallen[0];
+		TryInteractAlly(AllyFound, PlayerCharacter);
+		return;
+	}
+
+	// If no player to revive was found, we interact with the nearest interactible
+	AActor* Nearest = GetNearestInteractible();
+	AInteractibleObjects* Obj = Cast<AInteractibleObjects>(Nearest);
+
+	if (Obj && Obj->bCanBeUsed)
+	{
+		CurrentInteractible = Obj;
+		TryInteract(Obj, PlayerCharacter);
+	}
+}
+
+
+void UInteractionComponent::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
+{
+	if (!Player || !Player->IsLocallyControlled()) return;
+	if (InteractibleObject)
+		ServerInteract(InteractibleObject, Player);
+}
+
+
+void UInteractionComponent::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
+{
+	if (!Interactible || !Interactible->bCanBeUsed)
+		return;
+
+	Interactible->Interaction(Player);
+}
 
 TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius, bool bOnlyDead) const
 {
@@ -97,53 +140,31 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 #pragma endregion
 
 
-#pragma region Start Interaction
+#pragma region Stop Interaction
 
-void UInteractionComponent::StartInteract()
+void UInteractionComponent::StopInteract()
 {
-	if (!PlayerCharacter)
-		return;
+	// Cancel the revive
+	ServerCancelRevive();
 
-	// --- PRIORITÉ RELEVAGE ALLIÉ ---
-	TArray<AAPlayerCharacter*> Fallen = GetNearbyPlayers(150.f, true);
-
-	if (Fallen.Num() > 0)
+	// Cancel the interactible interaction
+	if (CurrentInteractible)
 	{
-		AAPlayerCharacter* AllyFound = Fallen[0];
-		TryInteractAlly(AllyFound, PlayerCharacter);
-		return;
-	}
-
-	// --- SINON : OBJETS ---
-	AActor* Nearest = GetNearestInteractible();
-	AInteractibleObjects* Obj = Cast<AInteractibleObjects>(Nearest);
-
-	if (Obj && Obj->bCanBeUsed)
-	{
-		CurrentInteractible = Obj;
-		TryInteract(Obj, PlayerCharacter);
+		ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		CurrentInteractible = nullptr;
 	}
 }
 
-void UInteractionComponent::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
+void UInteractionComponent::ServerStopInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
 {
-	if (!Player || !Player->IsLocallyControlled()) return;
-	if (InteractibleObject)
-		ServerInteract(InteractibleObject, Player);
-}
-
-void UInteractionComponent::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
-{
-	if (!Interactible || !Interactible->bCanBeUsed)
-		return;
-
-	Interactible->Interaction(Player);
+	if (!Interactible || !Player) return;
+	Interactible->StopInteraction(Player);
 }
 
 #pragma endregion
 
 
-#pragma region Ally Interaction (Revive)
+#pragma region Revive
 
 void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlayerCharacter* Player)
 {
@@ -152,6 +173,7 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 	if (AllyParam)
 		ServerStartRevive(AllyParam);
 }
+
 
 void UInteractionComponent::ServerStartRevive_Implementation(AAPlayerCharacter* AllyParam)
 {
@@ -190,30 +212,6 @@ void UInteractionComponent::CompleteRevive()
 		}
 		CurrentReviveTarget = nullptr;
 	}
-}
-
-#pragma endregion
-
-
-#pragma region Stop Interaction
-
-void UInteractionComponent::StopInteract()
-{
-	// Annule le relevage si en cours
-	ServerCancelRevive();
-
-	// Annule interaction objet
-	if (CurrentInteractible)
-	{
-		ServerStopInteract(CurrentInteractible, PlayerCharacter);
-		CurrentInteractible = nullptr;
-	}
-}
-
-void UInteractionComponent::ServerStopInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
-{
-	if (!Interactible || !Player) return;
-	Interactible->StopInteraction(Player);
 }
 
 #pragma endregion

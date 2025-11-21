@@ -51,6 +51,7 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AInteractibleObjects* Interactible, AAPlayerCharacter* Player);
 
+
 // === REVIVE ===
 public:
 	UFUNCTION(Server, Reliable)
@@ -66,6 +67,7 @@ public:
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
 
 
+// === PUBLIC PROPERTIES ===
 public:
 	UPROPERTY()
 	AInteractibleObjects* CurrentInteractible = nullptr;
@@ -79,7 +81,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	AAPlayerCharacter* AllyPlayer;
 
+
+// === PRIVATE PROPERTIES ===
 private:
+	UPROPERTY()
 	FTimerHandle ReviveTimer;
 
 	UPROPERTY()
