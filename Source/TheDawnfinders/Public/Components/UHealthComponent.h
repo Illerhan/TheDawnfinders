@@ -102,10 +102,10 @@ public :
 	float InjureDecreaseSpeed = 0.02f;
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsDead, BlueprintReadWrite)
-	bool IsDead;
+	bool bIsDead;
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
-	bool IsFallen;
+	bool bIsFallen;
 
 
 // === PRIVATE PROPERTIES ===

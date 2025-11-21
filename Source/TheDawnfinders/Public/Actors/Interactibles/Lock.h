@@ -40,7 +40,7 @@ private :
 	float InteractionTimer;
 
 	UPROPERTY()
-	bool IsInteracting;
+	bool bIsInteracting;
 
 	UPROPERTY()
 	AAPlayerCharacter* PlayerTemp;

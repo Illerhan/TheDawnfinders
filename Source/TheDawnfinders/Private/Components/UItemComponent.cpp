@@ -111,7 +111,7 @@ void UItemComponent::DoMainAction()
 			if (EquippedItem.ItemData->NeededHoldDuration != 0 && !EquippedItem.ItemData->ContextualUse)
 			{
 				ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
-				IsUsingItem = true;
+				bIsUsingItem = true;
 				return;
 			}
 		}
@@ -122,7 +122,7 @@ void UItemComponent::DoMainAction()
 
 void UItemComponent::ActualiseUseProgress(float DeltaTime)
 {
-	if (!IsUsingItem) return;
+	if (!bIsUsingItem) return;
 
 	if (ItemUseTimer > 0)
 	{
@@ -144,7 +144,7 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 
 void UItemComponent::UseConsumable()
 {
-	IsUsingItem = false;
+	bIsUsingItem = false;
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
@@ -215,7 +215,7 @@ void UItemComponent::StopMainAction()
 		PlayerInterface->HideProgress_Implementation();
 	}
 
-	IsUsingItem = false;
+	bIsUsingItem = false;
 }
 
 #pragma endregion
@@ -383,7 +383,8 @@ void UItemComponent::PerformeRevive(AAPlayerCharacter* TargetAlly)
 {
 	if (!PlayerCharacter || !PlayerCharacter->HasAuthority()) return;
 	if (!TargetAlly || !TargetAlly->HealthComponent) return;
-	if (!TargetAlly->HealthComponent->IsDead) return;
+
+	if (!TargetAlly->HealthComponent->bIsDead) return;
 
 	float Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), TargetAlly->GetActorLocation());
 	if (Distance > 300.f) return;

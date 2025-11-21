@@ -29,7 +29,7 @@ public:
 	void ActualiseAttacksCooldowns();
 
 	UPROPERTY(BlueprintReadWrite)
-	bool CanAttack;
+	bool bCanAttack;
 
 
 

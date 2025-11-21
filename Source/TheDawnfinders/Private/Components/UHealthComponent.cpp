@@ -94,7 +94,7 @@ void UHealthComponent::TakeDamage(float quantity)
 
 	if (CurrentHealth <= 0.0f)
 	{
-		if (IsFallen)
+		if (bIsFallen)
 		{
 			Die();
 			return;
@@ -197,7 +197,7 @@ void UHealthComponent::RemoveProtectionZone()
 
 void UHealthComponent::ApplyCurse(float DeltaTime)
 {
-	if (IsFallen || IsDead) return;
+	if (bIsFallen || bIsDead) return;
 	if (!GetOwner()->HasAuthority()) return;
 	if (IsProtectedFromCurse()) return;
 	if (CurrentMaxHealth <= MinimumMaxHP) return;
@@ -223,7 +223,7 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 void UHealthComponent::Fallen()
 {
-	IsFallen = true;
+	bIsFallen = true;
 
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
@@ -240,7 +240,7 @@ void UHealthComponent::Fallen()
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
 {
-	if (!IsFallen) return;
+	if (!bIsFallen) return;
 	if (!GetOwner()->HasAuthority()) return;
 
 	TakeDamage(InjureDecreaseSpeed * MaxHealth * DeltaTime);
@@ -252,7 +252,7 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 
 void UHealthComponent::Die()
 {
-	IsDead = true;
+	bIsDead = true;
 
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
@@ -266,11 +266,11 @@ void UHealthComponent::Die()
 
 void UHealthComponent::Server_Revive_Implementation()
 {
-	if (!IsFallen) return;
+	if (!bIsFallen) return;
 	CurrentMaxHealth = CurseMaxHealth;
 	CurrentHealth = FMath::Clamp(MinReviveHP, MinReviveHP, CurseMaxHealth);
 	ServerChangeHealth_Implementation(CurrentHealth);
-	IsFallen = false;
+	bIsFallen = false;
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
@@ -278,7 +278,7 @@ void UHealthComponent::Server_Revive_Implementation()
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
-		IsDead = false;
+		bIsDead = false;
 	}
 }
 
@@ -293,7 +293,7 @@ void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UHealthComponent, ProtectionZoneAmount);
 	DOREPLIFETIME(UHealthComponent, CurrentHealth);
 	DOREPLIFETIME(UHealthComponent, CurrentMaxHealth);
-	DOREPLIFETIME(UHealthComponent, IsDead);
+	DOREPLIFETIME(UHealthComponent, bIsDead);
 	DOREPLIFETIME(UHealthComponent, CurseMaxHealth);
 }
 

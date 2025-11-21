@@ -135,5 +135,5 @@ protected:
 
 private :
 	int PreviousOverloadCount = 0;
-	bool IsOpened;
+	bool bIsOpened;
 };

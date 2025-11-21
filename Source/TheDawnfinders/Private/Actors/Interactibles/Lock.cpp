@@ -15,7 +15,7 @@ ALock::ALock()
 
 void ALock::Tick(float DeltaTime)
 {
-	if (!IsInteracting) return;
+	if (!bIsInteracting) return;
 
 	PlayerTemp->ShowProgress_Implementation(InteractionTimer);
 	InteractionTimer = InteractionTimer - GetWorld()->GetDeltaSeconds();
@@ -35,20 +35,20 @@ void ALock::Interaction(AAPlayerCharacter* Player)
 
 	PlayerTemp = Player;
 
-	IsInteracting = true;
+	bIsInteracting = true;
 	InteractionTimer = 2.f;
 }
 
 void ALock::StopInteraction(AAPlayerCharacter* Player)
 {
-	IsInteracting = false;
+	bIsInteracting = false;
 	Player->HideProgress_Implementation();
 }
 
 
 void ALock::Unlock()
 {
-	IsInteracting = false;
+	bIsInteracting = false;
 
 	for (int i = 0; i < LinkedObjects.Num(); i++) {
 		LinkedObjects[i]->DoMovement();

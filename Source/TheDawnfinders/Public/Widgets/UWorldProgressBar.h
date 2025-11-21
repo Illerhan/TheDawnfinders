@@ -27,5 +27,5 @@ protected :
 	float StartValue;
 
 	UPROPERTY(BlueprintReadOnly)
-	bool IsDisplayed;
+	bool bIsDisplayed;
 };
