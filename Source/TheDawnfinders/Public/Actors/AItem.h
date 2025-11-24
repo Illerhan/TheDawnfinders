@@ -40,7 +40,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Initialise();
 
-	virtual void Interaction(AAPlayerCharacter* Player) override;
+	virtual void Interact_Implementation(AActor* Interactor) override;
 
 private:
 

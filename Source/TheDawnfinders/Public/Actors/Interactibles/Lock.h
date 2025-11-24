@@ -20,8 +20,8 @@ public :
 	ALock();
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void Interaction(AAPlayerCharacter* Player) override;
-	virtual void StopInteraction(AAPlayerCharacter* Player) override;
+	virtual void Interact_Implementation(AActor* Interactor) override;
+	virtual void StopInteract_Implementation(AActor* Interactor) override;
 
 	UFUNCTION()
 	void Unlock();
@@ -43,5 +43,5 @@ private :
 	bool bIsInteracting;
 
 	UPROPERTY()
-	AAPlayerCharacter* PlayerTemp;
+	AActor* PlayerTemp;
 };

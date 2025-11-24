@@ -1,58 +1,56 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿#include "Actors/Interactibles/Lever.h"
 
 
-#include "Actors/Interactibles/Lever.h"
-
-// Sets default values
 ALever::ALever()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
 void ALever::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-// Called every frame
 void ALever::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void ALever::Interaction(AAPlayerCharacter* Player)
+
+
+void ALever::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed || LinkedObjects.Num() == 0) return;
 
 	if (bRequiresHold)
 	{
-		StartHoldInteraction(Player);
+		StartHoldInteraction(Interactor);
 	}
-	
+
 	else
 	{
-	for (AMovableObjects* const Object : LinkedObjects)
-		if (Object && Object->bCanMove)
-		{
-			bool bReverse = Object->CanReverse();
-			UE_LOG(LogTemp, Warning, TEXT("moving %s") , *Object->GetName());
-			if (bReverse && Object->bIsMovingForward)
+		for (AMovableObjects* const Object : LinkedObjects)
+			if (Object && Object->bCanMove)
 			{
-				Object->DoReverseMovement();
+				bool bReverse = Object->CanReverse();
+				UE_LOG(LogTemp, Warning, TEXT("moving %s"), *Object->GetName());
+				if (bReverse && Object->bIsMovingForward)
+				{
+					Object->DoReverseMovement();
+				}
+				else
+				{
+					Object->DoMovement();
+				}
+
+				Super::Interact(Interactor);
 			}
-			else
-			{
-				Object->DoMovement();
-			}
-			
-			Super::Interaction(Player);
-		}
 	}
 }
-void ALever::StartHoldInteraction(AAPlayerCharacter* Player)
+
+
+void ALever::StartHoldInteraction(AActor* Player)
 {
 	for (AMovableObjects* const Object : LinkedObjects)
 	{
@@ -66,13 +64,13 @@ void ALever::StartHoldInteraction(AAPlayerCharacter* Player)
 }
 
 
-void ALever::StopInteraction(AAPlayerCharacter* Player)
+void ALever::StopInteract_Implementation(AActor* Interactor)
 {
-	StopHoldInteraction(Player);
+	StopHoldInteraction(Interactor);
 }
 
 
-void ALever::StopHoldInteraction(AAPlayerCharacter* Player)
+void ALever::StopHoldInteraction(AActor* Player)
 {
 	for (AMovableObjects* Object : LinkedObjects)
 	{

@@ -14,9 +14,12 @@ class THEDAWNFINDERS_API AGrapplePoint : public AInteractibleObjects
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AGrapplePoint();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
+
+public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
 	UStaticMeshComponent* GrappleMesh;
 
@@ -30,7 +33,7 @@ public:
 	bool bIsGrappling = false;
 	
 	UPROPERTY()
-	AAPlayerCharacter* GrapplingPlayer = nullptr;
+	AActor* GrapplingPlayer = nullptr;
 	
 	UPROPERTY()
 	FVector GrappleStartLocation;
@@ -44,36 +47,26 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Grapple|SmoothMove")
 	float GrappleMoveDuration = 0.75f; 
 
-	void StartSmoothGrapple(AAPlayerCharacter* Player);
+	void StartSmoothGrapple(AActor* Player);
 
 	void UpdateSmoothGrapple(float DeltaTime);
 
-	virtual void Interaction(AAPlayerCharacter* Player) override;
+	virtual void Interact_Implementation(AActor* Interactor) override;
 
-	
+
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	
 	UFUNCTION(BlueprintCallable, Category = "Grapple")
-	bool HasGrappleInInventory(AAPlayerCharacter* Player) const;
-
-	UFUNCTION(BlueprintCallable, Category = "Grapple")
-	bool HasLineOfSight(AAPlayerCharacter* Player) const;
+	bool HasLineOfSight(AActor* Player) const;
 
 	UFUNCTION(Server, Reliable)
-	void ServerTeleportPlayer(AAPlayerCharacter* Player);
+	void ServerTeleportPlayer(AActor* Player);
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Grapple")
-	void OnGrappleUsed(AAPlayerCharacter* Player);
+	void OnGrappleUsed(AActor* Player);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Grapple")
-	void OnGrappleFailed(AAPlayerCharacter* Player, const FString& Reason);
+	void OnGrappleFailed(AActor* Player, const FString& Reason);
 
 	UFUNCTION(Client, Reliable)
 	void ClientPlayGrappleEffects();
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 };

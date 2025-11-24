@@ -57,17 +57,18 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Interaction(AAPlayerCharacter* Player)
-{
-	if (!Player->InventoryComponent->AddNewItem(ItemData)) return;
-	
-	Super::Interaction(Player);
-
-	Destroy();
-}
-
 void AItem::Initialise()
 {
 
+}
+
+void AItem::Interact_Implementation(AActor* Interactor)
+{
+	Super::Interact_Implementation(Interactor);
+
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
+	if (!Player->InventoryComponent->AddNewItem(ItemData)) return;
+
+	Destroy();
 }
 

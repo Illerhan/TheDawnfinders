@@ -1,6 +1,7 @@
 #include "Components/UInteractionComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Interactibles/Interactible.h"
+#include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
 
 
@@ -74,30 +75,33 @@ void UInteractionComponent::StartInteract()
 
 	// If no player to revive was found, we interact with the nearest interactible
 	AActor* Nearest = GetNearestInteractible();
-	AInteractibleObjects* Obj = Cast<AInteractibleObjects>(Nearest);
+	if (!Nearest) return;
 
-	if (Obj && Obj->bCanBeUsed)
+	if (IInteractible::Execute_GetQTENeeded(Nearest)) {
+
+	}
+	else 
 	{
-		CurrentInteractible = Obj;
-		TryInteract(Obj, PlayerCharacter);
+		CurrentInteractible = Nearest;
+		TryInteract(Nearest, PlayerCharacter);
 	}
 }
 
 
-void UInteractionComponent::TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player)
+void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
-	if (InteractibleObject)
-		ServerInteract(InteractibleObject, Player);
+	if (Interactible)
+		ServerInteract(Interactible, Player);
 }
 
 
-void UInteractionComponent::ServerInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
+void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, AAPlayerCharacter* Player)
 {
-	if (!Interactible || !Interactible->bCanBeUsed)
+	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible))
 		return;
 
-	Interactible->Interaction(Player);
+	IInteractible::Execute_Interact(Interactible, Player);
 }
 
 TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius, bool bOnlyDead) const
@@ -155,10 +159,10 @@ void UInteractionComponent::StopInteract()
 	}
 }
 
-void UInteractionComponent::ServerStopInteract_Implementation(AInteractibleObjects* Interactible, AAPlayerCharacter* Player)
+void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Interactible || !Player) return;
-	Interactible->StopInteraction(Player);
+	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
 #pragma endregion

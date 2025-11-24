@@ -343,7 +343,6 @@ void UInventoryComponent::SortItems()
 	}
 }
 
-
 #pragma endregion
 
 

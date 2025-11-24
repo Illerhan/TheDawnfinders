@@ -17,32 +17,32 @@ void ALock::Tick(float DeltaTime)
 {
 	if (!bIsInteracting) return;
 
-	PlayerTemp->ShowProgress_Implementation(InteractionTimer);
+	IPlayerInterface::Execute_ShowProgress(PlayerTemp, InteractionTimer);
 	InteractionTimer = InteractionTimer - GetWorld()->GetDeltaSeconds();
 
 	if (InteractionTimer <= 0) {
-		PlayerTemp->HideProgress_Implementation();
+		IPlayerInterface::Execute_HideProgress(PlayerTemp);
 		Unlock();
 	}
 }
 
-
-void ALock::Interaction(AAPlayerCharacter* Player)
+void ALock::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
-	if (Player->GetEquippedItem_Implementation() == nullptr) return;
-	if (Player->GetEquippedItem_Implementation() != NeededKey) return;
+	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr) return;
+	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededKey) return;
 
-	PlayerTemp = Player;
+	PlayerTemp = Interactor;
 
 	bIsInteracting = true;
 	InteractionTimer = 2.f;
 }
 
-void ALock::StopInteraction(AAPlayerCharacter* Player)
+
+void ALock::StopInteract_Implementation(AActor* Interactor)
 {
 	bIsInteracting = false;
-	Player->HideProgress_Implementation();
+	IPlayerInterface::Execute_HideProgress(Interactor);
 }
 
 
@@ -54,7 +54,6 @@ void ALock::Unlock()
 		LinkedObjects[i]->DoMovement();
 	}
 
-
 	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
 	{
 		if (APawn* Pawn = PC->GetPawn())
@@ -65,7 +64,6 @@ void ALock::Unlock()
 			}
 		}
 	}
-
 
 	Destroy();
 }

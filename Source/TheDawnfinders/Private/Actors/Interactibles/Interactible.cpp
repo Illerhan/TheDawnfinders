@@ -1,6 +1,7 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Actors/Interactibles/Interactible.h"
+#include "Widgets/ULockpickQTEWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
 
 
@@ -17,9 +18,30 @@ AInteractibleObjects::AInteractibleObjects()
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
 	StaticMesh->SetupAttachment(CapsuleCollider);
+
+	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
+	InteractQTEWidgetComponent->SetupAttachment(CapsuleCollider);
 	
 	bReplicates = true;
 }
+
+void AInteractibleObjects::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
+	CapsuleCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
+
+	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
+}
+
+void AInteractibleObjects::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+
+#pragma region Colliders 
 
 void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -44,43 +66,49 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 	}
 }
 
-void AInteractibleObjects::Interaction(AAPlayerCharacter* Player)
-{
-	BP_OnInteraction(Player);
-}
+#pragma endregion	
 
-void AInteractibleObjects::StopInteraction(AAPlayerCharacter* Player)
-{
-	BP_OnStopInteraction(Player);
-}
 
-void AInteractibleObjects::BeginPlay()
-{
-	Super::BeginPlay();
-	CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapBegin);
-	CapsuleCollider->OnComponentEndOverlap.AddDynamic(this,&AInteractibleObjects::OnOverlapEnd);
-	
-}
-
+#pragma region Interface
 
 void AInteractibleObjects::Interact_Implementation(AActor* Interact)
 {
-	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interact);
-	if (Player)
-		Player->InteractionComponent->TryInteract(this,Player);
-	UE_LOG(LogTemp, Warning, TEXT("Interacted with a %s") , *GetName());
-}
+	if (!bCanBeUsed) return;
 
+	BP_OnInteraction(Cast<AAPlayerCharacter>(Interact));
+}
 
 void AInteractibleObjects::StopInteract_Implementation(AActor* Interactor)
 {
-	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
-	if (Player)
-		StopInteraction(Player);
+	if (!bCanBeUsed) return;
+
+	BP_OnStopInteraction(Cast<AAPlayerCharacter>(Interactor));
 }
 
-
-void AInteractibleObjects::Tick(float DeltaTime)
+bool AInteractibleObjects::GetCanBeUsed_Implementation()
 {
-	Super::Tick(DeltaTime);
+	return bCanBeUsed;
 }
+
+bool AInteractibleObjects::GetQTENeeded_Implementation()
+{
+	return bDoQTE;
+}
+
+void AInteractibleObjects::StartQTE_Implementation()
+{
+	InteractQTEWidget->EnterQTE(QTESuccessRange, 150.f);
+}
+
+void AInteractibleObjects::StopQTE_Implementation()
+{
+	InteractQTEWidget->ExitQTE();
+}
+
+void AInteractibleObjects::ValidateQTE_Implementation()
+{
+	InteractQTEWidget->ValidateQTE();
+}
+
+#pragma endregion
+

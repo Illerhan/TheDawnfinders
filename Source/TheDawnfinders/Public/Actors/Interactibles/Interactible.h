@@ -4,9 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
 #include "Interactible.generated.h"
+
+class ULockpickQTEWidget;
+
 
 UCLASS()
 class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible
@@ -14,33 +18,24 @@ class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteracti
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AInteractibleObjects();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
-	UCapsuleComponent* CapsuleCollider;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Mesh")
-	UStaticMeshComponent* StaticMesh;
-	
-	UFUNCTION(BlueprintCallable)
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
-						bool bFromSweep, const FHitResult& SweepResult);
-	UFUNCTION(BlueprintCallable)
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+// === INTERACTION INTERFACE ===
+public :
+	virtual void Interact_Implementation(AActor* Interactor) override;
+	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	virtual bool GetCanBeUsed_Implementation() override;
+	virtual bool GetQTENeeded_Implementation() override;
+	virtual void StartQTE_Implementation() override;
+	virtual void StopQTE_Implementation() override;
+	virtual void ValidateQTE_Implementation() override;
 
-	
-	UPROPERTY()
-	bool bCanBeUsed = true;
-	
-	UFUNCTION(BlueprintCallable,Blueprintable,Category="Interactibles")
-	virtual void Interaction(AAPlayerCharacter* Player);
 
-	UFUNCTION(BlueprintCallable, Blueprintable, Category = "Interactibles")
-	virtual void StopInteraction(AAPlayerCharacter* Player);
-
+// === MAIN FUNCTIONS ===
+public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
 	void BP_OnInteraction(AAPlayerCharacter* Player);
 
@@ -48,10 +43,41 @@ public:
 	void BP_OnStopInteraction(AAPlayerCharacter* Player);
 
 
-public:
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+// === COMPONENTS ===
+public :
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
+	UCapsuleComponent* CapsuleCollider;
 
-	virtual void Interact_Implementation(AActor* Interactor) override;
-	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Mesh")
+	UStaticMeshComponent* StaticMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widget")
+	UWidgetComponent* InteractQTEWidgetComponent;
+	
+	UFUNCTION(BlueprintCallable)
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
+						bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintCallable)
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+
+// === PROTECTED PROPERTIES
+protected :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bDoQTE;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float QTESuccessRange;
+
+	UPROPERTY()
+	bool bCanBeUsed = true;
+
+
+// === PRIVATE PROPERTIES ====
+private :
+	UPROPERTY()
+	ULockpickQTEWidget* InteractQTEWidget;
 };

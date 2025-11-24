@@ -14,26 +14,22 @@ class THEDAWNFINDERS_API ALever : public AInteractibleObjects
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ALever();
-	
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+
+public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Interactibles")
 	TArray<AMovableObjects*> LinkedObjects;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
 	bool bRequiresHold = false;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	virtual void Interaction(AAPlayerCharacter* Player) override;
-	void StartHoldInteraction(AAPlayerCharacter* Player);
-	virtual void StopInteraction(AAPlayerCharacter* Player) override;
-	void StopHoldInteraction(AAPlayerCharacter* Player);
+	virtual void Interact_Implementation(AActor* Interactor) override;
+	void StartHoldInteraction(AActor* Player);
+	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	void StopHoldInteraction(AActor* Player);
 
 
 private:

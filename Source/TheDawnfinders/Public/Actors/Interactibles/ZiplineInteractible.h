@@ -30,7 +30,7 @@ public:
 	void TryLinkToNearbyZipline();
 
 	// --- INTERACTION ---
-	virtual void Interaction(AAPlayerCharacter* Player) override;
+	virtual void Interact_Implementation(AActor* Interactor) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -40,7 +40,7 @@ protected:
 	bool bIsTravelling = false;
 
 	UPROPERTY()
-	AAPlayerCharacter* TravellingPlayer = nullptr;
+	ACharacter* TravellingPlayer = nullptr;
 
 	UPROPERTY()
 	FVector StartLocation;
@@ -54,17 +54,17 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Zipline")
 	float TravelDuration = 1.5f;
 
-	void StartTravel(AAPlayerCharacter* Player);
+	void StartTravel(AActor* Player);
 	void UpdateTravel(float DeltaTime);
 	void EndTravel();
 
 	// RPC
 	UFUNCTION(Server, Reliable)
-	void ServerStartTravel(AAPlayerCharacter* Player);
+	void ServerStartTravel(AActor* Player);
 
 	UFUNCTION(Client, Reliable)
 	void ClientPlayTravelEffects();
 
 	UFUNCTION(NetMulticast, Reliable)
-	void MulticastStartTravel(AAPlayerCharacter* Player, FVector Start, FVector End);
+	void MulticastStartTravel(AActor* Player, FVector Start, FVector End);
 };

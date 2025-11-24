@@ -60,9 +60,9 @@ void AZiplineInteractible::TryLinkToNearbyZipline()
 	UE_LOG(LogTemp, Log, TEXT("%s found no zipline to link"), *GetName());
 }
 
-void AZiplineInteractible::Interaction(AAPlayerCharacter* Player)
+void AZiplineInteractible::Interact_Implementation(AActor* Interactor)
 {
-	Super::Interaction(Player);
+	Super::Interact_Implementation(Interactor);
 
 	if (!LinkedZipline)
 	{
@@ -72,31 +72,31 @@ void AZiplineInteractible::Interaction(AAPlayerCharacter* Player)
 
 	if (!HasAuthority())
 	{
-		ServerStartTravel(Player);
+		ServerStartTravel(Interactor);
 		return;
 	}
 
-	StartTravel(Player);
+	StartTravel(Interactor);
 }
 
-void AZiplineInteractible::ServerStartTravel_Implementation(AAPlayerCharacter* Player)
+void AZiplineInteractible::ServerStartTravel_Implementation(AActor* Player)
 {
 	if (!LinkedZipline) return;
 	StartTravel(Player);
 }
 
-void AZiplineInteractible::StartTravel(AAPlayerCharacter* Player)
+void AZiplineInteractible::StartTravel(AActor* Player)
 {
 	if (!LinkedZipline || !Player) return;
 
 	bIsTravelling = true;
-	TravellingPlayer = Player;
+	TravellingPlayer = (ACharacter*)Player;
 	TravelTimer = 0.f;
 
 	StartLocation = Player->GetActorLocation() + TeleportOffset;
 	EndLocation = LinkedZipline->GetActorLocation() + TeleportOffset;
 
-	if (UCharacterMovementComponent* MoveComp = Player->GetCharacterMovement())
+	if (UCharacterMovementComponent* MoveComp = TravellingPlayer->GetCharacterMovement())
 	{
 		MoveComp->DisableMovement();
 		MoveComp->SetComponentTickEnabled(false);
@@ -147,9 +147,9 @@ void AZiplineInteractible::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(AZiplineInteractible, LinkedZipline);
 }
 
-void AZiplineInteractible::MulticastStartTravel_Implementation(AAPlayerCharacter* Player, FVector Start, FVector End)
+void AZiplineInteractible::MulticastStartTravel_Implementation(AActor* Player, FVector Start, FVector End)
 {
-	TravellingPlayer = Player;
+	TravellingPlayer = (ACharacter*)Player;
 	StartLocation = Start;
 	EndLocation = End;
 	TravelTimer = 0.f;

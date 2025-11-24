@@ -80,7 +80,7 @@ public :
 	bool IsProtectedFromCurse() const;
 	
 	UPROPERTY()
-	AInteractibleObjects* CurrentInteractible = nullptr;;
+	AActor* CurrentInteractible = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;

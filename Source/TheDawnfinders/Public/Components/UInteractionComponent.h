@@ -6,8 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "UInteractionComponent.generated.h"
 
-class AInteractibleObjects;
 class AAPlayerCharacter;
+
 
 UCLASS(ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent))
 class THEDAWNFINDERS_API UInteractionComponent : public UActorComponent
@@ -40,16 +40,16 @@ public:
 	void StartInteract();
 
 	UFUNCTION()
-	void TryInteract(AInteractibleObjects* InteractibleObject, AAPlayerCharacter* Player);
+	void TryInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 	UFUNCTION(Server, Reliable)
-	void ServerInteract(AInteractibleObjects* Interactible, AAPlayerCharacter* Player);
+	void ServerInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 	UFUNCTION(BlueprintCallable)
 	void StopInteract();
 
 	UFUNCTION(Server, Reliable)
-	void ServerStopInteract(AInteractibleObjects* Interactible, AAPlayerCharacter* Player);
+	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 
 // === REVIVE ===
@@ -70,7 +70,7 @@ public:
 // === PUBLIC PROPERTIES ===
 public:
 	UPROPERTY()
-	AInteractibleObjects* CurrentInteractible = nullptr;
+	AActor* CurrentInteractible = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
