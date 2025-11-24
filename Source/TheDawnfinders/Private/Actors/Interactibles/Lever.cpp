@@ -44,7 +44,7 @@ void ALever::Interact_Implementation(AActor* Interactor)
 					Object->DoMovement();
 				}
 
-				Super::Interact(Interactor);
+				Super::Interact_Implementation(Interactor);
 			}
 	}
 }

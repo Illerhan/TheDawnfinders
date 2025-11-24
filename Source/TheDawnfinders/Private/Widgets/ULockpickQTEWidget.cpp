@@ -4,7 +4,7 @@
 ULockpickQTEWidget::ULockpickQTEWidget(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
-    
+    UpdateCanTick();
 }
 
 void ULockpickQTEWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
@@ -14,6 +14,7 @@ void ULockpickQTEWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTi
     if (!IsDisplayed) return;
 
     CurrentAngle += RotationSpeed * InDeltaTime;
+    CurrentAngle = FMath::Modulo(CurrentAngle, 360.f);
 }
 
 
@@ -34,5 +35,5 @@ bool ULockpickQTEWidget::ValidateQTE_Implementation()
 {
     IsDisplayed = false;
 
-    return CurrentAngle > SuccessPercent * -0.5f && CurrentAngle < SuccessPercent * 0.5f;
+    return CurrentAngle > 360 - SuccessPercent * 0.5f || CurrentAngle < SuccessPercent * 0.5f;
 }

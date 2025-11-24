@@ -97,7 +97,7 @@ bool AInteractibleObjects::GetQTENeeded_Implementation()
 
 void AInteractibleObjects::StartQTE_Implementation()
 {
-	InteractQTEWidget->EnterQTE(QTESuccessRange, 150.f);
+	InteractQTEWidget->EnterQTE(QTESuccessRange, 400.f);
 }
 
 void AInteractibleObjects::StopQTE_Implementation()
@@ -105,9 +105,11 @@ void AInteractibleObjects::StopQTE_Implementation()
 	InteractQTEWidget->ExitQTE();
 }
 
-void AInteractibleObjects::ValidateQTE_Implementation()
+bool AInteractibleObjects::ValidateQTE_Implementation()
 {
-	InteractQTEWidget->ValidateQTE();
+	InteractQTEWidget->ExitQTE();
+
+	return InteractQTEWidget->ValidateQTE();
 }
 
 #pragma endregion
