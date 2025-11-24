@@ -1,6 +1,8 @@
 // Fill out your copyright notice...
 
 #include "Components/UItemComponent.h"
+
+#include "FrameTypes.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
@@ -197,6 +199,22 @@ void UItemComponent::UseConsumable()
 			PerformeRevive(Ally);
 		}
 		break;
+
+		case EConsumableEffectType::Refile:
+		if (!PlayerCharacter) return;
+		if (!PlayerCharacter->LightComponent) return;
+		float Amount = EquippedItem.ItemData->ConsumableEffectPower;
+
+		if (!PlayerCharacter->HasAuthority())
+		{
+			PlayerCharacter->LightComponent->Server_RequestFuelUpdate(Amount);
+		}
+		else
+		{
+			PlayerCharacter->LightComponent->FuelUpdate(Amount);
+		}
+		InventoryComponent->RemoveCurrentItem();
+		
 	}
 }
 
