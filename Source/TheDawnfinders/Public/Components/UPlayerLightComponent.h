@@ -40,9 +40,13 @@ public :
 
 	UFUNCTION()
 	void OnRep_LightOn();
+	UFUNCTION()
+	void FuelUpdate(float NewFuel);
+	UFUNCTION()
+	void OnRep_FuelRemaining();
 
 
-// === FUEL + PROTECTION ===
+	// === FUEL + PROTECTION ===
 private :
 	UFUNCTION()
 	void ConsumeFuel(float DeltaTime);
@@ -51,7 +55,10 @@ private :
 	{
 		return FuelRemaining > 0.0f;
 	}
-
+public :
+	UFUNCTION(Server,Unreliable)
+	void Server_RequestFuelUpdate(float Amount);
+	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
@@ -91,7 +98,7 @@ public :
 	UPROPERTY(Replicated, EditAnywhere, Category = "Lantern")
 	float MaxFuel;
 	
-	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
+	UPROPERTY(ReplicatedUsing = OnRep_FuelRemaining,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
 	float FuelRemaining;
 
 	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite, Category = "Lantern")

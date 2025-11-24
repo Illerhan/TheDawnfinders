@@ -93,7 +93,7 @@ void UPlayerLightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UPlayerLightComponent, bLightOn);
-	DOREPLIFETIME(UPlayerLightComponent, FuelRemaining);
+	DOREPLIFETIME_CONDITION_NOTIFY(UPlayerLightComponent, FuelRemaining, COND_None, REPNOTIFY_Always);
 }
 
 
@@ -182,6 +182,57 @@ void UPlayerLightComponent::OnRep_LightOn()
 	ApplyLightState();
 }
 
+void UPlayerLightComponent::FuelUpdate(float NewFuel)
+{
+
+	if (GetOwner()->HasAuthority()) 
+	{
+		FuelRemaining += NewFuel;
+		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
+
+		if (FuelRemaining <= 0.f && bLightOn)
+		{
+			TurnLightOff();
+		}
+	}
+	
+	// Actualises the local UI 
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+}
+void UPlayerLightComponent::OnRep_FuelRemaining()
+{
+	// Update UI local
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC || !PC->IsLocalController()) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	if (PSCustom)
+	{
+		PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	}
+}
+
+
 #pragma endregion
 
 
@@ -218,8 +269,13 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 }
 
 
+void UPlayerLightComponent::Server_RequestFuelUpdate_Implementation(float Amount)
+{
+	FuelUpdate(Amount);
+}
+
 void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                           UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (!GetOwner()->HasAuthority() || !bLightOn) return;
 	if (OtherActor == GetOwner()) return;

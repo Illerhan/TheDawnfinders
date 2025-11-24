@@ -23,6 +23,7 @@ enum class EConsumableEffectType : uint8 {
 	Revive UMETA (DisplayName = "Revive"),
 	PlaceZipline UMETA(DisplayName = "PlaceZipline"),
 	ThrowObject UMETA(DisplayName = "ThrowObject"),
+	Refile UMETA(DisplayName = "Refile"),
 	None UMETA(DisplayName = "None")
 };
 
