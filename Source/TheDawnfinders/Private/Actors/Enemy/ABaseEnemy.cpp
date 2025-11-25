@@ -11,7 +11,8 @@ ABaseEnemy::ABaseEnemy()
 void ABaseEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+    CurrentHealth = EnemyData->Health;
 }
 
 void ABaseEnemy::Tick(float DeltaTime)
@@ -53,6 +54,8 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
     CurrentHealth -= Quantity;
+
+    UE_LOG(LogTemp, Display, TEXT("Enemy Health = %d"), CurrentHealth);
 
     if (CurrentHealth <= 0) {
         Die();

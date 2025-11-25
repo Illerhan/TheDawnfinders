@@ -7,6 +7,7 @@
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UStaminaComponent.h"
 #include "Interfaces/IPlayer.h"
 
 UItemComponent::UItemComponent()
@@ -25,6 +26,7 @@ void UItemComponent::BeginPlay()
 
 	HealthComponent = PlayerCharacter->HealthComponent;
 	InventoryComponent = PlayerCharacter->InventoryComponent;
+	StaminaComponent = PlayerCharacter->StaminaComponent;
 
 	InventoryComponent->OnInventoryChange.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
 }
@@ -319,6 +321,8 @@ void UItemComponent::DoLightAttack()
 		return;
 	}
 
+	if (!StaminaComponent->VerifyHasStamina()) return;
+
 	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
 	if (!Table)
 	{
@@ -344,6 +348,10 @@ void UItemComponent::DoLightAttack()
 
 	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(WeaponData->LightComboStaminaCosts[ComboIndex]);
+
+	CurrentAttackDamages = WeaponData->LightComboDamages[ComboIndex];
 }
 
 
@@ -361,6 +369,8 @@ void UItemComponent::DoHeavyAttack()
 		PressedHeavyAttackInput = true;
 		return;
 	}
+
+	if (!StaminaComponent->VerifyHasStamina()) return;
 
 	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
 	if (!Table)
@@ -387,6 +397,10 @@ void UItemComponent::DoHeavyAttack()
 
 	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(WeaponData->HeavyComboStaminaCosts[ComboIndex]);
+
+	CurrentAttackDamages = WeaponData->HeavyComboDamages[ComboIndex];
 }
 
 
@@ -401,6 +415,11 @@ void UItemComponent::AttackAnimEnd()
 	{
 		DoLightAttack();
 	}
+}
+
+float UItemComponent::GetCurrentAttackDamages()
+{
+	return CurrentAttackDamages;
 }
 
 #pragma endregion
