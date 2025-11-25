@@ -17,9 +17,10 @@ class THEDAWNFINDERS_API UInteractionComponent : public UActorComponent
 public:
 	UInteractionComponent();
 	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-// === INTERCACTIBLES AT RANGE MANAGEMENT ===
+	// === INTERCACTIBLES AT RANGE MANAGEMENT ===
 public:
 	UFUNCTION()
 	void AddInteractible(AActor* Interactible);
@@ -65,6 +66,23 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
+
+	UPROPERTY(ReplicatedUsing=OnRep_ReviveState)
+	bool bIsReviving = false;
+	float ReviveDuration = 2.f;
+	UPROPERTY(ReplicatedUsing=OnRep_ReviveState)
+	float ReviveTimeRemaining = 0.f;
+	
+	UFUNCTION(Client, Reliable)
+	void Client_ShowReviveProgress(float Duration);
+
+	UFUNCTION(Client, Reliable)
+	void Client_HideReviveProgress();
+	
+	UFUNCTION()
+	void OnRep_ReviveState();
+	
+	
 
 
 // === PUBLIC PROPERTIES ===

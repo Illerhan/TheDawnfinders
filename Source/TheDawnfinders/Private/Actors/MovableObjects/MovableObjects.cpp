@@ -136,22 +136,17 @@ void AMovableObjects::OnTimeLineFinished()
 		UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
 		return;
 	}
-	
-	{
-		// ✅ Always reset positions properly
-		if (!bIsMovingForward)   // Finished reverse
+	if (!bIsMovingForward)   
 		{
 			CurrentTimelineProgress = 0.f;
 			bCanMove = true;
 			return;
 		}
 		bCanMove = true;
-		
-	}
+	
 	FinalPosition = StartPosition;
 	StartPosition = GetActorLocation();
 	
-	// ✅ Normal forward end
 	CurrentTimelineProgress = 1.0f;
 	bCanMove = true;
 
