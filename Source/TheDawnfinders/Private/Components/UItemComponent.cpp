@@ -319,11 +319,20 @@ void UItemComponent::DoLightAttack()
 		return;
 	}
 
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num())
+		if (++ComboIndex >= WeaponData->LightComboAnims.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -333,7 +342,7 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex]);
+	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
 }
 
@@ -353,11 +362,20 @@ void UItemComponent::DoHeavyAttack()
 		return;
 	}
 
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedHeavyAttackInput)
 	{
 		PressedHeavyAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->HeavyComboAnims.Num())
+		if (++ComboIndex >= WeaponData->HeavyComboAnims.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -367,7 +385,7 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->HeavyComboAnims[ComboIndex]);
+	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
 }
 

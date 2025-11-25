@@ -3,6 +3,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DataAssets/ItemData.h"
+#include "Engine/DataTable.h"
 #include "CustomStructs.generated.h" 
 
 
@@ -64,4 +65,45 @@ public:
 		: Value()
 	{
 	}
+};
+
+
+
+UENUM(BlueprintType)
+enum class EDamageType : uint8 {
+	Piercing UMETA(DisplayName = "Piercing"),
+	Blunt UMETA(DisplayName = "Blunt")
+};
+
+USTRUCT(BlueprintType)
+struct FWeaponInfos : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float SpeedModifier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float CriticalRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EDamageType DamageType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<float> LightComboDamages;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<float> LightComboStaminaCosts;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UAnimMontage*> LightComboAnims;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<float> HeavyComboDamages;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<float> HeavyComboStaminaCosts;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UAnimMontage*> HeavyComboAnims;
 };

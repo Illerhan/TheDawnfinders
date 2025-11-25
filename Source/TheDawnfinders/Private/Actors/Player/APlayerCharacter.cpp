@@ -149,9 +149,9 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     CurrentState = NewState;
 }
 
-void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage)
+void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed)
 {
-    PlayMontage(AttackMontage);
+    PlayMontage(AttackMontage, Speed);
 }
 
 void AAPlayerCharacter::AddProtectionZone_Implementation()
@@ -413,7 +413,27 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 
 #pragma region Montages
 
-void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed)
+{
+    if (!HasAuthority())
+    {
+        ServerPlayMontage(Montage, Speed);
+    }
+    else
+    {
+        MulticastPlayMontage(Montage, Speed);
+    }
+}
+
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (Montage)
+        MulticastPlayMontage(Montage, Speed);
+}
+
+
+void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     if (!Montage || !GetMesh()) return;
 
@@ -421,7 +441,7 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     if (!AnimInstance) return;
 
     AnimInstance->StopAllMontages(0.1f);
-    AnimInstance->Montage_Play(Montage);
+    AnimInstance->Montage_Play(Montage, Speed);
 
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
@@ -429,26 +449,6 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     EndDelegate.BindUObject(this, &AAPlayerCharacter::OnMontageEnded);
     AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &AAPlayerCharacter::OnMontageNotifyBegin);
-}
-
-
-void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
-{
-    if (!HasAuthority())
-    {
-        ServerPlayMontage(Montage);
-    }
-    else
-    {
-        MulticastPlayMontage(Montage);
-    }
-}
-
-
-void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
-{
-    if (Montage)
-        MulticastPlayMontage(Montage);
 }
 
 
