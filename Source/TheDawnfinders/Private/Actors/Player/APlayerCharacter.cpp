@@ -222,7 +222,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
-    if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging)
+    if (CurrentState == EPlayerState::Dodging)
         return;
 
     CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
