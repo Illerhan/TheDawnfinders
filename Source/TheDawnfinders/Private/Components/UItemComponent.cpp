@@ -309,13 +309,13 @@ void UItemComponent::StopPreviewThrow()
 
 void UItemComponent::DoLightAttack()
 {
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
+		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
+
 	if (EquippedItem.ItemData == nullptr) return;
-	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
-	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-
-	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
 		PressedHeavyAttackInput = false;
@@ -347,8 +347,8 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(WeaponData->LightComboStaminaCosts[ComboIndex]);
 
@@ -358,13 +358,13 @@ void UItemComponent::DoLightAttack()
 
 void UItemComponent::DoHeavyAttack()
 {
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
+		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
+
 	if (EquippedItem.ItemData == nullptr) return;
-	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
-	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-
-	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = false;
 		PressedHeavyAttackInput = true;
@@ -396,11 +396,10 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(WeaponData->HeavyComboStaminaCosts[ComboIndex]);
-
 	CurrentAttackDamages = WeaponData->HeavyComboDamages[ComboIndex];
 }
 
