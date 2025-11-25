@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Actors/Enemy/ABaseEnemy.h"
 #include "CustomStructs.h"
 #include "UItemComponent.generated.h"
 
@@ -71,6 +72,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentAttackDamages();
+
+	UFUNCTION(BlueprintCallable)
+	void ApplyDamagesToEnemy(ABaseEnemy* Enemy);
 
 
 // === OTHERS ===

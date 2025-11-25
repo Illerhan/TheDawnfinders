@@ -55,7 +55,7 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
     CurrentHealth -= Quantity;
 
-    UE_LOG(LogTemp, Display, TEXT("Enemy Health = %d"), CurrentHealth);
+    UE_LOG(LogTemp, Display, TEXT("Enemy Health = %f"), CurrentHealth);
 
     if (CurrentHealth <= 0) {
         Die();

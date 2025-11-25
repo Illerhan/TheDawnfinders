@@ -210,16 +210,12 @@ void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-    
-    UE_LOG(LogTemp, Log, TEXT("[SERVER RPC] %s speed set to %.0f"), *GetName(), NewSpeed);
 }
 
 void AAPlayerCharacter::OnRep_PlayerSpeed()
 {
     // Appliqué automatiquement sur tous les clients quand PlayerSpeed change
     GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
-    
-    UE_LOG(LogTemp, Log, TEXT("[CLIENT] %s speed replicated to %.0f"), *GetName(), PlayerSpeed);
 }
 
 
@@ -455,11 +451,6 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
 void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
     if (!Montage) return;
-
-    UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
-        *GetName(),
-        *Montage->GetName(),
-        bInterrupted ? TEXT("true") : TEXT("false"));
 
     if (CurrentState == EPlayerState::UsingEquipment)
     {

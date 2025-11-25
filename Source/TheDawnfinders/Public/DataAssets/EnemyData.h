@@ -30,4 +30,10 @@ public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	TArray<UEnemyAttackData*> PossibleAttacks;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Main")
+	float BluntAbsorption = 0;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Main")
+	float PiercingAbsorption = 0;
 };

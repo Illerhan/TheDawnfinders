@@ -422,6 +422,32 @@ float UItemComponent::GetCurrentAttackDamages()
 	return CurrentAttackDamages;
 }
 
+void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
+{
+	float FinalDamage = CurrentAttackDamages;
+
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	switch (WeaponData->DamageType) {
+	case EDamageType::Blunt :
+		FinalDamage *= 1 - Enemy->EnemyData->BluntAbsorption;
+		break;
+
+	case EDamageType::Piercing:
+		FinalDamage *= 1 - Enemy->EnemyData->PiercingAbsorption;
+		break;
+	}
+
+	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+}
+
 #pragma endregion
 
 
