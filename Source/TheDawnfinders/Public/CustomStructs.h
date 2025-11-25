@@ -83,8 +83,11 @@ struct FWeaponInfos : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float SpeedModifier;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+	float CriticalChance;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float CriticalRate;
+	float Range;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;

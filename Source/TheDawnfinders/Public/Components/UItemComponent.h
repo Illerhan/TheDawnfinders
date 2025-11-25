@@ -74,6 +74,9 @@ public :
 	float GetCurrentAttackDamages();
 
 	UFUNCTION(BlueprintCallable)
+	void DoAttackCollision();
+
+	UFUNCTION(BlueprintCallable)
 	void ApplyDamagesToEnemy(ABaseEnemy* Enemy);
 
 

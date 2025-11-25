@@ -8,6 +8,7 @@
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
 
 UItemComponent::UItemComponent()
@@ -422,6 +423,50 @@ float UItemComponent::GetCurrentAttackDamages()
 	return CurrentAttackDamages;
 }
 
+void UItemComponent::DoAttackCollision()
+{
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	TArray<FHitResult> Hit;
+	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
+	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 80, 80);
+	FRotator Rotation = GetOwner()->GetActorRotation();
+
+	bool bHit = UKismetSystemLibrary::BoxTraceMulti(
+		this,
+		FinalCollisionCenter,
+		FinalCollisionCenter,
+		HalfSize,
+		Rotation,
+		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
+		false,           // trace complex
+		TArray<AActor*>(),
+		EDrawDebugTrace::ForDuration,
+		Hit,
+		true             // ignore self
+	);
+
+	if (!bHit) return;
+
+	TSet<AActor*> AlreadyHitActors;
+	for (int i = 0; i < Hit.Num(); i++) {
+		if (!Hit[i].GetActor()) continue;
+		if (!Hit[i].GetActor()->ActorHasTag("Enemy")) continue;
+		if (AlreadyHitActors.Contains(Hit[i].GetActor())) continue;
+
+		AlreadyHitActors.Add(Hit[i].GetActor());
+
+		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+		ApplyDamagesToEnemy(Enemy);
+	}
+}
+
 void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 {
 	float FinalDamage = CurrentAttackDamages;
@@ -432,9 +477,9 @@ void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 		return;
 	}
-
 	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
+	// Enemy Resistances
 	switch (WeaponData->DamageType) {
 	case EDamageType::Blunt :
 		FinalDamage *= 1 - Enemy->EnemyData->BluntAbsorption;
@@ -443,6 +488,12 @@ void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 	case EDamageType::Piercing:
 		FinalDamage *= 1 - Enemy->EnemyData->PiercingAbsorption;
 		break;
+	}
+
+	// Crit
+	float CritPercent = FMath::FRandRange(0.f, 100.f);
+	if (CritPercent < WeaponData->CriticalChance) {
+		FinalDamage *= 3;
 	}
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
