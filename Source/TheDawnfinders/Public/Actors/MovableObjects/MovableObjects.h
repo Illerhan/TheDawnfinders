@@ -40,6 +40,8 @@ public:
 	float CurrentTimelineProgress;
 	float LastReverseTime;
 	float ReverseCooldown;
+	FVector FinalPosition;
+	FVector OriginalStart;
 
 	UFUNCTION()
 	void HandleProgress(float value);
