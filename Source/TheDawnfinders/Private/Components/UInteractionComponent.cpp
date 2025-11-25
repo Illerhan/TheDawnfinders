@@ -24,20 +24,20 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!bIsReviving || !CurrentReviveTarget) return;
+	if (!bIsHelping || !CurrentHelpedTarget) return;
 
-	ReviveTimeRemaining -= DeltaTime;
+	HelpTimeRemaining -= DeltaTime;
 
 	// update UI locally
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
-		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, ReviveTimeRemaining);
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
 	}
 
-	if (ReviveTimeRemaining <= 0.f)
+	if (HelpTimeRemaining <= 0.f)
 	{
-		bIsReviving = false;
-		CompleteRevive();
+		bIsHelping = false;
+		CompleteHelp();
 	}
 }
 
@@ -45,8 +45,8 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(UInteractionComponent, bIsReviving);
-	DOREPLIFETIME(UInteractionComponent, ReviveTimeRemaining);
+	DOREPLIFETIME(UInteractionComponent, bIsHelping);
+	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
 }
 
 
@@ -192,12 +192,12 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 	return Result;
 }
 
-void UInteractionComponent::OnRep_ReviveState()
+void UInteractionComponent::OnRep_HelpState()
 {
-	if (bIsReviving)
+	if (bIsHelping)
 	{
 		// start showing progress locally
-		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, ReviveTimeRemaining);
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
 	}
 	else
 	{
@@ -214,7 +214,7 @@ void UInteractionComponent::OnRep_ReviveState()
 void UInteractionComponent::StopInteract()
 {
 	// Cancel the revive
-	ServerCancelRevive();
+	ServerCancelHelp();
 
 	// Cancel the interactible interaction
 	if (CurrentInteractible)
@@ -240,34 +240,34 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 	if (!Player || !Player->IsLocallyControlled()) return;
 
 	if (AllyParam)
-		ServerStartRevive(AllyParam);
+		ServerStartHelp(AllyParam);
 }
 
 
-void UInteractionComponent::ServerStartRevive_Implementation(AAPlayerCharacter* AllyParam)
+void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* AllyParam)
 {
 	if (!AllyParam) return;
 	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
 		return;
 
-	CurrentReviveTarget = AllyParam;
+	CurrentHelpedTarget = AllyParam;
 
-	bIsReviving = true;
-	ReviveTimeRemaining = ReviveDuration;
+	bIsHelping = true;
+	HelpTimeRemaining = HelpDuration;
 
 	// Tell client to show UI
-	Client_ShowReviveProgress(ReviveDuration);
+	Client_ShowHelpProgress(HelpDuration);
 	
 }
 
-void UInteractionComponent::ServerCancelRevive_Implementation()
+void UInteractionComponent::ServerCancelHelp_Implementation()
 {
-	bIsReviving = false;
-	CurrentReviveTarget = nullptr;
+	bIsHelping = false;
+	CurrentHelpedTarget = nullptr;
 
-	Client_HideReviveProgress();
+	Client_HideHelpProgress();
 }
-void UInteractionComponent::Client_ShowReviveProgress_Implementation(float Duration)
+void UInteractionComponent::Client_ShowHelpProgress_Implementation(float Duration)
 {
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
@@ -275,7 +275,7 @@ void UInteractionComponent::Client_ShowReviveProgress_Implementation(float Durat
 	}
 }
 
-void UInteractionComponent::Client_HideReviveProgress_Implementation()
+void UInteractionComponent::Client_HideHelpProgress_Implementation()
 {
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
@@ -284,14 +284,14 @@ void UInteractionComponent::Client_HideReviveProgress_Implementation()
 }
 
 
-void UInteractionComponent::CompleteRevive()
+void UInteractionComponent::CompleteHelp()
 {
-	if (!CurrentReviveTarget) return;
+	if (!CurrentHelpedTarget) return;
 
-	Client_HideReviveProgress();
+	Client_HideHelpProgress();
 
-	CurrentReviveTarget->HealthComponent->Server_Revive();
-	CurrentReviveTarget = nullptr;
+	CurrentHelpedTarget->HealthComponent->Server_Revive();
+	CurrentHelpedTarget = nullptr;
 }
 
 #pragma endregion

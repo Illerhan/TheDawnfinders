@@ -56,31 +56,31 @@ public:
 // === REVIVE ===
 public:
 	UFUNCTION(Server, Reliable)
-	void ServerStartRevive(AAPlayerCharacter* Ally);
+	void ServerStartHelp(AAPlayerCharacter* Ally);
 
 	UFUNCTION(Server, Reliable)
-	void ServerCancelRevive();
+	void ServerCancelHelp();
 
 	UFUNCTION()
-	void CompleteRevive();
+	void CompleteHelp();
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
 
-	UPROPERTY(ReplicatedUsing=OnRep_ReviveState)
-	bool bIsReviving = false;
-	float ReviveDuration = 2.f;
-	UPROPERTY(ReplicatedUsing=OnRep_ReviveState)
-	float ReviveTimeRemaining = 0.f;
+	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
+	bool bIsHelping = false;
+	float HelpDuration = 2.f;
+	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
+	float HelpTimeRemaining = 0.f;
 	
 	UFUNCTION(Client, Reliable)
-	void Client_ShowReviveProgress(float Duration);
+	void Client_ShowHelpProgress(float Duration);
 
 	UFUNCTION(Client, Reliable)
-	void Client_HideReviveProgress();
+	void Client_HideHelpProgress();
 	
 	UFUNCTION()
-	void OnRep_ReviveState();
+	void OnRep_HelpState();
 	
 	
 
@@ -103,11 +103,11 @@ public:
 // === PRIVATE PROPERTIES ===
 private:
 	UPROPERTY()
-	FTimerHandle ReviveTimer;
+	FTimerHandle HelpTimer;
 
 	UPROPERTY()
 	AActor* InteractingQTEActor;
 
 	UPROPERTY()
-	AAPlayerCharacter* CurrentReviveTarget = nullptr;
+	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 };
