@@ -310,6 +310,9 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
         break;
     case EPlayerState::Dead:
         //
+        break;
+    case EPlayerState::Rooted:
+        SetPlayerSpeed(0.f);
     default:
         SetPlayerSpeed(400.f);
         break;
@@ -326,6 +329,19 @@ void AAPlayerCharacter::OnFallen()
     CurrentState = EPlayerState::Fallen;
     SetPlayerSpeed(100.f);
     
+}
+
+void AAPlayerCharacter::OnTrapped()
+{
+    if (!HasAuthority())
+        Server_OnTrapped();
+    CurrentState = EPlayerState::Rooted;
+    SetPlayerSpeed(0.f);
+}
+
+void AAPlayerCharacter::Server_OnTrapped_Implementation()
+{
+    OnTrapped();
 }
 
 void AAPlayerCharacter::Server_OnFallen_Implementation()

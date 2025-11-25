@@ -161,6 +161,12 @@ public:
 	
 	UFUNCTION(Server, Reliable)
 	void Server_OnFallen();
+
+	UFUNCTION()
+	void OnTrapped();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_OnTrapped();
 	
 
 public:	

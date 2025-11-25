@@ -1,41 +1,95 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-#include "Actors/Traps/ATrapBase.h"
+﻿#include "Actors/Traps/ATrapBase.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
 
-// Sets default values
+
 ATrapBase::ATrapBase()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	TrapCollider =  CreateDefaultSubobject<UBoxComponent>(TEXT("TrapCollider"));
+	bReplicates = true;
+
+	TrapCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("TrapCollider"));
 	RootComponent = TrapCollider;
-	
 	TrapCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 }
 
-void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-						   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
-						   bool bFromSweep, const FHitResult& SweepResult)
-{
-	if (OtherActor && OtherActor != this)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Overlap avec: %s"), *OtherActor->GetName());
-		UGameplayStatics::PlaySoundAtLocation(this,Sound,GetActorLocation());
-		DoTrapAction();
-	}
-}
-
-// Called when the game starts or when spawned
 void ATrapBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TrapCollider->OnComponentBeginOverlap.AddDynamic(this, &ATrapBase::OnOverlapBegin);
+	if (TrapCollider)
+	{
+		TrapCollider->OnComponentBeginOverlap.AddDynamic(this, &ATrapBase::OnOverlapBegin);
+	}
 }
 
-// Called every frame
+
+void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+							   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
+							   bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (!HasAuthority()) return;  // CLIENTS DO NOTHING
+
+	if (!bEnable) return;
+	if (CurrentCooldown > 0.f) return;
+	if (!OtherActor || OtherActor == this) return;
+	TrappedActor = OtherActor;
+
+	// Run trap action (server side)
+	DoTrapAction();
+
+	// Multicast sound FX
+	Multicast_PlayEffects();
+
+	// Start cooldown
+	CurrentCooldown = Cooldown;
+}
+
+void ATrapBase::Multicast_PlayEffects_Implementation()
+{
+	if (Sound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
+	}
+}
+
 void ATrapBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (HasAuthority())
+	{
+		if (CurrentCooldown > 0.f)
+			CurrentCooldown -= DeltaTime;
+	}
 }
 
+void ATrapBase::DisableTrap()
+{
+	if (HasAuthority())
+	{
+		bEnable = false;
+	}
+	else
+	{
+		// If a client calls it, ensure server handles it
+		UE_LOG(LogTemp, Warning, TEXT("Client tried to disable trap. Should call on server."));
+	}
+}
+
+void ATrapBase::OnRep_Enabled()
+{
+	// effet visuel
+}
+
+void ATrapBase::DoTrapAction()
+{
+
+}
+
+void ATrapBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ATrapBase, bEnable);
+}
