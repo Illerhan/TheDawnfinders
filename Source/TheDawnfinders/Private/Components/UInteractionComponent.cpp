@@ -3,6 +3,7 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 UInteractionComponent::UInteractionComponent()
@@ -16,6 +17,36 @@ void UInteractionComponent::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerCharacter = Cast<AAPlayerCharacter>(GetOwner());
+}
+
+void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+	FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!bIsReviving || !CurrentReviveTarget) return;
+
+	ReviveTimeRemaining -= DeltaTime;
+
+	// update UI locally
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+	{
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, ReviveTimeRemaining);
+	}
+
+	if (ReviveTimeRemaining <= 0.f)
+	{
+		bIsReviving = false;
+		CompleteRevive();
+	}
+}
+
+void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UInteractionComponent, bIsReviving);
+	DOREPLIFETIME(UInteractionComponent, ReviveTimeRemaining);
 }
 
 
@@ -161,6 +192,20 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 	return Result;
 }
 
+void UInteractionComponent::OnRep_ReviveState()
+{
+	if (bIsReviving)
+	{
+		// start showing progress locally
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, ReviveTimeRemaining);
+	}
+	else
+	{
+		// hide when canceled or completed
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+	}
+}
+
 #pragma endregion
 
 
@@ -207,35 +252,46 @@ void UInteractionComponent::ServerStartRevive_Implementation(AAPlayerCharacter* 
 
 	CurrentReviveTarget = AllyParam;
 
-	// Timer 2 sec pour relever
-	GetWorld()->GetTimerManager().SetTimer(
-		ReviveTimer,
-		this,
-		&UInteractionComponent::CompleteRevive,
-		2.0f,
-		false
-	);
+	bIsReviving = true;
+	ReviveTimeRemaining = ReviveDuration;
+
+	// Tell client to show UI
+	Client_ShowReviveProgress(ReviveDuration);
+	
 }
 
 void UInteractionComponent::ServerCancelRevive_Implementation()
 {
-	GetWorld()->GetTimerManager().ClearTimer(ReviveTimer);
+	bIsReviving = false;
 	CurrentReviveTarget = nullptr;
+
+	Client_HideReviveProgress();
 }
+void UInteractionComponent::Client_ShowReviveProgress_Implementation(float Duration)
+{
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+	{
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, Duration);
+	}
+}
+
+void UInteractionComponent::Client_HideReviveProgress_Implementation()
+{
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+	{
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+	}
+}
+
 
 void UInteractionComponent::CompleteRevive()
 {
-	if (CurrentReviveTarget)
-	{
-		CurrentReviveTarget->SetCurrentPlayerState_Implementation(EPlayerState::None);
-		
-		if (CurrentReviveTarget->HasAuthority())
-		{
-			CurrentReviveTarget->HealthComponent->Server_Revive();
-			CurrentReviveTarget->SetPlayerSpeed(400.f);
-		}
-		CurrentReviveTarget = nullptr;
-	}
+	if (!CurrentReviveTarget) return;
+
+	Client_HideReviveProgress();
+
+	CurrentReviveTarget->HealthComponent->Server_Revive();
+	CurrentReviveTarget = nullptr;
 }
 
 #pragma endregion
