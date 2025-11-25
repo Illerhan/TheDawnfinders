@@ -88,5 +88,8 @@ private:
 	FTimerHandle ReviveTimer;
 
 	UPROPERTY()
+	AActor* InteractingQTEActor;
+
+	UPROPERTY()
 	AAPlayerCharacter* CurrentReviveTarget = nullptr;
 };

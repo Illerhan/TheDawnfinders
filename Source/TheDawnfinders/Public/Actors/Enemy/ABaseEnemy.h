@@ -47,7 +47,7 @@ public:
 // HEALTH
 public :
 	UPROPERTY(BlueprintReadOnly)
-	int CurrentHealth;
+	float CurrentHealth;
 
 	UFUNCTION(BlueprintCallable)
 	void Die();

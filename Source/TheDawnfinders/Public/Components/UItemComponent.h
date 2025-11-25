@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Actors/Enemy/ABaseEnemy.h"
 #include "CustomStructs.h"
 #include "UItemComponent.generated.h"
 
@@ -14,6 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnThrowHidePreview);
 
 class UHealthComponent;
 class UInventoryComponent;
+class UStaminaComponent;
 class AAPlayerCharacter;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -67,6 +69,12 @@ public :
 
 	UFUNCTION()
 	void AttackAnimEnd();
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentAttackDamages();
+
+	UFUNCTION(BlueprintCallable)
+	void ApplyDamagesToEnemy(ABaseEnemy* Enemy);
 
 
 // === OTHERS ===
@@ -137,6 +145,9 @@ private :
 	UPROPERTY()
 	int ComboIndex = 0;
 
+	UPROPERTY()
+	int CurrentAttackDamages = 0;
+
 
 // === PRIVATE REFERENCES ===
 private :
@@ -145,6 +156,9 @@ private :
 
 	UPROPERTY()
 	UInventoryComponent* InventoryComponent = nullptr;
+
+	UPROPERTY()
+	UStaminaComponent* StaminaComponent = nullptr;
 
 	UPROPERTY()
 	AAPlayerCharacter* PlayerCharacter = nullptr;

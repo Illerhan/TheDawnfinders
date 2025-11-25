@@ -66,7 +66,7 @@ public :
 	UItemData* GetEquippedItem();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
-	void PlayAttackMontage(UAnimMontage* AttackMontage);
+	void PlayAttackMontage(UAnimMontage* AttackMontage, float Speed);
 
 
 public :

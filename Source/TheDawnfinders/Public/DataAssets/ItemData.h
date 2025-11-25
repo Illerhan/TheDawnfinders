@@ -84,14 +84,17 @@ public:
 // Weapon
 public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<float> BaseComboDamages;
+	FName WeaponDataTableRow;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<UAnimMontage*> BaseComboAnims;
+	TArray<float> BBaseComboDamages;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<float> HeavyComboDamages;
+	TArray<UAnimMontage*> BBaseComboAnims;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-	TArray<UAnimMontage*> HeavyComboAnims;
+	TArray<float> BHeavyComboDamages;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+	TArray<UAnimMontage*> BHeavyComboAnims;
 };

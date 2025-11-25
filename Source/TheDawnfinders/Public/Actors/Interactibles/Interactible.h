@@ -31,7 +31,7 @@ public :
 	virtual bool GetQTENeeded_Implementation() override;
 	virtual void StartQTE_Implementation() override;
 	virtual void StopQTE_Implementation() override;
-	virtual void ValidateQTE_Implementation() override;
+	virtual bool ValidateQTE_Implementation() override;
 
 
 // === MAIN FUNCTIONS ===

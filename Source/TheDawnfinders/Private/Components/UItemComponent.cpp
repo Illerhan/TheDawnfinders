@@ -7,6 +7,7 @@
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UStaminaComponent.h"
 #include "Interfaces/IPlayer.h"
 
 UItemComponent::UItemComponent()
@@ -25,6 +26,7 @@ void UItemComponent::BeginPlay()
 
 	HealthComponent = PlayerCharacter->HealthComponent;
 	InventoryComponent = PlayerCharacter->InventoryComponent;
+	StaminaComponent = PlayerCharacter->StaminaComponent;
 
 	InventoryComponent->OnInventoryChange.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
 }
@@ -319,11 +321,22 @@ void UItemComponent::DoLightAttack()
 		return;
 	}
 
+	if (!StaminaComponent->VerifyHasStamina()) return;
+
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num())
+		if (++ComboIndex >= WeaponData->LightComboAnims.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -333,8 +346,12 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex]);
+	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(WeaponData->LightComboStaminaCosts[ComboIndex]);
+
+	CurrentAttackDamages = WeaponData->LightComboDamages[ComboIndex];
 }
 
 
@@ -353,11 +370,22 @@ void UItemComponent::DoHeavyAttack()
 		return;
 	}
 
+	if (!StaminaComponent->VerifyHasStamina()) return;
+
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedHeavyAttackInput)
 	{
 		PressedHeavyAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->HeavyComboAnims.Num())
+		if (++ComboIndex >= WeaponData->HeavyComboAnims.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -367,8 +395,12 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->HeavyComboAnims[ComboIndex]);
+	PlayerInterface->PlayAttackMontage_Implementation(WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(WeaponData->HeavyComboStaminaCosts[ComboIndex]);
+
+	CurrentAttackDamages = WeaponData->HeavyComboDamages[ComboIndex];
 }
 
 
@@ -383,6 +415,37 @@ void UItemComponent::AttackAnimEnd()
 	{
 		DoLightAttack();
 	}
+}
+
+float UItemComponent::GetCurrentAttackDamages()
+{
+	return CurrentAttackDamages;
+}
+
+void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
+{
+	float FinalDamage = CurrentAttackDamages;
+
+	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!Table)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+		return;
+	}
+
+	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	switch (WeaponData->DamageType) {
+	case EDamageType::Blunt :
+		FinalDamage *= 1 - Enemy->EnemyData->BluntAbsorption;
+		break;
+
+	case EDamageType::Piercing:
+		FinalDamage *= 1 - Enemy->EnemyData->PiercingAbsorption;
+		break;
+	}
+
+	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
 }
 
 #pragma endregion

@@ -77,8 +77,28 @@ void UInteractionComponent::StartInteract()
 	AActor* Nearest = GetNearestInteractible();
 	if (!Nearest) return;
 
-	if (IInteractible::Execute_GetQTENeeded(Nearest)) {
+	// If is doing QTE
+	if (InteractingQTEActor) 
+	{
+		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
+		{
+			InteractingQTEActor = nullptr;
+			return;
+		}
 
+		InteractingQTEActor = nullptr;
+		CurrentInteractible = Nearest;
+
+		TryInteract(Nearest, PlayerCharacter);
+
+		return;
+	}
+
+	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
+	{
+		IInteractible::Execute_StartQTE(Nearest);
+
+		InteractingQTEActor = Nearest;
 	}
 	else 
 	{

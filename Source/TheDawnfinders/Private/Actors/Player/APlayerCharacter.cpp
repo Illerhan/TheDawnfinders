@@ -149,9 +149,9 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     CurrentState = NewState;
 }
 
-void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage)
+void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed)
 {
-    PlayMontage(AttackMontage);
+    PlayMontage(AttackMontage, Speed);
 }
 
 void AAPlayerCharacter::AddProtectionZone_Implementation()
@@ -210,16 +210,12 @@ void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-    
-    UE_LOG(LogTemp, Log, TEXT("[SERVER RPC] %s speed set to %.0f"), *GetName(), NewSpeed);
 }
 
 void AAPlayerCharacter::OnRep_PlayerSpeed()
 {
     // Appliqué automatiquement sur tous les clients quand PlayerSpeed change
     GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
-    
-    UE_LOG(LogTemp, Log, TEXT("[CLIENT] %s speed replicated to %.0f"), *GetName(), PlayerSpeed);
 }
 
 
@@ -429,7 +425,27 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 
 #pragma region Montages
 
-void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage)
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed)
+{
+    if (!HasAuthority())
+    {
+        ServerPlayMontage(Montage, Speed);
+    }
+    else
+    {
+        MulticastPlayMontage(Montage, Speed);
+    }
+}
+
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (Montage)
+        MulticastPlayMontage(Montage, Speed);
+}
+
+
+void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     if (!Montage || !GetMesh()) return;
 
@@ -437,7 +453,7 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     if (!AnimInstance) return;
 
     AnimInstance->StopAllMontages(0.1f);
-    AnimInstance->Montage_Play(Montage);
+    AnimInstance->Montage_Play(Montage, Speed);
 
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
@@ -448,34 +464,9 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
 }
 
 
-void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage)
-{
-    if (!HasAuthority())
-    {
-        ServerPlayMontage(Montage);
-    }
-    else
-    {
-        MulticastPlayMontage(Montage);
-    }
-}
-
-
-void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage)
-{
-    if (Montage)
-        MulticastPlayMontage(Montage);
-}
-
-
 void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
     if (!Montage) return;
-
-    UE_LOG(LogTemp, Log, TEXT("[%s] Montage %s ended. Interrupted: %s"),
-        *GetName(),
-        *Montage->GetName(),
-        bInterrupted ? TEXT("true") : TEXT("false"));
 
     if (CurrentState == EPlayerState::UsingEquipment)
     {
