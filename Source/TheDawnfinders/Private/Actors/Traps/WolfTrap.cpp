@@ -3,6 +3,9 @@
 
 #include "WolfTrap.h"
 
+#include "Actors/Enemy/ABaseEnemy.h"
+#include "Actors/Player/APlayerCharacter.h"
+#include "Interfaces/IDamageable.h"
 
 
 // Sets default values
@@ -27,7 +30,19 @@ void AWolfTrap::Tick(float DeltaTime)
 
 void AWolfTrap::DoTrapAction()
 {
-
 	Super::DoTrapAction();
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(TrappedActor);
+	if (Player)
+		if (!Player->HasAuthority())
+		{
+			Player->Server_OnTrapped();
+		}
+		else
+		{
+			Player->OnTrapped();
+		}
+			
+	//ABaseEnemy* Enemy = Cast<ABaseEnemy>(TrappedActor);
+
 }
 
