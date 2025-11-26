@@ -14,6 +14,7 @@ enum class EPlayerState : uint8
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
 	Dodging UMETA(DisplayName = "Dodging"),
 	Fallen UMETA(DisplayName = "Fallen"),
+	Rooted UMETA(DisplayName = "Rooted"),
 	Dead UMETA(DisplayName = "Dead")
 };
 
@@ -65,7 +66,7 @@ public :
 	UItemData* GetEquippedItem();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
-	void PlayAttackMontage(UAnimMontage* AttackMontage);
+	void PlayAttackMontage(UAnimMontage* AttackMontage, float Speed);
 
 
 public :

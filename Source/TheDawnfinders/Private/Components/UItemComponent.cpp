@@ -7,6 +7,8 @@
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UStaminaComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
 
 UItemComponent::UItemComponent()
@@ -25,8 +27,17 @@ void UItemComponent::BeginPlay()
 
 	HealthComponent = PlayerCharacter->HealthComponent;
 	InventoryComponent = PlayerCharacter->InventoryComponent;
+	StaminaComponent = PlayerCharacter->StaminaComponent;
 
 	InventoryComponent->OnInventoryChange.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
+
+	WeaponDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!WeaponDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+	WeaponActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Actions.DT_Actions"));
+	if (!WeaponActionsDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 }
 
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -306,24 +317,28 @@ void UItemComponent::StopPreviewThrow()
 
 void UItemComponent::DoLightAttack()
 {
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
+		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
+
 	if (EquippedItem.ItemData == nullptr) return;
-	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
-	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-
-	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
 		PressedHeavyAttackInput = false;
 		return;
 	}
 
+	if (!StaminaComponent->VerifyHasStamina()) return;
+
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->BaseComboAnims.Num())
+		if (++ComboIndex >= WeaponData->LightComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -333,31 +348,40 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->BaseComboAnims[ComboIndex]);
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponData->LightComboActionNames[ComboIndex], " ");
+
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
 }
 
 
 void UItemComponent::DoHeavyAttack()
 {
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
+		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
+
 	if (EquippedItem.ItemData == nullptr) return;
-	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
-	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-
-	if (PlayerInterface->GetCurrentPlayerState_Implementation() == EPlayerState::UsingEquipment)
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = false;
 		PressedHeavyAttackInput = true;
 		return;
 	}
 
+	if (!StaminaComponent->VerifyHasStamina()) return;
+
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
 	if (PressedHeavyAttackInput)
 	{
 		PressedHeavyAttackInput = false;
 
-		if (++ComboIndex >= EquippedItem.ItemData->HeavyComboAnims.Num())
+		if (++ComboIndex >= WeaponData->HeavyComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -367,8 +391,13 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	PlayerInterface->PlayAttackMontage_Implementation(EquippedItem.ItemData->HeavyComboAnims[ComboIndex]);
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::UsingEquipment);
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponData->HeavyComboActionNames[ComboIndex], " ");
+
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
+
+	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
 }
 
 
@@ -383,6 +412,74 @@ void UItemComponent::AttackAnimEnd()
 	{
 		DoLightAttack();
 	}
+}
+
+float UItemComponent::GetCurrentAttackDamages()
+{
+	return CurrentAttackDamages;
+}
+
+void UItemComponent::DoAttackCollision()
+{
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	TArray<FHitResult> Hit;
+	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
+	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 80, 80);
+	FRotator Rotation = GetOwner()->GetActorRotation();
+
+	bool bHit = UKismetSystemLibrary::BoxTraceMulti(
+		this,
+		FinalCollisionCenter,
+		FinalCollisionCenter,
+		HalfSize,
+		Rotation,
+		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
+		false,           // trace complex
+		TArray<AActor*>(),
+		EDrawDebugTrace::ForDuration,
+		Hit,
+		true             // ignore self
+	);
+
+	if (!bHit) return;
+
+	TSet<AActor*> AlreadyHitActors;
+	for (int i = 0; i < Hit.Num(); i++) {
+		if (!Hit[i].GetActor()) continue;
+		if (!Hit[i].GetActor()->ActorHasTag("Enemy")) continue;
+		if (AlreadyHitActors.Contains(Hit[i].GetActor())) continue;
+
+		AlreadyHitActors.Add(Hit[i].GetActor());
+
+		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+		ApplyDamagesToEnemy(Enemy);
+	}
+}
+
+void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
+{
+	float FinalDamage = CurrentAttackDamages;
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	// Enemy Resistances
+	switch (WeaponData->DamageType) {
+	case EDamageType::Blunt :
+		FinalDamage *= 1 - Enemy->EnemyData->BluntAbsorption;
+		break;
+
+	case EDamageType::Piercing:
+		FinalDamage *= 1 - Enemy->EnemyData->PiercingAbsorption;
+		break;
+	}
+
+	// Crit
+	float CritPercent = FMath::FRandRange(0.f, 100.f);
+	if (CritPercent < WeaponData->CriticalChance) {
+		FinalDamage *= 3;
+	}
+
+	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
 }
 
 #pragma endregion

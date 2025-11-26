@@ -3,6 +3,7 @@
 
 #include "Actors/MovableObjects/MovableObjects.h"
 #include "Actors/MovableObjects/Doors.h"
+#include "EntitySystem/MovieSceneEntitySystemRunner.h"
 // Sets default values
 
 
@@ -26,9 +27,9 @@ void AMovableObjects::BeginPlay()
 	Super::BeginPlay();
 
 	StartPosition = GetActorLocation();
+	OriginalStart = StartPosition;
 	
-	EndPosition = GetActorLocation() + EndPosition;
-	
+	FinalPosition = GetActorLocation() + EndPosition;
 
 	if (MoveCurve)
 	{
@@ -70,6 +71,7 @@ void AMovableObjects::DoMovement()
 			UE_LOG(LogTemp, Warning, TEXT("[SERVER] DoMovement resuming from position: %f"), CurrentTimelineProgress);
 		}else
 		{
+			CurrentTimelineProgress = 0.0f;
 			Timeline.PlayFromStart();
 		}
 		Timeline.SetTimelineFinishedFunc(TimelineFinished);
@@ -121,7 +123,7 @@ void AMovableObjects::HandleProgress(float value)
 {
 	CurrentTimelineProgress = value;
 	bCanMove = CanReverse();
-	FVector NewPosition = FMath::Lerp(StartPosition, EndPosition, value);
+	FVector NewPosition = FMath::Lerp(StartPosition, FinalPosition, value);
 	SetActorLocation(NewPosition);
 }
 
@@ -132,15 +134,23 @@ void AMovableObjects::OnTimeLineFinished()
 	{
 		Door->bIsFullyOpen = true;
 		UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
+		return;
 	}
-	else
-	{
-		CurrentTimelineProgress = bIsMovingForward ? 1.0f : 0.0f;
-		EndPosition = StartPosition;
-		StartPosition = GetActorLocation();
-		
+	if (!bIsMovingForward)   
+		{
+			CurrentTimelineProgress = 0.f;
+			bCanMove = true;
+			return;
+		}
 		bCanMove = true;
-	}
+	
+	FinalPosition = StartPosition;
+	StartPosition = GetActorLocation();
+	
+	CurrentTimelineProgress = 1.0f;
+	bCanMove = true;
+
+	UE_LOG(LogTemp, Warning, TEXT("[SERVER] Forward movement completed"));
 }
 
 bool AMovableObjects::CanReverse() const

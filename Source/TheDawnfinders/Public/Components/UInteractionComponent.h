@@ -17,9 +17,10 @@ class THEDAWNFINDERS_API UInteractionComponent : public UActorComponent
 public:
 	UInteractionComponent();
 	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-// === INTERCACTIBLES AT RANGE MANAGEMENT ===
+	// === INTERCACTIBLES AT RANGE MANAGEMENT ===
 public:
 	UFUNCTION()
 	void AddInteractible(AActor* Interactible);
@@ -55,16 +56,33 @@ public:
 // === REVIVE ===
 public:
 	UFUNCTION(Server, Reliable)
-	void ServerStartRevive(AAPlayerCharacter* Ally);
+	void ServerStartHelp(AAPlayerCharacter* Ally);
 
 	UFUNCTION(Server, Reliable)
-	void ServerCancelRevive();
+	void ServerCancelHelp();
 
 	UFUNCTION()
-	void CompleteRevive();
+	void CompleteHelp();
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
+
+	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
+	bool bIsHelping = false;
+	float HelpDuration = 2.f;
+	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
+	float HelpTimeRemaining = 0.f;
+	
+	UFUNCTION(Client, Reliable)
+	void Client_ShowHelpProgress(float Duration);
+
+	UFUNCTION(Client, Reliable)
+	void Client_HideHelpProgress();
+	
+	UFUNCTION()
+	void OnRep_HelpState();
+	
+	
 
 
 // === PUBLIC PROPERTIES ===
@@ -85,8 +103,11 @@ public:
 // === PRIVATE PROPERTIES ===
 private:
 	UPROPERTY()
-	FTimerHandle ReviveTimer;
+	FTimerHandle HelpTimer;
 
 	UPROPERTY()
-	AAPlayerCharacter* CurrentReviveTarget = nullptr;
+	AActor* InteractingQTEActor;
+
+	UPROPERTY()
+	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 };

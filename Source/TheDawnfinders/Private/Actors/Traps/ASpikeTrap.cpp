@@ -3,6 +3,8 @@
 
 #include "ASpikeTrap.h"
 
+#include "Interfaces/IDamageable.h"
+
 
 // Sets default values
 AASpikeTrap::AASpikeTrap()
@@ -27,5 +29,7 @@ void AASpikeTrap::Tick(float DeltaTime)
 void AASpikeTrap::DoTrapAction()
 {
 	Super::DoTrapAction();
+	IDamageable::Execute_ReceiveDamage(TrappedActor,Damages,this);
+	
 }
 

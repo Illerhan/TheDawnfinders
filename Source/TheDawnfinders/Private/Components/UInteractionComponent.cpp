@@ -3,6 +3,7 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 UInteractionComponent::UInteractionComponent()
@@ -16,6 +17,36 @@ void UInteractionComponent::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerCharacter = Cast<AAPlayerCharacter>(GetOwner());
+}
+
+void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+	FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!bIsHelping || !CurrentHelpedTarget) return;
+
+	HelpTimeRemaining -= DeltaTime;
+
+	// update UI locally
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+	{
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
+	}
+
+	if (HelpTimeRemaining <= 0.f)
+	{
+		bIsHelping = false;
+		CompleteHelp();
+	}
+}
+
+void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UInteractionComponent, bIsHelping);
+	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
 }
 
 
@@ -77,8 +108,28 @@ void UInteractionComponent::StartInteract()
 	AActor* Nearest = GetNearestInteractible();
 	if (!Nearest) return;
 
-	if (IInteractible::Execute_GetQTENeeded(Nearest)) {
+	// If is doing QTE
+	if (InteractingQTEActor) 
+	{
+		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
+		{
+			InteractingQTEActor = nullptr;
+			return;
+		}
 
+		InteractingQTEActor = nullptr;
+		CurrentInteractible = Nearest;
+
+		TryInteract(Nearest, PlayerCharacter);
+
+		return;
+	}
+
+	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
+	{
+		IInteractible::Execute_StartQTE(Nearest);
+
+		InteractingQTEActor = Nearest;
 	}
 	else 
 	{
@@ -141,6 +192,20 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 	return Result;
 }
 
+void UInteractionComponent::OnRep_HelpState()
+{
+	if (bIsHelping)
+	{
+		// start showing progress locally
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
+	}
+	else
+	{
+		// hide when canceled or completed
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+	}
+}
+
 #pragma endregion
 
 
@@ -149,7 +214,7 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 void UInteractionComponent::StopInteract()
 {
 	// Cancel the revive
-	ServerCancelRevive();
+	ServerCancelHelp();
 
 	// Cancel the interactible interaction
 	if (CurrentInteractible)
@@ -175,47 +240,58 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 	if (!Player || !Player->IsLocallyControlled()) return;
 
 	if (AllyParam)
-		ServerStartRevive(AllyParam);
+		ServerStartHelp(AllyParam);
 }
 
 
-void UInteractionComponent::ServerStartRevive_Implementation(AAPlayerCharacter* AllyParam)
+void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* AllyParam)
 {
 	if (!AllyParam) return;
 	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
 		return;
 
-	CurrentReviveTarget = AllyParam;
+	CurrentHelpedTarget = AllyParam;
 
-	// Timer 2 sec pour relever
-	GetWorld()->GetTimerManager().SetTimer(
-		ReviveTimer,
-		this,
-		&UInteractionComponent::CompleteRevive,
-		2.0f,
-		false
-	);
+	bIsHelping = true;
+	HelpTimeRemaining = HelpDuration;
+
+	// Tell client to show UI
+	Client_ShowHelpProgress(HelpDuration);
+	
 }
 
-void UInteractionComponent::ServerCancelRevive_Implementation()
+void UInteractionComponent::ServerCancelHelp_Implementation()
 {
-	GetWorld()->GetTimerManager().ClearTimer(ReviveTimer);
-	CurrentReviveTarget = nullptr;
-}
+	bIsHelping = false;
+	CurrentHelpedTarget = nullptr;
 
-void UInteractionComponent::CompleteRevive()
+	Client_HideHelpProgress();
+}
+void UInteractionComponent::Client_ShowHelpProgress_Implementation(float Duration)
 {
-	if (CurrentReviveTarget)
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
-		CurrentReviveTarget->SetCurrentPlayerState_Implementation(EPlayerState::None);
-		
-		if (CurrentReviveTarget->HasAuthority())
-		{
-			CurrentReviveTarget->HealthComponent->Server_Revive();
-			CurrentReviveTarget->SetPlayerSpeed(400.f);
-		}
-		CurrentReviveTarget = nullptr;
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, Duration);
 	}
+}
+
+void UInteractionComponent::Client_HideHelpProgress_Implementation()
+{
+	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+	{
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+	}
+}
+
+
+void UInteractionComponent::CompleteHelp()
+{
+	if (!CurrentHelpedTarget) return;
+
+	Client_HideHelpProgress();
+
+	CurrentHelpedTarget->HealthComponent->Server_Revive();
+	CurrentHelpedTarget = nullptr;
 }
 
 #pragma endregion

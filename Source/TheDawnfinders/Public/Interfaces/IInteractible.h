@@ -36,5 +36,5 @@ public :
 	void StopQTE();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
-	void ValidateQTE();
+	bool ValidateQTE();
 };

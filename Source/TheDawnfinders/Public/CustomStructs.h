@@ -3,6 +3,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DataAssets/ItemData.h"
+#include "Engine/DataTable.h"
 #include "CustomStructs.generated.h" 
 
 
@@ -64,4 +65,58 @@ public:
 		: Value()
 	{
 	}
+};
+
+
+
+UENUM(BlueprintType)
+enum class EDamageType : uint8 {
+	Piercing UMETA(DisplayName = "Piercing"),
+	Blunt UMETA(DisplayName = "Blunt")
+};
+
+USTRUCT(BlueprintType)
+struct FWeaponInfos : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float SpeedModifier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+	float CriticalChance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Range;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EDamageType DamageType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BaseDamage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaMultiplier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> LightComboActionNames;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> HeavyComboActionNames;
+};
+
+
+USTRUCT(BlueprintType)
+struct FWeaponActionData : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DamageMultiplier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaCost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* Animation;
 };

@@ -104,7 +104,7 @@ public :
 
 	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
 
-	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage) override;
+	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) override;
 
 	virtual void AddProtectionZone_Implementation() override;
 
@@ -161,6 +161,12 @@ public:
 	
 	UFUNCTION(Server, Reliable)
 	void Server_OnFallen();
+
+	UFUNCTION()
+	void OnTrapped();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_OnTrapped();
 	
 
 public:	
@@ -189,13 +195,13 @@ public:
 // Montage Methods
 public :
 	UFUNCTION(Server, Reliable)
-	void ServerPlayMontage(UAnimMontage* Montage);
+	void ServerPlayMontage(UAnimMontage* Montage, float Speed);
 
 	UFUNCTION(NetMulticast,Reliable)
-	void MulticastPlayMontage(UAnimMontage* Montage);
+	void MulticastPlayMontage(UAnimMontage* Montage, float Speed);
 
 	UFUNCTION(BlueprintCallable)
-	void PlayMontage(UAnimMontage* Montage);
+	void PlayMontage(UAnimMontage* Montage, float Speed);
 
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
