@@ -30,6 +30,18 @@ void UItemComponent::BeginPlay()
 	StaminaComponent = PlayerCharacter->StaminaComponent;
 
 	InventoryComponent->OnInventoryChange.AddUniqueDynamic(this, &UItemComponent::SetEquippedItem);
+
+	WeaponDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+	if (!WeaponDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+	WeaponActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_WeaponActions.DT_WeaponActions"));
+	if (!WeaponActionsDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+	WeaponTypeActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_WeaponTypes.DT_WeaponTypes"));
+	if (!WeaponActionsDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 }
 
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -324,20 +336,14 @@ void UItemComponent::DoLightAttack()
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
 
-		if (++ComboIndex >= WeaponData->LightComboAnims.Num())
+		if (++ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -347,12 +353,13 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), WeaponData->LightComboAnims[ComboIndex], WeaponData->SpeedModifier);
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
+
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
-	StaminaComponent->UseStamina(WeaponData->LightComboStaminaCosts[ComboIndex]);
-
-	CurrentAttackDamages = WeaponData->LightComboDamages[ComboIndex];
+	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
 }
 
 
@@ -373,20 +380,14 @@ void UItemComponent::DoHeavyAttack()
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedHeavyAttackInput)
 	{
 		PressedHeavyAttackInput = false;
 
-		if (++ComboIndex >= WeaponData->HeavyComboAnims.Num())
+		if (++ComboIndex >= WeaponTypeActions->HeavyComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -396,11 +397,13 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), WeaponData->HeavyComboAnims[ComboIndex], WeaponData->SpeedModifier);
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
+
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
-	StaminaComponent->UseStamina(WeaponData->HeavyComboStaminaCosts[ComboIndex]);
-	CurrentAttackDamages = WeaponData->HeavyComboDamages[ComboIndex];
+	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
 }
 
 
@@ -424,13 +427,7 @@ float UItemComponent::GetCurrentAttackDamages()
 
 void UItemComponent::DoAttackCollision()
 {
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
@@ -469,14 +466,7 @@ void UItemComponent::DoAttackCollision()
 void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 {
 	float FinalDamage = CurrentAttackDamages;
-
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {

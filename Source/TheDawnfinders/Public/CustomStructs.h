@@ -75,10 +75,27 @@ enum class EDamageType : uint8 {
 	Blunt UMETA(DisplayName = "Blunt")
 };
 
+UENUM(BlueprintType)
+enum class EWeaponType : uint8 {
+	OneHanded UMETA(DisplayName = "OneHanded"),
+	TwoHanded UMETA(DisplayName = "TwoHanded"),
+	AtRange UMETA(DisplayName = "AtRange")
+};
+
+
 USTRUCT(BlueprintType)
 struct FWeaponInfos : public FTableRowBase {
 
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName WeaponTypeName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BaseDamage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaMultiplier;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float SpeedModifier;
@@ -91,22 +108,39 @@ struct FWeaponInfos : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;
+};
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<float> LightComboDamages;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<float> LightComboStaminaCosts;
+USTRUCT(BlueprintType)
+struct FWeaponTypesData : public FTableRowBase {
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<UAnimMontage*> LightComboAnims;
+	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<float> HeavyComboDamages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> LightComboActionNames;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<float> HeavyComboStaminaCosts;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> HeavyComboActionNames;
+};
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<UAnimMontage*> HeavyComboAnims;
+
+USTRUCT(BlueprintType)
+struct FWeaponActionData : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DamageMultiplier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaCost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* Animation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
+	float CameraShakeIntensity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
+	float CameraShakeDuration;
 };
