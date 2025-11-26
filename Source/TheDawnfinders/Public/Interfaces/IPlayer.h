@@ -14,7 +14,7 @@ enum class EPlayerState : uint8
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
 	Dodging UMETA(DisplayName = "Dodging"),
 	Fallen UMETA(DisplayName = "Fallen"),
-	Rooted UMETA(DisplayName = "Rooted"),
+	Immobilized UMETA(DisplayName = "Immobilized"),
 	Dead UMETA(DisplayName = "Dead")
 };
 

@@ -316,7 +316,7 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     case EPlayerState::Dead:
         //
         break;
-    case EPlayerState::Rooted:
+    case EPlayerState::Immobilized:
         TargetMaxSpeed =0.f;
     default:
         TargetMaxSpeed =0.f;
@@ -340,7 +340,7 @@ void AAPlayerCharacter::OnTrapped()
 {
     if (!HasAuthority())
         Server_OnTrapped();
-    CurrentState = EPlayerState::Rooted;
+    CurrentState = EPlayerState::Immobilized;
     SetPlayerSpeed(0.f);
 }
 
