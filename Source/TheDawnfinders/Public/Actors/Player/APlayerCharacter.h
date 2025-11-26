@@ -117,7 +117,11 @@ public:
 	
 
 // Movement + State
-protected:
+
+private:
+	float TargetMaxSpeed = 400.f;
+	
+protected:	
 	virtual void BeginPlay() override;
 	
 	UPROPERTY(BlueprintReadOnly)

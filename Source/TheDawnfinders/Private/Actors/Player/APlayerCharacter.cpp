@@ -82,19 +82,28 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    if (HasAuthority())
+    {
+        float CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
+        
+        float NewSpeed = FMath::FInterpTo(
+            CurrentSpeed,
+            TargetMaxSpeed,
+            DeltaTime,
+            2.0f // <- Facteur de changement de vitesse  ( + = + rapide)
+        );
+
+        GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+
+        // Pour réplication correcte
+        PlayerSpeed = NewSpeed; 
+    }
 
     if (GetLocalRole() == ROLE_SimulatedProxy)
-    {
         return;
-    }
-
-    // --- Plus aucune rotation Mesh/Actor ici ---
-    // Tu gères la rotation en Blueprint (input Turn/Look et/ou CharacterMovement).
 
     if (CurrentState == EPlayerState::Dodging)
-    {
         ActualiseDodge(DeltaTime);
-    }
 }
 
 
@@ -256,14 +265,14 @@ void AAPlayerCharacter::ManageRun(bool Input)
         if (Input)
         {
             CurrentState = EPlayerState::Running;
-            SetPlayerSpeed(800.f);
+            TargetMaxSpeed = 800.f;
         }
         else
         {
             if (CurrentState == EPlayerState::Running)
                 CurrentState = EPlayerState::None;
 
-            SetPlayerSpeed(400.f);
+            TargetMaxSpeed = 400.f;
         }
     }
     else
@@ -293,24 +302,24 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     switch(CurrentState)
     {
     case EPlayerState::Running:
-        SetPlayerSpeed(800.f);
+        TargetMaxSpeed = 800.f;
         break;
     case EPlayerState::None:
-        SetPlayerSpeed(400.f);
+        TargetMaxSpeed =400.f;
         break;
     case EPlayerState::Dodging:
         // Géré par ActualiseDodge
         break;
     case EPlayerState::Fallen:
-        SetPlayerSpeed(100.f);
+        TargetMaxSpeed =100.f;
         break;
     case EPlayerState::Dead:
         //
         break;
     case EPlayerState::Rooted:
-        SetPlayerSpeed(0.f);
+        TargetMaxSpeed =0.f;
     default:
-        SetPlayerSpeed(400.f);
+        TargetMaxSpeed =0.f;
         break;
     }
     // You can add logic here to update animations, movement speed, etc.
