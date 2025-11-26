@@ -75,10 +75,27 @@ enum class EDamageType : uint8 {
 	Blunt UMETA(DisplayName = "Blunt")
 };
 
+UENUM(BlueprintType)
+enum class EWeaponType : uint8 {
+	OneHanded UMETA(DisplayName = "OneHanded"),
+	TwoHanded UMETA(DisplayName = "TwoHanded"),
+	AtRange UMETA(DisplayName = "AtRange")
+};
+
+
 USTRUCT(BlueprintType)
 struct FWeaponInfos : public FTableRowBase {
 
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName WeaponTypeName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BaseDamage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaMultiplier;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float SpeedModifier;
@@ -91,12 +108,13 @@ struct FWeaponInfos : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;
+};
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float BaseDamage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float StaminaMultiplier;
+USTRUCT(BlueprintType)
+struct FWeaponTypesData : public FTableRowBase {
+
+	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FName> LightComboActionNames;
@@ -119,4 +137,10 @@ struct FWeaponActionData : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UAnimMontage* Animation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
+	float CameraShakeIntensity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
+	float CameraShakeDuration;
 };

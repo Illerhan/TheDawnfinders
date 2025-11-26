@@ -157,6 +157,9 @@ private :
 	UPROPERTY()
 	UDataTable* WeaponActionsDataTable;
 
+	UPROPERTY()
+	UDataTable* WeaponTypeActionsDataTable;
+
 
 // === PRIVATE REFERENCES ===
 private :

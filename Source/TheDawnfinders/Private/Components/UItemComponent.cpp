@@ -35,7 +35,11 @@ void UItemComponent::BeginPlay()
 	if (!WeaponDataTable)
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 
-	WeaponActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Actions.DT_Actions"));
+	WeaponActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_WeaponActions.DT_WeaponActions"));
+	if (!WeaponActionsDataTable)
+		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+	WeaponTypeActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_WeaponTypes.DT_WeaponTypes"));
 	if (!WeaponActionsDataTable)
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 }
@@ -333,12 +337,13 @@ void UItemComponent::DoLightAttack()
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
 
-		if (++ComboIndex >= WeaponData->LightComboActionNames.Num())
+		if (++ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -348,7 +353,7 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponData->LightComboActionNames[ComboIndex], " ");
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
@@ -376,12 +381,13 @@ void UItemComponent::DoHeavyAttack()
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedHeavyAttackInput)
 	{
 		PressedHeavyAttackInput = false;
 
-		if (++ComboIndex >= WeaponData->HeavyComboActionNames.Num())
+		if (++ComboIndex >= WeaponTypeActions->HeavyComboActionNames.Num())
 		{
 			ComboIndex = 0;
 		}
@@ -391,7 +397,7 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponData->HeavyComboActionNames[ComboIndex], " ");
+	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
 
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
