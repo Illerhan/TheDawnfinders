@@ -128,6 +128,11 @@ void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interac
     InteractionComponent->RemoveInteractible(Interactible);
 }
 
+void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity, float duration)
+{
+
+}
+
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 {
     ProgressBarWidget->ActualiseProgress(CurrentValue);
