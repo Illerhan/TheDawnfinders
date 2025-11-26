@@ -92,21 +92,31 @@ struct FWeaponInfos : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<float> LightComboDamages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BaseDamage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<float> LightComboStaminaCosts;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaMultiplier;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Light Combo")
-	TArray<UAnimMontage*> LightComboAnims;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> LightComboActionNames;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<float> HeavyComboDamages;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> HeavyComboActionNames;
+};
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<float> HeavyComboStaminaCosts;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heavy Combo")
-	TArray<UAnimMontage*> HeavyComboAnims;
+USTRUCT(BlueprintType)
+struct FWeaponActionData : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DamageMultiplier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaCost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* Animation;
 };

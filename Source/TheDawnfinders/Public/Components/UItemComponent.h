@@ -151,6 +151,12 @@ private :
 	UPROPERTY()
 	int CurrentAttackDamages = 0;
 
+	UPROPERTY()
+	UDataTable* WeaponDataTable;
+
+	UPROPERTY()
+	UDataTable* WeaponActionsDataTable;
+
 
 // === PRIVATE REFERENCES ===
 private :
