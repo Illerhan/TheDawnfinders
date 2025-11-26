@@ -41,6 +41,8 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	void SetCurrentPlayerState(EPlayerState NewState);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void DoCameraShake(float Intensity, float duration);
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")

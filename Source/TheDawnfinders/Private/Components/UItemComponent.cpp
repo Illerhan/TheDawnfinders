@@ -486,6 +486,8 @@ void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 	}
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+
+	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 0, 0);
 }
 
 #pragma endregion
