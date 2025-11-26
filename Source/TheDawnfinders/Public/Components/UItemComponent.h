@@ -149,7 +149,7 @@ private :
 	int ComboIndex = 0;
 
 	UPROPERTY()
-	int CurrentAttackDamages = 0;
+	float CurrentAttackDamages = 0;
 
 	UPROPERTY()
 	UDataTable* WeaponDataTable;

@@ -421,13 +421,7 @@ float UItemComponent::GetCurrentAttackDamages()
 
 void UItemComponent::DoAttackCollision()
 {
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
@@ -466,14 +460,7 @@ void UItemComponent::DoAttackCollision()
 void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 {
 	float FinalDamage = CurrentAttackDamages;
-
-	UDataTable* Table = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-	if (!Table)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-		return;
-	}
-	FWeaponInfos* WeaponData = Table->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
