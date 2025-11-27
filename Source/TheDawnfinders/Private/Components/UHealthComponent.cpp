@@ -4,6 +4,7 @@
 #include "Components/UHealthComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
+#include "Components/UStaminaComponent.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -12,8 +13,10 @@ UHealthComponent::UHealthComponent()
 	CurrentMaxHealth = 100.0f;
 	CurrentHealth = CurrentMaxHealth;
 	MaxHealth = 100.0f;
+
 	PrimaryComponentTick.bCanEverTick = true;
 	bAllowConcurrentTick = true;
+
 	SetIsReplicatedByDefault(true);
 }
 
@@ -27,6 +30,8 @@ void UHealthComponent::BeginPlay()
 
 	APawn* PawnOwner = Cast<APawn>(Owner);
 	if (!PawnOwner) return;
+
+	StaminaComponent = (Cast<AAPlayerCharacter>(PawnOwner))->StaminaComponent;
 
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
@@ -79,6 +84,13 @@ void UHealthComponent::InitialiseComponent(float MaxHP)
 
 void UHealthComponent::TakeDamage(float quantity)
 {
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
+	{
+		StaminaComponent->UseStamina(10.f);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0, 0);
+		return;
+	}
+
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
 
 	// If Client

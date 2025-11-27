@@ -102,8 +102,16 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     if (GetLocalRole() == ROLE_SimulatedProxy)
         return;
 
-    if (CurrentState == EPlayerState::Dodging)
+    switch (CurrentState) {
+    case EPlayerState::Dodging :
         ActualiseDodge(DeltaTime);
+        break;
+
+    case EPlayerState::Blocking :
+        StaminaComponent->UseStamina(3.f * DeltaTime);
+        if (!StaminaComponent->VerifyHasStamina()) ItemComponent->StopSecondaryAction();
+        break;
+    }
 }
 
 
@@ -239,6 +247,11 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     if (CurrentState == EPlayerState::Dodging)
         return;
 
+    if (CurrentState == EPlayerState::Blocking) {
+        AddMovementInput(FVector(0, 0, 0), 1.0f, false);
+        return;
+    }
+
     CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
     if (CurrentPlayerInput.Length() > 0.5f) {
@@ -252,7 +265,6 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
     FinalVector.Normalize();
 
-    // Ton offset 30° (cam isométrique ?) conservé
     FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 

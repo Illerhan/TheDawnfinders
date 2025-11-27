@@ -7,6 +7,8 @@
 #include "Net/UnrealNetwork.h"
 #include "UHealthComponent.generated.h"
 
+class UStaminaComponent;
+
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UHealthComponent : public UActorComponent
@@ -121,4 +123,7 @@ private :
 
 	UPROPERTY()
 	float CurseRatio= 0.02;
+
+	UPROPERTY()
+	UStaminaComponent* StaminaComponent;
 };

@@ -260,11 +260,19 @@ void UItemComponent::DoSecondaryAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
+
+	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) {
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking);
+	}
 }
 
 void UItemComponent::StopSecondaryAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+
+	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) {
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+	}
 }
 
 #pragma endregion

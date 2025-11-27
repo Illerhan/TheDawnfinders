@@ -12,6 +12,7 @@ enum class EPlayerState : uint8
 	Running UMETA(DisplayName = "Running"),
 	Crouching UMETA(DisplayName = "Crouching"),
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
+	Blocking UMETA(DisplayName = "Blocking"),
 	Dodging UMETA(DisplayName = "Dodging"),
 	Fallen UMETA(DisplayName = "Fallen"),
 	Rooted UMETA(DisplayName = "Rooted"),
@@ -43,6 +44,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	void DoCameraShake(float Intensity, float duration);
+
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
