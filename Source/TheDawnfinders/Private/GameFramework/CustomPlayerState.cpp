@@ -8,9 +8,19 @@
 #include "Components/UStaminaComponent.h"
 #include "Net/UnrealNetwork.h"
 
+
+
 void ACustomPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetPlayerController() == nullptr) return;
+
+	for (UAmuletData* Amulet : PossessedAmulets) {
+		if (Amulet->AmuletTriggerType == EAmuletTriggerType::Always) {
+			Amulet->ApplyEffect(GetPlayerController(), this);
+		}
+	}
 }
 
 
@@ -51,7 +61,7 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 	CurrentStamina = current;
 	CurrentMaxStamina = max;
 
-	OnRep_StaminaChange();
+	OnRep_HealthChange();
 }
 
 // CALLED ON THE SERVER TO ACTUALISE FOR ALL
@@ -71,6 +81,19 @@ void ACustomPlayerState::ActualiseLantern(float current, float max)
 
 	OnRep_LanternChange();
 }
+
+
+
+void ACustomPlayerState::ApplyContextualAmulet(EAmuletTriggerType Trigger)
+{
+	for(UAmuletData* Amulet : PossessedAmulets) {
+		if (Amulet->AmuletTriggerType == Trigger) {
+			Amulet->VerifyApplyEffect(GetPlayerController(), this);
+		}
+	}
+}
+
+
 
 void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {

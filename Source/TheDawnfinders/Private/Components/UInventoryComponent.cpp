@@ -15,6 +15,8 @@ UInventoryComponent::UInventoryComponent()
 
 void UInventoryComponent::BeginPlay()
 {
+	CurrentOverloadSlotCount += OverloadSlotBaseCount;
+
 	Super::BeginPlay();
 }
 
@@ -381,7 +383,7 @@ int UInventoryComponent::GetCurrentOverloadCount()
 {
 	int Count = 0;
 
-	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - OverloadBaseCount; i--) {
+	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - CurrentOverloadSlotCount; i--) {
 		if (InventorySlots[i].ItemData == nullptr) continue;
 		if (!InventorySlots[i].bIsOverloadSlot) continue;
 
@@ -391,10 +393,19 @@ int UInventoryComponent::GetCurrentOverloadCount()
 	return Count;
 }
 
+void UInventoryComponent::ChangeOverloadSlotCount(int AmountAdded)
+{
+	CurrentOverloadSlotCount += AmountAdded;
+
+	ActualiseOverloadedSlots();
+}
+
 
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
 	if (!bIsOpened) return GetCurrentSlot();
+
+	UE_LOG(LogTemp, Display, TEXT("Change Inedx : %d"), CurrentSlotIndex);
 
 	// Client
 	if (!GetOwner()->HasAuthority())
@@ -429,7 +440,24 @@ void UInventoryComponent::ServerChangeCurrentSlot_Implementation(bool IndexGoUp,
 			CurrentSlotIndex = (CurrentSlotIndex - 1 + InventorySlots.Num()) % InventorySlots.Num();
 		}
 	}
+	OnRep_CurrentSlotIndex();
+	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+}
 
+void UInventoryComponent::ActualiseOverloadedSlots()
+{
+	if (InventorySlots.Num() == 0) return;
+
+	TArray<FInventorySlot> NewInventorySlots;
+
+	for (int i = 0; i < InventorySlotCount; i++) {
+		NewInventorySlots.Add(InventorySlots[i]);
+
+		bool bIsOverloadSlot = (InventorySlotCount - CurrentOverloadSlotCount) <= i;
+		NewInventorySlots[i].bIsOverloadSlot = bIsOverloadSlot;
+	}
+
+	InventorySlots = NewInventorySlots;
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 

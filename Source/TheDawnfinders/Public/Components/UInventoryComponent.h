@@ -98,6 +98,9 @@ public :
 
 // ==== OTHERS ====
 public :
+	UFUNCTION(BlueprintCallable)
+	void ActualiseOverloadedSlots();
+
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void OpenInventory();
 
@@ -116,6 +119,9 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	int GetCurrentOverloadCount();
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void ChangeOverloadSlotCount(int AmountAdded);
+
 
 // === PROTECTED PROPERTIES ===
 public : 
@@ -126,7 +132,10 @@ public :
 	int CurrentSlotIndex;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
-	int OverloadBaseCount = 3;
+	int OverloadSlotBaseCount = 3;
+
+	UPROPERTY(BlueprintReadOnly)
+	int CurrentOverloadSlotCount;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;

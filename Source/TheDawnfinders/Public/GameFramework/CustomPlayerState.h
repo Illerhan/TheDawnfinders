@@ -6,6 +6,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "Components/UHealthComponent.h"
 #include "GameFramework/PlayerState.h"
+#include "DataAssets/AmuletData.h"
 #include "CustomPlayerState.generated.h"
 
 
@@ -22,9 +23,29 @@ class THEDAWNFINDERS_API ACustomPlayerState : public APlayerState
 public :
 	virtual void BeginPlay() override;
 
+
+// === REPLICATION ===
+public :
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION()
+	void OnRep_StaminaChange();
+
+	UFUNCTION()
+	void OnRep_HealthChange();
+
+	UFUNCTION()
+	void OnRep_LanternChange();
+
+
+// === DELEGATES
+public :
 	FOnInfoChange OnInfoChange;
 	FOnInfoChangeLocal OnInfoChangeLocal;
 
+
+// === HEALTH + STAMINA
+public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLocalStamina(float current, float max);
 
@@ -37,16 +58,26 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max, float fixedMax);
 
+
+// === LANTERN ===
+public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLocalLantern(float current, float max);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLantern(float current, float max);
 
+
+// === AMULETS
+public :
+	UFUNCTION(BlueprintCallable)
+	void ApplyContextualAmulet(EAmuletTriggerType Trigger);
+
+
+// === PUBLIC PROPERTIES
+public :
 	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
-
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxStamina;
@@ -63,12 +94,8 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	float LanternPercent = 100;
 
-	UFUNCTION()
-	void OnRep_StaminaChange();
-
-	UFUNCTION()
-	void OnRep_HealthChange();
-
-	UFUNCTION()
-	void OnRep_LanternChange();
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintReadOnly)
+	TSet<UAmuletData*> PossessedAmulets;
 };
