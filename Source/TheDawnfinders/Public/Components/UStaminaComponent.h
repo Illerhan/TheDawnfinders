@@ -44,9 +44,7 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseCurrentOverloadCount(int NewCount);
 
-
-// === PRIVATE PROPERTIES === 
-private :
+	
 	UPROPERTY()
 	int CurrentOverloadCount = 0;
 

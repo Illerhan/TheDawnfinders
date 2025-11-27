@@ -24,7 +24,7 @@ public:
 // === MAIN FUNCTIONS ===
 public : 
 	UFUNCTION(BlueprintCallable)
-	void InitialiseComponent(float MaxHealth);
+	void InitialiseComponent(float MaxHP, float MinMaxHP, float MinReviveHP,float InjureDecreaseSpeed, float CurseRatio);
 
 	UFUNCTION(BlueprintCallable)
 	void Heal(float quantity);
@@ -108,10 +108,7 @@ public :
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
 	bool bIsFallen;
-
-
-// === PRIVATE PROPERTIES ===
-private :
+	
 	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
 	int32 ProtectionZoneAmount = 0;
 

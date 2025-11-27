@@ -22,7 +22,10 @@ public:
 
 
 // === TURN ON / OFF ===
-public : 
+public :
+	UFUNCTION(BlueprintCallable)
+	void InitialiseComponent(float FuelConsumption, float MaxFuel);
+	
 	UFUNCTION(BlueprintCallable, Category = "Light")
 	void TurnLightOn();
 

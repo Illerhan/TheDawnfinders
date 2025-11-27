@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
+#include "PlayerData.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
@@ -29,8 +30,10 @@ public:
 	AAPlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Config")
+	UPlayerData* PlayerConfig;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UInventoryComponent* InventoryComponent;
 
@@ -123,7 +126,9 @@ public:
 private:
 	float TargetMaxSpeed = 400.f;
 	
-protected:	
+protected:
+	UFUNCTION()
+	void ApplyPlayerData();
 	virtual void BeginPlay() override;
 	
 	UPROPERTY(BlueprintReadOnly)

@@ -36,8 +36,6 @@ void UHealthComponent::BeginPlay()
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
 
-	InitialiseComponent(100);
-
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	if (!PSCustom) return;
 
@@ -61,11 +59,16 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 }
 
 
-void UHealthComponent::InitialiseComponent(float MaxHP)
+void UHealthComponent::InitialiseComponent
+	(float MaxHP, float MinMaxHP, float ReviveHP,float InjureSpeed, float CurseRate)
 {
 	CurrentHealth = MaxHP;
 	CurrentMaxHealth = MaxHP;
 	MaxHealth = MaxHP;
+	MinimumMaxHP = MinMaxHP;
+	MinReviveHP = ReviveHP;
+	InjureDecreaseSpeed = InjureSpeed;
+	CurseRatio = CurseRate;
 
 	// If is not the server
 	if (!GetOwner()->HasAuthority()) {

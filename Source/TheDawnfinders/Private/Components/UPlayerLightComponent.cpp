@@ -96,6 +96,13 @@ void UPlayerLightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	DOREPLIFETIME_CONDITION_NOTIFY(UPlayerLightComponent, FuelRemaining, COND_None, REPNOTIFY_Always);
 }
 
+void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
+{
+	FuelRemaining = FuelRate;
+	MaxFuel = MaxFuels;
+	FuelRemaining = MaxFuel;
+}
+
 
 #pragma region Turn On / Off
 
