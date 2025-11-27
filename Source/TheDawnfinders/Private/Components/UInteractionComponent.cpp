@@ -111,15 +111,17 @@ void UInteractionComponent::StartInteract()
 	// If is doing QTE
 	if (InteractingQTEActor) 
 	{
+		
 		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
 		{
 			InteractingQTEActor = nullptr;
+			PlayerCharacter->OnRevive();
 			return;
 		}
 
 		InteractingQTEActor = nullptr;
 		CurrentInteractible = Nearest;
-
+		PlayerCharacter->OnRevive();
 		TryInteract(Nearest, PlayerCharacter);
 
 		return;
@@ -127,8 +129,8 @@ void UInteractionComponent::StartInteract()
 
 	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
 	{
+		PlayerCharacter->OnTrapped();
 		IInteractible::Execute_StartQTE(Nearest);
-
 		InteractingQTEActor = Nearest;
 	}
 	else 
@@ -247,7 +249,9 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* AllyParam)
 {
 	if (!AllyParam) return;
-	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen
+		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen
+		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead)
 		return;
 
 	CurrentHelpedTarget = AllyParam;

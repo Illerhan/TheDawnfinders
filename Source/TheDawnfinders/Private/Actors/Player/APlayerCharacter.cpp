@@ -1,5 +1,7 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
+
+#include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
 #include "Components/UStaminaComponent.h"
@@ -9,6 +11,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/GameSession.h"
+#include "GameFramework/PlayerState.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
 
@@ -84,23 +89,26 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 
     if (HasAuthority())
     {
-        float CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
+        // Interpole la MaxWalkSpeed vers TargetMaxSpeed
+        float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
+        float InterpSpeed = 2.0f; // ajustage freinage : 3 = lent, 8 = rapide
+        float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, InterpSpeed);
         
-        float NewSpeed = FMath::FInterpTo(
-            CurrentSpeed,
-            TargetMaxSpeed,
-            DeltaTime,
-            2.0f // <- Facteur de changement de vitesse  ( + = + rapide)
-        );
+        // arrêt immédiat 
+        if (CurrentState == EPlayerState::Dead || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Running)
+        {
+            NewSpeed = TargetMaxSpeed;
+        }
 
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-
-        // Pour réplication correcte
-        PlayerSpeed = NewSpeed; 
+        
+        PlayerSpeed = NewSpeed;
     }
-
+    
     if (GetLocalRole() == ROLE_SimulatedProxy)
+    {
         return;
+    }
 
     switch (CurrentState) {
     case EPlayerState::Dodging :
@@ -274,32 +282,26 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
-    if (CurrentState == EPlayerState::Dodging) return;
-
-    // Si on est sur le serveur, on applique normalement
-    if (HasAuthority())
+    if (!HasAuthority())
     {
-        if (Input)
-        {
-            CurrentState = EPlayerState::Running;
-            TargetMaxSpeed = 800.f;
-        }
-        else
-        {
-            if (CurrentState == EPlayerState::Running)
-                CurrentState = EPlayerState::None;
+        ServerManageRun(Input);
+        return;
+    }
 
-            TargetMaxSpeed = 400.f;
-        }
+    if (Input)
+    {
+        TargetMaxSpeed = 800.f;
+        CurrentState = EPlayerState::Running;
+        // Ajuster friction si besoin
+        GetCharacterMovement()->BrakingFrictionFactor = 0.f;
     }
     else
     {
-        // Client: uniquement prédiction visuelle locale (vitesse)
-        // Ne PAS toucher à CurrentState, il sera répliqué par le serveur
-        //GetCharacterMovement()->MaxWalkSpeed = Input ? 800.0f : 400.0f;
-        
-        // Demander au serveur
-        ServerManageRun(Input);
+        TargetMaxSpeed = 400.f;
+        if (CurrentState == EPlayerState::Running)
+            CurrentState = EPlayerState::None;
+        GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
+        GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
     }
 }
 
@@ -316,30 +318,33 @@ void AAPlayerCharacter::OnRep_CurrentPlayerState()
     UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
         *GetName(),
         GetController() ? *GetController()->GetName() : TEXT("None"));
+
+    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
+    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
+    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
     switch(CurrentState)
     {
     case EPlayerState::Running:
-        TargetMaxSpeed = 800.f;
+        // jouer anim run
         break;
     case EPlayerState::None:
-        TargetMaxSpeed =400.f;
+        // jouer idle/walk
         break;
     case EPlayerState::Dodging:
-        // Géré par ActualiseDodge
+        // ...
         break;
     case EPlayerState::Fallen:
-        TargetMaxSpeed =100.f;
+        // ...
         break;
     case EPlayerState::Dead:
-        //
+        // ...
         break;
-    case EPlayerState::Rooted:
-        TargetMaxSpeed =0.f;
+    case EPlayerState::Immobilized:
+        // ...
+        break;
     default:
-        TargetMaxSpeed =0.f;
         break;
     }
-    // You can add logic here to update animations, movement speed, etc.
 }
 
 void AAPlayerCharacter::OnFallen()
@@ -349,7 +354,9 @@ void AAPlayerCharacter::OnFallen()
         Server_OnFallen();
     }
     CurrentState = EPlayerState::Fallen;
-    SetPlayerSpeed(100.f);
+    TargetMaxSpeed = 100.f;
+    GetCharacterMovement()->MaxWalkSpeed = 100.f; // Force immédiate
+    PlayerSpeed = 100.f;
     
 }
 
@@ -357,8 +364,11 @@ void AAPlayerCharacter::OnTrapped()
 {
     if (!HasAuthority())
         Server_OnTrapped();
-    CurrentState = EPlayerState::Rooted;
-    SetPlayerSpeed(0.f);
+    CurrentState = EPlayerState::Immobilized;
+    TargetMaxSpeed = 0.f;
+    GetCharacterMovement()->StopMovementImmediately();
+    GetCharacterMovement()->MaxWalkSpeed = 0.f; // Force immédiate
+    PlayerSpeed = 0.f;
 }
 
 void AAPlayerCharacter::Server_OnTrapped_Implementation()
@@ -378,7 +388,11 @@ void AAPlayerCharacter::OnRevive()
         Server_OnRevive();
     }
     CurrentState = EPlayerState::None;
-    SetPlayerSpeed(400.f);
+    TargetMaxSpeed = 400.f;
+    GetCharacterMovement()->MaxWalkSpeed = 400.f; // Force immédiate
+    PlayerSpeed = 400.f;
+    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
+    //Cast<APlayerController>(GetController())->SetViewTargetWithBlend(this);
 }
 
 void AAPlayerCharacter::Server_OnRevive_Implementation()
@@ -394,7 +408,10 @@ void AAPlayerCharacter::OnDeath()
         Server_OnDied();
     }
     CurrentState = EPlayerState::Dead;
-    SetPlayerSpeed(0.f);
+    TargetMaxSpeed = 0.f;
+    GetCharacterMovement()->StopMovementImmediately();
+    GetCharacterMovement()->MaxWalkSpeed = 0.f; // Force immédiate
+    PlayerSpeed = 0.f;
 }
 
 void AAPlayerCharacter::Server_OnDied_Implementation()
@@ -436,7 +453,7 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    SetPlayerSpeed(FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f));
+   TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();

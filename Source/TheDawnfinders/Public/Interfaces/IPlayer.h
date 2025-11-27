@@ -15,7 +15,7 @@ enum class EPlayerState : uint8
 	Blocking UMETA(DisplayName = "Blocking"),
 	Dodging UMETA(DisplayName = "Dodging"),
 	Fallen UMETA(DisplayName = "Fallen"),
-	Rooted UMETA(DisplayName = "Rooted"),
+	Immobilized UMETA(DisplayName = "Immobilized"),
 	Dead UMETA(DisplayName = "Dead")
 };
 
