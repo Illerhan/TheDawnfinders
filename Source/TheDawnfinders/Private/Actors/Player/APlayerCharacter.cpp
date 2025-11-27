@@ -63,14 +63,42 @@ AAPlayerCharacter::AAPlayerCharacter()
     // Orientation sur déplacement
      bUseControllerRotationYaw = false;
      GetCharacterMovement()->bOrientRotationToMovement = true;
-     GetCharacterMovement()->RotationRate = FRotator(0.f, 720.f, 0.f);
+    if (PlayerConfig == nullptr)
+    {
+        PlayerConfig = CreateDefaultSubobject<UPlayerData>(TEXT("PlayerConfig"));
+    }
+    if (PlayerConfig)
+     GetCharacterMovement()->RotationRate = FRotator(0.f, PlayerConfig->RotationRate, 0.f);
 }
 
+
+void AAPlayerCharacter::ApplyPlayerData()
+{
+    GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->WalkSpeed;
+    TargetMaxSpeed = PlayerConfig->WalkSpeed;
+    HealthComponent->InitialiseComponent(
+        PlayerConfig->MaxHealth,
+        PlayerConfig->MinMaxHP,
+        PlayerConfig->MinReviveHP,
+        PlayerConfig->InjureDecreaseSpeed,
+        PlayerConfig->CurseRatio
+        );
+    
+    LightComponent->InitialiseComponent(
+        PlayerConfig->FuelConsumption,
+        PlayerConfig->MaxFuel);
+    
+    StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
+        PlayerConfig->ReloadSpeed,
+        PlayerConfig->ReloadDelay);
+    
+}
 
 void AAPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
-    GetCharacterMovement()->MaxWalkSpeed = 400.0f;
+    if (PlayerConfig)
+    ApplyPlayerData();
 
     ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
 
@@ -78,7 +106,7 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
-
+    
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
 
@@ -116,7 +144,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         break;
 
     case EPlayerState::Blocking :
-        StaminaComponent->UseStamina(3.f * DeltaTime);
+        StaminaComponent->UseStamina(PlayerConfig->BlockStaminaDrainPerSecond * DeltaTime);
         if (!StaminaComponent->VerifyHasStamina()) ItemComponent->StopSecondaryAction();
         break;
     }
@@ -290,14 +318,14 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
     if (Input)
     {
-        TargetMaxSpeed = 800.f;
+        TargetMaxSpeed = PlayerConfig->RunSpeed;
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
         GetCharacterMovement()->BrakingFrictionFactor = 0.f;
     }
     else
     {
-        TargetMaxSpeed = 400.f;
+        TargetMaxSpeed = PlayerConfig->WalkSpeed;
         if (CurrentState == EPlayerState::Running)
             CurrentState = EPlayerState::None;
         GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
@@ -354,9 +382,9 @@ void AAPlayerCharacter::OnFallen()
         Server_OnFallen();
     }
     CurrentState = EPlayerState::Fallen;
-    TargetMaxSpeed = 100.f;
-    GetCharacterMovement()->MaxWalkSpeed = 100.f; // Force immédiate
-    PlayerSpeed = 100.f;
+    TargetMaxSpeed = PlayerConfig->FallenSpeed;
+    GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->FallenSpeed; // Force immédiate
+    PlayerSpeed = PlayerConfig->FallenSpeed;
     
 }
 
@@ -388,11 +416,10 @@ void AAPlayerCharacter::OnRevive()
         Server_OnRevive();
     }
     CurrentState = EPlayerState::None;
-    TargetMaxSpeed = 400.f;
-    GetCharacterMovement()->MaxWalkSpeed = 400.f; // Force immédiate
-    PlayerSpeed = 400.f;
+    TargetMaxSpeed = PlayerConfig->WalkSpeed;
+    GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->WalkSpeed; // Force immédiate
+    PlayerSpeed = PlayerConfig->WalkSpeed;
     GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
-    //Cast<APlayerController>(GetController())->SetViewTargetWithBlend(this);
 }
 
 void AAPlayerCharacter::Server_OnRevive_Implementation()
@@ -446,14 +473,13 @@ void AAPlayerCharacter::StartDodge()
 void AAPlayerCharacter::EndDodge()
 {
     CurrentState = EPlayerState::None;
-    //GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 }
 
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-   TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
+    TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
