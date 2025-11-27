@@ -249,7 +249,9 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* AllyParam)
 {
 	if (!AllyParam) return;
-	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+	if (AllyParam->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen
+		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen
+		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead)
 		return;
 
 	CurrentHelpedTarget = AllyParam;

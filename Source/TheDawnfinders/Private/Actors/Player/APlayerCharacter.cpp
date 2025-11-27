@@ -1,5 +1,7 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
+
+#include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
 #include "Components/UStaminaComponent.h"
@@ -9,6 +11,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/GameSession.h"
+#include "GameFramework/PlayerState.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
 
@@ -339,7 +344,7 @@ void AAPlayerCharacter::OnFallen()
         Server_OnFallen();
     }
     CurrentState = EPlayerState::Fallen;
-    TargetMaxSpeed = 1000.f;
+    TargetMaxSpeed = 100.f;
     GetCharacterMovement()->MaxWalkSpeed = 100.f; // Force immédiate
     PlayerSpeed = 100.f;
     
@@ -376,6 +381,8 @@ void AAPlayerCharacter::OnRevive()
     TargetMaxSpeed = 400.f;
     GetCharacterMovement()->MaxWalkSpeed = 400.f; // Force immédiate
     PlayerSpeed = 400.f;
+    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
+    //Cast<APlayerController>(GetController())->SetViewTargetWithBlend(this);
 }
 
 void AAPlayerCharacter::Server_OnRevive_Implementation()
@@ -436,7 +443,7 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    SetPlayerSpeed(FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f));
+   TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
