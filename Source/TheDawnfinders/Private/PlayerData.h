@@ -70,12 +70,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
 	float CurseRatio = 0.02f;
 
-	// ---------- LANTERN ----------
+	// ---------- LANTERN ---------- 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
-	float FuelConsumption;
+	float FuelConsumption = 0.1f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
-	float MaxFuel;
+	float MaxFuel = 100.f;
 	
 	// ---------- FRICTION ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
