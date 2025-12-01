@@ -65,3 +65,14 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
 void ABaseEnemy::Die() {
     Destroy();
 }
+
+
+void ABaseEnemy::FadeIn_Implementation()
+{
+
+}
+
+void ABaseEnemy::FadeOut_Implementation()
+{
+
+}

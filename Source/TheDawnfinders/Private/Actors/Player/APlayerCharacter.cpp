@@ -264,11 +264,14 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
     // Validation : empêcher les valeurs absurdes
     return NewSpeed >= 0.0f && NewSpeed <= 2000.0f;
 }
+
+
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
 }
+
 
 void AAPlayerCharacter::OnRep_PlayerSpeed()
 {
