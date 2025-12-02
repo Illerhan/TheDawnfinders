@@ -6,8 +6,8 @@
 #include "GameFramework/Character.h"
 #include "DataAssets/EnemyData.h"
 #include "Interfaces/IDamageable.h"
+#include "Interfaces/IFadeable.h"
 #include "ABaseEnemy.generated.h"
-
 
 
 UENUM(BlueprintType)
@@ -19,7 +19,7 @@ enum class EEnemyState : uint8 {
 
 
 UCLASS()
-class THEDAWNFINDERS_API ABaseEnemy : public ACharacter, public IDamageable
+class THEDAWNFINDERS_API ABaseEnemy : public ACharacter, public IDamageable, public IFadeable
 {
 	GENERATED_BODY()
 	
@@ -44,7 +44,7 @@ public:
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
 
-// HEALTH
+// === HEALTH ===
 public :
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentHealth;
@@ -53,4 +53,10 @@ public :
 	void Die();
 
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
+
+
+// === FADE INTERFACE === 
+public :
+	void FadeIn_Implementation();
+	void FadeOut_Implementation();
 };

@@ -25,9 +25,23 @@ class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerIn
 {
 	GENERATED_BODY()
 
+public:
+	UFUNCTION()
+	void ApplyPlayerData();
+
+	UFUNCTION()
+	void OnRep_CurrentPlayerState();
+
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	bool IsReadyForRPCs() const;
+
+
+
 // Components + Constructor
 public:
 	AAPlayerCharacter();
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -60,37 +74,21 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* ThrowablePreviewMeshComponent;
-
-	UPROPERTY(ReplicatedUsing = OnRep_PlayerSpeed)
-	float PlayerSpeed = 400.0f;
-
-	UFUNCTION()
-	void OnRep_PlayerSpeed();
-
-	UFUNCTION(BlueprintCallable, Category = "Movement")
-	void SetPlayerSpeed(float NewSpeed);
-
-	UFUNCTION(Server, Reliable, WithValidation)
-	void ServerSetPlayerSpeed(float NewSpeed);
 	
 
-// Curse
+// === CURSE ===
 public :
-	UPROPERTY(Replicated)
-	int32 ProtectionZoneAmount;
-
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
 	
-	UPROPERTY()
-	AActor* CurrentInteractible = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-	TArray<AActor*> InteractiblesAtRange;
+// === IDAMAGEABLE METHODS ===
+public:
+	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 
 	
-// Player Interface
-public : 
+// === IPLAYER METHODS ===
+public:
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
 
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
@@ -114,72 +112,9 @@ public :
 	virtual void AddProtectionZone_Implementation() override;
 
 	virtual void RemoveProtectionZone_Implementation() override;
-
-
-// Damageable Interface
-public:
-	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 	
 
-// Movement + State
-
-private:
-	float TargetMaxSpeed = 400.f;
-	
-protected:
-	UFUNCTION()
-	void ApplyPlayerData();
-	virtual void BeginPlay() override;
-	
-	UPROPERTY(BlueprintReadOnly)
-	FVector2D CurrentDir;
-
-	UPROPERTY(BlueprintReadOnly)
-	FVector CurrentPlayerInput;
-
-	UPROPERTY(BlueprintReadOnly)
-	FVector PreviousPlayerInput;
-
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentPlayerState,EditAnywhere, BlueprintReadWrite)
-	EPlayerState CurrentState;
-
-	UFUNCTION()
-	void OnRep_CurrentPlayerState();
-
-
-	UPROPERTY()
-	float DodgeTimer;
-	
-	virtual void PossessedBy(AController* NewController) override;
-	virtual void OnRep_PlayerState() override;
-	bool IsReadyForRPCs() const;
-
-public:
-	UFUNCTION()
-	void OnDeath();
-
-	UFUNCTION(Server, Reliable)
-	void Server_OnDied();
-	
-	UFUNCTION()
-	void OnRevive();
-
-	UFUNCTION(Server,Reliable)
-	void Server_OnRevive();
-
-	UFUNCTION()
-	void OnFallen();
-	
-	UFUNCTION(Server, Reliable)
-	void Server_OnFallen();
-
-	UFUNCTION()
-	void OnTrapped();
-	
-	UFUNCTION(Server, Reliable)
-	void Server_OnTrapped();
-	
-
+// === MOVEMENT METHODS ===
 public:	
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
@@ -199,11 +134,47 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ActualiseDodge(float DeltaTime);
 
+	UFUNCTION()
+	void OnRep_PlayerSpeed();
+
+	UFUNCTION(BlueprintCallable)
+	void SetPlayerSpeed(float NewSpeed);
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSetPlayerSpeed(float NewSpeed);
+
 	UFUNCTION(Server, Reliable)
 	void ServerUseZiplineItem(UItemData* ZiplineItem);
 
+	UFUNCTION()
+	void OnTrapped();
 
-// Montage Methods
+	UFUNCTION(Server, Reliable)
+	void Server_OnTrapped();
+
+
+// === DEATH METHODS ===
+public:
+	UFUNCTION()
+	void OnDeath();
+
+	UFUNCTION(Server, Reliable)
+	void Server_OnDied();
+
+	UFUNCTION()
+	void OnRevive();
+
+	UFUNCTION(Server, Reliable)
+	void Server_OnRevive();
+
+	UFUNCTION()
+	void OnFallen();
+
+	UFUNCTION(Server, Reliable)
+	void Server_OnFallen();
+
+
+// === MONTAGE METHODS ===
 public :
 	UFUNCTION(Server, Reliable)
 	void ServerPlayMontage(UAnimMontage* Montage, float Speed);
@@ -227,8 +198,8 @@ public :
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
 
-// Others
-private :
+// === THROW PREVIEW ===
+protected:
 	UFUNCTION()
 	void DisplayThrowPreview(FVector Position, float Range);
 
@@ -236,8 +207,42 @@ private :
 	void HideThrowPreview();
 
 
-// Private References
-private :
+// === PUBLIC PROPERTIES ===
+public :
+	UPROPERTY(ReplicatedUsing = OnRep_PlayerSpeed)
+	float PlayerSpeed = 400.0f;
+
+	UPROPERTY(BlueprintReadOnly)
+	FVector2D CurrentDir;
+
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentPlayerState, EditAnywhere, BlueprintReadWrite)
+	EPlayerState CurrentState;
+
+	UPROPERTY(Replicated)
+	int32 ProtectionZoneAmount;
+
+
+// === PROTECTED PROPERTIES ===
+protected :
 	UPROPERTY()
 	UWorldProgressBar* ProgressBarWidget;
+
+	UPROPERTY(BlueprintReadOnly)
+	FVector CurrentPlayerInput;
+
+	UPROPERTY(BlueprintReadOnly)
+	FVector PreviousPlayerInput;
+
+	UPROPERTY()
+	float DodgeTimer;
+
+	UPROPERTY()
+	float TargetMaxSpeed = 400.f;
+
+	UPROPERTY()
+	AActor* CurrentInteractible = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> InteractiblesAtRange;
+
 };
