@@ -47,7 +47,7 @@ void AMovableObjects::Tick(float DeltaTime)
 	
 }
 
-void AMovableObjects::DoMovement()
+void AMovableObjects::DoMovement_Implementation()
 {
 	if (!HasAuthority()) return;
 	
