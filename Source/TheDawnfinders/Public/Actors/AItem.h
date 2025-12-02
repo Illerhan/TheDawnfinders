@@ -37,7 +37,7 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
 	float LevitationSpeed = 2.f;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Initialise(UItemData* Data);
 
 	virtual void Interact_Implementation(AActor* Interactor) override;

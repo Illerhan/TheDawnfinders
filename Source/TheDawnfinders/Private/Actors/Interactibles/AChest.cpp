@@ -67,7 +67,7 @@ void AChest::SpawnLoot()
 			}
 		}
 
-		AItem* NewItem = GetWorld()->SpawnActor<AItem>(AItem::StaticClass(), ItemLocation, FRotator());
+		AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
 		NewItem->Initialise(SpawnedData);
 	}
 
@@ -94,7 +94,7 @@ FVector AChest::GetPossibleSpawnLocation()
 
 		if (!GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, Params)) continue;
 
-		return Hit.ImpactPoint + FVector(0.f, 0.f, 0.f);
+		return Hit.ImpactPoint + FVector(0.f, 0.f, 100.f);
 	}
 
 	return FVector();

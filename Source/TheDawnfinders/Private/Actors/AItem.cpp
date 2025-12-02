@@ -6,10 +6,8 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "Components/UInventoryComponent.h"
 
-// Sets default values
 AItem::AItem()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
 	ItemMesh->SetupAttachment(CapsuleCollider);
@@ -58,14 +56,16 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Initialise(UItemData* Data)
+void AItem::Initialise_Implementation(UItemData* Data)
 {
 	ItemData = Data;
 
+	ItemMesh->SetStaticMesh(ItemData->ItemMesh);
 	ItemMesh->SetSimulatePhysics(false);
 	ItemMesh->SetEnableGravity(false);
 	ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	ItemMesh->SetStaticMesh(ItemData->ItemMesh);
+
+	bShouldLevitate = true;
 }
 
 void AItem::Interact_Implementation(AActor* Interactor)

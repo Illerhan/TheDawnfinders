@@ -5,6 +5,7 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "AChest.generated.h"
 
+class AItem;
 
 UCLASS()
 class THEDAWNFINDERS_API AChest : public AInteractibleObjects
@@ -37,6 +38,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName DataTableRowName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<AItem> LootActor;
 
 
 // === PROTECTED PROPERTIES ===
