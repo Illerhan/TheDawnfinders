@@ -37,9 +37,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float RotationRate = 720.f;
 
+
 	// ---------- DODGE ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Dodge")
 	float DodgeDuration = 0.9f;
+
+
+	// ---------- FALL DAMAGE -----------
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fall Damage")
+	float FallDamageMinYVelocity = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fall Damage")
+	float FallDamageMaxYVelocity = 100.f;
+
 
 	// ---------- STAMINA ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
@@ -53,6 +63,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
 	float ReloadDelay = 2.f;
+
 	
 	// ---------- HEALTH ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
@@ -70,12 +81,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
 	float CurseRatio = 0.02f;
 
+
 	// ---------- LANTERN ---------- 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
 	float FuelConsumption = 0.1f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
 	float MaxFuel = 100.f;
+
 	
 	// ---------- FRICTION ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
@@ -86,6 +99,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
 	float DecelerationWalking = 1500.f;
+
 
 	// ---------- THROW PREVIEW ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Throw")
