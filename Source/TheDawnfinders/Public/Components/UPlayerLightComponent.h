@@ -58,6 +58,8 @@ private :
 	{
 		return FuelRemaining > 0.0f;
 	}
+
+
 public :
 	UFUNCTION(Server,Unreliable)
 	void Server_RequestFuelUpdate(float Amount);
