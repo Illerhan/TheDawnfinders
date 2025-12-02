@@ -11,13 +11,15 @@ AInteractibleObjects::AInteractibleObjects()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
+	RootComponent = CreateDefaultSubobject<USceneComponent>(FName("Root"));
+
 	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("SphereCollider"));
-	RootComponent = CapsuleCollider;
+	CapsuleCollider->SetupAttachment(RootComponent);
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
-	StaticMesh->SetupAttachment(CapsuleCollider);
+	StaticMesh->SetupAttachment(RootComponent);
 
 	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
 	InteractQTEWidgetComponent->SetupAttachment(CapsuleCollider);
