@@ -89,8 +89,10 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MaxFuel);
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
-        PlayerConfig->ReloadSpeed,
-        PlayerConfig->ReloadDelay);
+    PlayerConfig->ReloadSpeed,
+    PlayerConfig->ReloadDelay,
+    PlayerConfig->StaminaConsumptionRun,
+    PlayerConfig->StaminaConsumptionDodge);
     
 }
 

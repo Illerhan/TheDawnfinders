@@ -64,6 +64,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
 	float ReloadDelay = 2.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
+	float StaminaConsumptionRun =0.1f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
+	float StaminaConsumptionDodge =15.f;
+
 	
 	// ---------- HEALTH ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
