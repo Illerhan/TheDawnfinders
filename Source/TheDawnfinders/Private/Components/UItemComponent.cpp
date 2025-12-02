@@ -11,6 +11,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
 
+
 UItemComponent::UItemComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;

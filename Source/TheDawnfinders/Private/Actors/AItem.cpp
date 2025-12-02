@@ -13,6 +13,7 @@ AItem::AItem()
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
 	ItemMesh->SetupAttachment(CapsuleCollider);
+
 	if (ItemData && ItemData->ItemMesh)
 	ItemMesh->SetStaticMesh(ItemData->ItemMesh);	
 }
@@ -27,7 +28,7 @@ void AItem::OnConstruction(const FTransform& Transform)
 	}
 }
 
-// Called when the game starts or when spawned
+
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
@@ -36,7 +37,7 @@ void AItem::BeginPlay()
 		
 }
 
-// Called every frame
+
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -57,9 +58,14 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Initialise()
+void AItem::Initialise(UItemData* Data)
 {
+	ItemData = Data;
 
+	ItemMesh->SetSimulatePhysics(false);
+	ItemMesh->SetEnableGravity(false);
+	ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	ItemMesh->SetStaticMesh(ItemData->ItemMesh);
 }
 
 void AItem::Interact_Implementation(AActor* Interactor)

@@ -38,12 +38,14 @@ public:
 	float LevitationSpeed = 2.f;
 
 	UFUNCTION(BlueprintCallable)
-	void Initialise();
+	void Initialise(UItemData* Data);
 
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
 private:
-
+	UPROPERTY()
 	float LevitationTime = 0.f;
+
+	UPROPERTY()
 	FVector InitialeLocation;
 };

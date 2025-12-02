@@ -27,7 +27,7 @@ public :
 	void Unlock();
 
 
-// Properties
+// === PUBLIC PROPERTIES ===
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* NeededKey;
@@ -35,6 +35,8 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AMovableObjects*> LinkedObjects;
 
+
+// === PRIVATE PROPERTIES ===
 private :
 	UPROPERTY()
 	float InteractionTimer;

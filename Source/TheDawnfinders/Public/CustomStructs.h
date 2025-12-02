@@ -144,3 +144,32 @@ struct FWeaponActionData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
 	float CameraShakeDuration;
 };
+
+
+USTRUCT(BlueprintType)
+struct FChestSpawnLoot {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0", ClampMax = "100"))
+	float SpawnPercent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UItemData* ItemData;
+};
+
+
+USTRUCT(BlueprintType)
+struct FChestSpawn : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MinItemCount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxItemCount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FChestSpawnLoot> SpawnableItems;
+};
