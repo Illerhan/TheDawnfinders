@@ -122,6 +122,10 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ChangeOverloadSlotCount(int AmountAdded);
 
+	UFUNCTION(Server, Reliable,BlueprintCallable, Category = "Inventory")
+	void ServerConsumeItemDirectly(UItemData* Item);
+	
+
 
 // === PROTECTED PROPERTIES ===
 public : 
@@ -139,8 +143,23 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;
+	
+// == OTHER RESSOURCES
 
+	UPROPERTY(ReplicatedUsing = OnRep_Gold, EditAnywhere,BlueprintReadWrite, Category = "Inventory Ressources")
+	int Gold;
 
+	UPROPERTY(ReplicatedUsing = OnRep_Knowledge, Blueprintable,BlueprintReadWrite, Category = "Inventory Ressources")
+	int Knowledge;
+
+	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	void Server_AddGold(int32 Amount);
+	
+	UFUNCTION()
+	void OnRep_Gold();
+
+	UFUNCTION()
+	void OnRep_Knowledge();
 // === PRIVATE PROPERTIES === 
 private :
 	UPROPERTY()

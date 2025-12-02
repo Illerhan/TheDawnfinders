@@ -57,7 +57,7 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(Blueprintable,Category="MovableObjects")
-	virtual void DoMovement();
+	UFUNCTION(Blueprintable,BlueprintCallable,BlueprintNativeEvent,Category="MovableObjects")
+	void DoMovement();
 	void DoReverseMovement();
 };

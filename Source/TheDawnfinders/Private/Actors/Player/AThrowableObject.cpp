@@ -77,12 +77,11 @@ void AThrowableObject::DoCollisionEffect()
 
 	for (FHitResult& Hit : HitResults)
 	{
+		if(Hit.GetActor()) continue;
+
 		switch (EffectType) {
 		case EThrowableEffectType::Explodes :
-			if (Hit.GetActor()->GetClass()->ImplementsInterface(UDamageable::StaticClass())) {
-				IDamageable* Interface = Cast<IDamageable>(Hit.GetActor());
-				Interface->ReceiveDamage_Implementation(EffectPower, this);
-			}
+			IDamageable::Execute_ReceiveDamage(Hit.GetActor(), EffectPower, this);
 			break;
 
 		case EThrowableEffectType::PlayLoudSound :

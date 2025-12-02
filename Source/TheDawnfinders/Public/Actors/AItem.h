@@ -37,13 +37,15 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
 	float LevitationSpeed = 2.f;
 
-	UFUNCTION(BlueprintCallable)
-	void Initialise();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Initialise(UItemData* Data);
 
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
 private:
-
+	UPROPERTY()
 	float LevitationTime = 0.f;
+
+	UPROPERTY()
 	FVector InitialeLocation;
 };

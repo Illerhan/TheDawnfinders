@@ -11,6 +11,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
 
+
 UItemComponent::UItemComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -566,3 +567,5 @@ TArray<AAPlayerCharacter*> UItemComponent::GetNearbyPlayers(float Radius, bool b
 	return Result;
 }
 #pragma endregion
+
+
