@@ -33,8 +33,8 @@ void UInventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UInventoryComponent, InventorySlots);
-
 	DOREPLIFETIME(UInventoryComponent, CurrentSlotIndex);
+	DOREPLIFETIME(UInventoryComponent, Gold);
 }
 
 
@@ -58,6 +58,17 @@ void UInventoryComponent::OnRep_CurrentSlotIndex()
 
 bool UInventoryComponent::AddNewItem(UItemData* NewItem)
 {
+	if (NewItem->ItemType == EItemType::Currency)
+	{
+		if (!GetOwner()->HasAuthority())
+		{
+			ServerConsumeItemDirectly(NewItem);
+			return true;
+		}
+		ServerConsumeItemDirectly_Implementation(NewItem);
+		return true;
+	}
+	
 	if (!HasRoomForItem(NewItem)) return false;
 
 	if (!GetOwner()->HasAuthority())
@@ -347,6 +358,16 @@ void UInventoryComponent::SortItems()
 
 #pragma endregion
 
+#pragma region Gold
+
+void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
+{
+	Gold+= Amount;
+	OnRep_Gold();
+}
+
+
+#pragma endregion
 
 #pragma region Others
 
@@ -398,6 +419,34 @@ void UInventoryComponent::ChangeOverloadSlotCount(int AmountAdded)
 	CurrentOverloadSlotCount += AmountAdded;
 
 	ActualiseOverloadedSlots();
+}
+
+void UInventoryComponent::ServerConsumeItemDirectly_Implementation(UItemData* Item)
+{
+	if (!Item) return;
+    
+	switch (Item->ItemType)
+	{
+	case EItemType::Currency:
+		// Ajouter l'or directement
+		Gold += Item->ItemValue;
+		OnRep_Gold();
+		break;
+	
+	default:
+		break;
+	}
+}
+
+
+void UInventoryComponent::OnRep_Gold()
+{
+	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+}
+
+void UInventoryComponent::OnRep_Knowledge()
+{
+	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
 
@@ -474,3 +523,4 @@ void UInventoryComponent::CloseInventory()
 }
 
 #pragma endregion
+
