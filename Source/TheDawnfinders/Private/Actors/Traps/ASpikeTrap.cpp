@@ -28,8 +28,10 @@ void AASpikeTrap::Tick(float DeltaTime)
 
 void AASpikeTrap::DoTrapAction()
 {
+	if (!TrappedActor) return;
+
 	Super::DoTrapAction();
-	IDamageable::Execute_ReceiveDamage(TrappedActor,Damages,this);
+	IDamageable::Execute_ReceiveDamage(TrappedActor, Damages, this);
 	
 }
 
