@@ -10,6 +10,7 @@
 #include "Interactible.generated.h"
 
 class ULockpickQTEWidget;
+class UWorldInteractibleWidget;
 
 
 UCLASS()
@@ -51,8 +52,11 @@ public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Mesh")
 	UStaticMeshComponent* StaticMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widget")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractQTEWidgetComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
+	UWidgetComponent* InteractibleWidgetComponent;
 	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
@@ -76,8 +80,11 @@ protected :
 	bool bCanBeUsed = true;
 
 
-// === PRIVATE PROPERTIES ====
-private :
+// === PROTECTED PROPERTIES ====
+protected :
 	UPROPERTY()
 	ULockpickQTEWidget* InteractQTEWidget;
+
+	UPROPERTY()
+	UWorldInteractibleWidget* InteractibleWidget;
 };

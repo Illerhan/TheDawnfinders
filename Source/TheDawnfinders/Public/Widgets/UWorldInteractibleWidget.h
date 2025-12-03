@@ -21,4 +21,7 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideText();
 
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DisplayErrorText(const FString& Text);
 };

@@ -10,3 +10,8 @@ void UWorldInteractibleWidget::HideText_Implementation()
 {
 
 }
+
+void UWorldInteractibleWidget::DisplayErrorText_Implementation(const FString& Text)
+{
+
+}
