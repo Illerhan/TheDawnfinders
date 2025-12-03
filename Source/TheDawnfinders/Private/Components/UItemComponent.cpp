@@ -200,6 +200,8 @@ void UItemComponent::UseConsumable()
 			{
 				ThrowedObject->Initialise(FinalPos);
 				InventoryComponent->RemoveCurrentItem();
+
+				StopPreviewThrow();
 			}
 		}
 		break;
