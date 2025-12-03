@@ -222,6 +222,7 @@ public :
 	int32 ProtectionZoneAmount;
 
 
+
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY()

@@ -36,7 +36,7 @@ public :
 // === OTHERS
 public :
 	UFUNCTION(BlueprintCallable)
-	void InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl);
+	void InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl, float StaminaConsumptionR, float StaminaConsumptionD);
 
 	UFUNCTION(BlueprintCallable)
 	bool VerifyHasStamina();
@@ -62,4 +62,12 @@ public :
 
 	UPROPERTY()
 	float CurrentReloadDelay = 0.f;
+	
+	UPROPERTY(Blueprintable,BlueprintReadWrite)
+	float StaminaConsumptionRun = 0.1f;
+
+	UPROPERTY(Blueprintable,BlueprintReadWrite)
+	float StaminaConsumptionDodge = 15.0f;
+
+	
 };

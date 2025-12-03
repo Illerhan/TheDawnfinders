@@ -28,7 +28,7 @@ void UStaminaComponent::BeginPlay()
 	AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(PawnOwner);
 	PlayerCharacter->InventoryComponent->OnOverloadCountChange.AddDynamic(this, &UStaminaComponent::ActualiseCurrentOverloadCount);
 
-	InitialiseComponent(100, 10, 2);
+	InitialiseComponent(100, 10, 2, 0.1f, 15.f);
 }
 
 
@@ -131,12 +131,14 @@ bool UStaminaComponent::VerifyHasStamina()
 }
 
 
-void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl)
+void UStaminaComponent::InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl,float StaminaConsumptionR,float StaminaConsumptionD)
 {
 	CurrentStamina = MaxStamina;
 	CurrentMaxStamina = MaxStamina;
 	ReloadSpeed = ReloadSpd;
 	ReloadDelay = ReloadDl;
+	StaminaConsumptionRun = StaminaConsumptionR;
+	StaminaConsumptionDodge = StaminaConsumptionD;
 
 	// If is not server
 	if (!GetOwner()->HasAuthority()) {
