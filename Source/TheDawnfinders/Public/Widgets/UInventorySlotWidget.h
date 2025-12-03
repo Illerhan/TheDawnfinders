@@ -43,4 +43,10 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void InitialiseWidget(int Index);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayAppearAnimation(float Delay);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayDisappearAnimation(float Delay);
 };
