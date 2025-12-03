@@ -55,7 +55,7 @@ public :
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
 
 
-// === FADE INTERFACE === 
+// === FADE === 
 public :
 	void FadeIn_Implementation();
 	void FadeOut_Implementation();

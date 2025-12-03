@@ -38,18 +38,20 @@ public :
 	UFUNCTION(Server, Reliable)
 	void Server_TurnLightOff();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ApplyLightState();
 
 	UFUNCTION()
 	void OnRep_LightOn();
+
 	UFUNCTION()
 	void FuelUpdate(float NewFuel);
+
 	UFUNCTION()
 	void OnRep_FuelRemaining();
 
 
-	// === FUEL + PROTECTION ===
+// === FUEL + PROTECTION ===
 private :
 	UFUNCTION()
 	void ConsumeFuel(float DeltaTime);
@@ -73,6 +75,15 @@ public :
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UFUNCTION(BlueprintCallable, Category = "Collision")
+	void OnFogOfWarOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintCallable, Category = "Collision")
+	void OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 
 // === COMPONENTS ===
 public :
@@ -85,7 +96,13 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	USphereComponent* ProtectionZone;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Light")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOn;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOff;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lantern")
 	USceneComponent* LightRoot;
 
 

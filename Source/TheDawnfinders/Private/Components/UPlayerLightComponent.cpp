@@ -4,6 +4,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UHealthComponent.h"
+#include "Interfaces/IFadeable.h"
 #include "Net/UnrealNetwork.h"
 
 UPlayerLightComponent::UPlayerLightComponent()
@@ -23,6 +24,12 @@ UPlayerLightComponent::UPlayerLightComponent()
 	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	ProtectionZone->SetHiddenInGame(true);
 	ProtectionZone->SetupAttachment(PointLight);
+
+	FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
+	FogOfWarLightOn->SetupAttachment(PointLight);
+
+	FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
+	FogOfWarLightOff->SetupAttachment(PointLight);
 
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 	LightMesh->SetupAttachment(LightRoot);
@@ -56,6 +63,12 @@ void UPlayerLightComponent::BeginPlay()
 	{
 		ProtectionZone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapBegin);
 		ProtectionZone->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapEnd);
+
+		FogOfWarLightOn->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
+		FogOfWarLightOn->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
+
+		FogOfWarLightOff->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
+		FogOfWarLightOff->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
 	}
 
 	ApplyLightState();
@@ -104,6 +117,24 @@ void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
 }
 
 
+#pragma region Colliders
+
+void UPlayerLightComponent::OnFogOfWarOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Display, TEXT("Skibidi"));
+	IFadeable::Execute_FadeIn(OtherActor);
+}
+
+void UPlayerLightComponent::OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	IFadeable::Execute_FadeOut(OtherActor);
+}
+
+#pragma endregion
+
+
 #pragma region Turn On / Off
 
 void UPlayerLightComponent::TurnLightOn()
@@ -150,7 +181,7 @@ void UPlayerLightComponent::Server_TurnLightOff_Implementation()
 }
 
 
-void UPlayerLightComponent::ApplyLightState()
+void UPlayerLightComponent::ApplyLightState_Implementation()
 {
 	if (!PointLight) return;
 
