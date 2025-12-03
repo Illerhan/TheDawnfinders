@@ -439,6 +439,12 @@ void UInventoryComponent::ServerConsumeItemDirectly_Implementation(UItemData* It
 }
 
 
+void UInventoryComponent::Server_AddKnowledge_Implementation(int32 Amount)
+{
+	Knowledge += Amount;
+	OnRep_Knowledge();
+}
+
 void UInventoryComponent::OnRep_Gold()
 {
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);

@@ -36,10 +36,10 @@ public :
 
 // === MAIN FUNCTIONS ===
 public:
-	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
 	void BP_OnInteraction(AAPlayerCharacter* Player);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "Interaction")
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
 	void BP_OnStopInteraction(AAPlayerCharacter* Player);
 
 
