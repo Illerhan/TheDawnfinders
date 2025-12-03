@@ -154,6 +154,9 @@ public :
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void Server_AddGold(int32 Amount);
+
+	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
+	void Server_AddKnowledge(int32 Amount);
 	
 	UFUNCTION()
 	void OnRep_Gold();
