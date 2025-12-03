@@ -5,6 +5,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "DataAssets/ItemData.h"
 #include "Interfaces/IPlayer.h"
+#include "Widgets/UWorldInteractibleWidget.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -29,8 +30,11 @@ void ALock::Tick(float DeltaTime)
 void ALock::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
-	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr) return;
-	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededKey) return;
+	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr || 
+		IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededKey ) {
+		InteractibleWidget->DisplayErrorText("You need a key");
+		return;
+	}
 
 	PlayerTemp = Interactor;
 

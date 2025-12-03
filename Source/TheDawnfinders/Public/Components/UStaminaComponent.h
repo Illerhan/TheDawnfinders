@@ -68,6 +68,4 @@ public :
 
 	UPROPERTY(Blueprintable,BlueprintReadWrite)
 	float StaminaConsumptionDodge = 15.0f;
-
-	
 };

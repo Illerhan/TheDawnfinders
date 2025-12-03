@@ -2,6 +2,7 @@
 
 #include "Actors/Interactibles/Interactible.h"
 #include "Widgets/ULockpickQTEWidget.h"
+#include "Widgets/UWorldInteractibleWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
 
 
@@ -23,6 +24,9 @@ AInteractibleObjects::AInteractibleObjects()
 
 	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
 	InteractQTEWidgetComponent->SetupAttachment(CapsuleCollider);
+
+	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
+	InteractibleWidgetComponent->SetupAttachment(CapsuleCollider);
 	
 	bReplicates = true;
 }
@@ -35,6 +39,7 @@ void AInteractibleObjects::BeginPlay()
 	CapsuleCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
 
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
+	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
 }
 
 void AInteractibleObjects::Tick(float DeltaTime)
@@ -53,6 +58,9 @@ void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 	{
 		Player->AddInteractibleAtRange_Implementation(this);
 		UE_LOG(LogTemp, Log, TEXT("Added interactible locally on client"));
+
+		if(InteractibleWidget)
+			InteractibleWidget->DisplayText("[E] Interact");
 	}
 }
 
@@ -63,6 +71,9 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 	if (Player && Player->IsLocallyControlled())
 	{
 		Player->RemoveInteractibleAtRange_Implementation(this);
+
+		if (InteractibleWidget)
+			InteractibleWidget->HideText();
 	}
 }
 
