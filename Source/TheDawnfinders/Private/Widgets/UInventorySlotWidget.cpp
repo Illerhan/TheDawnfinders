@@ -23,3 +23,11 @@ void UInventorySlotWidget::InitialiseWidget_Implementation(int Index)
 void UInventorySlotWidget::ActualiseSlotCounter_Implementation(FInventorySlot Data)
 {
 }
+
+void UInventorySlotWidget::PlayAppearAnimation_Implementation(float Delay)
+{
+}
+
+void UInventorySlotWidget::PlayDisappearAnimation_Implementation(float Delay)
+{
+}
