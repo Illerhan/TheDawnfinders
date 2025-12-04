@@ -66,6 +66,7 @@ void UStaminaComponent::UseStamina(float quantity)
 	ServerChangeStamina_Implementation(CurrentStamina);
 }
 
+
 // CALLED IN THE UPDATE AFTER A CERTAIN DELAY
 void UStaminaComponent::ReloadStamina(float quantity)
 {
