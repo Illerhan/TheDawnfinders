@@ -3,7 +3,6 @@
 #include "Actors/Interactibles/Lock.h"
 #include "Actors/MovableObjects/MovableObjects.h"
 #include "Actors/Player/APlayerCharacter.h"
-#include "DataAssets/ItemData.h"
 #include "Interfaces/IPlayer.h"
 #include "Widgets/UWorldInteractibleWidget.h"
 #include "Kismet/GameplayStatics.h"

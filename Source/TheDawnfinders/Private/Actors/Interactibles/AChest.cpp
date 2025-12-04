@@ -2,7 +2,6 @@
 #include "Interfaces/IPlayer.h"
 #include "Actors/AItem.h"
 #include "CustomStructs.h"
-#include "Net/UnrealNetwork.h"
 
 
 AChest::AChest()

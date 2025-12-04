@@ -232,6 +232,9 @@ public :
 	UPROPERTY(Replicated)
 	int32 ProtectionZoneAmount;
 
+	UPROPERTY()
+	float TargetRotationRate = 360.f;
+
 
 
 // === PROTECTED PROPERTIES ===

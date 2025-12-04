@@ -121,7 +121,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     {
         // Interpole la MaxWalkSpeed vers TargetMaxSpeed
         float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-        float InterpSpeed = 2.0f; // ajustage freinage : 3 = lent, 8 = rapide
+        float InterpSpeed = 8.0f; // ajustage freinage : 3 = lent, 8 = rapide
         float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, InterpSpeed);
         
         // arrêt immédiat 
@@ -333,7 +333,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
         TargetMaxSpeed = PlayerConfig->RunSpeed;
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
-        GetCharacterMovement()->BrakingFrictionFactor = 0.f;
+        GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
