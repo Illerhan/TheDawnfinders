@@ -51,6 +51,16 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	}
 }
 
+void ATrapBase::FadeIn_Implementation()
+{
+
+}
+
+void ATrapBase::FadeOut_Implementation()
+{
+
+}
+
 void ATrapBase::Multicast_PlayEffects_Implementation()
 {
 	if (Sound)

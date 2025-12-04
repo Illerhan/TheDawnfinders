@@ -7,6 +7,7 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
+#include "Interfaces/IFadeable.h"
 #include "Interactible.generated.h"
 
 class ULockpickQTEWidget;
@@ -14,7 +15,7 @@ class UWorldInteractibleWidget;
 
 
 UCLASS()
-class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible
+class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible, public IFadeable
 {
 	GENERATED_BODY()
 
@@ -33,6 +34,12 @@ public :
 	virtual void StartQTE_Implementation() override;
 	virtual void StopQTE_Implementation() override;
 	virtual bool ValidateQTE_Implementation() override;
+
+
+// === FADEABLE INTERFACE ===
+public :
+	virtual void FadeIn_Implementation() override;
+	virtual void FadeOut_Implementation() override;
 
 
 // === MAIN FUNCTIONS ===
@@ -57,6 +64,8 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
+
+
 protected :
 	UPROPERTY(Replicated)
 	float InteractionTimer;
@@ -66,6 +75,8 @@ protected :
 
 	UPROPERTY(Replicated)
 	AActor* PlayerTemp;
+
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
