@@ -263,6 +263,7 @@ void UItemComponent::DoSecondaryAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
+	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dodging) return;
 
 	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) {
 		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking);
