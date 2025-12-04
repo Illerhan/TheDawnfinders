@@ -2,13 +2,13 @@
 #include "Interfaces/IPlayer.h"
 #include "Actors/AItem.h"
 #include "CustomStructs.h"
+#include "Net/UnrealNetwork.h"
 
 
 AChest::AChest()
 {
 	PrimaryActorTick.bCanEverTick = true;
 }
-
 
 void AChest::Tick(float DeltaTime)
 {

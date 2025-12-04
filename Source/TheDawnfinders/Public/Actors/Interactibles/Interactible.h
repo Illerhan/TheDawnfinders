@@ -57,7 +57,16 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
-	
+protected :
+	UPROPERTY(Replicated)
+	float InteractionTimer;
+
+	UPROPERTY(Replicated)
+	bool bIsInteracting;
+
+	UPROPERTY(Replicated)
+	AActor* PlayerTemp;
+public:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 

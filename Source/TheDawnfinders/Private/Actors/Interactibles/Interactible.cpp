@@ -4,6 +4,7 @@
 #include "Widgets/ULockpickQTEWidget.h"
 #include "Widgets/UWorldInteractibleWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Net/UnrealNetwork.h"
 
 
 // Sets default values
@@ -29,6 +30,15 @@ AInteractibleObjects::AInteractibleObjects()
 	InteractibleWidgetComponent->SetupAttachment(CapsuleCollider);
 	
 	bReplicates = true;
+}
+
+void AInteractibleObjects::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AInteractibleObjects, bIsInteracting);
+	DOREPLIFETIME(AInteractibleObjects, PlayerTemp);
+	DOREPLIFETIME(AInteractibleObjects, InteractionTimer);
 }
 
 void AInteractibleObjects::BeginPlay()

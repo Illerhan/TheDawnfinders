@@ -37,13 +37,5 @@ public :
 
 
 // === PRIVATE PROPERTIES ===
-private :
-	UPROPERTY()
-	float InteractionTimer;
 
-	UPROPERTY()
-	bool bIsInteracting;
-
-	UPROPERTY()
-	AActor* PlayerTemp;
 };
