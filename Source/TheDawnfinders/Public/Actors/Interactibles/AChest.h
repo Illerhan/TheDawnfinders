@@ -43,14 +43,4 @@ protected :
 	TSubclassOf<AItem> LootActor;
 
 
-// === PROTECTED PROPERTIES ===
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	float InteractionTimer;
-
-	UPROPERTY()
-	bool bIsInteracting;
-
-	UPROPERTY()
-	AActor* PlayerTemp;
 };

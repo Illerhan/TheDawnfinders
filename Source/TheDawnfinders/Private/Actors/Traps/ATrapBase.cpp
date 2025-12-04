@@ -1,4 +1,7 @@
 ﻿#include "Actors/Traps/ATrapBase.h"
+
+#include "Actors/Enemy/ABaseEnemy.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
@@ -36,13 +39,16 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	TrappedActor = OtherActor;
 
 	// Run trap action (server side)
-	DoTrapAction();
+	if (OtherActor->Implements<UDamageable>())
+	{
+		DoTrapAction();
 
-	// Multicast sound FX
-	Multicast_PlayEffects();
+		// Multicast sound FX
+		Multicast_PlayEffects();
 
-	// Start cooldown
-	CurrentCooldown = Cooldown;
+		// Start cooldown
+		CurrentCooldown = Cooldown;
+	}
 }
 
 void ATrapBase::Multicast_PlayEffects_Implementation()
