@@ -17,11 +17,15 @@ AInteractibleObjects::AInteractibleObjects()
 
 	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("SphereCollider"));
 	CapsuleCollider->SetupAttachment(RootComponent);
-	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
+	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
+	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
+	StaticMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	StaticMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
+	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
 
 	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
 	InteractQTEWidgetComponent->SetupAttachment(CapsuleCollider);
@@ -131,6 +135,16 @@ bool AInteractibleObjects::ValidateQTE_Implementation()
 	InteractQTEWidget->ExitQTE();
 
 	return InteractQTEWidget->ValidateQTE();
+}
+
+void AInteractibleObjects::FadeIn_Implementation()
+{
+
+}
+
+void AInteractibleObjects::FadeOut_Implementation()
+{
+
 }
 
 #pragma endregion
