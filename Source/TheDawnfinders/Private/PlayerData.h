@@ -24,7 +24,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float FallenSpeed = 100.f;
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
+	float WalkRotationRate = 360.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
+	float RunRotationRate  = 900.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
+	float DodgeRotationRate = 1400.f;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float LowStaminaSpeed = 600.f;
 
@@ -110,4 +116,9 @@ public:
 	// ---------- THROW PREVIEW ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Throw")
 	float ThrowPreviewScaleMultiplier = 0.01f;
+
+
+	// ---------- BAGARRE ----------
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fight")
+	float AutoLockStrength = 5.f;
 };

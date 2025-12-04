@@ -152,6 +152,17 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_OnTrapped();
 
+// === AUTO-LOCK ===
+public :
+	UFUNCTION()
+	void StartAutoLock(float AutoLockStrength);
+
+	UFUNCTION()
+	void ActualiseAutoLock();
+
+	UFUNCTION()
+	void StopAutoLock();
+
 
 // === DEATH METHODS ===
 public:
@@ -221,6 +232,9 @@ public :
 	UPROPERTY(Replicated)
 	int32 ProtectionZoneAmount;
 
+	UPROPERTY()
+	float TargetRotationRate = 360.f;
+
 
 
 // === PROTECTED PROPERTIES ===
@@ -239,6 +253,15 @@ protected :
 
 	UPROPERTY()
 	float TargetMaxSpeed = 400.f;
+
+	UPROPERTY()
+	float CurrentAutoLockStrength = 0.f;
+
+	UPROPERTY()
+	bool bAutoLockIsActive = false;
+
+	UPROPERTY()
+	AActor* CurrentAutoLockTarget;
 
 	UPROPERTY()
 	AActor* CurrentInteractible = nullptr;

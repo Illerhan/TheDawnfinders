@@ -121,7 +121,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     {
         // Interpole la MaxWalkSpeed vers TargetMaxSpeed
         float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-        float InterpSpeed = 2.0f; // ajustage freinage : 3 = lent, 8 = rapide
+        float InterpSpeed = 8.0f; // ajustage freinage : 3 = lent, 8 = rapide
         float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, InterpSpeed);
         
         // arrêt immédiat 
@@ -133,6 +133,13 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
         
         PlayerSpeed = NewSpeed;
+    }
+
+    if (bAutoLockIsActive) {
+        ActualiseAutoLock();
+    }
+    else {
+        
     }
     
     if (GetLocalRole() == ROLE_SimulatedProxy)
@@ -326,7 +333,7 @@ void AAPlayerCharacter::ManageRun(bool Input)
         TargetMaxSpeed = PlayerConfig->RunSpeed;
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
-        GetCharacterMovement()->BrakingFrictionFactor = 0.f;
+        GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
@@ -460,6 +467,73 @@ bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 {
     ManageRun(Input); // Call the same logic on the server
+}
+
+#pragma endregion
+
+
+#pragma region Auto Lock
+
+void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
+{
+    CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
+    bAutoLockIsActive = true;
+
+    // Get the nearest enemy as a target
+    TArray<FOverlapResult> Overlaps;
+    FCollisionObjectQueryParams ObjectQueryParams;
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_Pawn);
+
+    bool bHit = GetWorld()->OverlapMultiByObjectType(
+        Overlaps,
+        GetActorLocation(),
+        FQuat::Identity,
+        ObjectQueryParams,
+        FCollisionShape::MakeSphere(2000.f)
+    );
+
+    if (!bHit) return;
+    
+    float BestDist = 10000.f;
+    for (auto& Result : Overlaps)
+    {
+        AActor* Actor = Result.GetActor();
+        if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
+            
+        float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
+        if (CurrentDist > BestDist) continue;
+
+        CurrentAutoLockTarget = Actor;
+        BestDist = CurrentDist;
+    }
+}
+
+void AAPlayerCharacter::ActualiseAutoLock()
+{
+    if (!CurrentAutoLockTarget) {
+        GetCharacterMovement()->bOrientRotationToMovement = true;
+        return;
+    }
+
+    GetCharacterMovement()->bOrientRotationToMovement = false;
+    FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
+
+    FRotator TargetRotation = AimedForward.Rotation();
+    
+    FRotator NewRotation = FMath::RInterpTo(
+        GetActorRotation(),
+        TargetRotation,
+        GetWorld()->GetDeltaSeconds(),
+        CurrentAutoLockStrength
+    );
+
+    SetActorRotation(NewRotation);
+}
+
+void AAPlayerCharacter::StopAutoLock()
+{
+    bAutoLockIsActive = false;
+    GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 #pragma endregion

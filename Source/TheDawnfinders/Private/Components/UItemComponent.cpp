@@ -348,6 +348,8 @@ void UItemComponent::DoLightAttack()
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
+	PlayerCharacter->StartAutoLock(5.f);
+
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
@@ -391,6 +393,8 @@ void UItemComponent::DoHeavyAttack()
 	}
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
+
+	PlayerCharacter->StartAutoLock(5.f);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
@@ -440,6 +444,8 @@ float UItemComponent::GetCurrentAttackDamages()
 void UItemComponent::DoAttackCollision()
 {
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+
+	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
