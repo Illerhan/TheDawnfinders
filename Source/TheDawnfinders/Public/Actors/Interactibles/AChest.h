@@ -22,11 +22,11 @@ public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	
+	
 
 protected :
-	UFUNCTION(BlueprintCallable) 
-	void SpawnLoot();
-
+	UFUNCTION()
+	virtual void BP_OnInteractionFinished_Implementation() override;
 	UFUNCTION()
 	FVector GetPossibleSpawnLocation();
 
@@ -41,6 +41,5 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AItem> LootActor;
-
-
+	
 };

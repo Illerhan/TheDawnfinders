@@ -22,9 +22,9 @@ public :
 
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
-
 	UFUNCTION()
-	void Unlock();
+	virtual void BP_OnInteractionFinished_Implementation() override;
+
 
 
 // === PUBLIC PROPERTIES ===

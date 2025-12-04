@@ -110,6 +110,10 @@ void AInteractibleObjects::StopInteract_Implementation(AActor* Interactor)
 	BP_OnStopInteraction(Cast<AAPlayerCharacter>(Interactor));
 }
 
+void AInteractibleObjects::BP_OnInteractionFinished_Implementation()
+{
+}
+
 bool AInteractibleObjects::GetCanBeUsed_Implementation()
 {
 	return bCanBeUsed;

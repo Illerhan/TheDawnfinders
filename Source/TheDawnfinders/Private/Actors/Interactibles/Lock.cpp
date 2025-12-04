@@ -22,7 +22,7 @@ void ALock::Tick(float DeltaTime)
 
 	if (InteractionTimer <= 0) {
 		IPlayerInterface::Execute_HideProgress(PlayerTemp);
-		Unlock();
+		BP_OnInteractionFinished_Implementation();
 	}
 }
 
@@ -48,8 +48,7 @@ void ALock::StopInteract_Implementation(AActor* Interactor)
 	IPlayerInterface::Execute_HideProgress(Interactor);
 }
 
-
-void ALock::Unlock()
+void ALock::BP_OnInteractionFinished_Implementation()
 {
 	bIsInteracting = false;
 

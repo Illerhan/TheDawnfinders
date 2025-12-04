@@ -10,6 +10,7 @@
 #include "Interfaces/IFadeable.h"
 #include "Interactible.generated.h"
 
+class AAPlayerCharacter;
 class ULockpickQTEWidget;
 class UWorldInteractibleWidget;
 
@@ -50,6 +51,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
 	void BP_OnStopInteraction(AAPlayerCharacter* Player);
 
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "Interaction")
+	void BP_OnInteractionFinished();
+
+
 
 // === COMPONENTS ===
 public :
@@ -73,10 +78,17 @@ protected :
 	UPROPERTY(Replicated)
 	bool bIsInteracting;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated,BlueprintReadWrite)
 	AActor* PlayerTemp;
 
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	USoundBase* ChestSound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float SoundLoudness;
+	
 public:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
