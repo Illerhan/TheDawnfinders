@@ -134,6 +134,13 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         
         PlayerSpeed = NewSpeed;
     }
+
+    if (bAutoLockIsActive) {
+        ActualiseAutoLock();
+    }
+    else {
+        
+    }
     
     if (GetLocalRole() == ROLE_SimulatedProxy)
     {
@@ -460,6 +467,73 @@ bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 {
     ManageRun(Input); // Call the same logic on the server
+}
+
+#pragma endregion
+
+
+#pragma region Auto Lock
+
+void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
+{
+    CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
+    bAutoLockIsActive = true;
+
+    // Get the nearest enemy as a target
+    TArray<FOverlapResult> Overlaps;
+    FCollisionObjectQueryParams ObjectQueryParams;
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_Pawn);
+
+    bool bHit = GetWorld()->OverlapMultiByObjectType(
+        Overlaps,
+        GetActorLocation(),
+        FQuat::Identity,
+        ObjectQueryParams,
+        FCollisionShape::MakeSphere(2000.f)
+    );
+
+    if (!bHit) return;
+    
+    float BestDist = 10000.f;
+    for (auto& Result : Overlaps)
+    {
+        AActor* Actor = Result.GetActor();
+        if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
+            
+        float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
+        if (CurrentDist > BestDist) continue;
+
+        CurrentAutoLockTarget = Actor;
+        BestDist = CurrentDist;
+    }
+}
+
+void AAPlayerCharacter::ActualiseAutoLock()
+{
+    if (!CurrentAutoLockTarget) {
+        GetCharacterMovement()->bOrientRotationToMovement = true;
+        return;
+    }
+
+    GetCharacterMovement()->bOrientRotationToMovement = false;
+    FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
+
+    FRotator TargetRotation = AimedForward.Rotation();
+    
+    FRotator NewRotation = FMath::RInterpTo(
+        GetActorRotation(),
+        TargetRotation,
+        GetWorld()->GetDeltaSeconds(),
+        CurrentAutoLockStrength
+    );
+
+    SetActorRotation(NewRotation);
+}
+
+void AAPlayerCharacter::StopAutoLock()
+{
+    bAutoLockIsActive = false;
+    GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 #pragma endregion
