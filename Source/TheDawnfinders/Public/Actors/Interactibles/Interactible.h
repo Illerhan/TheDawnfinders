@@ -7,14 +7,16 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
+#include "Interfaces/IFadeable.h"
 #include "Interactible.generated.h"
 
+class AAPlayerCharacter;
 class ULockpickQTEWidget;
 class UWorldInteractibleWidget;
 
 
 UCLASS()
-class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible
+class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible, public IFadeable
 {
 	GENERATED_BODY()
 
@@ -35,6 +37,12 @@ public :
 	virtual bool ValidateQTE_Implementation() override;
 
 
+// === FADEABLE INTERFACE ===
+public :
+	virtual void FadeIn_Implementation() override;
+	virtual void FadeOut_Implementation() override;
+
+
 // === MAIN FUNCTIONS ===
 public:
 	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
@@ -42,6 +50,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
 	void BP_OnStopInteraction(AAPlayerCharacter* Player);
+
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "Interaction")
+	void BP_OnInteractionFinished();
+
 
 
 // === COMPONENTS ===
@@ -57,6 +69,8 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
+
+
 protected :
 	UPROPERTY(Replicated)
 	float InteractionTimer;
@@ -64,8 +78,17 @@ protected :
 	UPROPERTY(Replicated)
 	bool bIsInteracting;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated,BlueprintReadWrite)
 	AActor* PlayerTemp;
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	USoundBase* ChestSound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float SoundLoudness;
+	
 public:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 

@@ -2,6 +2,7 @@
 #include "Interfaces/IPlayer.h"
 #include "Actors/AItem.h"
 #include "CustomStructs.h"
+#include "GameFramework/GameplaySoundHelper.h"
 
 
 AChest::AChest()
@@ -11,6 +12,7 @@ AChest::AChest()
 
 void AChest::Tick(float DeltaTime)
 {
+
 	if (!bIsInteracting) return;
 
 	IPlayerInterface::Execute_ShowProgress(PlayerTemp, InteractionTimer);
@@ -19,8 +21,9 @@ void AChest::Tick(float DeltaTime)
 	if (InteractionTimer <= 0) {
 		IPlayerInterface::Execute_HideProgress(PlayerTemp);
 		
-		SpawnLoot();
+		BP_OnInteractionFinished();
 	}
+	Super::Tick(DeltaTime);
 }
 
 
@@ -40,7 +43,7 @@ void AChest::StopInteract_Implementation(AActor* Interactor)
 	bIsInteracting = false;
 }
 
-void AChest::SpawnLoot()
+void AChest::BP_OnInteractionFinished_Implementation()
 {
 	UDataTable* LootDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/LT_ChestLoot.LT_ChestLoot"));
 	if (!LootDataTable)
@@ -69,6 +72,8 @@ void AChest::SpawnLoot()
 		AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
 		NewItem->Initialise(SpawnedData);
 	}
+
+	UGameplaySoundHelper::PlaySoundNetworked(this,ChestSound,GetActorLocation(),SoundLoudness);
 
 	Destroy();
 }

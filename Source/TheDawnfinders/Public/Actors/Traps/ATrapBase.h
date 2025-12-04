@@ -3,10 +3,11 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/IFadeable.h"
 #include "ATrapBase.generated.h"
 
 UCLASS()
-class THEDAWNFINDERS_API ATrapBase : public AActor
+class THEDAWNFINDERS_API ATrapBase : public AActor, public IFadeable
 {
 	GENERATED_BODY()
 
@@ -41,6 +42,19 @@ public:
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 						bool bFromSweep, const FHitResult& SweepResult);
+
+// == FADEABLE INTERFACE ===
+public :
+	virtual void FadeIn_Implementation() override;
+	virtual void FadeOut_Implementation() override;
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	int FogOfWarAreasCount;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<UMaterialInstanceDynamic*> FadeableMaterials;
+
 
 protected:
 	virtual void BeginPlay() override;
