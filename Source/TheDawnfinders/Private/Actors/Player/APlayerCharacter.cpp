@@ -469,7 +469,13 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 
 void AAPlayerCharacter::StartDodge()
 {
-    if (CurrentState == EPlayerState::UsingEquipment || CurrentState == EPlayerState::Dodging) return;
+    if (CurrentState == EPlayerState::Dodging) return;
+
+    if (CurrentState == EPlayerState::UsingEquipment) {
+        UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+        AnimInstance->StopAllMontages(false);
+    }
+
     CurrentState = EPlayerState::Dodging;
     DodgeTimer = 0;
 }
