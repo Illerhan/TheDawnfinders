@@ -24,14 +24,7 @@ void AKnowledgeInteractibles::Tick(float DeltaTime)
 {
 	if (!bIsInteracting) return;
 
-	IPlayerInterface::Execute_ShowProgress(PlayerTemp, InteractionTimer);
-	InteractionTimer = InteractionTimer - DeltaTime;
-
-	if (InteractionTimer <= 0) {
-		IPlayerInterface::Execute_HideProgress(PlayerTemp);
-		
-		BP_OnInteractionFinished();
-	}
+	HoldTimer(DeltaTime);
 	
 	Super::Tick(DeltaTime);
 }

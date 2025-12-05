@@ -18,7 +18,6 @@ void ALever::Tick(float DeltaTime)
 }
 
 
-
 void ALever::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed || LinkedObjects.Num() == 0) return;

@@ -85,8 +85,7 @@ void AAPlayerCharacter::ApplyPlayerData()
         );
     
     LightComponent->InitialiseComponent(
-        PlayerConfig->FuelConsumption,
-        PlayerConfig->MaxFuel);
+        PlayerConfig->FuelConsumption, PlayerConfig->MaxFuel);
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
     PlayerConfig->ReloadSpeed,

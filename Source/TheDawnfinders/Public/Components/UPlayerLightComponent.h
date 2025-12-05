@@ -24,7 +24,7 @@ public:
 // === TURN ON / OFF ===
 public :
 	UFUNCTION(BlueprintCallable)
-	void InitialiseComponent(float FuelConsumption, float MaxFuel);
+	void InitialiseComponent(float FuelRate, float MaxFuels);
 	
 	UFUNCTION(BlueprintCallable, Category = "Light")
 	void TurnLightOn();
@@ -62,7 +62,7 @@ private :
 	}
 
 
-public :
+public :	
 	UFUNCTION(Server,Unreliable)
 	void Server_RequestFuelUpdate(float Amount);
 	

@@ -24,6 +24,12 @@ public:
 	AInteractibleObjects();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	
+	/**
+	 * Call this function when need to make a hold interactible.
+	 * @param DeltaTime  Tick DeltaTime 
+	 */
+	virtual void HoldTimer(float DeltaTime);
 
 
 // === INTERACTION INTERFACE ===
