@@ -445,6 +445,7 @@ void AAPlayerCharacter::OnDeath()
     {
         Server_OnDied();
     }
+
     CurrentState = EPlayerState::Dead;
     TargetMaxSpeed = 0.f;
     GetCharacterMovement()->StopMovementImmediately();

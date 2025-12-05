@@ -11,6 +11,8 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
 
+#include "Perception/AISense_Hearing.h"
+
 
 UItemComponent::UItemComponent()
 {
@@ -367,6 +369,9 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
+
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
@@ -412,6 +417,9 @@ void UItemComponent::DoHeavyAttack()
 	{
 		ComboIndex = 0;
 	}
+
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
 
