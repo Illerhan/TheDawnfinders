@@ -125,7 +125,8 @@ void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
 void UPlayerLightComponent::OnFogOfWarOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Display, TEXT("Skibidi"));
+	OtherActor->SetOwner(GetOwner());
+
 	IFadeable::Execute_FadeIn(OtherActor);
 }
 

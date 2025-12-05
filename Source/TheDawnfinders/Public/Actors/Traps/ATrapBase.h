@@ -4,6 +4,8 @@
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IFadeable.h"
+#include "Components/TimelineComponent.h" 
+#include "Curves/CurveFloat.h"
 #include "ATrapBase.generated.h"
 
 UCLASS()
@@ -13,6 +15,8 @@ class THEDAWNFINDERS_API ATrapBase : public AActor, public IFadeable
 
 public:
 	ATrapBase();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 	
 	UPROPERTY()
 	AActor* TrappedActor;
@@ -43,31 +47,41 @@ public:
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 						bool bFromSweep, const FHitResult& SweepResult);
 
-// == FADEABLE INTERFACE ===
+
+// == FADEABLE ===
 public :
 	virtual void FadeIn_Implementation() override;
 	virtual void FadeOut_Implementation() override;
 
-protected :
-	UPROPERTY(BlueprintReadWrite)
-	int FogOfWarAreasCount;
+	UFUNCTION(NetMulticast, Reliable)
+	void FadeIn_Multicast();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void FadeOut_Multicast();
+
+	UFUNCTION()
+	void HandleFadeProgress(float Value);
+
+	UPROPERTY()
+	FTimeline FadeTimeline;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCurveFloat* FloatCurve;
 
 	UPROPERTY(BlueprintReadWrite)
-	TArray<UMaterialInstanceDynamic*> FadeableMaterials;
+	int FogOfWarCount = 0;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<UMaterialInstanceDynamic*> Materials;
 
 
-protected:
-	virtual void BeginPlay() override;
-
+protected : 
 	/** Cooldown timer (server only) */
 	float CurrentCooldown = 0.f;
 
 	/** Called when bEnable changes on clients */
 	UFUNCTION()
 	void OnRep_Enabled();
-
-public:
-	virtual void Tick(float DeltaTime) override;
 
 	/** Disable trap */
 	UFUNCTION(BlueprintCallable)
