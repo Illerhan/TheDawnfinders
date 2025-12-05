@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Actors/Enemy/ABaseEnemy.h"
 #include "BasicEnemyAIController.generated.h"
 
 
@@ -12,7 +13,19 @@ class THEDAWNFINDERS_API ABasicEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public :
+protected :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> PlayersAtRange;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Alertness;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ABaseEnemy* PossessedPawn;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector LastNoiseLocation;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	EEnemyState EnemyState;
 };

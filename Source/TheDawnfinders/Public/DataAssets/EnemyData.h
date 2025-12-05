@@ -17,23 +17,32 @@ class THEDAWNFINDERS_API UEnemyData : public UPrimaryDataAsset
 public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float Name;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float Health;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float HearingRadius;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float AlertnessThreshold;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float NormalSpeed;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float SuspiciousSpeed;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float AggressiveSpeed;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
 	TArray<UEnemyAttackData*> PossibleAttacks;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Main")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Bagarre")
 	float BluntAbsorption = 0;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Main")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Bagarre")
 	float PiercingAbsorption = 0;
 };
