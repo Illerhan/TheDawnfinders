@@ -61,6 +61,18 @@ void AInteractibleObjects::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AInteractibleObjects::HoldTimer(float DeltaTime)
+{
+	IPlayerInterface::Execute_ShowProgress(PlayerTemp, InteractionTimer);
+	InteractionTimer = InteractionTimer - DeltaTime;
+
+	if (InteractionTimer <= 0) {
+		IPlayerInterface::Execute_HideProgress(PlayerTemp);
+		
+		BP_OnInteractionFinished();
+	}
+}
+
 
 #pragma region Colliders 
 
