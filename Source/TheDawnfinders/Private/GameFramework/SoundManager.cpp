@@ -28,17 +28,18 @@ void ASoundManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ASoundManager::ServerPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range)
+void ASoundManager::ServerPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range,bool bNeedNoise)
 {
-	MultiPlaySound(Sound, Location, Loudness);
+	MultiPlaySound(Sound, Location, Loudness,Range,bNeedNoise);
 }
 
 
-void ASoundManager::MultiPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range)
+void ASoundManager::MultiPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range,bool bNeedNoise)
 {
 	if(Sound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, Sound, Location);
-		UAISense_Hearing::ReportNoiseEvent(this, Location, Loudness, this,Range);
+		if (bNeedNoise)
+			UAISense_Hearing::ReportNoiseEvent(this, Location, Loudness, this,Range);
 	}
 }

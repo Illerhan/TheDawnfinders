@@ -29,6 +29,7 @@ public:
 	 * Call this function when need to make a hold interactible.
 	 * @param DeltaTime  Tick DeltaTime 
 	 */
+	UFUNCTION(BlueprintCallable)
 	virtual void HoldTimer(float DeltaTime);
 
 

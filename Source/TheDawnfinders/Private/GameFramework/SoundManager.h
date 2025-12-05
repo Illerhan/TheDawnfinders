@@ -17,11 +17,10 @@ public:
 
 	
 	UFUNCTION(Server, Reliable)
-	void ServerPlaySound(USoundBase* Sound, FVector Location, float Loudness, float Range = 1000.f);
+	void ServerPlaySound(USoundBase* Sound, FVector Location, float Loudness, float Range = 1000.f, bool bNeedNoise = false);
 
 	UFUNCTION(NetMulticast, Reliable)
-	void MultiPlaySound(USoundBase* Sound, FVector Location, float Loudness, float Range = 1000.f);
-	
+	void MultiPlaySound(USoundBase* Sound, FVector Location, float Loudness, float Range = 1000.f,bool bNeedNoise = false);
 
 protected:
 	// Called when the game starts or when spawned
