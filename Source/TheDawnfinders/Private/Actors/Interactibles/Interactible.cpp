@@ -54,10 +54,22 @@ void AInteractibleObjects::BeginPlay()
 
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
+
+	if (FloatCurve)
+	{
+		FOnTimelineFloat ProgressFunction{};
+		ProgressFunction.BindUFunction(this, FName("HandleFadeProgress"));
+
+		FadeTimeline.AddInterpFloat(FloatCurve, ProgressFunction);
+
+		FadeTimeline.SetLooping(false);
+	}
 }
 
 void AInteractibleObjects::Tick(float DeltaTime)
 {
+	FadeTimeline.TickTimeline(DeltaTime);
+
 	Super::Tick(DeltaTime);
 }
 
@@ -155,13 +167,37 @@ bool AInteractibleObjects::ValidateQTE_Implementation()
 
 void AInteractibleObjects::FadeIn_Implementation()
 {
-
+	FadeIn_Multicast();
 }
 
 void AInteractibleObjects::FadeOut_Implementation()
 {
-
+	FadeOut_Multicast();
 }
+
+void AInteractibleObjects::FadeIn_Multicast_Implementation()
+{
+	FogOfWarCount++;
+	if (FogOfWarCount != 1) return;
+
+	FadeTimeline.PlayFromStart();
+}
+
+void AInteractibleObjects::FadeOut_Multicast_Implementation()
+{
+	FogOfWarCount--;
+	if (FogOfWarCount != 0) return;
+
+	FadeTimeline.ReverseFromEnd();
+}
+
+void AInteractibleObjects::HandleFadeProgress(float Value)
+{
+	for (int i = 0; i < Materials.Num(); i++) {
+		Materials[i]->SetScalarParameterValue("Opacity", Value);
+	}
+}
+
 
 #pragma endregion
 

@@ -8,17 +8,28 @@
 #include "BasicEnemyAIController.generated.h"
 
 
+class UAIPerceptionComponent;
+class UAISenseConfig_Hearing;
+
+
 UCLASS()
 class THEDAWNFINDERS_API ABasicEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
 	
 public :
+	ABasicEnemyAIController();
+
+
+public :
 	UFUNCTION(BlueprintCallable)
 	void AddAlertness(float Quantity);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetEnemyState(EEnemyState NewEnemyState);
+
+	UFUNCTION(BlueprintCallable)
+	void SetHearingRange(float NewRange);
 
 
 protected :
@@ -36,4 +47,10 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	EEnemyState EnemyState;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UAIPerceptionComponent* AIPerceptionComponent;
+
+	UPROPERTY()
+	UAISenseConfig_Hearing* HearingConfig;
 };

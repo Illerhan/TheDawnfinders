@@ -12,12 +12,11 @@ AChest::AChest()
 
 void AChest::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
 
 	if (!bIsInteracting) return;
 
 	HoldTimer(DeltaTime);
-	
-	Super::Tick(DeltaTime);
 }
 
 

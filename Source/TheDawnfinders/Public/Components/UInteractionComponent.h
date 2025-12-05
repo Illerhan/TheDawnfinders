@@ -20,7 +20,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-	// === INTERCACTIBLES AT RANGE MANAGEMENT ===
+// === INTERCACTIBLES AT RANGE MANAGEMENT ===
 public:
 	UFUNCTION()
 	void AddInteractible(AActor* Interactible);
@@ -69,7 +69,9 @@ public:
 
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	bool bIsHelping = false;
+
 	float HelpDuration = 2.f;
+
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	float HelpTimeRemaining = 0.f;
 	

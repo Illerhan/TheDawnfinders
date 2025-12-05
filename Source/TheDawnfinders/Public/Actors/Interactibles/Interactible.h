@@ -8,6 +8,8 @@
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
 #include "Interfaces/IFadeable.h"
+#include "Components/TimelineComponent.h" 
+#include "Curves/CurveFloat.h"
 #include "Interactible.generated.h"
 
 class AAPlayerCharacter;
@@ -44,22 +46,31 @@ public :
 	virtual bool ValidateQTE_Implementation() override;
 
 
-// === FADEABLE INTERFACE ===
+// === MAIN FUNCTIONS ===
+public:
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interaction")
+	void BP_OnInteraction(AAPlayerCharacter* Player);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interaction")
+	void BP_OnStopInteraction(AAPlayerCharacter* Player);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void BP_OnInteractionFinished();
+
+
+// === FADEABLE ===
 public :
 	virtual void FadeIn_Implementation() override;
 	virtual void FadeOut_Implementation() override;
 
+	UFUNCTION(NetMulticast, Reliable)
+	void FadeIn_Multicast();
 
-// === MAIN FUNCTIONS ===
-public:
-	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
-	void BP_OnInteraction(AAPlayerCharacter* Player);
+	UFUNCTION(NetMulticast, Reliable)
+	void FadeOut_Multicast();
 
-	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Interaction")
-	void BP_OnStopInteraction(AAPlayerCharacter* Player);
-
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "Interaction")
-	void BP_OnInteractionFinished();
+	UFUNCTION()
+	void HandleFadeProgress(float Value);
 
 
 
@@ -78,24 +89,7 @@ public :
 	UWidgetComponent* InteractibleWidgetComponent;
 
 
-protected :
-	UPROPERTY(Replicated)
-	float InteractionTimer;
-
-	UPROPERTY(Replicated)
-	bool bIsInteracting;
-
-	UPROPERTY(Replicated,BlueprintReadWrite)
-	AActor* PlayerTemp;
-
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	USoundBase* ChestSound;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float SoundLoudness;
-	
+// === COLLISIONS ===
 public:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
@@ -107,7 +101,7 @@ public:
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 
-// === PROTECTED PROPERTIES
+// === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bDoQTE;
@@ -118,12 +112,36 @@ protected :
 	UPROPERTY()
 	bool bCanBeUsed = true;
 
-
-// === PROTECTED PROPERTIES ====
-protected :
 	UPROPERTY()
 	ULockpickQTEWidget* InteractQTEWidget;
 
 	UPROPERTY()
 	UWorldInteractibleWidget* InteractibleWidget;
+
+	UPROPERTY(Replicated)
+	float InteractionTimer;
+
+	UPROPERTY(Replicated)
+	bool bIsInteracting;
+
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	AActor* PlayerTemp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	USoundBase* ChestSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float SoundLoudness;
+
+	UPROPERTY()
+	FTimeline FadeTimeline;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCurveFloat* FloatCurve;
+
+	UPROPERTY(BlueprintReadWrite)
+	int FogOfWarCount = 0;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<UMaterialInstanceDynamic*> Materials;
 };
