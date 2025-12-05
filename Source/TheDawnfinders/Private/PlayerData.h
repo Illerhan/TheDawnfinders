@@ -121,4 +121,30 @@ public:
 	// ---------- BAGARRE ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fight")
 	float AutoLockStrength = 5.f;
+
+
+	// ---------- SOUND ----------
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float RunSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float RunSoundAlertness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float DodgeSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float DodgeSoundAlertness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float AttackSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float AttackSoundAlertness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float ShootSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float ShootSoundAlertness;
 };

@@ -13,6 +13,14 @@ class THEDAWNFINDERS_API ABasicEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+public :
+	UFUNCTION(BlueprintCallable)
+	void AddAlertness(float Quantity);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetEnemyState(EEnemyState NewEnemyState);
+
+
 protected :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> PlayersAtRange;

@@ -17,7 +17,7 @@ class THEDAWNFINDERS_API UEnemyData : public UPrimaryDataAsset
 public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float Name;
+	FName Name;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float Health;
