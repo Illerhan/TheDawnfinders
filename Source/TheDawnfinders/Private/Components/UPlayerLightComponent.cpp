@@ -1,6 +1,9 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Components/UPlayerLightComponent.h"
+
+#include <gsl/pointers>
+
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UHealthComponent.h"
@@ -48,7 +51,7 @@ void UPlayerLightComponent::BeginPlay()
 	Super::BeginPlay();
 
 	if (AActor* Owner = GetOwner())
-	{
+		{
 		if (LightRoot)
 		{
 			LightRoot->AttachToComponent(
@@ -111,7 +114,7 @@ void UPlayerLightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
 void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
 {
-	FuelRemaining = FuelRate;
+	FuelConsumption= FuelRate;
 	MaxFuel = MaxFuels;
 	FuelRemaining = MaxFuel;
 }
