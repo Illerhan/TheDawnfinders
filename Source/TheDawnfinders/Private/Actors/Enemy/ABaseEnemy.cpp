@@ -1,4 +1,6 @@
 #include "Actors/Enemy/ABaseEnemy.h"
+#include "Components/WidgetComponent.h"
+#include "Widgets/UEnemyWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -6,14 +8,19 @@ ABaseEnemy::ABaseEnemy()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+    EnemyWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("EnemyWidgetComponent");
+    EnemyWidgetComponent->SetupAttachment(RootComponent);
 }
 
 void ABaseEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
+    EnemyWidget = Cast<UEnemyWidget>(EnemyWidgetComponent->GetWidget());
+
     CurrentHealth = EnemyData->Health;
 }
+
 
 void ABaseEnemy::Tick(float DeltaTime)
 {

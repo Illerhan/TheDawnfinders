@@ -10,6 +10,10 @@
 #include "ABaseEnemy.generated.h"
 
 
+class UEnemyWidget;
+class UWidgetComponent;
+
+
 UENUM(BlueprintType)
 enum class EEnemyState : uint8 {
 	Idle UMETA(DisplayName = "Idle"),
@@ -28,8 +32,16 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UWidgetComponent* EnemyWidgetComponent;
+
+public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UEnemyData* EnemyData;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UEnemyWidget* EnemyWidget;
 
 	UFUNCTION(BlueprintCallable)
 	void DoAttack(UEnemyAttackData* AttackData);
@@ -40,7 +52,7 @@ public:
 	UFUNCTION()
 	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
+	UFUNCTION(BlueprintImplementableEvent)
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
 
