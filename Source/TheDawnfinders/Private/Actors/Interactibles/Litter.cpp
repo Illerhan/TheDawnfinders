@@ -3,7 +3,6 @@
 
 #include "Litter.h"
 
-#include "SWarningOrErrorBox.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
