@@ -30,7 +30,6 @@ void AItem::OnConstruction(const FTransform& Transform)
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Error, TEXT("Static Mesh : %s"),*ItemMesh->GetStaticMesh().GetFullName());
 	InitialeLocation = GetActorLocation();
 		
 }
