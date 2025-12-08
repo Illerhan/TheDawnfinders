@@ -12,6 +12,7 @@
 #include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
 
+class ALitter;
 class UHealthComponent;
 class UStaminaComponent;
 class UItemComponent;
@@ -152,6 +153,16 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_OnTrapped();
 
+	UFUNCTION(Server, Reliable)
+	void Server_SendPushInput(ALitter* Obj, FVector Input);
+
+	UFUNCTION()
+	void UpdatePushingMovement(float DeltaTime);
+
+	UFUNCTION(Server, Reliable)
+	void Server_SetPushingState(ALitter* Obj, bool bCarrying);
+	
+
 
 // === AUTO-LOCK ===
 public :
@@ -236,6 +247,12 @@ public :
 	UPROPERTY()
 	float TargetRotationRate = 360.f;
 
+	UPROPERTY(Replicated)
+	ALitter* CurrentPushedObject = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsCarrying = false;
+
 
 
 // === PROTECTED PROPERTIES ===
@@ -269,5 +286,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
+
+	
 
 };

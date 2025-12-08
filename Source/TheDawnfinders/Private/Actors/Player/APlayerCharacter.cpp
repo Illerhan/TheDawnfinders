@@ -1,6 +1,7 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
 
+#include "Actors/Interactibles/Litter.h"
 #include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
@@ -118,20 +119,19 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 
     if (HasAuthority())
     {
-        // Interpole la MaxWalkSpeed vers TargetMaxSpeed
-        float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-        float InterpSpeed = 8.0f; // ajustage freinage : 3 = lent, 8 = rapide
-        float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, InterpSpeed);
-        
-        // arrêt immédiat 
-        if (CurrentState == EPlayerState::Dead || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Running)
+        if (bIsCarrying && CurrentPushedObject)
         {
-            NewSpeed = TargetMaxSpeed;
+            float ObjSpeed = CurrentPushedObject->GetServerVelocity().Size();
+            GetCharacterMovement()->MaxWalkSpeed = ObjSpeed;
+            PlayerSpeed = ObjSpeed;
         }
-
-        GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-        
-        PlayerSpeed = NewSpeed;
+        else
+        {
+            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
+            float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, 8.f);
+            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+            PlayerSpeed = NewSpeed;
+        }
     }
 
     if (bAutoLockIsActive) {
@@ -140,12 +140,31 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     else {
         
     }
+    if (IsLocallyControlled() && bIsCarrying && CurrentPushedObject)
+    {
+        UpdatePushingMovement(DeltaTime);
+    }
+    else if (HasAuthority() && bIsCarrying && CurrentPushedObject)
+        {
+            UpdatePushingMovement(DeltaTime);
+        }
+
+    if (IsLocallyControlled() && CurrentPushedObject)
+    {
+        static float LastSendTime = 0.f;
+        FVector Input = GetLastMovementInputVector();
+        if (GetWorld()->GetTimeSeconds() - LastSendTime > 0.05f) // 20 Hz
+        {
+            Server_SendPushInput(CurrentPushedObject, Input);
+            LastSendTime = GetWorld()->GetTimeSeconds();
+        }
+    }
     
     if (GetLocalRole() == ROLE_SimulatedProxy)
     {
         return;
     }
-
+    
     switch (CurrentState) {
     case EPlayerState::Dodging :
         ActualiseDodge(DeltaTime);
@@ -473,6 +492,34 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 
 
 #pragma region Auto Lock
+
+void AAPlayerCharacter::Server_SendPushInput_Implementation(ALitter* Obj, FVector Input)
+{
+    if (Obj)
+        Obj->Server_UpdateInputs(this,Input);
+}
+
+void AAPlayerCharacter::UpdatePushingMovement(float DeltaTime)
+{
+    if (!bIsCarrying || !CurrentPushedObject) return;
+
+    FVector ObjVelocity = CurrentPushedObject->GetVelocity();
+    ObjVelocity.Z = 0.0f;
+
+    const float Speed = ObjVelocity.Size();
+    if (Speed <= KINDA_SMALL_NUMBER) return;
+
+    FRotator TargetRotation = ObjVelocity.Rotation();
+    FRotator NewRot = FMath::RInterpTo(GetActorRotation(),TargetRotation,DeltaTime, 12.f);
+    SetActorRotation(NewRot);
+    
+}
+
+void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool bCarrying)
+{
+    bIsCarrying = bCarrying;
+    CurrentPushedObject = bIsCarrying ? Obj : nullptr;
+}
 
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
