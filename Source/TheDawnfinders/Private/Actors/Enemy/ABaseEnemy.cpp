@@ -28,7 +28,7 @@ void ABaseEnemy::Tick(float DeltaTime)
 
 }
 
-void ABaseEnemy::DoAttack(UEnemyAttackData* AttackData)
+void ABaseEnemy::DoAttack(FEnemyActionData AttackData)
 {
     if (!GetMesh()) return;
 
@@ -38,13 +38,13 @@ void ABaseEnemy::DoAttack(UEnemyAttackData* AttackData)
     if (!AnimInstance) return;
 
     AnimInstance->StopAllMontages(0.1f);
-    AnimInstance->Montage_Play(AttackData->AttackAnimMontage);
+    AnimInstance->Montage_Play(AttackData.Animation, AttackData.MontageSpeed);
 
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
     FOnMontageEnded EndDelegate;
     EndDelegate.BindUObject(this, &ABaseEnemy::OnEndAttack);
-    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, AttackData->AttackAnimMontage);
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, AttackData.Animation);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
 }
 

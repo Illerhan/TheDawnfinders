@@ -44,7 +44,7 @@ public :
 	UEnemyWidget* EnemyWidget;
 
 	UFUNCTION(BlueprintCallable)
-	void DoAttack(UEnemyAttackData* AttackData);
+	void DoAttack(FEnemyActionData AttackData);
 
 	UFUNCTION(BlueprintCallable)
 	void OnEndAttack(UAnimMontage* Montage, bool bInterrupted);

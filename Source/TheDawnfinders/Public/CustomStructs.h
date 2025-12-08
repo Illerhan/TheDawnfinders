@@ -147,6 +147,31 @@ struct FWeaponActionData : public FTableRowBase {
 
 
 USTRUCT(BlueprintType)
+struct FEnemyActionData : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float DamageMultiplier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	UAnimMontage* Animation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float MontageSpeed = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	TArray<FEnemyAttackTrigger> Triggers;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	int AttackPriority;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	int AttackCooldown;
+};
+
+
+USTRUCT(BlueprintType)
 struct FChestSpawnLoot {
 
 	GENERATED_BODY()
