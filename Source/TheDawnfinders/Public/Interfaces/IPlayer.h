@@ -43,7 +43,10 @@ public:
 	void SetCurrentPlayerState(EPlayerState NewState);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void DoCameraShake(float Intensity, float duration);
+	void DoCameraShake(float Intensity);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void DoDamagePostProcess(float Speed);
 
 
 public :
