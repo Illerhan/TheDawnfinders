@@ -94,7 +94,9 @@ public:
 
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
 
-	virtual void DoCameraShake_Implementation(float Intensity, float duration) override;
+	virtual void DoCameraShake_Implementation(float Intensity) override;
+
+	virtual void DoDamagePostProcess_Implementation(float Duration) override;
 
 	virtual void ShowProgress_Implementation(float CurrentValue) override;
 

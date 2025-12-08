@@ -90,10 +90,12 @@ void UHealthComponent::TakeDamage(float quantity)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0, 0);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.5f);
 		return;
 	}
-
+	
+	IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
+	IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
 
 	// If Client
