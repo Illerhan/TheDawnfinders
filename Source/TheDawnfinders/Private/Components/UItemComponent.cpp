@@ -374,11 +374,13 @@ void UItemComponent::DoLightAttack()
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 
@@ -423,17 +425,21 @@ void UItemComponent::DoHeavyAttack()
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+	
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 
 void UItemComponent::AttackAnimEnd()
 {
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed);
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);

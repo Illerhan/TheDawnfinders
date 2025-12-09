@@ -296,6 +296,7 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
     {
         // Sur le serveur, on change directement
         PlayerSpeed = NewSpeed;
+        TargetMaxSpeed = NewSpeed;
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
         
         UE_LOG(LogTemp, Log, TEXT("[SERVER] %s speed set to %.0f"), *GetName(), NewSpeed);
@@ -320,6 +321,7 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
+    TargetMaxSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
 }
 

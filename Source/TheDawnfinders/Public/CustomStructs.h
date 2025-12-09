@@ -95,10 +95,13 @@ struct FWeaponInfos : public FTableRowBase {
 	float BaseDamage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float StaminaMultiplier;
+	float StaminaMultiplier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float SpeedModifier;
+	float PlayerSpeedModifier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AnimsSpeedModifier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 	float CriticalChance;
