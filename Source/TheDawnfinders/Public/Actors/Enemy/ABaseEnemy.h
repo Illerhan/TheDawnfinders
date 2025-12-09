@@ -71,4 +71,9 @@ public :
 public :
 	void FadeIn_Implementation();
 	void FadeOut_Implementation();
+	bool GetIsDisplayed_Implementation();
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	bool IsDisplayed;
 };

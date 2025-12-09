@@ -76,10 +76,15 @@ void ABaseEnemy::Die() {
 
 void ABaseEnemy::FadeIn_Implementation()
 {
-
+    IsDisplayed = true;
 }
 
 void ABaseEnemy::FadeOut_Implementation()
 {
+    IsDisplayed = false;
+}
 
+bool ABaseEnemy::GetIsDisplayed_Implementation()
+{
+    return IsDisplayed;
 }

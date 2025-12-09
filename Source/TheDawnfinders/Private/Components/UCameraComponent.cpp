@@ -1,4 +1,5 @@
 #include "Components/UCameraComponent.h"
+#include "Interfaces/IFadeable.h"
 
 
 UPlayerCameraComponent::UPlayerCameraComponent()
@@ -96,6 +97,7 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 
 		AActor* Actor = HitResults[i].GetActor();
 
+		if (!IFadeable::Execute_GetIsDisplayed(Actor)) continue;
 		if (Dist > BestDist) continue;
 
 		BestDist = Dist;
