@@ -58,10 +58,20 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 {
 	float NewDistance = CameraBaseDistance;
 
-	for (int i = 0; i < EnemiesAtRange.Num(); i++) {
+	for (int i = 0; i < EnemiesAtRange.Num(); i++) 
+	{
 		float Distance = (GetOwner()->GetActorLocation() - EnemiesAtRange[i]->GetActorLocation()).Length();
 		NewDistance -= FMath::Lerp(0, EnemiesDistanceMaxImpact, 1 - (Distance / EnemiesMaxRange));
 	}
+
+	float AverageDist = 0;
+	for (int i = 0; i < NearbyWallsLocations.Num(); i++) 
+	{
+		float Distance = (GetOwner()->GetActorLocation() - NearbyWallsLocations[i]).Length();
+		AverageDist += Distance;
+	}
+	AverageDist /= NearbyWallsLocations.Num();
+	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f));
 
 	CurrentDist = FMath::Lerp(CurrentDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
 }
@@ -87,9 +97,9 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 		FCollisionResponseParams::DefaultResponseParam
 	);
 
-	EnemiesAtRange = TArray<AActor*>();
+	EnemiesAtRange.Reset();
 
-	//if (!bHit) return;
+	if (!bHit) return;
 
 	float BestDist = EnemiesMaxRange;
 	for (int i = 0; i < HitResults.Num(); i++) {
@@ -101,12 +111,37 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 		if (Dist > BestDist) continue;
 
 		BestDist = Dist;
-		EnemiesAtRange = TArray<AActor*>();
+		EnemiesAtRange.Reset();
 		EnemiesAtRange.Add(HitResults[i].GetActor());
 	}
 }
 
 void UPlayerCameraComponent::ActualiseEnviroInfos()
 {
+	NearbyWallsLocations.Reset();
+	FVector BasePos = GetOwner()->GetActorLocation();
+	
+	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 20) 
+	{
+		FVector Dir = FVector(FMath::Cos(CurrentAngle), FMath::Sin(CurrentAngle), 0);
+		FVector EndPos = BasePos + Dir * 2000.f;
 
+		FHitResult HitResult;
+		FCollisionQueryParams Params;
+		Params.AddIgnoredActor(GetOwner());
+
+		bool bHit = GetWorld()->LineTraceSingleByObjectType(
+			HitResult,
+			BasePos,
+			EndPos,
+			ECC_WorldStatic
+		);
+
+		if (!bHit) {
+			NearbyWallsLocations.Add(EndPos);
+			continue;
+		}
+
+		NearbyWallsLocations.Add(HitResult.ImpactPoint);
+	}
 }

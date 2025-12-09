@@ -51,19 +51,24 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float CameraOffsetLerpSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float EnemiesMaxRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enviro")
+	float EnviroRaycastsMaxRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enviro")
 	float EnviroDistanceMaxImpact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enviro")
 	float EnviroOffsetMaxImpact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enemies")
+	float EnemiesMaxRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enemies")
 	float EnemiesDistanceMaxImpact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enemies")
 	float EnemiesOffsetMaxImpact;
 		
 
