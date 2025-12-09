@@ -62,4 +62,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float InputTimeout = 0.5f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPlayerLightComponent* Light;
 };
