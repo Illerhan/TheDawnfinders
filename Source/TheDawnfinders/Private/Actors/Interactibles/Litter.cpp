@@ -15,6 +15,9 @@ ALitter::ALitter()
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
 	SetReplicateMovement(true);
+
+	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("Light"));
+	Light->LightRoot->SetupAttachment(RootComponent);
 }
 
 void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -78,7 +81,24 @@ void ALitter::Tick(float DeltaTime)
 	float FinalSpeed = MaxSpeed * SpeedMultiplier;
 	FVector Delta = Dir * FinalSpeed * DeltaTime;
 
-	SetActorLocation(GetActorLocation() + Delta, true);
+	if (UPrimitiveComponent* Prim = Cast<UPrimitiveComponent>(GetRootComponent()))
+	{
+		FHitResult Hit;
+		Prim->MoveComponent(
+			Delta,
+			GetActorRotation(),
+			true,
+			&Hit
+		);
+
+		if (Hit.IsValidBlockingHit())
+		{
+			// Optionnel : stop si on tape un mur
+			ServerVelocity = FVector::ZeroVector;
+			return;
+		}
+	}
+	//SetActorLocation(GetActorLocation() + Delta, true);
 	ServerVelocity = Dir * FinalSpeed;
 }
 
