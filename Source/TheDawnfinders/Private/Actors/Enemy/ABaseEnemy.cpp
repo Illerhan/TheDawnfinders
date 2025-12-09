@@ -43,14 +43,9 @@ void ABaseEnemy::DoAttack(FEnemyActionData AttackData)
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
     FOnMontageEnded EndDelegate;
-    EndDelegate.BindUObject(this, &ABaseEnemy::OnEndAttack);
+    EndDelegate.BindUObject(this, &ABaseEnemy::OnMontageEnd);
     AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, AttackData.Animation);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
-}
-
-void ABaseEnemy::OnEndAttack(UAnimMontage* Montage, bool bInterrupted)
-{
-    GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
 }
 
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
@@ -58,11 +53,18 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
     BP_OnMontageNotifyBegin(NotifyName);
 }
 
+void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
+{
+    GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
+
+    BP_OnMontageEnd(bInterrupted);
+}
+
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
     CurrentHealth -= Quantity;
 
-    UE_LOG(LogTemp, Display, TEXT("Enemy Health = %f"), CurrentHealth);
+    DoHitEffect();
 
     if (CurrentHealth <= 0) {
         Die();
@@ -71,6 +73,11 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
 
 void ABaseEnemy::Die() {
     Destroy();
+}
+
+void ABaseEnemy::DoHitEffect_Implementation()
+{
+
 }
 
 
