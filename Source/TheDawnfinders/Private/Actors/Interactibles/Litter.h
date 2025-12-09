@@ -1,13 +1,15 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "Actors/Interactibles/Interactible.h"
 #include "Components/UPlayerLightComponent.h"
+#include "Components/BoxComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 #include "Litter.generated.h"
-USTRUCT()
 
+class AAPlayerCharacter;
+
+USTRUCT()
 struct FPusherData
 {
 	GENERATED_BODY()
@@ -29,7 +31,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	virtual void Tick(float DeltaTime) override;
 
+	// Server RPCs
 	UFUNCTION(Server, Reliable)
 	void Server_StartPushing(AAPlayerCharacter* Player);
 
@@ -42,14 +46,26 @@ public:
 	FVector GetServerVelocity() const { return ServerVelocity; }
 
 protected:
-	virtual void Tick(float DeltaTime) override;
-
+	// Déplacement
 	UPROPERTY(Replicated)
 	FVector ServerVelocity = FVector::ZeroVector;
 
 	UPROPERTY()
 	TMap<TWeakObjectPtr<AAPlayerCharacter>, FPusherData> ActivePushers;
 
+	// Collision physique
+	UPROPERTY(EditAnywhere)
+	UBoxComponent* CollisionBox;
+
+	// Points d’attache pour les joueurs
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* CarryPoints[4];
+
+	// Slots occupés
+	UPROPERTY()
+	TArray<TWeakObjectPtr<AAPlayerCharacter>> CarrySlots;
+
+	// Fonctions attach/detach
 	void AttachPlayer(AAPlayerCharacter* Player);
 	void DetachPlayer(AAPlayerCharacter* Player);
 
@@ -58,11 +74,16 @@ public:
 	float MaxSpeed = 1000.f;
 
 	UPROPERTY(EditAnywhere)
-	int32 MaxUsingPlayer = 1;
+	int32 MaxUsingPlayer = 4;
 
 	UPROPERTY(EditAnywhere)
 	float InputTimeout = 0.5f;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UPlayerLightComponent* Light;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
+	UFloatingPawnMovement* FloatingMovement;
+	
+	
 };
