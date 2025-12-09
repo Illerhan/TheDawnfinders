@@ -121,18 +121,39 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     {
         if (bIsCarrying && CurrentPushedObject)
         {
+            // Si on pousse un objet, la vitesse correspond à l'objet
             float ObjSpeed = CurrentPushedObject->GetServerVelocity().Size();
             GetCharacterMovement()->MaxWalkSpeed = ObjSpeed;
             PlayerSpeed = ObjSpeed;
         }
         else
         {
+            // Si on ne pousse rien, interpolation vers TargetMaxSpeed côté serveur
             float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
             float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, 8.f);
             GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
             PlayerSpeed = NewSpeed;
         }
     }
+    else
+    {
+        // Prédiction locale plus fluide côté client
+        if (!bIsCarrying)
+        {
+            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
+            float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, 12.f);
+            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+        }
+        else if (bIsCarrying && CurrentPushedObject)
+        {
+            // Même principe si on pousse, on peut interpoler légèrement pour le client
+            float ObjSpeed = CurrentPushedObject->GetServerVelocity().Size();
+            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
+            float NewSpeed = FMath::FInterpTo(CurrentMax, ObjSpeed, DeltaTime, 12.f);
+            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+        }
+    }
+
 
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
