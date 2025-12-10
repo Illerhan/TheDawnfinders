@@ -87,6 +87,8 @@ void UHealthComponent::InitialiseComponent
 
 void UHealthComponent::TakeDamage(float quantity)
 {
+	if (IsInvincible) return;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
@@ -97,6 +99,8 @@ void UHealthComponent::TakeDamage(float quantity)
 	IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 	IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
+
+	StartInvincibilityFrames_Implementation(1.f);
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 
@@ -298,6 +302,32 @@ void UHealthComponent::Server_Revive_Implementation()
 		bIsDead = false;
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Invincibility
+
+void UHealthComponent::StartInvincibilityFrames_Implementation(float Duration)
+{
+	if (IsInvincible) return;
+
+	IsInvincible = true;
+
+	GetWorld()->GetTimerManager().SetTimer(
+		InvincibilityTimerHandle,              
+		this,                       
+		&UHealthComponent::EndInvincibilityFrames,
+		Duration,
+		false                        
+	);
+}
+
+void UHealthComponent::EndInvincibilityFrames_Implementation()
+{
+	IsInvincible = false;
+}
+
 
 #pragma endregion
 

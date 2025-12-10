@@ -83,7 +83,7 @@ public :
 	bool IsProtectedFromCurse() const;
 	
 
-// === IDAMAGEABLE METHODS ===
+// === HEALTH ===
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 
