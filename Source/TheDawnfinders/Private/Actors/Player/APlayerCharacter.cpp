@@ -377,15 +377,15 @@ void AAPlayerCharacter::ManageRun(bool Input)
         TargetMaxSpeed = PlayerConfig->RunSpeed;
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
-        GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+        //GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
         TargetMaxSpeed = PlayerConfig->WalkSpeed;
         if (CurrentState == EPlayerState::Running)
             CurrentState = EPlayerState::None;
-        GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
-        GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
+        //GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
+        //GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
     }
 }
 
@@ -631,13 +631,16 @@ void AAPlayerCharacter::StartDodge()
 void AAPlayerCharacter::EndDodge()
 {
     CurrentState = EPlayerState::None;
+
+    SetPlayerSpeed(PlayerConfig->WalkSpeed);
 }
 
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
+
+    SetPlayerSpeed(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, DodgeTimer));
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
