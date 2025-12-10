@@ -61,7 +61,10 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 }
 
 
-void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
+void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
+{
+    if (IsInvincible) return;
+
     CurrentHealth -= Quantity;
 
     DoHitEffect();
@@ -73,6 +76,26 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) {
 
 void ABaseEnemy::Die() {
     Destroy();
+}
+
+void ABaseEnemy::StartInvincibilityFrames(float Duration)
+{
+    if (IsInvincible) return;
+
+    IsInvincible = true;
+
+    GetWorld()->GetTimerManager().SetTimer(
+        InvincibilityTimerHandle,
+        this,
+        &ABaseEnemy::EndInvincibilityFrames,
+        Duration,
+        false
+    );
+}
+
+void ABaseEnemy::EndInvincibilityFrames()
+{
+    IsInvincible = false;
 }
 
 void ABaseEnemy::DoHitEffect_Implementation()

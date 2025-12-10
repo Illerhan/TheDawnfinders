@@ -64,11 +64,22 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentHealth;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool IsInvincible;
+
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
 	UFUNCTION(BlueprintNativeEvent)
 	void DoHitEffect();
+
+	UFUNCTION()
+	void StartInvincibilityFrames(float Duration);
+
+	UFUNCTION()
+	void EndInvincibilityFrames();
+
+	FTimerHandle InvincibilityTimerHandle;
 
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
 

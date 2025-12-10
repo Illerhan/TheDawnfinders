@@ -53,8 +53,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponMeshComponent->SetupAttachment(GetMesh());
     ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
-    //LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
-    //LightComponent->SetupAttachment(GetMesh());
+    WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
+    WeaponCollisionPosRef->SetupAttachment(GetMesh());
 
     // ---------- ROTATION PAR DÉFAUT ----------
 
