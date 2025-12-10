@@ -469,10 +469,10 @@ void UItemComponent::DoAttackCollision()
 	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;
-	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
-	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 80, 80);
-	FRotator Rotation = GetOwner()->GetActorRotation();
-
+	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
+	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 20, 20);
+	FRotator Rotation = PlayerCharacter->WeaponCollisionPosRef->GetComponentRotation();
+	
 	bool bHit = UKismetSystemLibrary::BoxTraceMulti(
 		this,
 		FinalCollisionCenter,
@@ -482,7 +482,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::None,
+		EDrawDebugTrace::ForDuration,
 		Hit,
 		true             // ignore self
 	);

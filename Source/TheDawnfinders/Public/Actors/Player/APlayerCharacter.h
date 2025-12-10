@@ -70,11 +70,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* WeaponMeshComponent;
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UPlayerLightComponent* LightComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* ThrowablePreviewMeshComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USceneComponent* WeaponCollisionPosRef;
 	
 
 // === CURSE ===
@@ -83,7 +86,7 @@ public :
 	bool IsProtectedFromCurse() const;
 	
 
-// === IDAMAGEABLE METHODS ===
+// === HEALTH ===
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 

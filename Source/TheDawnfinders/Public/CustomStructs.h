@@ -127,6 +127,9 @@ struct FWeaponTypesData : public FTableRowBase {
 };
 
 
+
+#pragma region Actions
+
 USTRUCT(BlueprintType)
 struct FWeaponActionData : public FTableRowBase {
 
@@ -163,6 +166,9 @@ struct FEnemyActionData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float MontageSpeed = 1.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float FollowPlayerDuration = 0.2f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
 	TArray<FEnemyAttackTrigger> Triggers;
 
@@ -173,6 +179,10 @@ struct FEnemyActionData : public FTableRowBase {
 	int AttackCooldown;
 };
 
+#pragma endregion
+
+
+#pragma region Chests Loot
 
 USTRUCT(BlueprintType)
 struct FChestSpawnLoot {
@@ -201,3 +211,5 @@ struct FChestSpawn : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FChestSpawnLoot> SpawnableItems;
 };
+
+#pragma endregion
