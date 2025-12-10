@@ -10,6 +10,7 @@
 
 class UAIPerceptionComponent;
 class UAISenseConfig_Hearing;
+class UEnemyAttackComponent;
 
 
 UCLASS()
@@ -28,8 +29,14 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetEnemyState(EEnemyState NewEnemyState);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void EndAttack();
+
 	UFUNCTION(BlueprintCallable)
 	void SetHearingRange(float NewRange);
+
+	UFUNCTION(BlueprintCallable)
+	UEnemyAttackComponent* GetEnemyAttackComponent();
 
 
 protected :
@@ -53,4 +60,7 @@ protected :
 
 	UPROPERTY()
 	UAISenseConfig_Hearing* HearingConfig;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UEnemyAttackComponent* EnemyAttackComponent;
 };

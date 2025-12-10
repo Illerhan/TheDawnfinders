@@ -1,6 +1,10 @@
 #include "Actors/Enemy/ABaseEnemy.h"
 #include "Components/WidgetComponent.h"
+#include "Components/UEnemyAttackComponent.h"
 #include "Widgets/UEnemyWidget.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Interfaces/IDamageable.h"
+#include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -10,6 +14,9 @@ ABaseEnemy::ABaseEnemy()
 
     EnemyWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("EnemyWidgetComponent");
     EnemyWidgetComponent->SetupAttachment(RootComponent);
+
+    AttackCollisionPosRef = CreateDefaultSubobject<USceneComponent>("AttackCollisionPosRef");
+    AttackCollisionPosRef->SetupAttachment(GetMesh());
 }
 
 void ABaseEnemy::BeginPlay()
@@ -53,6 +60,57 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
     BP_OnMontageNotifyBegin(NotifyName);
 }
 
+void ABaseEnemy::DoAttackCollision()
+{
+    FEnemyActionData EnemyAction = AIController->GetEnemyAttackComponent()->GetLastAttackUsed();
+
+    TArray<FHitResult> HitResults;
+    FVector Start = AttackCollisionPosRef->GetComponentLocation();
+    float Radius = 100.f;
+    FCollisionQueryParams Params;
+    FCollisionShape Box = FCollisionShape::MakeBox(FVector(20.f, 20.f, Radius));
+
+    bool bHit = GetWorld()->SweepMultiByChannel(
+        HitResults,
+        Start,
+        Start,
+        AttackCollisionPosRef->GetComponentRotation().Quaternion(),
+        ECC_PhysicsBody,
+        Box,
+        Params,
+        FCollisionResponseParams::DefaultResponseParam
+    );
+
+    const FQuat Rotation = AttackCollisionPosRef->GetComponentRotation().Quaternion();
+    const FVector Location = Start;
+
+    DrawDebugBox(
+        GetWorld(),
+        Location,
+        Box.GetExtent(),   
+        Rotation,
+        FColor::Blue,
+        false,    
+        1.0f,               
+        0,
+        1.5f             
+    );
+
+    if (!bHit) return;
+
+    TSet<AActor*> AlreadyHitActors;
+    for (int i = 0; i < HitResults.Num(); i++) {
+
+        if (!HitResults[i].GetActor()) continue;
+        if (!HitResults[i].GetActor()->ActorHasTag("Player")) continue;
+        if (AlreadyHitActors.Contains(HitResults[i].GetActor())) continue;
+
+        AlreadyHitActors.Add(HitResults[i].GetActor());
+
+        IDamageable::Execute_ReceiveDamage(HitResults[i].GetActor(), EnemyData->Damages * EnemyAction.DamageMultiplier, this);
+    }
+}
+
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 {
     GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
@@ -64,6 +122,7 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
     if (IsInvincible) return;
+    StartInvincibilityFrames(0.1f);
 
     CurrentHealth -= Quantity;
 

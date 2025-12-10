@@ -12,6 +12,7 @@
 
 class UEnemyWidget;
 class UWidgetComponent;
+class ABasicEnemyAIController;
 
 
 UENUM(BlueprintType)
@@ -43,8 +44,14 @@ public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UEnemyWidget* EnemyWidget;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	USceneComponent* AttackCollisionPosRef;
+
 	UFUNCTION(BlueprintCallable)
 	void DoAttack(FEnemyActionData AttackData);
+
+	UFUNCTION(BlueprintCallable)
+	void DoAttackCollision();
 
 	UFUNCTION()
 	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
@@ -91,7 +98,11 @@ public :
 	void FadeOut_Implementation();
 	bool GetIsDisplayed_Implementation();
 
+
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ABasicEnemyAIController* AIController;
 };
