@@ -96,11 +96,15 @@ void UHealthComponent::TakeDamage(float quantity)
 		return;
 	}
 	
-	IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
-	IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
 
-	StartInvincibilityFrames_Implementation(1.f);
+	// Visual effects + Invincibility Frames
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
+		StartInvincibilityFrames_Implementation(1.f);
+
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
+		IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
+	}
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 

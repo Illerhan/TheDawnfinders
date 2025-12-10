@@ -57,7 +57,7 @@ void AThrowableObject::DoCollisionEffect()
 		GetActorLocation(),
 		GetActorLocation(),
 		FQuat::Identity,
-		ECC_Visibility,
+		ECC_GameTraceChannel1,
 		FCollisionShape::MakeSphere(EffectRange)
 	);
 
@@ -77,7 +77,8 @@ void AThrowableObject::DoCollisionEffect()
 
 	for (FHitResult& Hit : HitResults)
 	{
-		if(Hit.GetActor()) continue;
+		if (!Hit.GetActor()->ActorHasTag("Enemy")) continue;
+		if (!Hit.GetActor()) continue;
 
 		switch (EffectType) {
 		case EThrowableEffectType::Explodes :
