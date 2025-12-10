@@ -21,7 +21,7 @@ struct FPusherData
 	float LastUdateTime = 0.f;
 };
 
-UCLASS()
+UCLASS(NotPlaceable)
 class THEDAWNFINDERS_API ALitter : public AInteractibleObjects
 {
 	GENERATED_BODY()

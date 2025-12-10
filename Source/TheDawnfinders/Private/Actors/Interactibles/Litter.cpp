@@ -20,6 +20,7 @@ ALitter::ALitter()
 	CollisionBox->SetBoxExtent(FVector(80.f, 80.f, 50.f));
 	
 	// ===== Collider interaction =====
+	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
 	CapsuleCollider->SetupAttachment(CollisionBox);
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
@@ -64,24 +65,22 @@ void ALitter::StopInteract_Implementation(AActor* Interactor)
 void ALitter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-	
-	if (true)
-	{
-		float NewRadius = (Light->FuelRemaining/MaxFuel) * MaxRange;
-		Light->ProtectionZone->SetSphereRadius(NewRadius);
-	}
-	
-    if (!HasAuthority()) return;
 
+    // ---- Mise à jour du light radius ----
+    if (Light && Light->ProtectionZone)
+    {
+        float NewRadius = (Light->FuelRemaining / MaxFuel) * MaxRange;
+        Light->ProtectionZone->SetSphereRadius(NewRadius);
+    }
+
+    if (!HasAuthority()) return;
     const float Now = GetWorld()->GetTimeSeconds();
 
-    // ------------------ Nettoyage des porteurs inactifs ------------------
+    // ---- Nettoyage des porteurs inactifs ----
     TArray<TWeakObjectPtr<AAPlayerCharacter>> RemoveList;
     for (auto& Pair : ActivePushers)
-    {
         if (Now - Pair.Value.LastUdateTime > InputTimeout)
             RemoveList.Add(Pair.Key);
-    }
     for (auto& P : RemoveList)
         ActivePushers.Remove(P);
 
@@ -91,7 +90,7 @@ void ALitter::Tick(float DeltaTime)
         return;
     }
 
-    // ------------------ Somme des inputs ------------------
+    // ---- Somme des inputs ----
     FVector TotalInput = FVector::ZeroVector;
     for (auto& Pair : ActivePushers)
         TotalInput += Pair.Value.InputVector;
@@ -103,54 +102,45 @@ void ALitter::Tick(float DeltaTime)
     }
 
     FVector Dir = TotalInput.GetSafeNormal();
-
-    // Vitesse proportionnelle au nombre de porteurs
     float SpeedMultiplier = FMath::Clamp((float)ActivePushers.Num() / 4.f, 0.25f, 1.f);
     FVector Delta = Dir * MaxSpeed * SpeedMultiplier * DeltaTime;
 
-    // ------------------ Déplacement principal ------------------
-	FHitResult Hit;
-	CollisionBox->MoveComponent(Delta, GetActorRotation(), true, &Hit);
+    // ---- Paramètres step / slide ----
+    float MaxStepHeight = 20.f;  // Hauteur max que l'on peut monter
+    FHitResult Hit;
 
-	// ------------------ Correction de fin de pente ------------------
-	if (Hit.IsValidBlockingHit())
-	{
-		// Si on touche un "coin" (arête de rampe)
-		bool bIsRampEdge = Hit.Normal.Z > 0.1f && Hit.Normal.Z < 0.9f;
+    // ---- SafeMoveUpdatedComponent ----
+    if (CollisionBox)
+    {
+        // SafeMove gère automatiquement les collisions et les slides
+        CollisionBox->MoveComponent(Delta, GetActorRotation(), true, &Hit);
 
-		if (bIsRampEdge)
-		{
-			FVector Lift = FVector(0.f, 0.f, 15.f); // petit lift horizontal
-			CollisionBox->MoveComponent(Lift, GetActorRotation(), true);
-		}
-	}
+        // Si bloqué, tente un step up
+        if (Hit.IsValidBlockingHit() && Hit.Normal.Z < 0.99f)
+        {
+            FVector StepUp = FVector(0.f, 0.f, MaxStepHeight);
+            FVector Slide = FVector::VectorPlaneProject(Delta, Hit.Normal);
+            
+            // Move avec step up
+            CollisionBox->MoveComponent(Slide + StepUp, GetActorRotation(), true, &Hit);
+        }
+    }
 
-	// ------------------ Slide si pente réelle ------------------
-	if (Hit.IsValidBlockingHit() && Hit.Normal.Z < 0.99f)
-	{
-		FVector Slide = FVector::VectorPlaneProject(Delta, Hit.Normal);
-		CollisionBox->MoveComponent(Slide, GetActorRotation(), true);
-	}
-    // ------------------ Vérification du sol et gravité ------------------
+    // ---- Gravité ----
     FVector Start = GetActorLocation();
-    FVector End = Start - FVector(0.f, 0.f, 70.f); // distance pour vérifier le sol
+    FVector End = Start - FVector(0.f, 0.f, 50.f);
     FHitResult GroundHit;
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(this);
 
-    bool bOnGround = GetWorld()->LineTraceSingleByChannel(GroundHit, Start, End, ECC_WorldStatic, Params);
-
-    if (!bOnGround)
+    if (!GetWorld()->LineTraceSingleByChannel(GroundHit, Start, End, ECC_WorldStatic, Params))
     {
-        // Appliquer gravité si en l'air
         FVector Gravity = FVector(0.f, 0.f, -980.f * DeltaTime);
         CollisionBox->MoveComponent(Gravity, GetActorRotation(), true, &Hit);
     }
 
-    // ------------------ Mise à jour de la vitesse serveur ------------------
+    // ---- Mise à jour vitesse serveur ----
     ServerVelocity = Dir * MaxSpeed * SpeedMultiplier;
-
-	
 }
 
 void ALitter::BeginPlay()
