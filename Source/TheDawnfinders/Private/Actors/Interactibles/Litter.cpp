@@ -61,7 +61,13 @@ void ALitter::StopInteract_Implementation(AActor* Interactor)
 void ALitter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
+	
+	if (true)
+	{
+		float NewRadius = (Light->FuelRemaining/MaxFuel) * MaxRange;
+		Light->ProtectionZone->SetSphereRadius(NewRadius);
+	}
+	
     if (!HasAuthority()) return;
 
     const float Now = GetWorld()->GetTimeSeconds();
@@ -111,7 +117,7 @@ void ALitter::Tick(float DeltaTime)
 
 		if (bIsRampEdge)
 		{
-			FVector Lift = FVector(0.f, 0.f, 8.f); // petit lift horizontal
+			FVector Lift = FVector(0.f, 0.f, 15.f); // petit lift horizontal
 			CollisionBox->MoveComponent(Lift, GetActorRotation(), true);
 		}
 	}
@@ -124,7 +130,7 @@ void ALitter::Tick(float DeltaTime)
 	}
     // ------------------ Vérification du sol et gravité ------------------
     FVector Start = GetActorLocation();
-    FVector End = Start - FVector(0.f, 0.f, 25.f); // distance pour vérifier le sol
+    FVector End = Start - FVector(0.f, 0.f, 50.f); // distance pour vérifier le sol
     FHitResult GroundHit;
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(this);
@@ -140,6 +146,15 @@ void ALitter::Tick(float DeltaTime)
 
     // ------------------ Mise à jour de la vitesse serveur ------------------
     ServerVelocity = Dir * MaxSpeed * SpeedMultiplier;
+
+	
+}
+
+void ALitter::BeginPlay()
+{
+	Super::BeginPlay();
+	Light->InitialiseComponent(FuelRate,MaxFuel);
+	Light->ProtectionZone->SetSphereRadius(MaxFuel);
 }
 
 

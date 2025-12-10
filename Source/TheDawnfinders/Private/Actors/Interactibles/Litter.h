@@ -46,6 +46,8 @@ public:
 	FVector GetServerVelocity() const { return ServerVelocity; }
 
 protected:
+
+	virtual void BeginPlay() override;
 	// Déplacement
 	UPROPERTY(Replicated)
 	FVector ServerVelocity = FVector::ZeroVector;
@@ -81,9 +83,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UPlayerLightComponent* Light;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
-	UFloatingPawnMovement* FloatingMovement;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxRange = 2000;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxFuel = 1500;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float FuelRate = 1.f;
 	
 };
