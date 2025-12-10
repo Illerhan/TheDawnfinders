@@ -3,6 +3,7 @@
 #include "Components/UItemComponent.h"
 
 #include "FrameTypes.h"
+#include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
@@ -224,18 +225,24 @@ void UItemComponent::UseConsumable()
 		if (!PlayerCharacter) return;
 		if (!PlayerCharacter->LightComponent) return;
 		float Amount = EquippedItem.ItemData->ConsumableEffectPower;
-
-		if (!PlayerCharacter->HasAuthority())
+		if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 		{
-			PlayerCharacter->LightComponent->Server_RequestFuelUpdate(Amount);
-		}
-		else
-		{
-			PlayerCharacter->LightComponent->FuelUpdate(Amount);
-		}
+			ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
+			if (Litter)
+			{
+				if (!PlayerCharacter->HasAuthority())
+				{
+					Litter->Light->Server_RequestFuelUpdate(Amount);
+				}
+				else
+				{
+					Litter->Light->FuelUpdate(Amount);
+				}
+			}
+		};
 		InventoryComponent->RemoveCurrentItem();
-		
 	}
+	
 }
 
 void UItemComponent::StopMainAction()

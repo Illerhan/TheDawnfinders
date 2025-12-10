@@ -61,7 +61,7 @@ protected:
 
 	// Points d’attache pour les joueurs
 	UPROPERTY(VisibleAnywhere)
-	USceneComponent* CarryPoints[4];
+	TArray<USceneComponent*> CarryPoints;
 
 	// Slots occupés
 	UPROPERTY()

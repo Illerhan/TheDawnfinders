@@ -30,9 +30,12 @@ ALitter::ALitter()
 	Light->LightRoot->SetupAttachment(RootComponent);
 
 	// ===== Carry points =====
+	
+	CarryPoints.SetNum(4);
 	for (int i = 0; i < 4; i++)
 	{
 		FString Name = FString::Printf(TEXT("CarryPoint_%d"), i);
+
 		CarryPoints[i] = CreateDefaultSubobject<USceneComponent>(*Name);
 		CarryPoints[i]->SetupAttachment(RootComponent);
 	}
@@ -130,7 +133,7 @@ void ALitter::Tick(float DeltaTime)
 	}
     // ------------------ Vérification du sol et gravité ------------------
     FVector Start = GetActorLocation();
-    FVector End = Start - FVector(0.f, 0.f, 50.f); // distance pour vérifier le sol
+    FVector End = Start - FVector(0.f, 0.f, 70.f); // distance pour vérifier le sol
     FHitResult GroundHit;
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(this);
@@ -163,9 +166,10 @@ void ALitter::BeginPlay()
 void ALitter::AttachPlayer(AAPlayerCharacter* Player)
 {
 	if (!Player) return;
+	if (CarryPoints.Num() == 0) return;
 
 	int32 FreeIndex = -1;
-	for (int i = 0; i < 4; i++)
+	for (int i = 1; i < 4; i++)
 	{
 		if (!CarrySlots[i].IsValid())
 		{
@@ -175,9 +179,10 @@ void ALitter::AttachPlayer(AAPlayerCharacter* Player)
 	}
 
 	if (FreeIndex == -1) return;
-
+	if (!CarryPoints.IsValidIndex(FreeIndex)) return;
+	
 	CarrySlots[FreeIndex] = Player;
-
+	
 	Player->AttachToComponent(
 		CarryPoints[FreeIndex],
 		FAttachmentTransformRules::SnapToTargetNotIncludingScale
