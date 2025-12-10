@@ -125,14 +125,16 @@ void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
 void UPlayerLightComponent::OnFogOfWarOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	OtherActor->SetOwner(GetOwner());
+	if (!OtherActor->Implements<UFadeable>()) return;
 
+	OtherActor->SetOwner(GetOwner());
 	IFadeable::Execute_FadeIn(OtherActor);
 }
 
 void UPlayerLightComponent::OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if (!OtherActor->Implements<UFadeable>()) return;
 	IFadeable::Execute_FadeOut(OtherActor);
 }
 

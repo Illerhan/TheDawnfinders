@@ -46,14 +46,17 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttack(FEnemyActionData AttackData);
 
-	UFUNCTION(BlueprintCallable)
-	void OnEndAttack(UAnimMontage* Montage, bool bInterrupted);
-
 	UFUNCTION()
 	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void BP_OnMontageNotifyBegin(FName NotifyName);
+
+	UFUNCTION()
+	void OnMontageEnd(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void BP_OnMontageEnd(bool bInterrupted);
 
 
 // === HEALTH ===
@@ -64,7 +67,11 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
+	UFUNCTION(BlueprintNativeEvent)
+	void DoHitEffect();
+
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
+
 
 
 // === FADE === 
