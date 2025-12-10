@@ -28,6 +28,7 @@ class THEDAWNFINDERS_API ALitter : public AInteractibleObjects
 
 public:
 	ALitter();
+	virtual void PostInitializeComponents() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
