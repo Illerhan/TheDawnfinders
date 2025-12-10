@@ -562,7 +562,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
         GetActorLocation(),
         FQuat::Identity,
         ObjectQueryParams,
-        FCollisionShape::MakeSphere(2000.f)
+        FCollisionShape::MakeSphere(1000.f)
     );
 
     if (!bHit) return;
