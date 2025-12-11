@@ -185,8 +185,6 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			UE_LOG(LogTemp, Display, TEXT("Throw"));
-
 			float Progress = ThrowPreviewTimer / 2.f;
 			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
 			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
@@ -236,8 +234,9 @@ void UItemComponent::UseConsumable()
 						Litter->Light->FuelUpdate(Amount);
 					}
 				}
-			};
+			}
 			InventoryComponent->RemoveCurrentItem();
+			break;
 	}
 	
 }

@@ -118,6 +118,8 @@ public:
 	virtual void AddProtectionZone_Implementation() override;
 
 	virtual void RemoveProtectionZone_Implementation() override;
+
+	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 	
 
 // === MOVEMENT METHODS ===

@@ -273,6 +273,21 @@ void AAPlayerCharacter::RemoveProtectionZone_Implementation()
     HealthComponent->RemoveProtectionZone();
 }
 
+float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
+{
+    if (SoundTag == "Run") {
+        return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
+    }
+    else if (SoundTag == "Dodge") {
+        return PlayerConfig->DodgeSoundAlertness;
+    }
+    else if (SoundTag == "Attack") {
+        return PlayerConfig->AttackSoundAlertness;
+    }
+
+    return 1.0f;
+}
+
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
     HealthComponent->TakeDamage(quantity);

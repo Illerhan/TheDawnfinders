@@ -48,6 +48,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	void DoDamagePostProcess(float Speed);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	float GetSoundAlertness(FName SoundTag);
+
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
