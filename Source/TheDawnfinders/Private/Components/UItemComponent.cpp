@@ -244,6 +244,8 @@ void UItemComponent::UseConsumable()
 void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) return;
+	if (!bIsUsingItem) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -338,9 +340,6 @@ void UItemComponent::StopPreviewThrow()
 
 void UItemComponent::DoLightAttack()
 {
-	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
-		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
-
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
@@ -460,8 +459,12 @@ float UItemComponent::GetCurrentAttackDamages()
 
 void UItemComponent::DoAttackCollision()
 {
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	// only for the owning client
+	if (!PlayerCharacter) return;
+	if (!PlayerCharacter->GetController()) return;
+	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;

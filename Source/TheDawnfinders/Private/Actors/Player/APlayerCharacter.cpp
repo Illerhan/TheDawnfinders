@@ -117,49 +117,8 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (HasAuthority())
-    {
-        if (bIsCarrying && CurrentPushedObject)
-        {
-            // Si on pousse un objet, la vitesse correspond à l'objet
-            float ObjSpeed = CurrentPushedObject->GetServerVelocity().Size();
-            GetCharacterMovement()->MaxWalkSpeed = ObjSpeed;
-            PlayerSpeed = ObjSpeed;
-        }
-        else
-        {
-            // Si on ne pousse rien, interpolation vers TargetMaxSpeed côté serveur
-            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-            float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, 8.f);
-            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-            PlayerSpeed = NewSpeed;
-        }
-    }
-    else
-    {
-        // Prédiction locale plus fluide côté client
-        if (!bIsCarrying)
-        {
-            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-            float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, 12.f);
-            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-        }
-        else if (bIsCarrying && CurrentPushedObject)
-        {
-            // Même principe si on pousse, on peut interpoler légèrement pour le client
-            float ObjSpeed = CurrentPushedObject->GetServerVelocity().Size();
-            float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-            float NewSpeed = FMath::FInterpTo(CurrentMax, ObjSpeed, DeltaTime, 12.f);
-            GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-        }
-    }
-
-
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
-    }
-    else {
-        
     }
     if (IsLocallyControlled() && bIsCarrying && CurrentPushedObject)
     {
@@ -290,6 +249,9 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
 
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
+    if (!GetController()) return;
+    if (!GetController()->IsLocalController()) return;
+
     HealthComponent->TakeDamage(quantity);
 }
 
@@ -320,6 +282,9 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
     {
         // Sur le client, on demande au serveur
         ServerSetPlayerSpeed(NewSpeed);
+
+        PlayerSpeed = NewSpeed;
+        TargetMaxSpeed = NewSpeed;
         
         // Prédiction locale optionnelle (pour réactivité)
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
@@ -389,14 +354,16 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
     if (Input)
     {
-        TargetMaxSpeed = PlayerConfig->RunSpeed;
+        SetPlayerSpeed(PlayerConfig->RunSpeed);
+
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
         //GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
-        TargetMaxSpeed = PlayerConfig->WalkSpeed;
+        SetPlayerSpeed(PlayerConfig->WalkSpeed);
+
         if (CurrentState == EPlayerState::Running)
             CurrentState = EPlayerState::None;
         //GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
@@ -415,8 +382,11 @@ void AAPlayerCharacter::OnFallen()
     {
         Server_OnFallen();
     }
+
     CurrentState = EPlayerState::Fallen;
-    TargetMaxSpeed = PlayerConfig->FallenSpeed;
+    SetPlayerSpeed(PlayerConfig->FallenSpeed);
+
+    //TargetMaxSpeed = PlayerConfig->FallenSpeed;
     GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->FallenSpeed; // Force immédiate
     PlayerSpeed = PlayerConfig->FallenSpeed;
     

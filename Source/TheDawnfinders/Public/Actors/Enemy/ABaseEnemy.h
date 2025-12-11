@@ -53,6 +53,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
+
+// === MONTAGES ===
+public :
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayMontage(UAnimMontage* Montage, float Speed);
+
 	UFUNCTION()
 	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
@@ -91,7 +97,6 @@ public :
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
 
 
-
 // === FADE === 
 public :
 	void FadeIn_Implementation();
@@ -99,6 +104,7 @@ public :
 	bool GetIsDisplayed_Implementation();
 
 
+// === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;

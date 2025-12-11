@@ -3,6 +3,7 @@
 #include "Components/UEnemyAttackComponent.h"
 #include "Widgets/UEnemyWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -40,18 +41,22 @@ void ABaseEnemy::DoAttack(FEnemyActionData AttackData)
     if (!GetMesh()) return;
 
     GetCharacterMovement()->MaxWalkSpeed = 0.f;
+    MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
+}
 
+void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
+{
     UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
     if (!AnimInstance) return;
 
     AnimInstance->StopAllMontages(0.1f);
-    AnimInstance->Montage_Play(AttackData.Animation, AttackData.MontageSpeed);
+    AnimInstance->Montage_Play(Montage, Speed);
 
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
 
     FOnMontageEnded EndDelegate;
     EndDelegate.BindUObject(this, &ABaseEnemy::OnMontageEnd);
-    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, AttackData.Animation);
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
 }
 
@@ -62,13 +67,14 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
 
 void ABaseEnemy::DoAttackCollision()
 {
-    FEnemyActionData EnemyAction = AIController->GetEnemyAttackComponent()->GetLastAttackUsed();
+    //if (!HasAuthority()) return;
+    //FEnemyActionData EnemyAction = AIController->GetEnemyAttackComponent()->GetLastAttackUsed();
 
     TArray<FHitResult> HitResults;
     FVector Start = AttackCollisionPosRef->GetComponentLocation();
     float Radius = EnemyData->AtttacksRange;
     FCollisionQueryParams Params;
-    FCollisionShape Box = FCollisionShape::MakeBox(FVector(10.f, 10.f, Radius));
+    FCollisionShape Box = FCollisionShape::MakeBox(FVector(15.f, 15.f, Radius));
 
     bool bHit = GetWorld()->SweepMultiByChannel(
         HitResults,
@@ -107,7 +113,7 @@ void ABaseEnemy::DoAttackCollision()
 
         AlreadyHitActors.Add(HitResults[i].GetActor());
 
-        IDamageable::Execute_ReceiveDamage(HitResults[i].GetActor(), EnemyData->Damages * EnemyAction.DamageMultiplier, this);
+        IDamageable::Execute_ReceiveDamage(HitResults[i].GetActor(), EnemyData->Damages, this);
     }
 }
 
@@ -122,7 +128,10 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
     if (IsInvincible) return;
-    StartInvincibilityFrames(0.1f);
+    StartInvincibilityFrames(0.2f);
+
+    APawn* Pawn = UGameplayStatics::GetPlayerPawn(this, 0);
+    UE_LOG(LogTemp, Display, TEXT("%d"), Cast<ACharacter>(Pawn)->GetController()->IsLocalController());
 
     CurrentHealth -= Quantity;
 
