@@ -64,11 +64,11 @@ void AThrowableObject::DoCollisionEffect()
 	DrawDebugSphere(
 		GetWorld(),
 		GetActorLocation(),
-		EffectRange,      // ton rayon
-		16,               // nombre de segments
-		bHit ? FColor::Red : FColor::Green, // couleur selon collision
-		false,            // ne reste pas indéfiniment
-		2.0f              // durée en secondes
+		EffectRange,     
+		16,               
+		bHit ? FColor::Red : FColor::Green, 
+		false,        
+		2.0f            
 	);
 
 

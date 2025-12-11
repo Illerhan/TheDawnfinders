@@ -336,7 +336,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
-    if (CurrentState == EPlayerState::Dodging)
+    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized)
         return;
 
     if (CurrentState == EPlayerState::Blocking) {
@@ -389,46 +389,9 @@ void AAPlayerCharacter::ManageRun(bool Input)
     }
 }
 
-
 bool AAPlayerCharacter::IsProtectedFromCurse() const
 {
     return ProtectionZoneAmount > 0;
-}
-
-
-
-void AAPlayerCharacter::OnRep_CurrentPlayerState()
-{
-    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
-        *GetName(),
-        GetController() ? *GetController()->GetName() : TEXT("None"));
-
-    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
-    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
-    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
-    switch(CurrentState)
-    {
-    case EPlayerState::Running:
-        // jouer anim run
-        break;
-    case EPlayerState::None:
-        // jouer idle/walk
-        break;
-    case EPlayerState::Dodging:
-        // ...
-        break;
-    case EPlayerState::Fallen:
-        // ...
-        break;
-    case EPlayerState::Dead:
-        // ...
-        break;
-    case EPlayerState::Immobilized:
-        // ...
-        break;
-    default:
-        break;
-    }
 }
 
 void AAPlayerCharacter::OnFallen()
@@ -717,6 +680,40 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 
 #pragma region Others
+
+
+void AAPlayerCharacter::OnRep_CurrentPlayerState()
+{
+    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
+        *GetName(),
+        GetController() ? *GetController()->GetName() : TEXT("None"));
+
+    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
+    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
+    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
+    switch (CurrentState)
+    {
+    case EPlayerState::Running:
+        // jouer anim run
+        break;
+    case EPlayerState::None:
+        // jouer idle/walk
+        break;
+    case EPlayerState::Dodging:
+        // ...
+        break;
+    case EPlayerState::Fallen:
+        // ...
+        break;
+    case EPlayerState::Dead:
+        // ...
+        break;
+    case EPlayerState::Immobilized:
+        break;
+    default:
+        break;
+    }
+}
 
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)

@@ -107,8 +107,6 @@ void UItemComponent::UnequipWeapon()
 void UItemComponent::DoMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
-	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen 
-		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) return;
 
 	if (EquippedItem.ItemData->ItemType == EItemType::Consumable) 
 	{
@@ -133,6 +131,9 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+				
+				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::Immobilized);
+
 				return;
 			}
 		}
@@ -151,11 +152,7 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 
 		if (GetOwner()->Implements<UPlayerInterface>())
 		{
-			IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-			if (PlayerInterface)
-			{
-				PlayerInterface->ShowProgress_Implementation(ItemUseTimer);
-			}
+			IPlayerInterface::Execute_ShowProgress(GetOwner(), ItemUseTimer);
 		}
 		return;
 	}
@@ -169,8 +166,8 @@ void UItemComponent::UseConsumable()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
+		IPlayerInterface::Execute_HideProgress(GetOwner());
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
 	}
 
 	switch (EquippedItem.ItemData->ConsumableEffectType)
@@ -210,37 +207,37 @@ void UItemComponent::UseConsumable()
 		break;
 
 		case EConsumableEffectType::Revive:
-		if (!PlayerCharacter || !Ally) return;
-		if (!PlayerCharacter->HasAuthority())
-		{
-			ServerRequestRevive(Ally);
-		}
-		else
-		{
-			PerformeRevive(Ally);
-		}
-		break;
+			if (!PlayerCharacter || !Ally) return;
+			if (!PlayerCharacter->HasAuthority())
+			{
+				ServerRequestRevive(Ally);
+			}
+			else
+			{
+				PerformeRevive(Ally);
+			}
+			break;
 
 		case EConsumableEffectType::Refile:
-		if (!PlayerCharacter) return;
-		if (!PlayerCharacter->LightComponent) return;
-		float Amount = EquippedItem.ItemData->ConsumableEffectPower;
-		if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
-		{
-			ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
-			if (Litter)
+			if (!PlayerCharacter) return;
+			if (!PlayerCharacter->LightComponent) return;
+			float Amount = EquippedItem.ItemData->ConsumableEffectPower;
+			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
-				if (!PlayerCharacter->HasAuthority())
+				ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
+				if (Litter)
 				{
-					Litter->Light->Server_RequestFuelUpdate(Amount);
+					if (!PlayerCharacter->HasAuthority())
+					{
+						Litter->Light->Server_RequestFuelUpdate(Amount);
+					}
+					else
+					{
+						Litter->Light->FuelUpdate(Amount);
+					}
 				}
-				else
-				{
-					Litter->Light->FuelUpdate(Amount);
-				}
-			}
-		};
-		InventoryComponent->RemoveCurrentItem();
+			};
+			InventoryComponent->RemoveCurrentItem();
 	}
 	
 }
@@ -256,8 +253,8 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
+		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
 	bIsUsingItem = false;
