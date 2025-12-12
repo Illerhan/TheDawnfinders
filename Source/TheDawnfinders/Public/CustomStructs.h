@@ -95,10 +95,13 @@ struct FWeaponInfos : public FTableRowBase {
 	float BaseDamage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float StaminaMultiplier;
+	float StaminaMultiplier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float SpeedModifier;
+	float PlayerSpeedModifier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AnimsSpeedModifier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 	float CriticalChance;
@@ -124,6 +127,9 @@ struct FWeaponTypesData : public FTableRowBase {
 };
 
 
+
+#pragma region Actions
+
 USTRUCT(BlueprintType)
 struct FWeaponActionData : public FTableRowBase {
 
@@ -145,6 +151,38 @@ struct FWeaponActionData : public FTableRowBase {
 	float CameraShakeDuration;
 };
 
+
+USTRUCT(BlueprintType)
+struct FEnemyActionData : public FTableRowBase {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float DamageMultiplier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	UAnimMontage* Animation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float MontageSpeed = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	float FollowPlayerDuration = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	TArray<FEnemyAttackTrigger> Triggers;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	int AttackPriority;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
+	int AttackCooldown;
+};
+
+#pragma endregion
+
+
+#pragma region Chests Loot
 
 USTRUCT(BlueprintType)
 struct FChestSpawnLoot {
@@ -173,3 +211,5 @@ struct FChestSpawn : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FChestSpawnLoot> SpawnableItems;
 };
+
+#pragma endregion

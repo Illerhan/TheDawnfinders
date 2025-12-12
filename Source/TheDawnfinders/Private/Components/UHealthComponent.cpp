@@ -87,14 +87,24 @@ void UHealthComponent::InitialiseComponent
 
 void UHealthComponent::TakeDamage(float quantity)
 {
+	if (IsInvincible) return;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0, 0);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.5f);
 		return;
 	}
-
+	
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
+
+	// Visual effects + Invincibility Frames
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
+		StartInvincibilityFrames_Implementation(1.f);
+
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
+		IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
+	}
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 
@@ -296,6 +306,32 @@ void UHealthComponent::Server_Revive_Implementation()
 		bIsDead = false;
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Invincibility
+
+void UHealthComponent::StartInvincibilityFrames_Implementation(float Duration)
+{
+	if (IsInvincible) return;
+
+	IsInvincible = true;
+
+	GetWorld()->GetTimerManager().SetTimer(
+		InvincibilityTimerHandle,              
+		this,                       
+		&UHealthComponent::EndInvincibilityFrames,
+		Duration,
+		false                        
+	);
+}
+
+void UHealthComponent::EndInvincibilityFrames_Implementation()
+{
+	IsInvincible = false;
+}
+
 
 #pragma endregion
 

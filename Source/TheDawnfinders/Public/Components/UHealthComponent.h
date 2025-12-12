@@ -72,6 +72,17 @@ public :
 	void Server_Revive();
 
 
+// === INVINCIBILITY ===
+public :
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StartInvincibilityFrames(float Duration);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void EndInvincibilityFrames();
+
+	FTimerHandle InvincibilityTimerHandle;
+
+
 // === NETWORK ===
 public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -123,4 +134,7 @@ public :
 
 	UPROPERTY()
 	UStaminaComponent* StaminaComponent;
+
+	UPROPERTY()
+	bool IsInvincible;
 };

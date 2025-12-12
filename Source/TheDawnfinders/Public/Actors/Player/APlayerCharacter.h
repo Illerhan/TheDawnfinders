@@ -12,6 +12,7 @@
 #include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
 
+class ALitter;
 class UHealthComponent;
 class UStaminaComponent;
 class UItemComponent;
@@ -69,11 +70,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* WeaponMeshComponent;
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UPlayerLightComponent* LightComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* ThrowablePreviewMeshComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USceneComponent* WeaponCollisionPosRef;
 	
 
 // === CURSE ===
@@ -82,7 +86,7 @@ public :
 	bool IsProtectedFromCurse() const;
 	
 
-// === IDAMAGEABLE METHODS ===
+// === HEALTH ===
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 
@@ -93,7 +97,9 @@ public:
 
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
 
-	virtual void DoCameraShake_Implementation(float Intensity, float duration) override;
+	virtual void DoCameraShake_Implementation(float Intensity) override;
+
+	virtual void DoDamagePostProcess_Implementation(float Duration) override;
 
 	virtual void ShowProgress_Implementation(float CurrentValue) override;
 
@@ -112,6 +118,8 @@ public:
 	virtual void AddProtectionZone_Implementation() override;
 
 	virtual void RemoveProtectionZone_Implementation() override;
+
+	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 	
 
 // === MOVEMENT METHODS ===
@@ -151,6 +159,16 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void Server_OnTrapped();
+
+	UFUNCTION(Server, Reliable)
+	void Server_SendPushInput(ALitter* Obj, FVector Input);
+
+	UFUNCTION()
+	void UpdatePushingMovement(float DeltaTime);
+
+	UFUNCTION(Server, Reliable)
+	void Server_SetPushingState(ALitter* Obj, bool bCarrying);
+	
 
 
 // === AUTO-LOCK ===
@@ -236,6 +254,12 @@ public :
 	UPROPERTY()
 	float TargetRotationRate = 360.f;
 
+	UPROPERTY(Replicated)
+	ALitter* CurrentPushedObject = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsCarrying = false;
+
 
 
 // === PROTECTED PROPERTIES ===
@@ -269,5 +293,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
+
+	
 
 };
