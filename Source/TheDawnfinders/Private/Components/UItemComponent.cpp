@@ -245,7 +245,6 @@ void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) return;
-	if (!bIsUsingItem) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -296,6 +295,7 @@ void UItemComponent::StartPreviewThrow()
 	if (IsPreviewingThrow) return;
 
 	IsPreviewingThrow = true;
+
 	ThrowPreviewTimer = 0;
 }
 
