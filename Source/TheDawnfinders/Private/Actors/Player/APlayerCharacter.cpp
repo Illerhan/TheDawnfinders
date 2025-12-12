@@ -26,20 +26,20 @@ AAPlayerCharacter::AAPlayerCharacter()
     // Réplication Actor + mouvement (utile pour ACharacter)
     bReplicates = true;
     SetReplicateMovement(true);
-    GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Exponential;
+    GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Disabled;
     GetCharacterMovement()->bNetworkSmoothingComplete = false;
-    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.100f;
-    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.033f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.040f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.033f;
+    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.05f;
+    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.05f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.05f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.05f;
     
     // Interpolation plus agressive
     GetCharacterMovement()->NetworkMaxSmoothUpdateDistance = 128.0f;
     GetCharacterMovement()->NetworkNoSmoothUpdateDistance = 256.0f;
     
     // Augmenter la fréquence pour les mouvements critiques
-    SetNetUpdateFrequency(100.0f);
-    SetMinNetUpdateFrequency(50.0f);
+    SetNetUpdateFrequency(10.0f);
+    SetMinNetUpdateFrequency(5.0f);
 
     // Components 
     InventoryComponent   = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
@@ -57,10 +57,7 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
 
     // ---------- ROTATION PAR DÉFAUT ----------
-
-    bUseControllerRotationYaw = true;
-    GetCharacterMovement()->bOrientRotationToMovement = false;
-
+    
     // Orientation sur déplacement
      bUseControllerRotationYaw = false;
      GetCharacterMovement()->bOrientRotationToMovement = true;
