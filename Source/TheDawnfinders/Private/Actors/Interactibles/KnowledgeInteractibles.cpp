@@ -22,11 +22,11 @@ void AKnowledgeInteractibles::BeginPlay()
 // Called every frame
 void AKnowledgeInteractibles::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
-
 	if (!bIsInteracting) return;
 
 	HoldTimer(DeltaTime);
+	
+	Super::Tick(DeltaTime);
 }
 
 void AKnowledgeInteractibles::Interact_Implementation(AActor* Interactor)

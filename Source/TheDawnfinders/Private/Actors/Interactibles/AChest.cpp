@@ -37,16 +37,6 @@ void AChest::StopInteract_Implementation(AActor* Interactor)
 
 void AChest::BP_OnInteractionFinished_Implementation()
 {
-	if (!HasAuthority()) {
-		SpawnLoot();
-	}
-	else {
-		SpawnLoot_Implementation();
-	}
-}
-
-void AChest::SpawnLoot_Implementation()
-{
 	UDataTable* LootDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/LT_ChestLoot.LT_ChestLoot"));
 	if (!LootDataTable)
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
@@ -75,7 +65,7 @@ void AChest::SpawnLoot_Implementation()
 		NewItem->Initialise(SpawnedData);
 	}
 
-	UGameplaySoundHelper::PlaySoundNetworked(this, ChestSound, GetActorLocation(), SoundLoudness);
+	UGameplaySoundHelper::PlaySoundNetworked(this,ChestSound,GetActorLocation(),SoundLoudness);
 
 	Destroy();
 }

@@ -20,7 +20,4 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Fadeable")
 	void FadeOut();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Fadeable")
-	bool GetIsDisplayed();
 };

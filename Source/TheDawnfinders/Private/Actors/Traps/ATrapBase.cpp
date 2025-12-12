@@ -114,7 +114,6 @@ void ATrapBase::HandleFadeProgress(float Value)
 
 #pragma endregion
 
-
 void ATrapBase::Multicast_PlayEffects_Implementation()
 {
 	if (Sound)

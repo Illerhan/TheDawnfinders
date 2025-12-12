@@ -22,16 +22,13 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void SortPossibleAttacks(TArray<FName> PossibleAttacksRowNames);
+	void SortPossibleAttacks(TArray<UEnemyAttackData*> PossibleAttacks);
 
 	UFUNCTION(BlueprintCallable)
-	FEnemyActionData GetCurrentAttack(TArray<AActor*> PlayersAtRange);
+	UEnemyAttackData* GetCurrentAttack(TArray<AActor*> PlayersAtRange);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseAttacksCooldowns();
-
-	UFUNCTION(BlueprintCallable)
-	FEnemyActionData GetLastAttackUsed();
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bCanAttack;
@@ -42,11 +39,8 @@ protected:
 	bool VerifyTrigger(FEnemyAttackTrigger Trigger, TArray<AActor*> PlayersAtRange);
 
 	UPROPERTY(BlueprintReadOnly)
-	TArray<FEnemyActionData> SortedPossibleAttacks;
+	TArray<UEnemyAttackData*> SortedPossibleAttacks;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<int> CurrentAttacksCooldowns;
-
-	UPROPERTY()
-	FEnemyActionData LastAttackUsed;
 };

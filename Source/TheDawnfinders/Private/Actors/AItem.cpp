@@ -19,19 +19,19 @@ AItem::AItem()
 void AItem::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
+    
+	if (ItemData && ItemData->ItemMesh)
+	{
+		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
+	}
 }
 
 
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-
 	InitialeLocation = GetActorLocation();
-
-	if (ItemData && ItemData->ItemMesh)
-	{
-		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
-	}
+		
 }
 
 
@@ -56,13 +56,6 @@ void AItem::Tick(float DeltaTime)
 }
 
 void AItem::Initialise_Implementation(UItemData* Data)
-{
-	if (HasAuthority()) {
-		Multicast_Initialise(Data);
-	}
-}
-
-void AItem::Multicast_Initialise_Implementation(UItemData* Data)
 {
 	ItemData = Data;
 
