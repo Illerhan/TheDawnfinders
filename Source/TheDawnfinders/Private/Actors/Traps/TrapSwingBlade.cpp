@@ -63,8 +63,10 @@ void ATrapSwingBlade::Tick(float DeltaTime)
 
     TimeAccumulator += DeltaTime * SwingSpeed;
 
-    float Angle = FMath::Sin(TimeAccumulator) * MaxSwingAngle;
-    Pivot->SetRelativeRotation(FRotator(Angle, 0.f, 0.f));
+    if (HasAuthority()) {
+        float Angle = FMath::Sin(TimeAccumulator) * MaxSwingAngle;
+        Pivot->SetRelativeRotation(FRotator(Angle, 0.f, 0.f));
+    }
 
     float AngularVelocity = FMath::Abs(FMath::Cos(TimeAccumulator) * SwingSpeed * MaxSwingAngle);
     CurrentSwingVelocity = AngularVelocity;

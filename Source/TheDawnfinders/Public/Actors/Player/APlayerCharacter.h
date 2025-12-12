@@ -120,6 +120,8 @@ public:
 	virtual void RemoveProtectionZone_Implementation() override;
 
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
+
+	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range) override;
 	
 
 // === MOVEMENT METHODS ===
@@ -237,6 +239,12 @@ protected:
 	void HideThrowPreview();
 
 
+// === OTHERS ===
+protected:
+	UFUNCTION(Server, Unreliable)
+	void Server_PlaySound(FName SoundTag, float Range);
+
+
 // === PUBLIC PROPERTIES ===
 public :
 	UPROPERTY(ReplicatedUsing = OnRep_PlayerSpeed)
@@ -259,7 +267,6 @@ public :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsCarrying = false;
-
 
 
 // === PROTECTED PROPERTIES ===
