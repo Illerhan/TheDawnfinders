@@ -42,11 +42,8 @@ void ATrapBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (HasAuthority())
-	{
-		if (CurrentCooldown > 0.f)
-			CurrentCooldown -= DeltaTime;
-	}
+	if (CurrentCooldown > 0.f)
+		CurrentCooldown -= DeltaTime;
 
 	FadeTimeline.TickTimeline(DeltaTime);
 }
@@ -56,8 +53,6 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 							   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 							   bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!HasAuthority()) return;  
-
 	if (!bEnable) return;
 	if (CurrentCooldown > 0.f) return;
 	if (!OtherActor || OtherActor == this) return;
