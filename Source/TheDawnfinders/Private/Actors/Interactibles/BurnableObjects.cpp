@@ -33,9 +33,11 @@ void ABurnableObjects::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    // Si l'objet brûle, consommer la vie
     if (bIsBurning && HasAuthority())
     {
         ConsumeHealth(DeltaTime);
+        
     }
 }
 

@@ -6,9 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "AThrowableObject.generated.h"
 
-class UItemData;
-
-
 UENUM(BlueprintType)
 enum class EThrowableEffectType : uint8 {
 	Explodes UMETA(DisplayName = "Explodes"),
@@ -27,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void Initialise(FVector FinalPos, UItemData* Data);
+	void Initialise(FVector FinalPos);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualisePosition();
@@ -43,10 +40,14 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	EThrowableEffectType EffectType;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float EffectRange;
 
-protected :
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float EffectPower;
+
+
+private :
 	UPROPERTY()
 	FVector StartPos;
 
@@ -55,7 +56,4 @@ protected :
 
 	UPROPERTY()
 	float ProgressTimer;
-
-	UPROPERTY(BlueprintReadOnly)
-	UItemData* ItemData;
 };

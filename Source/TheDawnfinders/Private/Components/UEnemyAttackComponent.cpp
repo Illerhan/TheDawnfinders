@@ -24,25 +24,16 @@ void UEnemyAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 }
 
 
-void UEnemyAttackComponent::SortPossibleAttacks(TArray<FName> PossibleAttacksRowNames)
+void UEnemyAttackComponent::SortPossibleAttacks(TArray<UEnemyAttackData*> PossibleAttacks)
 {
 	SortedPossibleAttacks.Reset();
 	CurrentAttacksCooldowns.Reset();
 
-	UDataTable* ActionsDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_EnemyActions.DT_EnemyActions"));
-	if (!ActionsDataTable)
-		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
-
-	TArray<FEnemyActionData> PossibleAttacks;
-	for (int i = 0; i < PossibleAttacksRowNames.Num(); i++) {
-		PossibleAttacks.Add(*ActionsDataTable->FindRow<FEnemyActionData>(PossibleAttacksRowNames[i], " "));
-	}
-
-	for (int i = 0; i < PossibleAttacksRowNames.Num(); i++) {
+	for (int i = 0; i < PossibleAttacks.Num(); i++) {
 		bool Found = false;
 
 		for (int j = 0; j < SortedPossibleAttacks.Num(); j++) {
-			if (SortedPossibleAttacks[j].AttackPriority <= PossibleAttacks[i].AttackPriority) {
+			if (SortedPossibleAttacks[j]->AttackPriority <= PossibleAttacks[i]->AttackPriority) {
 				Found = true;
 
 				SortedPossibleAttacks.Insert(PossibleAttacks[i], j);
@@ -59,15 +50,15 @@ void UEnemyAttackComponent::SortPossibleAttacks(TArray<FName> PossibleAttacksRow
 	}
 }
 
-FEnemyActionData UEnemyAttackComponent::GetCurrentAttack(TArray<AActor*> PlayersAtRange)
+UEnemyAttackData* UEnemyAttackComponent::GetCurrentAttack(TArray<AActor*> PlayersAtRange)
 {
 	for (int i = 0; i < SortedPossibleAttacks.Num(); i++) {
 		if (CurrentAttacksCooldowns[i] != 0) continue;   // If the skill is on cooldown we skip
 
 		// We verify all the triggers to see if they are all valid
 		bool TriggerValid = true;
-		for (int j = 0; j < SortedPossibleAttacks[i].Triggers.Num(); j++) {
-			if (VerifyTrigger(SortedPossibleAttacks[i].Triggers[j], PlayersAtRange)) continue;
+		for (int j = 0; j < SortedPossibleAttacks[i]->AttackTriggers.Num(); j++) {
+			if (VerifyTrigger(SortedPossibleAttacks[i]->AttackTriggers[j], PlayersAtRange)) continue;
 
 			TriggerValid = false;
 			break;
@@ -76,13 +67,11 @@ FEnemyActionData UEnemyAttackComponent::GetCurrentAttack(TArray<AActor*> Players
 		if (!TriggerValid) continue;
 
 		// We send the valid attack + Setup it's cooldown
-		CurrentAttacksCooldowns[i] = SortedPossibleAttacks[i].AttackCooldown + 1;
-
-		LastAttackUsed = SortedPossibleAttacks[i];
+		CurrentAttacksCooldowns[i] = SortedPossibleAttacks[i]->AttackCooldown + 1;
 		return SortedPossibleAttacks[i];
 	}
 
-	return FEnemyActionData();
+	return nullptr;
 }
 
 void UEnemyAttackComponent::ActualiseAttacksCooldowns()
@@ -92,11 +81,6 @@ void UEnemyAttackComponent::ActualiseAttacksCooldowns()
 
 		CurrentAttacksCooldowns[i]--;
 	}
-}
-
-FEnemyActionData UEnemyAttackComponent::GetLastAttackUsed()
-{
-	return LastAttackUsed;
 }
 
 bool UEnemyAttackComponent::VerifyTrigger(FEnemyAttackTrigger Trigger, TArray<AActor*> PlayersAtRange)

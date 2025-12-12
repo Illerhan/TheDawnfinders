@@ -23,9 +23,6 @@ public :
 	float Health;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float Damages;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float HearingRadius;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
@@ -41,10 +38,7 @@ public :
 	float AggressiveSpeed;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
-	TArray<FName> PossibleAttacksRowNames;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
-	float AtttacksRange = 50.f;
+	TArray<UEnemyAttackData*> PossibleAttacks;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Bagarre")
 	float BluntAbsorption = 0;

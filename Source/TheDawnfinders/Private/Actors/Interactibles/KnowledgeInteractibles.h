@@ -12,19 +12,24 @@ class THEDAWNFINDERS_API AKnowledgeInteractibles : public AInteractibleObjects
 	GENERATED_BODY()
 
 public:
+	// Sets default values for this actor's properties
 	AKnowledgeInteractibles();
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
 	
 	// === INTERFACE FUNCTIONS ===
+	
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	
 protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	
 	UFUNCTION()
 	virtual void BP_OnInteractionFinished_Implementation() override;
 
 public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float InteractionDuration;
