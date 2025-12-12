@@ -27,10 +27,10 @@ AAPlayerCharacter::AAPlayerCharacter()
     // Réplication Actor + mouvement (utile pour ACharacter)
     bReplicates = true;
     SetReplicateMovement(true);
-    GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Disabled;
-    GetCharacterMovement()->bNetworkSmoothingComplete = false;
-    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.05f;
-    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.05f;
+    GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Exponential;
+    GetCharacterMovement()->bNetworkSmoothingComplete =  true;
+    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.08f;
+    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.08f;
     GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.2f;
     GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.2f;
     
@@ -187,17 +187,11 @@ void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration)
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 {
-    if (!GetController()) return;
-    if (!GetController()->IsLocalController()) return;
-
     ProgressBarWidget->ActualiseProgress(CurrentValue);
 }
 
 void AAPlayerCharacter::HideProgress_Implementation()
 {
-    //if (!GetController()) return;
-    //if (!GetController()->IsLocalController()) return;
-
     ProgressBarWidget->Hide();
 }
 
