@@ -1,4 +1,5 @@
 #include "Actors/Player/AThrowableObject.h"
+#include "DataAssets/ItemData.h"
 #include "Interfaces/IDamageable.h"
 
 
@@ -30,11 +31,13 @@ void AThrowableObject::Tick(float DeltaTime)
 }
 
 
-void AThrowableObject::Initialise(FVector FinalPos)
+void AThrowableObject::Initialise(FVector FinalPos, UItemData* Data)
 {
 	StartPos = GetActorLocation();
 	EndPos = FinalPos;
 	ProgressTimer = 0;
+
+	ItemData = Data;
 }
 
 
@@ -77,12 +80,12 @@ void AThrowableObject::DoCollisionEffect()
 
 	for (FHitResult& Hit : HitResults)
 	{
-		if (!Hit.GetActor()->ActorHasTag("Enemy")) continue;
 		if (!Hit.GetActor()) continue;
+		if (!Hit.GetActor()->ActorHasTag("Enemy")) continue;
 
 		switch (EffectType) {
 		case EThrowableEffectType::Explodes :
-			IDamageable::Execute_ReceiveDamage(Hit.GetActor(), EffectPower, this);
+			IDamageable::Execute_ReceiveDamage(Hit.GetActor(), ItemData->ConsumableEffectPower, this);
 			break;
 
 		case EThrowableEffectType::PlayLoudSound :

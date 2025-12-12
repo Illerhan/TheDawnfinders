@@ -23,10 +23,13 @@ public :
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	
 	
-
 protected :
 	UFUNCTION()
 	virtual void BP_OnInteractionFinished_Implementation() override;
+
+	UFUNCTION(Server, Reliable)
+	void SpawnLoot();
+
 	UFUNCTION()
 	FVector GetPossibleSpawnLocation();
 
