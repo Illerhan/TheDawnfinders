@@ -31,16 +31,16 @@ AAPlayerCharacter::AAPlayerCharacter()
     GetCharacterMovement()->bNetworkSmoothingComplete = false;
     GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.05f;
     GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.05f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.05f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.05f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.2f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.2f;
     
     // Interpolation plus agressive
     GetCharacterMovement()->NetworkMaxSmoothUpdateDistance = 128.0f;
     GetCharacterMovement()->NetworkNoSmoothUpdateDistance = 256.0f;
     
     // Augmenter la fréquence pour les mouvements critiques
-    SetNetUpdateFrequency(10.0f);
-    SetMinNetUpdateFrequency(5.0f);
+    SetNetUpdateFrequency(30.0f);
+    SetMinNetUpdateFrequency(15.0f);
 
     // Components 
     InventoryComponent   = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
@@ -187,11 +187,17 @@ void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration)
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 {
+    if (!GetController()) return;
+    if (!GetController()->IsLocalController()) return;
+
     ProgressBarWidget->ActualiseProgress(CurrentValue);
 }
 
 void AAPlayerCharacter::HideProgress_Implementation()
 {
+    //if (!GetController()) return;
+    //if (!GetController()->IsLocalController()) return;
+
     ProgressBarWidget->Hide();
 }
 
