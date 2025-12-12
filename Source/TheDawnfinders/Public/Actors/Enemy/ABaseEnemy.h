@@ -53,6 +53,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterSuspicious();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterAggressives();
+
 
 // === MONTAGES ===
 public :
