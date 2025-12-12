@@ -51,23 +51,25 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 		NewOffset -= Offset * FMath::Lerp(0, EnemiesOffsetMaxImpact, 1 - (Offset.Length() / EnemiesMaxRange));
 	}
 
+	NewOffset /= EnemiesAtRange.Num();
+
 	CurrentOffset = FMath::Lerp(CurrentOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
 }
 
 void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 {
 	float NewDistance = CameraBaseDistance;
+	float Distance = 0;
 
-	for (int i = 0; i < EnemiesAtRange.Num(); i++) 
-	{
-		float Distance = (GetOwner()->GetActorLocation() - EnemiesAtRange[i]->GetActorLocation()).Length();
+	if (FarestEnemy) {
+		Distance = (GetOwner()->GetActorLocation() - FarestEnemy->GetActorLocation()).Length();
 		NewDistance -= FMath::Lerp(0, EnemiesDistanceMaxImpact, 1 - (Distance / EnemiesMaxRange));
 	}
 
 	float AverageDist = 0;
 	for (int i = 0; i < NearbyWallsLocations.Num(); i++) 
 	{
-		float Distance = (GetOwner()->GetActorLocation() - NearbyWallsLocations[i]).Length();
+		Distance = (GetOwner()->GetActorLocation() - NearbyWallsLocations[i]).Length();
 		AverageDist += Distance;
 	}
 	AverageDist /= NearbyWallsLocations.Num();
@@ -98,21 +100,23 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	);
 
 	EnemiesAtRange.Reset();
+	FarestEnemy = nullptr;
 
 	if (!bHit) return;
 
-	float BestDist = EnemiesMaxRange;
+	float BestDist = 0;
 	for (int i = 0; i < HitResults.Num(); i++) {
 		float Dist = (HitResults[i].GetActor()->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
-
 		AActor* Actor = HitResults[i].GetActor();
 
 		if (!IFadeable::Execute_GetIsDisplayed(Actor)) continue;
-		if (Dist > BestDist) continue;
 
-		BestDist = Dist;
-		EnemiesAtRange.Reset();
 		EnemiesAtRange.Add(HitResults[i].GetActor());
+
+		if (Dist < BestDist) continue;
+
+		FarestEnemy = HitResults[i].GetActor();
+		BestDist = Dist;
 	}
 }
 

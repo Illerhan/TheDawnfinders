@@ -90,5 +90,8 @@ protected :
 	TArray<AActor*> EnemiesAtRange;
 
 	UPROPERTY()
+	AActor* FarestEnemy;
+
+	UPROPERTY()
 	TArray<FVector> NearbyWallsLocations;
 };
