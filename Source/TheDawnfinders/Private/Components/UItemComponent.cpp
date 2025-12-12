@@ -196,7 +196,7 @@ void UItemComponent::UseConsumable()
 
 			if (ThrowedObject)
 			{
-				ThrowedObject->Initialise(FinalPos);
+				ThrowedObject->Initialise(FinalPos, EquippedItem.ItemData);
 				InventoryComponent->RemoveCurrentItem();
 
 				StopPreviewThrow();
@@ -318,7 +318,6 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
 
 	AThrowableObject* Throwable = EquippedItem.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
-
 	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
 }
 
