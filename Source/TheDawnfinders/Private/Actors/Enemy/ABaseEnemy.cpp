@@ -117,6 +117,16 @@ void ABaseEnemy::DoAttackCollision()
     }
 }
 
+void ABaseEnemy::Multicast_EnterAggressives_Implementation()
+{
+    EnemyWidget->PlayAggressiveAnim();
+}
+
+void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
+{
+    EnemyWidget->PlaySuspiciousAnim();
+}
+
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 {
     GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
