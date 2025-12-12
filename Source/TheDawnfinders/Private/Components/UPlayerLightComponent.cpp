@@ -255,6 +255,7 @@ void UPlayerLightComponent::FuelUpdate(float NewFuel)
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
 }
+
 void UPlayerLightComponent::OnRep_FuelRemaining()
 {
 	// Update UI local

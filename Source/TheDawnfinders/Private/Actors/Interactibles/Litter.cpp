@@ -143,7 +143,7 @@ void ALitter::Tick(float DeltaTime)
 
     // ---- Gravité ----
     FVector Start = GetActorLocation();
-    FVector End = Start - FVector(0.f, 0.f, 50.f);
+    FVector End = Start - FVector(0.f, 0.f, 125.f);
     FHitResult GroundHit;
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(this);
@@ -192,6 +192,8 @@ void ALitter::AttachPlayer(AAPlayerCharacter* Player)
 		CarryPoints[FreeIndex],
 		FAttachmentTransformRules::SnapToTargetNotIncludingScale
 	);
+	Player->SetActorEnableCollision(false);
+	//CollisionBox->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
 
 	Player->bIsCarrying = true;
 	Player->CurrentPushedObject = this;
@@ -209,7 +211,7 @@ void ALitter::DetachPlayer(AAPlayerCharacter* Player)
 			break;
 		}
 	}
-
+	Player->SetActorEnableCollision(true);
 	Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	Player->bIsCarrying = false;
 	Player->CurrentPushedObject = nullptr;

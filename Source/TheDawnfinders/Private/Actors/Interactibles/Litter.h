@@ -72,6 +72,8 @@ protected:
 	void AttachPlayer(AAPlayerCharacter* Player);
 	void DetachPlayer(AAPlayerCharacter* Player);
 
+	
+
 public:
 	UPROPERTY(EditAnywhere)
 	float MaxSpeed = 1000.f;
