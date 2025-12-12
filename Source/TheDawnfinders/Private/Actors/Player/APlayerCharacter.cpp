@@ -15,6 +15,7 @@
 #include "GameFramework/GameSession.h"
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
+#include "Perception/AISense_Hearing.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
 
@@ -242,6 +243,16 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     }
 
     return 1.0f;
+}
+
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range)
+{
+    if (HasAuthority()) {
+        Server_PlaySound_Implementation(SoundTag, Range);
+    }
+    else {
+        Server_PlaySound(SoundTag, Range);
+    }
 }
 
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
@@ -663,6 +674,11 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 #pragma region Others
 
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+{
+    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+}
+
 
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
@@ -723,6 +739,7 @@ void AAPlayerCharacter::OnRep_PlayerState()
         *GetName(),
         GetController() ? *GetController()->GetName() : TEXT("None"));
 }
+
 
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
