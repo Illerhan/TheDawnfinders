@@ -59,6 +59,10 @@ public :
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_EnterAggressives();
 
+	UFUNCTION(BlueprintCallable)
+	void SetLockRotation(bool Locked);
+
+
 
 // === MONTAGES ===
 public :
@@ -110,10 +114,14 @@ public :
 	bool GetIsDisplayed_Implementation();
 
 
+
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bLockRotation;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;

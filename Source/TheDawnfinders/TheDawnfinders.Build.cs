@@ -13,18 +13,24 @@ public class TheDawnfinders : ModuleRules
 			"CoreUObject",
 			"Engine", 
 			"InputCore",
-			"OnlineSubsystem",
+            "AIModule",
+            "OnlineSubsystem",
 			"OnlineSubsystemUtils",
-			"UMG" 
-		});
+            "UMG",
+            "AdvancedSessions"
+        });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        PrivateDependencyModuleNames.AddRange(new string[]
+        {
+            "AdvancedSessions",
+            "AdvancedSteamSessions"
+        });
+
+        // Uncomment if you are using online features
+        PrivateDependencyModuleNames.Add("OnlineSubsystem");
 
 		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
 	}

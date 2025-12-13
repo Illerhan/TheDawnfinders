@@ -117,6 +117,11 @@ void ABaseEnemy::DoAttackCollision()
     }
 }
 
+void ABaseEnemy::SetLockRotation(bool Locked)
+{
+    bLockRotation = Locked;
+}
+
 void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 {
     EnemyWidget->PlayAggressiveAnim();
