@@ -260,10 +260,10 @@ void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 	if (!OwnerController) return;
 
 	if (IsProtectedFromCurse()) {
-		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 0.0f, DeltaTime * 2.f);
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 0.0f, DeltaTime * 1.5f);
 	}
 	else {
-		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 1.0f, DeltaTime * 2.f);
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 1.0f, DeltaTime * 1.5f);
 	}
 }
 

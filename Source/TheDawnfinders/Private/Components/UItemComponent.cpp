@@ -480,7 +480,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::ForDuration,
+		EDrawDebugTrace::ForOneFrame,
 		Hit,
 		true             // ignore self
 	);
@@ -495,15 +495,21 @@ void UItemComponent::DoAttackCollision()
 
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
+		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
+
 		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-		ApplyDamagesToEnemy(Enemy);
+		if (!GetOwner()->HasAuthority())
+			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
+
+		else
+			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
 	}
 }
 
-void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
+void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
-	float FinalDamage = CurrentAttackDamages;
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	float FinalDamage = BaseDamages;
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -523,8 +529,6 @@ void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 	}
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
-
-	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
 }
 
 #pragma endregion

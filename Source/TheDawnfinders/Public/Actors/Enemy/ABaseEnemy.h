@@ -105,6 +105,9 @@ public :
 	FTimerHandle InvincibilityTimerHandle;
 
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
+	
+	UFUNCTION(Server, Reliable)
+	void Server_TakeDamages(float Quantity, AActor* Origin);
 
 
 // === FADE === 

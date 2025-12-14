@@ -12,6 +12,7 @@
 ABaseEnemy::ABaseEnemy()
 {
 	PrimaryActorTick.bCanEverTick = true;
+    bReplicates = true;
 
     EnemyWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("EnemyWidgetComponent");
     EnemyWidgetComponent->SetupAttachment(RootComponent);
@@ -145,16 +146,29 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
     if (IsInvincible) return;
     StartInvincibilityFrames(0.2f);
 
-    APawn* Pawn = UGameplayStatics::GetPlayerPawn(this, 0);
-    UE_LOG(LogTemp, Display, TEXT("%d"), Cast<ACharacter>(Pawn)->GetController()->IsLocalController());
-
     CurrentHealth -= Quantity;
-
-    DoHitEffect();
 
     if (CurrentHealth <= 0) {
         Die();
     }
+
+    DoHitEffect();
+}
+
+void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
+{
+    if (IsInvincible) return;
+    StartInvincibilityFrames(0.2f);
+
+    UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
+
+    CurrentHealth -= Quantity;
+
+    if (CurrentHealth <= 0) {
+        Die();
+    }
+
+    DoHitEffect();
 }
 
 void ABaseEnemy::Die() {
