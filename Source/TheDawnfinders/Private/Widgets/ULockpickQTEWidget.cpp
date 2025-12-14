@@ -53,11 +53,10 @@ bool ULockpickQTEWidget::ValidateQTE_Implementation()
         return false;
     }
 
-    PlaySuccessAnim();
     CurrentStep++;
     if (CurrentStep >= StepsCount) ExitQTE();
 
-    UE_LOG(LogTemp, Display, TEXT("%d"), StepsCount);
+    PlaySuccessAnim();
 
     return CurrentStep >= StepsCount;
 }
