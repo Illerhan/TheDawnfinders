@@ -56,6 +56,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ApplyCurse(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseCursePostProcess(float DeltaTime);
+
 
 // === DEATH ===
 public : 
@@ -137,4 +140,10 @@ public :
 
 	UPROPERTY()
 	bool IsInvincible;
+
+	UPROPERTY()
+	APostProcessVolume* CurseVolume;
+
+	UPROPERTY()
+	AController* OwnerController;
 };

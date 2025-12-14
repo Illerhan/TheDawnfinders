@@ -5,6 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -36,6 +37,8 @@ void UHealthComponent::BeginPlay()
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
 
+	OwnerController = PC;
+
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	if (!PSCustom) return;
 
@@ -49,6 +52,9 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	{
 		ApplyCurse(DeltaTime);
 	}
+
+	if (CurseVolume) ActualiseCursePostProcess(DeltaTime);
+	
 
 	if (GetOwner()->HasAuthority())
 	{
@@ -69,6 +75,14 @@ void UHealthComponent::InitialiseComponent
 	MinReviveHP = ReviveHP;
 	InjureDecreaseSpeed = InjureSpeed;
 	CurseRatio = CurseRate;
+
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "PPCurse", FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		CurseVolume = (APostProcessVolume*)Actor;
+	}
 
 	// If is not the server
 	if (!GetOwner()->HasAuthority()) {
@@ -231,6 +245,7 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
 
+
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
 	{
@@ -238,6 +253,18 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	}
 
 	ServerChangeHealth_Implementation(CurrentHealth);
+}
+
+void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
+{
+	if (!OwnerController) return;
+
+	if (IsProtectedFromCurse()) {
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 0.0f, DeltaTime * 2.f);
+	}
+	else {
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 1.0f, DeltaTime * 2.f);
+	}
 }
 
 
