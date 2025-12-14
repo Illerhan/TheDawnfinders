@@ -107,7 +107,10 @@ protected :
 	bool bDoQTE;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float QTESuccessRange;
+	float QTESuccessRangeStart;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float QTESuccessRangeEnd;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int QTEStepsCount;

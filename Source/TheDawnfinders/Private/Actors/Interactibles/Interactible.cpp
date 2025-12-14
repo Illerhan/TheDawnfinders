@@ -150,7 +150,7 @@ bool AInteractibleObjects::GetQTENeeded_Implementation()
 
 void AInteractibleObjects::StartQTE_Implementation()
 {
-	InteractQTEWidget->EnterQTE(QTESuccessRange, 400.f, QTEStepsCount);
+	InteractQTEWidget->EnterQTE(QTESuccessRangeStart, QTESuccessRangeEnd, 400.f, QTEStepsCount);
 }
 
 void AInteractibleObjects::StopQTE_Implementation()

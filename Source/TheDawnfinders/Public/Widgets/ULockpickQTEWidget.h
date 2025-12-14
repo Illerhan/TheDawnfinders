@@ -17,7 +17,7 @@ public :
 // === MAIN FUNCTIONS ===
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void EnterQTE(float Success, float Speed, int Steps);
+	void EnterQTE(float SuccessStart, float SuccessEnd, float Speed, int Steps);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ExitQTE();
@@ -36,6 +36,15 @@ public :
 protected :
 	UPROPERTY(BlueprintReadOnly)
 	float SuccessPercent;
+
+	UPROPERTY(BlueprintReadOnly)
+	float AimedSuccessPercent;
+
+	UPROPERTY(BlueprintReadOnly)
+	float SuccessPercentStart;
+
+	UPROPERTY(BlueprintReadOnly)
+	float SuccessPercentEnd;
 
 	UPROPERTY(BlueprintReadOnly)
 	float RotationSpeed;
