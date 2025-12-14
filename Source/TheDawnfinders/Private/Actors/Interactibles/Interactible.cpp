@@ -150,7 +150,7 @@ bool AInteractibleObjects::GetQTENeeded_Implementation()
 
 void AInteractibleObjects::StartQTE_Implementation()
 {
-	InteractQTEWidget->EnterQTE(QTESuccessRange, 400.f);
+	InteractQTEWidget->EnterQTE(QTESuccessRange, 400.f, QTEStepsCount);
 }
 
 void AInteractibleObjects::StopQTE_Implementation()
@@ -160,8 +160,6 @@ void AInteractibleObjects::StopQTE_Implementation()
 
 bool AInteractibleObjects::ValidateQTE_Implementation()
 {
-	InteractQTEWidget->ExitQTE();
-
 	return InteractQTEWidget->ValidateQTE();
 }
 

@@ -111,11 +111,8 @@ void UInteractionComponent::StartInteract()
 	// If is doing QTE
 	if (InteractingQTEActor) 
 	{
-		
 		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
 		{
-			InteractingQTEActor = nullptr;
-			PlayerCharacter->OnRevive();
 			return;
 		}
 

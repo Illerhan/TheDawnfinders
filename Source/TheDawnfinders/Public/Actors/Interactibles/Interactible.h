@@ -109,6 +109,9 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float QTESuccessRange;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int QTEStepsCount;
+
 	UPROPERTY()
 	bool bCanBeUsed = true;
 
