@@ -107,7 +107,7 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
-    LightComponent->ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
+    LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
     LightComponent->ProtectionZone->SetSphereRadius(0.f);
     
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
