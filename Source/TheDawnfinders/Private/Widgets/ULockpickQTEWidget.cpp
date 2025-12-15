@@ -15,15 +15,32 @@ void ULockpickQTEWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTi
 
     CurrentAngle += RotationSpeed * InDeltaTime;
     CurrentAngle = FMath::Modulo(CurrentAngle, 360.f);
+
+    SuccessPercent = FMath::FInterpTo(SuccessPercent, AimedSuccessPercent, InDeltaTime, 5.f);
+}
+
+void ULockpickQTEWidget::PlaySuccessAnim_Implementation()
+{
+    
+}
+
+void ULockpickQTEWidget::PlayFailAnim_Implementation()
+{
+    
 }
 
 
-void ULockpickQTEWidget::EnterQTE_Implementation(float Success, float Speed)
+void ULockpickQTEWidget::EnterQTE_Implementation(float SuccessStart, float SuccessEnd, float Speed, int Steps)
 {
     IsDisplayed = true;
-	SuccessPercent = Success;
+	SuccessPercent = SuccessStart;
+    AimedSuccessPercent = SuccessStart;
+    SuccessPercentStart = SuccessStart;
+    SuccessPercentEnd = SuccessEnd;
     RotationSpeed = Speed;
     CurrentAngle = 0;
+    CurrentStep = 0;
+    StepsCount = Steps;
 }
 
 void ULockpickQTEWidget::ExitQTE_Implementation()
@@ -33,7 +50,20 @@ void ULockpickQTEWidget::ExitQTE_Implementation()
 
 bool ULockpickQTEWidget::ValidateQTE_Implementation()
 {
-    IsDisplayed = false;
+    if (RecentlyPressedTimer > 0.f) return false;
+    RecentlyPressedTimer = 0.1f;
 
-    return CurrentAngle > 360 - SuccessPercent * 0.5f || CurrentAngle < SuccessPercent * 0.5f;
+    if (!(CurrentAngle > 360 - SuccessPercent * 0.5f) && !(CurrentAngle < SuccessPercent * 0.5f)) {
+        PlayFailAnim();
+        return false;
+    }
+
+    CurrentStep++;
+    if (CurrentStep >= StepsCount) ExitQTE();
+
+    AimedSuccessPercent = FMath::Lerp(SuccessPercentStart, SuccessPercentEnd, ((float)CurrentStep + 1) / StepsCount);
+
+    PlaySuccessAnim();
+
+    return CurrentStep >= StepsCount;
 }

@@ -56,6 +56,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ApplyCurse(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseCursePostProcess(float DeltaTime);
+
 
 // === DEATH ===
 public : 
@@ -70,6 +73,17 @@ public :
 
 	UFUNCTION(Server,Reliable,BlueprintCallable)
 	void Server_Revive();
+
+
+// === INVINCIBILITY ===
+public :
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StartInvincibilityFrames(float Duration);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void EndInvincibilityFrames();
+
+	FTimerHandle InvincibilityTimerHandle;
 
 
 // === NETWORK ===
@@ -123,4 +137,13 @@ public :
 
 	UPROPERTY()
 	UStaminaComponent* StaminaComponent;
+
+	UPROPERTY()
+	bool IsInvincible;
+
+	UPROPERTY()
+	APostProcessVolume* CurseVolume;
+
+	UPROPERTY()
+	AController* OwnerController;
 };

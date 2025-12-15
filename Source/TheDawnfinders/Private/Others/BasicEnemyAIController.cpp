@@ -1,4 +1,29 @@
 #include "Others/BasicEnemyAIController.h"
+#include "Perception/AIPerceptionComponent.h"
+#include "Components/UEnemyAttackComponent.h"
+#include "Perception/AISenseConfig_Hearing.h"
+
+
+ABasicEnemyAIController::ABasicEnemyAIController()
+{
+    AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
+
+    HearingConfig = CreateDefaultSubobject<UAISenseConfig_Hearing>(TEXT("Hearing Config"));
+    HearingConfig->HearingRange = 2000.f;
+
+    EnemyAttackComponent = CreateDefaultSubobject<UEnemyAttackComponent>(TEXT("AC_EnemyAttack"));
+
+    // Pour s'assurer que l�AI utilise le sens auditif
+    HearingConfig->DetectionByAffiliation.bDetectEnemies = true;
+    HearingConfig->DetectionByAffiliation.bDetectFriendlies = true;
+    HearingConfig->DetectionByAffiliation.bDetectNeutrals = true;
+
+    AIPerceptionComponent->ConfigureSense(*HearingConfig);
+    AIPerceptionComponent->SetDominantSense(UAISense_Hearing::StaticClass());
+}
+
+
+
 
 void ABasicEnemyAIController::AddAlertness(float Quantity)
 {
@@ -9,7 +34,28 @@ void ABasicEnemyAIController::AddAlertness(float Quantity)
 	}
 }
 
+void ABasicEnemyAIController::EndAttack_Implementation()
+{
+
+}
+
+void ABasicEnemyAIController::SetHearingRange(float NewRange)
+{
+    if (HearingConfig)
+    {
+        HearingConfig->HearingRange = NewRange;
+
+        AIPerceptionComponent->RequestStimuliListenerUpdate();
+    }
+}
+
+UEnemyAttackComponent* ABasicEnemyAIController::GetEnemyAttackComponent()
+{
+    return EnemyAttackComponent;
+}
+
 void ABasicEnemyAIController::SetEnemyState_Implementation(EEnemyState NewEnemyState)
 {
 
 }
+

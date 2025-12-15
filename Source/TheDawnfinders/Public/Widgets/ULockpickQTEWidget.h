@@ -17,7 +17,7 @@ public :
 // === MAIN FUNCTIONS ===
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void EnterQTE(float Success, float Speed);
+	void EnterQTE(float SuccessStart, float SuccessEnd, float Speed, int Steps);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ExitQTE();
@@ -25,11 +25,26 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool ValidateQTE();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PlaySuccessAnim();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PlayFailAnim();
+
 
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadOnly)
 	float SuccessPercent;
+
+	UPROPERTY(BlueprintReadOnly)
+	float AimedSuccessPercent;
+
+	UPROPERTY(BlueprintReadOnly)
+	float SuccessPercentStart;
+
+	UPROPERTY(BlueprintReadOnly)
+	float SuccessPercentEnd;
 
 	UPROPERTY(BlueprintReadOnly)
 	float RotationSpeed;
@@ -39,4 +54,13 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	bool IsDisplayed;
+
+	UPROPERTY(BlueprintReadOnly)
+	int StepsCount;
+
+	UPROPERTY(BlueprintReadOnly)
+	int CurrentStep;
+
+	UPROPERTY(BlueprintReadWrite)
+	float RecentlyPressedTimer;
 };

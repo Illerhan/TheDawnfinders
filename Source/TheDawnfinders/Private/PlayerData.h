@@ -24,21 +24,18 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float FallenSpeed = 100.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float WalkRotationRate = 360.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float RunRotationRate  = 900.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float DodgeRotationRate = 1400.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float LowStaminaSpeed = 600.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float DodgeStartSpeed = 1400.f;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float DodgeEndSpeed = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float RotationRate = 720.f;
@@ -47,6 +44,15 @@ public:
 	// ---------- DODGE ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Dodge")
 	float DodgeDuration = 0.9f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
+	float DodgeStartSpeed = 1400.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
+	float DodgeEndSpeed = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
+	float DodgeInvincibilityDuration = 0.2f;
 
 
 	// ---------- FALL DAMAGE -----------

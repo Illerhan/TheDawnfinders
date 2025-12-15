@@ -125,13 +125,16 @@ void UPlayerLightComponent::InitialiseComponent(float FuelRate, float MaxFuels)
 void UPlayerLightComponent::OnFogOfWarOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Display, TEXT("Skibidi"));
+	if (!OtherActor->Implements<UFadeable>()) return;
+
+	OtherActor->SetOwner(GetOwner());
 	IFadeable::Execute_FadeIn(OtherActor);
 }
 
 void UPlayerLightComponent::OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if (!OtherActor->Implements<UFadeable>()) return;
 	IFadeable::Execute_FadeOut(OtherActor);
 }
 
@@ -252,6 +255,7 @@ void UPlayerLightComponent::FuelUpdate(float NewFuel)
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
 }
+
 void UPlayerLightComponent::OnRep_FuelRemaining()
 {
 	// Update UI local

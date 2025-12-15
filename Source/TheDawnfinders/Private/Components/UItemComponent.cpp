@@ -3,6 +3,7 @@
 #include "Components/UItemComponent.h"
 
 #include "FrameTypes.h"
+#include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Player/AThrowableObject.h"
 #include "Components/UHealthComponent.h"
@@ -10,6 +11,8 @@
 #include "Components/UStaminaComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
+
+#include "Perception/AISense_Hearing.h"
 
 
 UItemComponent::UItemComponent()
@@ -104,8 +107,6 @@ void UItemComponent::UnequipWeapon()
 void UItemComponent::DoMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
-	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen 
-		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) return;
 
 	if (EquippedItem.ItemData->ItemType == EItemType::Consumable) 
 	{
@@ -130,6 +131,9 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+				
+				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::Immobilized);
+
 				return;
 			}
 		}
@@ -148,11 +152,7 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 
 		if (GetOwner()->Implements<UPlayerInterface>())
 		{
-			IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-			if (PlayerInterface)
-			{
-				PlayerInterface->ShowProgress_Implementation(ItemUseTimer);
-			}
+			IPlayerInterface::Execute_ShowProgress(GetOwner(), ItemUseTimer);
 		}
 		return;
 	}
@@ -166,8 +166,8 @@ void UItemComponent::UseConsumable()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
+		IPlayerInterface::Execute_HideProgress(GetOwner());
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
 	}
 
 	switch (EquippedItem.ItemData->ConsumableEffectType)
@@ -185,8 +185,6 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			UE_LOG(LogTemp, Display, TEXT("Throw"));
-
 			float Progress = ThrowPreviewTimer / 2.f;
 			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
 			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
@@ -198,7 +196,7 @@ void UItemComponent::UseConsumable()
 
 			if (ThrowedObject)
 			{
-				ThrowedObject->Initialise(FinalPos);
+				ThrowedObject->Initialise(FinalPos, EquippedItem.ItemData);
 				InventoryComponent->RemoveCurrentItem();
 
 				StopPreviewThrow();
@@ -207,38 +205,46 @@ void UItemComponent::UseConsumable()
 		break;
 
 		case EConsumableEffectType::Revive:
-		if (!PlayerCharacter || !Ally) return;
-		if (!PlayerCharacter->HasAuthority())
-		{
-			ServerRequestRevive(Ally);
-		}
-		else
-		{
-			PerformeRevive(Ally);
-		}
-		break;
+			if (!PlayerCharacter || !Ally) return;
+			if (!PlayerCharacter->HasAuthority())
+			{
+				ServerRequestRevive(Ally);
+			}
+			else
+			{
+				PerformeRevive(Ally);
+			}
+			break;
 
 		case EConsumableEffectType::Refile:
-		if (!PlayerCharacter) return;
-		if (!PlayerCharacter->LightComponent) return;
-		float Amount = EquippedItem.ItemData->ConsumableEffectPower;
-
-		if (!PlayerCharacter->HasAuthority())
-		{
-			PlayerCharacter->LightComponent->Server_RequestFuelUpdate(Amount);
-		}
-		else
-		{
-			PlayerCharacter->LightComponent->FuelUpdate(Amount);
-		}
-		InventoryComponent->RemoveCurrentItem();
-		
+			if (!PlayerCharacter) return;
+			if (!PlayerCharacter->LightComponent) return;
+			float Amount = EquippedItem.ItemData->ConsumableEffectPower;
+			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
+			{
+				ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
+				if (Litter)
+				{
+					if (!PlayerCharacter->HasAuthority())
+					{
+						Litter->Light->Server_RequestFuelUpdate(Amount);
+					}
+					else
+					{
+						Litter->Light->FuelUpdate(Amount);
+					}
+				}
+			}
+			InventoryComponent->RemoveCurrentItem();
+			break;
 	}
+	
 }
 
 void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -247,8 +253,8 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->HideProgress_Implementation();
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
+		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
 	bIsUsingItem = false;
@@ -289,6 +295,7 @@ void UItemComponent::StartPreviewThrow()
 	if (IsPreviewingThrow) return;
 
 	IsPreviewingThrow = true;
+
 	ThrowPreviewTimer = 0;
 }
 
@@ -311,7 +318,6 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
 
 	AThrowableObject* Throwable = EquippedItem.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
-
 	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
 }
 
@@ -333,9 +339,6 @@ void UItemComponent::StopPreviewThrow()
 
 void UItemComponent::DoLightAttack()
 {
-	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
-		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
-
 	if (EquippedItem.ItemData == nullptr) return;
 	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
 
@@ -367,13 +370,18 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
+
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 
@@ -413,19 +421,26 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
+
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->SpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+	
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 
 void UItemComponent::AttackAnimEnd()
 {
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
+
+	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed);
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
@@ -443,15 +458,19 @@ float UItemComponent::GetCurrentAttackDamages()
 
 void UItemComponent::DoAttackCollision()
 {
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	// only for the owning client
+	if (!PlayerCharacter) return;
+	if (!PlayerCharacter->GetController()) return;
+	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;
-	FVector FinalCollisionCenter = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * WeaponData->Range * 0.5f;
-	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 80, 80);
-	FRotator Rotation = GetOwner()->GetActorRotation();
-
+	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
+	FVector HalfSize = FVector(WeaponData->Range * 0.5f, 20, 20);
+	FRotator Rotation = PlayerCharacter->WeaponCollisionPosRef->GetComponentRotation();
+	
 	bool bHit = UKismetSystemLibrary::BoxTraceMulti(
 		this,
 		FinalCollisionCenter,
@@ -461,7 +480,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::ForDuration,
+		EDrawDebugTrace::ForOneFrame,
 		Hit,
 		true             // ignore self
 	);
@@ -476,15 +495,21 @@ void UItemComponent::DoAttackCollision()
 
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
+		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
+
 		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-		ApplyDamagesToEnemy(Enemy);
+		if (!GetOwner()->HasAuthority())
+			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
+
+		else
+			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
 	}
 }
 
-void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
+void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
-	float FinalDamage = CurrentAttackDamages;
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	float FinalDamage = BaseDamages;
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -504,8 +529,6 @@ void UItemComponent::ApplyDamagesToEnemy(ABaseEnemy* Enemy)
 	}
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
-
-	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 0, 0);
 }
 
 #pragma endregion

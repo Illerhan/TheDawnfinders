@@ -43,7 +43,16 @@ public:
 	void SetCurrentPlayerState(EPlayerState NewState);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void DoCameraShake(float Intensity, float duration);
+	void DoCameraShake(float Intensity);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void DoDamagePostProcess(float Speed);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void PlaySoundOnServer(FName SoundTag, float Range);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	float GetSoundAlertness(FName SoundTag);
 
 
 public :

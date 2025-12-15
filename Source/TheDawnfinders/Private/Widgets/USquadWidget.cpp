@@ -118,6 +118,7 @@ void USquadWidget::ActualiseSquadInfos()
             if (SquadMemberWidgets.IsValidIndex(WidgetIndex) && SquadMemberWidgets[WidgetIndex])
             {
                 SquadMemberWidgets[WidgetIndex]->SetVisibility(ESlateVisibility::HitTestInvisible);
+                SquadMemberWidgets[WidgetIndex]->Initialise(false);
                 SquadMemberWidgets[WidgetIndex]->ActualiseWidget(
                     CustomPS->CurrentHealth,
                     CustomPS->CurrentMaxHealth,

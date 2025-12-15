@@ -76,8 +76,8 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
-	UFUNCTION(BlueprintCallable)
-	void ApplyDamagesToEnemy(ABaseEnemy* Enemy);
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_ApplyDamagesToEnemy(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages);
 
 
 // === OTHERS ===

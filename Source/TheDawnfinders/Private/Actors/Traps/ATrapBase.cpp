@@ -16,6 +16,7 @@ ATrapBase::ATrapBase()
 	TrapCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 }
 
+
 void ATrapBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -24,6 +25,27 @@ void ATrapBase::BeginPlay()
 	{
 		TrapCollider->OnComponentBeginOverlap.AddDynamic(this, &ATrapBase::OnOverlapBegin);
 	}
+
+	if (FloatCurve)
+	{
+		FOnTimelineFloat ProgressFunction{};
+		ProgressFunction.BindUFunction(this, FName("HandleFadeProgress"));
+
+		FadeTimeline.AddInterpFloat(FloatCurve, ProgressFunction);
+
+		FadeTimeline.SetLooping(false);
+	}
+}
+
+
+void ATrapBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (CurrentCooldown > 0.f)
+		CurrentCooldown -= DeltaTime;
+
+	FadeTimeline.TickTimeline(DeltaTime);
 }
 
 
@@ -31,8 +53,6 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 							   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 							   bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!HasAuthority()) return;  // CLIENTS DO NOTHING
-
 	if (!bEnable) return;
 	if (CurrentCooldown > 0.f) return;
 	if (!OtherActor || OtherActor == this) return;
@@ -51,32 +71,50 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	}
 }
 
+
+#pragma region Fade
+
 void ATrapBase::FadeIn_Implementation()
 {
-
+	FadeIn_Multicast();
 }
 
 void ATrapBase::FadeOut_Implementation()
 {
-
+	FadeOut_Multicast();
 }
+
+void ATrapBase::FadeIn_Multicast_Implementation()
+{
+	FogOfWarCount++;
+	if (FogOfWarCount != 1) return;
+
+	FadeTimeline.PlayFromStart();
+}
+
+void ATrapBase::FadeOut_Multicast_Implementation()
+{
+	FogOfWarCount--;
+	if (FogOfWarCount != 0) return;
+
+	FadeTimeline.ReverseFromEnd();
+}
+
+void ATrapBase::HandleFadeProgress(float Value)
+{
+	for (int i = 0; i < Materials.Num(); i++) {
+		Materials[i]->SetScalarParameterValue("Opacity", Value);
+	}
+}
+
+#pragma endregion
+
 
 void ATrapBase::Multicast_PlayEffects_Implementation()
 {
 	if (Sound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, Sound, GetActorLocation());
-	}
-}
-
-void ATrapBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	if (HasAuthority())
-	{
-		if (CurrentCooldown > 0.f)
-			CurrentCooldown -= DeltaTime;
 	}
 }
 

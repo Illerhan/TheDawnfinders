@@ -1,6 +1,7 @@
 // Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
 
+#include "Actors/Interactibles/Litter.h"
 #include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
@@ -14,6 +15,7 @@
 #include "GameFramework/GameSession.h"
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
+#include "Perception/AISense_Hearing.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
 
@@ -26,19 +28,19 @@ AAPlayerCharacter::AAPlayerCharacter()
     bReplicates = true;
     SetReplicateMovement(true);
     GetCharacterMovement()->NetworkSmoothingMode = ENetworkSmoothingMode::Exponential;
-    GetCharacterMovement()->bNetworkSmoothingComplete = false;
-    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.100f;
-    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.033f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.040f;
-    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.033f;
+    GetCharacterMovement()->bNetworkSmoothingComplete =  true;
+    GetCharacterMovement()->NetworkSimulatedSmoothLocationTime = 0.08f;
+    GetCharacterMovement()->NetworkSimulatedSmoothRotationTime = 0.08f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothLocationTime = 0.2f;
+    GetCharacterMovement()->ListenServerNetworkSimulatedSmoothRotationTime = 0.2f;
     
     // Interpolation plus agressive
     GetCharacterMovement()->NetworkMaxSmoothUpdateDistance = 128.0f;
     GetCharacterMovement()->NetworkNoSmoothUpdateDistance = 256.0f;
     
     // Augmenter la fréquence pour les mouvements critiques
-    SetNetUpdateFrequency(100.0f);
-    SetMinNetUpdateFrequency(50.0f);
+    SetNetUpdateFrequency(30.0f);
+    SetMinNetUpdateFrequency(15.0f);
 
     // Components 
     InventoryComponent   = CreateDefaultSubobject<UInventoryComponent>(TEXT("AC_Inventory"));
@@ -52,14 +54,11 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponMeshComponent->SetupAttachment(GetMesh());
     ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
-    //LightComponent     = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_Light"));
-    //LightComponent->SetupAttachment(GetMesh());
+    WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
+    WeaponCollisionPosRef->SetupAttachment(GetMesh());
 
     // ---------- ROTATION PAR DÉFAUT ----------
-
-    bUseControllerRotationYaw = true;
-    GetCharacterMovement()->bOrientRotationToMovement = false;
-
+    
     // Orientation sur déplacement
      bUseControllerRotationYaw = false;
      GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -116,36 +115,34 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (HasAuthority())
-    {
-        // Interpole la MaxWalkSpeed vers TargetMaxSpeed
-        float CurrentMax = GetCharacterMovement()->MaxWalkSpeed;
-        float InterpSpeed = 8.0f; // ajustage freinage : 3 = lent, 8 = rapide
-        float NewSpeed = FMath::FInterpTo(CurrentMax, TargetMaxSpeed, DeltaTime, InterpSpeed);
-        
-        // arrêt immédiat 
-        if (CurrentState == EPlayerState::Dead || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Running)
-        {
-            NewSpeed = TargetMaxSpeed;
-        }
-
-        GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-        
-        PlayerSpeed = NewSpeed;
-    }
-
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
     }
-    else {
-        
+    if (IsLocallyControlled() && bIsCarrying && CurrentPushedObject)
+    {
+        UpdatePushingMovement(DeltaTime);
+    }
+    else if (HasAuthority() && bIsCarrying && CurrentPushedObject)
+        {
+            UpdatePushingMovement(DeltaTime);
+        }
+
+    if (IsLocallyControlled() && CurrentPushedObject)
+    {
+        static float LastSendTime = 0.f;
+        FVector Input = GetLastMovementInputVector();
+        if (GetWorld()->GetTimeSeconds() - LastSendTime > 0.05f) // 20 Hz
+        {
+            Server_SendPushInput(CurrentPushedObject, Input);
+            LastSendTime = GetWorld()->GetTimeSeconds();
+        }
     }
     
     if (GetLocalRole() == ROLE_SimulatedProxy)
     {
         return;
     }
-
+    
     switch (CurrentState) {
     case EPlayerState::Dodging :
         ActualiseDodge(DeltaTime);
@@ -180,9 +177,12 @@ void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interac
     InteractionComponent->RemoveInteractible(Interactible);
 }
 
-void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity, float duration)
+void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity)
 {
+}
 
+void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration)
+{
 }
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
@@ -230,8 +230,36 @@ void AAPlayerCharacter::RemoveProtectionZone_Implementation()
     HealthComponent->RemoveProtectionZone();
 }
 
+float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
+{
+    if (SoundTag == "Run") {
+        return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
+    }
+    else if (SoundTag == "Dodge") {
+        return PlayerConfig->DodgeSoundAlertness;
+    }
+    else if (SoundTag == "Attack") {
+        return PlayerConfig->AttackSoundAlertness;
+    }
+
+    return 1.0f;
+}
+
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range)
+{
+    if (HasAuthority()) {
+        Server_PlaySound_Implementation(SoundTag, Range);
+    }
+    else {
+        Server_PlaySound(SoundTag, Range);
+    }
+}
+
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
+    if (!GetController()) return;
+    if (!GetController()->IsLocalController()) return;
+
     HealthComponent->TakeDamage(quantity);
 }
 
@@ -253,6 +281,7 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
     {
         // Sur le serveur, on change directement
         PlayerSpeed = NewSpeed;
+        TargetMaxSpeed = NewSpeed;
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
         
         UE_LOG(LogTemp, Log, TEXT("[SERVER] %s speed set to %.0f"), *GetName(), NewSpeed);
@@ -261,6 +290,9 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
     {
         // Sur le client, on demande au serveur
         ServerSetPlayerSpeed(NewSpeed);
+
+        PlayerSpeed = NewSpeed;
+        TargetMaxSpeed = NewSpeed;
         
         // Prédiction locale optionnelle (pour réactivité)
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
@@ -277,6 +309,7 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
+    TargetMaxSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
 }
 
@@ -291,7 +324,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
-    if (CurrentState == EPlayerState::Dodging)
+    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized)
         return;
 
     if (CurrentState == EPlayerState::Blocking) {
@@ -329,61 +362,26 @@ void AAPlayerCharacter::ManageRun(bool Input)
 
     if (Input)
     {
-        TargetMaxSpeed = PlayerConfig->RunSpeed;
+        SetPlayerSpeed(PlayerConfig->RunSpeed);
+
         CurrentState = EPlayerState::Running;
         // Ajuster friction si besoin
-        GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+        //GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
-        TargetMaxSpeed = PlayerConfig->WalkSpeed;
+        SetPlayerSpeed(PlayerConfig->WalkSpeed);
+
         if (CurrentState == EPlayerState::Running)
             CurrentState = EPlayerState::None;
-        GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
-        GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
+        //GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
+        //GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
     }
 }
-
 
 bool AAPlayerCharacter::IsProtectedFromCurse() const
 {
     return ProtectionZoneAmount > 0;
-}
-
-
-
-void AAPlayerCharacter::OnRep_CurrentPlayerState()
-{
-    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
-        *GetName(),
-        GetController() ? *GetController()->GetName() : TEXT("None"));
-
-    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
-    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
-    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
-    switch(CurrentState)
-    {
-    case EPlayerState::Running:
-        // jouer anim run
-        break;
-    case EPlayerState::None:
-        // jouer idle/walk
-        break;
-    case EPlayerState::Dodging:
-        // ...
-        break;
-    case EPlayerState::Fallen:
-        // ...
-        break;
-    case EPlayerState::Dead:
-        // ...
-        break;
-    case EPlayerState::Immobilized:
-        // ...
-        break;
-    default:
-        break;
-    }
 }
 
 void AAPlayerCharacter::OnFallen()
@@ -392,8 +390,11 @@ void AAPlayerCharacter::OnFallen()
     {
         Server_OnFallen();
     }
+
     CurrentState = EPlayerState::Fallen;
-    TargetMaxSpeed = PlayerConfig->FallenSpeed;
+    SetPlayerSpeed(PlayerConfig->FallenSpeed);
+
+    //TargetMaxSpeed = PlayerConfig->FallenSpeed;
     GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->FallenSpeed; // Force immédiate
     PlayerSpeed = PlayerConfig->FallenSpeed;
     
@@ -445,6 +446,7 @@ void AAPlayerCharacter::OnDeath()
     {
         Server_OnDied();
     }
+
     CurrentState = EPlayerState::Dead;
     TargetMaxSpeed = 0.f;
     GetCharacterMovement()->StopMovementImmediately();
@@ -473,6 +475,34 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 
 #pragma region Auto Lock
 
+void AAPlayerCharacter::Server_SendPushInput_Implementation(ALitter* Obj, FVector Input)
+{
+    if (Obj)
+        Obj->Server_UpdateInputs(this,Input);
+}
+
+void AAPlayerCharacter::UpdatePushingMovement(float DeltaTime)
+{
+    if (!bIsCarrying || !CurrentPushedObject) return;
+
+    FVector ObjVelocity = CurrentPushedObject->GetVelocity();
+    ObjVelocity.Z = 0.0f;
+
+    const float Speed = ObjVelocity.Size();
+    if (Speed <= KINDA_SMALL_NUMBER) return;
+
+    FRotator TargetRotation = ObjVelocity.Rotation();
+    FRotator NewRot = FMath::RInterpTo(GetActorRotation(),TargetRotation,DeltaTime, 12.f);
+    SetActorRotation(NewRot);
+    
+}
+
+void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool bCarrying)
+{
+    bIsCarrying = bCarrying;
+    CurrentPushedObject = bIsCarrying ? Obj : nullptr;
+}
+
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
@@ -488,7 +518,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
         GetActorLocation(),
         FQuat::Identity,
         ObjectQueryParams,
-        FCollisionShape::MakeSphere(2000.f)
+        FCollisionShape::MakeSphere(1000.f)
     );
 
     if (!bHit) return;
@@ -557,13 +587,16 @@ void AAPlayerCharacter::StartDodge()
 void AAPlayerCharacter::EndDodge()
 {
     CurrentState = EPlayerState::None;
+
+    SetPlayerSpeed(PlayerConfig->WalkSpeed);
 }
 
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    TargetMaxSpeed = FMath::Lerp(1400.0f, 100.0f, DodgeTimer * 0.9f);
+
+    SetPlayerSpeed(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, DodgeTimer));
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
@@ -641,6 +674,45 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 #pragma region Others
 
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+{
+    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+}
+
+
+void AAPlayerCharacter::OnRep_CurrentPlayerState()
+{
+    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
+        *GetName(),
+        GetController() ? *GetController()->GetName() : TEXT("None"));
+
+    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
+    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
+    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
+    switch (CurrentState)
+    {
+    case EPlayerState::Running:
+        // jouer anim run
+        break;
+    case EPlayerState::None:
+        // jouer idle/walk
+        break;
+    case EPlayerState::Dodging:
+        // ...
+        break;
+    case EPlayerState::Fallen:
+        // ...
+        break;
+    case EPlayerState::Dead:
+        // ...
+        break;
+    case EPlayerState::Immobilized:
+        break;
+    default:
+        break;
+    }
+}
+
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
@@ -667,6 +739,7 @@ void AAPlayerCharacter::OnRep_PlayerState()
         *GetName(),
         GetController() ? *GetController()->GetName() : TEXT("None"));
 }
+
 
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {

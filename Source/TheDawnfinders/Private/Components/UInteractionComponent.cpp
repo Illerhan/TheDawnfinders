@@ -111,11 +111,8 @@ void UInteractionComponent::StartInteract()
 	// If is doing QTE
 	if (InteractingQTEActor) 
 	{
-		
 		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
 		{
-			InteractingQTEActor = nullptr;
-			PlayerCharacter->OnRevive();
 			return;
 		}
 
@@ -218,9 +215,10 @@ void UInteractionComponent::StopInteract()
 	// Cancel the revive
 	ServerCancelHelp();
 
-	// Cancel the interactible interaction
 	if (CurrentInteractible)
 	{
+		IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
+
 		ServerStopInteract(CurrentInteractible, PlayerCharacter);
 		CurrentInteractible = nullptr;
 	}

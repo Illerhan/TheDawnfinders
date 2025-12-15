@@ -40,6 +40,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Initialise(UItemData* Data);
 
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_Initialise(UItemData* Data);
+
+
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
 private:

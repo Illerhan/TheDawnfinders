@@ -12,6 +12,7 @@
 
 class UEnemyWidget;
 class UWidgetComponent;
+class ABasicEnemyAIController;
 
 
 UENUM(BlueprintType)
@@ -43,11 +44,30 @@ public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UEnemyWidget* EnemyWidget;
 
-	UFUNCTION(BlueprintCallable)
-	void DoAttack(UEnemyAttackData* AttackData);
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	USceneComponent* AttackCollisionPosRef;
 
 	UFUNCTION(BlueprintCallable)
-	void OnEndAttack(UAnimMontage* Montage, bool bInterrupted);
+	void DoAttack(FEnemyActionData AttackData);
+
+	UFUNCTION(BlueprintCallable)
+	void DoAttackCollision();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterSuspicious();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterAggressives();
+
+	UFUNCTION(BlueprintCallable)
+	void SetLockRotation(bool Locked);
+
+
+
+// === MONTAGES ===
+public :
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayMontage(UAnimMontage* Montage, float Speed);
 
 	UFUNCTION()
 	void OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
@@ -55,20 +75,57 @@ public :
 	UFUNCTION(BlueprintImplementableEvent)
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
+	UFUNCTION()
+	void OnMontageEnd(UAnimMontage* Montage, bool bInterrupted);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void BP_OnMontageEnd(bool bInterrupted);
+
 
 // === HEALTH ===
 public :
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentHealth;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool IsInvincible;
+
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
+	UFUNCTION(BlueprintNativeEvent)
+	void DoHitEffect();
+
+	UFUNCTION()
+	void StartInvincibilityFrames(float Duration);
+
+	UFUNCTION()
+	void EndInvincibilityFrames();
+
+	FTimerHandle InvincibilityTimerHandle;
+
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
+	
+	UFUNCTION(Server, Reliable)
+	void Server_TakeDamages(float Quantity, AActor* Origin);
 
 
 // === FADE === 
 public :
 	void FadeIn_Implementation();
 	void FadeOut_Implementation();
+	bool GetIsDisplayed_Implementation();
+
+
+
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	bool IsDisplayed;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bLockRotation;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ABasicEnemyAIController* AIController;
 };

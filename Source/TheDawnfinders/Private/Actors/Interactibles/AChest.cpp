@@ -12,12 +12,11 @@ AChest::AChest()
 
 void AChest::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
 
 	if (!bIsInteracting) return;
 
 	HoldTimer(DeltaTime);
-	
-	Super::Tick(DeltaTime);
 }
 
 
@@ -37,6 +36,16 @@ void AChest::StopInteract_Implementation(AActor* Interactor)
 }
 
 void AChest::BP_OnInteractionFinished_Implementation()
+{
+	if (!HasAuthority()) {
+		SpawnLoot();
+	}
+	else {
+		SpawnLoot_Implementation();
+	}
+}
+
+void AChest::SpawnLoot_Implementation()
 {
 	UDataTable* LootDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/LT_ChestLoot.LT_ChestLoot"));
 	if (!LootDataTable)
@@ -66,7 +75,7 @@ void AChest::BP_OnInteractionFinished_Implementation()
 		NewItem->Initialise(SpawnedData);
 	}
 
-	UGameplaySoundHelper::PlaySoundNetworked(this,ChestSound,GetActorLocation(),SoundLoudness);
+	UGameplaySoundHelper::PlaySoundNetworked(this, ChestSound, GetActorLocation(), SoundLoudness);
 
 	Destroy();
 }

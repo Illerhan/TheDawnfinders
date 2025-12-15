@@ -5,6 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -36,6 +37,8 @@ void UHealthComponent::BeginPlay()
 	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
 	if (!PC || !PC->IsLocalController()) return;
 
+	OwnerController = PC;
+
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	if (!PSCustom) return;
 
@@ -49,6 +52,9 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	{
 		ApplyCurse(DeltaTime);
 	}
+
+	if (CurseVolume) ActualiseCursePostProcess(DeltaTime);
+	
 
 	if (GetOwner()->HasAuthority())
 	{
@@ -70,6 +76,14 @@ void UHealthComponent::InitialiseComponent
 	InjureDecreaseSpeed = InjureSpeed;
 	CurseRatio = CurseRate;
 
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "PPCurse", FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		CurseVolume = (APostProcessVolume*)Actor;
+	}
+
 	// If is not the server
 	if (!GetOwner()->HasAuthority()) {
 		LocalChangeHealth();
@@ -87,14 +101,24 @@ void UHealthComponent::InitialiseComponent
 
 void UHealthComponent::TakeDamage(float quantity)
 {
+	if (IsInvincible) return;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0, 0);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.5f);
 		return;
 	}
-
+	
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
+
+	// Visual effects + Invincibility Frames
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
+		StartInvincibilityFrames_Implementation(1.f);
+
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
+		IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
+	}
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 
@@ -221,6 +245,7 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
 
+
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
 	{
@@ -228,6 +253,18 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	}
 
 	ServerChangeHealth_Implementation(CurrentHealth);
+}
+
+void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
+{
+	if (!OwnerController) return;
+
+	if (IsProtectedFromCurse()) {
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 0.0f, DeltaTime * 1.5f);
+	}
+	else {
+		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 1.0f, DeltaTime * 1.5f);
+	}
 }
 
 
@@ -296,6 +333,32 @@ void UHealthComponent::Server_Revive_Implementation()
 		bIsDead = false;
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Invincibility
+
+void UHealthComponent::StartInvincibilityFrames_Implementation(float Duration)
+{
+	if (IsInvincible) return;
+
+	IsInvincible = true;
+
+	GetWorld()->GetTimerManager().SetTimer(
+		InvincibilityTimerHandle,              
+		this,                       
+		&UHealthComponent::EndInvincibilityFrames,
+		Duration,
+		false                        
+	);
+}
+
+void UHealthComponent::EndInvincibilityFrames_Implementation()
+{
+	IsInvincible = false;
+}
+
 
 #pragma endregion
 
