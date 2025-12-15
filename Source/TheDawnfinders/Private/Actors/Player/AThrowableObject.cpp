@@ -6,6 +6,8 @@
 AThrowableObject::AThrowableObject()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
+	SetReplicateMovement(true);
 }
 
 
@@ -20,13 +22,15 @@ void AThrowableObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!HasAuthority()) return;
+
 	ProgressTimer += DeltaTime;
 
 	if (ProgressTimer < ThrowDuration) {
 		ActualisePosition();
 	}
 	else {
-		DoCollisionEffect();
+		Server_DoCollisionEffect();
 	}
 }
 
@@ -51,7 +55,7 @@ void AThrowableObject::ActualisePosition()
 	SetActorLocation(CurrentPos);
 }
 
-void AThrowableObject::DoCollisionEffect()
+void AThrowableObject::Server_DoCollisionEffect_Implementation()
 {
 	// We get the in range actors
 	TArray<FHitResult> HitResults;
@@ -73,10 +77,6 @@ void AThrowableObject::DoCollisionEffect()
 		false,        
 		2.0f            
 	);
-
-
-	// We apply the throwable object effects on the actors in range
-	if (!bHit) return;
 
 	for (FHitResult& Hit : HitResults)
 	{

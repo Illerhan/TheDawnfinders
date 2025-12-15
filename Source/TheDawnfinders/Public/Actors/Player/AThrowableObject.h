@@ -32,8 +32,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ActualisePosition();
 
-	UFUNCTION(BlueprintCallable)
-	void DoCollisionEffect();
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_DoCollisionEffect();
 
 
 public :

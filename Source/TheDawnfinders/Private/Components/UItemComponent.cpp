@@ -185,22 +185,10 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			float Progress = ThrowPreviewTimer / 2.f;
-			FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
-			FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-			FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
+			Server_ThrowItem(ThrowPreviewTimer / 2.f, EquippedItem.ItemData);
 
-			AThrowableObject* ThrowedObject =
-				GetWorld()->SpawnActor<AThrowableObject>(EquippedItem.ItemData->ThrowedObjectClass, 
-					GetOwner()->GetActorLocation(), FRotator(0.f, 0.f, 0.f));
-
-			if (ThrowedObject)
-			{
-				ThrowedObject->Initialise(FinalPos, EquippedItem.ItemData);
-				InventoryComponent->RemoveCurrentItem();
-
-				StopPreviewThrow();
-			}
+			InventoryComponent->RemoveCurrentItem();
+			StopPreviewThrow();
 		}
 		break;
 
@@ -297,6 +285,26 @@ void UItemComponent::StartPreviewThrow()
 	IsPreviewingThrow = true;
 
 	ThrowPreviewTimer = 0;
+}
+
+void UItemComponent::Server_ThrowItem_Implementation(float Progress, UItemData* Data)
+{
+	FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
+	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
+	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
+
+	FActorSpawnParameters Params;
+	Params.Owner = GetOwner();
+	Params.Instigator = Cast<APawn>(GetOwner());
+
+	AThrowableObject* ThrowedObject =
+		GetWorld()->SpawnActor<AThrowableObject>(Data->ThrowedObjectClass,
+			GetOwner()->GetActorLocation(), FRotator(0.f, 0.f, 0.f), Params);
+
+	if (ThrowedObject)
+	{
+		ThrowedObject->Initialise(FinalPos, Data);
+	}
 }
 
 

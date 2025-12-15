@@ -91,6 +91,9 @@ private :
 	UFUNCTION()
 	void StartPreviewThrow();
 
+	UFUNCTION(Server, Reliable)
+	void Server_ThrowItem(float Progress, UItemData* Data);
+
 	UFUNCTION()
 	void ActualisePreviewThrow(float DeltaTime);
 
