@@ -370,7 +370,7 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), 1.0f, GetOwner(),
 		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
@@ -421,7 +421,7 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), 1.0f, GetOwner(),
 		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
@@ -445,6 +445,8 @@ void UItemComponent::AttackAnimEnd()
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
 
+	PlayerCharacter->StopAutoLock();
+
 	if (PressedAttackInput)
 	{
 		DoLightAttack();
@@ -464,7 +466,6 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
-	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
@@ -480,7 +481,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::ForOneFrame,
+		EDrawDebugTrace::None,
 		Hit,
 		true             // ignore self
 	);
@@ -498,6 +499,8 @@ void UItemComponent::DoAttackCollision()
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
 
 		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+		if (!Enemy) return;
+
 		if (!GetOwner()->HasAuthority())
 			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
 
@@ -508,6 +511,8 @@ void UItemComponent::DoAttackCollision()
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
+	if (!Enemy) return;
+
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 

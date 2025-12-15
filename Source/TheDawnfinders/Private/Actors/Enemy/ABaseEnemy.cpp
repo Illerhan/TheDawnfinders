@@ -75,7 +75,7 @@ void ABaseEnemy::DoAttackCollision()
     FVector Start = AttackCollisionPosRef->GetComponentLocation();
     float Radius = EnemyData->AtttacksRange;
     FCollisionQueryParams Params;
-    FCollisionShape Box = FCollisionShape::MakeBox(FVector(15.f, 15.f, Radius));
+    FCollisionShape Box = FCollisionShape::MakeBox(FVector(20.f, 20.f, Radius));
 
     bool bHit = GetWorld()->SweepMultiByChannel(
         HitResults,
@@ -88,7 +88,7 @@ void ABaseEnemy::DoAttackCollision()
         FCollisionResponseParams::DefaultResponseParam
     );
 
-    const FQuat Rotation = AttackCollisionPosRef->GetComponentRotation().Quaternion();
+    /*const FQuat Rotation = AttackCollisionPosRef->GetComponentRotation().Quaternion();
     const FVector Location = Start;
 
     DrawDebugBox(
@@ -101,7 +101,7 @@ void ABaseEnemy::DoAttackCollision()
         1.0f,               
         0,
         1.5f             
-    );
+    );*/
 
     if (!bHit) return;
 

@@ -49,6 +49,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StopInteract();
 
+	UFUNCTION(BlueprintCallable)
+	void CancelInteraction();
+
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
@@ -70,7 +73,7 @@ public:
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	bool bIsHelping = false;
 
-	float HelpDuration = 2.f;
+	float HelpDuration = 4.f;
 
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	float HelpTimeRemaining = 0.f;
@@ -109,6 +112,9 @@ private:
 
 	UPROPERTY()
 	AActor* InteractingQTEActor;
+
+	UPROPERTY()
+	bool bIsDoingQTE;
 
 	UPROPERTY()
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;

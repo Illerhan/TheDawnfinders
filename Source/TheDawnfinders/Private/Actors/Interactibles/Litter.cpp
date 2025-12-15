@@ -26,6 +26,8 @@ ALitter::ALitter()
 	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
 
+	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("Light"));
+	Light->LightRoot->SetupAttachment(RootComponent);
 	// ===== Carry points =====
 	
 	CarryPoints.SetNum(4);
@@ -42,20 +44,6 @@ ALitter::ALitter()
 void ALitter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-    
-	// Create Light component here instead
-	if (!Light)
-	{
-		Light = NewObject<UPlayerLightComponent>(this, TEXT("Light"));
-		if (Light)
-		{
-			Light->RegisterComponent();
-			if (Light->LightRoot)
-			{
-				Light->LightRoot->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-			}
-		}
-	}
 }
 
 void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -192,8 +180,23 @@ void ALitter::AttachPlayer(AAPlayerCharacter* Player)
 		CarryPoints[FreeIndex],
 		FAttachmentTransformRules::SnapToTargetNotIncludingScale
 	);
-	Player->SetActorEnableCollision(false);
-	//CollisionBox->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
+	if (UCapsuleComponent* PlayerCapsule = Player->GetCapsuleComponent())
+	{
+		// 1. Définir le mode de collision à QueryOnly (plus de Physics ou Blocking)
+		PlayerCapsule->SetCollisionEnabled(ECollisionEnabled::QueryOnly); 
+       
+		// 2. Définir la réponse par défaut : Ignorer les objets physiques (Block), Overlap tout le reste
+		PlayerCapsule->SetCollisionResponseToAllChannels(ECR_Overlap);
+       
+		// 3. Cas spécifique : Assurez-vous que les objets du monde ou les acteurs ne vous bloquent pas :
+		PlayerCapsule->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Overlap);
+		PlayerCapsule->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
+		// Optionnel : Conserver l'overlap avec le Palanquin si nécessaire (mais normalement géré par l'attachement)
+		// PlayerCapsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+       
+		// 4. Important : Assurez-vous qu'elle peut encore détecter les "WorldDynamic" (pièges, etc.)
+		// et générer les overlaps pour les ennemis/lumières.
+	}
 
 	Player->bIsCarrying = true;
 	Player->CurrentPushedObject = this;
@@ -211,7 +214,15 @@ void ALitter::DetachPlayer(AAPlayerCharacter* Player)
 			break;
 		}
 	}
-	Player->SetActorEnableCollision(true);
+	if (UCapsuleComponent* PlayerCapsule = Player->GetCapsuleComponent())
+	{
+		// 1. Réappliquer le profil par défaut du Character (souvent 'Pawn' ou 'CharacterMesh')
+		// Si vous utilisez le profil de collision par défaut d'un ACharacter, il est "Pawn".
+		PlayerCapsule->SetCollisionProfileName(TEXT("Pawn")); 
+        
+		// 2. Réactiver la collision complète, qui est implicite dans le profil "Pawn".
+		PlayerCapsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	}
 	Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	Player->bIsCarrying = false;
 	Player->CurrentPushedObject = nullptr;

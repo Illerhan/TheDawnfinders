@@ -24,6 +24,15 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (bIsDoingQTE) {
+		AActor* Nearest = GetNearestInteractible();
+		if (Nearest != InteractingQTEActor) {
+			InteractingQTEActor = nullptr;
+			bIsDoingQTE = false;
+			PlayerCharacter->OnRevive();
+		}
+	}
+
 	if (!bIsHelping || !CurrentHelpedTarget) return;
 
 	HelpTimeRemaining -= DeltaTime;
@@ -120,6 +129,7 @@ void UInteractionComponent::StartInteract()
 		CurrentInteractible = Nearest;
 		PlayerCharacter->OnRevive();
 		TryInteract(Nearest, PlayerCharacter);
+		bIsDoingQTE = false;
 
 		return;
 	}
@@ -129,6 +139,7 @@ void UInteractionComponent::StartInteract()
 		PlayerCharacter->OnTrapped();
 		IInteractible::Execute_StartQTE(Nearest);
 		InteractingQTEActor = Nearest;
+		bIsDoingQTE = true;
 	}
 	else 
 	{
@@ -141,8 +152,16 @@ void UInteractionComponent::StartInteract()
 void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
-	if (Interactible)
+	if (!Interactible) return;
+
+	// Server
+	if (!GetOwner()->HasAuthority()) {
 		ServerInteract(Interactible, Player);
+	}
+	// Client
+	else {
+		ServerInteract_Implementation(Interactible, Player);
+	}
 }
 
 
@@ -230,6 +249,20 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
+void UInteractionComponent::CancelInteraction()
+{
+	AActor* Nearest = GetNearestInteractible();
+	if (!Nearest) return;
+
+	if (InteractingQTEActor)
+	{
+		IInteractible::Execute_StopQTE(Nearest);
+		InteractingQTEActor = nullptr;
+		bIsDoingQTE = false;
+
+		PlayerCharacter->OnRevive();
+	}
+}
 #pragma endregion
 
 

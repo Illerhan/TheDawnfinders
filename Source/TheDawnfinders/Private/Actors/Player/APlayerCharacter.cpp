@@ -56,6 +56,7 @@ AAPlayerCharacter::AAPlayerCharacter()
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
     WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
+    
 
     // ---------- ROTATION PAR DÉFAUT ----------
     
@@ -106,6 +107,8 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
+    LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
+    LightComponent->ProtectionZone->SetSphereRadius(0.f);
     
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
@@ -511,7 +514,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     // Get the nearest enemy as a target
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
-    ObjectQueryParams.AddObjectTypesToQuery(ECC_Pawn);
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
 
     bool bHit = GetWorld()->OverlapMultiByObjectType(
         Overlaps,

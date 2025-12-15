@@ -26,13 +26,13 @@ UPlayerLightComponent::UPlayerLightComponent()
 	ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
 	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	ProtectionZone->SetHiddenInGame(true);
-	ProtectionZone->SetupAttachment(PointLight);
+	ProtectionZone->SetupAttachment(LightRoot);
 
 	FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
-	FogOfWarLightOn->SetupAttachment(PointLight);
+	FogOfWarLightOn->SetupAttachment(LightRoot);
 
 	FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
-	FogOfWarLightOff->SetupAttachment(PointLight);
+	FogOfWarLightOff->SetupAttachment(LightRoot);
 
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 	LightMesh->SetupAttachment(LightRoot);
@@ -60,6 +60,26 @@ void UPlayerLightComponent::BeginPlay()
 			);
 		}
 	}
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+	
+	if (Cast<AAPlayerCharacter>(Owner))
+	{
+		if (ProtectionZone)
+		{
+			ProtectionZone->SetGenerateOverlapEvents(false);
+			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::NoCollision); 
+		}
+	}
+	else
+	{
+		if (ProtectionZone)
+		{
+			ProtectionZone->SetGenerateOverlapEvents(true);
+			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly); 
+		}
+	}
 	
 	LightRoot->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	if (GetOwnerRole() == ROLE_Authority)
@@ -78,7 +98,6 @@ void UPlayerLightComponent::BeginPlay()
 
 
 	// Actualises the local UI
-	AActor* Owner = GetOwner();
 	if (!Owner) return;
 
 	APawn* PawnOwner = Cast<APawn>(Owner);
@@ -197,13 +216,7 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 	ProtectionZone->SetHiddenInGame(!bLightOn);
 
 	if (!GetOwner()->HasAuthority()) return;    // Continue only if is server
-
-	if (AAPlayerCharacter* OwnerPlayer = Cast<AAPlayerCharacter>(GetOwner()))
-	{
-		if (bLightOn) OwnerPlayer->HealthComponent->AddProtectionZone();
-		else OwnerPlayer->HealthComponent->RemoveProtectionZone();
-	}
-
+	
 	if (!ProtectionZone) return;
 
 	TArray<AActor*> OverlappingActors;
