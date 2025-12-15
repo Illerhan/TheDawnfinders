@@ -514,7 +514,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     // Get the nearest enemy as a target
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
-    ObjectQueryParams.AddObjectTypesToQuery(ECC_Pawn);
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
 
     bool bHit = GetWorld()->OverlapMultiByObjectType(
         Overlaps,

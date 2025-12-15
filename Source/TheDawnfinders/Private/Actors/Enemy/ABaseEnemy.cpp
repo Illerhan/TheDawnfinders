@@ -88,7 +88,7 @@ void ABaseEnemy::DoAttackCollision()
         FCollisionResponseParams::DefaultResponseParam
     );
 
-    const FQuat Rotation = AttackCollisionPosRef->GetComponentRotation().Quaternion();
+    /*const FQuat Rotation = AttackCollisionPosRef->GetComponentRotation().Quaternion();
     const FVector Location = Start;
 
     DrawDebugBox(
@@ -101,7 +101,7 @@ void ABaseEnemy::DoAttackCollision()
         1.0f,               
         0,
         1.5f             
-    );
+    );*/
 
     if (!bHit) return;
 

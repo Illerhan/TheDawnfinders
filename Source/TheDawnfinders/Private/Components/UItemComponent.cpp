@@ -370,7 +370,7 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), 1.0f, GetOwner(),
 		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
@@ -421,7 +421,7 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), PlayerCharacter->PlayerConfig->AttackSoundAlertness, GetOwner(),
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetOwner()->GetActorLocation(), 1.0f, GetOwner(),
 		PlayerCharacter->PlayerConfig->AttackSoundRange, "");
 
 	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
@@ -480,7 +480,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::ForOneFrame,
+		EDrawDebugTrace::None,
 		Hit,
 		true             // ignore self
 	);
