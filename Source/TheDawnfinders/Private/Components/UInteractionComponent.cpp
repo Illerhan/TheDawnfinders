@@ -24,6 +24,15 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (bIsDoingQTE) {
+		AActor* Nearest = GetNearestInteractible();
+		if (Nearest != InteractingQTEActor) {
+			InteractingQTEActor = nullptr;
+			bIsDoingQTE = false;
+			PlayerCharacter->OnRevive();
+		}
+	}
+
 	if (!bIsHelping || !CurrentHelpedTarget) return;
 
 	HelpTimeRemaining -= DeltaTime;
@@ -120,6 +129,7 @@ void UInteractionComponent::StartInteract()
 		CurrentInteractible = Nearest;
 		PlayerCharacter->OnRevive();
 		TryInteract(Nearest, PlayerCharacter);
+		bIsDoingQTE = false;
 
 		return;
 	}
@@ -129,6 +139,7 @@ void UInteractionComponent::StartInteract()
 		PlayerCharacter->OnTrapped();
 		IInteractible::Execute_StartQTE(Nearest);
 		InteractingQTEActor = Nearest;
+		bIsDoingQTE = true;
 	}
 	else 
 	{
@@ -247,6 +258,7 @@ void UInteractionComponent::CancelInteraction()
 	{
 		IInteractible::Execute_StopQTE(Nearest);
 		InteractingQTEActor = nullptr;
+		bIsDoingQTE = false;
 
 		PlayerCharacter->OnRevive();
 	}

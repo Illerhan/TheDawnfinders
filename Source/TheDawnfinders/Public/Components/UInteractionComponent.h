@@ -114,5 +114,8 @@ private:
 	AActor* InteractingQTEActor;
 
 	UPROPERTY()
+	bool bIsDoingQTE;
+
+	UPROPERTY()
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 };
