@@ -75,7 +75,7 @@ void ABaseEnemy::DoAttackCollision()
     FVector Start = AttackCollisionPosRef->GetComponentLocation();
     float Radius = EnemyData->AtttacksRange;
     FCollisionQueryParams Params;
-    FCollisionShape Box = FCollisionShape::MakeBox(FVector(15.f, 15.f, Radius));
+    FCollisionShape Box = FCollisionShape::MakeBox(FVector(20.f, 20.f, Radius));
 
     bool bHit = GetWorld()->SweepMultiByChannel(
         HitResults,
