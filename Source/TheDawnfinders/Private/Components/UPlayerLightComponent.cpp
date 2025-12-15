@@ -14,7 +14,7 @@ UPlayerLightComponent::UPlayerLightComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
-	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("RootLight"));
+	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("Root"));
 	
 	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
 	PointLight->SetupAttachment(LightRoot);
@@ -26,13 +26,13 @@ UPlayerLightComponent::UPlayerLightComponent()
 	ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
 	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	ProtectionZone->SetHiddenInGame(true);
-	ProtectionZone->SetupAttachment(PointLight);
+	ProtectionZone->SetupAttachment(LightRoot);
 
 	FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
-	FogOfWarLightOn->SetupAttachment(PointLight);
+	FogOfWarLightOn->SetupAttachment(LightRoot);
 
 	FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
-	FogOfWarLightOff->SetupAttachment(PointLight);
+	FogOfWarLightOff->SetupAttachment(LightRoot);
 
 	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
 	LightMesh->SetupAttachment(LightRoot);

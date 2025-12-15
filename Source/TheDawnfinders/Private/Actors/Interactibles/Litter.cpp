@@ -26,6 +26,8 @@ ALitter::ALitter()
 	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
 
+	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("Light"));
+	Light->LightRoot->SetupAttachment(RootComponent);
 	// ===== Carry points =====
 	
 	CarryPoints.SetNum(4);
@@ -42,20 +44,6 @@ ALitter::ALitter()
 void ALitter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-    
-	// Create Light component here instead
-	if (!Light)
-	{
-		Light = NewObject<UPlayerLightComponent>(this, TEXT("Light"));
-		if (Light)
-		{
-			Light->RegisterComponent();
-			if (Light->LightRoot)
-			{
-				Light->LightRoot->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-			}
-		}
-	}
 }
 
 void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
