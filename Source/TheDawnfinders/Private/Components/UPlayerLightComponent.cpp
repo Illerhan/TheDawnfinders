@@ -14,7 +14,7 @@ UPlayerLightComponent::UPlayerLightComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
-	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("Root"));
+	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("RootLight"));
 	
 	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
 	PointLight->SetupAttachment(LightRoot);
@@ -60,6 +60,26 @@ void UPlayerLightComponent::BeginPlay()
 			);
 		}
 	}
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+	
+	if (Cast<AAPlayerCharacter>(Owner))
+	{
+		if (ProtectionZone)
+		{
+			ProtectionZone->SetGenerateOverlapEvents(false);
+			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::NoCollision); 
+		}
+	}
+	else
+	{
+		if (ProtectionZone)
+		{
+			ProtectionZone->SetGenerateOverlapEvents(true);
+			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly); 
+		}
+	}
 	
 	LightRoot->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	if (GetOwnerRole() == ROLE_Authority)
@@ -78,7 +98,6 @@ void UPlayerLightComponent::BeginPlay()
 
 
 	// Actualises the local UI
-	AActor* Owner = GetOwner();
 	if (!Owner) return;
 
 	APawn* PawnOwner = Cast<APawn>(Owner);
@@ -197,13 +216,7 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 	ProtectionZone->SetHiddenInGame(!bLightOn);
 
 	if (!GetOwner()->HasAuthority()) return;    // Continue only if is server
-
-	if (AAPlayerCharacter* OwnerPlayer = Cast<AAPlayerCharacter>(GetOwner()))
-	{
-		if (bLightOn) OwnerPlayer->HealthComponent->AddProtectionZone();
-		else OwnerPlayer->HealthComponent->RemoveProtectionZone();
-	}
-
+	
 	if (!ProtectionZone) return;
 
 	TArray<AActor*> OverlappingActors;
