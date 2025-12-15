@@ -230,6 +230,19 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
+void UInteractionComponent::CancelInteraction()
+{
+	AActor* Nearest = GetNearestInteractible();
+	if (!Nearest) return;
+
+	if (InteractingQTEActor)
+	{
+		IInteractible::Execute_StopQTE(Nearest);
+		InteractingQTEActor = nullptr;
+
+		PlayerCharacter->OnRevive();
+	}
+}
 #pragma endregion
 
 

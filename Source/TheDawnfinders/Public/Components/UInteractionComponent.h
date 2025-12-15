@@ -49,6 +49,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StopInteract();
 
+	UFUNCTION(BlueprintCallable)
+	void CancelInteraction();
+
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
