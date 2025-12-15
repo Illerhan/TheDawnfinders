@@ -145,11 +145,11 @@ void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter*
 
 	// Server
 	if (!GetOwner()->HasAuthority()) {
-		ServerInteract_Implementation(Interactible, Player);
+		ServerInteract(Interactible, Player);
 	}
 	// Client
 	else {
-		ServerInteract(Interactible, Player);
+		ServerInteract_Implementation(Interactible, Player);
 	}
 }
 

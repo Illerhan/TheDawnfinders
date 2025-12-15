@@ -445,6 +445,8 @@ void UItemComponent::AttackAnimEnd()
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
 
+	PlayerCharacter->StopAutoLock();
+
 	if (PressedAttackInput)
 	{
 		DoLightAttack();
@@ -464,7 +466,6 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
-	PlayerCharacter->StopAutoLock();
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
