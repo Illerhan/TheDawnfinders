@@ -87,16 +87,17 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	float Radius = EnemiesMaxRange;
 	FCollisionQueryParams Params;
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
-	
+
+    
 	bool bHit = GetWorld()->SweepMultiByChannel(
-		HitResults,
-		Start,
-		Start,
-		FQuat::Identity,
-		ECC_GameTraceChannel1,   
-		Sphere,
-		Params,
-		FCollisionResponseParams::DefaultResponseParam
+	   HitResults,
+	   Start,
+	   Start,
+	   FQuat::Identity,
+	   ECC_GameTraceChannel1,   
+	   Sphere,
+	   Params,
+	   FCollisionResponseParams::DefaultResponseParam
 	);
 
 	EnemiesAtRange.Reset();
@@ -105,17 +106,33 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	if (!bHit) return;
 
 	float BestDist = 0;
-	for (int i = 0; i < HitResults.Num(); i++) {
-		float Dist = (HitResults[i].GetActor()->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
+	for (int i = 0; i < HitResults.Num(); i++) 
+	{
 		AActor* Actor = HitResults[i].GetActor();
 
-		if (!IFadeable::Execute_GetIsDisplayed(Actor)) continue;
+		if (!IsValid(Actor))
+		{
+			continue; 
+		}
 
-		EnemiesAtRange.Add(HitResults[i].GetActor());
+		if (!Actor->Implements<UFadeable>())
+		{
+			continue; 
+		}
+
+		if (!IFadeable::Execute_GetIsDisplayed(Actor)) 
+		{
+			continue;
+		}
+
+		// Le reste de la logique peut continuer
+		float Dist = (Actor->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
+       
+		EnemiesAtRange.Add(Actor);
 
 		if (Dist < BestDist) continue;
 
-		FarestEnemy = HitResults[i].GetActor();
+		FarestEnemy = Actor;
 		BestDist = Dist;
 	}
 }
