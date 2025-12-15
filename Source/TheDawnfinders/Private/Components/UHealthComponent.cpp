@@ -114,7 +114,7 @@ void UHealthComponent::TakeDamage(float quantity)
 
 	// Visual effects + Invincibility Frames
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
-		StartInvincibilityFrames_Implementation(1.f);
+		StartInvincibilityFrames_Implementation(0.3f);
 
 		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 		IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
