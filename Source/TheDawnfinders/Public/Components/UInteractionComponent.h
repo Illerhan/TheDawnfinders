@@ -70,7 +70,7 @@ public:
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	bool bIsHelping = false;
 
-	float HelpDuration = 2.f;
+	float HelpDuration = 4.f;
 
 	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
 	float HelpTimeRemaining = 0.f;
