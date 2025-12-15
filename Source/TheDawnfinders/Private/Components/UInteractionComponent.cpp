@@ -141,8 +141,16 @@ void UInteractionComponent::StartInteract()
 void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
-	if (Interactible)
+	if (!Interactible) return;
+
+	// Server
+	if (!GetOwner()->HasAuthority()) {
+		ServerInteract_Implementation(Interactible, Player);
+	}
+	// Client
+	else {
 		ServerInteract(Interactible, Player);
+	}
 }
 
 
