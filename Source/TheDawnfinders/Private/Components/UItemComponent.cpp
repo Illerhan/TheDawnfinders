@@ -499,6 +499,8 @@ void UItemComponent::DoAttackCollision()
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
 
 		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+		if (!Enemy) return;
+
 		if (!GetOwner()->HasAuthority())
 			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
 
@@ -509,6 +511,8 @@ void UItemComponent::DoAttackCollision()
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
+	if (!Enemy) return;
+
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
