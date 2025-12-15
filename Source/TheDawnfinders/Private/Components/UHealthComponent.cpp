@@ -106,7 +106,7 @@ void UHealthComponent::TakeDamage(float quantity)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.5f);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.6f);
 		return;
 	}
 	
@@ -127,9 +127,9 @@ void UHealthComponent::TakeDamage(float quantity)
 		Server_TakeDamage(quantity, nullptr);
 		return;
 	}
-	
-	// If Server
+
 	ServerChangeHealth(CurrentHealth);
+	
 
 	if (CurrentHealth <= 0.0f)
 	{
