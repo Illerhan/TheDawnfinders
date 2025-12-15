@@ -125,10 +125,10 @@ void UHealthComponent::TakeDamage(float quantity)
 	{
 		LocalChangeHealth(); 
 		Server_TakeDamage(quantity, nullptr);
-		return;
 	}
-
-	ServerChangeHealth(CurrentHealth);
+	else {
+		ServerChangeHealth(CurrentHealth);
+	}
 	
 
 	if (CurrentHealth <= 0.0f)
@@ -278,7 +278,7 @@ void UHealthComponent::Fallen()
 	bIsFallen = true;
 
 	AActor* Owner = GetOwner();
-	if (!Owner || !Owner->HasAuthority()) return;
+	if (!Owner) return;
 
 	// Notify Player 
 	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))
