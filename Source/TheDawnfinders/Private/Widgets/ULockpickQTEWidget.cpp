@@ -32,6 +32,8 @@ void ULockpickQTEWidget::PlayFailAnim_Implementation()
 
 void ULockpickQTEWidget::EnterQTE_Implementation(float SuccessStart, float SuccessEnd, float Speed, int Steps)
 {
+    if (IsDisplayed) return;
+
     IsDisplayed = true;
 	SuccessPercent = SuccessStart;
     AimedSuccessPercent = SuccessStart;

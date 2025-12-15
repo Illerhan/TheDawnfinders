@@ -141,8 +141,16 @@ void UInteractionComponent::StartInteract()
 void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
-	if (Interactible)
+	if (!Interactible) return;
+
+	// Server
+	if (!GetOwner()->HasAuthority()) {
+		ServerInteract_Implementation(Interactible, Player);
+	}
+	// Client
+	else {
 		ServerInteract(Interactible, Player);
+	}
 }
 
 
@@ -230,6 +238,19 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
+void UInteractionComponent::CancelInteraction()
+{
+	AActor* Nearest = GetNearestInteractible();
+	if (!Nearest) return;
+
+	if (InteractingQTEActor)
+	{
+		IInteractible::Execute_StopQTE(Nearest);
+		InteractingQTEActor = nullptr;
+
+		PlayerCharacter->OnRevive();
+	}
+}
 #pragma endregion
 
 
