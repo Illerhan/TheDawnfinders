@@ -201,6 +201,8 @@ void UInventoryComponent::ServerThrow_Implementation()
 		{
 			DroppedItem->ItemData = CurrentSlot.ItemData;
 
+			DroppedItem->Initialise(CurrentSlot.ItemData);
+
 			if (DroppedItem->ItemMesh && CurrentSlot.ItemData->ItemMesh)
 			{
 				DroppedItem->ItemMesh->SetStaticMesh(CurrentSlot.ItemData->ItemMesh);
