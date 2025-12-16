@@ -170,6 +170,8 @@ void UItemComponent::UseConsumable()
 		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
 	}
 
+	if (EquippedItem.ItemData == nullptr) return;
+
 	switch (EquippedItem.ItemData->ConsumableEffectType)
 	{
 		case EConsumableEffectType::Heal:
@@ -472,6 +474,8 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter) return;
 	if (!PlayerCharacter->GetController()) return;
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
+
+	if (EquippedItem.ItemData == nullptr) return;
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
 
