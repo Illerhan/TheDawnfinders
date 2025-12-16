@@ -394,6 +394,8 @@ void AAPlayerCharacter::OnFallen()
         Server_OnFallen();
     }
 
+    StopAutoLock();
+
     CurrentState = EPlayerState::Fallen;
     SetPlayerSpeed(PlayerConfig->FallenSpeed);
 
@@ -589,6 +591,8 @@ void AAPlayerCharacter::StartDodge()
 
 void AAPlayerCharacter::EndDodge()
 {
+    if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
+
     CurrentState = EPlayerState::None;
 
     SetPlayerSpeed(PlayerConfig->WalkSpeed);
