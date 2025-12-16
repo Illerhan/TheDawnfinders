@@ -106,7 +106,7 @@ void UHealthComponent::TakeDamage(float quantity)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
 	{
 		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.5f);
+		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.6f);
 		return;
 	}
 	
@@ -125,11 +125,11 @@ void UHealthComponent::TakeDamage(float quantity)
 	{
 		LocalChangeHealth(); 
 		Server_TakeDamage(quantity, nullptr);
-		return;
+	}
+	else {
+		ServerChangeHealth(CurrentHealth);
 	}
 	
-	// If Server
-	ServerChangeHealth(CurrentHealth);
 
 	if (CurrentHealth <= 0.0f)
 	{
@@ -278,7 +278,7 @@ void UHealthComponent::Fallen()
 	bIsFallen = true;
 
 	AActor* Owner = GetOwner();
-	if (!Owner || !Owner->HasAuthority()) return;
+	if (!Owner) return;
 
 	// Notify Player 
 	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))
