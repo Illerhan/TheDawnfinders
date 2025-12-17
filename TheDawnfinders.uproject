@@ -35,6 +35,10 @@
 		{
 			"Name": "UdpMessaging",
 			"Enabled": false
+		},
+		{
+			"Name": "SlateIM",
+			"Enabled": true
 		}
 	]
 }

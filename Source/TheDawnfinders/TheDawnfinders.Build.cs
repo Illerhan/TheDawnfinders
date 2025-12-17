@@ -17,7 +17,8 @@ public class TheDawnfinders : ModuleRules
             "OnlineSubsystem",
 			"OnlineSubsystemUtils",
             "UMG",
-            "AdvancedSessions"
+            "AdvancedSessions",
+            "ImGui"
         });
 
         // Uncomment if you are using Slate UI
