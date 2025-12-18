@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -12,6 +10,8 @@ class THEDAWNFINDERS_API UWorldProgressBar : public UUserWidget
 {
 	GENERATED_BODY()
 	
+
+// === MAIN FUNCTIONS ===
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Show(float CurrentValue);
@@ -22,6 +22,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Hide();
 
+
+// === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadOnly)
 	float StartValue;

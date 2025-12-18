@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -17,11 +15,11 @@ public:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
+
+// === MAIN FUNCTIONS ===
+public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseSquadInfos();
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<USquadMemberWidget*> SquadMemberWidgets;
 
 	UFUNCTION(BlueprintCallable)
 	void BindAllCurrentPlayerStates();
@@ -34,15 +32,21 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void RemoveSquadMember();
-
-	FTimerHandle BindDelayTimerHandle;
 	
+
+// === PROTECTED PROPERTIES ===
+protected:
+	UPROPERTY()
+	bool bWidgetsInitialized = false;
+
 	UPROPERTY()
 	bool bAlreadyBound = false;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Squad")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	int32 MaxSquadMembers = 4;
 
-private:
-	bool bWidgetsInitialized = false;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<USquadMemberWidget*> SquadMemberWidgets;
+
+	FTimerHandle BindDelayTimerHandle;
 };
