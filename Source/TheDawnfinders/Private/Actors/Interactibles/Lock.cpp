@@ -26,7 +26,8 @@ void ALock::Interact_Implementation(AActor* Interactor)
 	if (!bCanBeUsed) return;
 	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr || 
 		IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededKey ) {
-		InteractibleWidget->DisplayErrorText("You need a " + NeededKey->ItemName);
+
+		Server_DisplayErrorMessage("You need a " + NeededKey->ItemName);
 		return;
 	}
 

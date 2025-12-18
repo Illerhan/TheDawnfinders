@@ -73,6 +73,23 @@ public :
 	void HandleFadeProgress(float Value);
 
 
+// === OTHERS ===
+public:
+	UFUNCTION(BlueprintCallable)
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintCallable)
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_DisplayErrorMessage(const FString& Message);
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_DisplayErrorMessage(const FString& Message);
+
 
 // === COMPONENTS ===
 public :
@@ -87,18 +104,6 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
-
-
-// === COLLISIONS ===
-public:
-	UFUNCTION(BlueprintCallable)
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
-						bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION(BlueprintCallable)
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 
 // === PROTECTED PROPERTIES ===

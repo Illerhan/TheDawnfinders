@@ -86,7 +86,7 @@ void AInteractibleObjects::HoldTimer(float DeltaTime)
 }
 
 
-#pragma region Colliders 
+#pragma region Others 
 
 void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -113,6 +113,20 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 		if (InteractibleWidget)
 			InteractibleWidget->HideText();
 	}
+}
+
+void AInteractibleObjects::Multicast_DisplayErrorMessage_Implementation(const FString& Message)
+{
+	if (InteractibleWidget->GetVisibility() == ESlateVisibility::Collapsed) return;
+	InteractibleWidget->DisplayErrorText(Message);
+}
+
+void AInteractibleObjects::Server_DisplayErrorMessage_Implementation(const FString& Message)
+{
+	Multicast_DisplayErrorMessage(Message);
+
+	if (InteractibleWidget->GetVisibility() == ESlateVisibility::Collapsed) return;
+	InteractibleWidget->DisplayErrorText(Message);
 }
 
 #pragma endregion	
