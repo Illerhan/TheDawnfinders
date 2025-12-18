@@ -18,7 +18,7 @@ public class TheDawnfinders : ModuleRules
 			"OnlineSubsystemUtils",
             "UMG",
             "AdvancedSessions",
-            "ImGui"
+            "SlateIM"
         });
 
         // Uncomment if you are using Slate UI
@@ -27,7 +27,9 @@ public class TheDawnfinders : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[]
         {
             "AdvancedSessions",
-            "AdvancedSteamSessions"
+            "AdvancedSteamSessions",
+            "Slate",
+            "SlateCore"
         });
 
         // Uncomment if you are using online features
