@@ -116,8 +116,6 @@ void UStaminaComponent::ChangeLocalStamina()
 
 	if (!PC->PlayerState) return;
 
-	UE_LOG(LogTemp, Display, TEXT("fefe"));
-
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseLocalStamina(CurrentStamina, CurrentMaxStamina);
 }
