@@ -190,11 +190,17 @@ void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration)
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 {
+    if(!GetController()) return;
+    if(!GetController()->IsLocalController()) return;
+
     ProgressBarWidget->ActualiseProgress(CurrentValue);
 }
 
 void AAPlayerCharacter::HideProgress_Implementation()
 {
+    if (!GetController()) return;
+    if (!GetController()->IsLocalController()) return;
+
     ProgressBarWidget->Hide();
 }
 
