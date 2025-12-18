@@ -3,8 +3,9 @@
 
 #include "DebugWindow.h"
 
+#include "AssetRegistry/AssetRegistryModule.h"
 #include "Components/UHealthComponent.h"
-#include "Components/UItemComponent.h"
+#include "Public/Actors/AItem.h"
 #include "Kismet/GameplayStatics.h"       // Pour trouver le PlayerPawn
 #include "Editor/EditorEngine.h"          // Pour accéder à GEditor
 #include "Public/Actors/Player/APlayerCharacter.h"
@@ -64,5 +65,93 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	{
 		GameWorld->ServerTravel("L_Prototype?listen",true);
 	}
+
+	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);
+
+    // --- 2. LOGIQUE DU DROPDOWN ---
+    
+    // Variable statique pour retenir l'état ouvert/fermé entre les frames
+    static bool bIsSpawnerOpen = false;
+
+    // Le texte du bouton change selon l'état (+ ou -)
+    FString DropdownTitle = bIsSpawnerOpen ? TEXT("[-] CACHER SPAWNER") : TEXT("[+] OUVRIR SPAWNER");
+
+    // Si on clique sur le bouton titre, on inverse l'état
+    if (SlateIM::Button(*DropdownTitle))
+    {
+        bIsSpawnerOpen = !bIsSpawnerOpen;
+    }
+
+    // --- 3. CONTENU DU MENU (Affiché seulement si ouvert) ---
+    if (bIsSpawnerOpen)
+    {
+	    // On décale un peu visuellement (si SlateIM a un Indent, sinon pas grave)
+    	// SlateIM::Indent(10.f); 
+
+    	// --- A. Chargement des Assets (Optimisé: fait 1 seule fois) ---
+    	static TArray<FAssetData> ItemAssetsList;
+    	static bool bAssetsSearched = false;
+
+    	if (!bAssetsSearched)
+    	{
+    		FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
+    		FARFilter Filter;
+            
+    		// Méthode Auto pour la classe
+    		Filter.ClassPaths.Add(UItemData::StaticClass()->GetClassPathName());
+    		// Ton dossier
+    		Filter.PackagePaths.Add(FName("/Game/Data/Items")); 
+    		Filter.bRecursivePaths = true; 
+
+    		AssetRegistryModule.Get().GetAssets(Filter, ItemAssetsList);
+    		bAssetsSearched = true;
+    	}
+
+    	// --- B. Boucle d'affichage des boutons ---
+    	for (const FAssetData& AssetData : ItemAssetsList)
+    	{
+    		UItemData* ItemData = Cast<UItemData>(AssetData.GetAsset());
+    		if (!ItemData) continue; // Sécurité
+
+    		// On affiche le nom de l'item (ou le nom du fichier si ItemName est vide)
+    		FString ItemName = ItemData->ItemName.IsEmpty() ? AssetData.AssetName.ToString() : ItemData->ItemName;
+            
+    		// Petit style : " > Sword"
+    		if (SlateIM::Button(*FString::Printf(TEXT("   > %s"), *ItemName)))
+    		{
+    			// --- C. Logique de Spawn (Identique à avant) ---
+    			FVector SpawnLoc = PlayerChar->GetActorLocation() + (PlayerChar->GetActorForwardVector() * 150.f) + FVector(0,0,50);
+    			FRotator SpawnRot = FRotator::ZeroRotator; // Ou PlayerChar->GetActorRotation()
+
+    			FActorSpawnParameters SpawnInfo;
+    			SpawnInfo.Instigator = PlayerChar;
+    			SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+    			AItem* DroppedItem = GameWorld->SpawnActor<AItem>(
+					ItemData->ItemClass,
+					SpawnLoc,
+					SpawnRot,
+					SpawnInfo
+				);
+
+    			if (DroppedItem)
+    			{
+    				DroppedItem->ItemData = ItemData;
+    				DroppedItem->Initialise(ItemData);
+
+    				if (DroppedItem->ItemMesh && ItemData->ItemMesh)
+    				{
+    					DroppedItem->ItemMesh->SetStaticMesh(ItemData->ItemMesh);
+    					DroppedItem->ItemMesh->SetSimulatePhysics(false);
+    					DroppedItem->ItemMesh->SetEnableGravity(false);
+    					DroppedItem->ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+    				}
+    				DroppedItem->bShouldLevitate = true;
+                    
+    				UE_LOG(LogTemp, Log, TEXT("Spawned: %s"), *ItemName);
+    			}
+    		}
+    	}
+    }
 	SlateIM::EndVerticalStack();
 }
