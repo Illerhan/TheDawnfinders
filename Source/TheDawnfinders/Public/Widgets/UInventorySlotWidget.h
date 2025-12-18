@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -16,22 +14,12 @@ class THEDAWNFINDERS_API UInventorySlotWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
-public :
-	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "InventorySlot")
-	FOnHoverWidget OnHoverWidget;
 
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UImage* IconImage;
+// === MAIN FUNCTIONS ===
+public :	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void InitialiseWidget(int Index);
 
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UCanvasPanel* CanvasPanel;
-
-	UPROPERTY(BlueprintReadWrite, Category="InventorySlot")
-	bool bIsSlotSelected = false;
-
-	UPROPERTY(BlueprintReadWrite)
-	int SlotIndex;
-	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ActualiseVisuals(FInventorySlot Data, bool IsSelected);
 
@@ -41,12 +29,30 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ActualiseSlotCounter(FInventorySlot Data);
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void InitialiseWidget(int Index);
 
+// === OTHERS ===
+public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayAppearAnimation(float Delay);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayDisappearAnimation(float Delay);
+
+
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnHoverWidget OnHoverWidget;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UImage* IconImage;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UCanvasPanel* CanvasPanel;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsSlotSelected = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	int SlotIndex;
 };

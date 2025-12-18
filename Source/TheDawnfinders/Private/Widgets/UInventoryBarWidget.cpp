@@ -1,18 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Widgets/UInventoryBarWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Widgets/UInventorySlotWidget.h"
 
-void UInventoryBarWidget::ShowWidget_Implementation()
-{
 
-}
-
-void UInventoryBarWidget::HideWidget_Implementation()
-{
-
-}
+#pragma region Construct / Destruct
 
 void UInventoryBarWidget::NativeConstruct()
 {
@@ -36,6 +27,37 @@ void UInventoryBarWidget::NativeConstruct()
     }
 }
 
+void UInventoryBarWidget::NativeDestruct()
+{
+    if (GetWorld())
+    {
+        GetWorld()->GetTimerManager().ClearTimer(BindDelayTimerHandle);
+    }
+
+    if (InventoryComponentRef)
+    {
+        InventoryComponentRef->OnInventoryChange.RemoveDynamic(this, &UInventoryBarWidget::ActualiseWidget);
+        InventoryComponentRef = nullptr;
+    }
+
+    Super::NativeDestruct();
+}
+
+#pragma endregion
+
+
+#pragma region Main Functions
+
+void UInventoryBarWidget::ShowWidget_Implementation()
+{
+
+}
+
+void UInventoryBarWidget::HideWidget_Implementation()
+{
+
+}
+
 void UInventoryBarWidget::TryBindToInventory()
 {
     APlayerController* PC = GetOwningPlayer();
@@ -57,6 +79,7 @@ void UInventoryBarWidget::TryBindToInventory()
     }
 
     InventoryComponentRef = PlayerCharacter->InventoryComponent;
+    GetWorld()->GetTimerManager().ClearTimer(BindDelayTimerHandle);
 
     // Bind TOUJOURS côté client
     InventoryComponentRef->OnInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
@@ -65,37 +88,18 @@ void UInventoryBarWidget::TryBindToInventory()
     ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
 }
 
-void UInventoryBarWidget::NativeDestruct()
-{
-    if (GetWorld())
-    {
-        GetWorld()->GetTimerManager().ClearTimer(BindDelayTimerHandle);
-    }
-
-    if (InventoryComponentRef)
-    {
-        InventoryComponentRef->OnInventoryChange.RemoveDynamic(this, &UInventoryBarWidget::ActualiseWidget);
-        InventoryComponentRef = nullptr;
-    }
-
-    Super::NativeDestruct();
-}
-
 void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex)
 {
     UE_LOG(LogTemp, Error, TEXT("════════════════════════════════════════════════════════"));
     UE_LOG(LogTemp, Error, TEXT("ActualiseWidget called! Slots: %d, CurrentIndex: %d"), Slots.Num(), CurrentIndex);
-    
+
     for (int32 i = 0; i < InventorySlotsWidgets.Num(); i++)
     {
-        if (!InventorySlotsWidgets[i])
-        {
-            continue;
-        }
+        if (!InventorySlotsWidgets[i]) continue;
 
         if (Slots.IsValidIndex(i))
         {
-            UE_LOG(LogTemp, Warning, TEXT("  Slot %d: %s (Qty: %d) [%s]"), 
+            UE_LOG(LogTemp, Warning, TEXT("  Slot %d: %s (Qty: %d) [%s]"),
                 i,
                 Slots[i].ItemData ? *Slots[i].ItemData->ItemName : TEXT("Empty"),
                 Slots[i].Quantity,
@@ -110,3 +114,6 @@ void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventory
     }
     UE_LOG(LogTemp, Error, TEXT("════════════════════════════════════════════════════════"));
 }
+
+#pragma endregion
+

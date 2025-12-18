@@ -25,6 +25,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool ValidateQTE();
 
+
+// === OTHERS ===
+public : 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlaySuccessAnim();
 
