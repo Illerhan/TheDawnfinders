@@ -1,14 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UWorldInteractibleWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class THEDAWNFINDERS_API UWorldInteractibleWidget : public UUserWidget
 {
@@ -20,7 +16,6 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideText();
-
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DisplayErrorText(const FString& Text);
