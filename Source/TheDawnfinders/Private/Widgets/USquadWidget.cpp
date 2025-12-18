@@ -8,41 +8,44 @@
 #include "GameFramework/CustomGameState.h"
 
 
+#pragma region Construct / Destruct
 
 void USquadWidget::NativeConstruct()
 {
-	Super::NativeConstruct();
-	BindAllCurrentPlayerStates();
+    Super::NativeConstruct();
+    BindAllCurrentPlayerStates();
 }
 
 
 void USquadWidget::NativeDestruct()
 {
-	Super::NativeDestruct();
-	bAlreadyBound = false;
+    Super::NativeDestruct();
+    bAlreadyBound = false;
 
-	APlayerController* PC = GetOwningPlayer();
-	if (!PC || !PC->IsLocalController()) return;
+    APlayerController* PC = GetOwningPlayer();
+    if (!PC || !PC->IsLocalController()) return;
 
-	APlayerState* PS = PC->PlayerState;
-	if (!PS) return;
+    APlayerState* PS = PC->PlayerState;
+    if (!PS) return;
 
-	ACustomGameState* CustomGS = Cast<ACustomGameState>(GetWorld()->GetGameState());
-	if (!CustomGS) return;
+    ACustomGameState* CustomGS = Cast<ACustomGameState>(GetWorld()->GetGameState());
+    if (!CustomGS) return;
 
-	ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-	if (CustomPS)
-	{
-		CustomPS->OnInfoChange.RemoveDynamic(this, &USquadWidget::ActualiseSquadInfos);
-	}
+    ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
+    if (CustomPS)
+    {
+        CustomPS->OnInfoChange.RemoveDynamic(this, &USquadWidget::ActualiseSquadInfos);
+    }
 
-	CustomGS->OnPlayerListChanged.RemoveDynamic(this, &USquadWidget::BindNewPlayerState);
+    CustomGS->OnPlayerListChanged.RemoveDynamic(this, &USquadWidget::BindNewPlayerState);
 }
 
+#pragma endregion
 
-// ============================================================================
+
+#pragma region Main Functions
+
 // UPDATE ALL SQUAD WIDGETS WHEN PLAYERS INFO CHANGE
-// ============================================================================
 void USquadWidget::ActualiseSquadInfos()
 {
     APlayerController* LocalPC = GetOwningPlayer();
@@ -53,10 +56,10 @@ void USquadWidget::ActualiseSquadInfos()
     if (!GS || !LocalPS) return;
 
     int32 NumPlayers = GS->PlayerArray.Num();
-    
+
     // IMPORTANT: Ne jamais dépasser le nombre de widgets disponibles
     int32 MaxWidgetsToShow = FMath::Min(NumPlayers, SquadMemberWidgets.Num());
-    
+
     // Vérification de sécurité
     if (SquadMemberWidgets.Num() == 0)
     {
@@ -75,7 +78,7 @@ void USquadWidget::ActualiseSquadInfos()
 
     // ---- Update widgets for existing players ----
     int WidgetIndex = 0;
-    
+
     // Local player first (slot 0)
     for (APlayerState* PS : GS->PlayerArray)
     {
@@ -87,12 +90,12 @@ void USquadWidget::ActualiseSquadInfos()
                 {
                     SquadMemberWidgets[0]->SetVisibility(ESlateVisibility::HitTestInvisible);
                     SquadMemberWidgets[0]->ActualiseWidget(
-                        CustomPS->CurrentHealth,
-                        CustomPS->CurrentMaxHealth,
-                        CustomPS->CurrentStamina,
-                        CustomPS->CurrentMaxStamina,
-                        CustomPS->MaxHealth,
-                        CustomPS->LanternPercent
+                        CustomPS->GetCurrentHealth(),
+                        CustomPS->GetCurrentMaxHealth(),
+                        CustomPS->GetCurrentStamina(),
+                        CustomPS->GetCurrentMaxStamina(),
+                        CustomPS->GetMaxHealth(),
+                        CustomPS->GetLanternPercent()
                     );
                 }
             }
@@ -105,7 +108,7 @@ void USquadWidget::ActualiseSquadInfos()
     for (APlayerState* PS : GS->PlayerArray)
     {
         if (PS == LocalPS) continue;
-        
+
         // SÉCURITÉ: arrêter si on dépasse le nombre de widgets
         if (WidgetIndex >= SquadMemberWidgets.Num())
         {
@@ -120,11 +123,11 @@ void USquadWidget::ActualiseSquadInfos()
                 SquadMemberWidgets[WidgetIndex]->SetVisibility(ESlateVisibility::HitTestInvisible);
                 SquadMemberWidgets[WidgetIndex]->Initialise(false);
                 SquadMemberWidgets[WidgetIndex]->ActualiseWidget(
-                    CustomPS->CurrentHealth,
-                    CustomPS->CurrentMaxHealth,
-                    CustomPS->CurrentStamina,
-                    CustomPS->CurrentMaxStamina,
-                    CustomPS->MaxHealth,
+                    CustomPS->GetCurrentHealth(),
+                    CustomPS->GetCurrentMaxHealth(),
+                    CustomPS->GetCurrentStamina(),
+                    CustomPS->GetCurrentMaxStamina(),
+                    CustomPS->GetMaxHealth(),
                     0
                 );
             }
@@ -134,102 +137,102 @@ void USquadWidget::ActualiseSquadInfos()
 }
 
 
-// ============================================================================
 // BINDING OF PLAYER STATES
-// ============================================================================
 void USquadWidget::BindAllCurrentPlayerStates()
 {
-	if (bAlreadyBound) return;
+    if (bAlreadyBound) return;
 
-	APlayerController* PC = GetOwningPlayer();
-	if (!PC || !PC->IsLocalController())
-	{
-		return;
-	}
+    APlayerController* PC = GetOwningPlayer();
+    if (!PC || !PC->IsLocalController())
+    {
+        return;
+    }
 
-	AGameStateBase* GS = GetWorld()->GetGameState();
-	if (!GS || GS->PlayerArray.Num() == 0)
-	{
-		GetWorld()->GetTimerManager().SetTimer(
-			BindDelayTimerHandle,
-			this,
-			&USquadWidget::BindAllCurrentPlayerStates,
-			0.1f,
-			false
-		);
-		return;
-	}
+    AGameStateBase* GS = GetWorld()->GetGameState();
+    if (!GS || GS->PlayerArray.Num() == 0)
+    {
+        GetWorld()->GetTimerManager().SetTimer(
+            BindDelayTimerHandle,
+            this,
+            &USquadWidget::BindAllCurrentPlayerStates,
+            0.1f,
+            false
+        );
+        return;
+    }
 
-	ACustomGameState* CustomGS = Cast<ACustomGameState>(GS);
-	if (!CustomGS)
-	{
-		GetWorld()->GetTimerManager().SetTimer(
-			BindDelayTimerHandle,
-			this,
-			&USquadWidget::BindAllCurrentPlayerStates,
-			0.1f,
-			false
-		);
-		return;
-	}
+    ACustomGameState* CustomGS = Cast<ACustomGameState>(GS);
+    if (!CustomGS)
+    {
+        GetWorld()->GetTimerManager().SetTimer(
+            BindDelayTimerHandle,
+            this,
+            &USquadWidget::BindAllCurrentPlayerStates,
+            0.1f,
+            false
+        );
+        return;
+    }
 
-	// ---- Bind delegate for new players joining ----
-	CustomGS->OnPlayerListChanged.AddUniqueDynamic(this, &USquadWidget::BindNewPlayerState);
+    // ---- Bind delegate for new players joining ----
+    CustomGS->OnPlayerListChanged.AddUniqueDynamic(this, &USquadWidget::BindNewPlayerState);
 
-	// ---- Bind delegates for existing players ----
-	for (APlayerState* PS : GS->PlayerArray)
-	{
-		if (!PS) continue;
+    // ---- Bind delegates for existing players ----
+    for (APlayerState* PS : GS->PlayerArray)
+    {
+        if (!PS) continue;
 
-		ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
-		if (!CustomPS || !CustomPS->IsActorInitialized()) continue;
-        
-		CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
-	}
+        ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(PS);
+        if (!CustomPS || !CustomPS->IsActorInitialized()) continue;
 
-	// ---- Special delegate for local player only ----
-	if (ACustomPlayerState* LocalPS = Cast<ACustomPlayerState>(PC->PlayerState))
-	{
-		LocalPS->OnInfoChangeLocal.BindUFunction(this, "ActualiseSquadInfos");
-	}
+        CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
+    }
 
-	bAlreadyBound = true;
-    
-	// Appeler l'actualisation une fois
-	ActualiseSquadInfos();
+    // ---- Special delegate for local player only ----
+    if (ACustomPlayerState* LocalPS = Cast<ACustomPlayerState>(PC->PlayerState))
+    {
+        LocalPS->OnInfoChangeLocal.BindUFunction(this, "ActualiseSquadInfos");
+    }
+
+    bAlreadyBound = true;
+
+    // Appeler l'actualisation une fois
+    ActualiseSquadInfos();
 }
 
-// ============================================================================
+
 // WHEN A NEW PLAYER JOINS
-// ============================================================================
 void USquadWidget::BindNewPlayerState()
 {
-	APlayerController* PC = GetOwningPlayer();
-	if (!PC || !PC->IsLocalController()) return;
+    APlayerController* PC = GetOwningPlayer();
+    if (!PC || !PC->IsLocalController()) return;
 
-	AGameStateBase* GS = GetWorld()->GetGameState();
-	if (!GS || GS->PlayerArray.Num() == 0) return;
+    AGameStateBase* GS = GetWorld()->GetGameState();
+    if (!GS || GS->PlayerArray.Num() == 0) return;
 
-	APlayerState* NewPS = GS->PlayerArray.Last();
-	if (ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(NewPS))
-	{
-		CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
-        
-		// Juste rafraîchir l'affichage, pas de création de widget
-		ActualiseSquadInfos();
-	}
+    APlayerState* NewPS = GS->PlayerArray.Last();
+    if (ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(NewPS))
+    {
+        CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
+
+        // Juste rafraîchir l'affichage, pas de création de widget
+        ActualiseSquadInfos();
+    }
 }
 
+#pragma endregion
 
-// ============================================================================
-// BP IMPLEMENTATIONS (EMPTY)
-// ============================================================================
+
+#pragma region Blueprint Implemented
+
 void USquadWidget::AddNewSquadMember_Implementation()
 {
-	// Géré en Blueprint
+    // Géré en Blueprint
 }
 
 void USquadWidget::RemoveSquadMember_Implementation()
 {
-	// Géré en Blueprint
+    // Géré en Blueprint
 }
+
+#pragma endregion

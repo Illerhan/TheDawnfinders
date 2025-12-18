@@ -24,18 +24,10 @@ void ACustomPlayerState::BeginPlay()
 }
 
 
-// CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
-void ACustomPlayerState::ActualiseLocalStamina(float current, float max)
-{
-	CurrentStamina = current;
-	CurrentMaxStamina = max;
-
-	OnInfoChangeLocal.ExecuteIfBound();
-}
-
+#pragma region Health
 
 // CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
-void ACustomPlayerState::ActualiseLocalHealth(float current, float max,float fixedMax)
+void ACustomPlayerState::ActualiseLocalHealth(float current, float max, float fixedMax)
 {
 	CurrentHealth = current;
 	CurrentMaxHealth = max;
@@ -44,16 +36,34 @@ void ACustomPlayerState::ActualiseLocalHealth(float current, float max,float fix
 	OnInfoChangeLocal.ExecuteIfBound();
 }
 
+// CALLED ON THE SERVER TO ACTUALISE FOR ALL
+void ACustomPlayerState::ActualiseHealth(float current, float max, float fixedMax)
+{
+	CurrentHealth = current;
+	CurrentMaxHealth = max;
+	MaxHealth = fixedMax;
+
+	OnRep_StaminaChange();
+}
+
+void ACustomPlayerState::SetMaxHealth(float MaxHP)
+{
+	MaxHealth = MaxHP;
+}
+
+#pragma endregion
+
+
+#pragma region Stamina
 
 // CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
-void ACustomPlayerState::ActualiseLocalLantern(float current, float max)
+void ACustomPlayerState::ActualiseLocalStamina(float current, float max)
 {
-	LanternPercent = (int)((current / max) * 100);
+	CurrentStamina = current;
+	CurrentMaxStamina = max;
 
 	OnInfoChangeLocal.ExecuteIfBound();
 }
-
-
 
 // CALLED ON THE SERVER TO ACTUALISE FOR ALL
 void ACustomPlayerState::ActualiseStamina(float current, float max)
@@ -64,15 +74,19 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 	OnRep_HealthChange();
 }
 
-// CALLED ON THE SERVER TO ACTUALISE FOR ALL
-void ACustomPlayerState::ActualiseHealth(float current, float max,float fixedMax)
-{
-	CurrentHealth = current;
-	CurrentMaxHealth = max;
-	MaxHealth = fixedMax;
+#pragma endregion
 
-	OnRep_StaminaChange();
+
+#pragma region Lantern
+
+// CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
+void ACustomPlayerState::ActualiseLocalLantern(float current, float max)
+{
+	LanternPercent = (int)((current / max) * 100);
+
+	OnInfoChangeLocal.ExecuteIfBound();
 }
+
 
 // CALLED ON THE SERVER TO ACTUALISE FOR ALL
 void ACustomPlayerState::ActualiseLantern(float current, float max)
@@ -83,17 +97,24 @@ void ACustomPlayerState::ActualiseLantern(float current, float max)
 }
 
 
+#pragma endregion
+
+
+#pragma region Amulets
 
 void ACustomPlayerState::ApplyContextualAmulet(EAmuletTriggerType Trigger)
 {
-	for(UAmuletData* Amulet : PossessedAmulets) {
+	for (UAmuletData* Amulet : PossessedAmulets) {
 		if (Amulet->AmuletTriggerType == Trigger) {
 			Amulet->VerifyApplyEffect(GetPlayerController(), this);
 		}
 	}
 }
 
+#pragma endregion
 
+
+#pragma region Network
 
 void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
@@ -101,7 +122,6 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 
 	DOREPLIFETIME(ACustomPlayerState, CurrentStamina);
 }
-
 
 void ACustomPlayerState::OnRep_StaminaChange()
 {
@@ -117,3 +137,5 @@ void ACustomPlayerState::OnRep_LanternChange()
 {
 	OnInfoChange.Broadcast();
 }
+
+#pragma endregion
