@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -10,16 +8,20 @@
 
 class UInventoryComponent;
 
-/**
- * 
- */
+
 UCLASS()
 class THEDAWNFINDERS_API UInventoryBarWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public :
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category="Inventory")
+	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
+
+
+// === MAIN PROPERTIES ===
+public :
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	void ActualiseWidget(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
@@ -28,15 +30,12 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideWidget();
 
-	
-	
-protected:
-	virtual void NativeConstruct() override;
-	
+	UFUNCTION(BlueprintCallable)
 	void TryBindToInventory();
 
-	virtual void NativeDestruct() override;
 
+// === PROTECTED PROPERTIES ===
+protected :
 	UPROPERTY()
 	UInventoryComponent* InventoryComponentRef;
 
@@ -44,5 +43,4 @@ protected:
 	TArray<UInventorySlotWidget*> InventorySlotsWidgets;
 
 	FTimerHandle BindDelayTimerHandle;
-		
 };

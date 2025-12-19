@@ -42,7 +42,7 @@ void UHealthComponent::BeginPlay()
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	if (!PSCustom) return;
 
-	PSCustom->MaxHealth = MaxHealth;
+	PSCustom->SetMaxHealth(MaxHealth);
 }
 
 
@@ -129,7 +129,6 @@ void UHealthComponent::TakeDamage(float quantity)
 	else {
 		ServerChangeHealth(CurrentHealth);
 	}
-	
 
 	if (CurrentHealth <= 0.0f)
 	{

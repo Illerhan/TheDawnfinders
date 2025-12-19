@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -44,7 +42,7 @@ public :
 	FOnInfoChangeLocal OnInfoChangeLocal;
 
 
-// === HEALTH + STAMINA
+// === HEALTH + STAMINA CHANGES
 public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLocalStamina(float current, float max);
@@ -58,8 +56,11 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseHealth(float current, float max, float fixedMax);
 
+	UFUNCTION(BlueprintCallable)
+	void SetMaxHealth(float MaxHP);
 
-// === LANTERN ===
+
+// === LANTERN CHANGES ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLocalLantern(float current, float max);
@@ -68,14 +69,38 @@ public :
 	void ActualiseLantern(float current, float max);
 
 
-// === AMULETS
+// === GETTERS ===
+public :
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentHealth() const { return CurrentHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentMaxHealth() const { return CurrentMaxHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetMaxHealth() const { return MaxHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentStamina() const { return CurrentStamina; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentMaxStamina() const { return CurrentMaxStamina; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetLanternPercent() const { return LanternPercent; }
+
+
+// === AMULETS ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void ApplyContextualAmulet(EAmuletTriggerType Trigger);
 
 
-// === PUBLIC PROPERTIES
-public :
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintReadOnly)
+	TSet<UAmuletData*> PossessedAmulets;
+
 	UPROPERTY(ReplicatedUsing = OnRep_StaminaChange)
 	float CurrentStamina;
 
@@ -93,9 +118,4 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	float LanternPercent = 100;
-
-// === PROTECTED PROPERTIES ===
-protected :
-	UPROPERTY(BlueprintReadOnly)
-	TSet<UAmuletData*> PossessedAmulets;
 };

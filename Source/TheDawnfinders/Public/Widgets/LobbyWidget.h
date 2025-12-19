@@ -17,30 +17,6 @@ protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
-public:
-	// Référence au subsystem de session
-	UPROPERTY()
-	USessionManagerSubsystem* SessionSubsystem;
-
-	// Bouton pour inviter des amis Steam (à binder dans le designer)
-	UPROPERTY(meta = (BindWidget))
-	class UButton* InviteFriendsButton;
-
-	// Bouton pour créer une session
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CreateSessionButton;
-
-	// Bouton pour demarrer la partie
-	UPROPERTY(meta = (BindWidget))
-	class UButton* StartGameButton;
-
-
-	// Texte affichant le nombre de joueurs
-	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* PlayerCountText;
-
-	// Timer pour mettre à jour le compte de joueurs
-	FTimerHandle PlayerCountTimerHandle;
 
 private:
 	UFUNCTION()
@@ -61,4 +37,25 @@ private:
 	void UpdatePlayerCount();
 
 	void UpdateStartGame();
+
+
+// === PROTECTED PROPERTIES ===
+protected:
+	UPROPERTY()
+	USessionManagerSubsystem* SessionSubsystem; 	// Référence au subsystem de session
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* InviteFriendsButton;  	// (à binder dans le designer)
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* CreateSessionButton;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* StartGameButton;
+
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* PlayerCountText;
+
+	FTimerHandle PlayerCountTimerHandle;
 };
