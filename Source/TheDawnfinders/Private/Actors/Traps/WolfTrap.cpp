@@ -11,17 +11,6 @@
 void AWolfTrap::DoTrapAction()
 {
 	Super::DoTrapAction();
-	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(TrappedActor);
-	if (!Player) return;
-
-
-	if (!Player->HasAuthority())
-	{
-		Player->Server_OnTrapped();
-	}
-	else
-	{
-		Player->OnTrapped();
-	}
+	IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Immobilized);
 }
 

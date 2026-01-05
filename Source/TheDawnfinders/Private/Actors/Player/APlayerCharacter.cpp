@@ -158,6 +158,12 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     }
 }
 
+void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
+    // Laisse tes bindings BP gérer le Turn (AddControllerYawInput) et le Move.
+}
+
 
 void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
@@ -219,9 +225,32 @@ EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
     return CurrentState;
 }
 
+void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
+{
+    if (CurrentState == NewState) return;
+
+    SetCurrentPlayerState_Implementation(NewState);
+}
+
 void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewState)
 {
     CurrentState = NewState;
+
+    switch (CurrentState)
+    {
+    case EPlayerState::Fallen :
+        StopAutoLock();
+        SetPlayerSpeed(PlayerConfig->FallenSpeed);
+        break;
+
+    case EPlayerState::Immobilized :
+        SetPlayerSpeed(0.f);
+        break;
+
+    case EPlayerState::Dead :
+        SetPlayerSpeed(0.f);
+        break;
+    }
 }
 
 void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed)
@@ -275,13 +304,6 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 #pragma endregion
 
 
-void AAPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-    Super::SetupPlayerInputComponent(PlayerInputComponent);
-    // Laisse tes bindings BP gérer le Turn (AddControllerYawInput) et le Move.
-}
-
-
 #pragma region Movement / Run
 
 void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
@@ -314,7 +336,6 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
     return NewSpeed >= 0.0f && NewSpeed <= 2000.0f;
 }
 
-
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
 {
     PlayerSpeed = NewSpeed;
@@ -322,14 +343,11 @@ void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
 }
 
-
 void AAPlayerCharacter::OnRep_PlayerSpeed()
 {
     // Appliqué automatiquement sur tous les clients quand PlayerSpeed change
     GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
 }
-
-
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
@@ -360,6 +378,10 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     AddMovementInput(FinalVector, 1.0f, true);
 }
 
+void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
+{
+    ManageRun(Input); // Call the same logic on the server
+}
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
@@ -372,19 +394,13 @@ void AAPlayerCharacter::ManageRun(bool Input)
     if (Input)
     {
         SetPlayerSpeed(PlayerConfig->RunSpeed);
-
         CurrentState = EPlayerState::Running;
-        // Ajuster friction si besoin
-        //GetCharacterMovement()->BrakingFrictionFactor = 2.f;
     }
     else
     {
         SetPlayerSpeed(PlayerConfig->WalkSpeed);
-
         if (CurrentState == EPlayerState::Running)
             CurrentState = EPlayerState::None;
-        //GetCharacterMovement()->BrakingFrictionFactor = 2.0f;
-        //GetCharacterMovement()->BrakingDecelerationWalking = 1500.f;
     }
 }
 
@@ -393,98 +409,10 @@ bool AAPlayerCharacter::IsProtectedFromCurse() const
     return ProtectionZoneAmount > 0;
 }
 
-void AAPlayerCharacter::OnFallen()
-{
-    if (!HasAuthority())
-    {
-        Server_OnFallen();
-    }
-
-    StopAutoLock();
-
-    CurrentState = EPlayerState::Fallen;
-    SetPlayerSpeed(PlayerConfig->FallenSpeed);
-
-    //TargetMaxSpeed = PlayerConfig->FallenSpeed;
-    GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->FallenSpeed; // Force immédiate
-    PlayerSpeed = PlayerConfig->FallenSpeed;
-    
-}
-
-void AAPlayerCharacter::OnTrapped()
-{
-    if (!HasAuthority())
-        Server_OnTrapped();
-    CurrentState = EPlayerState::Immobilized;
-    TargetMaxSpeed = 0.f;
-    GetCharacterMovement()->StopMovementImmediately();
-    GetCharacterMovement()->MaxWalkSpeed = 0.f; // Force immédiate
-    PlayerSpeed = 0.f;
-}
-
-void AAPlayerCharacter::Server_OnTrapped_Implementation()
-{
-    OnTrapped();
-}
-
-void AAPlayerCharacter::Server_OnFallen_Implementation()
-{
-    OnFallen(); // Re-appelle la version serveur
-}
-
-void AAPlayerCharacter::OnRevive()
-{
-    if (!HasAuthority())
-    {
-        Server_OnRevive();
-    }
-    CurrentState = EPlayerState::None;
-    TargetMaxSpeed = PlayerConfig->WalkSpeed;
-    GetCharacterMovement()->MaxWalkSpeed = PlayerConfig->WalkSpeed; // Force immédiate
-    PlayerSpeed = PlayerConfig->WalkSpeed;
-    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
-}
-
-void AAPlayerCharacter::Server_OnRevive_Implementation()
-{
-    OnRevive();
-}
-
-
-void AAPlayerCharacter::OnDeath()
-{
-    if (!HasAuthority())
-    {
-        Server_OnDied();
-    }
-
-    CurrentState = EPlayerState::Dead;
-    TargetMaxSpeed = 0.f;
-    GetCharacterMovement()->StopMovementImmediately();
-    GetCharacterMovement()->MaxWalkSpeed = 0.f; // Force immédiate
-    PlayerSpeed = 0.f;
-}
-
-void AAPlayerCharacter::Server_OnDied_Implementation()
-{
-    OnDeath();
-}
-
-bool AAPlayerCharacter::ServerManageRun_Validate(bool Input)
-{
-    return true;
-}
-
-
-void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
-{
-    ManageRun(Input); // Call the same logic on the server
-}
-
 #pragma endregion
 
 
-#pragma region Auto Lock
+#pragma region Litter
 
 void AAPlayerCharacter::Server_SendPushInput_Implementation(ALitter* Obj, FVector Input)
 {
@@ -514,6 +442,11 @@ void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool
     CurrentPushedObject = bIsCarrying ? Obj : nullptr;
 }
 
+#pragma endregion
+
+
+#pragma region Auto Lock
+
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
@@ -533,13 +466,13 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     );
 
     if (!bHit) return;
-    
+
     float BestDist = 10000.f;
     for (auto& Result : Overlaps)
     {
         AActor* Actor = Result.GetActor();
         if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
-            
+
         float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
         if (CurrentDist > BestDist) continue;
 
@@ -559,7 +492,7 @@ void AAPlayerCharacter::ActualiseAutoLock()
     FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
 
     FRotator TargetRotation = AimedForward.Rotation();
-    
+
     FRotator NewRotation = FMath::RInterpTo(
         GetActorRotation(),
         TargetRotation,
@@ -687,72 +620,22 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 #pragma region Others
 
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+void AAPlayerCharacter::OnRevive()
 {
-    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
-}
-
-
-void AAPlayerCharacter::OnRep_CurrentPlayerState()
-{
-    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s CurrentState replicated. Controller: %s"),
-        *GetName(),
-        GetController() ? *GetController()->GetName() : TEXT("None"));
-
-    // Ne pas changer TargetMaxSpeed ou MaxWalkSpeed côté client.
-    // Laisser le serveur gérer TargetMaxSpeed et répliquer PlayerSpeed.
-    // Ici, tu peux jouer des animations / effets visuels en fonction de CurrentState:
-    switch (CurrentState)
+    if (!HasAuthority())
     {
-    case EPlayerState::Running:
-        // jouer anim run
-        break;
-    case EPlayerState::None:
-        // jouer idle/walk
-        break;
-    case EPlayerState::Dodging:
-        // ...
-        break;
-    case EPlayerState::Fallen:
-        // ...
-        break;
-    case EPlayerState::Dead:
-        // ...
-        break;
-    case EPlayerState::Immobilized:
-        break;
-    default:
-        break;
+        Server_OnRevive();
     }
+
+    CurrentState = EPlayerState::None;
+    SetPlayerSpeed(PlayerConfig->WalkSpeed);
+    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
 }
 
-
-void AAPlayerCharacter::PossessedBy(AController* NewController)
+void AAPlayerCharacter::Server_OnRevive_Implementation()
 {
-    Super::PossessedBy(NewController);
-
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] %s POSSESSED by %s"),
-        *GetName(),
-        NewController ? *NewController->GetName() : TEXT("None"));
-
-    if (IsReadyForRPCs())
-    {
-        UE_LOG(LogTemp, Log, TEXT("[SERVER] %s is ready for RPCs"), *GetName());
-    }
-    else
-    {
-        UE_LOG(LogTemp, Error, TEXT("[SERVER] %s is NOT ready for RPCs!"), *GetName());
-    }
+    OnRevive();
 }
-
-void AAPlayerCharacter::OnRep_PlayerState()
-{
-    Super::OnRep_PlayerState();
-    UE_LOG(LogTemp, Warning, TEXT("[CLIENT] %s PlayerState replicated. Controller: %s"),
-        *GetName(),
-        GetController() ? *GetController()->GetName() : TEXT("None"));
-}
-
 
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
@@ -760,6 +643,24 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
         Cast<APlayerController>(GetController()) != nullptr;
 }
 
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+{
+    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+}
+
+void AAPlayerCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+}
+
+void AAPlayerCharacter::OnRep_PlayerState()
+{
+    Super::OnRep_PlayerState();
+}
+
+void AAPlayerCharacter::OnRep_CurrentPlayerState()
+{
+}
 
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
 {
@@ -787,7 +688,6 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
     }
 }
 
-
 void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
 {
     ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
@@ -802,4 +702,3 @@ void AAPlayerCharacter::HideThrowPreview()
 }
 
 #pragma endregion
-
