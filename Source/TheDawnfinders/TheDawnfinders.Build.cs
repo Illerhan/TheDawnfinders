@@ -18,8 +18,16 @@ public class TheDawnfinders : ModuleRules
 			"OnlineSubsystemUtils",
             "UMG",
             "AdvancedSessions",
-            "SlateIM"
+            "SlateIM",
         });
+		
+		if (Target.bBuildEditor)
+		{
+			PublicDependencyModuleNames.AddRange(new string[] { 
+				"UnrealEd", 
+				"EditorSubsystem" 
+			});
+		}
 
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
