@@ -2,9 +2,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 
 #include "Actors/Interactibles/Litter.h"
-#include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
-
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UItemComponent.h"
@@ -12,18 +10,17 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/GameSession.h"
 #include "GameFramework/PlayerState.h"
-#include "Kismet/GameplayStatics.h"
 #include "Perception/AISense_Hearing.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
-
+#include "Components/DebugComponent.h"
 
 AAPlayerCharacter::AAPlayerCharacter()
 {
     PrimaryActorTick.bCanEverTick = true;
 
+    
     // Réplication Actor + mouvement (utile pour ACharacter)
     bReplicates = true;
     SetReplicateMovement(true);
@@ -54,6 +51,7 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponMeshComponent->SetupAttachment(GetMesh());
     ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
+    DebugComponent = CreateDefaultSubobject<UDebugComponent>(TEXT("DebugComponent"));
     WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
     

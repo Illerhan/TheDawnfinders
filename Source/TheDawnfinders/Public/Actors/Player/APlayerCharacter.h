@@ -77,9 +77,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USceneComponent* WeaponCollisionPosRef;
-	
 
-// === CURSE ===
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
+	class UDebugComponent* DebugComponent;
+
+
+	// === CURSE ===
 public :
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
