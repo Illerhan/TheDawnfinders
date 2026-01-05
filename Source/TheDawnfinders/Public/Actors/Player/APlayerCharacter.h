@@ -7,7 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
-#include "PlayerData.h"
+#include "DataAssets/PlayerData.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
