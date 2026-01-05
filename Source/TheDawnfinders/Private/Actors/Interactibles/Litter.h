@@ -4,6 +4,7 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "Components/UPlayerLightComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/UInventoryComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Litter.generated.h"
 
@@ -43,6 +44,9 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void Server_UpdateInputs(AAPlayerCharacter* Player, FVector Input);
+
+	UPROPERTY(BlueprintReadWrite, Blueprintable)
+	UInventoryComponent* InventoryComp;
 
 	FVector GetServerVelocity() const { return ServerVelocity; }
 

@@ -3,16 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EditorSubsystem.h"
 #include "TheDawnfinders/DebugWindow.h"
 #include "DebugSubsyteme.generated.h"
 
 /**
  * 
  */
-#if WITH_EDITOR
+
 UCLASS()
-class THEDAWNFINDERS_API UDebugSubsyteme : public UEditorSubsystem
+class THEDAWNFINDERS_API UDebugSubsyteme : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	public:
@@ -20,4 +19,3 @@ class THEDAWNFINDERS_API UDebugSubsyteme : public UEditorSubsystem
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 };
-#endif

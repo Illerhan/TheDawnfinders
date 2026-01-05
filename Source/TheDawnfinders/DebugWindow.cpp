@@ -1,12 +1,8 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-
-#include "DebugWindow.h"
+﻿#include "DebugWindow.h"
 
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Components/UHealthComponent.h"
 #include "Kismet/GameplayStatics.h"       // Pour trouver le PlayerPawn
-#include "Editor/EditorEngine.h"          // Pour accéder à GEditor
 #include "Public/Actors/Player/APlayerCharacter.h"
 #include "Private/GameFramework/SessionManagerSubsystem.h"
 #include "Components/DebugComponent.h"
@@ -19,15 +15,22 @@ FDebugWindow::FDebugWindow()
 
 void FDebugWindow::DrawWindow(float DeltaTime)
 {
-	UWorld* GameWorld = GEditor ? GEditor->PlayWorld : nullptr;
+	UWorld* GameWorld = nullptr;
+	GameWorld = GWorld ? GWorld->GetWorld() : nullptr;
+	#if WITH_EDITOR
+		// Si on est dans l'éditeur
+		if (GEditor) GameWorld = GEditor->PlayWorld;
+	#endif
+	
 	if (!GameWorld)
 	{
 		SlateIM::Text(TEXT("Le jeu n'est pas lancé. En attente..."), FLinearColor::Gray);
-		return; // On arrête là, pas de joueur à chercher
+		return;
 	}
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GameWorld, 0);
 
 	AAPlayerCharacter* PlayerChar = Cast<AAPlayerCharacter>(PlayerPawn);
+	UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
 
 	if (!PlayerChar)
 		return;
@@ -63,17 +66,16 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
-		GameWorld->ServerTravel("L_Prototype?listen",true);
+		DebugComp->Server_TravelToMap("L_Prototype?listen");
 	}
 
 	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);
 
-    // --- 2. LOGIQUE DU DROPDOWN ---
-    
+    // --- 2. LOGIQUE DU DROPDOWN --
+	
     // Variable statique pour retenir l'état ouvert/fermé entre les frames
     static bool bIsSpawnerOpen = false;
-
-    // Le texte du bouton change selon l'état (+ ou -)
+	
     FString DropdownTitle = bIsSpawnerOpen ? TEXT("[-] CACHER SPAWNER") : TEXT("[+] OUVRIR SPAWNER");
 
     // Si on clique sur le bouton titre, on inverse l'état
@@ -85,9 +87,6 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     // --- 3. CONTENU DU MENU (Affiché seulement si ouvert) ---
     if (bIsSpawnerOpen)
     {
-	    // On décale un peu visuellement (si SlateIM a un Indent, sinon pas grave)
-    	// SlateIM::Indent(10.f); 
-
     	// --- A. Chargement des Assets (Optimisé: fait 1 seule fois) ---
     	static TArray<FAssetData> ItemAssetsList;
     	static bool bAssetsSearched = false;
@@ -121,9 +120,6 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     		{
     			FVector SpawnLoc = PlayerChar->GetActorLocation() + (PlayerChar->GetActorForwardVector() * 150.f) + FVector(0,0,50);
     			FRotator SpawnRot = FRotator::ZeroRotator;
-
-    			// 2. On cherche le composant sur le Controller (ou le Pawn selon où tu l'as mis)
-    			UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
 
     			// 3. Appel RPC via le composant
     			if (DebugComp)

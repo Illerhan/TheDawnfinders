@@ -28,4 +28,7 @@ public:
 
 	UFUNCTION(Server, Reliable, WithValidation)
 	void Server_SpawnDebugItem(UItemData* ItemData, FVector Location, FRotator Rotation);
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void Server_TravelToMap(const FString& MapName);
 };

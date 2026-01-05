@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float FallenSpeed = 100.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float CarrySpeed = 250.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float WalkRotationRate = 360.f;
 

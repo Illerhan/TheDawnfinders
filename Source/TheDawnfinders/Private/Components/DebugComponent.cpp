@@ -72,3 +72,29 @@ bool UDebugComponent::Server_SpawnDebugItem_Validate(UItemData* ItemData, FVecto
 	return true;
 }
 
+bool UDebugComponent::Server_TravelToMap_Validate(const FString& MapName)
+{
+	return true; // Tu peux ajouter des checks de sécurité ici
+}
+
+void UDebugComponent::Server_TravelToMap_Implementation(const FString& MapName)
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		// On s'assure que l'URL contient bien les options nécessaires
+		FString TravelURL = MapName;
+        
+		// Si c'est pour du multijoueur, on force souvent le mode Listen
+		if (!TravelURL.Contains("?listen"))
+		{
+			TravelURL += "?listen";
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("[SERVER] ServerTravel requested to: %s"), *TravelURL);
+
+		// bAbsolute = true pour reset complètement l'état du monde (nettoie la mémoire)
+		// bShouldSkipGameNotify = false par défaut
+		World->ServerTravel(TravelURL, true, false); 
+	}
+}
