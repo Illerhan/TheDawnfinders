@@ -7,7 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
 #include "Interfaces/IDamageable.h"
-#include "PlayerData.h"
+#include "DataAssets/PlayerData.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UInteractionComponent.h"
 #include "APlayerCharacter.generated.h"
@@ -30,13 +30,12 @@ public:
 	UFUNCTION()
 	void ApplyPlayerData();
 
-	UFUNCTION()
-	void OnRep_CurrentPlayerState();
-
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	bool IsReadyForRPCs() const;
 
+	UFUNCTION()
+	void OnRep_CurrentPlayerState();
 
 
 // Components + Constructor
@@ -78,9 +77,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USceneComponent* WeaponCollisionPosRef;
-	
 
-// === CURSE ===
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
+	class UDebugComponent* DebugComponent;
+
+
+	// === CURSE ===
 public :
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
@@ -111,6 +113,8 @@ public:
 
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
+	virtual void RequestStateChange_Implementation(EPlayerState NewState) override;
+
 	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
 
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) override;
@@ -129,7 +133,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
 	
-	UFUNCTION(Server, Reliable, WithValidation)
+	UFUNCTION(Server, Reliable)
 	void ServerManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
@@ -155,12 +159,6 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void ServerUseZiplineItem(UItemData* ZiplineItem);
-
-	UFUNCTION()
-	void OnTrapped();
-
-	UFUNCTION(Server, Reliable)
-	void Server_OnTrapped();
 
 	UFUNCTION(Server, Reliable)
 	void Server_SendPushInput(ALitter* Obj, FVector Input);
@@ -188,22 +186,10 @@ public :
 // === DEATH METHODS ===
 public:
 	UFUNCTION()
-	void OnDeath();
-
-	UFUNCTION(Server, Reliable)
-	void Server_OnDied();
-
-	UFUNCTION()
 	void OnRevive();
 
 	UFUNCTION(Server, Reliable)
 	void Server_OnRevive();
-
-	UFUNCTION()
-	void OnFallen();
-
-	UFUNCTION(Server, Reliable)
-	void Server_OnFallen();
 
 
 // === MONTAGE METHODS ===
@@ -230,19 +216,16 @@ public :
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
 
-// === THROW PREVIEW ===
+// === OTHERS ===
 protected:
+	UFUNCTION(Server, Unreliable)
+	void Server_PlaySound(FName SoundTag, float Range);
+
 	UFUNCTION()
 	void DisplayThrowPreview(FVector Position, float Range);
 
 	UFUNCTION()
 	void HideThrowPreview();
-
-
-// === OTHERS ===
-protected:
-	UFUNCTION(Server, Unreliable)
-	void Server_PlaySound(FName SoundTag, float Range);
 
 
 // === PUBLIC PROPERTIES ===
@@ -253,7 +236,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentPlayerState, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, ReplicatedUsing = OnRep_CurrentPlayerState)
 	EPlayerState CurrentState;
 
 	UPROPERTY(Replicated)
@@ -300,7 +283,4 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
-
-	
-
 };

@@ -136,8 +136,9 @@ void UInteractionComponent::StartInteract()
 
 	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
 	{
-		PlayerCharacter->OnTrapped();
+		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
 		IInteractible::Execute_StartQTE(Nearest);
+
 		InteractingQTEActor = Nearest;
 		bIsDoingQTE = true;
 	}

@@ -5,11 +5,11 @@
 
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Components/UHealthComponent.h"
-#include "Public/Actors/AItem.h"
 #include "Kismet/GameplayStatics.h"       // Pour trouver le PlayerPawn
 #include "Editor/EditorEngine.h"          // Pour accéder à GEditor
 #include "Public/Actors/Player/APlayerCharacter.h"
 #include "Private/GameFramework/SessionManagerSubsystem.h"
+#include "Components/DebugComponent.h"
 
 FDebugWindow::FDebugWindow()
 	: FSlateIMWindowBase(TEXT("Ma Fenêtre Debug"), FVector2f(400, 600), TEXT("MyDebug.Toggle"), TEXT("Ouvre ma fenêtre de debug"))
@@ -119,36 +119,21 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     		// Petit style : " > Sword"
     		if (SlateIM::Button(*FString::Printf(TEXT("   > %s"), *ItemName)))
     		{
-    			// --- C. Logique de Spawn (Identique à avant) ---
     			FVector SpawnLoc = PlayerChar->GetActorLocation() + (PlayerChar->GetActorForwardVector() * 150.f) + FVector(0,0,50);
-    			FRotator SpawnRot = FRotator::ZeroRotator; // Ou PlayerChar->GetActorRotation()
+    			FRotator SpawnRot = FRotator::ZeroRotator;
 
-    			FActorSpawnParameters SpawnInfo;
-    			SpawnInfo.Instigator = PlayerChar;
-    			SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+    			// 2. On cherche le composant sur le Controller (ou le Pawn selon où tu l'as mis)
+    			UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
 
-    			AItem* DroppedItem = GameWorld->SpawnActor<AItem>(
-					ItemData->ItemClass,
-					SpawnLoc,
-					SpawnRot,
-					SpawnInfo
-				);
-
-    			if (DroppedItem)
+    			// 3. Appel RPC via le composant
+    			if (DebugComp)
     			{
-    				DroppedItem->ItemData = ItemData;
-    				DroppedItem->Initialise(ItemData);
-
-    				if (DroppedItem->ItemMesh && ItemData->ItemMesh)
-    				{
-    					DroppedItem->ItemMesh->SetStaticMesh(ItemData->ItemMesh);
-    					DroppedItem->ItemMesh->SetSimulatePhysics(false);
-    					DroppedItem->ItemMesh->SetEnableGravity(false);
-    					DroppedItem->ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-    				}
-    				DroppedItem->bShouldLevitate = true;
-                    
-    				UE_LOG(LogTemp, Log, TEXT("Spawned: %s"), *ItemName);
+    				DebugComp->Server_SpawnDebugItem(ItemData, SpawnLoc, SpawnRot);
+    				UE_LOG(LogTemp, Log, TEXT("Ordre de spawn envoyé via DebugComponent"));
+    			}
+    			else
+    			{
+    				UE_LOG(LogTemp, Warning, TEXT("DebugComponent introuvable !"));
     			}
     		}
     	}
