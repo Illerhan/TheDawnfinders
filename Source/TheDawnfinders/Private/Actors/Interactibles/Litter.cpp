@@ -28,6 +28,7 @@ ALitter::ALitter()
 
 	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("Light"));
 	Light->LightRoot->SetupAttachment(RootComponent);
+	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComp"));
 	// ===== Carry points =====
 	
 	CarryPoints.SetNum(4);
