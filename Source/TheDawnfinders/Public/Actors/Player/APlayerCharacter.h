@@ -236,6 +236,9 @@ protected:
 	UFUNCTION()
 	void HideThrowPreview();
 
+	UFUNCTION(Server, Reliable)
+	void Server_EndCarryHeavyItem();
+
 
 // === PUBLIC PROPERTIES ===
 public :

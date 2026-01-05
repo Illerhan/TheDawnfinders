@@ -188,29 +188,6 @@ void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interac
     InteractionComponent->RemoveInteractible(Interactible);
 }
 
-void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
-{
-    CarriedItem = Cast<ACarriable>(Interactible);
-    SetCurrentPlayerState_Implementation(EPlayerState::Carrying);
-
-    SetPlayerSpeed(PlayerConfig->CarrySpeed);
-
-    FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, true);
-    Interactible->AttachToComponent(CarriablePosRef, AttachRules);
-}
-
-void AAPlayerCharacter::EndCarryHeavyItem_Implementation(AActor* Interactible)
-{
-    CarriedItem->StopCarry();
-
-    CarriedItem = nullptr;
-    SetCurrentPlayerState_Implementation(EPlayerState::None);
-
-    SetPlayerSpeed(PlayerConfig->WalkSpeed);
-
-    Interactible->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-}
-
 void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity)
 {
 }
@@ -638,6 +615,44 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
     BP_OnMontageNotifyBegin(NotifyName);
+}
+
+#pragma endregion
+
+
+#pragma region Carry
+
+// Always did server side
+void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
+{
+    CarriedItem = Cast<ACarriable>(Interactible);
+    SetCurrentPlayerState_Implementation(EPlayerState::Carrying);
+
+    SetPlayerSpeed(PlayerConfig->CarrySpeed);
+
+    FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, true);
+    Interactible->AttachToComponent(CarriablePosRef, AttachRules);
+}
+
+void AAPlayerCharacter::EndCarryHeavyItem_Implementation(AActor* Interactible)
+{
+    if (HasAuthority()) {
+        Server_EndCarryHeavyItem_Implementation();
+    }
+    else {
+        Server_EndCarryHeavyItem();
+    }
+}
+
+void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
+{
+    CarriedItem->StopCarry();
+    CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+    CarriedItem = nullptr;
+    SetCurrentPlayerState_Implementation(EPlayerState::None);
+
+    SetPlayerSpeed(PlayerConfig->WalkSpeed);
 }
 
 #pragma endregion
