@@ -25,10 +25,11 @@ ALitter::ALitter()
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	CapsuleCollider->SetGenerateOverlapEvents(true);
+	StaticMesh->SetupAttachment(RootComponent);
 
-	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("Light"));
-	Light->LightRoot->SetupAttachment(RootComponent);
-	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComp"));
+	Light = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("LightSource"));
+	Light->LightRoot->SetupAttachment(CollisionBox);
+	//InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("LitterInventoryComponent"));
 	// ===== Carry points =====
 	
 	CarryPoints.SetNum(4);

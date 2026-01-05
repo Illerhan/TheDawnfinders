@@ -45,9 +45,6 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_UpdateInputs(AAPlayerCharacter* Player, FVector Input);
 
-	UPROPERTY(BlueprintReadWrite, Blueprintable)
-	UInventoryComponent* InventoryComp;
-
 	FVector GetServerVelocity() const { return ServerVelocity; }
 
 protected:
