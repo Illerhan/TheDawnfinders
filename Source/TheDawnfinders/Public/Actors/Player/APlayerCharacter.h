@@ -83,7 +83,11 @@ public:
 	USceneComponent* CarriablePosRef;
 	
 
-// === CURSE ===
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
+	class UDebugComponent* DebugComponent;
+
+
+	// === CURSE ===
 public :
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
