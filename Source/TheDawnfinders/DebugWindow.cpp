@@ -28,6 +28,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GameWorld, 0);
 
 	AAPlayerCharacter* PlayerChar = Cast<AAPlayerCharacter>(PlayerPawn);
+	UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
 
 	if (!PlayerChar)
 		return;
@@ -63,7 +64,8 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
-		GameWorld->ServerTravel("L_Prototype?listen",true);
+		DebugComp->Server_TravelToMap("L_Prototype?listen");
+		//GameWorld->ServerTravel("L_Prototype?listen",true);
 	}
 
 	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);
@@ -123,7 +125,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     			FRotator SpawnRot = FRotator::ZeroRotator;
 
     			// 2. On cherche le composant sur le Controller (ou le Pawn selon où tu l'as mis)
-    			UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
+    			
 
     			// 3. Appel RPC via le composant
     			if (DebugComp)
