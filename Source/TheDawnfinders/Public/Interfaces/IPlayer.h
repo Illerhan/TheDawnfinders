@@ -10,7 +10,7 @@ enum class EPlayerState : uint8
 {
 	None UMETA(DisplayName = "None"),
 	Running UMETA(DisplayName = "Running"),
-	Crouching UMETA(DisplayName = "Crouching"),
+	Carrying UMETA(DisplayName = "Carrying"),
 	UsingEquipment UMETA(DisplayName = "Using Equipment"),
 	Blocking UMETA(DisplayName = "Blocking"),
 	Dodging UMETA(DisplayName = "Dodging"),
@@ -64,6 +64,12 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void RemoveInteractibleAtRange(AActor* Interactible);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void StartCarryHeavyItem(AActor* Interactible);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void EndCarryHeavyItem(AActor* Interactible);
 
 
 public :

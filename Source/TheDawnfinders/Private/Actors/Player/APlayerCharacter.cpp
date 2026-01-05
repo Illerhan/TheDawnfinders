@@ -2,6 +2,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 
 #include "Actors/Interactibles/Litter.h"
+#include "Actors/Interactibles/Carriable.h"
 #include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 
@@ -56,6 +57,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
     WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
+    CarriablePosRef = CreateDefaultSubobject<USceneComponent>(TEXT("CarriablePosRef"));
+    CarriablePosRef->SetupAttachment(GetMesh());
     
 
     // ---------- ROTATION PAR DÉFAUT ----------
@@ -126,9 +129,9 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         UpdatePushingMovement(DeltaTime);
     }
     else if (HasAuthority() && bIsCarrying && CurrentPushedObject)
-        {
-            UpdatePushingMovement(DeltaTime);
-        }
+    {
+        UpdatePushingMovement(DeltaTime);
+    }
 
     if (IsLocallyControlled() && CurrentPushedObject)
     {
@@ -184,6 +187,29 @@ void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactib
 void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible)
 {
     InteractionComponent->RemoveInteractible(Interactible);
+}
+
+void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
+{
+    CarriedItem = Cast<ACarriable>(Interactible);
+    SetCurrentPlayerState_Implementation(EPlayerState::Carrying);
+
+    SetPlayerSpeed(PlayerConfig->CarrySpeed);
+
+    FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, true);
+    Interactible->AttachToComponent(CarriablePosRef, AttachRules);
+}
+
+void AAPlayerCharacter::EndCarryHeavyItem_Implementation(AActor* Interactible)
+{
+    CarriedItem->StopCarry();
+
+    CarriedItem = nullptr;
+    SetCurrentPlayerState_Implementation(EPlayerState::None);
+
+    SetPlayerSpeed(PlayerConfig->WalkSpeed);
+
+    Interactible->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 }
 
 void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity)

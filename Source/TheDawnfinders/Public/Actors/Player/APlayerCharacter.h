@@ -13,6 +13,7 @@
 #include "APlayerCharacter.generated.h"
 
 class ALitter;
+class ACarriable;
 class UHealthComponent;
 class UStaminaComponent;
 class UItemComponent;
@@ -77,6 +78,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USceneComponent* WeaponCollisionPosRef;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USceneComponent* CarriablePosRef;
 	
 
 // === CURSE ===
@@ -95,6 +99,10 @@ public:
 	virtual void AddInteractibleAtRange_Implementation(AActor* Interactible) override;
 
 	virtual void RemoveInteractibleAtRange_Implementation(AActor* Interactible) override;
+
+	virtual void StartCarryHeavyItem_Implementation(AActor* Interactible) override;
+
+	virtual void EndCarryHeavyItem_Implementation(AActor* Interactible) override;
 
 	virtual void DoCameraShake_Implementation(float Intensity) override;
 
@@ -259,6 +267,9 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
+
+	UPROPERTY(BlueprintReadOnly)
+	ACarriable* CarriedItem;
 
 	UPROPERTY()
 	float DodgeTimer;

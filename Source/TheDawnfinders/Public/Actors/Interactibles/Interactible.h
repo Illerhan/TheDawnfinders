@@ -27,10 +27,6 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	
-	/**
-	 * Call this function when need to make a hold interactible.
-	 * @param DeltaTime  Tick DeltaTime 
-	 */
 	UFUNCTION(BlueprintCallable)
 	virtual void HoldTimer(float DeltaTime);
 
