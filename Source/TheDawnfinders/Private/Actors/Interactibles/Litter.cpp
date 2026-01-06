@@ -260,10 +260,8 @@ void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player)
 {
     if (!Player) return;
 
-    // 1. Find a free slot
+    // Trouve un slot libre
     int32 FreeSlot = -1;
-    // Simple heuristic: Try to find nearest slot, or just first available
-    // Here we just pick first available for simplicity
     for (int i = 0; i < 4; i++)
     {
         if (!CarrySlots[i].IsValid())
@@ -284,6 +282,9 @@ void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player)
 
         // Notify Player State
         Player->Server_SetPushingState(this, true);
+        
+        // On désactive le mouvement du CharacterMovement (WASD standard)
+        // Mais on garde la Capsule Collision active !
         Player->GetCharacterMovement()->DisableMovement();
     }
 }
@@ -296,6 +297,8 @@ void ALitter::Server_EndPushing_Implementation(AAPlayerCharacter* Player)
     ActivePushers.Remove(Player);
 
     Player->Server_SetPushingState(this, false);
+    
+    // On rend le contrôle standard au joueur
     Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 }
 
@@ -318,17 +321,13 @@ void ALitter::AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex)
 
     CarrySlots[SlotIndex] = Player;
 
-    // Snap player to the CarryPoint
+    // Attache le joueur au point de portage
+    // SnapToTargetNotIncludingScale garde la taille, mais force Pos/Rot
     Player->AttachToComponent(CarryPoints[SlotIndex], FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-    // Disable Player Collision so they don't push the litter physically via Capsule
-    if (UCapsuleComponent* Cap = Player->GetCapsuleComponent())
-    {
-        Cap->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-        Cap->SetCollisionResponseToAllChannels(ECR_Ignore);
-        // Keep visibility/camera checks if needed
-        Cap->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Overlap);
-    }
+    // CHANGEMENT : On NE touche PLUS aux collisions du joueur ici.
+    // Le joueur reste en "Pawn", collide avec le World, Static, Dynamic, etc.
+    // Il ne collide pas avec la Litter car le constructeur de la Litter ignore ECC_Pawn.
 }
 
 void ALitter::DetachPlayer(AAPlayerCharacter* Player)
@@ -345,12 +344,8 @@ void ALitter::DetachPlayer(AAPlayerCharacter* Player)
         }
     }
 
+    // Détache le joueur tout en gardant sa position actuelle dans le monde
     Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
-    // Restore Collision
-    if (UCapsuleComponent* Cap = Player->GetCapsuleComponent())
-    {
-        Cap->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-        Cap->SetCollisionProfileName(TEXT("Pawn"));
-    }
+    // CHANGEMENT : Pas besoin de restaurer les collisions car on ne les a jamais enlevées.
 }
