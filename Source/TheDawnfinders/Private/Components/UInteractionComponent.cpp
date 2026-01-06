@@ -277,8 +277,8 @@ void UInteractionComponent::CancelInteraction()
 
 void UInteractionComponent::StartCarryHeavyItem(ACarriable* Item)
 {
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::Carrying);
 	CarriedItem = Item;
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::Carrying);
 }
 
 void UInteractionComponent::PutInHeavyItem(AActor* Target)
@@ -288,18 +288,17 @@ void UInteractionComponent::PutInHeavyItem(AActor* Target)
 
 	CarriedItem->PutInTargetActor(Target);
 
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
 	CarriedItem = nullptr;
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
 }
 
 void UInteractionComponent::EndCarryHeavyItem()
 {
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
-
 	CarriedItem->StopCarry();
 	CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	CarriedItem = nullptr;
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
 }
 
 #pragma endregion
