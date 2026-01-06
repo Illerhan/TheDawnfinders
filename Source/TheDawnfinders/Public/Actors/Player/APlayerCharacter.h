@@ -275,9 +275,6 @@ protected :
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
 
-	UPROPERTY(BlueprintReadOnly)
-	ACarriable* CarriedItem;
-
 	UPROPERTY()
 	float DodgeTimer;
 

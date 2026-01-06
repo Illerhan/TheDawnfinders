@@ -1,6 +1,7 @@
 #include "Components/UInteractionComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Interactibles/Interactible.h"
+#include "Actors/Interactibles/Carriable.h"
 #include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -103,9 +104,15 @@ void UInteractionComponent::StartInteract()
 	if (!PlayerCharacter)
 		return;
 
+	// If the player is carrying an heavy object
+	if (CarriedItem != nullptr) {
+		AActor* Nearest = GetNearestInteractible();
+		PutInHeavyItem(Nearest);
+		return;
+	}
+
 	// We check if there is a player nearby to revive 
 	TArray<AAPlayerCharacter*> Fallen = GetNearbyPlayers(150.f, true);
-
 	if (Fallen.Num() > 0)
 	{
 		AAPlayerCharacter* AllyFound = Fallen[0];
@@ -120,20 +127,18 @@ void UInteractionComponent::StartInteract()
 	// If is doing QTE
 	if (InteractingQTEActor) 
 	{
-		if (!IInteractible::Execute_ValidateQTE(Nearest)) 
-		{
-			return;
-		}
-
+		if (!IInteractible::Execute_ValidateQTE(Nearest)) return;   // if QTE Isnt finished
+		
 		InteractingQTEActor = nullptr;
 		CurrentInteractible = Nearest;
-		PlayerCharacter->OnRevive();
+		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
 		TryInteract(Nearest, PlayerCharacter);
 		bIsDoingQTE = false;
 
 		return;
 	}
 
+	// Starts QTE if needed
 	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
 	{
 		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
@@ -142,7 +147,7 @@ void UInteractionComponent::StartInteract()
 		InteractingQTEActor = Nearest;
 		bIsDoingQTE = true;
 	}
-	else 
+	else  // No QTE 
 	{
 		CurrentInteractible = Nearest;
 		TryInteract(Nearest, PlayerCharacter);
@@ -264,6 +269,39 @@ void UInteractionComponent::CancelInteraction()
 		PlayerCharacter->OnRevive();
 	}
 }
+
+#pragma endregion
+
+
+#pragma region Carry
+
+void UInteractionComponent::StartCarryHeavyItem(ACarriable* Item)
+{
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::Carrying);
+	CarriedItem = Item;
+}
+
+void UInteractionComponent::PutInHeavyItem(AActor* Target)
+{
+	if (Target == nullptr) return;
+	if (!Target->IsA(CarriedItem->GetTargetActorType())) return;
+
+	CarriedItem->PutInTargetActor(Target);
+
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
+	CarriedItem = nullptr;
+}
+
+void UInteractionComponent::EndCarryHeavyItem()
+{
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
+
+	CarriedItem->StopCarry();
+	CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+	CarriedItem = nullptr;
+}
+
 #pragma endregion
 
 

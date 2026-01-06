@@ -20,7 +20,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-// === INTERCACTIBLES AT RANGE MANAGEMENT ===
+// === INTERACTIBLES AT RANGE MANAGEMENT ===
 public:
 	UFUNCTION()
 	void AddInteractible(AActor* Interactible);
@@ -56,6 +56,18 @@ public:
 	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 
+// === CARRY ===
+public : 
+	UFUNCTION(BlueprintCallable)
+	void StartCarryHeavyItem(ACarriable* Item);
+
+	UFUNCTION(BlueprintCallable)
+	void PutInHeavyItem(AActor* Target);
+
+	UFUNCTION(BlueprintCallable)
+	void EndCarryHeavyItem();
+
+
 // === REVIVE ===
 public:
 	UFUNCTION(Server, Reliable)
@@ -69,14 +81,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AAPlayerCharacter*> GetNearbyPlayers(float Radius, bool bOnlyDead) const;
-
-	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
-	bool bIsHelping = false;
-
-	float HelpDuration = 4.f;
-
-	UPROPERTY(ReplicatedUsing=OnRep_HelpState)
-	float HelpTimeRemaining = 0.f;
 	
 	UFUNCTION(Client, Reliable)
 	void Client_ShowHelpProgress(float Duration);
@@ -114,8 +118,20 @@ private:
 	AActor* InteractingQTEActor;
 
 	UPROPERTY()
+	ACarriable* CarriedItem;
+
+	UPROPERTY()
 	bool bIsDoingQTE;
 
 	UPROPERTY()
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
+
+	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
+	bool bIsHelping = false;
+
+	UPROPERTY()
+	float HelpDuration = 4.f;
+
+	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
+	float HelpTimeRemaining = 0.f;
 };
