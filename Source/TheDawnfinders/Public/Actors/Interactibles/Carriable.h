@@ -18,8 +18,17 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StopCarry();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PutInTargetActor(AActor* Actor);
+
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<AActor> GetTargetActorType();
+
 
 protected :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<AActor> TargetActor;
+
 	UPROPERTY()
 	bool bIsCarried;
 
