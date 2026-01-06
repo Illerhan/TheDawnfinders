@@ -217,11 +217,11 @@ void UItemComponent::UseConsumable()
 				{
 					if (!PlayerCharacter->HasAuthority())
 					{
-						Litter->Light->Server_RequestFuelUpdate(Amount);
+						//Litter->Light->Server_RequestFuelUpdate(Amount);
 					}
 					else
 					{
-						Litter->Light->FuelUpdate(Amount);
+						//Litter->Light->FuelUpdate(Amount);
 					}
 				}
 			}
