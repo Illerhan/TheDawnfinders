@@ -208,7 +208,6 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::Refile:
 			if (!PlayerCharacter) return;
-			if (!PlayerCharacter->LightComponent) return;
 			float Amount = EquippedItem.ItemData->ConsumableEffectPower;
 			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
@@ -217,11 +216,11 @@ void UItemComponent::UseConsumable()
 				{
 					if (!PlayerCharacter->HasAuthority())
 					{
-						Litter->Light->Server_RequestFuelUpdate(Amount);
+						//Litter->Light->Server_RequestFuelUpdate(Amount);
 					}
 					else
 					{
-						Litter->Light->FuelUpdate(Amount);
+						//Litter->Light->FuelUpdate(Amount);
 					}
 				}
 			}

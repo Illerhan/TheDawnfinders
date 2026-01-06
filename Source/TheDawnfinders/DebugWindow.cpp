@@ -8,7 +8,7 @@
 #include "Components/DebugComponent.h"
 
 FDebugWindow::FDebugWindow()
-	: FSlateIMWindowBase(TEXT("Ma Fenêtre Debug"), FVector2f(400, 600), TEXT("MyDebug.Toggle"), TEXT("Ouvre ma fenêtre de debug"))
+	: FSlateIMWindowBase(TEXT("God Window"), FVector2f(400, 600), TEXT("GodWindow.Toggle"), TEXT("Ouvre ma fenêtre de debug"))
 {
 	UE_LOG(LogTemp, Warning, TEXT("--- FDebugWindow CONSTRUCTOR CALLED ---"));
 }

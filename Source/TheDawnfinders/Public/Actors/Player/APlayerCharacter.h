@@ -260,7 +260,7 @@ public :
 	UPROPERTY(Replicated)
 	ALitter* CurrentPushedObject = nullptr;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
 
@@ -274,9 +274,6 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
-
-	UPROPERTY(BlueprintReadOnly)
-	ACarriable* CarriedItem;
 
 	UPROPERTY()
 	float DodgeTimer;
