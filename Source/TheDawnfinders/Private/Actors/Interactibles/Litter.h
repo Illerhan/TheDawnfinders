@@ -2,10 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Actors/Interactibles/Interactible.h"
-#include "Components/UPlayerLightComponent.h"
 #include "Components/BoxComponent.h"
-#include "Components/UInventoryComponent.h"
-#include "GameFramework/FloatingPawnMovement.h"
 #include "Litter.generated.h"
 
 class AAPlayerCharacter;
@@ -19,7 +16,7 @@ struct FPusherData
 	FVector InputVector = FVector::ZeroVector;
 
 	UPROPERTY()
-	float LastUdateTime = 0.f;
+	float LastUpdateTime = 0.f;
 };
 
 UCLASS()
@@ -28,76 +25,85 @@ class THEDAWNFINDERS_API ALitter : public AInteractibleObjects
 	GENERATED_BODY()
 
 public:
-	ALitter();
-	virtual void PostInitializeComponents() override;
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	virtual void Interact_Implementation(AActor* Interactor) override;
-	virtual void StopInteract_Implementation(AActor* Interactor) override;
-	virtual void Tick(float DeltaTime) override;
-
-	// Server RPCs
-	UFUNCTION(Server, Reliable)
-	void Server_StartPushing(AAPlayerCharacter* Player);
-
-	UFUNCTION(Server, Reliable)
-	void Server_EndPushing(AAPlayerCharacter* Player);
-
-	UFUNCTION(Server, Reliable)
-	void Server_UpdateInputs(AAPlayerCharacter* Player, FVector Input);
-
-	UPROPERTY(BlueprintReadWrite, Blueprintable)
-	UInventoryComponent* InventoryComp;
-
-	FVector GetServerVelocity() const { return ServerVelocity; }
+    ALitter();
 
 protected:
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaTime) override;
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	virtual void BeginPlay() override;
-	// Déplacement
-	UPROPERTY(Replicated)
-	FVector ServerVelocity = FVector::ZeroVector;
+    // --- COMPONENTS ---
+    // The invisible physics representation (Root)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
+    UBoxComponent* RootCollision;
 
-	UPROPERTY()
-	TMap<TWeakObjectPtr<AAPlayerCharacter>, FPusherData> ActivePushers;
+    // The visual mesh (Attached to Root, allows for rotation offset)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
+    UStaticMeshComponent* MeshComponent;
 
-	// Collision physique
-	UPROPERTY(EditAnywhere)
-	UBoxComponent* CollisionBox;
+    // The 4 slots where players attach
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
+    TArray<USceneComponent*> CarryPoints;
 
-	// Points d’attache pour les joueurs
-	UPROPERTY(VisibleAnywhere)
-	TArray<USceneComponent*> CarryPoints;
+    // --- PHYSICS CONFIGURATION ---
+    UPROPERTY(EditAnywhere, Category = "Litter Physics")
+    float Mass = 50.0f; // Simulate weight (kg)
 
-	// Slots occupés
-	UPROPERTY()
-	TArray<TWeakObjectPtr<AAPlayerCharacter>> CarrySlots;
+    UPROPERTY(EditAnywhere, Category = "Litter Physics")
+    float PushForce = 150000.0f; // Force applied by one player (Newtons * scale)
 
-	// Fonctions attach/detach
-	void AttachPlayer(AAPlayerCharacter* Player);
-	void DetachPlayer(AAPlayerCharacter* Player);
+    UPROPERTY(EditAnywhere, Category = "Litter Physics")
+    float LinearDamping = 0.8f; // "Friction" for movement (Higher = stops faster)
 
-	
+    UPROPERTY(EditAnywhere, Category = "Litter Physics")
+    float AngularDamping = 1.5f; // "Friction" for rotation (Higher = stops spinning faster)
+
+    UPROPERTY(EditAnywhere, Category = "Litter Physics")
+    float RotationalInertia = 50000.0f; // Resistance to turning (Higher = feels heavier to turn)
+
+    // --- STATE VARIABLES ---
+    // Replicated so clients can smooth out movement (Client-side prediction optional)
+    UPROPERTY(Replicated)
+    FVector CurrentLinearVelocity;
+
+    UPROPERTY(Replicated)
+    float CurrentAngularVelocityYaw;
+
+    // Server-side tracking of players
+    TMap<AAPlayerCharacter*, FPusherData> ActivePushers;
+    TArray<TWeakObjectPtr<AAPlayerCharacter>> CarrySlots; // Array of 4 slots
+
+    float InputTimeout = 0.5f; // Time before a player is considered "stopped" if no input received
+
+	// Force du freinage quand personne ne pousse (plus c'est haut, plus l'arrêt est sec)
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float BrakingDeceleration = 2000.0f; 
+
+	// Seuil de vitesse pour arrêt complet (pour éviter les micro-glissements)
+	float StopThreshold = 10.0f;
 
 public:
-	UPROPERTY(EditAnywhere)
-	float MaxSpeed = 1000.f;
+    // --- INTERACTION API ---
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+    void Interact(AActor* Interactor);
+    
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+    void StopInteract(AActor* Interactor);
 
-	UPROPERTY(EditAnywhere)
-	int32 MaxUsingPlayer = 4;
+    // --- NETWORKED INPUT ---
+    UFUNCTION(Server, Reliable)
+    void Server_StartPushing(AAPlayerCharacter* Player);
 
-	UPROPERTY(EditAnywhere)
-	float InputTimeout = 0.5f;
+    UFUNCTION(Server, Reliable)
+    void Server_EndPushing(AAPlayerCharacter* Player);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UPlayerLightComponent* Light;
+    // Unreliable is faster/better for continuous input updates
+    UFUNCTION(Server, Unreliable)
+    void Server_UpdateInputs(AAPlayerCharacter* Player, FVector WorldInputDirection);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxRange = 2000;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxFuel = 1500;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float FuelRate = 1.f;
-	
+private:
+    // --- INTERNAL LOGIC ---
+    void ResolvePhysics(float DeltaTime);
+    void AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex);
+    void DetachPlayer(AAPlayerCharacter* Player);
 };

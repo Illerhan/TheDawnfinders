@@ -260,7 +260,7 @@ public :
 	UPROPERTY(Replicated)
 	ALitter* CurrentPushedObject = nullptr;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
 

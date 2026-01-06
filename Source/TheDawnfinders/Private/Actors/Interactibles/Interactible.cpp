@@ -15,7 +15,7 @@ AInteractibleObjects::AInteractibleObjects()
 	
 	RootComponent = CreateDefaultSubobject<USceneComponent>(FName("Root"));
 
-	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("SphereCollider"));
+	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("CapsuleColliderComp"));
 	CapsuleCollider->SetupAttachment(RootComponent);
 	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
@@ -48,9 +48,11 @@ void AInteractibleObjects::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 void AInteractibleObjects::BeginPlay()
 {
 	Super::BeginPlay();
-
-	CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
-	CapsuleCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
+	if (CapsuleCollider)
+	{
+		CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
+		CapsuleCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
+	}
 
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());

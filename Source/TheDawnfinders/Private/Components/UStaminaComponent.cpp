@@ -127,6 +127,8 @@ void UStaminaComponent::ChangeLocalStamina()
 
 bool UStaminaComponent::VerifyHasStamina()
 {
+	if (CurrentStamina < MinReloadStamina && CurrentReloadDelay <= 0) return false;
+
 	return CurrentStamina > 0;
 }
 

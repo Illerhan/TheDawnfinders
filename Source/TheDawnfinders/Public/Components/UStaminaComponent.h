@@ -48,6 +48,9 @@ public :
 	UPROPERTY()
 	int CurrentOverloadCount = 0;
 
+	UPROPERTY(Blueprintable, BlueprintReadWrite)
+	float MinReloadStamina = 30.f;
+
 	UPROPERTY()
 	float CurrentStamina = 100.f;
 
