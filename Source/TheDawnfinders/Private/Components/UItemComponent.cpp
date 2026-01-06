@@ -208,7 +208,6 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::Refile:
 			if (!PlayerCharacter) return;
-			if (!PlayerCharacter->LightComponent) return;
 			float Amount = EquippedItem.ItemData->ConsumableEffectPower;
 			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
