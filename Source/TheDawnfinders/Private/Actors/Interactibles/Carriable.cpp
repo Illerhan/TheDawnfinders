@@ -20,3 +20,15 @@ void ACarriable::StopCarry()
 	CapsuleCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
+TSubclassOf<AActor> ACarriable::GetTargetActorType()
+{
+	return TargetActor;
+}
+
+void ACarriable::PutInTargetActor_Implementation(AActor* Actor)
+{
+
+
+	Destroy();
+}
+

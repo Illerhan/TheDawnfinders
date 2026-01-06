@@ -240,6 +240,14 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
 
     switch (CurrentState)
     {
+    case EPlayerState::None :
+        SetPlayerSpeed(PlayerConfig->WalkSpeed);
+        break;
+
+    case EPlayerState::Carrying:
+        SetPlayerSpeed(PlayerConfig->CarrySpeed);
+        break;
+
     case EPlayerState::Fallen :
         StopAutoLock();
         SetPlayerSpeed(PlayerConfig->FallenSpeed);
@@ -625,10 +633,7 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 // Always did server side
 void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
 {
-    CarriedItem = Cast<ACarriable>(Interactible);
-    SetCurrentPlayerState_Implementation(EPlayerState::Carrying);
-
-    SetPlayerSpeed(PlayerConfig->CarrySpeed);
+    InteractionComponent->StartCarryHeavyItem(Cast<ACarriable>(Interactible));
 
     FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, true);
     Interactible->AttachToComponent(CarriablePosRef, AttachRules);
@@ -646,13 +651,8 @@ void AAPlayerCharacter::EndCarryHeavyItem_Implementation(AActor* Interactible)
 
 void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
 {
-    CarriedItem->StopCarry();
-    CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+    InteractionComponent->EndCarryHeavyItem();
 
-    CarriedItem = nullptr;
-    SetCurrentPlayerState_Implementation(EPlayerState::None);
-
-    SetPlayerSpeed(PlayerConfig->WalkSpeed);
 }
 
 #pragma endregion
@@ -667,8 +667,7 @@ void AAPlayerCharacter::OnRevive()
         Server_OnRevive();
     }
 
-    CurrentState = EPlayerState::None;
-    SetPlayerSpeed(PlayerConfig->WalkSpeed);
+    SetCurrentPlayerState(EPlayerState::None);
     GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
 }
 
