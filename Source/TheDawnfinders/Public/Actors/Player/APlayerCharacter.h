@@ -71,6 +71,9 @@ public:
 	UStaticMeshComponent* WeaponMeshComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UPlayerLightComponent* LightComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UStaticMeshComponent* ThrowablePreviewMeshComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")

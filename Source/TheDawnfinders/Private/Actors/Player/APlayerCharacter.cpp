@@ -90,6 +90,8 @@ void AAPlayerCharacter::ApplyPlayerData()
     PlayerConfig->ReloadDelay,
     PlayerConfig->StaminaConsumptionRun,
     PlayerConfig->StaminaConsumptionDodge);
+
+    
     
 }
 
@@ -104,7 +106,10 @@ void AAPlayerCharacter::BeginPlay()
 
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
-
+    
+    LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
+    LightComponent->ProtectionZone->SetSphereRadius(0.f);
+    
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
 
