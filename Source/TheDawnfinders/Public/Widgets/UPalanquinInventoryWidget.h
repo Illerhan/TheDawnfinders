@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "CustomStructs.h"
 #include "UPalanquinInventoryWidget.generated.h"
 
 class UPalanquinInventorySlotWidget;
@@ -18,7 +19,13 @@ public :
 	void SetupSlots();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseSlots(const TArray<UItemData*>& InventoryItems);
+	void ActualiseSlots(const TArray<FInventorySlot>& InventorySlots, int32 CurrentSlotIndex);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ShowWidget();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void HideWidget();
 
 
 // === PARAMETERS ===
@@ -30,5 +37,5 @@ protected :
 // === PROTECTED PROPERTIES ===
 protected:
 	UPROPERTY(BlueprintReadWrite)
-	TArray<UPalanquinInventorySlotWidget*> InventorySlots;
+	TArray<UPalanquinInventorySlotWidget*> SlotsWidgets;
 };

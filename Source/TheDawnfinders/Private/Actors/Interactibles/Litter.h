@@ -3,7 +3,9 @@
 #include "CoreMinimal.h"
 #include "Actors/Interactibles/Interactible.h"
 #include "Components/BoxComponent.h"
+#include "Components/UInventoryComponent.h"
 #include "Litter.generated.h"
+
 
 class AAPlayerCharacter;
 
@@ -27,7 +29,7 @@ class THEDAWNFINDERS_API ALitter : public AInteractibleObjects
 public:
     ALitter();
 
-protected:
+public:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -37,6 +39,9 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UBoxComponent* RootCollision;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
+    UInventoryComponent* InventoryComponent;
+
     // The visual mesh (Attached to Root, allows for rotation offset)
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UStaticMeshComponent* MeshComponent;
@@ -45,6 +50,13 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     TArray<USceneComponent*> CarryPoints;
 
+	// Vérifie si un joueur va toucher quelque chose avec le mouvement prévu
+	UFUNCTION()
+	bool CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit);
+private:
+	// Pousse le brancard si un joueur est coincé
+	void ResolveWallPenetration(float DeltaTime);
+protected:
     // --- PHYSICS CONFIGURATION ---
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
     float Mass = 50.0f; // Simulate weight (kg)

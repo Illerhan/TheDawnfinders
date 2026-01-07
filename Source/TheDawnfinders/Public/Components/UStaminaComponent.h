@@ -33,7 +33,7 @@ public :
 	void ChangeLocalStamina();
 
 
-// === OTHERS
+// === OTHERS ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void InitialiseComponent(float MaxStamina, float ReloadSpd, float ReloadDl, float StaminaConsumptionR, float StaminaConsumptionD);
@@ -45,6 +45,8 @@ public :
 	void ActualiseCurrentOverloadCount(int NewCount);
 
 	
+// === PROTECTED PROPERTIES ===
+protected : 
 	UPROPERTY()
 	int CurrentOverloadCount = 0;
 

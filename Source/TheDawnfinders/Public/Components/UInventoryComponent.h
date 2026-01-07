@@ -144,7 +144,8 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;
 	
-// == OTHER RESSOURCES
+
+// === OTHER RESSOURCES ===
 
 	UPROPERTY(ReplicatedUsing = OnRep_Gold, EditAnywhere,BlueprintReadWrite, Category = "Inventory Ressources")
 	int Gold;
@@ -163,6 +164,8 @@ public :
 
 	UFUNCTION()
 	void OnRep_Knowledge();
+
+
 // === PRIVATE PROPERTIES === 
 private :
 	UPROPERTY()
