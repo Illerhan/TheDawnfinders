@@ -9,4 +9,11 @@ UCLASS()
 class THEDAWNFINDERS_API UMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public :
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OpenPalanquinInventory();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ClosePalanquinInventory();
 };

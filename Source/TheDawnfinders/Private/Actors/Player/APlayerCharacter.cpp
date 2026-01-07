@@ -86,29 +86,26 @@ void AAPlayerCharacter::ApplyPlayerData()
         );
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
-    PlayerConfig->ReloadSpeed,
-    PlayerConfig->ReloadDelay,
-    PlayerConfig->StaminaConsumptionRun,
-    PlayerConfig->StaminaConsumptionDodge);
-
-    
-    
+        PlayerConfig->ReloadSpeed,
+        PlayerConfig->ReloadDelay,
+        PlayerConfig->StaminaConsumptionRun,
+        PlayerConfig->StaminaConsumptionDodge);
 }
 
 void AAPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
+
     if (PlayerConfig)
-    ApplyPlayerData();
+        ApplyPlayerData();
 
     ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
-
 
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
-    LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
-    LightComponent->ProtectionZone->SetSphereRadius(0.f);
+    //LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
+    //LightComponent->ProtectionZone->SetSphereRadius(0.f);
     
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
@@ -480,6 +477,7 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
     AddMovementInput(FinalVector, 1.0f, false);
 }
 #pragma endregion
+
 
 // ... (Rest of Montages, Carry, and Others regions remain identical) ...
 #pragma region Montages
