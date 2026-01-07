@@ -57,10 +57,10 @@ public :
 // ==== PLAYER ACTIONS ====
 public :
 	UFUNCTION(BlueprintCallable,Category="Inventory")
-	bool AddNewItem(UItemData* NewItem);
+	bool AddNewItem(UItemData* NewItem, int Quantity = 1);
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
-	void ServerAddNewItem(UItemData* NewItem);
+	void ServerAddNewItem(UItemData* NewItem, int Quantity = 1);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool HasRoomForItem(UItemData* NewItem);
@@ -70,6 +70,12 @@ public :
 
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
 	void ServerRemoveCurrentItem();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void RemoveItemAtIndex(int Index, bool bRemoveAll);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
+	void ServerRemoveItemAtIndex(int Index, bool bRemoveAll);
 
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void Throw();
