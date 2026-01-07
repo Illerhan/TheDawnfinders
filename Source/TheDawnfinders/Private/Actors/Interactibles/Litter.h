@@ -50,8 +50,13 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     TArray<USceneComponent*> CarryPoints;
 
-
-
+	// Vérifie si un joueur va toucher quelque chose avec le mouvement prévu
+	UFUNCTION()
+	bool CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit);
+private:
+	// Pousse le brancard si un joueur est coincé
+	void ResolveWallPenetration(float DeltaTime);
+protected:
     // --- PHYSICS CONFIGURATION ---
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
     float Mass = 50.0f; // Simulate weight (kg)
