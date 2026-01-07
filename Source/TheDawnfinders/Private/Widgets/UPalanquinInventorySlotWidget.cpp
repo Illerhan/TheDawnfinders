@@ -2,7 +2,7 @@
 #include "DataAssets/ItemData.h"
 
 
-void UPalanquinInventorySlotWidget::ActualiseSlot_Implementation(UItemData* ItemData)
+void UPalanquinInventorySlotWidget::ActualiseSlot_Implementation(FInventorySlot ItemData)
 {
 	CurrentData = ItemData;
 }

@@ -87,13 +87,13 @@ public:
 	class UDebugComponent* DebugComponent;
 
 
-	// === CURSE ===
+// === CURSE ===
 public :
 	UFUNCTION(BlueprintCallable)
 	bool IsProtectedFromCurse() const;
 	
 
-// === HEALTH ===
+// === HEALTH INTERFACE ===
 public:
 	virtual void ReceiveDamage_Implementation(float quantity, AActor* Origin) override;
 

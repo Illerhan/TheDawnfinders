@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "CustomStructs.h"
 #include "UPalanquinInventorySlotWidget.generated.h"
 
 class UItemData;
@@ -13,9 +14,9 @@ class THEDAWNFINDERS_API UPalanquinInventorySlotWidget : public UUserWidget
 	
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseSlot(UItemData* ItemData);
+	void ActualiseSlot(FInventorySlot ItemData);
 
 protected :
 	UPROPERTY(BlueprintReadWrite)
-	UItemData* CurrentData;
+	FInventorySlot CurrentData;
 };

@@ -162,9 +162,17 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
 
 #pragma region Interface Functions
-// ... (Keep existing Interface Functions as they were) ...
-void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible) { InteractionComponent->AddInteractible(Interactible); }
-void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible) { InteractionComponent->RemoveInteractible(Interactible); }
+
+void AAPlayerCharacter::AddInteractibleAtRange_Implementation(AActor* Interactible) 
+{ 
+    InteractionComponent->AddInteractible(Interactible); 
+}
+
+void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interactible) 
+{ 
+    InteractionComponent->RemoveInteractible(Interactible); 
+}
+
 void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity) {}
 void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration) {}
 
@@ -184,9 +192,20 @@ void AAPlayerCharacter::HideProgress_Implementation()
     ProgressBarWidget->Hide();
 }
 
-void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh) { WeaponMeshComponent->SetStaticMesh(NewMesh); }
-UItemData* AAPlayerCharacter::GetEquippedItem_Implementation() { return ItemComponent->GetEquippedItem(); }
-EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation() { return CurrentState; }
+void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh) 
+{
+    WeaponMeshComponent->SetStaticMesh(NewMesh); 
+}
+
+UItemData* AAPlayerCharacter::GetEquippedItem_Implementation()
+{ 
+    return ItemComponent->GetEquippedItem();
+}
+
+EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation() 
+{ 
+    return CurrentState;
+}
 
 void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
 {
@@ -224,9 +243,20 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     }
 }
 
-void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) { PlayMontage(AttackMontage, Speed); }
-void AAPlayerCharacter::AddProtectionZone_Implementation() { HealthComponent->AddProtectionZone(); }
-void AAPlayerCharacter::RemoveProtectionZone_Implementation() { HealthComponent->RemoveProtectionZone(); }
+void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) 
+{
+    PlayMontage(AttackMontage, Speed);
+}
+
+void AAPlayerCharacter::AddProtectionZone_Implementation() 
+{
+    HealthComponent->AddProtectionZone(); 
+}
+
+void AAPlayerCharacter::RemoveProtectionZone_Implementation()
+{ 
+    HealthComponent->RemoveProtectionZone(); 
+}
 
 float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
 {

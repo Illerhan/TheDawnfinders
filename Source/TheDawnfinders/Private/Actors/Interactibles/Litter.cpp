@@ -25,6 +25,8 @@ ALitter::ALitter()
     MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
     MeshComponent->SetupAttachment(RootComponent);
     MeshComponent->SetCollisionProfileName(TEXT("NoCollision")); // Visual only
+
+    InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
     
     // *** FIX: Rotate mesh -90 degrees if it faces the wrong way ***
     MeshComponent->SetRelativeRotation(FRotator(0.f, -90.f, 0.f)); 

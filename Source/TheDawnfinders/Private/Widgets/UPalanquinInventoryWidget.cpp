@@ -8,15 +8,25 @@ void UPalanquinInventoryWidget::SetupSlots_Implementation()
 
 }
 
-void UPalanquinInventoryWidget::ActualiseSlots_Implementation(const TArray<UItemData*>& InventoryItems)
+void UPalanquinInventoryWidget::ActualiseSlots_Implementation(const TArray<FInventorySlot>& InventorySlots, int32 CurrentSlotIndex)
 {
-	for (int i = 0; i < InventorySlots.Num(); i++) {
+	for (int i = 0; i < SlotsWidgets.Num(); i++) {
 
-		if (i >= InventoryItems.Num()) {
-			InventorySlots[i]->ActualiseSlot(nullptr);
+		if (i >= InventorySlots.Num()) {
+			SlotsWidgets[i]->ActualiseSlot(FInventorySlot());
 			continue;
 		}
 
-		InventorySlots[i]->ActualiseSlot(InventoryItems[i]);
+		SlotsWidgets[i]->ActualiseSlot(InventorySlots[i]);
 	}
+}
+
+void UPalanquinInventoryWidget::ShowWidget_Implementation()
+{
+
+}
+
+void UPalanquinInventoryWidget::HideWidget_Implementation()
+{
+
 }
