@@ -204,6 +204,18 @@ void ABaseEnemy::DoHitEffect_Implementation()
 void ABaseEnemy::FadeIn_Implementation()
 {
     IsDisplayed = true;
+
+    if (IsHallucinated) 
+    {
+        DispelledHallucination = true;
+
+        GetWorld()->GetTimerManager().SetTimer(
+            HallucinationDeathTimer,
+            this,
+            &ABaseEnemy::Die,
+            1.0f,
+            false);
+    }
 }
 
 void ABaseEnemy::FadeOut_Implementation()
@@ -213,5 +225,7 @@ void ABaseEnemy::FadeOut_Implementation()
 
 bool ABaseEnemy::GetIsDisplayed_Implementation()
 {
+    if (IsHallucinated && DispelledHallucination) return true;
+
     return IsDisplayed;
 }

@@ -47,6 +47,12 @@ public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USceneComponent* AttackCollisionPosRef;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool IsHallucinated;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool DispelledHallucination;
+
 	UFUNCTION(BlueprintCallable)
 	void DoAttack(FEnemyActionData AttackData);
 
@@ -128,4 +134,6 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;
+
+	FTimerHandle HallucinationDeathTimer;
 };
