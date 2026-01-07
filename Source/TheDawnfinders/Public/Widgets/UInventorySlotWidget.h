@@ -8,6 +8,7 @@
 #include "UInventorySlotWidget.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHoverWidget, int32, SlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnClickWidget, int32, SlotIndex);
 
 UCLASS()
 class THEDAWNFINDERS_API UInventorySlotWidget : public UUserWidget
@@ -36,6 +37,9 @@ public :
 	void PlayAppearAnimation(float Delay);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayPalanquinAppearAnimation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayDisappearAnimation(float Delay);
 
 
@@ -44,14 +48,23 @@ protected :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnHoverWidget OnHoverWidget;
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnClickWidget OnClickWidget;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* IconImage;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UCanvasPanel* CanvasPanel;
 
+	UPROPERTY(BlueprintReadOnly)
+	FInventorySlot CurrentData;
+
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsSlotSelected = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsInPalanquin = false;
 
 	UPROPERTY(BlueprintReadWrite)
 	int SlotIndex;

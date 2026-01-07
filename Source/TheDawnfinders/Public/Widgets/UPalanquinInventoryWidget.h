@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "CustomStructs.h"
+#include "Components/UInventoryComponent.h"
 #include "UPalanquinInventoryWidget.generated.h"
 
 class UPalanquinInventorySlotWidget;
@@ -38,4 +39,10 @@ protected :
 protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<UPalanquinInventorySlotWidget*> SlotsWidgets;
+
+	UPROPERTY(BlueprintReadWrite)
+	UInventoryComponent* PalanquinInventory;
+
+	UPROPERTY(BlueprintReadWrite)
+	UInventoryComponent* OtherInventory;
 };
