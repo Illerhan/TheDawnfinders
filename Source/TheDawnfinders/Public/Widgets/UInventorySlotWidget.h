@@ -42,6 +42,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayDisappearAnimation(float Delay);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetupNavigation(UWidget* TowardWidget);
+
 
 // === PROTECTED PROPERTIES ===
 protected :

@@ -19,7 +19,7 @@ public :
 	virtual void NativeDestruct() override;
 
 
-// === MAIN PROPERTIES ===
+// === MAIN FUNCTIONS ===
 public :
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	void ActualiseWidget(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
@@ -35,6 +35,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void TryBindToInventory();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetupSlotsNavigation();
 
 
 // === PROTECTED PROPERTIES ===
