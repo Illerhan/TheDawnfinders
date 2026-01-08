@@ -272,6 +272,11 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
     else Server_PlaySound(SoundTag, Range);
 }
 
+void AAPlayerCharacter::Server_AskOwnershipPermission_Implementation(AActor* Target, AController* Origin)
+{
+    Target->SetOwner(Origin);
+}
+
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
 {
     if (!GetController()) return;

@@ -135,6 +135,9 @@ public:
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
 	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range) override;
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Others")
+	void Server_AskOwnershipPermission(AActor* Target, AController* Origin);
 	
 
 // === MOVEMENT METHODS ===
