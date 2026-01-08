@@ -18,4 +18,6 @@ class THEDAWNFINDERS_API UDebugSubsyteme : public UGameInstanceSubsystem
 	TSharedPtr<FDebugWindow> DebugWindow;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	
+	virtual void Deinitialize() override;
 };
