@@ -13,11 +13,11 @@ void UPalanquinInventoryWidget::ActualiseSlots_Implementation(const TArray<FInve
 	for (int i = 0; i < SlotsWidgets.Num(); i++) {
 
 		if (i >= InventorySlots.Num()) {
-			SlotsWidgets[i]->ActualiseSlot(FInventorySlot());
+			SlotsWidgets[i]->ActualiseSlot(FInventorySlot(), i);
 			continue;
 		}
 
-		SlotsWidgets[i]->ActualiseSlot(InventorySlots[i]);
+		SlotsWidgets[i]->ActualiseSlot(InventorySlots[i], i);
 	}
 }
 

@@ -7,16 +7,26 @@
 
 class UItemData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlotClicked, int, SlotIndex);
+
 UCLASS()
 class THEDAWNFINDERS_API UPalanquinInventorySlotWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseSlot(FInventorySlot ItemData);
+	void ActualiseSlot(FInventorySlot ItemData, int Index);
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnSlotClicked OnSlotClicked;
+
 
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	FInventorySlot CurrentData;
+
+	UPROPERTY(BlueprintReadWrite)
+	int SlotIndex;
 };

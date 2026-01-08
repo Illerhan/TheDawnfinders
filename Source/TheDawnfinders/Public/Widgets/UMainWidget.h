@@ -16,4 +16,12 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ClosePalanquinInventory();
+
+	UFUNCTION(BlueprintCallable)
+	bool GetIsInPalanquin();
+
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsInPalanquin;
 };

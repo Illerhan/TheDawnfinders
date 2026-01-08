@@ -56,7 +56,7 @@ void UInventoryComponent::OnRep_CurrentSlotIndex()
 
 #pragma region Add / Remove Item
 
-bool UInventoryComponent::AddNewItem(UItemData* NewItem)
+bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
 {
 	if (NewItem->ItemType == EItemType::Currency)
 	{
@@ -73,22 +73,24 @@ bool UInventoryComponent::AddNewItem(UItemData* NewItem)
 
 	if (!GetOwner()->HasAuthority())
 	{
-		ServerAddNewItem(NewItem);
+		ServerAddNewItem(NewItem, Quantity);
 		return true;
 	}
 
-	ServerAddNewItem_Implementation(NewItem);
+	ServerAddNewItem_Implementation(NewItem, Quantity);
 	return true;
 }
 
 
-void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
+void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, int Quantity)
 {
 	if (!NewItem)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AddNewItem: NewItem is null"));
 		return;
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("AddNewItem"));
 
 	for (int32 i = 0; i < InventorySlots.Num(); i++)
 	{
@@ -97,13 +99,15 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem)
 		if (!Slot.ItemData)
 		{
 			Slot.ItemData = NewItem;
-			Slot.Quantity = 1;
+			Slot.Quantity = Quantity;
+
+			UE_LOG(LogTemp, Warning, TEXT("Found"));
 
 			break;
 		}
 		else if (Slot.ItemData == NewItem && Slot.Quantity < NewItem->MaxStackingCapacity)
 		{
-			Slot.Quantity++;
+			Slot.Quantity += Quantity;
 
 			break;
 		}
@@ -144,13 +148,42 @@ void UInventoryComponent::RemoveCurrentItem()
 	ServerRemoveCurrentItem_Implementation();
 }
 
-
 void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 {
 	TArray<FInventorySlot> NewSlots = InventorySlots;;
 
 	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
 	CurrentSlot.Quantity--;
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
+
+	InventorySlots = NewSlots;
+
+	SortInventory();
+	VerifyCurrentOverloadCount();
+}
+
+
+void UInventoryComponent::RemoveItemAtIndex(int Index, bool bRemoveAll)
+{
+	if (!GetOwner()->HasAuthority())
+	{
+		ServerRemoveItemAtIndex(Index, bRemoveAll);
+		return;
+	}
+
+	ServerRemoveItemAtIndex_Implementation(Index, bRemoveAll);
+}
+
+void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool bRemoveAll)
+{
+	TArray<FInventorySlot> NewSlots = InventorySlots;
+
+	FInventorySlot& CurrentSlot = NewSlots[Index];
+	if (bRemoveAll)
+		CurrentSlot.Quantity = 0;
+	else
+		CurrentSlot.Quantity--;
+
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
 
 	InventorySlots = NewSlots;
@@ -429,14 +462,14 @@ void UInventoryComponent::ServerConsumeItemDirectly_Implementation(UItemData* It
     
 	switch (Item->ItemType)
 	{
-	case EItemType::Currency:
-		// Ajouter l'or directement
-		Gold += Item->ItemValue;
-		OnRep_Gold();
-		break;
+		case EItemType::Currency:
+			// Ajouter l'or directement
+			Gold += Item->ItemValue;
+			OnRep_Gold();
+			break;
 	
-	default:
-		break;
+		default:
+			break;
 	}
 }
 

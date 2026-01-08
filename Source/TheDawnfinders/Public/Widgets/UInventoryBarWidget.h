@@ -28,6 +28,9 @@ public :
 	void ShowWidget();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowWidgetFromPalanquin();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideWidget();
 
 	UFUNCTION(BlueprintCallable)
@@ -36,11 +39,17 @@ public :
 
 // === PROTECTED PROPERTIES ===
 protected :
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	UInventoryComponent* InventoryComponentRef;
 
 	UPROPERTY(BlueprintReadWrite)
+	UInventoryComponent* PalanquinInventoryComponent;
+
+	UPROPERTY(BlueprintReadWrite)
 	TArray<UInventorySlotWidget*> InventorySlotsWidgets;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsInPalanquin;
 
 	FTimerHandle BindDelayTimerHandle;
 };

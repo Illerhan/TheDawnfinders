@@ -2,7 +2,8 @@
 #include "DataAssets/ItemData.h"
 
 
-void UPalanquinInventorySlotWidget::ActualiseSlot_Implementation(FInventorySlot ItemData)
+void UPalanquinInventorySlotWidget::ActualiseSlot_Implementation(FInventorySlot ItemData, int Index)
 {
 	CurrentData = ItemData;
+	SlotIndex = Index;
 }
