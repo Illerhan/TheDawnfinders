@@ -46,6 +46,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
     InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("AC_Interaction"));
+    LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_LightComponent"));
+    
     ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
@@ -57,6 +59,27 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
     CarriablePosRef = CreateDefaultSubobject<USceneComponent>(TEXT("CarriablePosRef"));
     CarriablePosRef->SetupAttachment(GetMesh());
+
+    PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
+    PointLight->SetupAttachment(RootComponent);
+
+    ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
+    ProtectionZone->SetGenerateOverlapEvents(true);
+    ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
+    ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
+    ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+    ProtectionZone->SetHiddenInGame(true);
+    ProtectionZone->SetupAttachment(RootComponent);
+
+    FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
+    FogOfWarLightOn->SetupAttachment(RootComponent);
+
+    FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
+    FogOfWarLightOff->SetupAttachment(RootComponent);
+
+    LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
+    LightMesh->SetupAttachment(RootComponent);
     
 
     // ---------- ROTATION PAR DÉFAUT ----------
@@ -90,6 +113,8 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->ReloadDelay,
         PlayerConfig->StaminaConsumptionRun,
         PlayerConfig->StaminaConsumptionDodge);
+
+    LightComponent->InitialiseComponent(PlayerConfig->FuelConsumption,PlayerConfig->MaxFuel);
 }
 
 void AAPlayerCharacter::BeginPlay()
@@ -104,8 +129,8 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
-    //LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
-    //LightComponent->ProtectionZone->SetSphereRadius(0.f);
+    ProtectionZone->SetGenerateOverlapEvents(false);
+    ProtectionZone->SetSphereRadius(0.f);
     
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }

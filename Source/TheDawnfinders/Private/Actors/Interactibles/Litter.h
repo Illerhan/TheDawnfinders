@@ -4,9 +4,12 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "Components/BoxComponent.h"
 #include "Components/UInventoryComponent.h"
+#include "Components/UPlayerLightComponent.h"
 #include "Litter.generated.h"
 
 
+class USphereComponent;
+class UPointLightComponent;
 class AAPlayerCharacter;
 
 USTRUCT()
@@ -42,6 +45,9 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UInventoryComponent* InventoryComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
+	UPlayerLightComponent* LightComponent;
+
     // The visual mesh (Attached to Root, allows for rotation offset)
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UStaticMeshComponent* MeshComponent;
@@ -49,6 +55,21 @@ public:
     // The 4 slots where players attach
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     TArray<USceneComponent*> CarryPoints;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	UStaticMeshComponent* LightMesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	UPointLightComponent* PointLight;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* ProtectionZone;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOn;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOff;
 
 	// Vérifie si un joueur va toucher quelque chose avec le mouvement prévu
 	UFUNCTION()
