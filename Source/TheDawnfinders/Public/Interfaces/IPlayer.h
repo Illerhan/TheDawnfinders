@@ -97,4 +97,9 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Protection")
 	void RemoveProtectionZone();
+
+
+public :
+	UFUNCTION(Server, Reliable, Category = "Others")
+	virtual void Server_AskOwnershipPermission(AActor* Target, AController* Origin) = 0;
 };

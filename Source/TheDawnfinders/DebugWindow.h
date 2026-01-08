@@ -12,6 +12,7 @@ public:
 	FDebugWindow();
 protected:
 	virtual void DrawWindow(float DeltaTime) override;
+
 private:
 
 };

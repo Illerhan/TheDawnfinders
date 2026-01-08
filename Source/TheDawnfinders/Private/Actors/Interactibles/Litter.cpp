@@ -19,7 +19,28 @@ ALitter::ALitter()
     RootCollision->SetBoxExtent(FVector(80.f, 120.f, 50.f)); // Adjust to palanquin size
     RootCollision->SetCollisionProfileName(TEXT("BlockAllDynamic")); 
     // Ensure it blocks world/physics but doesn't get stuck on pawns easily
-    RootCollision->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore); 
+    RootCollision->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+
+    PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
+    PointLight->SetupAttachment(RootComponent);
+
+    ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
+    ProtectionZone->SetGenerateOverlapEvents(true);
+    ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
+    ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
+    ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+    ProtectionZone->SetHiddenInGame(true);
+    ProtectionZone->SetupAttachment(RootComponent);
+
+    FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
+    FogOfWarLightOn->SetupAttachment(RootComponent);
+
+    FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
+    FogOfWarLightOff->SetupAttachment(RootComponent);
+
+    LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
+    LightMesh->SetupAttachment(RootComponent);
 
     // 2. Visual Mesh
     MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
@@ -27,6 +48,8 @@ ALitter::ALitter()
     MeshComponent->SetCollisionProfileName(TEXT("NoCollision")); // Visual only
 
     InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
+
+    LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_LightComponent"));
     
     // *** FIX: Rotate mesh -90 degrees if it faces the wrong way ***
     MeshComponent->SetRelativeRotation(FRotator(0.f, -90.f, 0.f)); 

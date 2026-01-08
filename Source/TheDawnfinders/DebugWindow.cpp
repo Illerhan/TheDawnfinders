@@ -16,26 +16,43 @@ FDebugWindow::FDebugWindow()
 void FDebugWindow::DrawWindow(float DeltaTime)
 {
 	UWorld* GameWorld = nullptr;
-	GameWorld = GWorld ? GWorld->GetWorld() : nullptr;
-	#if WITH_EDITOR
-		// Si on est dans l'éditeur
-		if (GEditor) GameWorld = GEditor->PlayWorld;
-	#endif
-	
-	if (!GameWorld)
+    
+	// --- Sécurité améliorée pour récupérer le monde ---
+#if WITH_EDITOR
+	if (GEditor && GEditor->PlayWorld) 
 	{
-		SlateIM::Text(TEXT("Le jeu n'est pas lancé. En attente..."), FLinearColor::Gray);
+		GameWorld = GEditor->PlayWorld;
+	}
+#endif
+	// Fallback si on n'est pas dans l'éditeur
+	if (!GameWorld && GWorld)
+	{
+		GameWorld = GWorld->GetWorld();
+	}
+
+	// 1. Si le monde n'existe pas ou est en train d'être détruit (IsTearingDown), on arrête TOUT de suite.
+	if (!GameWorld || GameWorld->bIsTearingDown)
+	{
+		SlateIM::Text(TEXT("En attente du jeu..."), FLinearColor::Gray);
 		return;
 	}
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GameWorld, 0);
-
+	if (!IsValid(PlayerPawn)) 
+	{
+		return;
+	}
 	AAPlayerCharacter* PlayerChar = Cast<AAPlayerCharacter>(PlayerPawn);
-	UDebugComponent* DebugComp = PlayerChar ? PlayerChar->FindComponentByClass<UDebugComponent>() : nullptr;
-
-	if (!PlayerChar)
+	if (!PlayerChar || !IsValid(PlayerChar)) 
 		return;
 	UGameInstance* GameIntance = GameWorld->GetGameInstance();
-	USessionManagerSubsystem* SessionManager = GameIntance->GetSubsystem<USessionManagerSubsystem>();;
+	if (!GameIntance) return; // CRUCIAL : Le GameInstance peut être null lors de l'arrêt
+
+	USessionManagerSubsystem* SessionManager = GameIntance->GetSubsystem<USessionManagerSubsystem>();
+	// SessionManager peut aussi être null si le subsystem a déjà été shut down
+    
+	UDebugComponent* DebugComp = PlayerChar->FindComponentByClass<UDebugComponent>();
+
+	// --- Début du Dessin ---
 	SlateIM::BeginVerticalStack();
 	FString HealthText = FString::Printf(
 		TEXT("Health : %.1f/%.1f"),
