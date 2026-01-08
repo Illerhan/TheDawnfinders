@@ -8,21 +8,19 @@ void UDebugSubsyteme::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 	UE_LOG(LogTemp, Warning, TEXT("--- DebugSubsyteme Initialized ---"));
-	if (!DebugWindow.IsValid())
+	static TSharedPtr<FDebugWindow> GDebugWindow;
+
+	if (!GDebugWindow.IsValid())
 	{
-		DebugWindow = MakeShareable(new FDebugWindow());
+		GDebugWindow = MakeShared<FDebugWindow>();
 	}
+
+	DebugWindow = GDebugWindow;
 	
 }
 void UDebugSubsyteme::Deinitialize()
 {
-	// C'est ici qu'on évite le crash. On détruit la fenêtre AVANT que le monde ne disparaisse.
-	if (DebugWindow.IsValid())
-	{
-		// Si ta classe FDebugWindow a une méthode genre .Close() ou .Destroy(), appelle-la ici.
-		// Sinon, le simple fait de reset le pointeur devrait suffire si le SlateIMWindowBase est bien fait.
-		DebugWindow.Reset(); 
-	}
+
 
 	Super::Deinitialize();
 }

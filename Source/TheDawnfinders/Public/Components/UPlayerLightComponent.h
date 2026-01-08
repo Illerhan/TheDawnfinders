@@ -44,7 +44,7 @@ public :
 	UFUNCTION()
 	void OnRep_LightOn();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void FuelUpdate(float NewFuel);
 
 	UFUNCTION()
@@ -83,29 +83,7 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Collision")
 	void OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-
-// === COMPONENTS ===
-public :
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	UStaticMeshComponent* LightMesh;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	UPointLightComponent* PointLight;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* ProtectionZone;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* FogOfWarLightOn;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* FogOfWarLightOff;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lantern")
-	USceneComponent* LightRoot;
-
-
+	
 // === PUBLIC PROPERTIES ===
 public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category="Lantern")
@@ -134,4 +112,7 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float VivianiteTimeLeft;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float MaxRadius;
 };
