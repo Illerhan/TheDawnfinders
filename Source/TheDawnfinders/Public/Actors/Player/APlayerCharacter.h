@@ -81,9 +81,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USceneComponent* CarriablePosRef;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	UStaticMeshComponent* LightMesh;
+	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	UPointLightComponent* PointLight;
@@ -96,7 +94,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	USphereComponent* FogOfWarLightOff;
-	
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
 	class UDebugComponent* DebugComponent;

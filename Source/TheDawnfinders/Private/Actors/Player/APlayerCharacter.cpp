@@ -78,10 +78,6 @@ AAPlayerCharacter::AAPlayerCharacter()
     FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
     FogOfWarLightOff->SetupAttachment(RootComponent);
 
-    LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
-    LightMesh->SetupAttachment(RootComponent);
-    
-
     // ---------- ROTATION PAR DÉFAUT ----------
     
     // Orientation sur déplacement
