@@ -146,7 +146,7 @@ public:
 
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
-	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range) override;
+	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength) override;
 
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Others")
 	void Server_AskOwnershipPermission(AActor* Target, AController* Origin);
@@ -278,6 +278,9 @@ public :
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
+	UPROPERTY(BlueprintReadOnly)
+	float UILoudness;
+
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -292,6 +295,9 @@ protected :
 
 	UPROPERTY()
 	float DodgeTimer;
+
+	UPROPERTY()
+	float LoudnessTimer;
 
 	UPROPERTY()
 	float TargetMaxSpeed = 400.f;

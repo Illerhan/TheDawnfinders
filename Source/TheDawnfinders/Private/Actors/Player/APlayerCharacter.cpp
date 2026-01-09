@@ -140,8 +140,11 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         ActualiseAutoLock();
     }
 
-    // [MODIFIED] Simplified Tick Logic for Litter
-    // Note: We moved the Input sending to MoveCharacter for better responsiveness
+    if (LoudnessTimer > 0) {
+        LoudnessTimer -= DeltaTime;
+        if (LoudnessTimer <= 0) UILoudness = 0.05f;
+    }
+
     if (bIsCarrying && CurrentPushedObject)
     {
         UpdatePushingMovement(DeltaTime);
@@ -287,8 +290,11 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     return 1.0f;
 }
 
-void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range)
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength)
 {
+    LoudnessTimer = 0.8f;
+    UILoudness = WaveStrength;
+
     if (HasAuthority()) Server_PlaySound_Implementation(SoundTag, Range);
     else Server_PlaySound(SoundTag, Range);
 }
@@ -442,20 +448,6 @@ void AAPlayerCharacter::Server_SendPushInput_Implementation(ALitter* Obj, FVecto
 void AAPlayerCharacter::UpdatePushingMovement(float DeltaTime)
 {
     if (!bIsCarrying || !CurrentPushedObject) return;
-
-    // Optional: Make the character rotate to face the litter's movement
-    // Or make the character face the litter center.
-    // For now, facing the movement direction is good feedback.
-    
-    // Note: Since we are attached, this rotation might be overridden by the attachment rule
-    // if using SnapToTarget. If rotation jitter occurs, check Litter.cpp AttachToComponent rules.
-    
-    /* If you want the player to face the litter (Center):
-       FVector DirectionToLitter = CurrentPushedObject->GetActorLocation() - GetActorLocation();
-       FRotator TargetRotation = DirectionToLitter.Rotation();
-       TargetRotation.Pitch = 0; TargetRotation.Roll = 0;
-       SetActorRotation(TargetRotation);
-    */
 }
 
 void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool bCarrying)
@@ -473,12 +465,17 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
     bAutoLockIsActive = true;
+
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
+
     ObjectQueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
+
     bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(1000.f));
     if (!bHit) return;
+
     float BestDist = 10000.f;
+
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
         if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
@@ -506,7 +503,7 @@ void AAPlayerCharacter::StopAutoLock()
 
 
 #pragma region Dodge
-// ... (Rest of Dodge code remains identical) ...
+
 void AAPlayerCharacter::StartDodge()
 {
     if (CurrentState == EPlayerState::Dodging) return;
@@ -532,13 +529,24 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
     FinalVector = Rotation.RotateVector(FinalVector);
     AddMovementInput(FinalVector, 1.0f, false);
 }
+
 #pragma endregion
 
 
-// ... (Rest of Montages, Carry, and Others regions remain identical) ...
+
 #pragma region Montages
-void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed) { if (!HasAuthority()) ServerPlayMontage(Montage, Speed); else MulticastPlayMontage(Montage, Speed); }
-void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) { if (Montage) MulticastPlayMontage(Montage, Speed); }
+
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed) 
+{ 
+    if (!HasAuthority()) ServerPlayMontage(Montage, Speed); 
+    else MulticastPlayMontage(Montage, Speed); 
+}
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) 
+{ 
+    if (Montage) MulticastPlayMontage(Montage, Speed); 
+}
+
 void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     if (!Montage || !GetMesh()) return;
