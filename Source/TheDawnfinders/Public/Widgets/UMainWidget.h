@@ -4,6 +4,8 @@
 #include "Blueprint/UserWidget.h"
 #include "UMainWidget.generated.h"
 
+class UPalanquinHUDWidget;
+
 
 UCLASS()
 class THEDAWNFINDERS_API UMainWidget : public UUserWidget
@@ -19,6 +21,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	bool GetIsInPalanquin();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UPalanquinHUDWidget* GetPalanquinHUDWidget();
 
 
 protected :
