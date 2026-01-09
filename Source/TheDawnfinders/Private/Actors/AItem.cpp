@@ -4,13 +4,14 @@
 #include "Actors/AItem.h"
 
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/BoxComponent.h"
 #include "Components/UInventoryComponent.h"
 
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
-	ItemMesh->SetupAttachment(CapsuleCollider);
+	ItemMesh->SetupAttachment(BoxCollider);
 
 	if (ItemData && ItemData->ItemMesh)
 	ItemMesh->SetStaticMesh(ItemData->ItemMesh);	

@@ -12,6 +12,7 @@
 #include "Curves/CurveFloat.h"
 #include "Interactible.generated.h"
 
+class UBoxComponent;
 class AAPlayerCharacter;
 class ULockpickQTEWidget;
 class UWorldInteractibleWidget;
@@ -90,7 +91,7 @@ public:
 // === COMPONENTS ===
 public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
-	UCapsuleComponent* CapsuleCollider;
+	UBoxComponent* BoxCollider;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Mesh")
 	UStaticMeshComponent* StaticMesh;
