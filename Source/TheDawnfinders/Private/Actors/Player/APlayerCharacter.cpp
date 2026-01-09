@@ -46,6 +46,8 @@ AAPlayerCharacter::AAPlayerCharacter()
     HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
     InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("AC_Interaction"));
+    LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_LightComponent"));
+    
     ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
     ProgressBarComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
@@ -57,7 +59,24 @@ AAPlayerCharacter::AAPlayerCharacter()
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
     CarriablePosRef = CreateDefaultSubobject<USceneComponent>(TEXT("CarriablePosRef"));
     CarriablePosRef->SetupAttachment(GetMesh());
-    
+
+    PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
+    PointLight->SetupAttachment(RootComponent);
+
+    ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
+    ProtectionZone->SetGenerateOverlapEvents(true);
+    ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
+    ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
+    ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+    ProtectionZone->SetHiddenInGame(true);
+    ProtectionZone->SetupAttachment(RootComponent);
+
+    FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
+    FogOfWarLightOn->SetupAttachment(RootComponent);
+
+    FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
+    FogOfWarLightOff->SetupAttachment(RootComponent);
 
     // ---------- ROTATION PAR DÉFAUT ----------
     
@@ -90,6 +109,8 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->ReloadDelay,
         PlayerConfig->StaminaConsumptionRun,
         PlayerConfig->StaminaConsumptionDodge);
+
+    LightComponent->InitialiseComponent(PlayerConfig->FuelConsumption,PlayerConfig->MaxFuel);
 }
 
 void AAPlayerCharacter::BeginPlay()
@@ -104,8 +125,8 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
-    //LightComponent->ProtectionZone->SetGenerateOverlapEvents(false);
-    //LightComponent->ProtectionZone->SetSphereRadius(0.f);
+    ProtectionZone->SetGenerateOverlapEvents(false);
+    ProtectionZone->SetSphereRadius(0.f);
     
     UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
@@ -119,8 +140,11 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         ActualiseAutoLock();
     }
 
-    // [MODIFIED] Simplified Tick Logic for Litter
-    // Note: We moved the Input sending to MoveCharacter for better responsiveness
+    if (LoudnessTimer > 0) {
+        LoudnessTimer -= DeltaTime;
+        if (LoudnessTimer <= 0) UILoudness = 0.05f;
+    }
+
     if (bIsCarrying && CurrentPushedObject)
     {
         UpdatePushingMovement(DeltaTime);
@@ -266,10 +290,18 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     return 1.0f;
 }
 
-void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range)
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength)
 {
+    LoudnessTimer = 0.8f;
+    UILoudness = WaveStrength;
+
     if (HasAuthority()) Server_PlaySound_Implementation(SoundTag, Range);
     else Server_PlaySound(SoundTag, Range);
+}
+
+void AAPlayerCharacter::Server_AskOwnershipPermission_Implementation(AActor* Target, AController* Origin)
+{
+    Target->SetOwner(Origin);
 }
 
 void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Origin)
@@ -416,20 +448,6 @@ void AAPlayerCharacter::Server_SendPushInput_Implementation(ALitter* Obj, FVecto
 void AAPlayerCharacter::UpdatePushingMovement(float DeltaTime)
 {
     if (!bIsCarrying || !CurrentPushedObject) return;
-
-    // Optional: Make the character rotate to face the litter's movement
-    // Or make the character face the litter center.
-    // For now, facing the movement direction is good feedback.
-    
-    // Note: Since we are attached, this rotation might be overridden by the attachment rule
-    // if using SnapToTarget. If rotation jitter occurs, check Litter.cpp AttachToComponent rules.
-    
-    /* If you want the player to face the litter (Center):
-       FVector DirectionToLitter = CurrentPushedObject->GetActorLocation() - GetActorLocation();
-       FRotator TargetRotation = DirectionToLitter.Rotation();
-       TargetRotation.Pitch = 0; TargetRotation.Roll = 0;
-       SetActorRotation(TargetRotation);
-    */
 }
 
 void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool bCarrying)
@@ -447,12 +465,17 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
     bAutoLockIsActive = true;
+
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
+
     ObjectQueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
+
     bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(1000.f));
     if (!bHit) return;
+
     float BestDist = 10000.f;
+
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
         if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
@@ -480,7 +503,7 @@ void AAPlayerCharacter::StopAutoLock()
 
 
 #pragma region Dodge
-// ... (Rest of Dodge code remains identical) ...
+
 void AAPlayerCharacter::StartDodge()
 {
     if (CurrentState == EPlayerState::Dodging) return;
@@ -506,13 +529,24 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
     FinalVector = Rotation.RotateVector(FinalVector);
     AddMovementInput(FinalVector, 1.0f, false);
 }
+
 #pragma endregion
 
 
-// ... (Rest of Montages, Carry, and Others regions remain identical) ...
+
 #pragma region Montages
-void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed) { if (!HasAuthority()) ServerPlayMontage(Montage, Speed); else MulticastPlayMontage(Montage, Speed); }
-void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) { if (Montage) MulticastPlayMontage(Montage, Speed); }
+
+void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed) 
+{ 
+    if (!HasAuthority()) ServerPlayMontage(Montage, Speed); 
+    else MulticastPlayMontage(Montage, Speed); 
+}
+
+void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) 
+{ 
+    if (Montage) MulticastPlayMontage(Montage, Speed); 
+}
+
 void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     if (!Montage || !GetMesh()) return;

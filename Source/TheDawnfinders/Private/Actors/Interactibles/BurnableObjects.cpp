@@ -88,10 +88,10 @@ void ABurnableObjects::ExtinguishObject()
         if (LightComponent)
         {
             LightComponent->bLightOn = false;
-            if (LightComponent->PointLight)
-            {
-                LightComponent->PointLight->SetVisibility(false);
-            }
+            // if (LightComponent->PointLight)
+            // {
+            //     LightComponent->PointLight->SetVisibility(false);
+            // }
         }
 
     }
@@ -140,12 +140,12 @@ void ABurnableObjects::OnRep_CurrentHealth()
 {
     
     // Mettre à jour les effets visuels selon la vie
-    if (LightComponent && LightComponent->PointLight)
-    {
-        float HealthPercentage = GetHealthPercentage();
-        // Exemple : changer la couleur ou l'intensité
-        // LightComponent->PointLight->SetIntensity(BaseIntensity * HealthPercentage);
-    }
+    // if (LightComponent && LightComponent->PointLight)
+    // {
+    //     float HealthPercentage = GetHealthPercentage();
+    //     // Exemple : changer la couleur ou l'intensité
+    //     // LightComponent->PointLight->SetIntensity(BaseIntensity * HealthPercentage);
+    // }
 }
 
 void ABurnableObjects::OnRep_IsBurning()

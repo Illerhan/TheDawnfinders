@@ -52,7 +52,7 @@ public:
 	void DoDamagePostProcess(float Speed);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void PlaySoundOnServer(FName SoundTag, float Range);
+	void PlaySoundOnServer(FName SoundTag, float Range, float WaveStrength);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	float GetSoundAlertness(FName SoundTag);
@@ -97,4 +97,9 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Protection")
 	void RemoveProtectionZone();
+
+
+public :
+	UFUNCTION(Server, Reliable, Category = "Others")
+	virtual void Server_AskOwnershipPermission(AActor* Target, AController* Origin) = 0;
 };

@@ -15,7 +15,9 @@ class THEDAWNFINDERS_API UDebugSubsyteme : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	public:
-	TSharedPtr<FDebugWindow> DebugWindow;
+	TSharedPtr<FDebugWindow, ESPMode::ThreadSafe> DebugWindow;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	
+	virtual void Deinitialize() override;
 };

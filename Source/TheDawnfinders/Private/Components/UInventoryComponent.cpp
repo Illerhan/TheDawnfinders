@@ -58,6 +58,8 @@ void UInventoryComponent::OnRep_CurrentSlotIndex()
 
 bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
 {
+	if (!NewItem) return false;
+
 	if (NewItem->ItemType == EItemType::Currency)
 	{
 		if (!GetOwner()->HasAuthority())
@@ -73,6 +75,8 @@ bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
 
 	if (!GetOwner()->HasAuthority())
 	{
+		UE_LOG(LogTemp, Display, TEXT("%s"), *NewItem->ItemName);
+
 		ServerAddNewItem(NewItem, Quantity);
 		return true;
 	}

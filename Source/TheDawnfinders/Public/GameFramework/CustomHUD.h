@@ -4,6 +4,8 @@
 #include "GameFramework/HUD.h"
 #include "CustomHUD.generated.h"
 
+class UMainWidget;
+
 
 UCLASS()
 class THEDAWNFINDERS_API ACustomHUD : public AHUD
@@ -13,5 +15,5 @@ class THEDAWNFINDERS_API ACustomHUD : public AHUD
 public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UUserWidget* MainWidget;
+	UMainWidget* MainWidget;
 };

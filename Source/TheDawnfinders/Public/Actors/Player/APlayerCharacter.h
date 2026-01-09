@@ -83,6 +83,18 @@ public:
 	USceneComponent* CarriablePosRef;
 	
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	UPointLightComponent* PointLight;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* ProtectionZone;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOn;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	USphereComponent* FogOfWarLightOff;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
 	class UDebugComponent* DebugComponent;
 
@@ -134,7 +146,10 @@ public:
 
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
-	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range) override;
+	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength) override;
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Others")
+	void Server_AskOwnershipPermission(AActor* Target, AController* Origin);
 	
 
 // === MOVEMENT METHODS ===
@@ -263,6 +278,9 @@ public :
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
+	UPROPERTY(BlueprintReadOnly)
+	float UILoudness;
+
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -277,6 +295,9 @@ protected :
 
 	UPROPERTY()
 	float DodgeTimer;
+
+	UPROPERTY()
+	float LoudnessTimer;
 
 	UPROPERTY()
 	float TargetMaxSpeed = 400.f;

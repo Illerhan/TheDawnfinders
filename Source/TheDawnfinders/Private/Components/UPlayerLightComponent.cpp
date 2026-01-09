@@ -1,47 +1,24 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "Components/UPlayerLightComponent.h"
+﻿#include "Components/UPlayerLightComponent.h"
 
 #include <gsl/pointers>
 
+#include "Kismet/GameplayStatics.h"
+#include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
+#include "GameFramework/CustomHUD.h"
 #include "Components/UHealthComponent.h"
+#include "Widgets/UPalanquinHUD.h"
+#include "Widgets/UMainWidget.h"
 #include "Interfaces/IFadeable.h"
 #include "Net/UnrealNetwork.h"
+
 
 UPlayerLightComponent::UPlayerLightComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
-	LightRoot = CreateDefaultSubobject<USceneComponent>(FName("Root"));
 	
-	PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
-	PointLight->SetupAttachment(LightRoot);
-
-	ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
-	ProtectionZone->SetGenerateOverlapEvents(true);
-	ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
-	ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
-	ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
-	ProtectionZone->SetHiddenInGame(true);
-	ProtectionZone->SetupAttachment(LightRoot);
-
-	FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
-	FogOfWarLightOn->SetupAttachment(LightRoot);
-
-	FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
-	FogOfWarLightOff->SetupAttachment(LightRoot);
-
-	LightMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("LanternMesh"));
-	LightMesh->SetupAttachment(LightRoot);
-
-	bLightOn = false;
-	FuelRemaining = 100.f;
-	LightIntensity = 5000.f;
-	LightRadius = 300.f;
-	FuelConsumption = 5.f;
+	
 
 	SetIsReplicatedByDefault(true);
 }
@@ -49,67 +26,67 @@ UPlayerLightComponent::UPlayerLightComponent()
 void UPlayerLightComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (AActor* Owner = GetOwner())
-		{
-		if (LightRoot)
-		{
-			LightRoot->AttachToComponent(
-				Owner->GetRootComponent(),
-				FAttachmentTransformRules::KeepRelativeTransform
-			);
-		}
-	}
-
+    
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
-	
-	if (Cast<AAPlayerCharacter>(Owner))
+
+	// Variables locales pour stocker les composants à binder
+	UPrimitiveComponent* ZoneToBind = nullptr;
+	UPrimitiveComponent* FogOffToBind = nullptr;
+	UPrimitiveComponent* FogOnToBind = nullptr;
+
+	// On récupère les références selon la classe
+	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))
 	{
-		if (ProtectionZone)
-		{
-			ProtectionZone->SetGenerateOverlapEvents(false);
-			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::NoCollision); 
-		}
+		ZoneToBind = Player->ProtectionZone;
+		FogOffToBind = Player->FogOfWarLightOff;
+		FogOnToBind = Player->FogOfWarLightOn;
 	}
-	else
+	else if (ALitter* Litter = Cast<ALitter>(Owner))
 	{
-		if (ProtectionZone)
-		{
-			ProtectionZone->SetGenerateOverlapEvents(true);
-			ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly); 
-		}
+		ZoneToBind = Litter->ProtectionZone;
+		FogOffToBind = Litter->FogOfWarLightOff;
+		FogOnToBind = Litter->FogOfWarLightOn;
 	}
-	
-	LightRoot->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+
+	// On fait les binds uniquement si on a trouvé les composants et qu'on est Authority
 	if (GetOwnerRole() == ROLE_Authority)
 	{
-		ProtectionZone->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapBegin);
-		ProtectionZone->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapEnd);
+		if (ZoneToBind)
+		{
+			ZoneToBind->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapBegin);
+			ZoneToBind->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnOverlapEnd);
+		}
+        
+		if (FogOffToBind)
+		{
+			FogOffToBind->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
+			FogOffToBind->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
+		}
 
-		FogOfWarLightOn->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
-		FogOfWarLightOn->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
-
-		FogOfWarLightOff->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
-		FogOfWarLightOff->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
+		if (FogOnToBind)
+		{
+			FogOnToBind->OnComponentBeginOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapBegin);
+			FogOnToBind->OnComponentEndOverlap.AddDynamic(this, &UPlayerLightComponent::OnFogOfWarOverlapEnd);
+		}
 	}
 
 	ApplyLightState();
 
 
-	// Actualises the local UI
+	// We get the UI ref
 	if (!Owner) return;
 
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
 	if (!PC || !PC->IsLocalController()) return;
 
-	if (!PC->PlayerState) return;
+	ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+	if (!HUD) return;
 
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	UMainWidget* MainWidget = HUD->MainWidget;
+	if (!MainWidget) return;
+
+	PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
 }
 
 
@@ -208,23 +185,46 @@ void UPlayerLightComponent::Server_TurnLightOff_Implementation()
 
 void UPlayerLightComponent::ApplyLightState_Implementation()
 {
-	if (!PointLight) return;
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
 
-	PointLight->SetVisibility(bLightOn);
-	PointLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
-	PointLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
-	ProtectionZone->SetHiddenInGame(!bLightOn);
+	// 1. DÉCLARATION : On prépare des pointeurs vides pour les composants dont on a besoin
+	UPointLightComponent* TargetLight = nullptr;
+	UPrimitiveComponent* TargetProtectionZone = nullptr;
 
-	if (!GetOwner()->HasAuthority()) return;    // Continue only if is server
-	
-	if (!ProtectionZone) return;
+	// 2. SELECTION : On remplit ces pointeurs selon le type de l'Owner
+	if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))
+	{
+		TargetLight = Player->PointLight;
+		TargetProtectionZone = Player->ProtectionZone;
+	}
+	else if (ALitter* Litter = Cast<ALitter>(Owner))
+	{
+		// Je suppose ici que ALitter possède aussi ces membres exacts
+		TargetLight = Litter->PointLight;
+		TargetProtectionZone = Litter->ProtectionZone;
+	}
+
+	// 3. SÉCURITÉ : Si on n'a pas trouvé la lumière (ex: Owner n'est ni Player ni Litter), on sort
+	if (!TargetLight || !TargetProtectionZone) return;
+
+	// 4. LOGIQUE : On utilise les pointeurs génériques (ça marche pour les deux !)
+	TargetLight->SetVisibility(bLightOn);
+	TargetLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
+	TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
+    
+	TargetProtectionZone->SetHiddenInGame(!bLightOn);
+
+	// --- Logique Serveur spécifique ---
+	if (!Owner->HasAuthority()) return; 
 
 	TArray<AActor*> OverlappingActors;
-	ProtectionZone->GetOverlappingActors(OverlappingActors, AAPlayerCharacter::StaticClass());
+	// Note: On utilise TargetProtectionZone ici au lieu de OwningActor->ProtectionZone
+	TargetProtectionZone->GetOverlappingActors(OverlappingActors, AAPlayerCharacter::StaticClass());
 
 	for (AActor* Actor : OverlappingActors)
 	{
-		if (Actor == GetOwner()) continue;
+		if (Actor == Owner) continue;
 
 		if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor))
 		{
@@ -239,58 +239,6 @@ void UPlayerLightComponent::OnRep_LightOn()
 	ApplyLightState();
 }
 
-void UPlayerLightComponent::FuelUpdate(float NewFuel)
-{
-
-	if (GetOwner()->HasAuthority()) 
-	{
-		FuelRemaining += NewFuel;
-		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
-
-		if (FuelRemaining <= 0.f && bLightOn)
-		{
-			TurnLightOff();
-		}
-	}
-	
-	// Actualises the local UI 
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
-
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
-
-	if (!PC->PlayerState) return;
-
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
-}
-
-void UPlayerLightComponent::OnRep_FuelRemaining()
-{
-	// Update UI local
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
-
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
-
-	if (!PC->PlayerState) return;
-
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	if (PSCustom)
-	{
-		PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
-	}
-}
-
-
 #pragma endregion
 
 
@@ -304,27 +252,82 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 		FuelRemaining -= FuelConsumption * DeltaTime;
 		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
 
+		ALitter* Litter = Cast<ALitter>(GetOwner());
+		Litter->ProtectionZone->SetSphereRadius(FuelRemaining/MaxFuel * MaxRadius);
+		Litter->PointLight->SetIntensity(FuelRemaining/MaxFuel *LightRadius);
+
 		if (FuelRemaining <= 0.f && bLightOn)
 		{
 			TurnLightOff();
 		}
 	}
 
-	// Actualises the local UI 
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
 
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
 
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
 
-	if (!PC->PlayerState) return;
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
 
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
 }
+
+void UPlayerLightComponent::FuelUpdate(float NewFuel)
+{
+	if (GetOwner()->HasAuthority())
+	{
+		FuelRemaining += NewFuel;
+		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
+
+		if (FuelRemaining <= 0.f && bLightOn)
+		{
+			TurnLightOff();
+		}
+	}
+
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
+
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
+
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
+
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
+}
+
+void UPlayerLightComponent::OnRep_FuelRemaining()
+{
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
+
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
+
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
+
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
+}
+
 
 
 void UPlayerLightComponent::Server_RequestFuelUpdate_Implementation(float Amount)

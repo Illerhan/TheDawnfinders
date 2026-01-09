@@ -42,6 +42,12 @@ void UInventorySlotWidget::PlayPalanquinAppearAnimation_Implementation()
 
 void UInventorySlotWidget::PlayDisappearAnimation_Implementation(float Delay)
 {
+
+}
+
+void UInventorySlotWidget::SetupNavigation_Implementation(UWidget* TowardWidget)
+{
+
 }
 
 #pragma endregion

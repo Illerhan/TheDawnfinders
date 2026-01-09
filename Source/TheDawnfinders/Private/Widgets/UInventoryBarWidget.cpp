@@ -94,6 +94,24 @@ void UInventoryBarWidget::TryBindToInventory()
     ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
 }
 
+void UInventoryBarWidget::SetupSlotsNavigation_Implementation()
+{
+    for (int i = 0; i < InventorySlotsWidgets.Num(); i++) {
+        if (i == 0) {
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[i + 1]);
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[InventorySlotsWidgets.Num() - 1]);
+        }
+        else if (i == InventorySlotsWidgets.Num() - 1) {
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[0]);
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[i - 1]);
+        }
+        else {
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[i + 1]);
+            InventorySlotsWidgets[i]->SetupNavigation(InventorySlotsWidgets[i - 1]);
+        }
+    }
+}
+
 void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex)
 {
     UE_LOG(LogTemp, Error, TEXT("════════════════════════════════════════════════════════"));

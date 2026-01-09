@@ -8,6 +8,8 @@
 #include "Components/SphereComponent.h"
 #include "UPlayerLightComponent.generated.h"
 
+class UPalanquinHUDWidget;
+
 
 UCLASS(ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent))
 class THEDAWNFINDERS_API UPlayerLightComponent : public UActorComponent
@@ -44,7 +46,7 @@ public :
 	UFUNCTION()
 	void OnRep_LightOn();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void FuelUpdate(float NewFuel);
 
 	UFUNCTION()
@@ -83,28 +85,7 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Collision")
 	void OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-
-// === COMPONENTS ===
-public :
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	UStaticMeshComponent* LightMesh;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	UPointLightComponent* PointLight;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* ProtectionZone;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* FogOfWarLightOn;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
-	USphereComponent* FogOfWarLightOff;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lantern")
-	USceneComponent* LightRoot;
-
+	
 
 // === PUBLIC PROPERTIES ===
 public :
@@ -134,4 +115,13 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float VivianiteTimeLeft;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float MaxRadius;
+
+
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintReadOnly)
+	UPalanquinHUDWidget* PalanquinHUDWidget;
 };
