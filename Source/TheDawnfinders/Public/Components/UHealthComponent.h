@@ -110,6 +110,9 @@ public :
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsDead, BlueprintReadWrite)
 	bool bIsDead;
+	
+	UPROPERTY()
+	int CurseZone = 0;
 
 
 // === PROTECTED PROPERTIES ===
@@ -144,8 +147,7 @@ protected :
 	UPROPERTY()
 	bool IsInvincible;
 	
-	UPROPERTY()
-	int CurseZone = 0;
+	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* CurseMaterial;
