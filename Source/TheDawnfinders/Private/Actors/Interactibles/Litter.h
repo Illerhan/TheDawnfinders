@@ -8,6 +8,7 @@
 #include "Litter.generated.h"
 
 
+class ASoundManager;
 class USphereComponent;
 class UPointLightComponent;
 class AAPlayerCharacter;
@@ -81,7 +82,15 @@ public:
 	// Zone d'interaction Centrale (Inventaire)
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	class UBoxComponent* InventoryTrigger;
-
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
+	USoundBase* SoloSound;
+	
+private:
+	float LastStrainSoundTime = 0.f; // Pour éviter de spammer le son "trop lourd"
+	float BaseMass = 100.f;
+	
+public:
 	// Fonction pour gérer l'affichage du widget selon la zone
 	UFUNCTION()
 	void OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -167,4 +176,7 @@ private:
     void ResolvePhysics(float DeltaTime);
     void AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex);
     void DetachPlayer(AAPlayerCharacter* Player);
+
+	UPROPERTY()
+	ASoundManager* SoundManagerInstance;
 };
