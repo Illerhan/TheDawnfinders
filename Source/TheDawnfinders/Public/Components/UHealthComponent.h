@@ -133,13 +133,16 @@ public :
 	float MinimumMaxHP = 20.f;
 
 	UPROPERTY()
-	float CurseRatio= 0.02;
+	float CurseRatio= 1;
 
 	UPROPERTY()
 	UStaminaComponent* StaminaComponent;
 
 	UPROPERTY()
 	bool IsInvincible;
+	
+	UPROPERTY()
+	int CurseZone = 0;
 
 	UPROPERTY()
 	APostProcessVolume* CurseVolume;

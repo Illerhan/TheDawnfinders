@@ -210,7 +210,7 @@ void UHealthComponent::LocalChangeHealth()
 
 bool UHealthComponent::IsProtectedFromCurse() const
 {
-	return ProtectionZoneAmount > 0;
+	return ProtectionZoneAmount > 0 || CurseZone < 1;
 }
 
 
