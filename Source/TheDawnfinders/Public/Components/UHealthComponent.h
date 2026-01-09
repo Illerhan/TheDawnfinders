@@ -105,6 +105,15 @@ public :
 	UPROPERTY(Replicated)
 	float CurrentHealth = 100.f;
 
+	UPROPERTY()
+	float MaxHealth = 100.f;
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsDead, BlueprintReadWrite)
+	bool bIsDead;
+
+
+// === PROTECTED PROPERTIES ===
+protected :
 	UPROPERTY(Replicated)
 	float CurrentMaxHealth = 100.f;
 
@@ -117,17 +126,11 @@ public :
 	UPROPERTY(EditAnywhere)
 	float InjureDecreaseSpeed = 0.02f;
 
-	UPROPERTY(ReplicatedUsing = OnRep_IsDead, BlueprintReadWrite)
-	bool bIsDead;
-
 	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
 	bool bIsFallen;
 	
 	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
 	int32 ProtectionZoneAmount = 0;
-
-	UPROPERTY()
-	float MaxHealth = 100.f;
 
 	UPROPERTY()
 	float MinimumMaxHP = 20.f;
@@ -144,8 +147,11 @@ public :
 	UPROPERTY()
 	int CurseZone = 0;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UMaterialInstanceDynamic* CurseMaterial;
+
 	UPROPERTY()
-	APostProcessVolume* CurseVolume;
+	float CurrentCurseVolumeStrength;
 
 	UPROPERTY()
 	AController* OwnerController;
