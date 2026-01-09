@@ -71,6 +71,24 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	USphereComponent* FogOfWarLightOff;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	class UBoxComponent* FrontTrigger;
+
+	// Zone d'interaction Arrière (Portage)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	class UBoxComponent* BackTrigger;
+
+	// Zone d'interaction Centrale (Inventaire)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	class UBoxComponent* InventoryTrigger;
+
+	// Fonction pour gérer l'affichage du widget selon la zone
+	UFUNCTION()
+	void OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 	// Vérifie si un joueur va toucher quelque chose avec le mouvement prévu
 	UFUNCTION()
 	bool CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit);
@@ -80,10 +98,10 @@ private:
 protected:
     // --- PHYSICS CONFIGURATION ---
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
-    float Mass = 50.0f; // Simulate weight (kg)
+    float Mass = 100.0f; // Simulate weight (kg)
 
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
-    float PushForce = 150000.0f; // Force applied by one player (Newtons * scale)
+    float PushForce = 8000.0f; // Force applied by one player (Newtons * scale)
 
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
     float LinearDamping = 0.8f; // "Friction" for movement (Higher = stops faster)
@@ -92,7 +110,17 @@ protected:
     float AngularDamping = 1.5f; // "Friction" for rotation (Higher = stops spinning faster)
 
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
-    float RotationalInertia = 50000.0f; // Resistance to turning (Higher = feels heavier to turn)
+    float RotationalInertia = 50000.0f;// Resistance to turning (Higher = feels heavier to turn)
+
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float CurrentWeight = 25.0f;
+	
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float SoloMaxWeight = 25.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float DuoMaxWeight = 25.0f;
+	
 
     // --- STATE VARIABLES ---
     // Replicated so clients can smooth out movement (Client-side prediction optional)
@@ -125,7 +153,7 @@ public:
 
     // --- NETWORKED INPUT ---
     UFUNCTION(Server, Reliable)
-    void Server_StartPushing(AAPlayerCharacter* Player);
+	void Server_StartPushing(AAPlayerCharacter* Player, int32 SlotIndex);
 
     UFUNCTION(Server, Reliable)
     void Server_EndPushing(AAPlayerCharacter* Player);

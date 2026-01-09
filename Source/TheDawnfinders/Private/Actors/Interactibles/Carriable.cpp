@@ -1,4 +1,6 @@
 #include "Actors/Interactibles/Carriable.h"
+
+#include "Components/BoxComponent.h"
 #include "Interfaces/IPlayer.h"
 
 
@@ -9,7 +11,7 @@ void ACarriable::Interact_Implementation(AActor* Interactor)
 
 	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
 
-	CapsuleCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	BoxCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void ACarriable::StopCarry()
@@ -17,7 +19,7 @@ void ACarriable::StopCarry()
 	CarryActor = nullptr;
 	bIsCarried = false;
 
-	CapsuleCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	BoxCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 TSubclassOf<AActor> ACarriable::GetTargetActorType()
