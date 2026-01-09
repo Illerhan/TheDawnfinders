@@ -53,7 +53,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		ApplyCurse(DeltaTime);
 	}
 
-	if (CurseVolume) ActualiseCursePostProcess(DeltaTime);
+	ActualiseCursePostProcess(DeltaTime);
 	
 
 	if (GetOwner()->HasAuthority())
@@ -81,7 +81,22 @@ void UHealthComponent::InitialiseComponent
 
 	for (AActor* Actor : FoundActors)
 	{
-		CurseVolume = (APostProcessVolume*)Actor;
+		APostProcessVolume* PPV = Cast<APostProcessVolume>(Actor);
+		FPostProcessSettings& Settings = PPV->Settings;
+
+		if (Settings.WeightedBlendables.Array.Num() > 0)
+		{
+			UObject* Obj = Settings.WeightedBlendables.Array[1].Object;
+
+			if (UMaterialInstance* MI = Cast<UMaterialInstance>(Obj))
+			{
+				UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(MI, this);
+
+				Settings.WeightedBlendables.Array[1].Object = DynamicMaterial;
+				CurseMaterial = DynamicMaterial;
+			}
+		}
+		
 	}
 
 	// If is not the server
@@ -259,10 +274,12 @@ void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 	if (!OwnerController) return;
 
 	if (IsProtectedFromCurse()) {
-		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 0.0f, DeltaTime * 1.5f);
+		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 0.f, DeltaTime * 1.5f);
+		CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"),CurrentCurseVolumeStrength);
 	}
 	else {
-		CurseVolume->BlendWeight = FMath::Lerp(CurseVolume->BlendWeight, 1.0f, DeltaTime * 1.5f);
+		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 2500.f, DeltaTime * 1.f);
+		CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentCurseVolumeStrength);
 	}
 }
 
