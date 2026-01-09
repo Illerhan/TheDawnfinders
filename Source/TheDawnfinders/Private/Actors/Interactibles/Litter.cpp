@@ -1,7 +1,10 @@
 ﻿#include "Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/CustomHUD.h"
 #include "Net/UnrealNetwork.h"
+#include "Widgets/UMainWidget.h"
+#include "Widgets/UWorldInteractibleWidget.h"
 
 ALitter::ALitter()
 {
@@ -55,11 +58,35 @@ ALitter::ALitter()
     MeshComponent->SetRelativeRotation(FRotator(0.f, -90.f, 0.f)); 
 
     // 3. Interaction Trigger
-    CapsuleCollider->SetupAttachment(RootComponent);
+    if (BoxCollider)
+    {
+        BoxCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    }
+
+    // --- 1. Zone AVANT (Portage) ---
+    FrontTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("FrontTrigger"));
+    FrontTrigger->SetupAttachment(RootComponent);
+    FrontTrigger->SetBoxExtent(FVector(60.f, 100.f, 60.f)); 
+    FrontTrigger->SetRelativeLocation(FVector(130.f, 0.f, 0.f)); // Décalé vers l'avant (+X)
+    FrontTrigger->SetCollisionProfileName(TEXT("Trigger"));
+
+    // --- 2. Zone ARRIÈRE (Portage) ---
+    BackTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("BackTrigger"));
+    BackTrigger->SetupAttachment(RootComponent);
+    BackTrigger->SetBoxExtent(FVector(60.f, 100.f, 60.f));
+    BackTrigger->SetRelativeLocation(FVector(-130.f, 0.f, 0.f)); // Décalé vers l'arrière (-X)
+    BackTrigger->SetCollisionProfileName(TEXT("Trigger"));
+
+    // --- 3. Zone CENTRALE (Inventaire) ---
+    InventoryTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("InventoryTrigger"));
+    InventoryTrigger->SetupAttachment(RootComponent);
+    InventoryTrigger->SetBoxExtent(FVector(50.f, 80.f, 60.f));
+    InventoryTrigger->SetRelativeLocation(FVector(0.f, 0.f, 0.f)); // Au centre
+    InventoryTrigger->SetCollisionProfileName(TEXT("Trigger"));
 
     // 4. Create Carry Points (Corners)
-    CarryPoints.SetNum(4);
-    for (int i = 0; i < 4; i++)
+    CarryPoints.SetNum(2);
+    for (int i = 0; i < 2; i++)
     {
         FString Name = FString::Printf(TEXT("CarryPoint_%d"), i);
         CarryPoints[i] = CreateDefaultSubobject<USceneComponent>(*Name);
@@ -73,7 +100,7 @@ ALitter::ALitter()
         CarryPoints[i]->SetRelativeLocation(FVector(XPos, YPos, 0.f));
     }
 
-    CarrySlots.SetNum(4);
+    CarrySlots.SetNum(2);
     CurrentLinearVelocity = FVector::ZeroVector;
     CurrentAngularVelocityYaw = 0.f;
 }
@@ -88,6 +115,22 @@ void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 void ALitter::BeginPlay()
 {
     Super::BeginPlay();
+    if (FrontTrigger)
+    {
+        FrontTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
+        FrontTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
+    }
+    if (BackTrigger)
+    {
+        BackTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
+        BackTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
+    }
+    if (InventoryTrigger)
+    {
+        InventoryTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
+        InventoryTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
+    }
+    
 }
 
 // ============================================================================
@@ -126,8 +169,15 @@ void ALitter::ResolvePhysics(float DeltaTime)
     float TotalTorqueZ = 0.0f;
     int32 ActiveCount = 0;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
+        if (ActiveCount == 1 && CurrentWeight>= SoloMaxWeight)
+        {
+            Mass += CurrentWeight;
+        }else if (ActiveCount == 2 && CurrentWeight>= DuoMaxWeight)
+        {
+            Mass += CurrentWeight;
+        }
         // Check if we have a player in this slot
         AAPlayerCharacter* Pusher = CarrySlots[i].Get();
         if (!Pusher) continue;
@@ -310,9 +360,55 @@ void ALitter::ResolvePhysics(float DeltaTime)
 void ALitter::Interact_Implementation(AActor* Interactor)
 {
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
-    if (Player)
+    if (!Player) return;
+
+    // Vérifie dans quelle zone se trouve le joueur
+    bool bInFront = FrontTrigger->IsOverlappingActor(Player);
+    bool bInBack  = BackTrigger->IsOverlappingActor(Player);
+    bool bInCenter = InventoryTrigger->IsOverlappingActor(Player);
+
+    // CAS 1 : Inventaire (Zone Centrale)
+    if (bInCenter)
     {
-        Server_StartPushing(Player);
+        // Logique d'ouverture d'inventaire
+        // Si tu as un InventoryComponent, tu peux appeler une fonction dessus
+        // Exemple :
+        if (InventoryComponent)
+        {
+            // Logique custom, ou appel RPC si besoin
+            UE_LOG(LogTemp, Warning, TEXT("Ouverture Inventaire Litter !"));
+            APlayerController* PlayerController = Cast<APlayerController>(Player->GetController());
+            ACustomHUD* HUD = Cast<ACustomHUD>(PlayerController->GetHUD());
+            if (HUD->MainWidget->GetIsInPalanquin())
+            {
+                HUD->MainWidget->ClosePalanquinInventory();
+                HUD->MainWidget->SetPalanquin(false);
+            }
+            else
+            {
+                HUD->MainWidget->OpenPalanquinInventory();
+                HUD->MainWidget->SetPalanquin(true);
+            }
+        }
+        return; 
+    }
+
+    // CAS 2 : Portage (Zone Avant OU Arrière)
+    int32 TargetSlot = -1;
+
+    if (bInFront)
+    {
+        TargetSlot = 0; // 0 est défini comme l'avant
+    }
+    else if (bInBack)
+    {
+        TargetSlot = 1; // 1 est défini comme l'arrière
+    }
+
+    // Si on a trouvé un slot valide, on demande au serveur
+    if (TargetSlot != -1)
+    {
+        Server_StartPushing(Player, TargetSlot);
     }
 }
 
@@ -329,37 +425,34 @@ void ALitter::StopInteract_Implementation(AActor* Interactor)
 //                                SERVER RPCs
 // ============================================================================
 
-void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player)
+void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player, int32 SlotIndex)
 {
     if (!Player) return;
 
-    // Trouve un slot libre
-    int32 FreeSlot = -1;
-    for (int i = 0; i < 4; i++)
+    // 1. Vérification de sécurité : L'index est-il valide (0 ou 1) ?
+    if (!CarryPoints.IsValidIndex(SlotIndex)) return;
+
+    // 2. Vérification : Le slot est-il déjà occupé ?
+    if (CarrySlots[SlotIndex].IsValid())
     {
-        if (!CarrySlots[i].IsValid())
-        {
-            FreeSlot = i;
-            break;
-        }
+        // Optionnel : Feedback visuel "Place occupée" ou son
+        UE_LOG(LogTemp, Warning, TEXT("Ce slot est déjà pris !"));
+        return;
     }
 
-    if (FreeSlot != -1)
-    {
-        AttachPlayerToSlot(Player, FreeSlot);
+    // 3. Attachement
+    AttachPlayerToSlot(Player, SlotIndex);
 
-        // Init Data
-        FPusherData& Data = ActivePushers.FindOrAdd(Player);
-        Data.InputVector = FVector::ZeroVector;
-        Data.LastUpdateTime = GetWorld()->GetTimeSeconds();
+    // Init Data
+    FPusherData& Data = ActivePushers.FindOrAdd(Player);
+    Data.InputVector = FVector::ZeroVector;
+    Data.LastUpdateTime = GetWorld()->GetTimeSeconds();
 
-        // Notify Player State
-        Player->Server_SetPushingState(this, true);
-        
-        // On désactive le mouvement du CharacterMovement (WASD standard)
-        // Mais on garde la Capsule Collision active !
-        Player->GetCharacterMovement()->DisableMovement();
-    }
+    // Notify Player State
+    Player->Server_SetPushingState(this, true);
+    
+    // Désactiver mouvement joueur
+    Player->GetCharacterMovement()->DisableMovement();
 }
 
 void ALitter::Server_EndPushing_Implementation(AAPlayerCharacter* Player)
@@ -398,9 +491,6 @@ void ALitter::AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex)
     // SnapToTargetNotIncludingScale garde la taille, mais force Pos/Rot
     Player->AttachToComponent(CarryPoints[SlotIndex], FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-    // CHANGEMENT : On NE touche PLUS aux collisions du joueur ici.
-    // Le joueur reste en "Pawn", collide avec le World, Static, Dynamic, etc.
-    // Il ne collide pas avec la Litter car le constructeur de la Litter ignore ECC_Pawn.
 }
 
 void ALitter::DetachPlayer(AAPlayerCharacter* Player)
@@ -408,7 +498,7 @@ void ALitter::DetachPlayer(AAPlayerCharacter* Player)
     if (!Player) return;
 
     // Remove from slot array
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
         if (CarrySlots[i] == Player)
         {
@@ -416,11 +506,9 @@ void ALitter::DetachPlayer(AAPlayerCharacter* Player)
             break;
         }
     }
-
-    // Détache le joueur tout en gardant sa position actuelle dans le monde
+    
     Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
-    // CHANGEMENT : Pas besoin de restaurer les collisions car on ne les a jamais enlevées.
 }
 
 bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit)
@@ -434,7 +522,7 @@ bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& Delt
     FutureLitterTrans.SetRotation(RotQuat * CurrentLitterTrans.GetRotation());
     FutureLitterTrans.AddToTranslation(DeltaLoc);
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
         AAPlayerCharacter* Player = CarrySlots[i].Get();
         if (!Player) continue;
@@ -485,21 +573,14 @@ bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& Delt
             // Cas 1 : On commence DÉJÀ dans le mur (bStartPenetrating)
             if (OutHit.bStartPenetrating)
             {
-                // Si on est déjà dedans, on autorise le mouvement SEULEMENT s'il nous éloigne.
-                // On calcule le produit scalaire entre la direction du mouvement et la normale de sortie.
-                // Note : En bStartPenetrating, ImpactNormal est souvent inversée ou non fiable, 
-                // mais Normal représente la direction pour sortir.
-                
                 float Dot = FVector::DotProduct(DeltaLoc.GetSafeNormal(), OutHit.Normal);
                 
                 if (Dot > 0.1f) 
                 {
-                    // On va dans le sens de la normale (vers le vide), donc ON LAISSE PASSER !
                     continue; 
                 }
                 else
                 {
-                    // On s'enfonce encore plus, on bloque.
                     return true;
                 }
             }
@@ -530,7 +611,7 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
     FVector TotalDepenetration = FVector::ZeroVector;
     int StuckCount = 0;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
         AAPlayerCharacter* Player = CarrySlots[i].Get();
         if (!Player) continue;
@@ -561,11 +642,6 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
         {
             for (const FOverlapResult& Res : Overlaps)
             {
-                // Astuce Mathématique :
-                // Si on est dans un mur, le moyen le plus simple de sortir est d'aller
-                // vers le centre du Brancard (qui est supposé être dans le vide).
-                // C'est une approximation robuste pour ce type de gameplay.
-                
                 FVector DirectionToCenter = GetActorLocation() - Player->GetActorLocation();
                 DirectionToCenter.Z = 0.f; // On ne veut pas voler
                 
@@ -580,13 +656,87 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
     // Si des joueurs sont coincés, on applique une correction immédiate à la position
     if (StuckCount > 0)
     {
-        // On déplace le Root sans vérifier la collision (Teleport) pour sortir de force
-        // On utilise VInterp pour ne pas que ça "téléporte" trop violemment visuellement
         FVector Nudge = TotalDepenetration * DeltaTime * 5.0f; // Vitesse d'éjection
         RootCollision->AddWorldOffset(Nudge, false); // false = Teleport (ignore collision)
         
         // On tue la vélocité pour arrêter de foncer dans le mur
         CurrentLinearVelocity *= 0.1f;
         CurrentAngularVelocityYaw = 0.f;
+    }
+}
+
+void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
+    if (Player && Player->IsLocallyControlled())
+    {
+        // Ajoute l'interactible au joueur pour qu'il puisse appuyer sur E
+        Player->AddInteractibleAtRange_Implementation(this);
+
+        // Mise à jour du texte selon la zone touchée
+        if (InteractibleWidget)
+        {
+            if (OverlappedComp == InventoryTrigger)
+            {
+                InteractibleWidget->DisplayText("[E] Ouvrir Inventaire");
+            }
+            else // Front ou Back
+            {
+                InteractibleWidget->DisplayText("[E] Porter");
+            }
+        }
+    }
+}
+
+void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+    if (!OtherActor || OtherActor == this) return;
+
+    AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
+    
+    // On ne fait rien si ce n'est pas le joueur local
+    if (!Player || !Player->IsLocallyControlled()) return;
+
+    // --- SECURITE CRITIQUE : Vérifier que nos composants existent ---
+    // Si pour une raison quelconque le composant est détruit ou pas encore prêt, on arrête.
+    if (!FrontTrigger || !BackTrigger || !InventoryTrigger) return;
+
+    // 2. Vérification : Est-ce qu'on touche encore UNE AUTRE zone ?
+    bool bStillOverlapping = false;
+
+    // On utilise "&&" pour vérifier que le pointeur existe AVANT de l'utiliser
+    if (FrontTrigger && FrontTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
+    if (BackTrigger && BackTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
+    if (InventoryTrigger && InventoryTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
+
+    // 3. Logique d'affichage
+    if (!bStillOverlapping)
+    {
+        // CAS A : On a tout quitté
+        Player->RemoveInteractibleAtRange_Implementation(this);
+        
+        if (InteractibleWidget)
+        {
+            InteractibleWidget->HideText();
+        }
+    }
+    else
+    {
+        // CAS B : On est passé d'une zone à l'autre (Transition)
+        // On met à jour le texte immédiatement pour ne pas avoir de clignotement
+        
+        if (InteractibleWidget)
+        {
+            // ATTENTION : C'est souvent ici que ça crashait (si InventoryTrigger était null)
+            if (InventoryTrigger && InventoryTrigger->IsOverlappingActor(Player))
+            {
+                InteractibleWidget->DisplayText("Ouvrir Inventaire");
+            }
+            else
+            {
+                // Si on touche encore quelque chose mais pas l'inventaire, c'est forcément le portage
+                InteractibleWidget->DisplayText("Porter");
+            }
+        }
     }
 }

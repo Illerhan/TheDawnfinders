@@ -24,4 +24,10 @@ public :
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsInPalanquin;
+
+public:
+	void SetPalanquin(bool bIsOpen)
+	{
+		bIsInPalanquin = bIsOpen;
+	}
 };
