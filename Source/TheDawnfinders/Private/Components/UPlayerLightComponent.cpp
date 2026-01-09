@@ -1,15 +1,18 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "Components/UPlayerLightComponent.h"
+﻿#include "Components/UPlayerLightComponent.h"
 
 #include <gsl/pointers>
 
+#include "Kismet/GameplayStatics.h"
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CustomPlayerState.h"
+#include "GameFramework/CustomHUD.h"
 #include "Components/UHealthComponent.h"
+#include "Widgets/UPalanquinHUD.h"
+#include "Widgets/UMainWidget.h"
 #include "Interfaces/IFadeable.h"
 #include "Net/UnrealNetwork.h"
+
 
 UPlayerLightComponent::UPlayerLightComponent()
 {
@@ -71,19 +74,19 @@ void UPlayerLightComponent::BeginPlay()
 	ApplyLightState();
 
 
-	// Actualises the local UI
+	// We get the UI ref
 	if (!Owner) return;
 
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
 	if (!PC || !PC->IsLocalController()) return;
 
-	if (!PC->PlayerState) return;
+	ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+	if (!HUD) return;
 
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	UMainWidget* MainWidget = HUD->MainWidget;
+	if (!MainWidget) return;
+
+	PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
 }
 
 
@@ -236,58 +239,6 @@ void UPlayerLightComponent::OnRep_LightOn()
 	ApplyLightState();
 }
 
-void UPlayerLightComponent::FuelUpdate(float NewFuel)
-{
-
-	if (GetOwner()->HasAuthority()) 
-	{
-		FuelRemaining += NewFuel;
-		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
-
-		if (FuelRemaining <= 0.f && bLightOn)
-		{
-			TurnLightOff();
-		}
-	}
-	
-	// Actualises the local UI 
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
-
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
-
-	if (!PC->PlayerState) return;
-
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
-}
-
-void UPlayerLightComponent::OnRep_FuelRemaining()
-{
-	// Update UI local
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
-
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
-
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
-
-	if (!PC->PlayerState) return;
-
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	if (PSCustom)
-	{
-		PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
-	}
-}
-
-
 #pragma endregion
 
 
@@ -300,6 +251,7 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 	{
 		FuelRemaining -= FuelConsumption * DeltaTime;
 		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
+
 		ALitter* Litter = Cast<ALitter>(GetOwner());
 		Litter->ProtectionZone->SetSphereRadius(FuelRemaining/MaxFuel * MaxRadius);
 		Litter->PointLight->SetIntensity(FuelRemaining/MaxFuel *LightRadius);
@@ -310,21 +262,72 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 		}
 	}
 
-	// Actualises the local UI 
-	AActor* Owner = GetOwner();
-	if (!Owner) return;
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
 
-	APawn* PawnOwner = Cast<APawn>(Owner);
-	if (!PawnOwner) return;
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
 
-	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
-	if (!PC || !PC->IsLocalController()) return;
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
 
-	if (!PC->PlayerState) return;
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
 
-	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseLocalLantern(FuelRemaining, MaxFuel);
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
 }
+
+void UPlayerLightComponent::FuelUpdate(float NewFuel)
+{
+	if (GetOwner()->HasAuthority())
+	{
+		FuelRemaining += NewFuel;
+		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
+
+		if (FuelRemaining <= 0.f && bLightOn)
+		{
+			TurnLightOff();
+		}
+	}
+
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
+
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
+
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
+
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
+}
+
+void UPlayerLightComponent::OnRep_FuelRemaining()
+{
+	if (!PalanquinHUDWidget)
+	{
+		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+		if (!PC || !PC->IsLocalController()) return;
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+		if (!HUD) return;
+
+		UMainWidget* MainWidget = HUD->MainWidget;
+		if (!MainWidget) return;
+
+		PalanquinHUDWidget = MainWidget->GetPalanquinHUDWidget();
+	}
+
+	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
+}
+
 
 
 void UPlayerLightComponent::Server_RequestFuelUpdate_Implementation(float Amount)

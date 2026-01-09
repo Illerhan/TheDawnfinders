@@ -237,15 +237,15 @@ void ALitter::ResolvePhysics(float DeltaTime)
     if (!CurrentLinearVelocity.IsZero() || !FMath::IsNearlyZero(CurrentAngularVelocityYaw))
     {
         FVector DeltaLoc = CurrentLinearVelocity * DeltaTime;
-    FRotator DeltaRot(0.f, CurrentAngularVelocityYaw * DeltaTime, 0.f);
+        FRotator DeltaRot(0.f, CurrentAngularVelocityYaw * DeltaTime, 0.f);
 
-    // --- DETECTION COLLISION JOUEURS ---
-    FHitResult PlayerHit;
+        // --- DETECTION COLLISION JOUEURS ---
+        FHitResult PlayerHit;
     
-    // On fait 3 itérations max pour glisser le long des murs (coin de mur, couloir étroit)
-    int MaxIterations = 3;
+        // On fait 3 itérations max pour glisser le long des murs (coin de mur, couloir étroit)
+        int MaxIterations = 3;
     
-    // Copie de travail
+        // Copie de travail
         FVector ProposedMove = DeltaLoc;
         FRotator ProposedRot = DeltaRot;
 

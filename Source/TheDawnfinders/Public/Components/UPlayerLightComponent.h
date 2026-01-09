@@ -8,6 +8,8 @@
 #include "Components/SphereComponent.h"
 #include "UPlayerLightComponent.generated.h"
 
+class UPalanquinHUDWidget;
+
 
 UCLASS(ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent))
 class THEDAWNFINDERS_API UPlayerLightComponent : public UActorComponent
@@ -84,6 +86,7 @@ public :
 	void OnFogOfWarOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
+
 // === PUBLIC PROPERTIES ===
 public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category="Lantern")
@@ -115,4 +118,10 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float MaxRadius;
+
+
+// === PROTECTED PROPERTIES ===
+protected :
+	UPROPERTY(BlueprintReadOnly)
+	UPalanquinHUDWidget* PalanquinHUDWidget;
 };
