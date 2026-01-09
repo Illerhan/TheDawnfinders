@@ -4,6 +4,7 @@
 #include "Widgets/ULockpickQTEWidget.h"
 #include "Widgets/UWorldInteractibleWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -15,11 +16,11 @@ AInteractibleObjects::AInteractibleObjects()
 	
 	RootComponent = CreateDefaultSubobject<USceneComponent>(FName("Root"));
 
-	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("CapsuleColliderComp"));
-	CapsuleCollider->SetupAttachment(RootComponent);
-	CapsuleCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
-	CapsuleCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
-	CapsuleCollider->SetGenerateOverlapEvents(true);
+	BoxCollider = CreateDefaultSubobject<UBoxComponent>(FName("CapsuleColliderComp"));
+	BoxCollider->SetupAttachment(RootComponent);
+	BoxCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
+	BoxCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	BoxCollider->SetGenerateOverlapEvents(true);
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
@@ -28,10 +29,10 @@ AInteractibleObjects::AInteractibleObjects()
 	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
 
 	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
-	InteractQTEWidgetComponent->SetupAttachment(CapsuleCollider);
+	InteractQTEWidgetComponent->SetupAttachment(BoxCollider);
 
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
-	InteractibleWidgetComponent->SetupAttachment(CapsuleCollider);
+	InteractibleWidgetComponent->SetupAttachment(BoxCollider);
 	
 	bReplicates = true;
 }
@@ -48,10 +49,10 @@ void AInteractibleObjects::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 void AInteractibleObjects::BeginPlay()
 {
 	Super::BeginPlay();
-	if (CapsuleCollider)
+	if (BoxCollider)
 	{
-		CapsuleCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
-		CapsuleCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
+		BoxCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
+		BoxCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
 	}
 
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
