@@ -2,6 +2,8 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/CustomHUD.h"
+#include "GameFramework/SoundManager.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UMainWidget.h"
 #include "Widgets/UWorldInteractibleWidget.h"
@@ -130,7 +132,12 @@ void ALitter::BeginPlay()
         InventoryTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
         InventoryTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
     }
-    
+    AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), ASoundManager::StaticClass());
+    SoundManagerInstance = Cast<ASoundManager>(FoundActor);
+    if (!SoundManagerInstance)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("ALitter: Attention, aucun ASoundManager trouvé dans le niveau !"));
+    }
 }
 
 // ============================================================================
@@ -171,7 +178,9 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
     for (int i = 0; i < 2; i++)
     {
-        if (ActiveCount == 1 && CurrentWeight>= SoloMaxWeight)
+        if (SoundManagerInstance && ActiveCount == 1)
+            SoundManagerInstance->MultiPlaySound(SoloSound,GetActorLocation(),800,1000,true);
+        if (ActiveCount == 1 && CurrentWeight >= SoloMaxWeight)
         {
             Mass += CurrentWeight;
         }else if (ActiveCount == 2 && CurrentWeight>= DuoMaxWeight)
@@ -212,6 +221,40 @@ void ALitter::ResolvePhysics(float DeltaTime)
         // Torque = r x F.  We only care about Z-axis rotation.
         FVector Torque3D = FVector::CrossProduct(LeverArmWorld, AppliedForce);
         TotalTorqueZ += Torque3D.Z;
+    }
+
+    Mass = BaseMass; 
+
+    // 2. Vérifier si on est en surcharge
+    bool bIsOverloaded = false;
+
+    if (ActiveCount == 1 && CurrentWeight >= SoloMaxWeight)
+    {
+        // On est tout seul et c'est trop lourd
+        Mass += CurrentWeight; // On ajoute le poids réel à la masse physique
+        bIsOverloaded = true;
+    }
+    else if (ActiveCount == 2 && CurrentWeight >= DuoMaxWeight)
+    {
+        // On est deux mais c'est quand même trop lourd
+        Mass += CurrentWeight;
+        bIsOverloaded = true;
+    }
+
+    // 3. Gestion du Son (Avec un délai de 2 secondes entre chaque cri/bruit)
+    if (ActiveCount == 1 &&  SoundManagerInstance)
+    {
+        // On vérifie si on pousse (inutile de crier si on est à l'arrêt)
+        if (!CurrentLinearVelocity.IsZero() || !TotalForce.IsZero())
+        {
+            // Anti-Spam : On joue le son seulement si 2 secondes sont passées
+            if (TimeNow - LastStrainSoundTime > 2.0f)
+            {
+                // J'assume que SoloSound est le bruit d'effort
+                SoundManagerInstance->MultiPlaySound(SoloSound, GetActorLocation(), 0.01f, 100.f, true);
+                LastStrainSoundTime = TimeNow;
+            }
+        }
     }
 
     // --- VISUAL DEBUG: Print status ---
