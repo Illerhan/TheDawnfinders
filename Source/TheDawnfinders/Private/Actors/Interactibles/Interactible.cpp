@@ -15,7 +15,12 @@ AInteractibleObjects::AInteractibleObjects()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	RootComponent = CreateDefaultSubobject<USceneComponent>(FName("Root"));
-
+	InteractCollider = CreateDefaultSubobject<UBoxComponent>(FName("InteractCollider"));
+	InteractCollider->SetupAttachment(RootComponent);
+	InteractCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
+	InteractCollider->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	InteractCollider->SetGenerateOverlapEvents(true);
+	
 	BoxCollider = CreateDefaultSubobject<UBoxComponent>(FName("CapsuleColliderComp"));
 	BoxCollider->SetupAttachment(RootComponent);
 	BoxCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
@@ -49,10 +54,10 @@ void AInteractibleObjects::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 void AInteractibleObjects::BeginPlay()
 {
 	Super::BeginPlay();
-	if (BoxCollider)
+	if (InteractCollider)
 	{
-		BoxCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
-		BoxCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
+		InteractCollider->OnComponentBeginOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapBegin);
+		InteractCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
 	}
 
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
