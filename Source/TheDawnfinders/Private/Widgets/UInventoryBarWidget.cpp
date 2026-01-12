@@ -95,8 +95,10 @@ void UInventoryBarWidget::TryBindToInventory()
     // Bind TOUJOURS côté client
     InventoryComponentRef->OnInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
 
+    UE_LOG(LogTemp, Display, TEXT("%d"), InventoryComponentRef->InventorySlots.Num());
+
     // Forcer une update immédiate pour synchroniser avec l’état actuel
-    SetupInventory(InventoryComponentRef->InventorySlots.Num());
+    SetupInventory(InventoryComponentRef->InventorySlotCount);
     ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
 }
 
