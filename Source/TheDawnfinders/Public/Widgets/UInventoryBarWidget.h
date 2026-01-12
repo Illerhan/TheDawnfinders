@@ -14,13 +14,19 @@ class THEDAWNFINDERS_API UInventoryBarWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+
+// === INITIALISATION / DESTRUCTION ===
 public :
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetupInventory(int SlotCount);
+
 
 // === MAIN FUNCTIONS ===
 public :
+
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	void ActualiseWidget(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
 

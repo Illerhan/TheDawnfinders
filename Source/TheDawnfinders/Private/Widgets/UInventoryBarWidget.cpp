@@ -3,7 +3,7 @@
 #include "Widgets/UInventorySlotWidget.h"
 
 
-#pragma region Construct / Destruct
+#pragma region Initialisation / Destruction
 
 void UInventoryBarWidget::NativeConstruct()
 {
@@ -25,6 +25,11 @@ void UInventoryBarWidget::NativeConstruct()
         // Poll for pawn if not immediately available
         GetWorld()->GetTimerManager().SetTimer(BindDelayTimerHandle, this, &UInventoryBarWidget::TryBindToInventory, 0.1f, true);
     }
+}
+
+void UInventoryBarWidget::SetupInventory_Implementation(int SlotCount)
+{
+
 }
 
 void UInventoryBarWidget::NativeDestruct()
@@ -91,6 +96,7 @@ void UInventoryBarWidget::TryBindToInventory()
     InventoryComponentRef->OnInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
 
     // Forcer une update immédiate pour synchroniser avec l’état actuel
+    SetupInventory(InventoryComponentRef->InventorySlots.Num());
     ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
 }
 
