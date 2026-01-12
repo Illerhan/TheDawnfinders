@@ -44,6 +44,9 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int ItemValue;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int ItemWeight = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int MaxStackingCapacity = 1;

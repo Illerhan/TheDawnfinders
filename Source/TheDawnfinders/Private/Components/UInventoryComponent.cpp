@@ -104,6 +104,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, in
 		{
 			Slot.ItemData = NewItem;
 			Slot.Quantity = Quantity;
+			CurrentWeight += Slot.ItemData->ItemWeight;
 
 			UE_LOG(LogTemp, Warning, TEXT("Found"));
 
@@ -181,13 +182,15 @@ void UInventoryComponent::RemoveItemAtIndex(int Index, bool bRemoveAll)
 void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool bRemoveAll)
 {
 	TArray<FInventorySlot> NewSlots = InventorySlots;
-
+	
 	FInventorySlot& CurrentSlot = NewSlots[Index];
+	if (!CurrentSlot.ItemData) return;
+	CurrentWeight -= CurrentSlot.ItemData->ItemWeight;
 	if (bRemoveAll)
 		CurrentSlot.Quantity = 0;
 	else
 		CurrentSlot.Quantity--;
-
+	
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
 
 	InventorySlots = NewSlots;

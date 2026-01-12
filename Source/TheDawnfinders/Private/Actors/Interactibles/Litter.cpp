@@ -180,12 +180,12 @@ void ALitter::ResolvePhysics(float DeltaTime)
     {
         if (SoundManagerInstance && ActiveCount == 1)
             SoundManagerInstance->MultiPlaySound(SoloSound,GetActorLocation(),800,1000,true);
-        if (ActiveCount == 1 && CurrentWeight >= SoloMaxWeight)
+        if (ActiveCount == 1 && InventoryComponent->CurrentWeight >= InventoryComponent->SoloMaxWeight)
         {
-            Mass += CurrentWeight;
-        }else if (ActiveCount == 2 && CurrentWeight>= DuoMaxWeight)
+            Mass += InventoryComponent->CurrentWeight;
+        }else if (ActiveCount == 2 && InventoryComponent->CurrentWeight>= InventoryComponent->DuoMaxWeight)
         {
-            Mass += CurrentWeight;
+            Mass += InventoryComponent->CurrentWeight;
         }
         // Check if we have a player in this slot
         AAPlayerCharacter* Pusher = CarrySlots[i].Get();
@@ -228,16 +228,16 @@ void ALitter::ResolvePhysics(float DeltaTime)
     // 2. Vérifier si on est en surcharge
     bool bIsOverloaded = false;
 
-    if (ActiveCount == 1 && CurrentWeight >= SoloMaxWeight)
+    if (ActiveCount == 1 && InventoryComponent->CurrentWeight >= InventoryComponent->SoloMaxWeight)
     {
         // On est tout seul et c'est trop lourd
-        Mass += CurrentWeight; // On ajoute le poids réel à la masse physique
+        Mass += InventoryComponent->CurrentWeight; // On ajoute le poids réel à la masse physique
         bIsOverloaded = true;
     }
-    else if (ActiveCount == 2 && CurrentWeight >= DuoMaxWeight)
+    else if (ActiveCount == 2 && InventoryComponent->CurrentWeight >= InventoryComponent->DuoMaxWeight)
     {
         // On est deux mais c'est quand même trop lourd
-        Mass += CurrentWeight;
+        Mass += InventoryComponent->CurrentWeight;
         bIsOverloaded = true;
     }
 

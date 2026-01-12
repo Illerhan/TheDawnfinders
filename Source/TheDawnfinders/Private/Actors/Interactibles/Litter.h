@@ -121,14 +121,7 @@ protected:
     UPROPERTY(EditAnywhere, Category = "Litter Physics")
     float RotationalInertia = 50000.0f;// Resistance to turning (Higher = feels heavier to turn)
 
-	UPROPERTY(EditAnywhere, Category = "Litter Physics")
-	float CurrentWeight = 25.0f;
 	
-	UPROPERTY(EditAnywhere, Category = "Litter Physics")
-	float SoloMaxWeight = 25.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Litter Physics")
-	float DuoMaxWeight = 25.0f;
 	
 
     // --- STATE VARIABLES ---
