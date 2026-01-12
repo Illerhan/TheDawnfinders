@@ -150,6 +150,15 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;
 	
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float CurrentWeight = 0.0f;
+	
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float SoloMaxWeight = 25.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Litter Physics")
+	float DuoMaxWeight = 25.0f;
+	
 
 // === OTHER RESSOURCES ===
 
