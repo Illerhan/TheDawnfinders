@@ -166,6 +166,9 @@ struct FEnemyActionData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float MontageSpeed = 1.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main", meta = (ClampMin = "0.0", ClampMax = "1.0"))
+	float PreparationSpeed = 0.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float FollowPlayerDuration = 0.2f;
 

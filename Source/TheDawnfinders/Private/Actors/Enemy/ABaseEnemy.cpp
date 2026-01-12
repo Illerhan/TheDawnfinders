@@ -37,11 +37,11 @@ void ABaseEnemy::Tick(float DeltaTime)
 
 }
 
-void ABaseEnemy::DoAttack(FEnemyActionData AttackData)
+void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor* Target)
 {
     if (!GetMesh()) return;
 
-    GetCharacterMovement()->MaxWalkSpeed = 0.f;
+    GetCharacterMovement()->MaxWalkSpeed = 0;
     MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
 }
 
@@ -70,6 +70,8 @@ void ABaseEnemy::DoAttackCollision()
 {
     //if (!HasAuthority()) return;
     //FEnemyActionData EnemyAction = AIController->GetEnemyAttackComponent()->GetLastAttackUsed();
+
+    GetCharacterMovement()->MaxWalkSpeed = 0;
 
     TArray<FHitResult> HitResults;
     FVector Start = AttackCollisionPosRef->GetComponentLocation();

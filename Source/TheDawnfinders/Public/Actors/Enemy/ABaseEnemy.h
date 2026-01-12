@@ -47,8 +47,8 @@ public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USceneComponent* AttackCollisionPosRef;
 
-	UFUNCTION(BlueprintCallable)
-	void DoAttack(FEnemyActionData AttackData);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartAttack(FEnemyActionData AttackData, AActor* Target);
 
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
