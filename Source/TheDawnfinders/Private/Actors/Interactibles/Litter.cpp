@@ -418,10 +418,9 @@ void ALitter::Interact_Implementation(AActor* Interactor)
         // Exemple :
         if (InventoryComponent)
         {
-            // Logique custom, ou appel RPC si besoin
-            UE_LOG(LogTemp, Warning, TEXT("Ouverture Inventaire Litter !"));
             APlayerController* PlayerController = Cast<APlayerController>(Player->GetController());
             ACustomHUD* HUD = Cast<ACustomHUD>(PlayerController->GetHUD());
+            if (!HUD) return;
             if (!HUD->MainWidget->GetIsInPalanquin())
             {
                 HUD->MainWidget->OpenPalanquinInventory();
