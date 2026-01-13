@@ -26,6 +26,9 @@ public :
 public :
 	UFUNCTION(BlueprintCallable)
 	void AddAlertness(float Quantity);
+	
+	UFUNCTION(BlueprintCallable)
+	void ResetAlertness();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetEnemyState(EEnemyState NewEnemyState);
