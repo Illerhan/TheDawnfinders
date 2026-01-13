@@ -17,6 +17,8 @@
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldProgressBar.h"
 #include "Components/DebugComponent.h"
+#include "GameFramework/CustomHUD.h"
+#include "Widgets/UMainWidget.h"
 
 AAPlayerCharacter::AAPlayerCharacter()
 {
@@ -597,13 +599,34 @@ void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
 #pragma endregion
 
 #pragma region Others
-void AAPlayerCharacter::OnRevive() { if (!HasAuthority()) Server_OnRevive(); CurrentState = EPlayerState::None; SetPlayerSpeed(PlayerConfig->WalkSpeed); GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this); }
-void AAPlayerCharacter::Server_OnRevive_Implementation() { OnRevive(); }
-bool AAPlayerCharacter::IsReadyForRPCs() const { return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr; }
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range) { UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag); }
-void AAPlayerCharacter::PossessedBy(AController* NewController) { Super::PossessedBy(NewController); }
+void AAPlayerCharacter::OnRevive()
+{
+    if (!HasAuthority()) Server_OnRevive(); 
+    CurrentState = EPlayerState::None; 
+    SetPlayerSpeed(PlayerConfig->WalkSpeed); 
+    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
+}
+void AAPlayerCharacter::Server_OnRevive_Implementation()
+{
+    OnRevive();
+}
+bool AAPlayerCharacter::IsReadyForRPCs() const
+{
+    return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
+}
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+{
+    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+}
+void AAPlayerCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+}
 void AAPlayerCharacter::OnRep_PlayerState() { Super::OnRep_PlayerState(); }
-void AAPlayerCharacter::OnRep_CurrentPlayerState() {}
+void AAPlayerCharacter::OnRep_CurrentPlayerState()
+{
+    
+}
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
 {
     if (!ZiplineItem || !ZiplineItem->ZiplineClass) return;
@@ -619,5 +642,25 @@ void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
     ThrowablePreviewMeshComponent->SetHiddenInGame(false);
     ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
 }
-void AAPlayerCharacter::HideThrowPreview() { ThrowablePreviewMeshComponent->SetHiddenInGame(true); }
+void AAPlayerCharacter::HideThrowPreview()
+{
+    ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI UIType, AActor* Context)
+{
+    APlayerController* PC = Cast<APlayerController>(GetController());
+    if (!PC) return;
+
+    ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+    if (!HUD || !HUD->MainWidget) return;
+
+    switch (UIType)
+    {
+    case EInteractionUI::LitterInventory:
+        HUD->MainWidget->OpenPalanquinInventory();
+        HUD->MainWidget->SetPalanquin(true);
+        break;
+    }
+}
 #pragma endregion
