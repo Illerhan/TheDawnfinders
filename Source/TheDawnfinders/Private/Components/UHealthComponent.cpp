@@ -53,7 +53,8 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		ApplyCurse(DeltaTime);
 	}
 
-	ActualiseCursePostProcess(DeltaTime);
+	if(CurseMaterial)
+		ActualiseCursePostProcess(DeltaTime);
 	
 
 	if (GetOwner()->HasAuthority())
