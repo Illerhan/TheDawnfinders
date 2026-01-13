@@ -129,6 +129,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool bLockRotation;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsAttacking;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;
 };
