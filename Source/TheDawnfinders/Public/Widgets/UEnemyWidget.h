@@ -12,10 +12,16 @@ class THEDAWNFINDERS_API UEnemyWidget : public UUserWidget
 	
 public :
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
-	void Multicast_PlaySuspiciousAnim();
+	void Multicast_DisplaySuspicionProgress();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void PlaySuspiciousAnim();
+	void DisplaySuspicionProgress(float CurrentRatio);
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_DisplayAggressiveProgress();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DisplayAggressiveProgress(float CurrentRatio);
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_PlayAggressiveAnim();
