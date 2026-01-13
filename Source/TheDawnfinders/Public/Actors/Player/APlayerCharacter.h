@@ -21,6 +21,14 @@ class UWidgetComponent;
 class UWorldProgressBar;
 class UStaticMeshComponent;
 
+UENUM()
+enum class EInteractionUI : uint8
+{
+	None,
+	LitterInventory,
+	Lockpick,
+	Chest,
+};
 
 UCLASS()
 class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface, public IDamageable
@@ -150,6 +158,9 @@ public:
 
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Others")
 	void Server_AskOwnershipPermission(AActor* Target, AController* Origin);
+	
+	UFUNCTION(Client, Reliable)
+	void Client_OpenInteractionUI (EInteractionUI UIType, AActor* Context);
 	
 
 // === MOVEMENT METHODS ===
