@@ -41,6 +41,8 @@ void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor*
 {
     if (!GetMesh()) return;
 
+    bIsAttacking = true;
+
     GetCharacterMovement()->MaxWalkSpeed = 0;
     MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
 }
@@ -125,6 +127,12 @@ void ABaseEnemy::SetLockRotation(bool Locked)
     bLockRotation = Locked;
 }
 
+
+void ABaseEnemy::Multicast_ActualiseSuspicionProgress_Implementation(float CurrentRatio)
+{
+    EnemyWidget->DisplaySuspicionProgress(CurrentRatio);
+}
+
 void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 {
     EnemyWidget->PlayAggressiveAnim();
@@ -138,6 +146,8 @@ void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 {
     GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
+
+    bIsAttacking = false;
 
     BP_OnMontageEnd(bInterrupted);
 }

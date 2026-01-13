@@ -53,6 +53,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
+	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
+	void Multicast_ActualiseSuspicionProgress(float CurrentRatio);
+
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_EnterSuspicious();
 
@@ -125,6 +128,9 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bLockRotation;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsAttacking;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;

@@ -20,11 +20,15 @@ class THEDAWNFINDERS_API ABasicEnemyAIController : public AAIController
 	
 public :
 	ABasicEnemyAIController();
+	virtual void Tick(float DeltaTime) override;
 
 
 public :
 	UFUNCTION(BlueprintCallable)
 	void AddAlertness(float Quantity);
+	
+	UFUNCTION(BlueprintCallable)
+	void ResetAlertness();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetEnemyState(EEnemyState NewEnemyState);
@@ -40,19 +44,28 @@ public :
 
 
 protected :
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> PlayersAtRange;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float AlertnessWaitDuration;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float AlertnessDecreaseSpeed;
+
+	UPROPERTY(BlueprintReadWrite)
 	float Alertness;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite)
+	float AlertnessTimer;
+
+	UPROPERTY(BlueprintReadWrite)
 	ABaseEnemy* PossessedPawn;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite)
 	FVector LastNoiseLocation;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite)
 	EEnemyState EnemyState;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
