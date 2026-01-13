@@ -44,6 +44,12 @@ void ABasicEnemyAIController::Tick(float DeltaTime)
 
 void ABasicEnemyAIController::AddAlertness(float Quantity)
 {
+    if (EnemyState == EEnemyState::Suspicious) {
+        SetEnemyState(EEnemyState::Suspicious);
+
+        return;
+    }
+
     if (EnemyState != EEnemyState::Idle) return;
 
 	Alertness += Quantity;
