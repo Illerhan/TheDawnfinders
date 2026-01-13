@@ -2,6 +2,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/CustomHUD.h"
+#include "GameFramework/GameSession.h"
 #include "GameFramework/SoundManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
@@ -138,6 +139,7 @@ void ALitter::BeginPlay()
     {
         UE_LOG(LogTemp, Warning, TEXT("ALitter: Attention, aucun ASoundManager trouvé dans le niveau !"));
     }
+
 }
 
 // ============================================================================
@@ -413,21 +415,14 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     // CAS 1 : Inventaire (Zone Centrale)
     if (bInCenter)
     {
-        // Logique d'ouverture d'inventaire
-        // Si tu as un InventoryComponent, tu peux appeler une fonction dessus
-        // Exemple :
         if (InventoryComponent)
         {
-            APlayerController* PlayerController = Cast<APlayerController>(Player->GetController());
-            ACustomHUD* HUD = Cast<ACustomHUD>(PlayerController->GetHUD());
-            if (!HUD) return;
-            if (!HUD->MainWidget->GetIsInPalanquin())
+            if (HasAuthority())
             {
-                HUD->MainWidget->OpenPalanquinInventory();
-                HUD->MainWidget->SetPalanquin(true);
+                Player->Client_OpenInteractionUI(EInteractionUI::LitterInventory, this);
             }
+            return;
         }
-        return; 
     }
 
     // CAS 2 : Portage (Zone Avant OU Arrière)
