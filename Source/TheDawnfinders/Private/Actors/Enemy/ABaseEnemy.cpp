@@ -125,6 +125,12 @@ void ABaseEnemy::SetLockRotation(bool Locked)
     bLockRotation = Locked;
 }
 
+
+void ABaseEnemy::Multicast_ActualiseSuspicionProgress_Implementation(float CurrentRatio)
+{
+    EnemyWidget->DisplaySuspicionProgress(CurrentRatio);
+}
+
 void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 {
     EnemyWidget->PlayAggressiveAnim();

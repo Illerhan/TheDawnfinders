@@ -53,6 +53,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
+	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
+	void Multicast_ActualiseSuspicionProgress(float CurrentRatio);
+
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_EnterSuspicious();
 

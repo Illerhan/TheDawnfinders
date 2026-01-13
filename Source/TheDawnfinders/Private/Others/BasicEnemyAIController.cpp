@@ -13,24 +13,44 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 
     EnemyAttackComponent = CreateDefaultSubobject<UEnemyAttackComponent>(TEXT("AC_EnemyAttack"));
 
-    // Pour s'assurer que l�AI utilise le sens auditif
     HearingConfig->DetectionByAffiliation.bDetectEnemies = true;
     HearingConfig->DetectionByAffiliation.bDetectFriendlies = true;
     HearingConfig->DetectionByAffiliation.bDetectNeutrals = true;
 
     AIPerceptionComponent->ConfigureSense(*HearingConfig);
     AIPerceptionComponent->SetDominantSense(UAISense_Hearing::StaticClass());
+
+    PrimaryActorTick.bCanEverTick = true;
 }
 
 
+void ABasicEnemyAIController::Tick(float DeltaTime)
+{
+    if (EnemyState != EEnemyState::Idle) return;
+
+    if (AlertnessTimer > 0) {
+        AlertnessTimer -= DeltaTime;
+        return;
+    }
+
+    if (Alertness > 0) {
+        Alertness -= AlertnessDecreaseSpeed * DeltaTime;
+        PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
+    }
+}
 
 
 void ABasicEnemyAIController::AddAlertness(float Quantity)
 {
+    if (EnemyState != EEnemyState::Idle) return;
+
 	Alertness += Quantity;
+    AlertnessTimer = AlertnessWaitDuration;
+
+    PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
 
 	if (Alertness >= PossessedPawn->EnemyData->AlertnessThreshold) {
-		SetEnemyState(EEnemyState::Aggressive);
+		SetEnemyState(EEnemyState::Suspicious);
 	}
 }
 
