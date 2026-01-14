@@ -488,7 +488,7 @@ void UItemComponent::DoAttackCollision()
 		UEngineTypes::ConvertToTraceType(ECC_EngineTraceChannel3),
 		false,           // trace complex
 		TArray<AActor*>(),
-		EDrawDebugTrace::None,
+		EDrawDebugTrace::ForDuration,
 		Hit,
 		true             // ignore self
 	);
