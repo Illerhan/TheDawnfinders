@@ -518,10 +518,14 @@ void UItemComponent::DoAttackCollision()
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
-	if (!Enemy) return;
+	if (!Enemy || Enemy->IsInvincible) return;
 
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
+
+	InventoryComponent->UseDurability(1);
+	EquippedItem.Durability -= 1;
+	if (EquippedItem.Durability <= 0) FinalDamage *= 0.1f;
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
