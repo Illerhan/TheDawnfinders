@@ -1,5 +1,6 @@
 #include "Widgets/UInventoryBarWidget.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "GameFramework/CustomPlayerState.h"
 #include "Widgets/UInventorySlotWidget.h"
 
 
@@ -122,8 +123,14 @@ void UInventoryBarWidget::SetupSlotsNavigation_Implementation()
 
 void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex)
 {
-    UE_LOG(LogTemp, Error, TEXT("════════════════════════════════════════════════════════"));
-    UE_LOG(LogTemp, Error, TEXT("ActualiseWidget called! Slots: %d, CurrentIndex: %d"), Slots.Num(), CurrentIndex);
+    APlayerController* PC = GetOwningPlayer();
+    if (!PC) return;
+
+    ACustomPlayerState* PSCustom = PC->GetPlayerState<ACustomPlayerState>();
+    if (!PSCustom) return;
+
+    PSCustom->ActualiseEquippedItem(Slots[CurrentIndex]);
+
 
     for (int32 i = 0; i < InventorySlotsWidgets.Num(); i++)
     {
@@ -131,11 +138,6 @@ void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventory
 
         if (Slots.IsValidIndex(i))
         {
-            UE_LOG(LogTemp, Warning, TEXT("  Slot %d: %s (Qty: %d) [%s]"),
-                i,
-                Slots[i].ItemData ? *Slots[i].ItemData->ItemName : TEXT("Empty"),
-                Slots[i].Quantity,
-                i == CurrentIndex ? TEXT("SELECTED") : TEXT(""));
             InventorySlotsWidgets[i]->ActualiseVisuals(Slots[i], i == CurrentIndex);
         }
         else
@@ -144,7 +146,6 @@ void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventory
             InventorySlotsWidgets[i]->ActualiseVisuals(EmptySlot, false);
         }
     }
-    UE_LOG(LogTemp, Error, TEXT("════════════════════════════════════════════════════════"));
 }
 
 #pragma endregion

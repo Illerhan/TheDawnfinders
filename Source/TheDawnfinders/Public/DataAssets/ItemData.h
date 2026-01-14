@@ -47,9 +47,6 @@ public :
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int ItemWeight = 0;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	int ItemDurability = 50;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int MaxStackingCapacity = 1;
@@ -92,6 +89,9 @@ public:
 public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	FName WeaponDataTableRow;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int WeaponDurability = 50;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	TArray<float> BBaseComboDamages;
