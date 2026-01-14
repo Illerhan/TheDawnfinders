@@ -117,6 +117,9 @@ public :
 	FInventorySlot GetCurrentSlot();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UseDurability(int NewDurability);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SelectSlotByAngle(int angle);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
