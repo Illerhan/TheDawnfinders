@@ -104,9 +104,8 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, in
 		{
 			Slot.ItemData = NewItem;
 			Slot.Quantity = Quantity;
+			Slot.Durability = NewItem->WeaponDurability;
 			CurrentWeight += Slot.ItemData->ItemWeight;
-
-			UE_LOG(LogTemp, Warning, TEXT("Found"));
 
 			break;
 		}
@@ -421,6 +420,13 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	}
 
 	return FInventorySlot();
+}
+
+void UInventoryComponent::UseDurability(int NewDurability)
+{
+	InventorySlots[CurrentSlotIndex].Durability -= NewDurability;
+
+	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
 
