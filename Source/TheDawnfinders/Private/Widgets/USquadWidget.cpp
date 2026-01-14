@@ -95,7 +95,7 @@ void USquadWidget::ActualiseSquadInfos()
                         CustomPS->GetCurrentStamina(),
                         CustomPS->GetCurrentMaxStamina(),
                         CustomPS->GetMaxHealth(),
-                        CustomPS->GetLanternPercent()
+                        CustomPS->GetCurrentEquippedItem()
                     );
                 }
             }
@@ -128,7 +128,7 @@ void USquadWidget::ActualiseSquadInfos()
                     CustomPS->GetCurrentStamina(),
                     CustomPS->GetCurrentMaxStamina(),
                     CustomPS->GetMaxHealth(),
-                    0
+                    FInventorySlot()
                 );
             }
             WidgetIndex++;
@@ -164,6 +164,17 @@ void USquadWidget::BindAllCurrentPlayerStates()
     ACustomGameState* CustomGS = Cast<ACustomGameState>(GS);
     if (!CustomGS)
     {
+        GetWorld()->GetTimerManager().SetTimer(
+            BindDelayTimerHandle,
+            this,
+            &USquadWidget::BindAllCurrentPlayerStates,
+            0.1f,
+            false
+        );
+        return;
+    }
+
+    if (!Cast<ACustomPlayerState>(PC->PlayerState)) {
         GetWorld()->GetTimerManager().SetTimer(
             BindDelayTimerHandle,
             this,

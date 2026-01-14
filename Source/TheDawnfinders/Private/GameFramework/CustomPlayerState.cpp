@@ -77,7 +77,7 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 #pragma endregion
 
 
-#pragma region Lantern
+#pragma region Others
 
 // CALLED ON THE CLIENT TO ACTUALISE IT'S VALUES INSTANTLY 
 void ACustomPlayerState::ActualiseLocalLantern(float current, float max)
@@ -96,6 +96,12 @@ void ACustomPlayerState::ActualiseLantern(float current, float max)
 	OnRep_LanternChange();
 }
 
+void ACustomPlayerState::ActualiseEquippedItem(FInventorySlot Current)
+{
+	CurrentSlot = Current;
+
+	OnInfoChangeLocal.ExecuteIfBound();
+}
 
 #pragma endregion
 

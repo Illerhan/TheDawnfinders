@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Components/UHealthComponent.h"
+#include "CustomStructs.h"
 #include "GameFramework/PlayerState.h"
 #include "DataAssets/AmuletData.h"
 #include "CustomPlayerState.generated.h"
@@ -60,7 +61,7 @@ public :
 	void SetMaxHealth(float MaxHP);
 
 
-// === LANTERN CHANGES ===
+// === OTHERS ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLocalLantern(float current, float max);
@@ -68,6 +69,8 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseLantern(float current, float max);
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseEquippedItem(FInventorySlot Current);
 
 // === GETTERS ===
 public :
@@ -88,6 +91,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	float GetLanternPercent() const { return LanternPercent; }
+
+	UFUNCTION(BlueprintCallable)
+	FInventorySlot GetCurrentEquippedItem() const { return CurrentSlot; }
 
 
 // === AMULETS ===
@@ -118,4 +124,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	float LanternPercent = 100;
+
+	UPROPERTY(BlueprintReadOnly)
+	FInventorySlot CurrentSlot;
 };

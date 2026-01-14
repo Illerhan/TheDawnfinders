@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "CustomStructs.h"
 #include "USquadMemberWidget.generated.h"
 
 
@@ -15,5 +16,5 @@ public :
 	void Initialise(bool IsMainSlot);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseWidget(float currentHealth, float currentMaxHealth, float currentStamina, float maxStamina, float maxHealth, float lanternPercent);
+	void ActualiseWidget(float currentHealth, float currentMaxHealth, float currentStamina, float maxStamina, float maxHealth, FInventorySlot CurrentItem);
 };
