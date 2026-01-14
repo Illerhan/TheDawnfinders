@@ -11,7 +11,7 @@ void ACarriable::Interact_Implementation(AActor* Interactor)
 
 	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
 
-	BoxCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void ACarriable::StopCarry()
@@ -19,7 +19,7 @@ void ACarriable::StopCarry()
 	CarryActor = nullptr;
 	bIsCarried = false;
 
-	BoxCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	InteractCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 TSubclassOf<AActor> ACarriable::GetTargetActorType()
