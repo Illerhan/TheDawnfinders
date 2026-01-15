@@ -46,6 +46,12 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
 	float AtttacksRange = 50.f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
+	float AttacksRadius = 20.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
+	bool DisplayCollisionDebug = false;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"), Category = "Bagarre")
 	float BluntAbsorption = 0;
 
