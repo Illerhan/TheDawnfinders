@@ -97,7 +97,6 @@ void UHealthComponent::InitialiseComponent
 				CurseMaterial = DynamicMaterial;
 			}
 		}
-		
 	}
 
 	// If is not the server

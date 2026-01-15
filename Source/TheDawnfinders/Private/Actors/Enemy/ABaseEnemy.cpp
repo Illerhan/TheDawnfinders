@@ -37,6 +37,11 @@ void ABaseEnemy::Tick(float DeltaTime)
 
 }
 
+void ABaseEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+
 void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor* Target)
 {
     if (!GetMesh()) return;

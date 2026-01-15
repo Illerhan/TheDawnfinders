@@ -7,6 +7,8 @@
 #include "DataAssets/EnemyData.h"
 #include "Interfaces/IDamageable.h"
 #include "Interfaces/IFadeable.h"
+#include "AIController.h"
+#include "Navigation/PathFollowingComponent.h"
 #include "ABaseEnemy.generated.h"
 
 
@@ -32,6 +34,8 @@ public:
 	ABaseEnemy();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
@@ -131,6 +135,12 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsAttacking;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	EEnemyState CurrentEnemyState;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	TEnumAsByte<EPathFollowingStatus::Type> FollowingStatus;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;

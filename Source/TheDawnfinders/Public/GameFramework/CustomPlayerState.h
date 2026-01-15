@@ -12,6 +12,8 @@
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnInfoChange, const float, hp, const float, maxHp, const float, stam, const float, maxStam);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInfoChange);
 DECLARE_DYNAMIC_DELEGATE(FOnInfoChangeLocal);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCurseRatioChange);
+
 
 
 UCLASS()
@@ -41,6 +43,9 @@ public :
 public :
 	FOnInfoChange OnInfoChange;
 	FOnInfoChangeLocal OnInfoChangeLocal;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnCurseRatioChange OnCurseInfoChange;
 
 
 // === HEALTH + STAMINA CHANGES
@@ -82,6 +87,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	float GetMaxHealth() const { return MaxHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurseRatio() const { return 1 - (CurrentMaxHealth / MaxHealth); }
 
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentStamina() const { return CurrentStamina; }

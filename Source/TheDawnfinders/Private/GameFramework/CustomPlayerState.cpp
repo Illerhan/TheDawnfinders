@@ -33,6 +33,7 @@ void ACustomPlayerState::ActualiseLocalHealth(float current, float max, float fi
 	CurrentMaxHealth = max;
 	MaxHealth = fixedMax;
 
+	OnCurseInfoChange.Broadcast();
 	OnInfoChangeLocal.ExecuteIfBound();
 }
 
@@ -43,6 +44,7 @@ void ACustomPlayerState::ActualiseHealth(float current, float max, float fixedMa
 	CurrentMaxHealth = max;
 	MaxHealth = fixedMax;
 
+	OnCurseInfoChange.Broadcast();
 	OnRep_StaminaChange();
 }
 
