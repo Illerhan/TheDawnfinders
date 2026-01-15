@@ -113,6 +113,12 @@ struct FWeaponInfos : public FTableRowBase {
 	float Range;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Radius = 40.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool DisplayCollisionDebug;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;
 };
 
