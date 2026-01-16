@@ -29,6 +29,9 @@ public :
 	float HearingRadius;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float DetectionRadius;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float AlertnessThreshold;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
