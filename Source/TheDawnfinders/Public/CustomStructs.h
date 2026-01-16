@@ -42,7 +42,6 @@ public:
 
 
 
-
 UENUM(BlueprintType)
 enum class EEnemyAttackTriggerType : uint8 {
 	None UMETA(DisplayName = "None"),
@@ -51,6 +50,7 @@ enum class EEnemyAttackTriggerType : uint8 {
 	HealthMin UMETA(DisplayName = "HealthMin"),
 	HealthMax UMETA(DisplayName = "HealthMax")
 };
+
 
 USTRUCT(BlueprintType)
 struct THEDAWNFINDERS_API FEnemyAttackTrigger {
@@ -180,6 +180,9 @@ struct FEnemyActionData : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float FollowPlayerDuration = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
+	bool bEnableRootMotion = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
 	TArray<FEnemyAttackTrigger> Triggers;
