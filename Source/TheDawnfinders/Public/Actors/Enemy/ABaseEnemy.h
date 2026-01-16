@@ -130,6 +130,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsCrystallized;
+
 	UPROPERTY(BlueprintReadWrite)
 	bool bLockRotation;
 
