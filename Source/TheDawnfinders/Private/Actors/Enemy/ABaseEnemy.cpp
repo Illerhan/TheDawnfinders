@@ -47,8 +47,9 @@ void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor*
     if (!GetMesh()) return;
 
     bIsAttacking = true;
+    CurrentActionData = AttackData;
 
-    GetCharacterMovement()->MaxWalkSpeed = 0;
+    //GetCharacterMovement()->MaxWalkSpeed = 0;
     MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
 }
 
