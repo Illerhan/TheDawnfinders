@@ -27,6 +27,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Doors")
 	bool bIsFullyOpen;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Doors")
+	bool bIsClosed = true;
+	
 
 protected:
 	// Called when the game starts or when spawned

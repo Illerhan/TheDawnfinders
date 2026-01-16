@@ -132,8 +132,25 @@ void AMovableObjects::OnTimeLineFinished()
 	ADoors* Door = Cast<ADoors>(this);
 	if (Door)
 	{
-		Door->bIsFullyOpen = true;
-		UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
+		// CORRECTION : On vérifie où la Timeline s'est arrêtée
+		// Si on est à la fin (ou presque), la porte est ouverte
+		if (Timeline.GetPlaybackPosition() >= 0.99f)
+		{
+			Door->bIsFullyOpen = true;
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door finished OPENING (Fully Open)"));
+		}
+		// Si on est au début (ou presque), la porte est fermée
+		else
+		{
+			Door->bIsFullyOpen = false;
+			UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door finished CLOSING (Closed)"));
+		}
+
+		// Important : on libère le mouvement dans les deux cas
+		bCanMove = true;
+		// On remet la progress bar à jour parfaitement (0 ou 1)
+		CurrentTimelineProgress = Timeline.GetPlaybackPosition();
+       
 		return;
 	}
 	if (!bIsMovingForward)   
