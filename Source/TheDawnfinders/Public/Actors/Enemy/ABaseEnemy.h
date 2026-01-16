@@ -136,6 +136,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsAttacking;
 
+	UPROPERTY(BlueprintReadWrite)
+	FEnemyActionData CurrentActionData;
+
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	EEnemyState CurrentEnemyState;
 
