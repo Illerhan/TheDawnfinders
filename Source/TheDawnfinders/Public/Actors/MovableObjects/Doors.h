@@ -33,6 +33,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+	virtual void OnTimelineFinished();
 
 public:
 	// Called every frame
