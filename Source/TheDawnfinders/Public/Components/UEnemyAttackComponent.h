@@ -28,9 +28,6 @@ public:
 	FEnemyActionData GetCurrentAttack(TArray<AActor*> PlayersAtRange);
 
 	UFUNCTION(BlueprintCallable)
-	void ActualiseAttacksCooldowns();
-
-	UFUNCTION(BlueprintCallable)
 	FEnemyActionData GetLastAttackUsed();
 
 	UPROPERTY(BlueprintReadWrite)
@@ -45,7 +42,7 @@ protected:
 	TArray<FEnemyActionData> SortedPossibleAttacks;
 
 	UPROPERTY(BlueprintReadOnly)
-	TArray<int> CurrentAttacksCooldowns;
+	TArray<float> CurrentAttacksCooldowns;
 
 	UPROPERTY()
 	FEnemyActionData LastAttackUsed;

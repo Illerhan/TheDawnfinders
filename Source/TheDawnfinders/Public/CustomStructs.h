@@ -191,7 +191,7 @@ struct FEnemyActionData : public FTableRowBase {
 	int AttackPriority;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Triggers")
-	int AttackCooldown;
+	float AttackCooldown;
 };
 
 #pragma endregion

@@ -22,6 +22,12 @@ void UEnemyAttackComponent::BeginPlay()
 void UEnemyAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	for (int i = 0; i < CurrentAttacksCooldowns.Num(); i++) {
+		if (CurrentAttacksCooldowns[i] <= 0) continue;
+
+		CurrentAttacksCooldowns[i] -= DeltaTime;
+	}
 }
 
 
@@ -63,7 +69,7 @@ void UEnemyAttackComponent::SortPossibleAttacks(TArray<FName> PossibleAttacksRow
 FEnemyActionData UEnemyAttackComponent::GetCurrentAttack(TArray<AActor*> PlayersAtRange)
 {
 	for (int i = 0; i < SortedPossibleAttacks.Num(); i++) {
-		if (CurrentAttacksCooldowns[i] != 0) continue;   // If the skill is on cooldown we skip
+		if (CurrentAttacksCooldowns[i] > 0) continue;   // If the skill is on cooldown we skip
 
 		// We verify all the triggers to see if they are all valid
 		bool TriggerValid = true;
@@ -84,15 +90,6 @@ FEnemyActionData UEnemyAttackComponent::GetCurrentAttack(TArray<AActor*> Players
 	}
 
 	return FEnemyActionData();
-}
-
-void UEnemyAttackComponent::ActualiseAttacksCooldowns()
-{
-	for (int i = 0; i < CurrentAttacksCooldowns.Num(); i++) {
-		if (CurrentAttacksCooldowns[i] == 0) continue;
-
-		CurrentAttacksCooldowns[i]--;
-	}
 }
 
 FEnemyActionData UEnemyAttackComponent::GetLastAttackUsed()
