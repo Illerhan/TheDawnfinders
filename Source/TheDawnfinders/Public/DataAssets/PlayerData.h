@@ -134,6 +134,12 @@ public:
 
 	// ---------- SOUND ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float WalkSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float WalkSoundAlertness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
 	float RunSoundRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")

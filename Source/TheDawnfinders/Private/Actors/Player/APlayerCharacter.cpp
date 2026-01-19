@@ -286,10 +286,11 @@ void AAPlayerCharacter::RemoveProtectionZone_Implementation()
 
 float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
 {
-    if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
+    if (SoundTag == "Walk") return PlayerConfig->WalkSoundAlertness * GetWorld()->GetDeltaSeconds();
+    else if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
     else if (SoundTag == "Dodge") return PlayerConfig->DodgeSoundAlertness;
     else if (SoundTag == "Attack") return PlayerConfig->AttackSoundAlertness;
-    return 1.0f;
+    return .0f;
 }
 
 void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength)
