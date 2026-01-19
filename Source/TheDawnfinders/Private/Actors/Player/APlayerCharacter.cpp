@@ -89,8 +89,6 @@ AAPlayerCharacter::AAPlayerCharacter()
     {
         PlayerConfig = CreateDefaultSubobject<UPlayerData>(TEXT("PlayerConfig"));
     }
-    if (PlayerConfig)
-     GetCharacterMovement()->RotationRate = FRotator(0.f, PlayerConfig->RotationRate, 0.f);
 }
 
 
@@ -111,8 +109,7 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->ReloadDelay,
         PlayerConfig->StaminaConsumptionRun,
         PlayerConfig->StaminaConsumptionDodge);
-
-    LightComponent->InitialiseComponent(PlayerConfig->FuelConsumption,PlayerConfig->MaxFuel);
+    
 }
 
 void AAPlayerCharacter::BeginPlay()
@@ -163,7 +160,6 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         break;
 
     case EPlayerState::Blocking :
-        StaminaComponent->UseStamina(PlayerConfig->BlockStaminaDrainPerSecond * DeltaTime);
         if (!StaminaComponent->VerifyHasStamina()) ItemComponent->StopSecondaryAction();
         break;
     }
@@ -286,10 +282,11 @@ void AAPlayerCharacter::RemoveProtectionZone_Implementation()
 
 float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
 {
-    if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
+    if (SoundTag == "Walk") return PlayerConfig->WalkSoundAlertness * GetWorld()->GetDeltaSeconds();
+    else if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
     else if (SoundTag == "Dodge") return PlayerConfig->DodgeSoundAlertness;
     else if (SoundTag == "Attack") return PlayerConfig->AttackSoundAlertness;
-    return 1.0f;
+    return .0f;
 }
 
 void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength)
