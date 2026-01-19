@@ -25,7 +25,7 @@ public :
 
 public :
 	UFUNCTION(BlueprintCallable)
-	void AddAlertness(float Quantity);
+	void AddAlertness(float Quantity, FVector Location);
 	
 	UFUNCTION(BlueprintCallable)
 	void ResetAlertness();

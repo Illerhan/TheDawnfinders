@@ -42,12 +42,14 @@ void ABasicEnemyAIController::Tick(float DeltaTime)
 }
 
 
-void ABasicEnemyAIController::AddAlertness(float Quantity)
+void ABasicEnemyAIController::AddAlertness(float Quantity, FVector Location)
 {
     if (EnemyState != EEnemyState::Idle) return;
 
 	Alertness += Quantity;
+    Alertness = FMath::Clamp(Alertness, 0, PossessedPawn->EnemyData->AlertnessThreshold);
     AlertnessTimer = AlertnessWaitDuration;
+    LastNoiseLocation = Location;
 
     PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
 

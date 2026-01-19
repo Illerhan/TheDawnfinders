@@ -1,5 +1,7 @@
 #include "Actors/Player/AThrowableObject.h"
 #include "DataAssets/ItemData.h"
+#include "Actors/Enemy/ABaseEnemy.h"
+#include "Others/BasicEnemyAIController.h"
 #include "Interfaces/IDamageable.h"
 
 
@@ -89,6 +91,7 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 			break;
 
 		case EThrowableEffectType::PlayLoudSound :
+			Cast<ABasicEnemyAIController>(Cast<ABaseEnemy>(Hit.GetActor())->GetController())->AddAlertness(ItemData->ConsumableEffectPower, GetActorLocation());
 			break;
 		}
 	}
