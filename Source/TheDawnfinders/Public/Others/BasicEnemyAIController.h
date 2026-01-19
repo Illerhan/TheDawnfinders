@@ -63,6 +63,9 @@ protected :
 	ABaseEnemy* PossessedPawn;
 
 	UPROPERTY(BlueprintReadWrite)
+	FVector StartPosition;
+
+	UPROPERTY(BlueprintReadWrite)
 	FVector LastNoiseLocation;
 
 	UPROPERTY(BlueprintReadWrite)
