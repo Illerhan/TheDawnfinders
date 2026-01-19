@@ -28,26 +28,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	float CarrySpeed = 250.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float WalkRotationRate = 360.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float RunRotationRate  = 900.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float DodgeRotationRate = 1400.f;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float LowStaminaSpeed = 600.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
-	float RotationRate = 720.f;
-
-
 	// ---------- DODGE ----------
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Dodge")
-	float DodgeDuration = 0.9f;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
 	float DodgeStartSpeed = 1400.f;
 
@@ -69,9 +50,6 @@ public:
 	// ---------- STAMINA ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
 	float MaxStamina = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
-	float BlockStaminaDrainPerSecond = 3.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Stamina")
 	float ReloadSpeed = 10.f;
@@ -101,26 +79,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
 	float CurseRatio = 0.02f;
-
-
-	// ---------- LANTERN ---------- 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
-	float FuelConsumption = 0.1f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Lantern")
-	float MaxFuel = 100.f;
-
-	
-	// ---------- FRICTION ----------
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
-	float RunFriction = 0.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
-	float WalkFriction = 2.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics")
-	float DecelerationWalking = 1500.f;
-
 
 	// ---------- THROW PREVIEW ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Throw")
