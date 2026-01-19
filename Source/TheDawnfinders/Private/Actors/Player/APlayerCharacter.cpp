@@ -89,8 +89,6 @@ AAPlayerCharacter::AAPlayerCharacter()
     {
         PlayerConfig = CreateDefaultSubobject<UPlayerData>(TEXT("PlayerConfig"));
     }
-    if (PlayerConfig)
-     GetCharacterMovement()->RotationRate = FRotator(0.f, PlayerConfig->RotationRate, 0.f);
 }
 
 
@@ -111,8 +109,7 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->ReloadDelay,
         PlayerConfig->StaminaConsumptionRun,
         PlayerConfig->StaminaConsumptionDodge);
-
-    LightComponent->InitialiseComponent(PlayerConfig->FuelConsumption,PlayerConfig->MaxFuel);
+    
 }
 
 void AAPlayerCharacter::BeginPlay()
@@ -163,7 +160,6 @@ void AAPlayerCharacter::Tick(float DeltaTime)
         break;
 
     case EPlayerState::Blocking :
-        StaminaComponent->UseStamina(PlayerConfig->BlockStaminaDrainPerSecond * DeltaTime);
         if (!StaminaComponent->VerifyHasStamina()) ItemComponent->StopSecondaryAction();
         break;
     }

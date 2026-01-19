@@ -111,6 +111,13 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bDoQTE;
 
+public:
+	void SetDoQTE(bool bQTE)
+	{
+		this->bDoQTE = bQTE;
+	}
+
+protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float QTESuccessRangeStart;
 

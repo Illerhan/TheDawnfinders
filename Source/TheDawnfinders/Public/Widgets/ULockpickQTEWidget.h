@@ -4,6 +4,8 @@
 #include "Blueprint/UserWidget.h"
 #include "ULockpickQTEWidget.generated.h"
 
+class AInteractibleObjects;
+
 UCLASS()
 class THEDAWNFINDERS_API ULockpickQTEWidget : public UUserWidget
 {
@@ -23,7 +25,7 @@ public :
 	void ExitQTE();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	bool ValidateQTE();
+bool ValidateQTE(AInteractibleObjects* Interactible);
 
 
 // === OTHERS ===
