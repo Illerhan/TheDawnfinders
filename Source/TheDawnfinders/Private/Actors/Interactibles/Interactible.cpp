@@ -180,7 +180,8 @@ void AInteractibleObjects::StopQTE_Implementation()
 
 bool AInteractibleObjects::ValidateQTE_Implementation()
 {
-	return InteractQTEWidget->ValidateQTE();
+	SetDoQTE(false);
+	return InteractQTEWidget->ValidateQTE(this);
 }
 
 void AInteractibleObjects::FadeIn_Implementation()

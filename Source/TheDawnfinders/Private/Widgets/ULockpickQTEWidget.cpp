@@ -1,5 +1,8 @@
 #include "Widgets/ULockpickQTEWidget.h"
 
+#include "Actors/Interactibles/Interactible.h"
+#include "Actors/Player/APlayerCharacter.h"
+
 
 #pragma region Initialisation
 
@@ -39,6 +42,7 @@ void ULockpickQTEWidget::EnterQTE_Implementation(float SuccessStart, float Succe
     CurrentAngle = 0;
     CurrentStep = 0;
     StepsCount = Steps;
+    
 }
 
 void ULockpickQTEWidget::ExitQTE_Implementation()
@@ -46,7 +50,7 @@ void ULockpickQTEWidget::ExitQTE_Implementation()
     IsDisplayed = false;
 }
 
-bool ULockpickQTEWidget::ValidateQTE_Implementation()
+bool ULockpickQTEWidget::ValidateQTE_Implementation(AInteractibleObjects* Interactible)
 {
     if (RecentlyPressedTimer > 0.f) return false;
     RecentlyPressedTimer = 0.1f;
@@ -57,7 +61,8 @@ bool ULockpickQTEWidget::ValidateQTE_Implementation()
     }
 
     CurrentStep++;
-    if (CurrentStep >= StepsCount) ExitQTE();
+    if (CurrentStep >= StepsCount)
+        ExitQTE();
 
     AimedSuccessPercent = FMath::Lerp(SuccessPercentStart, SuccessPercentEnd, ((float)CurrentStep + 1) / StepsCount);
 
