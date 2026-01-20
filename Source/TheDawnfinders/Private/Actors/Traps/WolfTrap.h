@@ -18,7 +18,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void BeginPlay() override;
-    
+
+protected:
+	// On surcharge cette fonction pour dire au système : "Cet objet est utilisable seulement si y'a un mec dedans"
+	virtual bool GetCanBeUsed_Implementation() override;
+	
 	// Appelé quand le QTE est réussi
 	virtual void OnQTESuccess() override;
     
