@@ -19,8 +19,11 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(Replicated)
+	UPROPERTY(BlueprintReadWrite, ReplicatedUsing = OnRep_TrappedActor)
 	AActor* TrappedActor;
+
+	UFUNCTION()
+	virtual void OnRep_TrappedActor();
 	
 	/** Damage value (server side only) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Trap")

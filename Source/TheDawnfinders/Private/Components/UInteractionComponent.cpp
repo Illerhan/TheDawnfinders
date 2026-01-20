@@ -127,7 +127,7 @@ void UInteractionComponent::StartInteract()
 	// If is doing QTE
 	if (InteractingQTEActor) 
 	{
-		if (!IInteractible::Execute_ValidateQTE(Nearest)) return;   // if QTE Isnt finished
+		if (!IInteractible::Execute_ValidateQTE(Nearest)) return;
 		
 		InteractingQTEActor = nullptr;
 		CurrentInteractible = Nearest;
@@ -228,6 +228,21 @@ void UInteractionComponent::OnRep_HelpState()
 		// hide when canceled or completed
 		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 	}
+}
+
+void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
+{
+	if (!QTEActor || !PlayerCharacter) return;
+
+	// Marque le QTE comme actif
+	InteractingQTEActor = QTEActor;
+	bIsDoingQTE = true;
+
+	// Immobilise le joueur (cohérent avec StartInteract)
+	IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
+
+	// Lance réellement le QTE
+	IInteractible::Execute_StartQTE(QTEActor);
 }
 
 #pragma endregion

@@ -108,4 +108,10 @@ void ATrapBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ATrapBase, bEnable);
+	DOREPLIFETIME(ATrapBase, TrappedActor);
+}
+
+void ATrapBase::OnRep_TrappedActor()
+{
+
 }

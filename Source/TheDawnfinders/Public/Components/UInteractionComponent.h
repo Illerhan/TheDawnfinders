@@ -55,6 +55,8 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
+	void StartExternalQTE(AActor* QTEActor);
+
 
 // === CARRY ===
 public : 

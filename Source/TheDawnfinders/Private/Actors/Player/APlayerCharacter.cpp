@@ -233,7 +233,7 @@ void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
 {
     if (CurrentState == NewState) return;
 
-    SetCurrentPlayerState_Implementation(NewState);
+    SetCurrentPlayerState_Implementation(NewState); 
 }
 
 void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewState)

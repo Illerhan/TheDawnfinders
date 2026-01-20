@@ -28,6 +28,13 @@ protected:
     
 	// Appelé quand le QTE échoue
 	virtual void OnQTEFailed() override;
+	
+	virtual void OnRep_TrappedActor() override;
+	
+	virtual bool GetQTENeeded_Implementation() override;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_StartTrapQTE(AAPlayerCharacter* TargetPlayer);
 
 protected:
 	// Temps avant que le joueur piégé puisse se libérer seul
@@ -50,6 +57,6 @@ protected:
     
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_ReleaseTrappedActor();
-    
+	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 };
