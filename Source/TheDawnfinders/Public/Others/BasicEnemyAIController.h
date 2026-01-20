@@ -39,6 +39,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SetHearingRange(float NewRange);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DisableAIController();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void EnableAIController();
+
 	UFUNCTION(BlueprintCallable)
 	UEnemyAttackComponent* GetEnemyAttackComponent();
 
