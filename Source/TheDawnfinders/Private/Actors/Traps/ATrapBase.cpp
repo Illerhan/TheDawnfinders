@@ -23,7 +23,7 @@ void ATrapBase::BeginPlay()
 
 	if (TrapCollider)
 	{
-		TrapCollider->OnComponentBeginOverlap.AddDynamic(this, &ATrapBase::OnOverlapBegin);
+		TrapCollider->OnComponentBeginOverlap.AddDynamic(this, &ATrapBase::OnTrapOverlapBegin);
 	}
 
 	if (FloatCurve)
@@ -49,7 +49,7 @@ void ATrapBase::Tick(float DeltaTime)
 }
 
 
-void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 							   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 							   bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -71,43 +71,6 @@ void ATrapBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	}
 }
 
-
-#pragma region Fade
-
-void ATrapBase::FadeIn_Implementation()
-{
-	FadeIn_Multicast();
-}
-
-void ATrapBase::FadeOut_Implementation()
-{
-	FadeOut_Multicast();
-}
-
-void ATrapBase::FadeIn_Multicast_Implementation()
-{
-	FogOfWarCount++;
-	if (FogOfWarCount != 1) return;
-
-	FadeTimeline.PlayFromStart();
-}
-
-void ATrapBase::FadeOut_Multicast_Implementation()
-{
-	FogOfWarCount--;
-	if (FogOfWarCount != 0) return;
-
-	FadeTimeline.ReverseFromEnd();
-}
-
-void ATrapBase::HandleFadeProgress(float Value)
-{
-	for (int i = 0; i < Materials.Num(); i++) {
-		Materials[i]->SetScalarParameterValue("Opacity", Value);
-	}
-}
-
-#pragma endregion
 
 
 void ATrapBase::Multicast_PlayEffects_Implementation()
