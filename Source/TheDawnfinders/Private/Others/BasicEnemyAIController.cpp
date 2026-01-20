@@ -82,6 +82,16 @@ void ABasicEnemyAIController::SetHearingRange(float NewRange)
     }
 }
 
+void ABasicEnemyAIController::DisableAIController_Implementation()
+{
+
+}
+
+void ABasicEnemyAIController::EnableAIController_Implementation()
+{
+
+}
+
 UEnemyAttackComponent* ABasicEnemyAIController::GetEnemyAttackComponent()
 {
     return EnemyAttackComponent;
