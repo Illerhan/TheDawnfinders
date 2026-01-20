@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Interactibles/Interactible.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/IFadeable.h"
@@ -9,7 +10,7 @@
 #include "ATrapBase.generated.h"
 
 UCLASS()
-class THEDAWNFINDERS_API ATrapBase : public AActor, public IFadeable
+class THEDAWNFINDERS_API ATrapBase : public AInteractibleObjects
 {
 	GENERATED_BODY()
 
@@ -43,36 +44,9 @@ public:
 
 	/** Called when overlap happens (SERVER ONLY handles it) */
 	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+	void OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 						bool bFromSweep, const FHitResult& SweepResult);
-
-
-// == FADEABLE ===
-public :
-	virtual void FadeIn_Implementation() override;
-	virtual void FadeOut_Implementation() override;
-
-	UFUNCTION(NetMulticast, Reliable)
-	void FadeIn_Multicast();
-
-	UFUNCTION(NetMulticast, Reliable)
-	void FadeOut_Multicast();
-
-	UFUNCTION()
-	void HandleFadeProgress(float Value);
-
-	UPROPERTY()
-	FTimeline FadeTimeline;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UCurveFloat* FloatCurve;
-
-	UPROPERTY(BlueprintReadWrite)
-	int FogOfWarCount = 0;
-
-	UPROPERTY(BlueprintReadWrite)
-	TArray<UMaterialInstanceDynamic*> Materials;
 
 
 protected : 
