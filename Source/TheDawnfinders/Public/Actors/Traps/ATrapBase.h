@@ -19,7 +19,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AActor* TrappedActor;
 	
 	/** Damage value (server side only) */
