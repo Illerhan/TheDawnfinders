@@ -131,6 +131,9 @@ private :
 	FInventorySlot EquippedItem;
 
 	UPROPERTY()
+	TArray<AActor*> AlreadyHitActors;
+
+	UPROPERTY()
 	float ItemUseTimer = 0.f;
 
 	UPROPERTY()

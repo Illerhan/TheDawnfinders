@@ -566,12 +566,14 @@ void UInventoryComponent::ActualiseOverloadedSlots()
 
 void UInventoryComponent::OpenInventory()
 {
+	if (bIsOpened) return;
 	bIsOpened = true;
 	OnInventoryOpenInput.Broadcast();
 }
 
 void UInventoryComponent::CloseInventory()
 {
+	if (!bIsOpened) return;
 	bIsOpened = false;
 	OnInventoryCloseInput.Broadcast();
 }

@@ -360,6 +360,7 @@ void UItemComponent::DoLightAttack()
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
+	AlreadyHitActors.Reset();
 	PlayerCharacter->StartAutoLock(5.f);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
@@ -409,6 +410,7 @@ void UItemComponent::DoHeavyAttack()
 
 	if (!StaminaComponent->VerifyHasStamina()) return;
 
+	AlreadyHitActors.Reset();
 	PlayerCharacter->StartAutoLock(5.f);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
@@ -495,7 +497,6 @@ void UItemComponent::DoAttackCollision()
 
 	if (!bHit) return;
 
-	TSet<AActor*> AlreadyHitActors;
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
 		if (!Hit[i].GetActor()->ActorHasTag("Enemy")) continue;

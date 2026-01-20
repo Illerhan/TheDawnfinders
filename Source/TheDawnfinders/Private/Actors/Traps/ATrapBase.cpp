@@ -10,9 +10,8 @@ ATrapBase::ATrapBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
-
 	TrapCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("TrapCollider"));
-	RootComponent = TrapCollider;
+	TrapCollider->SetupAttachment(GetRootComponent());
 	TrapCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 }
 
