@@ -181,7 +181,18 @@ void AInteractibleObjects::StopQTE_Implementation()
 bool AInteractibleObjects::ValidateQTE_Implementation()
 {
 	SetDoQTE(false);
-	return InteractQTEWidget->ValidateQTE(this);
+	bool bSuccess = InteractQTEWidget->ValidateQTE(this);
+    
+	if (bSuccess)
+	{
+		OnQTESuccess();
+	}
+	else
+	{
+		OnQTEFailed();
+	}
+    
+	return bSuccess;
 }
 
 void AInteractibleObjects::FadeIn_Implementation()
@@ -215,6 +226,14 @@ void AInteractibleObjects::HandleFadeProgress(float Value)
 	for (int i = 0; i < Materials.Num(); i++) {
 		Materials[i]->SetScalarParameterValue("Opacity", Value);
 	}
+}
+
+void AInteractibleObjects::OnQTESuccess()
+{
+}
+
+void AInteractibleObjects::OnQTEFailed()
+{
 }
 
 

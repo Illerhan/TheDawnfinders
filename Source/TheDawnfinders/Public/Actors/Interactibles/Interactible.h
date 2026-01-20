@@ -41,6 +41,12 @@ public :
 	virtual void StartQTE_Implementation() override;
 	virtual void StopQTE_Implementation() override;
 	virtual bool ValidateQTE_Implementation() override;
+	UFUNCTION(BlueprintCallable)
+	virtual void OnQTESuccess();
+
+	// Fonction pour gérer l'échec du QTE - à appeler depuis le widget
+	UFUNCTION(BlueprintCallable)
+	virtual void OnQTEFailed();
 
 
 // === MAIN FUNCTIONS ===
