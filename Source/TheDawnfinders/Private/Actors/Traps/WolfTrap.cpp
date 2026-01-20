@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "WolfTrap.h"
+﻿#include "WolfTrap.h"
 #include "Actors/Enemy/ABaseEnemy.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Interfaces/IDamageable.h"
@@ -11,34 +9,36 @@
 AWolfTrap::AWolfTrap()
 {
     bCanTrap = true;
+    // IMPORTANT : Par défaut, on ne peut pas se libérer seul
+    bCanSelfRelease = false; 
 }
 
 void AWolfTrap::BeginPlay()
 {
     Super::BeginPlay();
-    
-    // S'assurer que le QTE est activé pour ce piège
     bDoQTE = true;
+    bCanSelfRelease = false; // Sécurité
 }
 
 void AWolfTrap::DoTrapAction()
 {
     if (!bCanTrap) return;
     
+    // 1. Réinitialisation IMMEDIATE des variables AVANT d'appeler Super ou de changer l'état
+    CurrentTrappedTime = 0.0f;
+    bCanSelfRelease = false; // Le serveur verrouille l'auto-release
+    bCanBeUsed = true;
+    bCanTrap = false;
+
     Super::DoTrapAction();
     
+    // 2. Immobiliser le joueur
     if (TrappedActor && TrappedActor->Implements<UPlayerInterface>())
     {
         IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Immobilized);
     }
     
-    // Réinitialiser les timers
-    CurrentTrappedTime = 0.0f;
-    bCanSelfRelease = false;
-    bCanBeUsed = true;
-    bCanTrap = false;
-    
-    // Afficher le widget d'interaction pour les alliés
+    // 3. Mise à jour widget
     if (InteractibleWidget)
     {
         InteractibleWidget->DisplayText("[E] Libérer");
@@ -48,47 +48,89 @@ void AWolfTrap::DoTrapAction()
 void AWolfTrap::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    
-    // Si quelqu'un est piégé, incrémenter le timer
-    if (TrappedActor && !bCanSelfRelease)
+
+    if (!TrappedActor) return;
+
+    // Calcul du temps seulement sur le serveur pour éviter la triche ou désynchro
+    if (HasAuthority()) 
     {
-        CurrentTrappedTime += DeltaTime;
-        
-        // Vérifier si le temps pour se libérer seul est atteint
-        if (CurrentTrappedTime >= TimeBeforeSelfRelease)
+        // Si on ne peut pas encore se libérer
+        if (!bCanSelfRelease)
         {
-            bCanSelfRelease = true;
+            CurrentTrappedTime += DeltaTime;
             
-            // Mettre à jour le widget pour le joueur piégé
-            AAPlayerCharacter* TrappedPlayer = Cast<AAPlayerCharacter>(TrappedActor);
-            if (TrappedPlayer && TrappedPlayer->IsLocallyControlled())
+            // Si le temps est écoulé, on autorise la libération
+            if (CurrentTrappedTime >= TimeBeforeSelfRelease)
             {
-                if (InteractibleWidget)
+                bCanSelfRelease = true;
+                // La variable bCanSelfRelease est Replicated, donc les clients le sauront bientôt
+            }
+        }
+    }
+
+    // --- MISE A JOUR DU WIDGET (Client Side Visuals) ---
+    if (InteractibleWidget)
+    {
+        APlayerController* PC = GetWorld()->GetFirstPlayerController();
+        if (PC && TrappedActor)
+        {
+            bool bIsLocallyTrapped = (TrappedActor == PC->GetPawn());
+
+            if (bIsLocallyTrapped)
+            {
+                if (bCanSelfRelease)
                 {
-                    InteractibleWidget->DisplayText("[E] Se libérer");
+                    InteractibleWidget->DisplayText("[E] Se libérer (Difficile)");
                 }
+                else
+                {
+                    // Affiche le décompte visuel
+                    float TimeLeft = FMath::Max(0.0f, TimeBeforeSelfRelease - CurrentTrappedTime);
+                    FString WaitMsg = FString::Printf(TEXT("Immobilisé... %.1f"), TimeLeft);
+                    InteractibleWidget->DisplayText(WaitMsg);
+                }
+            }
+            else
+            {
+                InteractibleWidget->DisplayText("[E] Aider l'allié");
             }
         }
     }
 }
 
+bool AWolfTrap::GetCanBeUsed_Implementation()
+{
+    return TrappedActor != nullptr;
+}
+
 void AWolfTrap::Interact_Implementation(AActor* Interactor)
 {
-    Super::Interact_Implementation(Interactor);
-    
-    if (!TrappedActor) return;
-    
+    if (!TrappedActor || !Interactor) return;
+
     AAPlayerCharacter* InteractingPlayer = Cast<AAPlayerCharacter>(Interactor);
-    if (!InteractingPlayer) return;
+    bool bAllowedToInteract = false;
     
-    // Cas 1: Un allié essaie de libérer le joueur piégé
-    if (TrappedActor != Interactor)
+    // CAS A : Le joueur piégé essaie de se libérer
+    if (Interactor == TrappedActor)
     {
-        PlayerTemp = InteractingPlayer;
-        StartQTE();
+        // VERIFICATION STRICTE : Si bCanSelfRelease est false, on refuse TOUT DE SUITE.
+        if (bCanSelfRelease)
+        {
+            bAllowedToInteract = true;
+        }
+        else
+        {
+            // Feedback optionnel : "Trop faible pour bouger"
+            return; 
+        }
     }
-    // Cas 2: Le joueur piégé essaie de se libérer (seulement après le délai)
-    else if (bCanSelfRelease)
+    // CAS B : Un allié aide
+    else 
+    {
+        bAllowedToInteract = true;
+    }
+    
+    if (bAllowedToInteract)
     {
         PlayerTemp = InteractingPlayer;
         StartQTE();
@@ -97,43 +139,41 @@ void AWolfTrap::Interact_Implementation(AActor* Interactor)
 
 void AWolfTrap::OnQTESuccess()
 {
-    // Appeler la libération sur le serveur
     Server_ReleaseTrappedActor();
 }
 
 void AWolfTrap::OnQTEFailed()
 {
-    // Afficher un message d'erreur
     if (InteractibleWidget)
     {
         Server_DisplayErrorMessage("QTE échoué !");
     }
-    
-    // Réinitialiser le PlayerTemp
     PlayerTemp = nullptr;
 }
 
 void AWolfTrap::Server_ReleaseTrappedActor_Implementation()
 {
     if (!TrappedActor) return;
+
+    UE_LOG(LogTemp, Log, TEXT("%s released"), *TrappedActor->GetName());
     
-    // Libérer le joueur piégé
     if (TrappedActor->Implements<UPlayerInterface>())
     {
+        // --- CORRECTION CRITIQUE ICI ---
+        // Ne met pas "Running", remet l'état par défaut (None)
         IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::None);
     }
-    
-    // Multicast pour tous les clients
+
     Multicast_ReleaseTrappedActor();
     
-    // Réinitialiser l'état du piège
     TrappedActor = nullptr;
     PlayerTemp = nullptr;
     CurrentTrappedTime = 0.0f;
     bCanSelfRelease = false;
-    bCanBeUsed = true;
+    bCanBeUsed = false;
+    // On permet au piège de recapturer plus tard si nécessaire ? Sinon laisser false.
+    // bCanTrap = true; // Décommente si le piège est réutilisable
     
-    // Masquer le widget
     if (InteractibleWidget)
     {
         InteractibleWidget->HideText();
@@ -142,9 +182,6 @@ void AWolfTrap::Server_ReleaseTrappedActor_Implementation()
 
 void AWolfTrap::Multicast_ReleaseTrappedActor_Implementation()
 {
-    // Effets visuels/sonores de libération (si nécessaire)
-    // Par exemple, jouer un son de libération
-    
     if (InteractibleWidget)
     {
         InteractibleWidget->HideText();
