@@ -48,8 +48,10 @@ void ABasicEnemyAIController::AddAlertness(float Quantity, FVector Location)
 
 	Alertness += Quantity;
     Alertness = FMath::Clamp(Alertness, 0, PossessedPawn->EnemyData->AlertnessThreshold);
-    AlertnessTimer = AlertnessWaitDuration;
     LastNoiseLocation = Location;
+
+    if(EnemyState == EEnemyState::Suspicious)
+        AlertnessTimer = AlertnessWaitDuration;
 
     PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
 
@@ -62,7 +64,7 @@ void ABasicEnemyAIController::ResetAlertness()
 {
     Alertness = 0;
 
-    PossessedPawn->Multicast_ActualiseSuspicionProgress(0);
+    //PossessedPawn->Multicast_ActualiseSuspicionProgress(0);
 }
 
 void ABasicEnemyAIController::EndAttack_Implementation()
