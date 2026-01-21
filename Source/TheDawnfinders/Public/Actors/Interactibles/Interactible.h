@@ -41,6 +41,7 @@ public :
 	virtual void StartQTE_Implementation() override;
 	virtual void StopQTE_Implementation() override;
 	virtual bool ValidateQTE_Implementation() override;
+
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
 

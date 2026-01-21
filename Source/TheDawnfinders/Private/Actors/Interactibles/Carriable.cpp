@@ -29,8 +29,6 @@ TSubclassOf<AActor> ACarriable::GetTargetActorType()
 
 void ACarriable::PutInTargetActor_Implementation(AActor* Actor)
 {
-
-
 	Destroy();
 }
 
