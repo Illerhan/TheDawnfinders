@@ -23,15 +23,22 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<AActor> GetTargetActorType();
+	
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	
 
 
 protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AActor> TargetActor;
 
-	UPROPERTY()
+	UPROPERTY(ReplicatedUsing = OnRep_IsCarried, BlueprintReadOnly, Category = "Carriable")
 	bool bIsCarried;
-
+	
+	UFUNCTION()
+	void OnRep_IsCarried();
+	
 	UPROPERTY()
 	AActor* CarryActor;
 };

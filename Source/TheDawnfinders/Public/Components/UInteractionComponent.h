@@ -65,6 +65,10 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void PutInHeavyItem(AActor* Target);
+	
+	UFUNCTION(Server, Reliable)
+	void Server_PutInHeavyItem(AActor* Target);
+	
 
 	UFUNCTION(BlueprintCallable)
 	void EndCarryHeavyItem();
@@ -112,16 +116,17 @@ public:
 
 
 // === PRIVATE PROPERTIES ===
+public:
+	UPROPERTY(Replicated, EditAnywhere, Blueprintable)
+	ACarriable* CarriedItem;
+	
 private:
 	UPROPERTY()
 	FTimerHandle HelpTimer;
 
 	UPROPERTY()
 	AActor* InteractingQTEActor;
-
-	UPROPERTY()
-	ACarriable* CarriedItem;
-
+	
 	UPROPERTY()
 	bool bIsDoingQTE;
 

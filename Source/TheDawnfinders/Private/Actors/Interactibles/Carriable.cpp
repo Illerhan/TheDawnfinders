@@ -1,17 +1,15 @@
 #include "Actors/Interactibles/Carriable.h"
-
 #include "Components/BoxComponent.h"
 #include "Interfaces/IPlayer.h"
+#include "Net/UnrealNetwork.h"
 
 
 void ACarriable::Interact_Implementation(AActor* Interactor)
 {
 	CarryActor = Interactor;
 	bIsCarried = true;
-
+	OnRep_IsCarried();
 	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
-
-	InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void ACarriable::StopCarry()
@@ -29,8 +27,25 @@ TSubclassOf<AActor> ACarriable::GetTargetActorType()
 
 void ACarriable::PutInTargetActor_Implementation(AActor* Actor)
 {
-
-
-	Destroy();
+	this->Destroy();
 }
 
+void ACarriable::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	DOREPLIFETIME(ACarriable, bIsCarried);
+}
+
+void ACarriable::OnRep_IsCarried()
+{
+	if (InteractCollider)
+	{
+		if (bIsCarried)
+		{
+			InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
+		else
+		{
+			InteractCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		}
+	}
+}

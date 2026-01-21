@@ -57,6 +57,7 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
 	DOREPLIFETIME(UInteractionComponent, bIsHelping);
 	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
+	DOREPLIFETIME(UInteractionComponent,CarriedItem)
 }
 
 
@@ -298,11 +299,22 @@ void UInteractionComponent::StartCarryHeavyItem(ACarriable* Item)
 
 void UInteractionComponent::PutInHeavyItem(AActor* Target)
 {
-	if (Target == nullptr) return;
+	if (!GetOwner()->HasAuthority())
+	{
+		Server_PutInHeavyItem(Target);
+		return;
+	}
+	Server_PutInHeavyItem_Implementation(Target);
+}
+
+void UInteractionComponent::Server_PutInHeavyItem_Implementation(AActor* Target)
+{
+	if (Target == nullptr || CarriedItem == nullptr) return;
+	
 	if (!Target->IsA(CarriedItem->GetTargetActorType())) return;
-
+	
 	CarriedItem->PutInTargetActor(Target);
-
+	
 	CarriedItem = nullptr;
 	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
 }
@@ -315,6 +327,7 @@ void UInteractionComponent::EndCarryHeavyItem()
 	CarriedItem = nullptr;
 	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
 }
+
 
 #pragma endregion
 

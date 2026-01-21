@@ -415,7 +415,7 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     // CAS 1 : Inventaire (Zone Centrale)
     if (bInCenter)
     {
-        if (InventoryComponent)
+        if (InventoryComponent && !Player->bIsCarrying)
         {
             if (HasAuthority())
             {
