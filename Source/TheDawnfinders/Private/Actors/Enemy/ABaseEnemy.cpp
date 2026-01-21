@@ -144,7 +144,7 @@ void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 
 void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
 {
-    //EnemyWidget->PlaySuspiciousAnim();
+    EnemyWidget->PlaySuspiciousAnim();
 }
 
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)

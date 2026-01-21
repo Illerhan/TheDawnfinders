@@ -48,15 +48,12 @@ void ABasicEnemyAIController::AddAlertness(float Quantity, FVector Location)
 
 	Alertness += Quantity;
     Alertness = FMath::Clamp(Alertness, 0, PossessedPawn->EnemyData->AlertnessThreshold);
-    LastNoiseLocation = Location;
-
-    if(EnemyState == EEnemyState::Suspicious)
-        AlertnessTimer = AlertnessWaitDuration;
 
     PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
 
 	if (Alertness >= PossessedPawn->EnemyData->AlertnessThreshold) {
 		SetEnemyState(EEnemyState::Suspicious);
+        AlertnessTimer = 0;
 	}
 }
 
