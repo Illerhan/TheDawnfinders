@@ -251,7 +251,9 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 	{
 		FuelRemaining -= FuelConsumption * DeltaTime;
 		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
-
+		
+		UpdateProtectionZoneRadius();
+		
 		ALitter* Litter = Cast<ALitter>(GetOwner());
 		Litter->ProtectionZone->SetSphereRadius(FuelRemaining/MaxFuel * MaxRadius);
 		Litter->PointLight->SetIntensity(FuelRemaining/MaxFuel *LightRadius);
@@ -277,6 +279,33 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 	}
 
 	PalanquinHUDWidget->ActualiseWidget(FuelRemaining / MaxFuel);
+}
+
+void UPlayerLightComponent::UpdateProtectionZoneRadius()
+{
+
+	float FuelAlpha = (MaxFuel > 0.f) ? (FuelRemaining / MaxFuel) : 0.f;
+	
+	float TargetRadius = FuelAlpha * MaxRadius; 
+	
+	AActor* Owner = GetOwner();
+    
+	if (ALitter* Litter = Cast<ALitter>(Owner))
+	{
+		if (Litter->ProtectionZone)
+		{
+			Litter->ProtectionZone->SetSphereRadius(TargetRadius);
+
+			if (Litter->PointLight) Litter->PointLight->SetAttenuationRadius(TargetRadius);
+		}
+	}
+	else if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))
+	{
+		if (Player->ProtectionZone)
+		{
+			Player->ProtectionZone->SetSphereRadius(TargetRadius);
+		}
+	}
 }
 
 void UPlayerLightComponent::FuelUpdate(float NewFuel)
@@ -311,6 +340,9 @@ void UPlayerLightComponent::FuelUpdate(float NewFuel)
 
 void UPlayerLightComponent::OnRep_FuelRemaining()
 {
+	
+	UpdateProtectionZoneRadius();
+	
 	if (!PalanquinHUDWidget)
 	{
 		APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);

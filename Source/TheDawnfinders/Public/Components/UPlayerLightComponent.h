@@ -62,6 +62,7 @@ private :
 	{
 		return FuelRemaining > 0.0f;
 	}
+	void UpdateProtectionZoneRadius();
 
 
 public :	
