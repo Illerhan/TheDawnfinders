@@ -92,15 +92,20 @@ FVector AChest::GetPossibleSpawnLocation()
 
 		FVector FinalPos = Origin + RandomOffset;
 
-		FVector TraceStart = FinalPos + FVector(0, 0, 500);
-		FVector TraceEnd = FinalPos - FVector(0, 0, 1000);
-
+		FVector TraceStart = FinalPos + FVector(0, 0, 50);
+		FVector TraceEnd = FinalPos - FVector(0, 0, 100);
+		
 		FHitResult Hit;
+		FHitResult Hit2;
 		FCollisionQueryParams Params;
 
 		if (!GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, Params)) continue;
+		if (GetWorld()->LineTraceSingleByChannel(Hit2, GetActorLocation() + FVector(0.f, 0.f, 60.f), Hit.ImpactPoint, ECC_Visibility, Params)) {
+			continue;
+		}
 
-		return Hit.ImpactPoint + FVector(0.f, 0.f, 100.f);
+
+		return Hit.ImpactPoint + FVector(0.f, 0.f, 75.f);
 	}
 
 	return FVector();
