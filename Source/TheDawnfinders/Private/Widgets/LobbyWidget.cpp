@@ -99,7 +99,7 @@ void ULobbyWidget::OnCreateSessionClicked()
         false,  // Pas de serveur dédié
         true    // Utiliser les lobbies Steam
     );
-    UGameplayStatics::OpenLevel(this, FName("Lvl_TopDown"),false,"listen?");
+    UGameplayStatics::OpenLevel(this, FName("Lvl_GymRoom"),false,"listen?");
 }
 
 void ULobbyWidget::OnStartGameClicked()
