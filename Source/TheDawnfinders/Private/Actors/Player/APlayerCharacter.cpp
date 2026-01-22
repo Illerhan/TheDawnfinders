@@ -258,6 +258,10 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Immobilized :
         SetPlayerSpeed(0.f);
         break;
+        
+    case EPlayerState::Trapped :
+        SetPlayerSpeed(0.f);
+        break;
 
     case EPlayerState::Dead :
         SetPlayerSpeed(0.f);
@@ -619,7 +623,10 @@ void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
     Super::PossessedBy(NewController);
 }
-void AAPlayerCharacter::OnRep_PlayerState() { Super::OnRep_PlayerState(); }
+void AAPlayerCharacter::OnRep_PlayerState()
+{
+    Super::OnRep_PlayerState();
+}
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
     
