@@ -32,6 +32,7 @@ void AItem::BeginPlay()
 	if (ItemData && ItemData->ItemMesh)
 	{
 		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
+		ItemInfos = FItemInfos(ItemData, ItemData->WeaponDurability);
 	}
 }
 
@@ -56,16 +57,17 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Initialise_Implementation(UItemData* Data)
+void AItem::Initialise_Implementation(FItemInfos Data)
 {
 	if (HasAuthority()) {
 		Multicast_Initialise(Data);
 	}
 }
 
-void AItem::Multicast_Initialise_Implementation(UItemData* Data)
+void AItem::Multicast_Initialise_Implementation(FItemInfos Data)
 {
-	ItemData = Data;
+	ItemData = Data.ItemData;
+	ItemInfos = Data;
 
 	ItemMesh->SetStaticMesh(ItemData->ItemMesh);
 	ItemMesh->SetSimulatePhysics(false);
@@ -80,7 +82,7 @@ void AItem::Interact_Implementation(AActor* Interactor)
 	Super::Interact_Implementation(Interactor);
 
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
-	if (!Player->InventoryComponent->AddNewItem(ItemData)) return;
+	if (!Player->InventoryComponent->AddNewItem(ItemInfos)) return;
 
 	Destroy();
 }

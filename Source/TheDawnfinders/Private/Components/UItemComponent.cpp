@@ -63,14 +63,14 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex)
 {
-	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
+	if (EquippedItem.CurrentInfos.ItemData != nullptr && EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment)
 	{
 		UnequipWeapon();
 	}
 
 	EquippedItem = Slots[CurrentSlotIndex];
 
-	if (EquippedItem.ItemData != nullptr && EquippedItem.ItemData->ItemType == EItemType::Equipment)
+	if (EquippedItem.CurrentInfos.ItemData != nullptr && EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment)
 	{
 		EquipWeapon();
 	}
@@ -78,7 +78,7 @@ void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int Cu
 
 UItemData* UItemComponent::GetEquippedItem()
 {
-	return EquippedItem.ItemData;
+	return EquippedItem.CurrentInfos.ItemData;
 }
 
 void UItemComponent::EquipWeapon()
@@ -86,7 +86,7 @@ void UItemComponent::EquipWeapon()
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
 		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.ItemData->ItemMesh);
+		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.CurrentInfos.ItemData->ItemMesh);
 	}
 }
 
@@ -106,19 +106,19 @@ void UItemComponent::UnequipWeapon()
 
 void UItemComponent::DoMainAction()
 {
-	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	if (EquippedItem.ItemData->ItemType == EItemType::Consumable) 
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Consumable)
 	{
-		if (EquippedItem.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
+		if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 		{
 			StartPreviewThrow();
 			return;
 		}
 
-		if (EquippedItem.ItemData->NeededHoldDuration != 0)
+		if (EquippedItem.CurrentInfos.ItemData->NeededHoldDuration != 0)
 		{
-			if (EquippedItem.ItemData->ConsumableEffectType == EConsumableEffectType::Revive)
+			if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Revive)
 			{
 				float SearchRadius = 300.f;
 				TArray<AAPlayerCharacter*> DeadPlayers = GetNearbyPlayers(SearchRadius, true);
@@ -127,9 +127,9 @@ void UItemComponent::DoMainAction()
 				Ally = DeadPlayers[0]; // On cible le premier mort à portée
 			}
 			
-			if (EquippedItem.ItemData->NeededHoldDuration != 0 && !EquippedItem.ItemData->ContextualUse)
+			if (EquippedItem.CurrentInfos.ItemData->NeededHoldDuration != 0 && !EquippedItem.CurrentInfos.ItemData->ContextualUse)
 			{
-				ItemUseTimer = EquippedItem.ItemData->NeededHoldDuration;
+				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
 				
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::Immobilized);
@@ -170,12 +170,12 @@ void UItemComponent::UseConsumable()
 		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
 	}
 
-	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	switch (EquippedItem.ItemData->ConsumableEffectType)
+	switch (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType)
 	{
 		case EConsumableEffectType::Heal:
-			HealthComponent->Heal(EquippedItem.ItemData->ConsumableEffectPower);
+			HealthComponent->Heal(EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
@@ -187,7 +187,7 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			Server_ThrowItem(ThrowPreviewTimer / 2.f, EquippedItem.ItemData);
+			Server_ThrowItem(ThrowPreviewTimer / 2.f, EquippedItem.CurrentInfos.ItemData);
 
 			InventoryComponent->RemoveCurrentItem();
 			StopPreviewThrow();
@@ -208,7 +208,7 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::Refile:
 			if (!PlayerCharacter) return;
-			float Amount = EquippedItem.ItemData->ConsumableEffectPower;
+			float Amount = EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower;
 			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
 				ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
@@ -232,8 +232,8 @@ void UItemComponent::UseConsumable()
 
 void UItemComponent::StopMainAction()
 {
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -256,20 +256,20 @@ void UItemComponent::StopMainAction()
 
 void UItemComponent::DoSecondaryAction()
 {
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType == EItemType::Valuable) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Valuable) return;
 	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dodging) return;
 
-	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) {
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
 		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking);
 	}
 }
 
 void UItemComponent::StopSecondaryAction()
 {
-	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	if (EquippedItem.ItemData->ItemType == EItemType::Equipment) {
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
 		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 	}
 }
@@ -313,7 +313,7 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 {
 	if (!IsPreviewingThrow) return;
 
-	if (EquippedItem.ItemData == nullptr || EquippedItem.ItemData->ThrowedObjectClass == nullptr)
+	if (EquippedItem.CurrentInfos.ItemData == nullptr || EquippedItem.CurrentInfos.ItemData->ThrowedObjectClass == nullptr)
 	{
 		StopPreviewThrow();
 		return;
@@ -326,7 +326,7 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
 	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
 
-	AThrowableObject* Throwable = EquippedItem.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
+	AThrowableObject* Throwable = EquippedItem.CurrentInfos.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
 	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
 }
 
@@ -348,8 +348,8 @@ void UItemComponent::StopPreviewThrow()
 
 void UItemComponent::DoLightAttack()
 {
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
 
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
@@ -363,7 +363,7 @@ void UItemComponent::DoLightAttack()
 	AlreadyHitActors.Reset();
 	PlayerCharacter->StartAutoLock(5.f);
 
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedAttackInput)
@@ -398,8 +398,8 @@ void UItemComponent::DoHeavyAttack()
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Fallen ||
 		IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Dead) return;
 
-	if (EquippedItem.ItemData == nullptr) return;
-	if (EquippedItem.ItemData->ItemType != EItemType::Equipment) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
 
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
@@ -413,7 +413,7 @@ void UItemComponent::DoHeavyAttack()
 	AlreadyHitActors.Reset();
 	PlayerCharacter->StartAutoLock(5.f);
 
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(WeaponData->WeaponTypeName, " ");
 
 	if (PressedHeavyAttackInput)
@@ -472,9 +472,9 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter->GetController()) return;
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
-	if (EquippedItem.ItemData == nullptr) return;
+	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.ItemData->WeaponDataTableRow, " ");
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
@@ -510,10 +510,10 @@ void UItemComponent::DoAttackCollision()
 		if (!Enemy) return;
 
 		if (!GetOwner()->HasAuthority())
-			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
+			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 
 		else
-			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.ItemData, CurrentAttackDamages);
+			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 	}
 }
 
@@ -525,8 +525,8 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	InventoryComponent->UseDurability(1);
-	EquippedItem.Durability -= 1;
-	if (EquippedItem.Durability <= 0) FinalDamage *= 0.1f;
+	EquippedItem.CurrentInfos.Durability -= 1;
+	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= 0.1f;
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {

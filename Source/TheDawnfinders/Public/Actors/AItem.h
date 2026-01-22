@@ -6,6 +6,7 @@
 #include "Actors/Interactibles/Interactible.h"
 #include "GameFramework/Actor.h"
 #include "DataAssets/ItemData.h"
+#include "CustomStructs.h"
 #include "AItem.generated.h"
 
 UCLASS()
@@ -21,6 +22,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,meta=(ExposeOnSpawn="true"))
 	UItemData* ItemData;
+
+	UPROPERTY(BlueprintReadWrite)
+	FItemInfos ItemInfos;
 
 	UPROPERTY(Blueprintable,BlueprintReadWrite,EditAnywhere)
 	UStaticMeshComponent* ItemMesh;
@@ -38,10 +42,10 @@ public:
 	float LevitationSpeed = 2.f;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Initialise(UItemData* Data);
+	void Initialise(FItemInfos Data);
 
 	UFUNCTION(NetMulticast, Reliable)
-	void Multicast_Initialise(UItemData* Data);
+	void Multicast_Initialise(FItemInfos Data);
 
 
 	virtual void Interact_Implementation(AActor* Interactor) override;

@@ -57,13 +57,13 @@ public :
 // ==== PLAYER ACTIONS ====
 public :
 	UFUNCTION(BlueprintCallable,Category="Inventory")
-	bool AddNewItem(UItemData* NewItem, int Quantity = 1);
+	bool AddNewItem(FItemInfos NewItem, int Quantity = 1);
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
-	void ServerAddNewItem(UItemData* NewItem, int Quantity = 1);
+	void ServerAddNewItem(FItemInfos NewItem, int Quantity = 1);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool HasRoomForItem(UItemData* NewItem);
+	bool HasRoomForItem(FItemInfos NewItem);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void RemoveCurrentItem();
@@ -132,7 +132,7 @@ public :
 	void ChangeOverloadSlotCount(int AmountAdded);
 
 	UFUNCTION(Server, Reliable,BlueprintCallable, Category = "Inventory")
-	void ServerConsumeItemDirectly(UItemData* Item);
+	void ServerConsumeItemDirectly(FItemInfos Item);
 	
 
 

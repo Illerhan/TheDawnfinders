@@ -8,7 +8,7 @@
 
 
 USTRUCT(BlueprintType)
-struct THEDAWNFINDERS_API FInventorySlot {
+struct THEDAWNFINDERS_API FItemInfos {
 
 	GENERATED_BODY()
 
@@ -17,21 +17,51 @@ public:
 	UItemData* ItemData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 Quantity;
+	float Durability;
+
+
+	FItemInfos()
+	:  ItemData(nullptr), Durability()
+	{}
+
+	FItemInfos(UItemData* Data, int Durability)
+		: ItemData(Data), Durability(Durability)
+	{
+	}
+
+	bool operator==(const FItemInfos& Other) const
+	{
+		return ItemData == Other.ItemData && Durability == Other.Durability;
+	}
+
+	bool operator!=(const FItemInfos& Other) const
+	{
+		return !(*this == Other);
+	}
+};
+
+USTRUCT(BlueprintType)
+struct THEDAWNFINDERS_API FInventorySlot {
+
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FItemInfos CurrentInfos;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Durability;
+	int32 Quantity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsOverloadSlot;
 
 	FInventorySlot()
-	:  ItemData(nullptr), Quantity(), Durability(), bIsOverloadSlot(false)
+	: CurrentInfos(), Quantity(), bIsOverloadSlot(false)
 	{}
 
 	bool operator==(const FInventorySlot& Other) const
 	{
-		return ItemData == Other.ItemData && Quantity == Other.Quantity && Durability == Other.Durability && bIsOverloadSlot == Other.bIsOverloadSlot;
+		return CurrentInfos == Other.CurrentInfos && Quantity == Other.Quantity && bIsOverloadSlot == Other.bIsOverloadSlot;
 	}
 
 	bool operator!=(const FInventorySlot& Other) const

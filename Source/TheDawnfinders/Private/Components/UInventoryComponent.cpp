@@ -56,11 +56,11 @@ void UInventoryComponent::OnRep_CurrentSlotIndex()
 
 #pragma region Add / Remove Item
 
-bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
+bool UInventoryComponent::AddNewItem(FItemInfos NewItem, int Quantity)
 {
-	if (!NewItem) return false;
+	if (!NewItem.ItemData) return false;
 
-	if (NewItem->ItemType == EItemType::Currency)
+	if (NewItem.ItemData->ItemType == EItemType::Currency)
 	{
 		if (!GetOwner()->HasAuthority())
 		{
@@ -75,7 +75,7 @@ bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
 
 	if (!GetOwner()->HasAuthority())
 	{
-		UE_LOG(LogTemp, Display, TEXT("%s"), *NewItem->ItemName);
+		UE_LOG(LogTemp, Display, TEXT("%s"), *NewItem.ItemData->ItemName);
 
 		ServerAddNewItem(NewItem, Quantity);
 		return true;
@@ -86,9 +86,9 @@ bool UInventoryComponent::AddNewItem(UItemData* NewItem, int Quantity)
 }
 
 
-void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, int Quantity)
+void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, int Quantity)
 {
-	if (!NewItem)
+	if (!NewItem.ItemData)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AddNewItem: NewItem is null"));
 		return;
@@ -100,16 +100,15 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, in
 	{
 		FInventorySlot& Slot = InventorySlots[i];
 		
-		if (!Slot.ItemData)
+		if (!Slot.CurrentInfos.ItemData)
 		{
-			Slot.ItemData = NewItem;
+			Slot.CurrentInfos = NewItem;
 			Slot.Quantity = Quantity;
-			Slot.Durability = NewItem->WeaponDurability;
-			CurrentWeight += Slot.ItemData->ItemWeight;
+			CurrentWeight += Slot.CurrentInfos.ItemData->ItemWeight;
 
 			break;
 		}
-		else if (Slot.ItemData == NewItem && Slot.Quantity < NewItem->MaxStackingCapacity)
+		else if (Slot.CurrentInfos.ItemData == NewItem.ItemData && Slot.Quantity < NewItem.ItemData->MaxStackingCapacity)
 		{
 			Slot.Quantity += Quantity;
 
@@ -122,17 +121,17 @@ void UInventoryComponent::ServerAddNewItem_Implementation(UItemData* NewItem, in
 }
 
 
-bool UInventoryComponent::HasRoomForItem(UItemData* NewItem)
+bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 {
 	for (int32 i = 0; i < InventorySlots.Num(); i++)
 	{
 		FInventorySlot& Slot = InventorySlots[i];
 
-		if (!Slot.ItemData)
+		if (!Slot.CurrentInfos.ItemData)
 		{
 			return true;
 		}
-		else if (Slot.ItemData == NewItem && Slot.Quantity < NewItem->MaxStackingCapacity)
+		else if (Slot.CurrentInfos.ItemData == NewItem.ItemData && Slot.Quantity < NewItem.ItemData->MaxStackingCapacity)
 		{
 			return true;
 		}
@@ -158,7 +157,7 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 
 	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
 	CurrentSlot.Quantity--;
-	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
 	InventorySlots = NewSlots;
 
@@ -183,14 +182,14 @@ void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool
 	TArray<FInventorySlot> NewSlots = InventorySlots;
 	
 	FInventorySlot& CurrentSlot = NewSlots[Index];
-	if (!CurrentSlot.ItemData) return;
-	CurrentWeight -= CurrentSlot.ItemData->ItemWeight;
+	if (!CurrentSlot.CurrentInfos.ItemData) return;
+	CurrentWeight -= CurrentSlot.CurrentInfos.ItemData->ItemWeight;
 	if (bRemoveAll)
 		CurrentSlot.Quantity = 0;
 	else
 		CurrentSlot.Quantity--;
 	
-	if (CurrentSlot.Quantity <= 0) CurrentSlot.ItemData = nullptr;
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
 	InventorySlots = NewSlots;
 
@@ -219,9 +218,9 @@ void UInventoryComponent::ServerThrow_Implementation()
 	
 	FInventorySlot& CurrentSlot = InventorySlots[CurrentSlotIndex];
 
-	if (!CurrentSlot.ItemData) return; 
+	if (!CurrentSlot.CurrentInfos.ItemData) return;
 
-	if (GetWorld() && GetOwner() && CurrentSlot.ItemData->ItemClass)
+	if (GetWorld() && GetOwner() && CurrentSlot.CurrentInfos.ItemData->ItemClass)
 	{
 		FVector SpawnLocation = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 100.f;
 		FRotator SpawnRotation = FRotator::ZeroRotator;
@@ -230,7 +229,7 @@ void UInventoryComponent::ServerThrow_Implementation()
 		SpawnInfo.Instigator = Cast<APawn>(GetOwner());
 
 		AItem* DroppedItem = GetWorld()->SpawnActor<AItem>(
-			CurrentSlot.ItemData->ItemClass,
+			CurrentSlot.CurrentInfos.ItemData->ItemClass,
 			SpawnLocation,
 			SpawnRotation,
 			SpawnInfo
@@ -238,13 +237,13 @@ void UInventoryComponent::ServerThrow_Implementation()
 
 		if (DroppedItem)
 		{
-			DroppedItem->ItemData = CurrentSlot.ItemData;
+			DroppedItem->ItemData = CurrentSlot.CurrentInfos.ItemData;
 
-			DroppedItem->Initialise(CurrentSlot.ItemData);
+			DroppedItem->Initialise(CurrentSlot.CurrentInfos);
 
-			if (DroppedItem->ItemMesh && CurrentSlot.ItemData->ItemMesh)
+			if (DroppedItem->ItemMesh && CurrentSlot.CurrentInfos.ItemData->ItemMesh)
 			{
-				DroppedItem->ItemMesh->SetStaticMesh(CurrentSlot.ItemData->ItemMesh);
+				DroppedItem->ItemMesh->SetStaticMesh(CurrentSlot.CurrentInfos.ItemData->ItemMesh);
 				DroppedItem->ItemMesh->SetSimulatePhysics(false);
 				DroppedItem->ItemMesh->SetEnableGravity(false);
 				DroppedItem->ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
@@ -285,46 +284,46 @@ void UInventoryComponent::SortByCategories()
 
 	// Weapons 
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
-		if (InventorySlots[i].ItemData->ItemType != EItemType::Equipment) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData->ItemType != EItemType::Equipment) continue;
 
 		SortedInventory.Add(InventorySlots[i]);
 	}
 
 	// Consummables
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
-		if (InventorySlots[i].ItemData->ItemType != EItemType::Consumable) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData->ItemType != EItemType::Consumable) continue;
 
 		SortedInventory.Add(InventorySlots[i]);
 	}
 
 	// Valuables
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
-		if (InventorySlots[i].ItemData->ItemType != EItemType::Valuable) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData->ItemType != EItemType::Valuable) continue;
 
 		SortedInventory.Add(InventorySlots[i]);
 	}
 
 	// Ammo
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
-		if (InventorySlots[i].ItemData->ItemType != EItemType::Ammo) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData->ItemType != EItemType::Ammo) continue;
 
 		SortedInventory.Add(InventorySlots[i]);
 	}
 
 	// Empty
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData != nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != nullptr) continue;
 		SortedInventory.Add(InventorySlots[i]);
 	}
 
 
 	// We apply the sort
 	for (int i = 0; i < SortedInventory.Num(); i++) {
-		InventorySlots[i].ItemData = SortedInventory[i].ItemData;
+		InventorySlots[i].CurrentInfos.ItemData = SortedInventory[i].CurrentInfos.ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
 	}
 }
@@ -337,11 +336,11 @@ void UInventoryComponent::SortItems()
 	SortedSlots.Init(false, InventorySlots.Num());
 
 	for (int i = 0; i < InventorySlots.Num(); i++) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
 		if (SortedSlots[i]) continue;
 
 		// if one stack capacity
-		if (InventorySlots[i].ItemData->MaxStackingCapacity <= 1) {
+		if (InventorySlots[i].CurrentInfos.ItemData->MaxStackingCapacity <= 1) {
 			SortedInventory.Add(InventorySlots[i]);
 			continue;
 		}
@@ -351,7 +350,7 @@ void UInventoryComponent::SortItems()
 		SameItemSlots.Init(InventorySlots[i], 1);
 
 		for (int j = i + 1; j < InventorySlots.Num(); j++) {
-			if (InventorySlots[j].ItemData != InventorySlots[i].ItemData) continue;
+			if (InventorySlots[j].CurrentInfos.ItemData != InventorySlots[i].CurrentInfos.ItemData) continue;
 
 			SortedSlots[j] = true;
 			SameItemSlots.Add(InventorySlots[j]);
@@ -363,7 +362,7 @@ void UInventoryComponent::SortItems()
 			if (SameItemSlots[j].Quantity == 0) continue;
 
 			// If the slot is already full
-			if (SameItemSlots[j].Quantity == SameItemSlots[j].ItemData->MaxStackingCapacity)
+			if (SameItemSlots[j].Quantity == SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity)
 			{
 				SortedInventory.Add(SameItemSlots[j]);
 				continue;
@@ -371,12 +370,12 @@ void UInventoryComponent::SortItems()
 
 			// We try to stack the two slots
 			for (int k = j + 1; k < SameItemSlots.Num(); k++) {
-				if (SameItemSlots[j].Quantity == SameItemSlots[j].ItemData->MaxStackingCapacity) break;
+				if (SameItemSlots[j].Quantity == SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity) break;
 				if (SameItemSlots[k].Quantity <= 0) continue;
 
 				int FinalQuantity = SameItemSlots[k].Quantity + SameItemSlots[j].Quantity;
-				SameItemSlots[j].Quantity = FMath::Clamp(FinalQuantity, 0, SameItemSlots[j].ItemData->MaxStackingCapacity);
-				SameItemSlots[k].Quantity = FMath::Clamp(FinalQuantity - SameItemSlots[j].Quantity, 0, SameItemSlots[j].ItemData->MaxStackingCapacity);
+				SameItemSlots[j].Quantity = FMath::Clamp(FinalQuantity, 0, SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity);
+				SameItemSlots[k].Quantity = FMath::Clamp(FinalQuantity - SameItemSlots[j].Quantity, 0, SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity);
 			}
 
 			UE_LOG(LogTemp, Display, TEXT("Stack First Slot = %d"), SameItemSlots[j].Quantity);
@@ -387,12 +386,12 @@ void UInventoryComponent::SortItems()
 
 	// We apply the sort
 	for (int i = 0; i < SortedInventory.Num(); i++) {
-		InventorySlots[i].ItemData = SortedInventory[i].ItemData;
+		InventorySlots[i].CurrentInfos.ItemData = SortedInventory[i].CurrentInfos.ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
 	}
 
 	for (int i = SortedInventory.Num(); i < InventorySlots.Num(); i++) {
-		InventorySlots[i].ItemData = NULL;
+		InventorySlots[i].CurrentInfos.ItemData = NULL;
 		InventorySlots[i].Quantity = 0;
 	}
 }
@@ -424,7 +423,7 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 
 void UInventoryComponent::UseDurability(int NewDurability)
 {
-	InventorySlots[CurrentSlotIndex].Durability -= NewDurability;
+	InventorySlots[CurrentSlotIndex].CurrentInfos.Durability -= NewDurability;
 
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
@@ -453,7 +452,7 @@ int UInventoryComponent::GetCurrentOverloadCount()
 	int Count = 0;
 
 	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - CurrentOverloadSlotCount; i--) {
-		if (InventorySlots[i].ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
 		if (!InventorySlots[i].bIsOverloadSlot) continue;
 
 		Count++;
@@ -469,15 +468,15 @@ void UInventoryComponent::ChangeOverloadSlotCount(int AmountAdded)
 	ActualiseOverloadedSlots();
 }
 
-void UInventoryComponent::ServerConsumeItemDirectly_Implementation(UItemData* Item)
+void UInventoryComponent::ServerConsumeItemDirectly_Implementation(FItemInfos Item)
 {
-	if (!Item) return;
+	if (!Item.ItemData) return;
     
-	switch (Item->ItemType)
+	switch (Item.ItemData->ItemType)
 	{
 		case EItemType::Currency:
 			// Ajouter l'or directement
-			Gold += Item->ItemValue;
+			Gold += Item.ItemData->ItemValue;
 			OnRep_Gold();
 			break;
 	

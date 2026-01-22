@@ -10,6 +10,14 @@ class AItem;
 class AThrowableObject;
 
 UENUM(BlueprintType)
+enum class EItemRarity : uint8 {
+	Common UMETA(DisplayName = "Common"),
+	Rare UMETA(DisplayName = "Rare"),
+	Epic UMETA(DisplayName = "Epic"),
+	Legendary UMETA(DisplayName = "Legendary")
+};
+
+UENUM(BlueprintType)
 enum class EItemType : uint8 {
 	Equipment UMETA(DisplayName = "Weapon"),
 	Valuable UMETA(DisplayName = "Valuable"),
@@ -53,6 +61,9 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	EItemType ItemType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	EItemRarity ItemRarity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	UStaticMesh* ItemMesh;
