@@ -34,6 +34,9 @@ void ABaseEnemy::BeginPlay()
 void ABaseEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+    if(HasAuthority())
+        CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
 }
 
 void ABaseEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
