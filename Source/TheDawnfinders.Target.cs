@@ -9,12 +9,6 @@ public class TheDawnfindersTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
-		
-		if (Configuration == UnrealTargetConfiguration.Shipping)
-		{
-			GlobalDefinitions.Add("ALLOW_CONSOLE_IN_SHIPPING=1");
-			bUseLoggingInShipping = true; 
-		}
 
 		ExtraModuleNames.AddRange( new string[] { "TheDawnfinders" } );
 	}
