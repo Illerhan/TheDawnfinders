@@ -30,7 +30,8 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		if (Nearest != InteractingQTEActor) {
 			InteractingQTEActor = nullptr;
 			bIsDoingQTE = false;
-			PlayerCharacter->OnRevive();
+			if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 		}
 	}
 
@@ -132,7 +133,8 @@ void UInteractionComponent::StartInteract()
 		
 		InteractingQTEActor = nullptr;
 		CurrentInteractible = Nearest;
-		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
 		TryInteract(Nearest, PlayerCharacter);
 		bIsDoingQTE = false;
 
@@ -142,7 +144,8 @@ void UInteractionComponent::StartInteract()
 	// Starts QTE if needed
 	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
 	{
-		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
 		IInteractible::Execute_StartQTE(Nearest);
 
 		InteractingQTEActor = Nearest;
@@ -240,7 +243,8 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 	bIsDoingQTE = true;
 
 	// Immobilise le joueur (cohérent avec StartInteract)
-	IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
 
 	// Lance réellement le QTE
 	IInteractible::Execute_StartQTE(QTEActor);
@@ -253,7 +257,7 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 
 void UInteractionComponent::StopInteract()
 {
-	// Cancel the revive
+
 	ServerCancelHelp();
 
 	if (CurrentInteractible)
@@ -282,7 +286,8 @@ void UInteractionComponent::CancelInteraction()
 		InteractingQTEActor = nullptr;
 		bIsDoingQTE = false;
 
-		PlayerCharacter->OnRevive();
+		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 	}
 }
 
