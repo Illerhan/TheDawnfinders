@@ -13,7 +13,6 @@ ALitter::ALitter()
 {
     PrimaryActorTick.bCanEverTick = true;
     bReplicates = true;
-    SetReplicateMovement(true); // Let Unreal sync the final Transform
 
     // 1. Root Collision (Physics box)
     RootCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("RootCollision"));
@@ -106,6 +105,39 @@ ALitter::ALitter()
     CarrySlots.SetNum(2);
     CurrentLinearVelocity = FVector::ZeroVector;
     CurrentAngularVelocityYaw = 0.f;
+    
+   // RootCollision->SetIsReplicated(true);
+
+    NetUpdateFrequency = 60.f;
+    MinNetUpdateFrequency = 30.f;
+    
+    if (UPrimitiveComponent* Prim = Cast<UPrimitiveComponent>(RootComponent))
+    {
+        Prim->SetIsReplicated(true);
+    }
+
+    RootCollision->SetEnableGravity(false);
+    RootCollision->SetSimulatePhysics(false);
+    
+}
+
+void ALitter::ClampToGround()
+{
+    float HalfHeight = RootCollision->GetScaledBoxExtent().Z + 10;
+    
+    FVector Start = GetActorLocation() + FVector(0,0,50);
+    FVector End   = GetActorLocation() - FVector(0,0,500);
+
+    FHitResult Hit;
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(this);
+
+    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_WorldStatic, Params))
+    {
+        FVector Loc = GetActorLocation();
+        Loc.Z = Hit.ImpactPoint.Z + HalfHeight;
+        SetActorLocation(Loc, false, nullptr, ETeleportType::TeleportPhysics);
+    }
 }
 
 void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -113,6 +145,7 @@ void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     DOREPLIFETIME(ALitter, CurrentLinearVelocity);
     DOREPLIFETIME(ALitter, CurrentAngularVelocityYaw);
+    DOREPLIFETIME(ALitter, ServerTransform);
 }
 
 void ALitter::BeginPlay()
@@ -154,7 +187,32 @@ void ALitter::Tick(float DeltaTime)
     if (HasAuthority())
     {
         ResolvePhysics(DeltaTime);
+        ClampToGround();
     }
+    else
+    {
+        SmoothClientTransform(DeltaTime);
+    }
+}
+void ALitter::SmoothClientTransform(float DeltaTime)
+{
+    FTransform Current = GetActorTransform();
+
+    FVector NewLoc = FMath::VInterpTo(
+        Current.GetLocation(),
+        ServerTransform.GetLocation(),
+        DeltaTime,
+        10.0f
+    );
+
+    FRotator NewRot = FMath::RInterpTo(
+        Current.Rotator(),
+        ServerTransform.Rotator(),
+        DeltaTime,
+        10.0f
+    );
+
+    SetActorLocationAndRotation(NewLoc, NewRot, false, nullptr, ETeleportType::None);
 }
 
 void ALitter::ResolvePhysics(float DeltaTime)
@@ -164,14 +222,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
     // --- 1. Cleanup Stale Inputs ---
     TArray<AAPlayerCharacter*> ToRemove;
-    for (auto& Pair : ActivePushers)
-    {
-        if (TimeNow - Pair.Value.LastUpdateTime > InputTimeout)
-        {
-            // If player stopped sending input, assume zero input but keep attached
-            Pair.Value.InputVector = FVector::ZeroVector;
-        }
-    }
+    InputTimeout = 0.1f;
 
     // --- 2. Calculate Forces & Torques ---
     FVector TotalForce = FVector::ZeroVector;
@@ -396,6 +447,10 @@ void ALitter::ResolvePhysics(float DeltaTime)
             CurrentLinearVelocity = FVector::VectorPlaneProject(CurrentLinearVelocity, Hit.Normal);
         }
     }
+    if (HasAuthority())
+    {
+        ServerTransform = GetActorTransform();
+    }
 }
 
 // ============================================================================
@@ -505,6 +560,15 @@ void ALitter::Server_UpdateInputs_Implementation(AAPlayerCharacter* Player, FVec
     if (FPusherData* Data = ActivePushers.Find(Player))
     {
         Data->InputVector = WorldInputDirection.GetClampedToMaxSize(1.0f);
+
+        if (Data->InputVector.SizeSquared() < 0.001f)
+        {
+            Data->InputVector = FVector::ZeroVector;
+        }else
+        {
+            Data->InputVector = WorldInputDirection.GetClampedToMaxSize(1.0f);
+        }
+
         Data->LastUpdateTime = GetWorld()->GetTimeSeconds();
     }
 }
