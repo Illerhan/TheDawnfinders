@@ -79,11 +79,11 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 		false,
 		true    
 	);
-		UGameplayStatics::OpenLevel(GameWorld, FName("LvL_GymRoom"),false,"listen?");
+		UGameplayStatics::OpenLevel(GameWorld, FName("L_GymRoom"),true,"listen?");
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
-		DebugComp->Server_TravelToMap("L_Prototype?listen");
+		DebugComp->Server_TravelToMap("L_Palanquin?listen");
 	}
 
 	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);

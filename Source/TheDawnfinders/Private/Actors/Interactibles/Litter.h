@@ -32,9 +32,11 @@ class THEDAWNFINDERS_API ALitter : public AInteractibleObjects
 
 public:
     ALitter();
+	void ClampToGround();
 
 public:
     virtual void BeginPlay() override;
+	void SmoothClientTransform(float DeltaTime);
     virtual void Tick(float DeltaTime) override;
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -163,6 +165,9 @@ public:
     // Unreliable is faster/better for continuous input updates
     UFUNCTION(Server, Unreliable)
     void Server_UpdateInputs(AAPlayerCharacter* Player, FVector WorldInputDirection);
+	
+	UPROPERTY(Replicated)
+	FTransform ServerTransform;
 
 private:
     // --- INTERNAL LOGIC ---

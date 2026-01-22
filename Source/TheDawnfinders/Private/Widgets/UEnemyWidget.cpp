@@ -14,10 +14,12 @@ void UEnemyWidget::Multicast_DisplayAggressiveProgress_Implementation()
 
 void UEnemyWidget::DisplaySuspicionProgress_Implementation(float CurrentRatio)
 {
+
 }
 
 void UEnemyWidget::DisplayAggressiveProgress_Implementation(float CurrentRatio)
 {
+
 }
 
 
