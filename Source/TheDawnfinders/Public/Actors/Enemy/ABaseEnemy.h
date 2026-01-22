@@ -130,6 +130,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
 
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	float CurrentSpeed;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsCrystallized;
 
