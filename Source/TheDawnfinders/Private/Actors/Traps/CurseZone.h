@@ -31,7 +31,7 @@ public:
 	UFUNCTION()
 	void OnCurseOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USphereComponent* CurseCollider;
 	
 	UPROPERTY(EditAnywhere)
