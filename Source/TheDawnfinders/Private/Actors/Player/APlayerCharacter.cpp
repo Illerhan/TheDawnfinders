@@ -368,22 +368,27 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     // --- 1. HANDLE LITTER MOVEMENT ---
     if (bIsCarrying && CurrentPushedObject)
     {
-        // Convert Input to World Space based on your specific Camera Rotation (30, -90)
-        // This ensures the Push Force matches where the stick points visually.
         FVector PushDir = FVector(-Input.X, Input.Y, 0);
-        PushDir.Normalize();
-        FRotator CameraRotation(0.0f, 30.0f - 90.0f, 0.0f);
-        PushDir = CameraRotation.RotateVector(PushDir);
 
-        // Send to Server (Throttle if needed, but for Physics, per-frame is okay with Unreliable RPC)
+        // IMPORTANT : tester AVANT normalize
+        if (PushDir.SizeSquared() > 0.001f)
+        {
+            PushDir.Normalize();
+
+            FRotator CameraRotation(0.0f, 30.0f - 90.0f, 0.0f);
+            PushDir = CameraRotation.RotateVector(PushDir);
+        }
+        else
+        {
+            PushDir = FVector::ZeroVector;
+        }
+
         if (IsLocallyControlled())
         {
             Server_SendPushInput(CurrentPushedObject, PushDir);
         }
-        
-        // Do NOT call AddMovementInput while carrying, 
-        // because the CharacterMovement is likely disabled or attached.
-        return; 
+
+        return;
     }
 
     // --- 2. STANDARD CHARACTER MOVEMENT ---
