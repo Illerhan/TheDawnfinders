@@ -79,7 +79,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 		false,
 		true    
 	);
-		UGameplayStatics::OpenLevel(GameWorld, FName("Lvl_TopDown"),false,"listen?");
+		UGameplayStatics::OpenLevel(GameWorld, FName("LvL_GymRoom"),false,"listen?");
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
