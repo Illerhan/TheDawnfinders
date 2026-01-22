@@ -31,8 +31,6 @@ void AWolfTrap::OnRep_TrappedActor()
     // Appeler la version du parent (bonnes pratiques)
     Super::OnRep_TrappedActor();
 
-    // LOGIQUE CLIENT :
-    // Quand le serveur nous dit "Hey, TrappedActor a changé", on reset le timer visuel
     CurrentTrappedTime = 0.0f;
 
     // Si TrappedActor est devenu null (libération), on cache le widget immédiatement
@@ -67,7 +65,7 @@ void AWolfTrap::DoTrapAction()
     // 2. Immobiliser le joueur
     if (TrappedActor && TrappedActor->Implements<UPlayerInterface>())
     {
-        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Immobilized);
+        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Trapped);
     }
     
     // 3. Mise à jour widget
@@ -154,7 +152,7 @@ void AWolfTrap::Interact_Implementation(AActor* Interactor)
     {
         bIsTheVictim = true;
     }
-    else if (InteractingPlayer->CurrentState == EPlayerState::Immobilized)
+    else if (InteractingPlayer->CurrentState == EPlayerState::Trapped)
     {
         bIsTheVictim = true;
         UE_LOG(LogTemp, Warning, TEXT("FIX: Pointeur différent mais état Immobilized détecté. C'est bien la victime."));
@@ -165,7 +163,6 @@ void AWolfTrap::Interact_Implementation(AActor* Interactor)
         if (bCanSelfRelease)
         {
             PlayerTemp = InteractingPlayer;
-            // Multicast pour que TOUT LE MONDE (y compris le serveur) reçoive l'ordre
             Multicast_StartTrapQTE(InteractingPlayer);
         }
         else
@@ -195,8 +192,8 @@ void AWolfTrap::Multicast_StartTrapQTE_Implementation(AAPlayerCharacter* TargetP
         if (!IC) return;
         
         IC->StartExternalQTE(this);
-
-        IPlayerInterface::Execute_RequestStateChange(TargetPlayer, EPlayerState::Immobilized);
+    if (IPlayerInterface::Execute_GetCurrentPlayerState(TargetPlayer)!= EPlayerState::Trapped)
+            IPlayerInterface::Execute_RequestStateChange(TargetPlayer, EPlayerState::Immobilized);
         Execute_StartQTE(this);
     }
 }
@@ -233,8 +230,8 @@ void AWolfTrap::Server_ReleaseTrappedActor_Implementation()
     CurrentTrappedTime = 0.0f;
     bCanSelfRelease = false;
     bCanBeUsed = false;
-    // On permet au piège de recapturer plus tard si nécessaire ? Sinon laisser false.
-    // bCanTrap = true; // Décommente si le piège est réutilisable
+    
+    // bCanTrap = true; // Décommenter si le piège est réutilisable
     
     if (InteractibleWidget)
     {
