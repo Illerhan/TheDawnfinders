@@ -2,12 +2,9 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "Interfaces/IPlayer.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/CustomHUD.h"
-#include "GameFramework/GameSession.h"
 #include "GameFramework/SoundManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
-#include "Widgets/UMainWidget.h"
 #include "Widgets/UWorldInteractibleWidget.h"
 
 ALitter::ALitter()
@@ -108,9 +105,6 @@ ALitter::ALitter()
     CurrentAngularVelocityYaw = 0.f;
     
    // RootCollision->SetIsReplicated(true);
-
-    NetUpdateFrequency = 60.f;
-    MinNetUpdateFrequency = 30.f;
     
     if (UPrimitiveComponent* Prim = Cast<UPrimitiveComponent>(RootComponent))
     {
@@ -585,9 +579,7 @@ void ALitter::AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex)
     if (!Player || !CarryPoints.IsValidIndex(SlotIndex)) return;
 
     CarrySlots[SlotIndex] = Player;
-
-    // Attache le joueur au point de portage
-    // SnapToTargetNotIncludingScale garde la taille, mais force Pos/Rot
+    
     Player->AttachToComponent(CarryPoints[SlotIndex], FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 }
@@ -640,9 +632,7 @@ bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& Delt
         // La position de fin est : La future Transform du Litter + L'offset relatif du joueur
         FVector EndPos = FutureLitterTrans.TransformPosition(PlayerRelativeLoc);
 
-        // --- CORRECTIF 2 : Ignorer le sol (Shrink Height) ---
-        // Si la capsule fait 88cm de haut, on teste avec 80cm.
-        // Ça évite que le bas de la capsule ne frotte le sol et bloque la rotation.
+     
         float Radius = PlayerCapsule->GetScaledCapsuleRadius() * 1.1f; // +10% de marge en largeur
         float HalfHeight = PlayerCapsule->GetScaledCapsuleHalfHeight() - 5.0f; // -5 unités en hauteur (Lift feet)
 
