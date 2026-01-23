@@ -1,10 +1,8 @@
 #include "Components/UInteractionComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
-#include "Actors/Interactibles/Interactible.h"
 #include "Actors/Interactibles/Carriable.h"
 #include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
 
 
 UInteractionComponent::UInteractionComponent()
@@ -16,7 +14,6 @@ UInteractionComponent::UInteractionComponent()
 void UInteractionComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	PlayerCharacter = Cast<AAPlayerCharacter>(GetOwner());
 }
 

@@ -51,8 +51,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	// SessionManager peut aussi être null si le subsystem a déjà été shut down
     
 	UDebugComponent* DebugComp = PlayerChar->FindComponentByClass<UDebugComponent>();
-
-	// --- Début du Dessin ---
+	
 	SlateIM::BeginVerticalStack();
 	FString HealthText = FString::Printf(
 		TEXT("Health : %.1f/%.1f"),
@@ -68,6 +67,8 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 		PlayerChar->HealthComponent->CurrentHealth = PlayerChar->HealthComponent->MaxHealth;
 	}
 	SlateIM::SpinBox(PlayerChar->PlayerConfig->RunSpeed,0.f,1000.f);
+	
+	SlateIM::SpinBox(PlayerChar->PlayerConfig->ReloadSpeed,0.f,75.f);
 	
 	if (SlateIM::Button(TEXT("CreateSession")))
 	{
