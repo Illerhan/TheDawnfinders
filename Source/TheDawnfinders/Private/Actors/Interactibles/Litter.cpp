@@ -1,5 +1,6 @@
 ﻿#include "Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Interfaces/IPlayer.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/CustomHUD.h"
 #include "GameFramework/GameSession.h"
@@ -459,6 +460,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
 void ALitter::Interact_Implementation(AActor* Interactor)
 {
+
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
     if (!Player) return;
 
@@ -472,10 +474,11 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     {
         if (InventoryComponent && !Player->bIsCarrying)
         {
-            if (HasAuthority())
-            {
-                Player->Client_OpenInteractionUI(EInteractionUI::LitterInventory, this);
-            }
+            if (!HasAuthority()) return;
+
+            Player->Client_OpenInteractionUI(EInteractionUI::LitterInventory, this);
+            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+
             return;
         }
     }
