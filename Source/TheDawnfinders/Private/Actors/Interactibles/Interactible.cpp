@@ -117,14 +117,15 @@ void AInteractibleObjects::CheckEnableDistance()
 
 	if (ClosestDistSq < EnableDistance)
 	{
-		PrimaryActorTick.TickInterval = 0.0f;
 		SetActorTickEnabled(true);
 		SetActorHiddenInGame(false);
+		InteractQTEWidgetComponent->SetComponentTickEnabled(true);
 	}
 	else
 	{
 		SetActorTickEnabled(false);
 		SetActorHiddenInGame(true);
+		InteractQTEWidgetComponent->SetComponentTickEnabled(false);
 	}
 }
 

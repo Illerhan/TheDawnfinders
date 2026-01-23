@@ -28,6 +28,7 @@ void ABaseEnemy::BeginPlay()
     EnemyWidget = Cast<UEnemyWidget>(EnemyWidgetComponent->GetWidget());
 
     CurrentHealth = EnemyData->Health;
+    EnableDistance = EnableDistance * EnableDistance;
 
     GetWorldTimerManager().SetTimer(
         EnableTimer,
@@ -61,13 +62,13 @@ void ABaseEnemy::CheckEnableDistance()
     {
         if (APawn* Pawn = It->Get()->GetPawn())
         {
-            float DistSq = FVector::DistSquared(GetActorLocation(), Pawn->GetActorLocation());
+            float DistSq = FVector::DistSquared((GetActorLocation()), Pawn->GetActorLocation());
             ClosestDistSq = FMath::Min(ClosestDistSq, DistSq);
         }
     }
 
     if (ClosestDistSq < EnableDistance)
-    {
+    {    
         ShowEnemy();
     }
     else
@@ -78,7 +79,6 @@ void ABaseEnemy::CheckEnableDistance()
 
 void ABaseEnemy::ShowEnemy_Implementation()
 {
-
 }
 
 void ABaseEnemy::HideEnemy_Implementation()
