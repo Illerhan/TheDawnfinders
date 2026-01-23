@@ -69,6 +69,14 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SetLockRotation(bool Locked);
 
+	UFUNCTION(BlueprintCallable)
+	void CheckEnableDistance();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowEnemy();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HideEnemy();
 
 
 // === MONTAGES ===
@@ -127,6 +135,11 @@ public :
 
 // === PROTECTED PROPERTIES ===
 protected :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float EnableDistance = 3500.f;
+
+	FTimerHandle EnableTimer;
+
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
 

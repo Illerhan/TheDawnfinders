@@ -28,6 +28,14 @@ void ABaseEnemy::BeginPlay()
     EnemyWidget = Cast<UEnemyWidget>(EnemyWidgetComponent->GetWidget());
 
     CurrentHealth = EnemyData->Health;
+
+    GetWorldTimerManager().SetTimer(
+        EnableTimer,
+        this,
+        &ABaseEnemy::CheckEnableDistance,
+        1.5f,   // time in seconds
+        true    // looping
+    );
 }
 
 
@@ -43,6 +51,42 @@ void ABaseEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 }
+
+void ABaseEnemy::CheckEnableDistance()
+{
+    float ClosestDistSq = TNumericLimits<float>::Max();
+
+    // We go through all the players 
+    for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+    {
+        if (APawn* Pawn = It->Get()->GetPawn())
+        {
+            float DistSq = FVector::DistSquared(GetActorLocation(), Pawn->GetActorLocation());
+            ClosestDistSq = FMath::Min(ClosestDistSq, DistSq);
+        }
+    }
+
+    if (ClosestDistSq < EnableDistance)
+    {
+        ShowEnemy();
+    }
+    else
+    {
+        HideEnemy();
+    }
+}
+
+void ABaseEnemy::ShowEnemy_Implementation()
+{
+
+}
+
+void ABaseEnemy::HideEnemy_Implementation()
+{
+
+}
+
+
 
 void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor* Target)
 {
