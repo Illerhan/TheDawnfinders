@@ -153,7 +153,7 @@ void UInventoryComponent::RemoveCurrentItem()
 
 void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 {
-	TArray<FInventorySlot> NewSlots = InventorySlots;;
+	TArray<FInventorySlot> NewSlots = InventorySlots;
 
 	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
 	CurrentSlot.Quantity--;
