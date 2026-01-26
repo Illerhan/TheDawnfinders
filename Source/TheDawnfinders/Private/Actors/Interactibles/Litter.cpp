@@ -425,7 +425,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
         }
 
         // --- APPLICATION FINALE ---
-        // Si après itérations on est toujours bloqué (ex: coincé entre 2 murs), on annule tout.
+        // Si après itérations on est toujours bloqué (ex: coincé entre deux murs), on annule tout.
         if (MaxIterations == 0 && CheckPlayerCollision(ProposedMove, ProposedRot, PlayerHit))
         {
             // Fallback ultime : on ne bouge pas cette frame pour éviter le clip
@@ -812,23 +812,5 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
             InteractibleWidget->HideText();
         }
     }
-    else
-    {
-        // CAS B : On est passé d'une zone à l'autre (Transition)
-        // On met à jour le texte immédiatement pour ne pas avoir de clignotement
-        
-        if (InteractibleWidget)
-        {
-            // ATTENTION : C'est souvent ici que ça crashait (si InventoryTrigger était null)
-            if (InventoryTrigger && InventoryTrigger->IsOverlappingActor(Player))
-            {
-                InteractibleWidget->DisplayText("Ouvrir l'inventaire",InputIcon);
-            }
-            else
-            {
-                // Si on touche encore quelque chose mais pas l'inventaire, c'est forcément le portage
-                InteractibleWidget->DisplayText("Porter", InputIcon);
-            }
-        }
-    }
+    
 }
