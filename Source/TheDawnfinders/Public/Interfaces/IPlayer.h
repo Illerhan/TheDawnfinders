@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Interactibles/Litter.h"
 #include "UObject/Interface.h"
 #include "IPlayer.generated.h"
 
