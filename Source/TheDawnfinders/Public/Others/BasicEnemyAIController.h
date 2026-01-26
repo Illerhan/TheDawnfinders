@@ -7,7 +7,6 @@
 #include "Actors/Enemy/ABaseEnemy.h"
 #include "BasicEnemyAIController.generated.h"
 
-
 class UAIPerceptionComponent;
 class UAISenseConfig_Hearing;
 class UEnemyAttackComponent;
@@ -52,6 +51,9 @@ public :
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> PlayersAtRange;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<AActor*> NearPlayers;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float AlertnessWaitDuration;
