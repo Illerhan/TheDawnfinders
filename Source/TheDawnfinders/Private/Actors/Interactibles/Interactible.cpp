@@ -58,6 +58,8 @@ void AInteractibleObjects::BeginPlay()
 		InteractCollider->OnComponentEndOverlap.AddDynamic(this, &AInteractibleObjects::OnOverlapEnd);
 	}
 
+	EnableDistance = EnableDistance * EnableDistance;
+
 	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
 
@@ -70,6 +72,14 @@ void AInteractibleObjects::BeginPlay()
 
 		FadeTimeline.SetLooping(false);
 	}
+
+	GetWorldTimerManager().SetTimer(
+		EnableTimer,
+		this,
+		&AInteractibleObjects::CheckEnableDistance,
+		1.5f,   // time in seconds
+		true    // looping
+	);
 }
 
 void AInteractibleObjects::Tick(float DeltaTime)
@@ -88,6 +98,34 @@ void AInteractibleObjects::HoldTimer(float DeltaTime)
 		IPlayerInterface::Execute_HideProgress(PlayerTemp);
 		
 		BP_OnInteractionFinished();
+	}
+}
+
+void AInteractibleObjects::CheckEnableDistance()
+{
+	float ClosestDistSq = TNumericLimits<float>::Max();
+
+	// We go through all the players 
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		if (APawn* Pawn = It->Get()->GetPawn())
+		{
+			float DistSq = FVector::DistSquared(GetActorLocation(), Pawn->GetActorLocation());
+			ClosestDistSq = FMath::Min(ClosestDistSq, DistSq);
+		}
+	}
+
+	if (ClosestDistSq < EnableDistance)
+	{
+		SetActorTickEnabled(true);
+		SetActorHiddenInGame(false);
+		InteractQTEWidgetComponent->SetComponentTickEnabled(true);
+	}
+	else
+	{
+		SetActorTickEnabled(false);
+		SetActorHiddenInGame(true);
+		InteractQTEWidgetComponent->SetComponentTickEnabled(false);
 	}
 }
 
@@ -235,7 +273,6 @@ void AInteractibleObjects::OnQTESuccess()
 void AInteractibleObjects::OnQTEFailed()
 {
 }
-
 
 #pragma endregion
 

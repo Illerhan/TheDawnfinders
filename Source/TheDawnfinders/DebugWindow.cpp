@@ -68,7 +68,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	}
 	SlateIM::SpinBox(PlayerChar->PlayerConfig->RunSpeed,0.f,1000.f);
 	
-	SlateIM::SpinBox(PlayerChar->PlayerConfig->ReloadSpeed,0.f,15000.f);
+	SlateIM::SpinBox(PlayerChar->PlayerConfig->ReloadSpeed,0.f,75.f);
 	
 	if (SlateIM::Button(TEXT("CreateSession")))
 	{

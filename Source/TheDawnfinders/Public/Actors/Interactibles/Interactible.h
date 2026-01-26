@@ -49,6 +49,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTEFailed();
 
+	UFUNCTION(BlueprintCallable)
+	virtual void CheckEnableDistance();
+
 
 // === MAIN FUNCTIONS ===
 public:
@@ -125,6 +128,11 @@ public:
 	}
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float EnableDistance = 3500.f;
+
+	FTimerHandle EnableTimer;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float QTESuccessRangeStart;
 
