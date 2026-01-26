@@ -12,7 +12,7 @@ class THEDAWNFINDERS_API UWorldInteractibleWidget : public UUserWidget
 	
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void DisplayText(const FString& Text);
+	void DisplayText(const FString& Text, UTexture2D* Icon = nullptr);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideText();
