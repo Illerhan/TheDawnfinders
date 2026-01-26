@@ -770,11 +770,11 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         {
             if (OverlappedComp == InventoryTrigger)
             {
-                InteractibleWidget->DisplayText("[E] Ouvrir Inventaire");
+                InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
             }
             else // Front ou Back
             {
-                InteractibleWidget->DisplayText("[E] Porter");
+                InteractibleWidget->DisplayText("Porter",InputIcon);
             }
         }
     }
@@ -822,12 +822,12 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
             // ATTENTION : C'est souvent ici que ça crashait (si InventoryTrigger était null)
             if (InventoryTrigger && InventoryTrigger->IsOverlappingActor(Player))
             {
-                InteractibleWidget->DisplayText("Ouvrir Inventaire");
+                InteractibleWidget->DisplayText("Ouvrir l'inventaire",InputIcon);
             }
             else
             {
                 // Si on touche encore quelque chose mais pas l'inventaire, c'est forcément le portage
-                InteractibleWidget->DisplayText("Porter");
+                InteractibleWidget->DisplayText("Porter", InputIcon);
             }
         }
     }
