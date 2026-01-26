@@ -114,6 +114,9 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
+	UTexture2D* InputIcon;
 
 
 // === PROTECTED PROPERTIES ===
