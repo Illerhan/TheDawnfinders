@@ -17,7 +17,8 @@ enum class EPlayerState : uint8
 	Fallen UMETA(DisplayName = "Fallen"),
 	Immobilized UMETA(DisplayName = "Immobilized"),
 	Trapped UMETA(DisplayName = "Trapped"),
-	Dead UMETA(DisplayName = "Dead")
+	Dead UMETA(DisplayName = "Dead"),
+	Sneaking UMETA(DisplayName = "Sneaking")
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMontageEnd);

@@ -290,6 +290,7 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     else if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
     else if (SoundTag == "Dodge") return PlayerConfig->DodgeSoundAlertness;
     else if (SoundTag == "Attack") return PlayerConfig->AttackSoundAlertness;
+    else if (SoundTag == "Sneak") return PlayerConfig->SneakSoundAlertness;
     return .0f;
 }
 

@@ -22,11 +22,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float RunSpeed = 800.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float SneakSpeed = 250.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Movement")
 	float FallenSpeed = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	float CarrySpeed = 250.f;
+
 
 	// ---------- DODGE ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
@@ -102,6 +106,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
 	float RunSoundAlertness;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float SneakSoundRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float SneakSoundAlertness;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
 	float DodgeSoundRange;
