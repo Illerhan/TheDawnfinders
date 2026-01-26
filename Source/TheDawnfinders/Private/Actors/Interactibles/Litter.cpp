@@ -23,6 +23,8 @@ ALitter::ALitter()
     RootCollision->SetCollisionProfileName(TEXT("BlockAllDynamic")); 
     // Ensure it blocks world/physics but doesn't get stuck on pawns easily
     RootCollision->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+    
+    BoxCollider->SetupAttachment(RootCollision);
 
     PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
     PointLight->SetupAttachment(RootComponent);
@@ -62,6 +64,7 @@ ALitter::ALitter()
     {
         BoxCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     }
+    InteractibleWidgetComponent->SetupAttachment(RootCollision);
 
     // --- 1. Zone AVANT (Portage) ---
     FrontTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("FrontTrigger"));
