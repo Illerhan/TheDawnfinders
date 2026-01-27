@@ -8,7 +8,7 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 {
     AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
 
-    HearingConfig = CreateDefaultSubobject<UAISenseConfig_Hearing>(TEXT("Hearing Config"));
+    HearingConfig = CreateDefaultSubobject<UAISenseConfig_Hearing>(TEXT("Hearing Config")); 
     HearingConfig->HearingRange = 0.f;
 
     EnemyAttackComponent = CreateDefaultSubobject<UEnemyAttackComponent>(TEXT("AC_EnemyAttack"));
