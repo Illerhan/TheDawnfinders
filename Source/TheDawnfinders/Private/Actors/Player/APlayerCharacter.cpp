@@ -478,7 +478,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
 
-    ObjectQueryParams.AddObjectTypesToQuery(ECC_PhysicsBody);
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
 
     bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(1000.f));
     if (!bHit) return;
@@ -488,14 +488,23 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
         if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
+
         float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
-        if (CurrentDist > BestDist) { CurrentAutoLockTarget = Actor; BestDist = CurrentDist; }
+        if (CurrentDist < BestDist) 
+        {
+            CurrentAutoLockTarget = Actor; 
+            BestDist = CurrentDist; 
+        }
     }
 }
 
 void AAPlayerCharacter::ActualiseAutoLock()
 {
-    if (!CurrentAutoLockTarget) { GetCharacterMovement()->bOrientRotationToMovement = true; return; }
+    if (!CurrentAutoLockTarget) 
+    { 
+        GetCharacterMovement()->bOrientRotationToMovement = true; 
+        return; 
+    }
     GetCharacterMovement()->bOrientRotationToMovement = false;
     FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
     FRotator TargetRotation = AimedForward.Rotation();
