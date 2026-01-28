@@ -142,7 +142,7 @@ void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 		UE_LOG(LogTemp, Log, TEXT("Added interactible locally on client"));
 
 		if(InteractibleWidget)
-			InteractibleWidget->DisplayText("[E] Interact");
+			InteractibleWidget->DisplayText("Interact");
 	}
 }
 

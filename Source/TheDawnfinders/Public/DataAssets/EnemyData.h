@@ -34,6 +34,12 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float AlertnessThreshold;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float AlertStopDuration;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
+	float AggressiveStopDuration;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float NormalSpeed;
 
