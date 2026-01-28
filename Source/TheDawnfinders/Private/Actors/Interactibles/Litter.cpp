@@ -770,7 +770,10 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         {
             if (OverlappedComp == InventoryTrigger)
             {
-                InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
+                if (Player->CurrentState == EPlayerState::Carrying)
+                    InteractibleWidget->DisplayText("Remplir le palanquin",InputIcon);
+                else
+                    InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
             }
             else // Front ou Back
             {
