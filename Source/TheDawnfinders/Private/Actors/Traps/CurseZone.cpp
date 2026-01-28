@@ -50,7 +50,7 @@ void ACurseZone::OnCurseOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor
 		if (Player)
 		{
 			// Debug visuel
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DANGER : Tu es DANS la zone !"));
+			//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DANGER : Tu es DANS la zone !"));
 
 			Player->HealthComponent->CurseZone++;
 		}
@@ -65,7 +65,7 @@ void ACurseZone::OnCurseOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* 
 		if (Player)
 		{
 			// Debug visuel
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("OUF : Tu es SORTI de la zone."));
+			//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("OUF : Tu es SORTI de la zone."));
 
 			Player->HealthComponent->CurseZone--;
 		}
