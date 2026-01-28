@@ -54,6 +54,12 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartAttack(FEnemyActionData AttackData, AActor* Target);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void EnterSuspicious();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ExitSuspicious();
+
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 

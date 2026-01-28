@@ -99,6 +99,17 @@ void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor*
     MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
 }
 
+void ABaseEnemy::EnterSuspicious_Implementation()
+{
+
+}
+
+void ABaseEnemy::ExitSuspicious_Implementation()
+{
+
+}
+
+
 void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
@@ -119,6 +130,7 @@ void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNot
 {
     BP_OnMontageNotifyBegin(NotifyName);
 }
+
 
 void ABaseEnemy::DoAttackCollision()
 {
