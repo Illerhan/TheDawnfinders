@@ -204,8 +204,11 @@ public:
 	
 
 
-// === AUTO-LOCK ===
+// === ROTATION / AUTO-LOCK ===
 public :
+	UFUNCTION(BlueprintCallable)
+	void ForceRotation(FVector Input);
+
 	UFUNCTION()
 	void StartAutoLock(float AutoLockStrength);
 

@@ -1,4 +1,3 @@
-// Copyright ...
 #include "Actors/Player/APlayerCharacter.h"
 
 #include "Actors/Interactibles/Litter.h"
@@ -19,6 +18,7 @@
 #include "Components/DebugComponent.h"
 #include "GameFramework/CustomHUD.h"
 #include "Widgets/UMainWidget.h"
+
 
 AAPlayerCharacter::AAPlayerCharacter()
 {
@@ -468,8 +468,17 @@ void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool
 #pragma endregion
 
 
-#pragma region Auto Lock
-// ... (Rest of Auto Lock code remains identical) ...
+#pragma region Rotation / Auto Lock
+
+void AAPlayerCharacter::ForceRotation(FVector Input)
+{
+    GetCharacterMovement()->bOrientRotationToMovement = false;
+
+    FRotator TargetRotation = Input.Rotation();
+    FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 5.f);
+    SetActorRotation(NewRotation);
+}
+
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
@@ -517,6 +526,7 @@ void AAPlayerCharacter::StopAutoLock()
     bAutoLockIsActive = false;
     GetCharacterMovement()->bOrientRotationToMovement = true;
 }
+
 #pragma endregion
 
 
@@ -549,7 +559,6 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 }
 
 #pragma endregion
-
 
 
 #pragma region Montages
@@ -587,6 +596,7 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload) { BP_OnMontageNotifyBegin(NotifyName); }
 #pragma endregion
 
+
 #pragma region Carry
 
 void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
@@ -614,7 +624,9 @@ void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
 }
 #pragma endregion
 
+
 #pragma region Others
+
 void AAPlayerCharacter::OnRevive()
 {
     if (!HasAuthority()) Server_OnRevive(); 
@@ -622,30 +634,37 @@ void AAPlayerCharacter::OnRevive()
     SetPlayerSpeed(PlayerConfig->WalkSpeed); 
     GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
 }
+
 void AAPlayerCharacter::Server_OnRevive_Implementation()
 {
     OnRevive();
 }
+
 bool AAPlayerCharacter::IsReadyForRPCs() const
 {
     return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
 }
+
 void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
 {
     UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
 }
+
 void AAPlayerCharacter::PossessedBy(AController* NewController)
 {
     Super::PossessedBy(NewController);
 }
+
 void AAPlayerCharacter::OnRep_PlayerState()
 {
     Super::OnRep_PlayerState();
 }
+
 void AAPlayerCharacter::OnRep_CurrentPlayerState()
 {
     
 }
+
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
 {
     if (!ZiplineItem || !ZiplineItem->ZiplineClass) return;
@@ -655,12 +674,14 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
     AZiplineInteractible* NewZip = GetWorld()->SpawnActor<AZiplineInteractible>(ZiplineItem->ZiplineClass, SpawnLoc, SpawnRot, Params);
     if (NewZip) InventoryComponent->RemoveCurrentItem();
 }
+
 void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
 {
     ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
     ThrowablePreviewMeshComponent->SetHiddenInGame(false);
     ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
 }
+
 void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
@@ -682,4 +703,5 @@ void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI U
         break;
     }
 }
+
 #pragma endregion
