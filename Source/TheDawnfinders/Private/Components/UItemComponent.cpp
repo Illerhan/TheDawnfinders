@@ -179,8 +179,9 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
-		case EConsumableEffectType::PlaceZipline:
-			// TODO later
+		case EConsumableEffectType::Inhale:
+			HealthComponent->ChangeCurrentMaxHealth(EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
 			break;
 
 		case EConsumableEffectType::ThrowObject:

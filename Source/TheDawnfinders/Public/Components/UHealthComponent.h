@@ -40,6 +40,10 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void LocalChangeHealth();
+	void RequestMaxHealthChange(float Amount);
+
+	UFUNCTION(Server,Unreliable,BlueprintCallable)
+	void ChangeCurrentMaxHealth(float newValue);
 
 
 // === CURSE === 

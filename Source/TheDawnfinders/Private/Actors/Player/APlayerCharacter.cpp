@@ -82,9 +82,7 @@ AAPlayerCharacter::AAPlayerCharacter()
 
     // ---------- ROTATION PAR DÉFAUT ----------
     
-    // Orientation sur déplacement
      bUseControllerRotationYaw = false;
-     GetCharacterMovement()->bOrientRotationToMovement = true;
     if (PlayerConfig == nullptr)
     {
         PlayerConfig = CreateDefaultSubobject<UPlayerData>(TEXT("PlayerConfig"));
@@ -137,6 +135,9 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
+    }
+    else {
+        ActualiseRotation();
     }
 
     if (LoudnessTimer > 0) {
@@ -406,7 +407,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
     FinalVector.Normalize();
 
-    FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
+    FRotator Rotation(0.0f, -60.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
     AddMovementInput(FinalVector, 1.0f, true);
@@ -470,13 +471,49 @@ void AAPlayerCharacter::Server_SetPushingState_Implementation(ALitter* Obj, bool
 
 #pragma region Rotation / Auto Lock
 
+void AAPlayerCharacter::ActualiseRotation()
+{
+    PreviousPlayerInput.Normalize();
+
+    if (!bIsForcingRotation && CurrentForcedRotationRatio > 0) {
+        CurrentForcedRotationRatio -= GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
+        CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
+    }
+
+    float angle = FMath::Atan2(PreviousPlayerInput.Y, PreviousPlayerInput.X);
+    angle -= FMath::DegreesToRadians(50);
+    FVector RotatedVector = FVector(FMath::Cos(angle), FMath::Sin(angle), 0);
+
+    FRotator TargetRotation = RotatedVector.Rotation();
+    FRotator MovementRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), PlayerConfig->NormalRotationSpeed);
+
+    FRotator NewRotation = FQuat::Slerp(MovementRotation.Quaternion(), CurrentForcedRotation.Quaternion(), CurrentForcedRotationRatio).Rotator();
+
+    SetActorRotation(NewRotation);
+}
+
+
 void AAPlayerCharacter::ForceRotation(FVector Input)
 {
-    GetCharacterMovement()->bOrientRotationToMovement = false;
+    if(CurrentForcedRotationRatio < 1)
+        CurrentForcedRotationRatio += GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
 
-    FRotator TargetRotation = Input.Rotation();
-    FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 5.f);
-    SetActorRotation(NewRotation);
+    CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
+    bIsForcingRotation = true;
+
+    if (CurrentDir.SquaredLength() < 0.5f && Input.Length() > 0.9f)
+        PreviousPlayerInput = FVector(-Input.X, -Input.Y, 0);
+
+    Input.Normalize();
+
+    float angle = FMath::Atan2(Input.Y, Input.X);
+    angle -= FMath::DegreesToRadians(50 + 180);
+    FVector RotatedVector = FVector(FMath::Cos(angle), FMath::Sin(angle), 0);
+
+    FRotator TargetRotation = RotatedVector.Rotation();
+    FRotator NewRotation = FMath::RInterpTo(CurrentForcedRotation, TargetRotation, GetWorld()->GetDeltaSeconds(), PlayerConfig->ForceRotationSpeed);
+
+    CurrentForcedRotation = NewRotation;
 }
 
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
@@ -511,10 +548,9 @@ void AAPlayerCharacter::ActualiseAutoLock()
 {
     if (!CurrentAutoLockTarget) 
     { 
-        GetCharacterMovement()->bOrientRotationToMovement = true; 
         return; 
     }
-    GetCharacterMovement()->bOrientRotationToMovement = false;
+
     FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
     FRotator TargetRotation = AimedForward.Rotation();
     FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), CurrentAutoLockStrength);
@@ -524,7 +560,6 @@ void AAPlayerCharacter::ActualiseAutoLock()
 void AAPlayerCharacter::StopAutoLock()
 {
     bAutoLockIsActive = false;
-    GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 #pragma endregion

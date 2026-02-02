@@ -84,14 +84,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
 	float CurseRatio = 0.02f;
 
+
 	// ---------- THROW PREVIEW ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Throw")
 	float ThrowPreviewScaleMultiplier = 0.01f;
 
 
-	// ---------- BAGARRE ----------
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fight")
+	// ---------- ROTATION ----------
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rotation")
 	float AutoLockStrength = 5.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rotation")
+	float NormalRotationSpeed = 10.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rotation")
+	float NormalToForcedSpeed = 5.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rotation")
+	float ForceRotationSpeed = 5.f;
 
 
 	// ---------- SOUND ----------

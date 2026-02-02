@@ -33,6 +33,12 @@ enum class EConsumableEffectType : uint8 {
 	PlaceZipline UMETA(DisplayName = "PlaceZipline"),
 	ThrowObject UMETA(DisplayName = "ThrowObject"),
 	Refile UMETA(DisplayName = "Refile"),
+	Inhale UMETA(DisplayName = "Inhale"),
+	Adrenaline UMETA(DisplayName = "Adrenaline"),
+	Protector UMETA(DisplayName = "Protector"),
+	Navigation UMETA(DisplayName = "Navigation"),
+	SoundProtect UMETA(DisplayName = "SoundProtect"),
+	Antidote UMETA(DisplayName = "Antidote"),
 	None UMETA(DisplayName = "None")
 };
 

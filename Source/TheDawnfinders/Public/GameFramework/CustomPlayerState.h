@@ -64,6 +64,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void SetMaxHealth(float MaxHP);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentMaxHealth(float MaxHP);
 
 
 // === OTHERS ===
@@ -126,6 +129,9 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float CurrentMaxHealth;
+	
+	UPROPERTY(BlueprintReadOnly, Replicated)
+	float CurseMaxHP;
 
 	UPROPERTY(BlueprintReadOnly, Replicated)
 	float MaxHealth;
