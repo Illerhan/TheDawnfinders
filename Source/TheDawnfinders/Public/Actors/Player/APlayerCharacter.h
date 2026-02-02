@@ -207,6 +207,9 @@ public:
 // === ROTATION / AUTO-LOCK ===
 public :
 	UFUNCTION(BlueprintCallable)
+	void ActualiseRotation();
+
+	UFUNCTION(BlueprintCallable)
 	void ForceRotation(FVector Input);
 
 	UFUNCTION()
@@ -319,6 +322,15 @@ protected :
 
 	UPROPERTY()
 	bool bAutoLockIsActive = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsForcingRotation;
+
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentForcedRotationRatio;
+
+	UPROPERTY(BlueprintReadWrite)
+	FRotator CurrentForcedRotation;
 
 	UPROPERTY()
 	AActor* CurrentAutoLockTarget;
