@@ -53,6 +53,11 @@ void ACustomPlayerState::SetMaxHealth(float MaxHP)
 	MaxHealth = MaxHP;
 }
 
+void ACustomPlayerState::SetCurrentMaxHealth(float MaxHP)
+{
+	CurrentMaxHealth = MaxHP;
+}
+
 #pragma endregion
 
 

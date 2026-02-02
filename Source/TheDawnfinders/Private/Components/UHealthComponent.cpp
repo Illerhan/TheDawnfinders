@@ -217,6 +217,40 @@ void UHealthComponent::LocalChangeHealth()
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseLocalHealth(CurrentHealth, CurrentMaxHealth, MaxHealth);
 }
+void UHealthComponent::RequestMaxHealthChange(float Amount)
+{
+	if (GetOwner()->HasAuthority())
+	{
+		// Si on est déjà le serveur, on applique direct
+		ChangeCurrentMaxHealth(Amount);
+	}
+	else
+	{
+		// Si on est le client, on demande poliment au serveur
+		ChangeCurrentMaxHealth_Implementation(Amount);
+	}
+}
+void UHealthComponent::ChangeCurrentMaxHealth_Implementation(float NewValue)
+{
+	CurrentMaxHealth += NewValue;
+	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->SetCurrentMaxHealth(CurrentMaxHealth);
+	CurseMaxHealth = PSCustom->GetCurrentMaxHealth();
+	LocalChangeHealth();
+	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
+}
 
 #pragma endregion
 
@@ -254,10 +288,11 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	if (!GetOwner()->HasAuthority()) return;
 	if (IsProtectedFromCurse()) return;
 	if (CurrentMaxHealth <= MinimumMaxHP) return;
-
+	CurseMaxHealth = CurrentMaxHealth;
 	CurrentMaxHealth -= MaxHealth * CurseRatio * DeltaTime;
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
+	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
 
 
 	// Clamp current health if it exceeds new max
