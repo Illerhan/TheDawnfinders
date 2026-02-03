@@ -18,6 +18,7 @@ class UItemComponent;
 class UWidgetComponent;
 class UWorldProgressBar;
 class UStaticMeshComponent;
+class UWorldPlayerWidget;
 
 UENUM()
 enum class EInteractionUI : uint8
@@ -68,7 +69,7 @@ public:
 	UItemComponent* ItemComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-	UWidgetComponent* ProgressBarComponent;
+	UWidgetComponent* PlayerWidgetComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UInteractionComponent* InteractionComponent;
@@ -126,6 +127,8 @@ public:
 
 	virtual void EndCarryHeavyItem_Implementation(AActor* Interactible) override;
 
+	virtual void StartMashButtonQTE_Implementation(float Quantity, float DecreasePerSecond, bool Cancellable) override;
+
 	virtual void DoCameraShake_Implementation(float Intensity) override;
 
 	virtual void DoDamagePostProcess_Implementation(float Duration) override;
@@ -153,6 +156,8 @@ public:
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
 	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength) override;
+
+	virtual UWorldPlayerWidget* GetPlayerWidget_Implementation() override;
 
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Others")
 	void Server_AskOwnershipPermission(AActor* Target, AController* Origin);
@@ -300,7 +305,7 @@ public :
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY()
-	UWorldProgressBar* ProgressBarWidget;
+	UWorldPlayerWidget* PlayerWidget;
 
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;

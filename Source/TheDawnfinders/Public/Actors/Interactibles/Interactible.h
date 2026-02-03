@@ -37,10 +37,7 @@ public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	virtual bool GetCanBeUsed_Implementation() override;
-	virtual bool GetQTENeeded_Implementation() override;
-	virtual void StartQTE_Implementation() override;
-	virtual void StopQTE_Implementation() override;
-	virtual bool ValidateQTE_Implementation() override;
+	virtual EQTEType GetNeededQTE_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
@@ -110,9 +107,6 @@ public :
 	UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
-	UWidgetComponent* InteractQTEWidgetComponent;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
@@ -120,15 +114,23 @@ public :
 
 
 // === PROTECTED PROPERTIES ===
-protected :
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bDoQTE;
 
-public:
-	void SetDoQTE(bool bQTE)
-	{
-		this->bDoQTE = bQTE;
-	}
+public :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float QTESuccessRangeStart;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float QTESuccessRangeEnd;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	int QTEStepsCount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float MashQTEQuantity = 15.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float MashQTEDecresePerSeconds = 2.f;
+
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -136,20 +138,11 @@ protected:
 
 	FTimerHandle EnableTimer;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float QTESuccessRangeStart;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float QTESuccessRangeEnd;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int QTEStepsCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	EQTEType QTEType;
 
 	UPROPERTY()
 	bool bCanBeUsed = true;
-
-	UPROPERTY()
-	ULockpickQTEWidget* InteractQTEWidget;
 
 	UPROPERTY()
 	UWorldInteractibleWidget* InteractibleWidget;

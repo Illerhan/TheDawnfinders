@@ -60,6 +60,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	float GetSoundAlertness(FName SoundTag);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	UWorldPlayerWidget* GetPlayerWidget();
+
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
@@ -73,6 +76,10 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void EndCarryHeavyItem(AActor* Interactible);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void StartMashButtonQTE(float Quantity, float DecreasePerSecond, bool Cancellable);
+
 
 
 public :

@@ -31,9 +31,6 @@ AInteractibleObjects::AInteractibleObjects()
 	StaticMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
 
-	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
-	InteractQTEWidgetComponent->SetupAttachment(BoxCollider);
-
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
 	InteractibleWidgetComponent->SetupAttachment(BoxCollider);
 	
@@ -60,7 +57,6 @@ void AInteractibleObjects::BeginPlay()
 
 	EnableDistance = EnableDistance * EnableDistance;
 
-	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
 
 	if (FloatCurve)
@@ -119,13 +115,11 @@ void AInteractibleObjects::CheckEnableDistance()
 	{
 		SetActorTickEnabled(true);
 		SetActorHiddenInGame(false);
-		InteractQTEWidgetComponent->SetComponentTickEnabled(true);
 	}
 	else
 	{
 		SetActorTickEnabled(false);
 		SetActorHiddenInGame(true);
-		InteractQTEWidgetComponent->SetComponentTickEnabled(false);
 	}
 }
 
@@ -201,36 +195,9 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation()
 	return bCanBeUsed;
 }
 
-bool AInteractibleObjects::GetQTENeeded_Implementation()
+EQTEType AInteractibleObjects::GetNeededQTE_Implementation()
 {
-	return bDoQTE;
-}
-
-void AInteractibleObjects::StartQTE_Implementation()
-{
-	InteractQTEWidget->EnterQTE(QTESuccessRangeStart, QTESuccessRangeEnd, 400.f, QTEStepsCount);
-}
-
-void AInteractibleObjects::StopQTE_Implementation()
-{
-	InteractQTEWidget->ExitQTE();
-}
-
-bool AInteractibleObjects::ValidateQTE_Implementation()
-{
-	SetDoQTE(false);
-	bool bSuccess = InteractQTEWidget->ValidateQTE(this);
-    
-	if (bSuccess)
-	{
-		OnQTESuccess();
-	}
-	else
-	{
-		OnQTEFailed();
-	}
-    
-	return bSuccess;
+	return QTEType;
 }
 
 void AInteractibleObjects::FadeIn_Implementation()

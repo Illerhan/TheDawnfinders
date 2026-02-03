@@ -7,6 +7,7 @@
 #include "UInteractionComponent.generated.h"
 
 class AAPlayerCharacter;
+class UQTEWidget;
 
 
 UCLASS(ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent))
@@ -96,8 +97,15 @@ public:
 	
 	UFUNCTION()
 	void OnRep_HelpState();
+
+
+// === QTE ===
+public :
+	UFUNCTION(BlueprintCallable)
+	void StartRotativeQTE(AInteractibleObjects* Interactible);
 	
-	
+	UFUNCTION(BlueprintCallable)
+	void StartMashButtonQTE(AInteractibleObjects* Interactible);
 
 
 // === PUBLIC PROPERTIES ===
@@ -126,6 +134,9 @@ private:
 
 	UPROPERTY()
 	AActor* InteractingQTEActor;
+
+	UPROPERTY()
+	UQTEWidget* CurrentQTEWidget;
 	
 	UPROPERTY()
 	bool bIsDoingQTE;
