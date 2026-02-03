@@ -5,6 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/UItemComponent.h"
 
 
 UStaminaComponent::UStaminaComponent()
@@ -49,6 +50,8 @@ void UStaminaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UStaminaComponent::UseStamina(float quantity)
 {
+	
+	if (bStaminaReduced) quantity /= 2;
 	CurrentStamina -= quantity * (1 + CurrentOverloadCount);
 	CurrentStamina = FMath::Clamp(CurrentStamina, 0, CurrentMaxStamina);
 

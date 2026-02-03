@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Components/ActorComponent.h"
 #include "UStaminaComponent.generated.h"
 
@@ -73,4 +74,18 @@ protected :
 
 	UPROPERTY(Blueprintable,BlueprintReadWrite)
 	float StaminaConsumptionDodge = 15.0f;
+	
+	UPROPERTY()
+	bool bStaminaReduced = false;
+
+public:
+	bool IsStaminaReduced() const
+	{
+		return bStaminaReduced;
+	}
+
+	void SetStaminaReduced(const bool bReduced)
+	{
+		this->bStaminaReduced = bReduced;
+	}
 };
