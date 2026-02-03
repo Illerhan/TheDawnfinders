@@ -12,12 +12,14 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerState.h"
+#include "GameFramework/CustomHUD.h"
 #include "Perception/AISense_Hearing.h"
 #include "Net/UnrealNetwork.h"
-#include "Widgets/UWorldProgressBar.h"
 #include "Components/DebugComponent.h"
-#include "GameFramework/CustomHUD.h"
 #include "Widgets/UMainWidget.h"
+#include "Widgets/UWorldPlayerWidget.h"
+#include "Widgets/UWorldProgressBar.h"
+#include "Widgets/UQTEMashButtonWidget.h"
 
 
 AAPlayerCharacter::AAPlayerCharacter()
@@ -48,10 +50,10 @@ AAPlayerCharacter::AAPlayerCharacter()
     HealthComponent      = CreateDefaultSubobject<UHealthComponent>(TEXT("AC_Health"));
     ItemComponent        = CreateDefaultSubobject<UItemComponent>(TEXT("AC_ItemUse"));
     InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("AC_Interaction"));
-    LightComponent = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_LightComponent"));
+    LightComponent       = CreateDefaultSubobject<UPlayerLightComponent>(TEXT("AC_LightComponent"));
     
-    ProgressBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarComponent"));
-    ProgressBarComponent->SetupAttachment(GetMesh());
+    PlayerWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("PlayerWidgetComponent"));
+    PlayerWidgetComponent->SetupAttachment(GetMesh());
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
     ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
@@ -117,15 +119,13 @@ void AAPlayerCharacter::BeginPlay()
     if (PlayerConfig)
         ApplyPlayerData();
 
-    ProgressBarWidget = Cast<UWorldProgressBar>(ProgressBarComponent->GetWidget());
+    PlayerWidget = Cast<UWorldPlayerWidget>(PlayerWidgetComponent->GetWidget());
 
     ItemComponent->OnThrowPreviewDisplay.AddUniqueDynamic(this, &AAPlayerCharacter::DisplayThrowPreview);
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
     ProtectionZone->SetGenerateOverlapEvents(false);
     ProtectionZone->SetSphereRadius(0.f);
-    
-    UE_LOG(LogTemp, Display, TEXT("%d"), ProgressBarWidget != nullptr);
 }
 
 
@@ -196,6 +196,12 @@ void AAPlayerCharacter::RemoveInteractibleAtRange_Implementation(AActor* Interac
     InteractionComponent->RemoveInteractible(Interactible); 
 }
 
+void AAPlayerCharacter::StartMashButtonQTE_Implementation(float Quantity, float DecreasePerSecond, bool Cancellable)
+{
+    PlayerWidget->GetQTEMashButton()->StartQTE(Quantity, DecreasePerSecond, Cancellable);
+}
+
+
 void AAPlayerCharacter::DoCameraShake_Implementation(float Intensity) {}
 void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration) {}
 
@@ -204,7 +210,10 @@ void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
     if(!GetController()) return;
     if(!GetController()->IsLocalController()) return;
 
-    ProgressBarWidget->ActualiseProgress(CurrentValue);
+    if (!PlayerWidget->GetProgressBar()) return;
+
+    UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
+    ProgressBar->ActualiseProgress(CurrentValue);
 }
 
 void AAPlayerCharacter::HideProgress_Implementation()
@@ -212,7 +221,10 @@ void AAPlayerCharacter::HideProgress_Implementation()
     if (!GetController()) return;
     if (!GetController()->IsLocalController()) return;
 
-    ProgressBarWidget->Hide();
+    if (!PlayerWidget->GetProgressBar()) return;
+
+    UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
+    ProgressBar->Hide();
 }
 
 void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh) 
@@ -302,6 +314,11 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
 
     if (HasAuthority()) Server_PlaySound_Implementation(SoundTag, Range);
     else Server_PlaySound(SoundTag, Range);
+}
+
+UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
+{
+    return PlayerWidget;
 }
 
 void AAPlayerCharacter::Server_AskOwnershipPermission_Implementation(AActor* Target, AController* Origin)

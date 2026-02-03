@@ -21,11 +21,6 @@ void AWolfTrap::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
     DOREPLIFETIME(AWolfTrap, bCanTrap);
 }
 
-bool AWolfTrap::GetQTENeeded_Implementation()
-{
-    return false; 
-}
-
 void AWolfTrap::OnRep_TrappedActor()
 {
     // Appeler la version du parent (bonnes pratiques)
@@ -46,7 +41,6 @@ void AWolfTrap::OnRep_TrappedActor()
 void AWolfTrap::BeginPlay()
 {
     Super::BeginPlay();
-    bDoQTE = true;
     bCanSelfRelease = false; // Sécurité
 }
 
@@ -133,11 +127,6 @@ void AWolfTrap::Tick(float DeltaTime)
     }
 }
 
-bool AWolfTrap::GetCanBeUsed_Implementation()
-{
-    return bDoQTE;
-}
-
 void AWolfTrap::Interact_Implementation(AActor* Interactor)
 {
     // 1. Sécurités de base
@@ -194,7 +183,7 @@ void AWolfTrap::Multicast_StartTrapQTE_Implementation(AAPlayerCharacter* TargetP
         IC->StartExternalQTE(this);
     if (IPlayerInterface::Execute_GetCurrentPlayerState(TargetPlayer)!= EPlayerState::Trapped)
             IPlayerInterface::Execute_RequestStateChange(TargetPlayer, EPlayerState::Immobilized);
-        Execute_StartQTE(this);
+
     }
 }
 

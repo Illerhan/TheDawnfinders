@@ -71,6 +71,13 @@ public:
 };
 
 
+UENUM(BlueprintType)
+enum class EQTEType : uint8 {
+	NoQTE UMETA(DisplayName = "NoQTE"),
+	Rotative UMETA(DisplayName = "Rotative"),
+	SmashButton UMETA(DisplayName = "Smash Button")
+};
+
 
 UENUM(BlueprintType)
 enum class EEnemyAttackTriggerType : uint8 {

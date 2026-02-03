@@ -27,14 +27,5 @@ public :
 	bool GetCanBeUsed();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
-	bool GetQTENeeded();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
-	void StartQTE();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
-	void StopQTE();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
-	bool ValidateQTE();
+	EQTEType GetNeededQTE();
 };

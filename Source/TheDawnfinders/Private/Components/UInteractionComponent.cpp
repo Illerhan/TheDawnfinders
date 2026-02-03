@@ -1,6 +1,9 @@
 #include "Components/UInteractionComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Interactibles/Carriable.h"
+#include "Widgets/ULockpickQTEWidget.h"
+#include "Widgets/UQTEMashButtonWidget.h"
+#include "Widgets/UWorldPlayerWidget.h"
 #include "Interfaces/IInteractible.h"
 #include "Components/UHealthComponent.h"
 
@@ -124,11 +127,11 @@ void UInteractionComponent::StartInteract()
 	if (!Nearest) return;
 
 	// If is doing QTE
-	if (InteractingQTEActor) 
+	if (bIsDoingQTE)
 	{
-		if (!IInteractible::Execute_ValidateQTE(Nearest)) return;
+		if (!CurrentQTEWidget->PressButton()) return;
 		
-		InteractingQTEActor = nullptr;
+		CurrentQTEWidget = nullptr;
 		CurrentInteractible = Nearest;
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
@@ -139,11 +142,21 @@ void UInteractionComponent::StartInteract()
 	}
 
 	// Starts QTE if needed
-	if (IInteractible::Execute_GetQTENeeded(Nearest)) 
+	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE) 
 	{
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
-		IInteractible::Execute_StartQTE(Nearest);
+
+		switch (IInteractible::Execute_GetNeededQTE(Nearest))
+		{
+		case EQTEType::SmashButton :
+			StartMashButtonQTE(Cast<AInteractibleObjects>(Nearest));
+			break;
+
+		case EQTEType::Rotative:
+			StartRotativeQTE(Cast<AInteractibleObjects>(Nearest));
+			break;
+		}
 
 		InteractingQTEActor = Nearest;
 		bIsDoingQTE = true;
@@ -242,10 +255,28 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 	// Immobilise le joueur (cohérent avec StartInteract)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
-
-	// Lance réellement le QTE
-	IInteractible::Execute_StartQTE(QTEActor);
 }
+
+#pragma endregion
+
+
+#pragma region QTE
+
+
+void UInteractionComponent::StartRotativeQTE(AInteractibleObjects* Interactible)
+{
+	ULockpickQTEWidget* RotativeQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTERotative();
+	RotativeQTE->EnterQTE(Interactible->QTESuccessRangeStart, Interactible->QTESuccessRangeEnd, 400.f, Interactible->QTEStepsCount);
+	CurrentQTEWidget = RotativeQTE;
+}
+
+void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactible)
+{
+	UQTEMashButtonWidget* MashQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTEMashButton();
+	MashQTE->StartQTE(Interactible->MashQTEQuantity, Interactible->MashQTEDecresePerSeconds, true);
+	CurrentQTEWidget = MashQTE;
+}
+
 
 #pragma endregion
 
@@ -254,7 +285,6 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 
 void UInteractionComponent::StopInteract()
 {
-
 	ServerCancelHelp();
 
 	if (CurrentInteractible)
@@ -277,9 +307,8 @@ void UInteractionComponent::CancelInteraction()
 	AActor* Nearest = GetNearestInteractible();
 	if (!Nearest) return;
 
-	if (InteractingQTEActor)
+	if (bIsDoingQTE)
 	{
-		IInteractible::Execute_StopQTE(Nearest);
 		InteractingQTEActor = nullptr;
 		bIsDoingQTE = false;
 

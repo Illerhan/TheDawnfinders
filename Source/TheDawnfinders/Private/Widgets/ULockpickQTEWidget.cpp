@@ -50,7 +50,7 @@ void ULockpickQTEWidget::ExitQTE_Implementation()
     IsDisplayed = false;
 }
 
-bool ULockpickQTEWidget::ValidateQTE_Implementation(AInteractibleObjects* Interactible)
+bool ULockpickQTEWidget::PressButton()
 {
     if (RecentlyPressedTimer > 0.f) return false;
     RecentlyPressedTimer = 0.1f;

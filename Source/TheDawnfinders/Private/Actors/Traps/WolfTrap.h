@@ -20,8 +20,6 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
-	// On surcharge cette fonction pour dire au système : "Cet objet est utilisable seulement si y'a un mec dedans"
-	virtual bool GetCanBeUsed_Implementation() override;
 	
 	// Appelé quand le QTE est réussi
 	virtual void OnQTESuccess() override;
@@ -30,8 +28,6 @@ protected:
 	virtual void OnQTEFailed() override;
 	
 	virtual void OnRep_TrappedActor() override;
-	
-	virtual bool GetQTENeeded_Implementation() override;
 
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_StartTrapQTE(AAPlayerCharacter* TargetPlayer);

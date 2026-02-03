@@ -48,8 +48,7 @@ void UPlayerLightComponent::BeginPlay()
 		FogOffToBind = Litter->FogOfWarLightOff;
 		FogOnToBind = Litter->FogOfWarLightOn;
 	}
-
-	// On fait les binds uniquement si on a trouvé les composants et qu'on est Authority
+	
 	if (GetOwnerRole() == ROLE_Authority)
 	{
 		if (ZoneToBind)
@@ -246,6 +245,8 @@ void UPlayerLightComponent::OnRep_LightOn()
 
 void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 {
+	ALitter* Litter = Cast<ALitter>(GetOwner());
+	if (!Litter) return;
 	// Server Changes values
 	if (GetOwner()->HasAuthority()) 
 	{
@@ -254,7 +255,6 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 		
 		UpdateProtectionZoneRadius();
 		
-		ALitter* Litter = Cast<ALitter>(GetOwner());
 		Litter->ProtectionZone->SetSphereRadius(FuelRemaining/MaxFuel * MaxRadius);
 		Litter->PointLight->SetIntensity(FuelRemaining/MaxFuel *LightRadius);
 
