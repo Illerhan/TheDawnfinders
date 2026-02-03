@@ -42,7 +42,19 @@ public:
 
 	UFUNCTION()
 	void UnequipWeapon();
-
+	
+	
+// --- GESTION DES TIMERS ---
+	
+	TMap<EConsumableEffectType, FTimerHandle> ActiveEffectsTimers;
+	
+	void ApplyEffectLogic(EConsumableEffectType EffectType, bool bActivate);
+	
+	UFUNCTION()
+	void OnEffectExpired(EConsumableEffectType EffectType);
+	
+	UFUNCTION(Server, Reliable)
+	void Server_StartTimedEffect(EConsumableEffectType EffectType, float Duration);
 
 // === USE ITEMS ===
 public :

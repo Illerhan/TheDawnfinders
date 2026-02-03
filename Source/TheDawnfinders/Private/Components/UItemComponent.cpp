@@ -11,6 +11,8 @@
 #include "Components/UStaminaComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interfaces/IPlayer.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
 
 #include "Perception/AISense_Hearing.h"
 
@@ -101,6 +103,61 @@ void UItemComponent::UnequipWeapon()
 
 #pragma endregion
 
+#pragma region Timers
+
+void UItemComponent::ApplyEffectLogic(EConsumableEffectType EffectType, bool bActivate)
+{
+	if (!PlayerCharacter) return;
+
+	switch (EffectType)
+	{
+	case EConsumableEffectType::Adrenaline:
+		if (StaminaComponent)
+			StaminaComponent->SetStaminaReduced(bActivate);
+		UE_LOG(LogTemp,Warning,TEXT("Stamina : %hhd"),StaminaComponent->IsStaminaReduced());
+		break;
+	case EConsumableEffectType::Protector:
+		if (PlayerCharacter->LightComponent)
+		{
+			bActivate?PlayerCharacter->LightComponent->TurnLightOn():PlayerCharacter->LightComponent->TurnLightOff();
+		}
+	}
+}
+
+void UItemComponent::OnEffectExpired(EConsumableEffectType EffectType)
+{
+	ApplyEffectLogic(EffectType, false);
+
+	// 2. Nettoyage de la Map
+	if (ActiveEffectsTimers.Contains(EffectType))
+	{
+		ActiveEffectsTimers.Remove(EffectType);
+	}
+}
+
+void UItemComponent::Server_StartTimedEffect_Implementation(EConsumableEffectType EffectType, float Duration)
+{
+	if (Duration <= 0.f) return;
+
+	// 1. On applique l'effet sur le serveur (sera répliqué aux clients via les stats)
+	ApplyEffectLogic(EffectType, true);
+
+	// 2. Configuration du Timer avec paramètre
+	FTimerDelegate TimerDel;
+	TimerDel.BindUObject(this, &UItemComponent::OnEffectExpired, EffectType);
+
+	// On lance le timer. S'il existe déjà, il est réinitialisé (Refresh du buff)
+	GetWorld()->GetTimerManager().SetTimer(
+		ActiveEffectsTimers.FindOrAdd(EffectType), 
+		TimerDel, 
+		Duration, 
+		false
+	);
+}
+
+#pragma endregion
+
+
 
 #pragma region Use - Main Action
 
@@ -179,9 +236,20 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
-		case EConsumableEffectType::PlaceZipline:
-			// TODO later
+		case EConsumableEffectType::Inhale:
+			HealthComponent->ChangeCurrentMaxHealth(EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
 			break;
+		
+		case EConsumableEffectType::Adrenaline:
+			Server_StartTimedEffect(EConsumableEffectType::Adrenaline,EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
+			break;
+		case EConsumableEffectType::Protector:
+			Server_StartTimedEffect(EConsumableEffectType::Protector,EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
+			InventoryComponent->RemoveCurrentItem();
+			break;
+			
 
 		case EConsumableEffectType::ThrowObject:
 		{
@@ -229,6 +297,7 @@ void UItemComponent::UseConsumable()
 	}
 	
 }
+
 
 void UItemComponent::StopMainAction()
 {
