@@ -6,7 +6,7 @@
 #include "Actors/Player/APlayerCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
-
+#include "Kismet/GameplayStatics.h"
 
 AInteractibleObjects::AInteractibleObjects()
 {
@@ -30,9 +30,6 @@ AInteractibleObjects::AInteractibleObjects()
 	StaticMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
 	StaticMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
-
-	InteractQTEWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("LockpickWidget"));
-	InteractQTEWidgetComponent->SetupAttachment(BoxCollider);
 
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
 	InteractibleWidgetComponent->SetupAttachment(BoxCollider);
@@ -60,7 +57,6 @@ void AInteractibleObjects::BeginPlay()
 
 	EnableDistance = EnableDistance * EnableDistance;
 
-	InteractQTEWidget = Cast<ULockpickQTEWidget>(InteractQTEWidgetComponent->GetWidget());
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
 
 	if (FloatCurve)
@@ -119,13 +115,11 @@ void AInteractibleObjects::CheckEnableDistance()
 	{
 		SetActorTickEnabled(true);
 		SetActorHiddenInGame(false);
-		InteractQTEWidgetComponent->SetComponentTickEnabled(true);
 	}
 	else
 	{
 		SetActorTickEnabled(false);
 		SetActorHiddenInGame(true);
-		InteractQTEWidgetComponent->SetComponentTickEnabled(false);
 	}
 }
 
@@ -178,11 +172,11 @@ void AInteractibleObjects::Server_DisplayErrorMessage_Implementation(const FStri
 
 #pragma region Interface
 
-void AInteractibleObjects::Interact_Implementation(AActor* Interact)
+void AInteractibleObjects::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
 
-	BP_OnInteraction(Cast<AAPlayerCharacter>(Interact));
+	BP_OnInteraction(Cast<AAPlayerCharacter>(Interactor));
 }
 
 void AInteractibleObjects::StopInteract_Implementation(AActor* Interactor)
@@ -194,43 +188,38 @@ void AInteractibleObjects::StopInteract_Implementation(AActor* Interactor)
 
 void AInteractibleObjects::BP_OnInteractionFinished_Implementation()
 {
+	if (NeededInteractItem == NULL || InteractItemConsumptionType != EInteractItemConsuptionType::ConsumeOnUse) return;
+
+	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
+	{
+		if (APawn* Pawn = PC->GetPawn())
+		{
+			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
+			{
+				PlayerCharacter->InventoryComponent->RemoveCurrentItem();
+			}
+		}
+	}
 }
 
-bool AInteractibleObjects::GetCanBeUsed_Implementation()
+bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 {
+	if (NeededInteractItem != nullptr) {
+
+		if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr ||
+			IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededInteractItem)
+		{
+			Server_DisplayErrorMessage("You need a " + NeededInteractItem->ItemName);
+			return false;
+		}
+	}
+
 	return bCanBeUsed;
 }
 
-bool AInteractibleObjects::GetQTENeeded_Implementation()
+EQTEType AInteractibleObjects::GetNeededQTE_Implementation()
 {
-	return bDoQTE;
-}
-
-void AInteractibleObjects::StartQTE_Implementation()
-{
-	InteractQTEWidget->EnterQTE(QTESuccessRangeStart, QTESuccessRangeEnd, 400.f, QTEStepsCount);
-}
-
-void AInteractibleObjects::StopQTE_Implementation()
-{
-	InteractQTEWidget->ExitQTE();
-}
-
-bool AInteractibleObjects::ValidateQTE_Implementation()
-{
-	SetDoQTE(false);
-	bool bSuccess = InteractQTEWidget->ValidateQTE(this);
-    
-	if (bSuccess)
-	{
-		OnQTESuccess();
-	}
-	else
-	{
-		OnQTEFailed();
-	}
-    
-	return bSuccess;
+	return QTEType;
 }
 
 void AInteractibleObjects::FadeIn_Implementation()

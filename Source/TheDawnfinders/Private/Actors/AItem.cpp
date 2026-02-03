@@ -32,7 +32,7 @@ void AItem::BeginPlay()
 	if (ItemData && ItemData->ItemMesh)
 	{
 		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
-		ItemInfos = FItemInfos(ItemData, ItemData->WeaponDurability);
+		ItemInfos = FItemInfos(ItemData, ItemData->Durability);
 	}
 }
 

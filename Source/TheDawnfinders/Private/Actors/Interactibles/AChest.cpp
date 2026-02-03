@@ -72,10 +72,8 @@ void AChest::SpawnLoot_Implementation()
 		}
 
 		AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
-		NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->WeaponDurability));
+		NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->Durability));
 	}
-
-	UGameplaySoundHelper::PlaySoundNetworked(this, ChestSound, GetActorLocation(), SoundLoudness);
 
 	Destroy();
 }

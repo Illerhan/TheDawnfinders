@@ -2,12 +2,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Widgets/UQTEWidget.h"
 #include "ULockpickQTEWidget.generated.h"
 
 class AInteractibleObjects;
 
 UCLASS()
-class THEDAWNFINDERS_API ULockpickQTEWidget : public UUserWidget
+class THEDAWNFINDERS_API ULockpickQTEWidget : public UQTEWidget
 {
 	GENERATED_BODY()
 
@@ -24,8 +25,7 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ExitQTE();
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-bool ValidateQTE(AInteractibleObjects* Interactible);
+	virtual bool PressButton() override;
 
 
 // === OTHERS ===

@@ -13,9 +13,19 @@
 #include "Interactible.generated.h"
 
 class UBoxComponent;
+class UItemData;
 class AAPlayerCharacter;
 class ULockpickQTEWidget;
 class UWorldInteractibleWidget;
+
+
+UENUM(BlueprintType)
+enum class EInteractItemConsuptionType : uint8
+{
+	ConsumeOnQTEInput,
+	ConsumeOnQTEFail,
+	ConsumeOnUse
+};
 
 
 UCLASS()
@@ -36,11 +46,8 @@ public:
 public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
-	virtual bool GetCanBeUsed_Implementation() override;
-	virtual bool GetQTENeeded_Implementation() override;
-	virtual void StartQTE_Implementation() override;
-	virtual void StopQTE_Implementation() override;
-	virtual bool ValidateQTE_Implementation() override;
+	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
+	virtual EQTEType GetNeededQTE_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
@@ -98,6 +105,15 @@ public:
 	void Multicast_DisplayErrorMessage(const FString& Message);
 
 
+// === GETTERS ===
+public :
+	UFUNCTION(BlueprintCallable)
+	UItemData* GetNeededInteractItem() { return NeededInteractItem; }
+
+	UFUNCTION(BlueprintCallable)
+	EInteractItemConsuptionType GetInteractItemConsumptionType() { return InteractItemConsumptionType; }
+
+
 // === COMPONENTS ===
 public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
@@ -110,46 +126,48 @@ public :
 	UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
-	UWidgetComponent* InteractQTEWidgetComponent;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UTexture2D* InputIcon;
 
 
-// === PROTECTED PROPERTIES ===
-protected :
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bDoQTE;
+// === QTE INFOS ===
+public :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	EQTEType QTEType;
 
-public:
-	void SetDoQTE(bool bQTE)
-	{
-		this->bDoQTE = bQTE;
-	}
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float QTESuccessRangeStart;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float QTESuccessRangeEnd;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	int QTEStepsCount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float MashQTEQuantity = 15.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	float MashQTEDecresePerSeconds = 2.f;
+
+
+// === PROTECTED INFOS ===
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float EnableDistance = 3500.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UItemData* NeededInteractItem;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EInteractItemConsuptionType InteractItemConsumptionType;
+
 	FTimerHandle EnableTimer;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float QTESuccessRangeStart;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float QTESuccessRangeEnd;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int QTEStepsCount;
 
 	UPROPERTY()
 	bool bCanBeUsed = true;
-
-	UPROPERTY()
-	ULockpickQTEWidget* InteractQTEWidget;
 
 	UPROPERTY()
 	UWorldInteractibleWidget* InteractibleWidget;
@@ -162,12 +180,6 @@ protected:
 
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	AActor* PlayerTemp;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	USoundBase* ChestSound;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float SoundLoudness;
 
 	UPROPERTY()
 	FTimeline FadeTimeline;

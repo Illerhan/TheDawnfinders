@@ -52,7 +52,7 @@ void UDebugComponent::Server_SpawnDebugItem_Implementation(UItemData* ItemData, 
 	if (DroppedItem)
 	{
 		DroppedItem->ItemData = ItemData;
-		DroppedItem->Initialise(FItemInfos(ItemData, ItemData->WeaponDurability));
+		DroppedItem->Initialise(FItemInfos(ItemData, ItemData->Durability));
 		
 		// Setup Mesh, Physique etc...
 		if (DroppedItem->ItemMesh && ItemData->ItemMesh)
