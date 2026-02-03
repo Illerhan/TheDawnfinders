@@ -4,6 +4,8 @@
 #include "Blueprint/UserWidget.h"
 #include "UQTEWidget.generated.h"
 
+class AInteractibleObjects;
+
 UCLASS()
 class THEDAWNFINDERS_API UQTEWidget : public UUserWidget
 {
@@ -12,4 +14,17 @@ class THEDAWNFINDERS_API UQTEWidget : public UUserWidget
 public :
 	UFUNCTION(BlueprintCallable)
 	virtual bool PressButton();
+
+	UFUNCTION(BlueprintCallable)
+	void SetLinkedInteractible(AInteractibleObjects* Interactible);
+
+	UFUNCTION(BlueprintCallable)
+	void FailQTEStep();
+
+	UFUNCTION(BlueprintCallable)
+	void DoQTEStep();
+
+protected :
+	UPROPERTY()
+	AInteractibleObjects* LinkedInteractible;
 };

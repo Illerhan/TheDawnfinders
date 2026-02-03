@@ -80,6 +80,9 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<AItem> ItemClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int Durability = 50;
+
 
 // Consumable
 public:
@@ -106,9 +109,6 @@ public:
 public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	FName WeaponDataTableRow;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	int WeaponDurability = 50;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	TArray<float> BBaseComboDamages;

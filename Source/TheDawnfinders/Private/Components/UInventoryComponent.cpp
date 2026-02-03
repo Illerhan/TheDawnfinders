@@ -425,6 +425,11 @@ void UInventoryComponent::UseDurability(int NewDurability)
 {
 	InventorySlots[CurrentSlotIndex].CurrentInfos.Durability -= NewDurability;
 
+	if (InventorySlots[CurrentSlotIndex].CurrentInfos.Durability <= 0
+		&& InventorySlots[CurrentSlotIndex].CurrentInfos.ItemData->ItemType == EItemType::Consumable) {
+		RemoveCurrentItem();
+	}
+
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 

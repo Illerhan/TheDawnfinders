@@ -55,8 +55,12 @@ bool ULockpickQTEWidget::PressButton()
     if (RecentlyPressedTimer > 0.f) return false;
     RecentlyPressedTimer = 0.1f;
 
+    DoQTEStep();   // Consumes durability if needed
+
     if (!(CurrentAngle > 360 - SuccessPercent * 0.5f) && !(CurrentAngle < SuccessPercent * 0.5f)) {
         PlayFailAnim();
+        FailQTEStep();   // Consumes durability if needed
+
         return false;
     }
 

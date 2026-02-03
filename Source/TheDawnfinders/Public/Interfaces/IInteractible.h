@@ -24,7 +24,7 @@ public :
 	void StopInteract(AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
-	bool GetCanBeUsed();
+	bool GetCanBeUsed(AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
 	EQTEType GetNeededQTE();

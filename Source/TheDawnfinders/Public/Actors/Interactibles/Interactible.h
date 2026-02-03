@@ -13,9 +13,19 @@
 #include "Interactible.generated.h"
 
 class UBoxComponent;
+class UItemData;
 class AAPlayerCharacter;
 class ULockpickQTEWidget;
 class UWorldInteractibleWidget;
+
+
+UENUM(BlueprintType)
+enum class EInteractItemConsuptionType : uint8
+{
+	ConsumeOnQTEInput,
+	ConsumeOnQTEFail,
+	ConsumeOnUse
+};
 
 
 UCLASS()
@@ -36,7 +46,7 @@ public:
 public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
-	virtual bool GetCanBeUsed_Implementation() override;
+	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
 	virtual EQTEType GetNeededQTE_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
@@ -95,6 +105,15 @@ public:
 	void Multicast_DisplayErrorMessage(const FString& Message);
 
 
+// === GETTERS ===
+public :
+	UFUNCTION(BlueprintCallable)
+	UItemData* GetNeededInteractItem() { return NeededInteractItem; }
+
+	UFUNCTION(BlueprintCallable)
+	EInteractItemConsuptionType GetInteractItemConsumptionType() { return InteractItemConsumptionType; }
+
+
 // === COMPONENTS ===
 public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
@@ -113,9 +132,11 @@ public :
 	UTexture2D* InputIcon;
 
 
-// === PROTECTED PROPERTIES ===
-
+// === QTE INFOS ===
 public :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
+	EQTEType QTEType;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
 	float QTESuccessRangeStart;
 
@@ -132,14 +153,18 @@ public :
 	float MashQTEDecresePerSeconds = 2.f;
 
 
+// === PROTECTED INFOS ===
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float EnableDistance = 3500.f;
 
-	FTimerHandle EnableTimer;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UItemData* NeededInteractItem;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
-	EQTEType QTEType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EInteractItemConsuptionType InteractItemConsumptionType;
+
+	FTimerHandle EnableTimer;
 
 	UPROPERTY()
 	bool bCanBeUsed = true;
@@ -155,12 +180,6 @@ protected:
 
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	AActor* PlayerTemp;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	USoundBase* ChestSound;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float SoundLoudness;
 
 	UPROPERTY()
 	FTimeline FadeTimeline;

@@ -141,6 +141,9 @@ void UInteractionComponent::StartInteract()
 		return;
 	}
 
+	if (!Nearest || !IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner()))
+		return;
+
 	// Starts QTE if needed
 	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE) 
 	{
@@ -187,7 +190,7 @@ void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter*
 
 void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, AAPlayerCharacter* Player)
 {
-	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible))
+	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible, Player))
 		return;
 
 	IInteractible::Execute_Interact(Interactible, Player);
@@ -268,6 +271,7 @@ void UInteractionComponent::StartRotativeQTE(AInteractibleObjects* Interactible)
 	ULockpickQTEWidget* RotativeQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTERotative();
 	RotativeQTE->EnterQTE(Interactible->QTESuccessRangeStart, Interactible->QTESuccessRangeEnd, 400.f, Interactible->QTEStepsCount);
 	CurrentQTEWidget = RotativeQTE;
+	RotativeQTE->SetLinkedInteractible(Interactible);
 }
 
 void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactible)
@@ -275,6 +279,7 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 	UQTEMashButtonWidget* MashQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTEMashButton();
 	MashQTE->StartQTE(Interactible->MashQTEQuantity, Interactible->MashQTEDecresePerSeconds, true);
 	CurrentQTEWidget = MashQTE;
+	MashQTE->SetLinkedInteractible(Interactible);
 }
 
 

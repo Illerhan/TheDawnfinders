@@ -31,9 +31,6 @@ public :
 // === PUBLIC PROPERTIES ===
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UItemData* NeededKey;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AMovableObjects*> LinkedObjects;
 
 

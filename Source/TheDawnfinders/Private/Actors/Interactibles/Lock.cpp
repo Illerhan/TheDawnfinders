@@ -25,9 +25,9 @@ void ALock::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
 	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr || 
-		IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededKey ) {
+		IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededInteractItem ) {
 
-		Server_DisplayErrorMessage("You need a " + NeededKey->ItemName);
+		Server_DisplayErrorMessage("You need a " + NeededInteractItem->ItemName);
 		return;
 	}
 
@@ -52,16 +52,7 @@ void ALock::BP_OnInteractionFinished_Implementation()
 		LinkedObjects[i]->DoMovement();
 	}
 
-	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
-	{
-		if (APawn* Pawn = PC->GetPawn())
-		{
-			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
-			{
-				PlayerCharacter->InventoryComponent->RemoveCurrentItem();
-			}
-		}
-	}
+	Super::BP_OnInteractionFinished();
 
 	Destroy();
 }
