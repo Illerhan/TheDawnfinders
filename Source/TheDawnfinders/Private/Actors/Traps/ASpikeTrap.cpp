@@ -10,11 +10,11 @@ AASpikeTrap::AASpikeTrap()
 
 void AASpikeTrap::DoTrapAction()
 {
-	if (!TrappedActor) return;
+	//if (!TrappedActor) return;
 
 	Super::DoTrapAction();
+
 	DoSpikeAnim();
-	//IDamageable::Execute_ReceiveDamage(TrappedActor, Damages, this);
 }
 
 void AASpikeTrap::DoSpikeAnim_Implementation()

@@ -34,6 +34,10 @@ void ATrapBase::BeginPlay()
 
 		FadeTimeline.SetLooping(false);
 	}
+
+	if (TrapTriggerType == ETrapTriggerType::OnDuration) {
+		TriggerTimer = TriggerWaitDuration + StartOffsetDuration;
+	}
 }
 
 
@@ -45,6 +49,16 @@ void ATrapBase::Tick(float DeltaTime)
 		CurrentCooldown -= DeltaTime;
 
 	FadeTimeline.TickTimeline(DeltaTime);
+
+	if (TriggerTimer > 0.f) {
+		TriggerTimer -= DeltaTime;
+	}
+	else if (TrapTriggerType == ETrapTriggerType::OnDuration) {
+		DoTrapAction();
+		Multicast_PlayEffects();
+
+		TriggerTimer = TriggerWaitDuration;
+	}
 }
 
 
@@ -55,6 +69,8 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	if (!bEnable) return;
 	if (CurrentCooldown > 0.f) return;
 	if (!OtherActor || OtherActor == this) return;
+	if (TrapTriggerType != ETrapTriggerType::OnColliderEnter) return;
+
 	TrappedActor = OtherActor;
 
 	// Run trap action (server side)
@@ -62,10 +78,8 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	{
 		DoTrapAction();
 
-		// Multicast sound FX
 		Multicast_PlayEffects();
 
-		// Start cooldown
 		CurrentCooldown = Cooldown;
 	}
 }
