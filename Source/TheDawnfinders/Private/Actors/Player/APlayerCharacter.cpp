@@ -133,6 +133,8 @@ void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    if (!IsLocallyControlled()) return;
+
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
     }
