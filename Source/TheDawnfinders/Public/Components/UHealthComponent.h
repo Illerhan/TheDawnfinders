@@ -96,7 +96,8 @@ public :
 	FTimerHandle InvincibilityTimerHandle;
 
 
-// === NETWORK ===
+
+	// === NETWORK ===
 public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -165,11 +166,12 @@ public:
 	{
 		return bIsPoisoned;
 	}
+	UFUNCTION(Server,Reliable,BlueprintCallable)
+	void SetIsPoisoned(bool isPoisoned);
 
-	void SetIsPoisoned(const bool Poisoned)
-	{
-		this->bIsPoisoned = Poisoned;
-	}
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float PoisonDmg;
 
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

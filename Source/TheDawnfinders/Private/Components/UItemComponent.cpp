@@ -255,8 +255,10 @@ void UItemComponent::UseConsumable()
 			Server_StartTimedEffect(EConsumableEffectType::Protector,EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
 			break;
-			
-
+		case EConsumableEffectType::Antidote:
+			HealthComponent->SetIsPoisoned(false);
+			InventoryComponent->RemoveCurrentItem();
+	
 		case EConsumableEffectType::ThrowObject:
 		{
 			if (!IsPreviewingThrow) return;

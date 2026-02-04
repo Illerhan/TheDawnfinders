@@ -57,7 +57,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		if (bIsPoisoned)
 		{
 			UE_LOG(LogTemp,Warning,TEXT("Poisoned"));
-			TakeDamage(0.05f, EVFXType::Poison);
+			TakeDamage(PoisonDmg, EVFXType::Poison);
 		}
 	}
 
@@ -133,8 +133,6 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.6f);
 			return;
 		}
-	
-		
 
 		// Visual effects + Invincibility Frames
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
@@ -442,6 +440,16 @@ void UHealthComponent::OnRep_IsFallen()
 
 void UHealthComponent::OnRep_ProtectionZoneAmount()
 {
+}
+
+void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
+{
+	if (GetOwner()->HasAuthority())
+		bIsPoisoned = isPoisoned;
+	else
+	{
+		SetIsPoisoned_Implementation(isPoisoned);
+	}
 }
 
 
