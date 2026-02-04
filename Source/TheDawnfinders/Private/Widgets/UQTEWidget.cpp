@@ -9,6 +9,11 @@ bool UQTEWidget::PressButton()
 	return false;
 }
 
+void UQTEWidget::ExitQTE_Implementation()
+{
+
+}
+
 void UQTEWidget::SetLinkedInteractible(AInteractibleObjects* Interactible)
 {
 	LinkedInteractible = Interactible;
@@ -16,7 +21,7 @@ void UQTEWidget::SetLinkedInteractible(AInteractibleObjects* Interactible)
 
 void UQTEWidget::FailQTEStep()
 {
-	if (LinkedInteractible->GetNeededInteractItem() == NULL
+	if (LinkedInteractible->GetNeededInteractItem() == nullptr
 		|| LinkedInteractible->GetInteractItemConsumptionType() != EInteractItemConsuptionType::ConsumeOnQTEFail) return;
 
 	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
@@ -26,6 +31,10 @@ void UQTEWidget::FailQTEStep()
 			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
 			{
 				PlayerCharacter->InventoryComponent->UseDurability(1);
+
+				if (IPlayerInterface::Execute_GetEquippedItem(PlayerCharacter) == LinkedInteractible->GetNeededInteractItem()) return;
+
+				PlayerCharacter->InteractionComponent->CancelInteraction();
 			}
 		}
 	}
@@ -33,7 +42,7 @@ void UQTEWidget::FailQTEStep()
 
 void UQTEWidget::DoQTEStep()
 {
-	if (LinkedInteractible->GetNeededInteractItem() == NULL
+	if (LinkedInteractible->GetNeededInteractItem() == nullptr
 		|| LinkedInteractible->GetInteractItemConsumptionType() != EInteractItemConsuptionType::ConsumeOnQTEInput) return;
 
 	if (APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))

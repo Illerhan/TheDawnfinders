@@ -398,6 +398,7 @@ void UInventoryComponent::SortItems()
 
 #pragma endregion
 
+
 #pragma region Gold
 
 void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
@@ -408,6 +409,7 @@ void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
 
 
 #pragma endregion
+
 
 #pragma region Others
 

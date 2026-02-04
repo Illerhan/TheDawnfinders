@@ -22,8 +22,7 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void EnterQTE(float SuccessStart, float SuccessEnd, float Speed, int Steps);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ExitQTE();
+	virtual void ExitQTE_Implementation() override;
 
 	virtual bool PressButton() override;
 

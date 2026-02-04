@@ -314,6 +314,8 @@ void UInteractionComponent::CancelInteraction()
 
 	if (bIsDoingQTE)
 	{
+		CurrentQTEWidget->ExitQTE();
+
 		InteractingQTEActor = nullptr;
 		bIsDoingQTE = false;
 

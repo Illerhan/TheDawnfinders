@@ -15,6 +15,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	virtual bool PressButton();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ExitQTE();
+
 	UFUNCTION(BlueprintCallable)
 	void SetLinkedInteractible(AInteractibleObjects* Interactible);
 
