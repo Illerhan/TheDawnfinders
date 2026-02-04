@@ -7,7 +7,7 @@
 
 AChest::AChest()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	
 }
 
 void AChest::Tick(float DeltaTime)
@@ -45,6 +45,7 @@ void AChest::BP_OnInteractionFinished_Implementation()
 	}
 }
 
+// Did on the server only
 void AChest::SpawnLoot_Implementation()
 {
 	UDataTable* LootDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/LT_ChestLoot.LT_ChestLoot"));
@@ -75,7 +76,18 @@ void AChest::SpawnLoot_Implementation()
 		NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->Durability));
 	}
 
+	// Trapped chest check
+	if (FMath::RandRange(0, 100) < TrapProba) {
+		DoTrapEffect();
+	}
+
 	Destroy();
+}
+
+void AChest::DoTrapEffect()
+{
+	ACurseZone* CurseZone = GetWorld()->SpawnActor<ACurseZone>(TrapCurseZone, GetActorLocation(), FRotator());
+	CurseZone->Initialise(TrapRadius, TrapDelay, TrapDuration);
 }
 
 FVector AChest::GetPossibleSpawnLocation()

@@ -7,11 +7,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/UHealthComponent.h"
 
-
-// Sets default values
 ACurseZone::ACurseZone()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
 	CurseCollider = CreateDefaultSubobject<USphereComponent>("CurseCollider");
@@ -20,26 +17,49 @@ ACurseZone::ACurseZone()
 	
 }
 
-// Called when the game starts or when spawned
 void ACurseZone::BeginPlay()
 {
 	Super::BeginPlay();
 	if (CurseCollider)
 	{
-		// On lie l'événement dynamique
 		CurseCollider->OnComponentBeginOverlap.AddDynamic(this, &ACurseZone::OnCurseOverlapBegin);
-		
 		CurseCollider->OnComponentEndOverlap.AddDynamic(this, &ACurseZone::OnCurseOverlapEnd);
 	}
 }
 
-// Called every frame
 void ACurseZone::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	float CurrentRadius = CurseCollider->GetUnscaledSphereRadius();
 	CurseCollider->SetSphereRadius(CurrentRadius + (CurseRate*DeltaTime));
-	
+
+	if (!DestroyAfterTimer) return;
+
+	DestroyTimer -= DeltaTime;
+	if (DestroyTimer <= 0) Destroy();
+}
+
+void ACurseZone::Initialise(float Radius, float CurseZoneDelay, float Duration)
+{
+	DestroyAfterTimer = true;
+	DestroyTimer = Duration;
+
+	if (HasAuthority()) {
+		Multicast_Initialise(Radius, CurseZoneDelay);
+	}
+}
+
+void ACurseZone::Multicast_Initialise_Implementation(float Radius, float CurseZoneDelay)
+{
+	CurseCollider->SetSphereRadius(Radius);
+	CurseCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	GetWorldTimerManager().SetTimer(StartCurseDelayHandle, this, &ACurseZone::InitialiseAfterDelay, CurseZoneDelay, false);
+}
+
+void ACurseZone::InitialiseAfterDelay()
+{
+	CurseCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 void ACurseZone::OnCurseOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

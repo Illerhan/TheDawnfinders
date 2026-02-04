@@ -52,6 +52,14 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	{
 		ApplyCurse(DeltaTime);
 	}
+	if (GetOwner()->HasAuthority())
+	{
+		if (bIsPoisoned)
+		{
+			UE_LOG(LogTemp,Warning,TEXT("Poisoned"));
+			TakeDamage(0.05f, EVFXType::Poison);
+		}
+	}
 
 	if(CurseMaterial)
 		ActualiseCursePostProcess(DeltaTime);
@@ -114,26 +122,30 @@ void UHealthComponent::InitialiseComponent
 
 #pragma region Main Health Functions
 
-void UHealthComponent::TakeDamage(float quantity)
+void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
 	if (IsInvincible) return;
-
-	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
+	if (VFXType == Blood)
 	{
-		StaminaComponent->UseStamina(10.f);
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.6f);
-		return;
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
+		{
+			StaminaComponent->UseStamina(10.f);
+			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 0.6f);
+			return;
+		}
+	
+		
+
+		// Visual effects + Invincibility Frames
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
+			StartInvincibilityFrames_Implementation(0.2f);
+
+			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
+			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
+		}
 	}
 	
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
-
-	// Visual effects + Invincibility Frames
-	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
-		StartInvincibilityFrames_Implementation(0.2f);
-
-		IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
-		IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
-	}
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 
@@ -327,6 +339,7 @@ void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 void UHealthComponent::Fallen()
 {
 	bIsFallen = true;
+	bIsPoisoned = false;
 
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
@@ -416,6 +429,7 @@ void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UHealthComponent, CurrentMaxHealth);
 	DOREPLIFETIME(UHealthComponent, bIsDead);
 	DOREPLIFETIME(UHealthComponent, CurseMaxHealth);
+	DOREPLIFETIME(UHealthComponent, bIsPoisoned);
 }
 
 void UHealthComponent::OnRep_IsDead()

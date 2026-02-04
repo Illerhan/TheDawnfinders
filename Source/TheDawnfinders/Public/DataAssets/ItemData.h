@@ -39,6 +39,7 @@ enum class EConsumableEffectType : uint8 {
 	Navigation UMETA(DisplayName = "Navigation"),
 	SoundProtect UMETA(DisplayName = "SoundProtect"),
 	Antidote UMETA(DisplayName = "Antidote"),
+	Poison UMETA(DisplayName="Poison"),
 	None UMETA(DisplayName = "None")
 };
 

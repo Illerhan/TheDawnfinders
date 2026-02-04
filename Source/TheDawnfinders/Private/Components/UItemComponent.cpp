@@ -13,6 +13,7 @@
 #include "Interfaces/IPlayer.h"
 #include "TimerManager.h"
 #include "Engine/World.h"
+#include "Evaluation/Blending/MovieSceneBlendingActuatorID.h"
 
 #include "Perception/AISense_Hearing.h"
 
@@ -120,6 +121,11 @@ void UItemComponent::ApplyEffectLogic(EConsumableEffectType EffectType, bool bAc
 		if (PlayerCharacter->LightComponent)
 		{
 			bActivate?PlayerCharacter->LightComponent->TurnLightOn():PlayerCharacter->LightComponent->TurnLightOff();
+		}
+		case EConsumableEffectType::Poison:
+		if (HealthComponent)
+		{
+			HealthComponent->SetIsPoisoned(bActivate);
 		}
 	}
 }

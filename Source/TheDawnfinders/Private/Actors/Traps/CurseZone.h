@@ -14,23 +14,27 @@ class THEDAWNFINDERS_API ACurseZone : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ACurseZone();
-
-protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
+	UFUNCTION()
+	void Initialise(float Radius, float CurseZoneDelay, float Duration);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_Initialise(float Radius, float CurseZoneDelay);
+
+	UFUNCTION()
+	void InitialiseAfterDelay();
+
 	UFUNCTION()
 	void OnCurseOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	UFUNCTION()
 	void OnCurseOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
+
+protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USphereComponent* CurseCollider;
 	
@@ -39,4 +43,12 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	float CurseRate;
+
+	UPROPERTY()
+	float DestroyTimer;
+
+	UPROPERTY()
+	bool DestroyAfterTimer;
+
+	FTimerHandle StartCurseDelayHandle;
 };
