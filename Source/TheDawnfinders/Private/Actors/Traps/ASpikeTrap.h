@@ -17,4 +17,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoSpikeAnim();
+
+
+// === SPIKE TRAP PARAMETERS ===
+protected :
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Spike Trap")
+	float SpikeOutDuration = 0.5f;
 };
