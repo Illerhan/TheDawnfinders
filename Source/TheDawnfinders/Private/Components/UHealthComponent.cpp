@@ -75,7 +75,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 
 void UHealthComponent::InitialiseComponent
-	(float MaxHP, float MinMaxHP, float ReviveHP,float InjureSpeed, float CurseRate)
+	(float MaxHP, float MinMaxHP, float ReviveHP,float InjureSpeed, float CurseRate, float DmgPoison)
 {
 	CurrentHealth = MaxHP;
 	CurrentMaxHealth = MaxHP;
@@ -84,6 +84,7 @@ void UHealthComponent::InitialiseComponent
 	MinReviveHP = ReviveHP;
 	InjureDecreaseSpeed = InjureSpeed;
 	CurseRatio = CurseRate;
+	PoisonDmg = DmgPoison;
 
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "PPCurse", FoundActors);

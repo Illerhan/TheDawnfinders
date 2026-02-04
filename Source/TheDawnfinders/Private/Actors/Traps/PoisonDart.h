@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/Activable.h"
 #include "PoisonDart.generated.h"
@@ -27,8 +28,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<ADarts> Dart;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (MakeEditWidget = true))
-	FVector SpawnLocation;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UArrowComponent* Arrow;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float Cooldown;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated)

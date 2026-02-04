@@ -101,7 +101,8 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
         PlayerConfig->InjureDecreaseSpeed,
-        PlayerConfig->CurseRatio
+        PlayerConfig->CurseRatio,
+        PlayerConfig->PoisonDmg
         );
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
