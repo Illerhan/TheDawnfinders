@@ -9,6 +9,12 @@
 
 class UStaminaComponent;
 
+UENUM()
+enum EVFXType
+{
+	Blood UMETA(DisplayName = "Blood"),
+	Poison UMETA(DisplayName = "Poison")
+};
 
 UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UHealthComponent : public UActorComponent
@@ -30,7 +36,7 @@ public :
 	void Heal(float quantity);
 
 	UFUNCTION(BlueprintCallable)
-	void TakeDamage(float quantity);
+	void TakeDamage(float quantity, EVFXType DamageType = EVFXType::Blood);
 	
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_TakeDamage(float quantity, AActor* Origin);
@@ -90,7 +96,8 @@ public :
 	FTimerHandle InvincibilityTimerHandle;
 
 
-// === NETWORK ===
+
+	// === NETWORK ===
 public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -151,8 +158,22 @@ protected :
 	UPROPERTY()
 	bool IsInvincible;
 	
-	
+	UPROPERTY(Blueprintable,EditAnywhere, Replicated)
+	bool bIsPoisoned = false;
 
+public:
+	bool IsPoisoned() const
+	{
+		return bIsPoisoned;
+	}
+	UFUNCTION(Server,Reliable,BlueprintCallable)
+	void SetIsPoisoned(bool isPoisoned);
+
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float PoisonDmg;
+
+protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* CurseMaterial;
 
