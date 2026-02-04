@@ -17,8 +17,7 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartQTE(float Quantity, float DecreasePerSecond, bool CanBeCanceled);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ExitQTE();
+	virtual void ExitQTE_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PressButtonFeedback();
