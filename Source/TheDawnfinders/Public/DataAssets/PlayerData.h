@@ -83,6 +83,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Health")
 	float CurseRatio = 0.02f;
+	
+	UPROPERTY(EditAnywhere,BLueprintReadOnly, Category="Health")
+	float PoisonDmg = 0.05f;
 
 
 	// ---------- THROW PREVIEW ----------

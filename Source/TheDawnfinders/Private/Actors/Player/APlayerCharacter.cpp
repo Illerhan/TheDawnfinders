@@ -101,7 +101,8 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
         PlayerConfig->InjureDecreaseSpeed,
-        PlayerConfig->CurseRatio
+        PlayerConfig->CurseRatio,
+        PlayerConfig->PoisonDmg
         );
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
@@ -132,6 +133,8 @@ void AAPlayerCharacter::BeginPlay()
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    if (!IsLocallyControlled()) return;
 
     if (bAutoLockIsActive) {
         ActualiseAutoLock();

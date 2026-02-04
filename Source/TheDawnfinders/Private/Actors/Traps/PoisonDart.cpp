@@ -12,13 +12,15 @@ APoisonDart::APoisonDart()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	Arrow = CreateDefaultSubobject<UArrowComponent>("Arrow");
+	Arrow->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
 void APoisonDart::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnLocation += GetActorLocation();
 	
 }
 
@@ -36,7 +38,7 @@ void APoisonDart::DoMainAction_Implementation()
 	UWorld* World = GetWorld();
 	FActorSpawnParameters SpawnParam;
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	World->SpawnActor<ADarts>(Dart,SpawnLocation,FRotator::ZeroRotator,SpawnParam);
+	World->SpawnActor<ADarts>(Dart,Arrow->GetComponentLocation(),GetActorRotation(),SpawnParam);
 	UE_LOG(LogTemp,Error,TEXT("DoMainAction_Implementation()"));
 } 
 
