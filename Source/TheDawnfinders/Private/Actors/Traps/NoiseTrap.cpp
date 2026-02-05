@@ -3,6 +3,8 @@
 
 #include "NoiseTrap.h"
 
+#include "GameFramework/SoundManager.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -16,6 +18,12 @@ ANoiseTrap::ANoiseTrap()
 void ANoiseTrap::BeginPlay()
 {
 	Super::BeginPlay();
+	AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), ASoundManager::StaticClass());
+	SoundManagerInstance = Cast<ASoundManager>(FoundActor);
+	if (!SoundManagerInstance)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ALitter: Attention, aucun ASoundManager trouvé dans le niveau !"));
+	}
 	
 }
 
@@ -29,4 +37,6 @@ void ANoiseTrap::DoTrapAction()
 {
 	
 	Super::DoTrapAction();
+	
+	SoundManagerInstance->MultiPlaySound(Sound,GetActorLocation(),100,1000,true);
 }

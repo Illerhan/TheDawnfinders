@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Actors/Traps/ATrapBase.h"
+#include "GameFramework/SoundManager.h"
 #include "NoiseTrap.generated.h"
 
 UCLASS()
@@ -24,4 +25,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void DoTrapAction() override;
+	UPROPERTY()
+	ASoundManager* SoundManagerInstance;
 };
