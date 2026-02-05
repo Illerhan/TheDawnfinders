@@ -209,8 +209,8 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 
 	// 4. LOGIQUE : On utilise les pointeurs génériques (ça marche pour les deux !)
 	TargetLight->SetVisibility(bLightOn);
-	TargetLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
-	TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
+	//TargetLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
+	//TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
     
 	TargetProtectionZone->SetHiddenInGame(!bLightOn);
 
