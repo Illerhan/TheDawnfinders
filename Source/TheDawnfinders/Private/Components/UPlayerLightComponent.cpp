@@ -71,8 +71,7 @@ void UPlayerLightComponent::BeginPlay()
 	}
 
 	ApplyLightState();
-
-
+	
 	// We get the UI ref
 	if (!Owner) return;
 
@@ -186,7 +185,6 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 {
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
-
 	// 1. DÉCLARATION : On prépare des pointeurs vides pour les composants dont on a besoin
 	UPointLightComponent* TargetLight = nullptr;
 	UPrimitiveComponent* TargetProtectionZone = nullptr;
@@ -213,6 +211,7 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 	//TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
     
 	TargetProtectionZone->SetHiddenInGame(!bLightOn);
+	TargetProtectionZone->SetGenerateOverlapEvents(!bLightOn);
 
 	// --- Logique Serveur spécifique ---
 	if (!Owner->HasAuthority()) return; 

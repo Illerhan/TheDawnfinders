@@ -126,7 +126,6 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
     ProtectionZone->SetGenerateOverlapEvents(false);
-    ProtectionZone->SetSphereRadius(0.f);
 }
 
 

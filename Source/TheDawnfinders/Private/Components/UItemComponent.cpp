@@ -122,7 +122,8 @@ void UItemComponent::ApplyEffectLogic(EConsumableEffectType EffectType, bool bAc
 		{
 			bActivate?PlayerCharacter->LightComponent->TurnLightOn():PlayerCharacter->LightComponent->TurnLightOff();
 		}
-		case EConsumableEffectType::Poison:
+		break;
+	case EConsumableEffectType::Poison:
 		if (HealthComponent)
 		{
 			HealthComponent->SetIsPoisoned(bActivate);
