@@ -62,6 +62,18 @@ void ACurseZone::InitialiseAfterDelay()
 	CurseCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
+void ACurseZone::Multicast_SetEnabled_Implementation(bool bEnable)
+{
+	if (bEnable) {
+		CurseCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	}
+	else {
+		CurseCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+
+	BP_SetEnabled(bEnable);
+}
+
 void ACurseZone::OnCurseOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor && OtherActor != this)
