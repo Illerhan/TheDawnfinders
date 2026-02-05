@@ -24,6 +24,7 @@ ALitter::ALitter()
     // Ensure it blocks world/physics but doesn't get stuck on pawns easily
     RootCollision->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
     
+    BoxCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollider"));
     BoxCollider->SetupAttachment(RootCollision);
 
     PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
@@ -148,6 +149,14 @@ void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 
 void ALitter::BeginPlay()
 {
+    PrimaryActorTick.bStartWithTickEnabled = false;
+
+    FTimerHandle Handle;
+    GetWorldTimerManager().SetTimer(Handle, [this]()
+    {
+        SetActorTickEnabled(true);
+    }, 0.0f, false);
+    
     Super::BeginPlay();
     if (FrontTrigger)
     {

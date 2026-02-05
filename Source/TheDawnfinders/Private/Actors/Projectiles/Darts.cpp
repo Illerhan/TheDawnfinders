@@ -14,8 +14,9 @@ ADarts::ADarts()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-		
+	
 	SphereCollider = CreateDefaultSubobject<USphereComponent>("SphereCollider");
+	SphereCollider->SetupAttachment(RootComponent);
 	SphereCollider->SetSphereRadius(50);
 	
 	MoveComp = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
