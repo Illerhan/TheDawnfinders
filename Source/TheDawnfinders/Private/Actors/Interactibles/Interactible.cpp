@@ -12,6 +12,8 @@ AInteractibleObjects::AInteractibleObjects()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
 	InteractCollider = CreateDefaultSubobject<UBoxComponent>(FName("InteractCollider"));
 	InteractCollider->SetupAttachment(RootComponent);
 	InteractCollider->SetCollisionResponseToAllChannels(ECR_Ignore);
