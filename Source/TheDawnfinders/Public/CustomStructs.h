@@ -246,6 +246,11 @@ struct FChestSpawnLoot {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* ItemData;
+
+	FChestSpawnLoot()
+		: SpawnPercent(0.f), ItemData(nullptr)
+	{
+	}
 };
 
 
@@ -262,6 +267,11 @@ struct FChestSpawn : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FChestSpawnLoot> SpawnableItems;
+
+	FChestSpawn()
+		: MinItemCount(0), MaxItemCount(0)
+	{
+	}
 };
 
 #pragma endregion
