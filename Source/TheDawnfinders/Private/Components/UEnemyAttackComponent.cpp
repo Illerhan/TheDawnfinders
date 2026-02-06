@@ -101,25 +101,29 @@ bool UEnemyAttackComponent::VerifyTrigger(FEnemyAttackTrigger Trigger, TArray<AA
 {
 	switch (Trigger.EnemyAttackTriggerType) {
 	case EEnemyAttackTriggerType::DistanceMin:
-		for (int i = 0; i < PlayersAtRange.Num(); i++) {
-			if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayersAtRange[i]) == EPlayerState::Fallen ||
-				IPlayerInterface::Execute_GetCurrentPlayerState(PlayersAtRange[i]) == EPlayerState::Dead) continue;
+		for (AActor* Player : PlayersAtRange) {
+			if (!Player->Implements<UPlayerInterface>()) continue;
+			if (IPlayerInterface::Execute_GetCurrentPlayerState(Player) == EPlayerState::Fallen ||
+				IPlayerInterface::Execute_GetCurrentPlayerState(Player) == EPlayerState::Dead) continue;
 
-			float Dist = (PlayersAtRange[i]->GetActorLocation() - GetOwner()->GetAttachParentActor()->GetActorLocation()).Length();
+			float Dist = (Player->GetActorLocation() - GetOwner()->GetAttachParentActor()->GetActorLocation()).Length();
 
 			if (Dist > Trigger.Value) return true;
 		}
+		break;
 
 	case EEnemyAttackTriggerType::DistanceMax:
-		for (int i = 0; i < PlayersAtRange.Num(); i++) {
-			if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayersAtRange[i]) == EPlayerState::Fallen ||
-				IPlayerInterface::Execute_GetCurrentPlayerState(PlayersAtRange[i]) == EPlayerState::Dead) continue;
+		for (AActor* Player : PlayersAtRange) {
+			if (!Player->Implements<UPlayerInterface>()) continue;
+			if (IPlayerInterface::Execute_GetCurrentPlayerState(Player) == EPlayerState::Fallen ||
+				IPlayerInterface::Execute_GetCurrentPlayerState(Player) == EPlayerState::Dead) continue;
 
 			AAIController* AI = Cast<AAIController>(GetOwner());
-			float Dist = (PlayersAtRange[i]->GetActorLocation() - AI->GetPawn()->GetActorLocation()).Length();
+			float Dist = (Player->GetActorLocation() - AI->GetPawn()->GetActorLocation()).Length();
 
 			if (Dist < Trigger.Value) return true;
 		}
+		break;
 
 	case EEnemyAttackTriggerType::HealthMin:
 		break;

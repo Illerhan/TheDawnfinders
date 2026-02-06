@@ -54,7 +54,7 @@ void ATrapBase::Tick(float DeltaTime)
 		TriggerTimer -= DeltaTime;
 	}
 	else if (TrapTriggerType == ETrapTriggerType::OnDuration) {
-		DoTrapAction();
+		DoTrapAction(nullptr);
 		Multicast_PlayEffects();
 
 		TriggerTimer = TriggerWaitDuration;
@@ -76,15 +76,13 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	// Run trap action (server side)
 	if (OtherActor->Implements<UDamageable>())
 	{
-		DoTrapAction();
+		DoTrapAction(OtherActor);
 
 		Multicast_PlayEffects();
 
 		CurrentCooldown = Cooldown;
 	}
 }
-
-
 
 void ATrapBase::Multicast_PlayEffects_Implementation()
 {
@@ -112,7 +110,7 @@ void ATrapBase::OnRep_Enabled()
 	// effet visuel
 }
 
-void ATrapBase::DoTrapAction()
+void ATrapBase::DoTrapAction(AActor* OtherActor)
 {
 
 }

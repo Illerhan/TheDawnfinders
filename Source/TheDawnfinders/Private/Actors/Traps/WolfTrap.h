@@ -14,7 +14,7 @@ class THEDAWNFINDERS_API AWolfTrap : public ATrapBase
 public:
 	AWolfTrap();
     
-	virtual void DoTrapAction() override;
+	virtual void DoTrapAction(AActor* OtherActor) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void BeginPlay() override;

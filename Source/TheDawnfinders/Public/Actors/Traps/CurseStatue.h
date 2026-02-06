@@ -11,7 +11,7 @@ class THEDAWNFINDERS_API ACurseStatue : public ATrapBase
 	
 public:
 	ACurseStatue();
-	virtual void DoTrapAction() override;
+	virtual void DoTrapAction(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OpenStatueEyes(float Duration);

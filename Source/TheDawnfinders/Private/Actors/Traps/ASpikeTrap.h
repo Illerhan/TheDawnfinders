@@ -13,7 +13,7 @@ class THEDAWNFINDERS_API AASpikeTrap : public ATrapBase
 
 public:
 	AASpikeTrap();
-	virtual void DoTrapAction() override;
+	virtual void DoTrapAction(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoSpikeAnim();
