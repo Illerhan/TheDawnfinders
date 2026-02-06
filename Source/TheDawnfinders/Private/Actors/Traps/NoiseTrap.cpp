@@ -4,7 +4,6 @@
 #include "NoiseTrap.h"
 
 #include "Actors/Player/APlayerCharacter.h"
-#include "AssetTypeActions/AssetDefinition_SoundBase.h"
 #include "GameFramework/SoundManager.h"
 #include "Kismet/GameplayStatics.h"
 
