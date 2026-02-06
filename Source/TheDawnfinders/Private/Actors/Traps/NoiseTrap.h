@@ -24,7 +24,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void DoTrapAction() override;
+	virtual void DoTrapAction(AActor* OtherActor = nullptr) override;
 	UPROPERTY()
 	ASoundManager* SoundManagerInstance;
 };

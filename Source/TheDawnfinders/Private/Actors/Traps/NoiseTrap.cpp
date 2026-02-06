@@ -3,6 +3,7 @@
 
 #include "NoiseTrap.h"
 
+#include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/SoundManager.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -33,10 +34,14 @@ void ANoiseTrap::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ANoiseTrap::DoTrapAction()
+void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 {
 	
-	Super::DoTrapAction();
+	Super::DoTrapAction(OtherActor);
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
+	if (!Player) return;
 	
+	Player->Execute_PlaySoundOnServer(Player,"Distraction",1000,1);
 	SoundManagerInstance->MultiPlaySound(Sound,GetActorLocation(),100,1000,true);
+	
 }

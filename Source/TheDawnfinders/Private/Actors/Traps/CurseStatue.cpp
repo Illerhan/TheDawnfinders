@@ -6,7 +6,7 @@ ACurseStatue::ACurseStatue()
 
 }
 
-void ACurseStatue::DoTrapAction()
+void ACurseStatue::DoTrapAction(AActor* OtherActor)
 {
 	OpenStatueEyes(OpenedEyesDuration);
 }

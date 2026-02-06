@@ -25,6 +25,7 @@ enum class EInteractionUI : uint8
 {
 	None,
 	LitterInventory,
+	ContainerInventory,
 	Lockpick,
 	Chest,
 };

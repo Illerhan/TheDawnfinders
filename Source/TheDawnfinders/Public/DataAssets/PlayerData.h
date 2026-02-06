@@ -125,6 +125,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
 	float SneakSoundAlertness;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
+	float DistractionSoundAlertness;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound")
 	float DodgeSoundRange;

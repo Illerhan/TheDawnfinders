@@ -58,7 +58,7 @@ protected :
 	TArray<UInventorySlotWidget*> InventorySlotsWidgets;
 
 	UPROPERTY(BlueprintReadWrite)
-	bool bIsInPalanquin;
+	bool bIsInContainer;
 
 	FTimerHandle BindDelayTimerHandle;
 };

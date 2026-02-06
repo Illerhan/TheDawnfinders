@@ -2,23 +2,23 @@
 
 
 
-void UMainWidget::OpenPalanquinInventory_Implementation()
-{
-	bIsInPalanquin = true;
-}
-
-void UMainWidget::ClosePalanquinInventory_Implementation()
-{
-	bIsInPalanquin = false;
-}
-
 
 UPalanquinHUDWidget* UMainWidget::GetPalanquinHUDWidget_Implementation()
 {
 	return nullptr;
 }
 
-bool UMainWidget::GetIsInPalanquin()
+void UMainWidget::OpenContainerInventory_Implementation(AActor* Container)
 {
-	return bIsInPalanquin;
+	bIsInContainer = true;
+}
+
+void UMainWidget::CloseContainerInventory_Implementation()
+{
+	bIsInContainer = false;
+}
+
+bool UMainWidget::GetIsInContainer()
+{
+	return bIsInContainer;
 }
