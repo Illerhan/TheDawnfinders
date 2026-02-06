@@ -17,6 +17,9 @@ public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 
+	UFUNCTION(BlueprintCallable)
+	void SetupLoot();
+
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void Multicast_SetupLoot(const TArray<UItemData*>& Items);
 
@@ -26,4 +29,6 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
 	FName DataTableRowName;
+
+	FTimerHandle DelayStartHandle;
 };
