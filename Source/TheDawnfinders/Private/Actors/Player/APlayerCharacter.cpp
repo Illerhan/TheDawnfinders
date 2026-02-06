@@ -427,7 +427,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
     FinalVector.Normalize();
 
-    FRotator Rotation(0.0f, -60.0f, 0.0f);
+    FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
     AddMovementInput(FinalVector, 1.0f, true);
