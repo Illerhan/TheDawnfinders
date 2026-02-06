@@ -39,6 +39,11 @@ void AContainer::BeginPlay()
 			}
 		}
 
+		if (!SpawnedData) {
+			i--;
+			continue;
+		}
+
 		ContainerLoot.Add(SpawnedData);
 	}
 
