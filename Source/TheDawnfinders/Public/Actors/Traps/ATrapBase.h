@@ -42,7 +42,7 @@ public:
 	void DisableTrap();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void DoTrapAction();
+	virtual void DoTrapAction(AActor* OtherActor = nullptr);
 
 	UFUNCTION(NetMulticast, Unreliable)
 	void Multicast_PlayEffects();

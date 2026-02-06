@@ -8,7 +8,7 @@ AASpikeTrap::AASpikeTrap()
 }
 
 
-void AASpikeTrap::DoTrapAction()
+void AASpikeTrap::DoTrapAction(AActor* OtherActor)
 {
 	//if (!TrappedActor) return;
 

@@ -101,7 +101,7 @@ protected:
     TArray<AActor*> ActorsHitThisSwing;
 
     // ========== Fonctions ==========
-    virtual void DoTrapAction() override;
+    virtual void DoTrapAction(AActor* OtherActor = nullptr) override;
 
     UFUNCTION()
     void OnBladeOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
