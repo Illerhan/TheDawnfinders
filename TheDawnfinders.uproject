@@ -64,6 +64,10 @@
 		{
 			"Name": "PCGGeometryScriptInterop",
 			"Enabled": true
+		},
+		{
+			"Name": "ReScatter",
+			"Enabled": true
 		}
 	]
 }
