@@ -466,7 +466,6 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
 void ALitter::Interact_Implementation(AActor* Interactor)
 {
-
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
     if (!Player) return;
 

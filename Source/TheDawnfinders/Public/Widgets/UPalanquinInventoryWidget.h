@@ -23,7 +23,7 @@ public :
 	void ActualiseSlots(const TArray<FInventorySlot>& InventorySlots, int32 CurrentSlotIndex);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ShowWidget();
+	void ShowWidget(UInventoryComponent* LinkedInventory);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideWidget();
