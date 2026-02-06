@@ -302,10 +302,11 @@ void AAPlayerCharacter::RemoveProtectionZone_Implementation()
 float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
 {
     if (SoundTag == "Walk") return PlayerConfig->WalkSoundAlertness * GetWorld()->GetDeltaSeconds();
-    else if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
-    else if (SoundTag == "Dodge") return PlayerConfig->DodgeSoundAlertness;
-    else if (SoundTag == "Attack") return PlayerConfig->AttackSoundAlertness;
-    else if (SoundTag == "Sneak") return PlayerConfig->SneakSoundAlertness;
+    if (SoundTag == "Run") return PlayerConfig->RunSoundAlertness * GetWorld()->GetDeltaSeconds();
+    if (SoundTag == "Dodge") return PlayerConfig->DodgeSoundAlertness;
+    if (SoundTag == "Attack") return PlayerConfig->AttackSoundAlertness;
+    if (SoundTag == "Sneak") return PlayerConfig->SneakSoundAlertness;
+    if (SoundTag == "Distraction") return PlayerConfig->DistractionSoundAlertness;   
     return .0f;
 }
 
@@ -426,7 +427,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
     FinalVector.Normalize();
 
-    FRotator Rotation(0.0f, -60.0f, 0.0f);
+    FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
     AddMovementInput(FinalVector, 1.0f, true);
@@ -752,8 +753,11 @@ void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI U
     switch (UIType)
     {
     case EInteractionUI::LitterInventory:
-        HUD->MainWidget->OpenPalanquinInventory();
-        HUD->MainWidget->SetPalanquin(true);
+        HUD->MainWidget->OpenContainerInventory(Context);
+        break;
+
+    case EInteractionUI::ContainerInventory:
+        HUD->MainWidget->OpenContainerInventory(Context);
         break;
     }
 }

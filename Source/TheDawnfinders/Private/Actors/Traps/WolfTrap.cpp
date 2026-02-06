@@ -44,7 +44,7 @@ void AWolfTrap::BeginPlay()
     bCanSelfRelease = false; // Sécurité
 }
 
-void AWolfTrap::DoTrapAction()
+void AWolfTrap::DoTrapAction(AActor* OtherActor)
 {
     if (!bCanTrap) return;
     
@@ -54,7 +54,7 @@ void AWolfTrap::DoTrapAction()
     bCanBeUsed = true;
     bCanTrap = false;
 
-    Super::DoTrapAction();
+    Super::DoTrapAction(nullptr);
     
     // 2. Immobiliser le joueur
     if (TrappedActor && TrappedActor->Implements<UPlayerInterface>())

@@ -106,7 +106,7 @@ void ATrapSwingBlade::OnBladeOverlapEnd(UPrimitiveComponent* OverlappedComponent
     }
 }
 
-void ATrapSwingBlade::DoTrapAction()
+void ATrapSwingBlade::DoTrapAction(AActor* OtherActor)
 {
     if (!TrappedActor) return;
 
