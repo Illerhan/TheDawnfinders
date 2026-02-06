@@ -752,8 +752,11 @@ void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI U
     switch (UIType)
     {
     case EInteractionUI::LitterInventory:
-        HUD->MainWidget->OpenPalanquinInventory();
-        HUD->MainWidget->SetPalanquin(true);
+        HUD->MainWidget->OpenContainerInventory(Context);
+        break;
+
+    case EInteractionUI::ContainerInventory:
+        HUD->MainWidget->OpenContainerInventory(Context);
         break;
     }
 }

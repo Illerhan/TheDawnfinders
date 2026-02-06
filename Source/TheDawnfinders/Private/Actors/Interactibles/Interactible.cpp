@@ -33,7 +33,7 @@ AInteractibleObjects::AInteractibleObjects()
 	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
 
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
-	InteractibleWidgetComponent->SetupAttachment(BoxCollider);
+	InteractibleWidgetComponent->SetupAttachment(InteractCollider);
 	
 	bReplicates = true;
 }

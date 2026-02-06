@@ -14,13 +14,13 @@ class THEDAWNFINDERS_API UMainWidget : public UUserWidget
 
 public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OpenPalanquinInventory();
+	void OpenContainerInventory(AActor* Container);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ClosePalanquinInventory();
+	void CloseContainerInventory();
 
 	UFUNCTION(BlueprintCallable)
-	bool GetIsInPalanquin();
+	bool GetIsInContainer();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UPalanquinHUDWidget* GetPalanquinHUDWidget();
@@ -28,11 +28,5 @@ public :
 
 protected :
 	UPROPERTY(BlueprintReadWrite)
-	bool bIsInPalanquin;
-
-public:
-	void SetPalanquin(bool bIsOpen)
-	{
-		bIsInPalanquin = bIsOpen;
-	}
+	bool bIsInContainer;
 };

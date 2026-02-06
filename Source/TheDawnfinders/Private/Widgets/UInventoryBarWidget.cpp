@@ -56,12 +56,12 @@ void UInventoryBarWidget::NativeDestruct()
 
 void UInventoryBarWidget::ShowWidget_Implementation()
 {
-    bIsInPalanquin = false;
+    bIsInContainer = false;
 }
 
 void UInventoryBarWidget::ShowWidgetFromPalanquin_Implementation()
 {
-    bIsInPalanquin = true;
+    bIsInContainer = true;
 }
 
 void UInventoryBarWidget::HideWidget_Implementation()

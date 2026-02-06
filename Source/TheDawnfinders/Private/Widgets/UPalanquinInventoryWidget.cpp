@@ -13,15 +13,17 @@ void UPalanquinInventoryWidget::ActualiseSlots_Implementation(const TArray<FInve
 	for (int i = 0; i < SlotsWidgets.Num(); i++) {
 
 		if (i >= InventorySlots.Num()) {
+			SlotsWidgets[i]->SetVisibility(ESlateVisibility::Collapsed);
 			SlotsWidgets[i]->ActualiseSlot(FInventorySlot(), i);
 			continue;
 		}
 
+		SlotsWidgets[i]->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 		SlotsWidgets[i]->ActualiseSlot(InventorySlots[i], i);
 	}
 }
 
-void UPalanquinInventoryWidget::ShowWidget_Implementation()
+void UPalanquinInventoryWidget::ShowWidget_Implementation(UInventoryComponent* LinkedInventory)
 {
 
 }
