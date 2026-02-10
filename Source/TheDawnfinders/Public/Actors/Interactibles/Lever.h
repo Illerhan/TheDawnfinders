@@ -26,6 +26,9 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
 	bool bRequiresHold = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever", meta = (min = 1, max = 4))
+	int HoldPlayerCountNeeded = 1;
+
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	void StartHoldInteraction(AActor* Player);
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
@@ -33,5 +36,9 @@ public :
 
 
 private:
+	UPROPERTY()
 	bool bIsBeingHeld;
+
+	UPROPERTY()
+	int HoldPlayerCount;
 };

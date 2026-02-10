@@ -100,7 +100,13 @@ public :
 	bool bLightOn;   
 
 	UPROPERTY(Replicated, EditAnywhere, Category = "Lantern")
-	float MaxFuel;
+	float MaxFuel = 1200;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float MidFuel = 800;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float LowFuel = 400;
 	
 	UPROPERTY(ReplicatedUsing = OnRep_FuelRemaining,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
 	float FuelRemaining;
@@ -119,6 +125,8 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float MaxRadius;
+	
+	
 
 
 // === PROTECTED PROPERTIES ===

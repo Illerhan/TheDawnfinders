@@ -17,6 +17,9 @@ class THEDAWNFINDERS_API AMiningInteractible : public AInteractibleObjects
 public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
+	UFUNCTION()
+	FVector GetPossibleSpawnLocation();
+
 protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MinItemToSpawnCount;

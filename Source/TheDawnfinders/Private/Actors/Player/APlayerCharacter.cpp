@@ -2,7 +2,6 @@
 
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Interactibles/Carriable.h"
-#include "Actors/Interactibles/Lock.h"
 #include "Actors/Interactibles/ZiplineInteractible.h"
 #include "Components/UStaminaComponent.h"
 #include "Components/UHealthComponent.h"

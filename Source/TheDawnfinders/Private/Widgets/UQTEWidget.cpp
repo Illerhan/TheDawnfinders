@@ -52,6 +52,10 @@ void UQTEWidget::DoQTEStep()
 			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
 			{
 				PlayerCharacter->InventoryComponent->UseDurability(1);
+
+				if (IPlayerInterface::Execute_GetEquippedItem(PlayerCharacter) == LinkedInteractible->GetNeededInteractItem()) return;
+
+				PlayerCharacter->InteractionComponent->CancelInteraction();
 			}
 		}
 	}
