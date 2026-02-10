@@ -84,7 +84,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
-		DebugComp->Server_TravelToMap("L_Palanquin?listen");
+		DebugComp->Server_TravelToMap("L_Dungeon_01?listen");
 	}
 
 	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);
@@ -101,6 +101,9 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     {
         bIsSpawnerOpen = !bIsSpawnerOpen;
     }
+	
+	SlateIM::Text(TEXT("Spawnable Items"), FLinearColor::Yellow);
+	
 
     // --- 3. CONTENU DU MENU (Affiché seulement si ouvert) ---
     if (bIsSpawnerOpen)
@@ -125,6 +128,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     	}
 
     	// --- B. Boucle d'affichage des boutons ---
+    	SlateIM::BeginScrollBox(Orient_Vertical);
     	for (const FAssetData& AssetData : ItemAssetsList)
     	{
     		UItemData* ItemData = Cast<UItemData>(AssetData.GetAsset());
@@ -151,6 +155,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
     			}
     		}
     	}
+    	SlateIM::EndScrollBox();
     }
 	SlateIM::EndVerticalStack();
 }
