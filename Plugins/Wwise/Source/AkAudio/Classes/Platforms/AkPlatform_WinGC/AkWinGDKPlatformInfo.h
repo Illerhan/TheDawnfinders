@@ -15,10 +15,44 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if PLATFORM_IOS
-#include <AK/Plugin/AkToneSourceFactory.h>
-#include <AK/Plugin/AkRoomVerbFXFactory.h>
-#include <AK/Plugin/AkTremoloFXFactory.h>
-#include <AK/Plugin/AkSynthOneSourceFactory.h>
-#include <AK/Plugin/AkReflectFXFactory.h>
+#pragma once
+
+#include "Platforms/AkPlatformInfo.h"
+#include "AkWinGDKPlatformInfo.generated.h"
+
+UCLASS()
+class UAkWinGDKPlatformInfo : public UAkPlatformInfo
+{
+	GENERATED_BODY()
+
+public:
+	UAkWinGDKPlatformInfo()
+	{
+		WwisePlatform = "Windows";
+
+#ifdef AK_WINGC_VS_VERSION
+		Architecture = "WinGC_" AK_WINGC_VS_VERSION;
+#else
+		Architecture = "WinGC_vc160";
 #endif
+
+		LibraryFileNameFormat = "{0}.dll";
+		DebugFileNameFormat = "{0}.pdb";
+
+#if WITH_EDITORONLY_DATA
+		UAkPlatformInfo::UnrealNameToPlatformInfo.Add("WinGDK", this);
+#endif
+	}
+};
+
+UCLASS()
+class UAkWinAnvilPlatformInfo : public UAkWinGDKPlatformInfo
+{
+	GENERATED_BODY()
+	UAkWinAnvilPlatformInfo()
+	{
+#if WITH_EDITORONLY_DATA
+		UAkPlatformInfo::UnrealNameToPlatformInfo.Add("WinAnvil", this);
+#endif
+	}
+};

@@ -15,10 +15,17 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if PLATFORM_IOS
-#include <AK/Plugin/AkToneSourceFactory.h>
-#include <AK/Plugin/AkRoomVerbFXFactory.h>
-#include <AK/Plugin/AkTremoloFXFactory.h>
-#include <AK/Plugin/AkSynthOneSourceFactory.h>
-#include <AK/Plugin/AkReflectFXFactory.h>
-#endif
+using UnrealBuildTool;
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+public class WwiseUEPlatform_2022_1_WinGDK : WwiseUEPlatform_WinGDK
+{
+	public WwiseUEPlatform_2022_1_WinGDK(ReadOnlyTargetRules in_TargetRules, string in_ThirdPartyFolder) : base(in_TargetRules, in_ThirdPartyFolder) {}
+}
+
+public class WwiseUEPlatform_2022_1_WinAnvil : WwiseUEPlatform_2022_1_WinGDK
+{
+	public WwiseUEPlatform_2022_1_WinAnvil(ReadOnlyTargetRules in_TargetRules, string in_ThirdPartyFolder) : base(in_TargetRules, in_ThirdPartyFolder) {}
+}
