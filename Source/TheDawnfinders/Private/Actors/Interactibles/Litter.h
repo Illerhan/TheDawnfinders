@@ -85,6 +85,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	class UBoxComponent* InventoryTrigger;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	class UBoxComponent* LightTrigger;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	USoundBase* SoloSound;
 	

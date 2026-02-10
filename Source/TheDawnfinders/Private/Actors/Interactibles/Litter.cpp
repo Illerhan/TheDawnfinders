@@ -81,12 +81,19 @@ ALitter::ALitter()
     BackTrigger->SetRelativeLocation(FVector(-130.f, 0.f, 0.f)); // Décalé vers l'arrière (-X)
     BackTrigger->SetCollisionProfileName(TEXT("Trigger"));
 
-    // --- 3. Zone CENTRALE (Inventaire) ---
+    // --- 3. Zone CENTRALE 1 (Inventaire) ---
     InventoryTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("InventoryTrigger"));
     InventoryTrigger->SetupAttachment(RootComponent);
     InventoryTrigger->SetBoxExtent(FVector(50.f, 80.f, 60.f));
     InventoryTrigger->SetRelativeLocation(FVector(0.f, 0.f, 0.f)); // Au centre
     InventoryTrigger->SetCollisionProfileName(TEXT("Trigger"));
+    
+    // --- 4. Zone CENTRALE 2 (Light) ---
+    LightTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("LightTrigger"));
+    LightTrigger->SetupAttachment(RootComponent);
+    LightTrigger->SetBoxExtent(FVector(50.f, 80.f, 60.f));
+    LightTrigger->SetRelativeLocation(FVector(0.f, 0.f, 0.f)); // Au centre
+    LightTrigger->SetCollisionProfileName(TEXT("Trigger"));
 
     // 4. Create Carry Points (Corners)
     CarryPoints.SetNum(2);
@@ -172,6 +179,12 @@ void ALitter::BeginPlay()
     {
         InventoryTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
         InventoryTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
+    }
+    
+    if (LightTrigger)
+    {
+        LightTrigger->OnComponentBeginOverlap.AddDynamic(this, &ALitter::OnZoneOverlapBegin);
+        LightTrigger->OnComponentEndOverlap.AddDynamic(this, &ALitter::OnZoneOverlapEnd);
     }
     AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), ASoundManager::StaticClass());
     SoundManagerInstance = Cast<ASoundManager>(FoundActor);
@@ -472,10 +485,11 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     // Vérifie dans quelle zone se trouve le joueur
     bool bInFront = FrontTrigger->IsOverlappingActor(Player);
     bool bInBack  = BackTrigger->IsOverlappingActor(Player);
-    bool bInCenter = InventoryTrigger->IsOverlappingActor(Player);
+    bool bInventory= InventoryTrigger->IsOverlappingActor(Player);
+    bool bInLight = LightTrigger->IsOverlappingActor(Player);
 
     // CAS 1 : Inventaire (Zone Centrale)
-    if (bInCenter)
+    if (bInventory)
     {
         if (InventoryComponent && !Player->bIsCarrying)
         {
@@ -487,8 +501,21 @@ void ALitter::Interact_Implementation(AActor* Interactor)
             return;
         }
     }
+    
+    // CAS 2 : Light (Zone Centrale)
+    if (bInLight)
+    {
+        if (LightComponent && !Player->bIsCarrying)
+        {
+            if (!HasAuthority()) return;
+            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+            LightComponent->TurnLightOn();
+            return;
+        }
 
-    // CAS 2 : Portage (Zone Avant OU Arrière)
+    }
+
+    // CAS 3 : Portage (Zone Avant OU Arrière)
     int32 TargetSlot = -1;
 
     if (bInFront)
@@ -778,12 +805,17 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         {
             if (OverlappedComp == InventoryTrigger)
             {
+                    InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
+            }
+            else  if (OverlappedComp == LightTrigger)
+            {
                 if (Player->CurrentState == EPlayerState::Carrying)
                     InteractibleWidget->DisplayText("Remplir le palanquin",InputIcon);
                 else
-                    InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
+                    InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
             }
-            else // Front ou Back
+            // Front ou Back
+            else
             {
                 InteractibleWidget->DisplayText("Porter",InputIcon);
             }
@@ -802,7 +834,7 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
 
     // --- SECURITE CRITIQUE : Vérifier que nos composants existent ---
     // Si pour une raison quelconque le composant est détruit ou pas encore prêt, on arrête.
-    if (!FrontTrigger || !BackTrigger || !InventoryTrigger) return;
+    if (!FrontTrigger || !BackTrigger || !InventoryTrigger || !LightTrigger) return;
 
     // 2. Vérification : Est-ce qu'on touche encore UNE AUTRE zone ?
     bool bStillOverlapping = false;
@@ -811,6 +843,7 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
     if (FrontTrigger && FrontTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
     if (BackTrigger && BackTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
     if (InventoryTrigger && InventoryTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
+    if (LightTrigger && LightTrigger->IsOverlappingActor(Player)) bStillOverlapping = true;
 
     // 3. Logique d'affichage
     if (!bStillOverlapping)
