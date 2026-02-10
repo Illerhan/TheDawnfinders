@@ -22,6 +22,9 @@ public:
 	void StartOpening();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
+	void PauseOpening();
+
+	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void StopOpening();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Doors")

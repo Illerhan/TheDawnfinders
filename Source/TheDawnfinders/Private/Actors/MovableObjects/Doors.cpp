@@ -16,28 +16,33 @@ void ADoors::StartOpening()
 
     bCanMove = false;
 
-    // --- CORRECTION ---
-    // 1. On calcule la vitesse normale (positive)
+    // On calcule la vitesse normale (positive)
     float ForwardRate = 1.0f;
     if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
     {
         ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     }
 
-    // 2. IMPORTANT : On FORCE la vitesse à être positive.
-    // Sans ça, si la porte a été fermée (Reverse), le PlayRate est resté négatif (-1).
     Timeline.SetPlayRate(ForwardRate); 
-    // ------------------
 
-    // Cas 1 : La porte était en train de se fermer, on inverse le mouvement immédiatement
+
+    // La porte était en train de se fermer, on inverse le mouvement immédiatement
     if (Timeline.IsReversing())
     {
-        Timeline.Play(); // Maintenant que le Rate est positif, Play() va repartir vers l'avant
+        Timeline.Play();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door reversing to OPEN (was closing)"));
         return;
     }
 
-    // Cas 2 : La porte est à l'arrêt (soit fermée, soit au milieu arrêtée)
+    if (bIsFullyOpen) {
+        Timeline.ReverseFromEnd();
+        bIsFullyOpen = false;
+        bCanMove = false;
+
+        return;
+    }
+
+    // La porte est à l'arrêt (soit fermée, soit au milieu arrêtée)
     if (!Timeline.IsPlaying())
     {
         // Si on est pratiquement au début (Progress < 0.1), on s'assure de partir de 0
@@ -58,6 +63,14 @@ void ADoors::StartOpening()
     }
 }
 
+void ADoors::PauseOpening()
+{
+    if (!HasAuthority()) return;
+    if (!MoveCurve) return;
+
+    Timeline.SetPlayRate(0);
+}
+
 void ADoors::StopOpening()
 {
     if (!HasAuthority()) return;
@@ -73,9 +86,9 @@ void ADoors::StopOpening()
     // Si la porte est complètement ouverte (proche de FinalPosition)
     if ((DistanceFromEnd < 10.0f || bIsFullyOpen) && !Timeline.IsPlaying())
     {
-        Timeline.ReverseFromEnd();
-        bIsFullyOpen = false;
-        bCanMove = false;
+        //Timeline.ReverseFromEnd();
+        //bIsFullyOpen = false;
+        //bCanMove = false;
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from fully open position"));
         return;
     }
