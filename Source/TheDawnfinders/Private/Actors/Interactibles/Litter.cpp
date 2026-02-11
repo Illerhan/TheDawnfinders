@@ -31,12 +31,6 @@ ALitter::ALitter()
     PointLight->SetupAttachment(RootComponent);
 
     ProtectionZone = CreateDefaultSubobject<USphereComponent>(FName("ProtectionZone"));
-    ProtectionZone->SetGenerateOverlapEvents(true);
-    ProtectionZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    ProtectionZone->SetCollisionObjectType(ECC_WorldDynamic);
-    ProtectionZone->SetCollisionResponseToAllChannels(ECR_Ignore);
-    ProtectionZone->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
-    ProtectionZone->SetHiddenInGame(true);
     ProtectionZone->SetupAttachment(RootComponent);
 
     FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
@@ -509,6 +503,7 @@ void ALitter::Interact_Implementation(AActor* Interactor)
         {
             if (!HasAuthority()) return;
             IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+            LightComponent->FuelUpdate();
             LightComponent->TurnLightOn();
             return;
         }
