@@ -35,7 +35,7 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	CurrentPlayerCount++;
-	if (CurrentPlayerCount < NeededPlayerCount) return;
+	if (CurrentPlayerCount > 1) return;
 
 	for (auto LinkedActor : LinkedActors)
 	{
@@ -50,6 +50,7 @@ void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	CurrentPlayerCount--;
+	if (CurrentPlayerCount != 0) return;
 
 	for (auto LinkedActor : LinkedActors)
 	{

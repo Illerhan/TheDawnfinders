@@ -48,12 +48,19 @@ void ADoors::Tick(float DeltaTime)
 
 void ADoors::DoMainAction_Implementation()
 {
+    CurrentTriggerCount++;
+    if (CurrentTriggerCount < NeededTriggerCount) return;
+
     StartOpening();
 }
 
 void ADoors::StopMainAction_Implementation()
 {
-    StopOpening();
+    if (CurrentTriggerCount == 0) return;
+    CurrentTriggerCount--;
+
+    if (CurrentTriggerCount > 0) PauseOpening();
+    else StopOpening();
 }
 
 #pragma endregion
@@ -163,6 +170,13 @@ void ADoors::StopOpening()
 
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening - DistFromStart: %f, DistFromEnd: %f, Progress: %f"),
         DistanceFromStart, DistanceFromEnd, CurrentTimelineProgress);
+
+    float ForwardRate = 1.0f;
+    if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
+    {
+        ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
+    }
+    Timeline.SetPlayRate(ForwardRate);
 
     // Si la porte est complètement ouverte (proche de FinalPosition)
     if ((DistanceFromEnd < 10.0f || bIsFullyOpen) && !Timeline.IsPlaying())

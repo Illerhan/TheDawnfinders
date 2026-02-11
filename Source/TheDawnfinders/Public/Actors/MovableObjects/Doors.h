@@ -56,6 +56,12 @@ public :
 
 protected : 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
+	int NeededTriggerCount = 1;
+
+	UPROPERTY(BlueprintReadOnly)
+	int CurrentTriggerCount = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
 	float SpeedAddedPerAdditionalPlayer = 1;
 
 	UPROPERTY(BlueprintReadOnly)
