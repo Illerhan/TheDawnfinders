@@ -5,20 +5,53 @@
 #include "CoreMinimal.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/Activable.h"
 #include "MovableObjects.generated.h"
 
 UCLASS()
-class THEDAWNFINDERS_API AMovableObjects : public AActor
+class THEDAWNFINDERS_API AMovableObjects : public AActor, public IActivable
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AMovableObjects();
-	UPROPERTY(EditAnywhere,BlueprintReadwrite)
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+
+// === Interface ===
+public :
+	virtual void DoMainAction_Implementation() override;
+	virtual void StopMainAction_Implementation() override;
+
+
+// === Functions ===
+public :
+	UFUNCTION()
+	void HandleProgress(float value);
+
+	UFUNCTION()
+	void OnTimeLineFinished();
+
+	UFUNCTION()
+	bool CanReverse() const;
+
+	UFUNCTION()
+	float GetTimelineProgress() const;
+
+	UFUNCTION(Blueprintable,BlueprintCallable,BlueprintNativeEvent,Category="MovableObjects")
+	void DoMovement();
+
+	UFUNCTION()
+	void DoReverseMovement();
+
+
+// === Properties ===
+public :
+	UPROPERTY(EditAnywhere, BlueprintReadwrite)
 	UStaticMesh* MovableMesh;
 
-	UPROPERTY(EditAnywhere, Category="Timeline")
+	UPROPERTY(EditAnywhere, Category = "Timeline")
 	UCurveFloat* MoveCurve;
 
 	FTimeline Timeline;
@@ -26,38 +59,20 @@ public:
 	FOnTimelineEvent TimelineFinished;
 
 	FVector StartPosition;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Transform", 
-	meta = (MakeEditWidget = true))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Transform",
+		meta = (MakeEditWidget = true))
 	FVector EndPosition;
 
-	UPROPERTY(EditAnywhere, Category="Timeline")
+	UPROPERTY(EditAnywhere, Category = "Timeline")
 	mutable bool bCanMove = true;
-	
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Timeline");
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timeline");
 	float MovementDuration;
-	
+
 	bool bIsMovingForward;
 	float CurrentTimelineProgress;
 	float LastReverseTime;
 	float ReverseCooldown;
 	FVector FinalPosition;
 	FVector OriginalStart;
-
-	UFUNCTION()
-	void HandleProgress(float value);
-
-	UFUNCTION()
-	void OnTimeLineFinished();
-	bool CanReverse() const;
-	float GetTimelineProgress() const;
-
-protected:
-	virtual void BeginPlay() override;
-	
-public:
-	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(Blueprintable,BlueprintCallable,BlueprintNativeEvent,Category="MovableObjects")
-	void DoMovement();
-	void DoReverseMovement();
 };
