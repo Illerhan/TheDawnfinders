@@ -12,14 +12,29 @@ class THEDAWNFINDERS_API ADoors : public AMovableObjects
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ADoors();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Blueprintable, Category = "Doors")
-	bool bNeedHold;
+
+// === Interface ===
+public:
+	virtual void DoMainAction_Implementation() override;
+	virtual void StopMainAction_Implementation() override;
+
+
+// === Functions ===
+public :
+	virtual void OnTimelineFinished();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void StartOpening();
+
+	UFUNCTION(BlueprintCallable, Category = "Doors")
+	void AddOpeningPlayer();
+
+	UFUNCTION(BlueprintCallable, Category = "Doors")
+	void RemoveOpeningPlayer();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void PauseOpening();
@@ -27,21 +42,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void StopOpening();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Doors")
-	bool bIsFullyOpen;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="Doors")
+
+// === Properties ===
+public :
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
 	bool bIsClosed = true;
-	
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
+	bool bIsFullyOpen;
 
-	virtual void Tick(float DeltaTime) override;
-	virtual void OnTimelineFinished();
+	UPROPERTY(EditAnywhere, Blueprintable, Category = "Doors")
+	bool bNeedHold;
 
-public:
-	// Called every frame
+protected : 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
+	float SpeedAddedPerAdditionalPlayer = 1;
 
+	UPROPERTY(BlueprintReadOnly)
+	float CurrentAddedSpeed = 1;
 };

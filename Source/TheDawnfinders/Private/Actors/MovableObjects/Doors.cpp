@@ -9,6 +9,58 @@ ADoors::ADoors()
     PrimaryActorTick.bCanEverTick = true;
 }
 
+void ADoors::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // IMPORTANT: Fixer les positions de départ et fin pour les portes
+    // Ne JAMAIS les inverser comme le fait MovableObjects
+    StartPosition = GetActorLocation();
+    FinalPosition = StartPosition + EndPosition;
+    
+    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door initialized - Start: %s, Final: %s"), 
+           *StartPosition.ToString(), *FinalPosition.ToString());
+
+    if (MoveCurve)
+    {
+        Timeline.AddInterpFloat(MoveCurve, TimelineProgress);
+        Timeline.SetLooping(false);
+
+        if (MoveCurve->FloatCurve.GetLastKey().Time > 0)
+        {
+            Timeline.SetPlayRate(MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration);
+        }
+
+        FOnTimelineEvent TimeLineFinishedCallback;
+        TimeLineFinishedCallback.BindUFunction(this, FName("OnTimelineFinished"));
+        Timeline.SetTimelineFinishedFunc(TimeLineFinishedCallback);
+    }
+}
+
+
+void ADoors::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+}
+
+
+#pragma region Activable Interface
+
+void ADoors::DoMainAction_Implementation()
+{
+    StartOpening();
+}
+
+void ADoors::StopMainAction_Implementation()
+{
+    StopOpening();
+}
+
+#pragma endregion
+
+
+#pragma region Door Functions
+
 void ADoors::StartOpening()
 {
     if (!HasAuthority()) return;
@@ -23,7 +75,7 @@ void ADoors::StartOpening()
         ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     }
 
-    Timeline.SetPlayRate(ForwardRate); 
+    Timeline.SetPlayRate(ForwardRate);
 
 
     // La porte était en train de se fermer, on inverse le mouvement immédiatement
@@ -58,10 +110,38 @@ void ADoors::StartOpening()
             Timeline.Play();
             UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door resuming opening from: %f"), CurrentTimelineProgress);
         }
-        
+
         bIsFullyOpen = false;
     }
 }
+
+void ADoors::AddOpeningPlayer()
+{
+    CurrentAddedSpeed += SpeedAddedPerAdditionalPlayer;
+
+    float ForwardRate = 1.0f;
+    if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
+    {
+        ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration * CurrentAddedSpeed;
+    }
+
+    Timeline.SetPlayRate(ForwardRate);
+    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door opening speed %f"), ForwardRate);
+}
+
+void ADoors::RemoveOpeningPlayer()
+{
+    CurrentAddedSpeed -= SpeedAddedPerAdditionalPlayer;
+
+    float ForwardRate = 1.0f;
+    if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
+    {
+        ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration * CurrentAddedSpeed;
+    }
+
+    Timeline.SetPlayRate(ForwardRate );
+}
+
 
 void ADoors::PauseOpening()
 {
@@ -71,6 +151,7 @@ void ADoors::PauseOpening()
     Timeline.SetPlayRate(0);
 }
 
+
 void ADoors::StopOpening()
 {
     if (!HasAuthority()) return;
@@ -79,9 +160,9 @@ void ADoors::StopOpening()
     FVector CurrentPos = GetActorLocation();
     float DistanceFromStart = FVector::Distance(CurrentPos, StartPosition);
     float DistanceFromEnd = FVector::Distance(CurrentPos, FinalPosition);
-    
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening - DistFromStart: %f, DistFromEnd: %f, Progress: %f"), 
-           DistanceFromStart, DistanceFromEnd, CurrentTimelineProgress);
+
+    UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening - DistFromStart: %f, DistFromEnd: %f, Progress: %f"),
+        DistanceFromStart, DistanceFromEnd, CurrentTimelineProgress);
 
     // Si la porte est complètement ouverte (proche de FinalPosition)
     if ((DistanceFromEnd < 10.0f || bIsFullyOpen) && !Timeline.IsPlaying())
@@ -112,38 +193,6 @@ void ADoors::StopOpening()
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening: No action taken"));
 }
 
-void ADoors::BeginPlay()
-{
-    Super::BeginPlay();
-
-    // IMPORTANT: Fixer les positions de départ et fin pour les portes
-    // Ne JAMAIS les inverser comme le fait MovableObjects
-    StartPosition = GetActorLocation();
-    FinalPosition = StartPosition + EndPosition;
-    
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door initialized - Start: %s, Final: %s"), 
-           *StartPosition.ToString(), *FinalPosition.ToString());
-
-    if (MoveCurve)
-    {
-        Timeline.AddInterpFloat(MoveCurve, TimelineProgress);
-        Timeline.SetLooping(false);
-
-        if (MoveCurve->FloatCurve.GetLastKey().Time > 0)
-        {
-            Timeline.SetPlayRate(MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration);
-        }
-
-        FOnTimelineEvent TimeLineFinishedCallback;
-        TimeLineFinishedCallback.BindUFunction(this, FName("OnTimelineFinished"));
-        Timeline.SetTimelineFinishedFunc(TimeLineFinishedCallback);
-    }
-}
-
-void ADoors::Tick(float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-}
 
 void ADoors::OnTimelineFinished()
 {
@@ -166,3 +215,5 @@ void ADoors::OnTimelineFinished()
                *StartPosition.ToString(), *FinalPosition.ToString(), *GetActorLocation().ToString());
     }
 }
+
+#pragma endregion

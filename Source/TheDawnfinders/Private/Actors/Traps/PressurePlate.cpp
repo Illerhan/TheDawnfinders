@@ -6,20 +6,15 @@
 #include "Interfaces/Activable.h"
 
 
-// Sets default values
 APressurePlate::APressurePlate()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	SetReplicates(true);
 	
 	BoxCollider = CreateDefaultSubobject<UBoxComponent>("BoxCollider");
 	BoxCollider->SetupAttachment(RootComponent);
-	
-	
 }
 
-// Called when the game starts or when spawned
 void APressurePlate::BeginPlay()
 {
 	Super::BeginPlay();
@@ -29,9 +24,19 @@ void APressurePlate::BeginPlay()
 	
 }
 
+void APressurePlate::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+
+
 void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	CurrentPlayerCount++;
+	if (CurrentPlayerCount < NeededPlayerCount) return;
+
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
@@ -44,11 +49,14 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-}
+	CurrentPlayerCount--;
 
-// Called every frame
-void APressurePlate::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+	for (auto LinkedActor : LinkedActors)
+	{
+		if (LinkedActor->Implements<UActivable>())
+		{
+			IActivable::Execute_StopMainAction(LinkedActor);
+		}
+	}
 }
 
