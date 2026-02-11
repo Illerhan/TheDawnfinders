@@ -1,16 +1,10 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-
-#include "Actors/MovableObjects/MovableObjects.h"
+﻿#include "Actors/MovableObjects/MovableObjects.h"
 #include "Actors/MovableObjects/Doors.h"
 #include "EntitySystem/MovieSceneEntitySystemRunner.h"
-// Sets default values
-
 
 
 AMovableObjects::AMovableObjects()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	this->bReplicates = true;
 	AActor::SetReplicateMovement(true);
@@ -21,7 +15,6 @@ AMovableObjects::AMovableObjects()
 	ReverseCooldown = 2.f;
 }
 
-// Called when the game starts or when spawned
 void AMovableObjects::BeginPlay()
 {
 	Super::BeginPlay();
@@ -38,7 +31,6 @@ void AMovableObjects::BeginPlay()
 	}
 }
 
-// Called every frame
 void AMovableObjects::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -46,6 +38,22 @@ void AMovableObjects::Tick(float DeltaTime)
 		Timeline.TickTimeline(DeltaTime);
 	
 }
+
+
+#pragma region Activable Interface
+
+void AMovableObjects::DoMainAction_Implementation()
+{
+
+}
+
+void AMovableObjects::StopMainAction_Implementation()
+{
+
+}
+
+#pragma endregion
+
 
 void AMovableObjects::DoMovement_Implementation()
 {

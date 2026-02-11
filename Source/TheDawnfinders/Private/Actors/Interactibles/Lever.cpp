@@ -76,13 +76,27 @@ void ALever::StartHoldInteraction(AActor* Player)
     HoldPlayerCount++;
     if (HoldPlayerCount < HoldPlayerCountNeeded) return;
 
+    // Starts Opening
+    if (HoldPlayerCount == HoldPlayerCountNeeded) {
+        for (AMovableObjects* const Object : LinkedObjects)
+        {
+            ADoors* Door = Cast<ADoors>(Object);
+            if (Door)
+            {
+                Door->StartOpening();
+                UE_LOG(LogTemp, Warning, TEXT("[SERVER] Hold: Starting door opening"));
+            }
+        } 
+        return;
+    }
+
+    // Accelerates the opening
     for (AMovableObjects* const Object : LinkedObjects)
     {
         ADoors* Door = Cast<ADoors>(Object);
         if (Door)
         {
-            Door->StartOpening();
-            UE_LOG(LogTemp, Warning, TEXT("[SERVER] Hold: Starting door opening"));
+            Door->AddOpeningPlayer();
         }
     }
 }
@@ -100,8 +114,8 @@ void ALever::StopHoldInteraction(AActor* Player)
     if (HoldPlayerCount <= 0) return;
     HoldPlayerCount--;
 
-    // If some players still hold the lever
-    if (HoldPlayerCount > 0) {
+    // If some players still hold the lever (pause)
+    if (HoldPlayerCount > 0 && HoldPlayerCount < HoldPlayerCountNeeded) {
         for (AMovableObjects* Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
@@ -113,6 +127,20 @@ void ALever::StopHoldInteraction(AActor* Player)
         }
         return;
     }
+
+    // If enough players remains (change speed)
+    if (HoldPlayerCount >= HoldPlayerCountNeeded) {
+        for (AMovableObjects* Object : LinkedObjects)
+        {
+            ADoors* Door = Cast<ADoors>(Object);
+            if (Door)
+            {
+                Door->RemoveOpeningPlayer();
+            }
+        }
+        return;
+    }
+
 
     // If no players remain
     for (AMovableObjects* Object : LinkedObjects)

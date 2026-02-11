@@ -13,13 +13,13 @@ class THEDAWNFINDERS_API APressurePlate : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	APressurePlate();
-
-protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+	virtual void Tick(float DeltaTime) override;
+
+
+// === Functions ===
+public :
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -31,12 +31,18 @@ protected:
 	UPROPERTY(Blueprintable, EditAnywhere)
 	UBoxComponent* BoxCollider;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	
-private:
-	
-	UPROPERTY(Blueprintable,EditAnywhere)
+
+// === Properties ====
+protected:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int NeededPlayerCount = 1;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bActivatesWithPalanquin = false;
+
+	UPROPERTY(Blueprintable ,EditAnywhere)
 	TArray<AActor*> LinkedActors;
+
+	UPROPERTY()
+	int CurrentPlayerCount = 0;
 };
