@@ -47,7 +47,7 @@ public :
 	void OnRep_LightOn();
 
 	UFUNCTION(BlueprintCallable)
-	void FuelUpdate();
+	void FuelUpdate(float NewFuel);
 
 	UFUNCTION()
 	void OnRep_FuelRemaining();
