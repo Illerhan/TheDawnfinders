@@ -30,6 +30,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void UpdateDistance(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+	void StartForcePosition(FVector NewPos, float Dist);
+
+	UFUNCTION(BlueprintCallable)
+	void StartAutomaticControl();
+
 
 // === ACTUALISE INFORMATIONS FUNCTIONS ===
 public :
@@ -75,10 +81,19 @@ protected :
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY()
-	FVector CurrentOffset;
+	FVector CurrentOffset = FVector::ZeroVector;
+
+	UPROPERTY()
+	FVector ForcedPosition;
+
+	UPROPERTY()
+	float ForcedDist;
 
 	UPROPERTY()
 	float CurrentDist;
+
+	UPROPERTY()
+	float bIsOnForcedPosition = false;
 
 	UPROPERTY()
 	bool bIsInitialised;
