@@ -7,6 +7,7 @@ ALever::ALever()
 
 void ALever::BeginPlay()
 {
+    HoldPlayerCount = 0;
     Super::BeginPlay();
 }
 
@@ -72,6 +73,9 @@ void ALever::Interact_Implementation(AActor* Interactor)
 
 void ALever::StartHoldInteraction(AActor* Player)
 {
+    HoldPlayerCount++;
+    if (HoldPlayerCount < HoldPlayerCountNeeded) return;
+
     for (AMovableObjects* const Object : LinkedObjects)
     {
         ADoors* Door = Cast<ADoors>(Object);
@@ -93,6 +97,24 @@ void ALever::StopInteract_Implementation(AActor* Interactor)
 
 void ALever::StopHoldInteraction(AActor* Player)
 {
+    if (HoldPlayerCount <= 0) return;
+    HoldPlayerCount--;
+
+    // If some players still hold the lever
+    if (HoldPlayerCount > 0) {
+        for (AMovableObjects* Object : LinkedObjects)
+        {
+            ADoors* Door = Cast<ADoors>(Object);
+            if (Door)
+            {
+                Door->PauseOpening();
+                UE_LOG(LogTemp, Warning, TEXT("[SERVER] Hold: Pause door: %s"), *Door->GetName());
+            }
+        }
+        return;
+    }
+
+    // If no players remain
     for (AMovableObjects* Object : LinkedObjects)
     {
         ADoors* Door = Cast<ADoors>(Object);

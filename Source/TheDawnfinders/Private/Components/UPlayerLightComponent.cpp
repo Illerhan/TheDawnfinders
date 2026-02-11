@@ -253,10 +253,23 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
 		
 		UpdateProtectionZoneRadius();
-		
-		Litter->ProtectionZone->SetSphereRadius(FuelRemaining/MaxFuel * MaxRadius);
-		Litter->PointLight->SetIntensity(FuelRemaining/MaxFuel *LightRadius);
-
+		if (FuelRemaining > MidFuel)
+		{
+			Litter->ProtectionZone->SetSphereRadius(MaxRadius);
+			Litter->PointLight->SetIntensity(LightRadius);
+		}
+		if (FuelRemaining < MidFuel && FuelRemaining> LowFuel)
+		{
+			Litter->ProtectionZone->SetSphereRadius(MidFuel/MaxFuel * MaxRadius);
+			Litter->PointLight->SetIntensity(MidFuel/MaxFuel *LightRadius);
+		}
+		if (FuelRemaining < LowFuel)
+		{
+			Litter->ProtectionZone->SetSphereRadius(LowFuel/MaxFuel * MaxRadius);
+			Litter->PointLight->SetIntensity(LowFuel/MaxFuel *LightRadius);
+		}
+			
+			
 		if (FuelRemaining <= 0.f && bLightOn)
 		{
 			TurnLightOff();
