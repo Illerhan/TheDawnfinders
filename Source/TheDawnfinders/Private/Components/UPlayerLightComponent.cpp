@@ -355,6 +355,10 @@ void UPlayerLightComponent::FuelUpdate()
 		{
 			TurnLightOff();
 		}
+		else if (!bLightOn && FuelRemaining > 0.f)
+		{
+			TurnLightOn();
+		}
 	}
 
 	if (!PalanquinHUDWidget)
