@@ -47,7 +47,7 @@ public :
 	void OnRep_LightOn();
 
 	UFUNCTION(BlueprintCallable)
-	void FuelUpdate(float NewFuel);
+	void FuelUpdate();
 
 	UFUNCTION()
 	void OnRep_FuelRemaining();
@@ -63,11 +63,16 @@ private :
 		return FuelRemaining > 0.0f;
 	}
 	void UpdateProtectionZoneRadius();
-
+	
+	UFUNCTION(Server, Unreliable)
+	void Server_RequestStorageUpdate(float VivianiteSize);
+	
+	UFUNCTION(BlueprintCallable)
+	void StoreFuel(float VivianiteSize);
 
 public :	
 	UFUNCTION(Server,Unreliable)
-	void Server_RequestFuelUpdate(float Amount);
+	void Server_RequestFuelUpdate();
 	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
@@ -107,6 +112,12 @@ public :
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float LowFuel = 400;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float RefileValue = 400;
+	
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Lantern")
+	float FuelStorage = 1200;
 	
 	UPROPERTY(ReplicatedUsing = OnRep_FuelRemaining,EditAnywhere, BlueprintReadWrite, Category = "Lantern")
 	float FuelRemaining;
