@@ -211,7 +211,7 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 	//TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
     
 	TargetProtectionZone->SetHiddenInGame(!bLightOn);
-	TargetProtectionZone->SetGenerateOverlapEvents(!bLightOn);
+	TargetProtectionZone->SetGenerateOverlapEvents(bLightOn);
 
 	// --- Logique Serveur spécifique ---
 	if (!Owner->HasAuthority()) return; 
@@ -252,11 +252,12 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 		FuelRemaining -= FuelConsumption * DeltaTime;
 		FuelRemaining = FMath::Max(FuelRemaining, 0.f);
 		
-		UpdateProtectionZoneRadius();
+		
 		if (FuelRemaining > MidFuel)
 		{
 			Litter->ProtectionZone->SetSphereRadius(MaxRadius);
 			Litter->PointLight->SetIntensity(LightRadius);
+			
 		}
 		if (FuelRemaining < MidFuel && FuelRemaining> LowFuel)
 		{
@@ -269,6 +270,7 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 			Litter->PointLight->SetIntensity(LowFuel/MaxFuel *LightRadius);
 		}
 			
+		UpdateProtectionZoneRadius();
 			
 		if (FuelRemaining <= 0.f && bLightOn)
 		{
@@ -295,8 +297,12 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 
 void UPlayerLightComponent::UpdateProtectionZoneRadius()
 {
-
-	float FuelAlpha = (MaxFuel > 0.f) ? (FuelRemaining / MaxFuel) : 0.f;
+	float FuelValue = 0;
+	if (FuelRemaining > MidFuel) FuelValue = MaxFuel;
+	if (FuelRemaining < MidFuel && FuelRemaining> LowFuel) FuelValue = MidFuel;
+	if (FuelRemaining < LowFuel) FuelValue = LowFuel;
+	
+	float FuelAlpha = (MaxFuel > 0.f) ? (FuelValue / MaxFuel) : 0.f;
 	
 	float TargetRadius = FuelAlpha * MaxRadius; 
 	
@@ -306,6 +312,7 @@ void UPlayerLightComponent::UpdateProtectionZoneRadius()
 	{
 		if (Litter->ProtectionZone)
 		{
+			
 			Litter->ProtectionZone->SetSphereRadius(TargetRadius);
 
 			if (Litter->PointLight) Litter->PointLight->SetAttenuationRadius(TargetRadius);
@@ -320,11 +327,28 @@ void UPlayerLightComponent::UpdateProtectionZoneRadius()
 	}
 }
 
-void UPlayerLightComponent::FuelUpdate(float NewFuel)
+void UPlayerLightComponent::Server_RequestStorageUpdate_Implementation(float VivianiteSize)
+{
+	StoreFuel(VivianiteSize);
+}
+
+
+void UPlayerLightComponent::StoreFuel(float VivianiteSize)
 {
 	if (GetOwner()->HasAuthority())
 	{
-		FuelRemaining += NewFuel;
+		FuelStorage += VivianiteSize;
+		FuelStorage = FMath::Clamp(FuelStorage, 0.f, MaxFuel);
+	}
+}
+
+void UPlayerLightComponent::FuelUpdate()
+{
+	if (GetOwner()->HasAuthority())
+	{
+		if (FuelStorage < RefileValue) return;
+		FuelRemaining += RefileValue;
+		FuelStorage-= RefileValue;
 		FuelRemaining = FMath::Clamp(FuelRemaining, 0.f, MaxFuel);
 
 		if (FuelRemaining <= 0.f && bLightOn)
@@ -378,9 +402,9 @@ void UPlayerLightComponent::OnRep_FuelRemaining()
 
 
 
-void UPlayerLightComponent::Server_RequestFuelUpdate_Implementation(float Amount)
+void UPlayerLightComponent::Server_RequestFuelUpdate_Implementation()
 {
-	FuelUpdate(Amount);
+	FuelUpdate();
 }
 
 void UPlayerLightComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
