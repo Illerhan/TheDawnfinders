@@ -264,7 +264,7 @@ public :
 // === OTHERS ===
 protected:
 	UFUNCTION(Server, Unreliable)
-	void Server_PlaySound(FName SoundTag, float Range);
+	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector);
 
 	UFUNCTION()
 	void DisplayThrowPreview(FVector Position, float Range);
