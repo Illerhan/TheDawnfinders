@@ -837,7 +837,7 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
     if (!OtherActor || OtherActor == this) return;
 
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
-    
+    InventoryComponent->CloseInventory();
     // On ne fait rien si ce n'est pas le joueur local
     if (!Player || !Player->IsLocallyControlled()) return;
 
