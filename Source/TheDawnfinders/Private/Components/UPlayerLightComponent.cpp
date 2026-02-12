@@ -269,6 +269,11 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 			Litter->ProtectionZone->SetSphereRadius(LowFuel/MaxFuel * MaxRadius);
 			Litter->PointLight->SetIntensity(LowFuel/MaxFuel *LightRadius);
 		}
+		
+		if (Litter->PointLight)
+		{
+			Litter->PointLight->MarkRenderStateDirty();
+		}
 			
 		UpdateProtectionZoneRadius();
 			
@@ -316,6 +321,7 @@ void UPlayerLightComponent::UpdateProtectionZoneRadius()
 			Litter->ProtectionZone->SetSphereRadius(TargetRadius);
 
 			if (Litter->PointLight) Litter->PointLight->SetAttenuationRadius(TargetRadius);
+			Litter->PointLight->MarkRenderStateDirty();
 		}
 	}
 	else if (AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Owner))

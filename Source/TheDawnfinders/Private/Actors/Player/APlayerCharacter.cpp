@@ -15,6 +15,7 @@
 #include "Perception/AISense_Hearing.h"
 #include "Net/UnrealNetwork.h"
 #include "Components/DebugComponent.h"
+#include "Engine/OverlapResult.h"
 #include "Widgets/UMainWidget.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldProgressBar.h"
@@ -699,9 +700,12 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
     return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
 }
 
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range)
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc)
 {
-    UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+    if (Loc.Equals(FVector::ZeroVector))
+        UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
+    else
+        UAISense_Hearing::ReportNoiseEvent(GetWorld(), Loc, 1.0f, this, Range, SoundTag);
 }
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
