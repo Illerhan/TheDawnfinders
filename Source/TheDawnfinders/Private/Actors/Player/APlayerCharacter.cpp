@@ -310,12 +310,12 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     return .0f;
 }
 
-void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength)
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc)
 {
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
     
-    Server_PlaySound(SoundTag, Range);
+    Server_PlaySound(SoundTag, Range, Loc);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
