@@ -57,7 +57,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		if (bIsPoisoned)
 		{
 			UE_LOG(LogTemp,Warning,TEXT("Poisoned"));
-			TakeDamage(PoisonDmg, EVFXType::Poison);
+			TakeDamage(PoisonDmg * DeltaTime, EVFXType::Poison);
 		}
 	}
 
@@ -228,6 +228,7 @@ void UHealthComponent::LocalChangeHealth()
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseLocalHealth(CurrentHealth, CurrentMaxHealth, MaxHealth);
 }
+
 void UHealthComponent::RequestMaxHealthChange(float Amount)
 {
 	if (GetOwner()->HasAuthority())
@@ -241,6 +242,7 @@ void UHealthComponent::RequestMaxHealthChange(float Amount)
 		ChangeCurrentMaxHealth_Implementation(Amount);
 	}
 }
+
 void UHealthComponent::ChangeCurrentMaxHealth_Implementation(float NewValue)
 {
 	CurrentMaxHealth += NewValue;
@@ -329,6 +331,38 @@ void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 	}
 }
 
+
+#pragma endregion
+
+
+#pragma region Poison
+
+void UHealthComponent::StartPoisonEffects_Implementation()
+{
+
+}
+
+void UHealthComponent::EndPoisonEffects_Implementation()
+{
+
+}
+
+void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
+{
+	if (isPoisoned) {
+		StartPoisonEffects();
+	}
+	else {
+		EndPoisonEffects();
+	}
+
+	if (GetOwner()->HasAuthority())
+		bIsPoisoned = isPoisoned;
+	else
+	{
+		SetIsPoisoned_Implementation(isPoisoned);
+	}
+}
 
 #pragma endregion
 
@@ -442,16 +476,5 @@ void UHealthComponent::OnRep_IsFallen()
 void UHealthComponent::OnRep_ProtectionZoneAmount()
 {
 }
-
-void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
-{
-	if (GetOwner()->HasAuthority())
-		bIsPoisoned = isPoisoned;
-	else
-	{
-		SetIsPoisoned_Implementation(isPoisoned);
-	}
-}
-
 
 #pragma endregion 

@@ -8,6 +8,7 @@
 #include "DataAssets/PlayerData.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UInteractionComponent.h"
+#include "NiagaraComponent.h"
 #include "APlayerCharacter.generated.h"
 
 class ALitter;

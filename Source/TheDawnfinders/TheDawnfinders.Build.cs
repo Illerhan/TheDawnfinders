@@ -19,6 +19,7 @@ public class TheDawnfinders : ModuleRules
             "UMG",
             "AdvancedSessions",
             "SlateIM",
+            "Niagara"
         });
 		
 		if (Target.bBuildEditor)

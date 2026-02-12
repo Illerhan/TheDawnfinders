@@ -24,20 +24,12 @@ private:
 
 	UFUNCTION()
 	void OnCreateSessionClicked();
-
-	UFUNCTION()
-	void OnStartGameClicked();
-
+	
 	UFUNCTION()
 	void OnSessionCreated(bool bWasSuccessful);
 
 	UFUNCTION()
 	void OnSessionJoined(bool bWasSuccessful);
-
-	void UpdatePlayerCount();
-
-	void UpdateStartGame();
-
 
 // === PROTECTED PROPERTIES ===
 protected:
@@ -49,13 +41,6 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* CreateSessionButton;
-
-	UPROPERTY(meta = (BindWidget))
-	class UButton* StartGameButton;
-
-
-	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* PlayerCountText;
-
+	
 	FTimerHandle PlayerCountTimerHandle;
 };
