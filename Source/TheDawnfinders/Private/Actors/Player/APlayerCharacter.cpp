@@ -631,13 +631,17 @@ void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, 
 void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
 {
     if (!Montage || !GetMesh()) return;
+
     UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
     if (!AnimInstance) return;
+
     AnimInstance->StopAllMontages(0.1f);
     AnimInstance->Montage_Play(Montage, Speed);
     AnimInstance->OnPlayMontageNotifyBegin.RemoveAll(this);
+
     FOnMontageEnded EndDelegate;
     EndDelegate.BindUObject(this, &AAPlayerCharacter::OnMontageEnded);
+
     AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &AAPlayerCharacter::OnMontageNotifyBegin);
 }
