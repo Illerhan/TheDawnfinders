@@ -314,9 +314,8 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
 {
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
-
-    if (HasAuthority()) Server_PlaySound_Implementation(SoundTag, Range);
-    else Server_PlaySound(SoundTag, Range);
+    
+    Server_PlaySound(SoundTag, Range);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
