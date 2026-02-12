@@ -109,8 +109,16 @@ void UInteractionComponent::StartInteract()
 	// If the player is carrying an heavy object
 	if (CarriedItem != nullptr) {
 		AActor* Nearest = GetNearestInteractible();
-		PutInHeavyItem(Nearest);
-		return;
+		ALitter* Litter= Cast<ALitter>(Nearest);
+		if (Litter != nullptr)
+		{
+			if (Litter->LightTrigger->IsOverlappingActor(PlayerCharacter))
+			{
+				PutInHeavyItem(Nearest);
+                		return;
+			}
+			return;
+	}
 	}
 
 	// We check if there is a player nearby to revive 
@@ -359,6 +367,7 @@ void UInteractionComponent::Server_PutInHeavyItem_Implementation(AActor* Target)
 
 void UInteractionComponent::EndCarryHeavyItem()
 {
+	if (!CarriedItem->bUsed) return;
 	CarriedItem->StopCarry();
 	CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 

@@ -26,7 +26,8 @@ public :
 	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
-	
+	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite)
+    	bool bUsed;
 
 
 protected :
@@ -36,6 +37,7 @@ protected :
 	UPROPERTY(ReplicatedUsing = OnRep_IsCarried, BlueprintReadOnly, Category = "Carriable")
 	bool bIsCarried;
 	
+
 	UFUNCTION()
 	void OnRep_IsCarried();
 	

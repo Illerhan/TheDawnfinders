@@ -229,6 +229,14 @@ void ALitter::SmoothClientTransform(float DeltaTime)
     SetActorLocationAndRotation(NewLoc, NewRot, false, nullptr, ETeleportType::None);
 }
 
+void ALitter::StartExtraction_Implementation()
+{
+    LightComponent->Server_TurnLightOn();
+    LightComponent->FuelRemaining = LightComponent->MaxFuel;
+    LightComponent->FuelConsumption = 0;
+    
+}
+
 void ALitter::ResolvePhysics(float DeltaTime)
 {
     const float TimeNow = GetWorld()->GetTimeSeconds();
@@ -482,7 +490,27 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     bool bInventory= InventoryTrigger->IsOverlappingActor(Player);
     bool bInLight = LightTrigger->IsOverlappingActor(Player);
 
-    // CAS 1 : Inventaire (Zone Centrale)
+    // CAS 1 : Light (Zone Centrale)
+    if (bInLight)
+    {
+        if (LightComponent && !Player->bIsCarrying  && !bIsExtracting)
+        {
+            if (!HasAuthority()) return;
+            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+            LightComponent->FuelUpdate();
+            LightComponent->TurnLightOn();
+            return;
+        }
+        if (bIsExtracting && !Player->bIsCarrying)
+        {
+            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+            StartExtraction();
+            return;
+        }
+    }
+    if (Player->bIsCarrying) return;
+    
+    // CAS 2 : Inventaire (Zone Centrale)
     if (bInventory)
     {
         if (InventoryComponent && !Player->bIsCarrying)
@@ -494,20 +522,6 @@ void ALitter::Interact_Implementation(AActor* Interactor)
 
             return;
         }
-    }
-    
-    // CAS 2 : Light (Zone Centrale)
-    if (bInLight)
-    {
-        if (LightComponent && !Player->bIsCarrying)
-        {
-            if (!HasAuthority()) return;
-            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
-            LightComponent->FuelUpdate();
-            LightComponent->TurnLightOn();
-            return;
-        }
-
     }
 
     // CAS 3 : Portage (Zone Avant OU Arrière)
@@ -806,8 +820,8 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
             {
                 if (Player->CurrentState == EPlayerState::Carrying)
                     InteractibleWidget->DisplayText("Remplir le palanquin",InputIcon);
-                else
-                    InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
+                else if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction",InputIcon);
+                else InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
             }
             // Front ou Back
             else

@@ -91,6 +91,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	USoundBase* SoloSound;
 	
+	UPROPERTY(Replicated, Blueprintable)
+	bool bIsExtracting = false;
+
+	bool IsIsExtracting() const
+	{
+		return bIsExtracting;
+	}
+
+	UFUNCTION(BlueprintCallable)
+	void SetIsExtracting(const bool Extracting)
+	{
+		this->bIsExtracting = Extracting;
+	}
+
 private:
 	float LastStrainSoundTime = 0.f; // Pour éviter de spammer le son "trop lourd"
 	float BaseMass = 100.f;
@@ -168,6 +182,9 @@ public:
     // Unreliable is faster/better for continuous input updates
     UFUNCTION(Server, Unreliable)
     void Server_UpdateInputs(AAPlayerCharacter* Player, FVector WorldInputDirection);
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StartExtraction();
 	
 	UPROPERTY(Replicated)
 	FTransform ServerTransform;
