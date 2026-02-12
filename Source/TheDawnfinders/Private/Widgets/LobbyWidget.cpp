@@ -33,21 +33,6 @@ void ULobbyWidget::NativeConstruct()
     {
         CreateSessionButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnCreateSessionClicked);
     }
-    if (StartGameButton)
-    {
-        StartGameButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnStartGameClicked);
-    }
-
-    UpdateStartGame();
-    
-    // Timer pour mettre à jour le compte de joueurs toutes les secondes
-    GetWorld()->GetTimerManager().SetTimer(
-        PlayerCountTimerHandle,
-        this,
-        &ULobbyWidget::UpdatePlayerCount,
-        1.0f,
-        true
-    );
 }
 
 void ULobbyWidget::NativeDestruct()
@@ -102,41 +87,6 @@ void ULobbyWidget::OnCreateSessionClicked()
     UGameplayStatics::OpenLevel(this, FName("L_GymRoom"),true,"listen?");
 }
 
-void ULobbyWidget::OnStartGameClicked()
-{
-    if (!SessionSubsystem)
-    {
-        UE_LOG(LogTemp, Error, TEXT("SessionSubsystem is null"));
-        return;
-    }
-
-    // Vérifier qu'on est bien le serveur
-    APlayerController* PC = GetWorld()->GetFirstPlayerController();
-    if (!PC)
-    {
-        UE_LOG(LogTemp, Error, TEXT("PlayerController is null"));
-        return;
-    }
-
-    // Seul le serveur peut lancer la partie
-    if (!PC->HasAuthority())
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Only the host can start the game"));
-        return;
-    }
-
-    // ServerTravel pour emmener tous les clients avec nous
-
-    this->RemoveFromParent();
-    PC->bShowMouseCursor = false;
-
-    
-    
-    FString MapPath = TEXT("L_Test");
-    GetWorld()->ServerTravel(MapPath + "?listen", true);
-    
-    UE_LOG(LogTemp, Error, TEXT("ServerTravel called to: %s"), *MapPath);
-}
 
 void ULobbyWidget::OnSessionCreated(bool bWasSuccessful)
 {
@@ -170,34 +120,5 @@ void ULobbyWidget::OnSessionJoined(bool bWasSuccessful)
     else
     {
         UE_LOG(LogTemp, Error, TEXT("Failed to join session"));
-    }
-}
-
-void ULobbyWidget::UpdatePlayerCount()
-{
-    if (!SessionSubsystem || !PlayerCountText)
-    {
-        return;
-    }
-
-    if (SessionSubsystem->HasActiveSession())
-    {
-        int32 PlayerCount = SessionSubsystem->GetCurrentPlayerCount();
-        FString CountText = FString::Printf(TEXT("Players: %d/4"), PlayerCount);
-        PlayerCountText->SetText(FText::FromString(CountText));
-    }
-    else
-    {
-        PlayerCountText->SetText(FText::FromString(TEXT("No Active Session")));
-    }
-}
-
-void ULobbyWidget::UpdateStartGame()
-{
-    if (StartGameButton)
-    {
-        APlayerController* PC = GetWorld()->GetFirstPlayerController();
-        bool bIsServer = PC && PC->HasAuthority();
-        StartGameButton->SetVisibility(bIsServer ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
     }
 }
