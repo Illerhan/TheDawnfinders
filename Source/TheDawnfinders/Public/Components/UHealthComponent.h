@@ -70,6 +70,23 @@ public :
 	void ActualiseCursePostProcess(float DeltaTime);
 
 
+// === POISON ===
+public :
+	bool IsPoisoned() const
+	{
+		return bIsPoisoned;
+	}
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void SetIsPoisoned(bool isPoisoned);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartPoisonEffects();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void EndPoisonEffects();
+
+
 // === DEATH ===
 public : 
 	UFUNCTION()
@@ -161,19 +178,9 @@ protected :
 	UPROPERTY(Blueprintable,EditAnywhere, Replicated)
 	bool bIsPoisoned = false;
 
-public:
-	bool IsPoisoned() const
-	{
-		return bIsPoisoned;
-	}
-	UFUNCTION(Server,Reliable,BlueprintCallable)
-	void SetIsPoisoned(bool isPoisoned);
-
-	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float PoisonDmg;
 
-protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* CurseMaterial;
 
