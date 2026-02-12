@@ -41,7 +41,7 @@ void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
 	if (!Player) return;
 	
-	Player->Execute_PlaySoundOnServer(Player,"Distraction",1000,1);
+	Player->Execute_PlaySoundOnServer(Player,"Distraction",1000,1,FVector::ZeroVector);
 	SoundManagerInstance->MultiPlaySound(Sound,GetActorLocation(),100,1000,true);
 	
 }

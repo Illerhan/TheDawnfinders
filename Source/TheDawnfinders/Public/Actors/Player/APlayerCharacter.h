@@ -156,7 +156,7 @@ public:
 
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
-	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength) override;
+	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc = FVector::ZeroVector) override;
 
 	virtual UWorldPlayerWidget* GetPlayerWidget_Implementation() override;
 
