@@ -3,6 +3,7 @@
 #include "Interfaces/IPlayer.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SoundManager.h"
+#include "GameFramework/UDoorRegistry.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Widgets/UWorldInteractibleWidget.h"
@@ -234,6 +235,21 @@ void ALitter::StartExtraction_Implementation()
     LightComponent->Server_TurnLightOn();
     LightComponent->FuelRemaining = LightComponent->MaxFuel;
     LightComponent->FuelConsumption = 0;
+    if (!HasAuthority()) return;
+
+    UE_LOG(LogTemp, Warning, TEXT("[EXTRACTION] Mechanism activated! Opening all extraction doors..."));
+
+    // Récupérer le registre et ouvrir TOUTES les portes
+    UUDoorRegistry* Registry = GetGameInstance()->GetSubsystem<UUDoorRegistry>();
+    if (Registry)
+    {
+        Registry->OpenAllExtractionDoors();
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("[EXTRACTION] Failed to get DoorRegistry!"));
+    }
+    
     
 }
 

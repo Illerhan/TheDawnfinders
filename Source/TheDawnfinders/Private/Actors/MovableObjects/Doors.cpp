@@ -1,6 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Actors/MovableObjects/Doors.h"
+
+#include "GameFramework/UDoorRegistry.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -35,6 +37,15 @@ void ADoors::BeginPlay()
         TimeLineFinishedCallback.BindUFunction(this, FName("OnTimelineFinished"));
         Timeline.SetTimelineFinishedFunc(TimeLineFinishedCallback);
     }
+    
+    if (bIsExtractionDoor)
+    {
+        UUDoorRegistry* Registry = GetGameInstance()->GetSubsystem<UUDoorRegistry>();
+        if (Registry)
+        {
+            Registry->RegisterExtractionDoor(this);
+        }
+    }
 }
 
 
@@ -56,6 +67,12 @@ void ADoors::DoMainAction_Implementation()
 
 void ADoors::StopMainAction_Implementation()
 {
+    if (bIsPermanentlyOpen) 
+    {
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' is permanently open, ignoring close request"), *GetName());
+        return;
+    }
+    
     if (CurrentTriggerCount == 0) return;
     CurrentTriggerCount--;
 
@@ -122,6 +139,28 @@ void ADoors::StartOpening()
     }
 }
 
+void ADoors::OpenPermanently()
+{
+    if (!HasAuthority()) return;
+    if (!MoveCurve) return;
+    if (!bIsExtractionDoor) return;
+
+    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' opening PERMANENTLY"), *GetName());
+    
+    bIsPermanentlyOpen = true;
+    CurrentTriggerCount = NeededTriggerCount; // Force le trigger
+
+    // Force l'ouverture complète
+    float ForwardRate = 1.0f;
+    if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
+    {
+        ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
+    }
+    
+    Timeline.SetPlayRate(ForwardRate);
+    Timeline.PlayFromStart();
+}
+
 void ADoors::AddOpeningPlayer()
 {
     CurrentAddedSpeed += SpeedAddedPerAdditionalPlayer;
@@ -163,6 +202,12 @@ void ADoors::StopOpening()
 {
     if (!HasAuthority()) return;
     if (!MoveCurve) return;
+    
+    if (bIsPermanentlyOpen)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' is permanently open, cannot close"), *GetName());
+        return;
+    }
 
     FVector CurrentPos = GetActorLocation();
     float DistanceFromStart = FVector::Distance(CurrentPos, StartPosition);

@@ -41,6 +41,9 @@ public :
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void StopOpening();
+	
+	UFUNCTION(BlueprintCallable, Category = "Door")
+	void OpenPermanently();
 
 
 // === Properties ===
@@ -53,6 +56,12 @@ public :
 
 	UPROPERTY(EditAnywhere, Blueprintable, Category = "Doors")
 	bool bNeedHold;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Door Settings")
+	bool bIsPermanentlyOpen = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Door Settings")
+	bool bIsExtractionDoor = false;
 
 protected : 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
