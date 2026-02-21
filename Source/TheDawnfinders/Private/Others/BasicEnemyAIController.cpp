@@ -27,18 +27,6 @@ ABasicEnemyAIController::ABasicEnemyAIController()
 void ABasicEnemyAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
-    if (EnemyState != EEnemyState::Idle) return;
-
-    if (AlertnessTimer > 0) {
-        AlertnessTimer -= DeltaTime;
-        return;
-    }
-
-    if (Alertness > 0) {
-        Alertness -= AlertnessDecreaseSpeed * DeltaTime;
-        PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
-    }
 }
 
 
@@ -49,8 +37,6 @@ void ABasicEnemyAIController::AddAlertness(float Quantity, FVector Location)
 	Alertness += Quantity;
     Alertness = FMath::Clamp(Alertness, 0, PossessedPawn->EnemyData->AlertnessThreshold);
 
-    PossessedPawn->Multicast_ActualiseSuspicionProgress(Alertness / PossessedPawn->EnemyData->AlertnessThreshold);
-
 	if (Alertness >= PossessedPawn->EnemyData->AlertnessThreshold) {
 		SetEnemyState(EEnemyState::Suspicious);
         AlertnessTimer = 0;
@@ -60,8 +46,6 @@ void ABasicEnemyAIController::AddAlertness(float Quantity, FVector Location)
 void ABasicEnemyAIController::ResetAlertness()
 {
     Alertness = 0;
-
-    //PossessedPawn->Multicast_ActualiseSuspicionProgress(0);
 }
 
 void ABasicEnemyAIController::EndAttack_Implementation()

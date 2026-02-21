@@ -20,6 +20,7 @@ class ABasicEnemyAIController;
 UENUM(BlueprintType)
 enum class EEnemyState : uint8 {
 	Idle UMETA(DisplayName = "Idle"),
+	Listening UMETA(DisplayName = "Listening"),
 	Suspicious UMETA(DisplayName = "Suspicious"),
 	Aggressive UMETA(DisplayName = "Aggressive")
 };
@@ -55,16 +56,22 @@ public :
 	void StartAttack(FEnemyActionData AttackData, AActor* Target);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void EnterSuspicious();
+	void EnterListeningState();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ExitSuspicious();
+	void EnterIdleState();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void EnterSuspicious();
 
 	UFUNCTION(BlueprintCallable)
 	void DoAttackCollision();
 
-	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
-	void Multicast_ActualiseSuspicionProgress(float CurrentRatio);
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterIdle();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_EnterListening();
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_EnterSuspicious();

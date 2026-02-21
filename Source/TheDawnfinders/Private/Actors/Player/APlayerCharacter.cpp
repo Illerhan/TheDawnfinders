@@ -76,6 +76,9 @@ AAPlayerCharacter::AAPlayerCharacter()
     ProtectionZone->SetHiddenInGame(true);
     ProtectionZone->SetupAttachment(RootComponent);
 
+    NoiseZone = CreateDefaultSubobject<USphereComponent>(FName("NoiseZone"));
+    NoiseZone->SetupAttachment(GetMesh());
+
     FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
     FogOfWarLightOn->SetupAttachment(RootComponent);
 
@@ -705,10 +708,12 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 
 void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc)
 {
-    if (Loc.Equals(FVector::ZeroVector))
+    NoiseZone->SetSphereRadius(Range);
+
+    /*if (Loc.Equals(FVector::ZeroVector))
         UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
     else
-        UAISense_Hearing::ReportNoiseEvent(GetWorld(), Loc, 1.0f, this, Range, SoundTag);
+        UAISense_Hearing::ReportNoiseEvent(GetWorld(), Loc, 1.0f, this, Range, SoundTag);*/
 }
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)

@@ -90,6 +90,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USceneComponent* CarriablePosRef;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USphereComponent* NoiseZone;
 	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")

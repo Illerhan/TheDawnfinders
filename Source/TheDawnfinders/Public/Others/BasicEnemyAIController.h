@@ -68,6 +68,9 @@ protected :
 	float AlertnessTimer;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bIsTriggered;
+
+	UPROPERTY(BlueprintReadWrite)
 	ABaseEnemy* PossessedPawn;
 
 	UPROPERTY(BlueprintReadWrite)

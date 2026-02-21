@@ -26,19 +26,37 @@ public :
 	float Damages;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float HearingRadius;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float DetectionRadius;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
 	float AlertnessThreshold;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float AlertStopDuration;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Main")
-	float AggressiveStopDuration;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float PatrolReachPositionWait = 4.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float ListeningStateProba = 25.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float ListeningStateDuration = 3.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float SuspiciousStateDuration = 10.0f;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float NormalHearingRadius;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float EnterListeningDelay;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float ListeningHearingRadius;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float EnterSuspiciousDelay;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float SuspiciousHearingRadius;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float NormalSpeed;
@@ -48,6 +66,7 @@ public :
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float AggressiveSpeed;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
 	TArray<FName> PossibleAttacksRowNames;

@@ -99,15 +99,48 @@ void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor*
     MulticastPlayMontage(AttackData.Animation, AttackData.MontageSpeed);
 }
 
+
+#pragma region States Functions
+
+
+void ABaseEnemy::EnterIdleState_Implementation()
+{
+}
+
+void ABaseEnemy::EnterListeningState_Implementation()
+{
+}
+
 void ABaseEnemy::EnterSuspicious_Implementation()
 {
-
 }
 
-void ABaseEnemy::ExitSuspicious_Implementation()
+
+void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
-
+    EnterIdleState();
 }
+
+void ABaseEnemy::Multicast_EnterListening_Implementation()
+{
+    EnterListeningState();
+
+    EnemyWidget->PlayListeningAnim();
+}
+
+void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
+{
+    EnterSuspicious();
+
+    EnemyWidget->PlaySuspiciousAnim();
+}
+
+void ABaseEnemy::Multicast_EnterAggressives_Implementation()
+{
+    EnemyWidget->PlayAggressiveAnim();
+}
+
+#pragma endregion
 
 
 void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, float Speed)
@@ -185,25 +218,10 @@ void ABaseEnemy::DoAttackCollision()
     }
 }
 
+
 void ABaseEnemy::SetLockRotation(bool Locked)
 {
     bLockRotation = Locked;
-}
-
-
-void ABaseEnemy::Multicast_ActualiseSuspicionProgress_Implementation(float CurrentRatio)
-{
-    EnemyWidget->DisplaySuspicionProgress(CurrentRatio);
-}
-
-void ABaseEnemy::Multicast_EnterAggressives_Implementation()
-{
-    EnemyWidget->PlayAggressiveAnim();
-}
-
-void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
-{
-    EnemyWidget->PlaySuspiciousAnim();
 }
 
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
