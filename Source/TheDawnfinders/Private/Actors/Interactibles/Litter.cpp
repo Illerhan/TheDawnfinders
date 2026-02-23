@@ -514,7 +514,7 @@ void ALitter::Interact_Implementation(AActor* Interactor)
             if (!HasAuthority()) return;
             IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
             LightComponent->FuelUpdate();
-            LightComponent->TurnLightOn();
+            LightComponent->Server_TurnLightOn();
             return;
         }
         if (bIsExtracting && !Player->bIsCarrying)

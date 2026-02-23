@@ -156,14 +156,13 @@ void UPlayerLightComponent::TurnLightOn()
 void UPlayerLightComponent::TurnLightOff()
 {
 	if (!bLightOn) return;
-
-	// Server
+	
 	if (GetOwner()->HasAuthority())
 	{
 		bLightOn = false;
 		ApplyLightState();
 	}
-	else  // Client
+	else
 	{
 		Server_TurnLightOff();
 	}
