@@ -217,15 +217,15 @@ void USquadWidget::BindNewPlayerState()
 {
     APlayerController* PC = GetOwningPlayer();
     if (!PC || !PC->IsLocalController()) return;
-
+    
     AGameStateBase* GS = GetWorld()->GetGameState();
     if (!GS || GS->PlayerArray.Num() == 0) return;
-
+    
     APlayerState* NewPS = GS->PlayerArray.Last();
     if (ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(NewPS))
     {
         CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
-
+    
         // Juste rafraîchir l'affichage, pas de création de widget
         ActualiseSquadInfos();
     }
