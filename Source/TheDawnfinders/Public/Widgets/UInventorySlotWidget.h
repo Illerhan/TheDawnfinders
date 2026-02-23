@@ -8,6 +8,7 @@
 #include "UInventorySlotWidget.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHoverWidget, int32, SlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUnhoverWidget, int32, SlotIndex);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnClickWidget, int32, SlotIndex);
 
 UCLASS()
@@ -50,6 +51,9 @@ public :
 protected :
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnHoverWidget OnHoverWidget;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnUnhoverWidget OnUnhoverWidget;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnClickWidget OnClickWidget;
