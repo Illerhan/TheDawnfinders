@@ -7,6 +7,8 @@
 
 class UItemData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlotHovered, int, SlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlotUnhovered, int, SlotIndex);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlotClicked, int, SlotIndex);
 
 UCLASS()
@@ -21,6 +23,12 @@ public :
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnSlotClicked OnSlotClicked;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnSlotClicked FOnSlotHovered;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnSlotClicked FOnSlotUnhovered;
 
 
 protected :
