@@ -33,6 +33,9 @@ public :
 	float PatrolReachPositionWait = 4.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float PatrolMaxDist = 2000.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
 	float ListeningStateProba = 25.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")

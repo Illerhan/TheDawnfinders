@@ -709,17 +709,13 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc)
 {
     NoiseZone->SetSphereRadius(Range);
+
     if (Range <= 0) {
         NoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     }
     else {
         NoiseZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     }
-
-    /*if (Loc.Equals(FVector::ZeroVector))
-        UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 1.0f, this, Range, SoundTag);
-    else
-        UAISense_Hearing::ReportNoiseEvent(GetWorld(), Loc, 1.0f, this, Range, SoundTag);*/
 }
 
 void AAPlayerCharacter::PossessedBy(AController* NewController)
