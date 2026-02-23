@@ -16,13 +16,13 @@ void ACustomGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 void ACustomGameState::AddPlayerState(APlayerState* Player)
 {
 	Super::AddPlayerState(Player);
-	OnPlayerListChanged.Broadcast();
+	//OnPlayerListChanged.Broadcast();
 }
 
 void ACustomGameState::RemovePlayerState(APlayerState* Player)
 {
 	Super::RemovePlayerState(Player);
-	OnPlayerListChanged.Broadcast();
+	//OnPlayerListChanged.Broadcast();
 }
 void ACustomGameState::GetPlayers(TArray<APlayerState*>& Players)
 {
