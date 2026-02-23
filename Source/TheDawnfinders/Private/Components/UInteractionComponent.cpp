@@ -367,7 +367,8 @@ void UInteractionComponent::Server_PutInHeavyItem_Implementation(AActor* Target)
 
 void UInteractionComponent::EndCarryHeavyItem()
 {
-	if (!CarriedItem->bUsed) return;
+	//if (!CarriedItem->bUsed) return;
+
 	CarriedItem->StopCarry();
 	CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 

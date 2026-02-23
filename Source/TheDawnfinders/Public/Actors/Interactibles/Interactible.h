@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/TimelineComponent.h" 
+#include "Actors/Player/ANoise.h" 
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
 #include "Interfaces/IFadeable.h"
-#include "Components/TimelineComponent.h" 
 #include "Curves/CurveFloat.h"
 #include "Interactible.generated.h"
 
@@ -40,6 +41,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	virtual void HoldTimer(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayNoise();
 
 
 // === INTERACTION INTERFACE ===
@@ -164,6 +168,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EInteractItemConsuptionType InteractItemConsumptionType;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Noise")
+	TSubclassOf<ANoise> NoiseActor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Noise")
+	float NoiseRange;
+
+	UPROPERTY()
 	FTimerHandle EnableTimer;
 
 	UPROPERTY()

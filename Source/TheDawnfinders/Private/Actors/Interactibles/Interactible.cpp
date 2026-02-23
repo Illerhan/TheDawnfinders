@@ -98,6 +98,12 @@ void AInteractibleObjects::HoldTimer(float DeltaTime)
 	}
 }
 
+void AInteractibleObjects::PlayNoise()
+{
+	ANoise* NoiseObj = GetWorld()->SpawnActor<ANoise>(NoiseActor, GetActorLocation(), GetActorRotation());
+	NoiseObj->NoiseZone->SetSphereRadius(NoiseRange);
+}
+
 void AInteractibleObjects::CheckEnableDistance()
 {
 	float ClosestDistSq = TNumericLimits<float>::Max();
