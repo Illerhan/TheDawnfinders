@@ -77,6 +77,11 @@ void ABaseEnemy::CheckEnableDistance()
     }
 }
 
+void ABaseEnemy::ExitCrystal_Implementation()
+{
+    bIsCrystallized = false;
+}
+
 void ABaseEnemy::ShowEnemy_Implementation()
 {
 }
