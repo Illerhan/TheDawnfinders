@@ -378,7 +378,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
     GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
 }
 
-// [IMPORTANT MODIFICATION HERE]
+
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
     if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized)
@@ -509,6 +509,8 @@ void AAPlayerCharacter::ActualiseRotation()
     FRotator TargetRotation = RotatedVector.Rotation();
     FRotator MovementRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), PlayerConfig->NormalRotationSpeed);
 
+    ItemComponent->ActualisePreviewThrow(CurrentRotationInput);
+
     FRotator NewRotation = FQuat::Slerp(MovementRotation.Quaternion(), CurrentForcedRotation.Quaternion(), CurrentForcedRotationRatio).Rotator();
 
     SetActorRotation(NewRotation);
@@ -526,6 +528,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     if (CurrentDir.SquaredLength() < 0.5f && Input.Length() > 0.9f)
         PreviousPlayerInput = FVector(-Input.X, -Input.Y, 0);
 
+    float Length = Input.Length();
     Input.Normalize();
 
     float angle = FMath::Atan2(Input.Y, Input.X);
@@ -535,6 +538,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     FRotator TargetRotation = RotatedVector.Rotation();
     FRotator NewRotation = FMath::RInterpTo(CurrentForcedRotation, TargetRotation, GetWorld()->GetDeltaSeconds(), PlayerConfig->ForceRotationSpeed);
 
+    CurrentRotationInput = RotatedVector * Length;
     CurrentForcedRotation = NewRotation;
 }
 

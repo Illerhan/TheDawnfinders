@@ -56,6 +56,7 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_StartTimedEffect(EConsumableEffectType EffectType, float Duration);
 
+
 // === USE ITEMS ===
 public :
 	UFUNCTION(BlueprintCallable)
@@ -92,6 +93,21 @@ public :
 	void Server_ApplyDamagesToEnemy(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages);
 
 
+// === THROW ===
+public :
+	UFUNCTION()
+	void StartPreviewThrow();
+
+	UFUNCTION(Server, Reliable)
+	void Server_ThrowItem(UItemData* Data);
+
+	UFUNCTION()
+	void ActualisePreviewThrow(FVector AimInput);
+
+	UFUNCTION()
+	void StopPreviewThrow();
+
+
 // === OTHERS ===
 private :
 	UFUNCTION()
@@ -99,18 +115,6 @@ private :
 
 	UFUNCTION()
 	void UseConsumable();
-
-	UFUNCTION()
-	void StartPreviewThrow();
-
-	UFUNCTION(Server, Reliable)
-	void Server_ThrowItem(float Progress, UItemData* Data);
-
-	UFUNCTION()
-	void ActualisePreviewThrow(float DeltaTime);
-
-	UFUNCTION()
-	void StopPreviewThrow();
 
 	UFUNCTION(Server, Reliable)
 	void ServerRequestRevive(AAPlayerCharacter* TargetAlly);
@@ -168,6 +172,9 @@ private :
 
 	UPROPERTY()
 	float CurrentAttackDamages = 0;
+
+	UPROPERTY()
+	FVector CurrentThrowPosition;
 
 	UPROPERTY()
 	UDataTable* WeaponDataTable;

@@ -58,7 +58,7 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	if (!GetOwner()) return;
 
 	ActualiseUseProgress(DeltaTime);
-	ActualisePreviewThrow(DeltaTime);
+	//ActualisePreviewThrow();
 }
 
 
@@ -103,6 +103,7 @@ void UItemComponent::UnequipWeapon()
 }
 
 #pragma endregion
+
 
 #pragma region Timers
 
@@ -165,7 +166,6 @@ void UItemComponent::Server_StartTimedEffect_Implementation(EConsumableEffectTyp
 #pragma endregion
 
 
-
 #pragma region Use - Main Action
 
 void UItemComponent::DoMainAction()
@@ -174,12 +174,6 @@ void UItemComponent::DoMainAction()
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Consumable)
 	{
-		if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
-		{
-			StartPreviewThrow();
-			return;
-		}
-
 		if (EquippedItem.CurrentInfos.ItemData->NeededHoldDuration != 0)
 		{
 			if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Revive)
@@ -264,7 +258,7 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			Server_ThrowItem(ThrowPreviewTimer / 2.f, EquippedItem.CurrentInfos.ItemData);
+			Server_ThrowItem(EquippedItem.CurrentInfos.ItemData);
 
 			InventoryComponent->RemoveCurrentItem();
 			StopPreviewThrow();
@@ -338,6 +332,12 @@ void UItemComponent::DoSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Valuable) return;
 	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dodging) return;
 
+	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
+	{
+		StartPreviewThrow();
+		return;
+	}
+
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
 		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking);
 	}
@@ -349,6 +349,12 @@ void UItemComponent::StopSecondaryAction()
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
 		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+	}
+
+	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
+	{
+		StopPreviewThrow();
+		return;
 	}
 }
 
@@ -366,11 +372,11 @@ void UItemComponent::StartPreviewThrow()
 	ThrowPreviewTimer = 0;
 }
 
-void UItemComponent::Server_ThrowItem_Implementation(float Progress, UItemData* Data)
+void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data)
 {
-	FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
-	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
+	//FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
+	//FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
+	//FVector FinalPos = GetOwner()->GetActorLocation() + AimInput * 800.f;
 
 	FActorSpawnParameters Params;
 	Params.Owner = GetOwner();
@@ -382,12 +388,12 @@ void UItemComponent::Server_ThrowItem_Implementation(float Progress, UItemData* 
 
 	if (ThrowedObject)
 	{
-		ThrowedObject->Initialise(FinalPos, Data);
+		ThrowedObject->Initialise(CurrentThrowPosition, Data);
 	}
 }
 
 
-void UItemComponent::ActualisePreviewThrow(float DeltaTime)
+void UItemComponent::ActualisePreviewThrow(FVector AimInput)
 {
 	if (!IsPreviewingThrow) return;
 
@@ -397,15 +403,15 @@ void UItemComponent::ActualisePreviewThrow(float DeltaTime)
 		return;
 	}
 
-	ThrowPreviewTimer += DeltaTime;
+	//float Progress = ThrowPreviewTimer / 2.f;
+	//FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 200.f;
+	//FVector Pos2 = GetOwner()->GetActorLocation() + AimInput * 800.f;
+	//FVector FinalPos = GetOwner()->GetActorLocation() + AimInput * 800.f;
 
-	float Progress = ThrowPreviewTimer / 2.f;
-	FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 200.f;
-	FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-	FVector FinalPos = FMath::Lerp(Pos1, Pos2, FMath::Clamp(Progress, 0, 1));
+	CurrentThrowPosition = GetOwner()->GetActorLocation() + AimInput * 800.f;
 
 	AThrowableObject* Throwable = EquippedItem.CurrentInfos.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
-	OnThrowPreviewDisplay.Broadcast(FinalPos, Throwable->EffectRange);
+	OnThrowPreviewDisplay.Broadcast(CurrentThrowPosition, Throwable->EffectRange);
 }
 
 
