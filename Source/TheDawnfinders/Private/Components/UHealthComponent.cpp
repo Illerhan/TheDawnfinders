@@ -74,8 +74,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 }
 
 
-void UHealthComponent::InitialiseComponent
-	(float MaxHP, float MinMaxHP, float ReviveHP,float InjureSpeed, float CurseRate, float DmgPoison)
+void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float ReviveHP, float InjureSpeed, float CurseRate, float DmgPoison)
 {
 	CurrentHealth = MaxHP;
 	CurrentMaxHealth = MaxHP;
@@ -86,40 +85,39 @@ void UHealthComponent::InitialiseComponent
 	CurseRatio = CurseRate;
 	PoisonDmg = DmgPoison;
 
-	TArray<AActor*> FoundActors;
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "PPCurse", FoundActors);
-
-	for (AActor* Actor : FoundActors)
+	// --- CORRECTION MULTIJOUEUR ---
+	// On ne crée le matériau de Post-Process QUE si on contrôle localement ce perso
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
+	if (PawnOwner && PawnOwner->IsLocallyControlled()) 
 	{
-		APostProcessVolume* PPV = Cast<APostProcessVolume>(Actor);
-		FPostProcessSettings& Settings = PPV->Settings;
+		TArray<AActor*> PPActors; // Nom unique pour éviter l'erreur C4456
+		UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PPCurse"), PPActors);
 
-		if (Settings.WeightedBlendables.Array.Num() > 0)
+		for (AActor* Actor : PPActors)
 		{
-			UObject* Obj = Settings.WeightedBlendables.Array[1].Object;
-
-			if (UMaterialInstance* MI = Cast<UMaterialInstance>(Obj))
+			APostProcessVolume* PPV = Cast<APostProcessVolume>(Actor);
+			if (PPV && PPV->Settings.WeightedBlendables.Array.Num() > 1)
 			{
-				UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(MI, this);
+				UObject* Obj = PPV->Settings.WeightedBlendables.Array[1].Object;
 
-				Settings.WeightedBlendables.Array[1].Object = DynamicMaterial;
-				CurseMaterial = DynamicMaterial;
+				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
+				{
+					CurseMaterial = UMaterialInstanceDynamic::Create(MI, this);
+					PPV->Settings.WeightedBlendables.Array[1].Object = CurseMaterial;
+				}
 			}
 		}
 	}
 
-	// If is not the server
+	// Gestion de la réplication de la santé
 	if (!GetOwner()->HasAuthority()) {
 		LocalChangeHealth();
-
 		ServerChangeHealth(CurrentHealth);
-		return;
 	}
-
-	// If is server
-	ServerChangeHealth_Implementation(CurrentHealth);
+	else {
+		ServerChangeHealth_Implementation(CurrentHealth);
+	}
 }
-
 
 #pragma region Main Health Functions
 
@@ -319,16 +317,21 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 {
-	if (!OwnerController) return;
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
+	if (!PawnOwner || !PawnOwner->IsLocallyControlled()) 
+	{
+		return; 
+	}
 
+	if (!CurseMaterial) return;
+	
 	if (IsProtectedFromCurse()) {
 		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 0.f, DeltaTime * 1.5f);
-		CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"),CurrentCurseVolumeStrength);
 	}
 	else {
 		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 2500.f, DeltaTime * 1.f);
-		CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentCurseVolumeStrength);
 	}
+	CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentCurseVolumeStrength);
 }
 
 

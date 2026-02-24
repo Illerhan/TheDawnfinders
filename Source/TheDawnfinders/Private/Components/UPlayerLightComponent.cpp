@@ -274,12 +274,14 @@ void UPlayerLightComponent::ConsumeFuel(float DeltaTime)
 			Litter->PointLight->MarkRenderStateDirty();
 		}
 			
-		UpdateProtectionZoneRadius();
+		
 			
 		if (FuelRemaining <= 0.f && bLightOn)
 		{
 			TurnLightOff();
 		}
+		
+		UpdateProtectionZoneRadius();
 	}
 
 	if (!PalanquinHUDWidget)
