@@ -42,6 +42,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UWidgetComponent* EnemyWidgetComponent;
 
+
 public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UEnemyData* EnemyData;
@@ -84,6 +85,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void CheckEnableDistance();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ExitCrystal();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ShowEnemy();
