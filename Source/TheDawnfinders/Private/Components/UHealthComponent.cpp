@@ -301,12 +301,13 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	if (!GetOwner()->HasAuthority()) return;
 	if (IsProtectedFromCurse()) return;
 	if (CurrentMaxHealth <= MinimumMaxHP) return;
+
 	CurseMaxHealth = CurrentMaxHealth;
 	CurrentMaxHealth -= MaxHealth * CurseRatio * DeltaTime;
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
-	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
 
+	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
 
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
