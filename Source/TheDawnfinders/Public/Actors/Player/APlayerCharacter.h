@@ -342,6 +342,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	FRotator CurrentForcedRotation;
 
+	UPROPERTY(BlueprintReadWrite)
+	FVector CurrentRotationInput;
+
 	UPROPERTY()
 	AActor* CurrentAutoLockTarget;
 
