@@ -134,6 +134,8 @@ void AAPlayerCharacter::BeginPlay()
 
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
+    //GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(GetCharacterMovement()->MaxWalkSpeed, TargetMaxSpeed, DeltaTime * 5.0f);
+
     Super::Tick(DeltaTime);
 
     if (!IsLocallyControlled()) return;
@@ -154,11 +156,7 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     {
         UpdatePushingMovement(DeltaTime);
     }
-    
-    if (GetLocalRole() == ROLE_SimulatedProxy)
-    {
-        return;
-    }
+
     
     switch (CurrentState) {
     case EPlayerState::Dodging :
@@ -182,7 +180,6 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-    DOREPLIFETIME(AAPlayerCharacter, CurrentState);
     DOREPLIFETIME(AAPlayerCharacter, PlayerSpeed);
     DOREPLIFETIME(AAPlayerCharacter, bIsCarrying);
     DOREPLIFETIME(AAPlayerCharacter, CurrentPushedObject);
@@ -344,12 +341,13 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 
 #pragma region Movement / Run
 
-void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
+void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
 {
     if (HasAuthority())
     {
         PlayerSpeed = NewSpeed;
         TargetMaxSpeed = NewSpeed;
+
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
     }
     else
@@ -357,20 +355,27 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed)
         ServerSetPlayerSpeed(NewSpeed);
         PlayerSpeed = NewSpeed;
         TargetMaxSpeed = NewSpeed;
+
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
     }
+
+    if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
+    else GetCharacterMovement()->MaxAcceleration = 1000;
 }
 
-bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed)
+bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInstant)
 {
     return NewSpeed >= 0.0f && NewSpeed <= 2000.0f;
 }
 
-void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed)
+void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed, bool bInstant)
 {
     PlayerSpeed = NewSpeed;
     TargetMaxSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+
+    if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
+    else GetCharacterMovement()->MaxAcceleration = 1000;
 }
 
 void AAPlayerCharacter::OnRep_PlayerSpeed()
@@ -596,7 +601,11 @@ void AAPlayerCharacter::StopAutoLock()
 void AAPlayerCharacter::StartDodge()
 {
     if (CurrentState == EPlayerState::Dodging) return;
-    if (CurrentState == EPlayerState::UsingEquipment) { GetMesh()->GetAnimInstance()->StopAllMontages(false); }
+    if (CurrentState == EPlayerState::UsingEquipment) 
+    { 
+        GetMesh()->GetAnimInstance()->StopAllMontages(false); 
+    }
+
     CurrentState = EPlayerState::Dodging;
     DodgeTimer = 0;
 }
@@ -604,6 +613,7 @@ void AAPlayerCharacter::StartDodge()
 void AAPlayerCharacter::EndDodge()
 {
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
+
     CurrentState = EPlayerState::None;
     SetPlayerSpeed(PlayerConfig->WalkSpeed);
 }
@@ -611,11 +621,14 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    SetPlayerSpeed(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, DodgeTimer));
+    SetPlayerSpeed(FMath::Clamp(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, FMath::Clamp(DodgeTimer / 0.9f, 0, 1)), 0, 2000), true);
+
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
+
     FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
+
     AddMovementInput(FinalVector, 1.0f, false);
 }
 
@@ -652,13 +665,23 @@ void AAPlayerCharacter::MulticastPlayMontage_Implementation(UAnimMontage* Montag
     AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &AAPlayerCharacter::OnMontageNotifyBegin);
 }
+
 void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
     if (!Montage) return;
-    if (CurrentState == EPlayerState::UsingEquipment) { CurrentState = EPlayerState::None; ItemComponent->AttackAnimEnd(); }
+    if (CurrentState == EPlayerState::UsingEquipment) 
+    { 
+        CurrentState = EPlayerState::None; 
+        ItemComponent->AttackAnimEnd(); 
+    }
     BP_OnMontageEnded(Montage, bInterrupted);
 }
-void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload) { BP_OnMontageNotifyBegin(NotifyName); }
+
+void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
+{ 
+    BP_OnMontageNotifyBegin(NotifyName); 
+}
+
 #pragma endregion
 
 
@@ -730,11 +753,6 @@ void AAPlayerCharacter::PossessedBy(AController* NewController)
 void AAPlayerCharacter::OnRep_PlayerState()
 {
     Super::OnRep_PlayerState();
-}
-
-void AAPlayerCharacter::OnRep_CurrentPlayerState()
-{
-    
 }
 
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)

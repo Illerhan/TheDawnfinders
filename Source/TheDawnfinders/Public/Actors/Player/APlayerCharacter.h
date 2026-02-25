@@ -44,9 +44,6 @@ public:
 	virtual void OnRep_PlayerState() override;
 	bool IsReadyForRPCs() const;
 
-	UFUNCTION()
-	void OnRep_CurrentPlayerState();
-
 
 // Components + Constructor
 public:
@@ -195,10 +192,10 @@ public:
 	void OnRep_PlayerSpeed();
 
 	UFUNCTION(BlueprintCallable)
-	void SetPlayerSpeed(float NewSpeed);
+	void SetPlayerSpeed(float NewSpeed, bool bInstant = false);
 
 	UFUNCTION(Server, Reliable, WithValidation)
-	void ServerSetPlayerSpeed(float NewSpeed);
+	void ServerSetPlayerSpeed(float NewSpeed, bool bInstant = false);
 
 	UFUNCTION(Server, Reliable)
 	void ServerUseZiplineItem(UItemData* ZiplineItem);
@@ -288,7 +285,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, ReplicatedUsing = OnRep_CurrentPlayerState)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 
 	UPROPERTY(Replicated)
