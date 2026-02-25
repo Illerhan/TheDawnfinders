@@ -40,6 +40,8 @@ void ADarts::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLife
 void ADarts::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
                             int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (!HasAuthority()) return;
+
 	if (OtherActor->Implements<UDamageable>())
 	{
 		AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);

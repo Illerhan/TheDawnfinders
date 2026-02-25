@@ -260,7 +260,9 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
+    //if (!HasAuthority()) return;
     if (IsInvincible) return;
+
     StartInvincibilityFrames(0.2f);
 
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);

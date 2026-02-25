@@ -37,6 +37,7 @@ void APoisonDart::DoMainAction_Implementation()
 	CurrentCooldown = Cooldown;
 	UWorld* World = GetWorld();
 	FActorSpawnParameters SpawnParam;
+
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	World->SpawnActor<ADarts>(Dart,Arrow->GetComponentLocation(),GetActorRotation(),SpawnParam);
 	UE_LOG(LogTemp,Error,TEXT("DoMainAction_Implementation()"));
@@ -46,6 +47,8 @@ void APoisonDart::DoMainAction_Implementation()
 void APoisonDart::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (!HasAuthority()) return;
 	
 	if (CurrentCooldown<=0)
 	{
