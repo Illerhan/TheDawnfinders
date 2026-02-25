@@ -26,6 +26,8 @@ public:
 // === Functions ===
 public :
 	virtual void OnTimelineFinished();
+	UFUNCTION(BlueprintCallable, Category = "Doors")
+	void CloseDoor();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void StartOpening();
@@ -62,6 +64,14 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Door Settings")
 	bool bIsExtractionDoor = false;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Door Settings")
+	bool bAutoCloseWhenFullyOpen = true;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category="Door")
+	float AutoCloseDelay = 2.0f;
+
+	FTimerHandle AutoCloseTimer;
 
 protected : 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")
