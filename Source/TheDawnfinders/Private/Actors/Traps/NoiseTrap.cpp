@@ -44,9 +44,11 @@ void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 	
 	//Player->Execute_PlaySoundOnServer(Player,"Distraction",1000,1,FVector::ZeroVector);
 
-	ANoise* NoiseObj = GetWorld()->SpawnActor<ANoise>(NoiseActor, GetActorLocation(), GetActorRotation());
-	NoiseObj->NoiseZone->SetSphereRadius(NoiseRange);
-	NoiseObj->NoiseOriginActor = OtherActor;
+	if (OtherActor->ActorHasTag("Player")) {
+		ANoise* NoiseObj = GetWorld()->SpawnActor<ANoise>(NoiseActor, GetActorLocation(), GetActorRotation());
+		NoiseObj->NoiseZone->SetSphereRadius(NoiseRange);
+		NoiseObj->NoiseOriginActor = OtherActor;
 
-	SoundManagerInstance->MultiPlaySound(Sound,GetActorLocation(),100,1000,true);
+		SoundManagerInstance->MultiPlaySound(Sound, GetActorLocation(), 100, 1000, true);
+	}
 }
