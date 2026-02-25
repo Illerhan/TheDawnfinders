@@ -412,7 +412,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
         {
             PushDir.Normalize();
 
-            FRotator CameraRotation(0.0f, 30.0f - 90.0f, 0.0f);
+            FRotator CameraRotation(0.0f, -45.0f, 0.0f);
             PushDir = CameraRotation.RotateVector(PushDir);
         }
         else
