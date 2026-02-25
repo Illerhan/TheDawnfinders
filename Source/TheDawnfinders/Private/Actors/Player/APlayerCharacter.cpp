@@ -361,15 +361,15 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
     }
     else
     {
-        if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
-        else GetCharacterMovement()->MaxAcceleration = 1000;
-
         ServerSetPlayerSpeed(NewSpeed, bInstant);
         PlayerSpeed = NewSpeed;
         TargetMaxSpeed = NewSpeed;
 
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
     }
+
+    if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
+    else GetCharacterMovement()->MaxAcceleration = 1000;
 }
 
 bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInstant)

@@ -121,6 +121,11 @@ void ABaseEnemy::EnterSuspicious_Implementation()
 }
 
 
+void ABaseEnemy::Multicast_HideEye_Implementation()
+{
+    EnemyWidget->HideAnim();
+}
+
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
