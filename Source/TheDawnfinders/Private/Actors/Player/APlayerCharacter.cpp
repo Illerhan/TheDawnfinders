@@ -361,15 +361,15 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
     }
     else
     {
-        if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
-        else GetCharacterMovement()->MaxAcceleration = 1000;
-
         ServerSetPlayerSpeed(NewSpeed, bInstant);
         PlayerSpeed = NewSpeed;
         TargetMaxSpeed = NewSpeed;
 
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
     }
+
+    if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
+    else GetCharacterMovement()->MaxAcceleration = 1000;
 }
 
 bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInstant)
@@ -412,7 +412,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
         {
             PushDir.Normalize();
 
-            FRotator CameraRotation(0.0f, 30.0f - 90.0f, 0.0f);
+            FRotator CameraRotation(0.0f, -45.0f, 0.0f);
             PushDir = CameraRotation.RotateVector(PushDir);
         }
         else
@@ -614,7 +614,7 @@ void AAPlayerCharacter::StartDodge()
         GetMesh()->GetAnimInstance()->StopAllMontages(false); 
     }
 
-    CurrentState = EPlayerState::Dodging;
+    SetCurrentPlayerState_Implementation(EPlayerState::Dodging);
     DodgeTimer = 0;
 }
 
@@ -622,7 +622,7 @@ void AAPlayerCharacter::EndDodge()
 {
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
-    CurrentState = EPlayerState::None;
+    SetCurrentPlayerState_Implementation(EPlayerState::None);
     SetPlayerSpeed(PlayerConfig->WalkSpeed);
     PlaySoundOnServer_Implementation("", 0, 0, FVector(0, 0, 0));
 }
@@ -630,12 +630,13 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    SetPlayerSpeed(FMath::Clamp(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, FMath::Clamp(DodgeTimer / 0.9f, 0, 1)), 0, 2000), true);
+    if(DodgeTimer < 0.9f)
+        SetPlayerSpeed(FMath::Clamp(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, FMath::Clamp(DodgeTimer / 0.9f, 0, 1)), 0, 2000), true);
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
 
-    FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
+    FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
     AddMovementInput(FinalVector, 1.0f, false);

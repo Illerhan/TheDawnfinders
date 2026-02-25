@@ -10,6 +10,8 @@ void UPalanquinInventoryWidget::SetupSlots_Implementation()
 
 void UPalanquinInventoryWidget::ActualiseSlots_Implementation(const TArray<FInventorySlot>& InventorySlots, int32 CurrentSlotIndex)
 {
+	SlotCount = InventorySlots.Num();
+
 	for (int i = 0; i < SlotsWidgets.Num(); i++) {
 
 		if (i >= InventorySlots.Num()) {

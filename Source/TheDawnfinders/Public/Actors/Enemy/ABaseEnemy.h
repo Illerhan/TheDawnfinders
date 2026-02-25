@@ -69,6 +69,9 @@ public :
 	void DoAttackCollision();
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_HideEye();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_EnterIdle();
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)

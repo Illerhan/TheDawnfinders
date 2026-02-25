@@ -121,6 +121,11 @@ void ABaseEnemy::EnterSuspicious_Implementation()
 }
 
 
+void ABaseEnemy::Multicast_HideEye_Implementation()
+{
+    EnemyWidget->HideAnim();
+}
+
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
@@ -255,7 +260,9 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
+    //if (!HasAuthority()) return;
     if (IsInvincible) return;
+
     StartInvincibilityFrames(0.2f);
 
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);

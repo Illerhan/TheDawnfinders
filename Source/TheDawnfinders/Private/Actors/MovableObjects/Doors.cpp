@@ -148,7 +148,7 @@ void ADoors::OpenPermanently()
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' opening PERMANENTLY"), *GetName());
     
     bIsPermanentlyOpen = true;
-    CurrentTriggerCount = NeededTriggerCount; // Force le trigger
+    CurrentTriggerCount = NeededTriggerCount;
 
     // Force l'ouverture complète
     float ForwardRate = 1.0f;
@@ -192,87 +192,79 @@ void ADoors::RemoveOpeningPlayer()
 void ADoors::PauseOpening()
 {
     if (!HasAuthority()) return;
-    if (!MoveCurve) return;
-
-    Timeline.SetPlayRate(0);
+    Timeline.Stop();
 }
-
 
 void ADoors::StopOpening()
 {
     if (!HasAuthority()) return;
     if (!MoveCurve) return;
-    
-    if (bIsPermanentlyOpen)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' is permanently open, cannot close"), *GetName());
-        return;
-    }
+    if (bIsPermanentlyOpen) return;
 
-    FVector CurrentPos = GetActorLocation();
-    float DistanceFromStart = FVector::Distance(CurrentPos, StartPosition);
-    float DistanceFromEnd = FVector::Distance(CurrentPos, FinalPosition);
-
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening - DistFromStart: %f, DistFromEnd: %f, Progress: %f"),
-        DistanceFromStart, DistanceFromEnd, CurrentTimelineProgress);
-
-    float ForwardRate = 1.0f;
-    if (MoveCurve->FloatCurve.GetLastKey().Time > 0 && MovementDuration > 0)
-    {
-        ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
-    }
+    float ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     Timeline.SetPlayRate(ForwardRate);
 
-    // Si la porte est complètement ouverte (proche de FinalPosition)
-    if ((DistanceFromEnd < 10.0f || bIsFullyOpen) && !Timeline.IsPlaying())
+    // Si la timeline ne joue pas → on force la fermeture
+    if (!Timeline.IsPlaying())
     {
-        //Timeline.ReverseFromEnd();
-        //bIsFullyOpen = false;
-        //bCanMove = false;
-        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from fully open position"));
+        Timeline.ReverseFromEnd();
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from end"));
         return;
     }
 
-    // Si en train d'ouvrir, inverse pour fermer
-    if (Timeline.IsPlaying() && !Timeline.IsReversing())
+    // Si elle est en train d'ouvrir → on inverse
+    if (!Timeline.IsReversing())
     {
         Timeline.Reverse();
-        bIsFullyOpen = false;
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door reversing to close"));
-        return;
     }
-
-    // Si déjà en train de fermer
-    if (Timeline.IsReversing())
-    {
-        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door already closing"));
-        return;
-    }
-
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] StopOpening: No action taken"));
 }
 
 
 void ADoors::OnTimelineFinished()
 {
-    // Override pour les portes - NE PAS inverser les positions comme MovableObjects
-    if (Timeline.GetPlaybackPosition() >= 0.99f)
+    bool bOpened = Timeline.GetPlaybackPosition() >= 0.99f;
+
+    if (bOpened)
     {
-        // Porte complètement ouverte
         bIsFullyOpen = true;
         bCanMove = true;
         CurrentTimelineProgress = 1.0f;
-        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened - Start: %s, Final: %s, Current: %s"), 
-               *StartPosition.ToString(), *FinalPosition.ToString(), *GetActorLocation().ToString());
+
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
+
+        if (bAutoCloseWhenFullyOpen && !bIsPermanentlyOpen)
+        {
+            GetWorldTimerManager().SetTimer(
+                AutoCloseTimer,
+                this,
+                &ADoors::CloseDoor,
+                AutoCloseDelay,
+                false
+            );
+        }
     }
     else
     {
         bIsFullyOpen = false;
         bCanMove = true;
         CurrentTimelineProgress = 0.0f;
-        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully closed - Start: %s, Final: %s, Current: %s"), 
-               *StartPosition.ToString(), *FinalPosition.ToString(), *GetActorLocation().ToString());
+
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully closed"));
     }
+}
+
+void ADoors::CloseDoor()
+{
+    if (!HasAuthority()) return;
+    if (bIsPermanentlyOpen) return;
+
+    float ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
+    Timeline.SetPlayRate(ForwardRate);
+
+    Timeline.ReverseFromEnd();
+
+    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Auto closing door"));
 }
 
 #pragma endregion

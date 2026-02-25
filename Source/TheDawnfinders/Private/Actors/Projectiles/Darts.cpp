@@ -18,8 +18,6 @@ ADarts::ADarts()
 	
 	MoveComp = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
 	
-	
-	
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +40,8 @@ void ADarts::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLife
 void ADarts::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
                             int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (!HasAuthority()) return;
+
 	if (OtherActor->Implements<UDamageable>())
 	{
 		AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
@@ -49,8 +49,9 @@ void ADarts::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		{
 			Player->ItemComponent->Server_StartTimedEffect(EConsumableEffectType::Poison,10);
 			Destroy();
+			return;
 		}
-	ABaseEnemy* Enemy = Cast<ABaseEnemy>(OtherActor);
+		ABaseEnemy* Enemy = Cast<ABaseEnemy>(OtherActor);
 		if (Enemy)
 		{
 			Enemy->Execute_ReceiveDamage(Enemy,50,this);

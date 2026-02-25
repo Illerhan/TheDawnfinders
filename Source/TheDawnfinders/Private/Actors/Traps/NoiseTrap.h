@@ -13,18 +13,12 @@ class THEDAWNFINDERS_API ANoiseTrap : public ATrapBase
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ANoiseTrap();
-
-protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void DoTrapAction(AActor* OtherActor = nullptr) override;
+
 	UPROPERTY()
 	ASoundManager* SoundManagerInstance;
 };
