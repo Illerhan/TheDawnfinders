@@ -148,7 +148,7 @@ void ADoors::OpenPermanently()
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door '%s' opening PERMANENTLY"), *GetName());
     
     bIsPermanentlyOpen = true;
-    CurrentTriggerCount = NeededTriggerCount; // Force le trigger
+    CurrentTriggerCount = NeededTriggerCount;
 
     // Force l'ouverture complète
     float ForwardRate = 1.0f;
