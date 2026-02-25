@@ -423,9 +423,11 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	return FInventorySlot();
 }
 
-void UInventoryComponent::UseDurability(int NewDurability)
+void UInventoryComponent::UseDurability(int UsedDurability)
 {
-	InventorySlots[CurrentSlotIndex].CurrentInfos.Durability -= NewDurability;
+	InventorySlots[CurrentSlotIndex].CurrentInfos.Durability -= UsedDurability;
+
+	UE_LOG(LogTemp, Display, TEXT("%f"), InventorySlots[CurrentSlotIndex].CurrentInfos.Durability);
 
 	if (InventorySlots[CurrentSlotIndex].CurrentInfos.Durability <= 0
 		&& InventorySlots[CurrentSlotIndex].CurrentInfos.ItemData->ItemType == EItemType::Consumable) {

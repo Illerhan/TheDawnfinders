@@ -200,23 +200,17 @@ void UPlayerLightComponent::ApplyLightState_Implementation()
 		TargetLight = Litter->PointLight;
 		TargetProtectionZone = Litter->ProtectionZone;
 	}
-
-	// 3. SÉCURITÉ : Si on n'a pas trouvé la lumière (ex: Owner n'est ni Player ni Litter), on sort
+	
 	if (!TargetLight || !TargetProtectionZone) return;
 
-	// 4. LOGIQUE : On utilise les pointeurs génériques (ça marche pour les deux !)
 	TargetLight->SetVisibility(bLightOn);
-	//TargetLight->SetIntensity(bLightOn ? LightIntensity : 0.f);
-	//TargetLight->SetSourceRadius(bLightOn ? LightRadius : 0.f);
     
 	TargetProtectionZone->SetHiddenInGame(!bLightOn);
 	TargetProtectionZone->SetGenerateOverlapEvents(bLightOn);
 
-	// --- Logique Serveur spécifique ---
 	if (!Owner->HasAuthority()) return; 
 
 	TArray<AActor*> OverlappingActors;
-	// Note: On utilise TargetProtectionZone ici au lieu de OwningActor->ProtectionZone
 	TargetProtectionZone->GetOverlappingActors(OverlappingActors, AAPlayerCharacter::StaticClass());
 
 	for (AActor* Actor : OverlappingActors)

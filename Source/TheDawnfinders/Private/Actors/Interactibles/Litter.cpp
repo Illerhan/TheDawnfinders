@@ -16,9 +16,17 @@ ALitter::ALitter()
     // 1. Root Collision (Physics box)
     RootCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("RootCollision"));
     RootComponent = RootCollision;
+    RootCollision->SetCollisionProfileName(TEXT("NoCollision"));
 
     RootCollision->SetMobility(EComponentMobility::Movable); 
     RootCollision->SetSimulatePhysics(false);
+    
+    PhysicsCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("PhysicsCapsule"));
+    PhysicsCapsule->SetupAttachment(RootCollision);
+    PhysicsCapsule->SetCapsuleSize(100.f, 55.f);
+    PhysicsCapsule->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    PhysicsCapsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+    PhysicsCapsule->SetRelativeLocation(FVector::ZeroVector);
     
     RootCollision->SetBoxExtent(FVector(80.f, 120.f, 50.f)); // Adjust to palanquin size
     RootCollision->SetCollisionProfileName(TEXT("BlockAllDynamic")); 
@@ -124,7 +132,7 @@ ALitter::ALitter()
 
 void ALitter::ClampToGround()
 {
-    float HalfHeight = RootCollision->GetScaledBoxExtent().Z + 10;
+    float HalfHeight = PhysicsCapsule->GetScaledCapsuleHalfHeight() + 10;
     
     FVector Start = GetActorLocation() + FVector(0,0,50);
     FVector End   = GetActorLocation() - FVector(0,0,500);
@@ -475,13 +483,13 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
         // Déplacement réel du Brancard (Physics Root)
         FHitResult Hit;
-        RootCollision->MoveComponent(ProposedMove, GetActorRotation() + ProposedRot, true, &Hit);
+        AddActorWorldOffset(ProposedMove, true, &Hit);
+        SetActorRotation(GetActorRotation() + ProposedRot);
 
-        // Gestion collision du brancard lui-même (si le bois tape)
         if (Hit.IsValidBlockingHit())
         {
             FVector Slide = FVector::VectorPlaneProject(ProposedMove, Hit.Normal);
-            RootCollision->MoveComponent(Slide, GetActorRotation(), true);
+            AddActorWorldOffset(Slide, true);
             CurrentLinearVelocity = FVector::VectorPlaneProject(CurrentLinearVelocity, Hit.Normal);
         }
     }
