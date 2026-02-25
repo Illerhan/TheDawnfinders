@@ -44,6 +44,9 @@ public:
     // The invisible physics representation (Root)
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UBoxComponent* RootCollision;
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "Litter")
+	UCapsuleComponent* PhysicsCapsule;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Litter")
     UInventoryComponent* InventoryComponent;
