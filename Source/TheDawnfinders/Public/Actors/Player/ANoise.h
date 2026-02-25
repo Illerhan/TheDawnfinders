@@ -20,6 +20,9 @@ public :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	USphereComponent* NoiseZone;
 
+	UPROPERTY(BlueprintReadWrite)
+	AActor* NoiseOriginActor;
+
 protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bIsConstant;
