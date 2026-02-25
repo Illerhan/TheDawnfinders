@@ -29,4 +29,7 @@ public :
 protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsInContainer;
+
+	UPROPERTY(BlueprintReadWrite)
+	AActor* CurrentContainer;
 };

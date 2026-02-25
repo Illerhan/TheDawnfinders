@@ -123,6 +123,14 @@ public:
 	// Vérifie si un joueur va toucher quelque chose avec le mouvement prévu
 	UFUNCTION()
 	bool CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit);
+
+	UFUNCTION()
+	void ClosePalanquinInventory();
+
+	UFUNCTION(Server, Reliable)
+	void Server_ClosePalanquinInventory();
+
+
 private:
 	// Pousse le brancard si un joueur est coincé
 	void ResolveWallPenetration(float DeltaTime);

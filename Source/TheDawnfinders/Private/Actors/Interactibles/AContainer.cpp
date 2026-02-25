@@ -1,5 +1,6 @@
 #include "Actors/Interactibles/AContainer.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Widgets/UWorldInteractibleWidget.h"
 #include "Components/UInventoryComponent.h"
 
 
@@ -28,6 +29,13 @@ void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& It
 
 void AContainer::Interact_Implementation(AActor* Interactor)
 {
+	if (bPlayerIsUsing) {
+		//InteractibleWidget->DisplayErrorText("Someone Is Already Using");
+
+		return;
+	}
+	bPlayerIsUsing = true;
+
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player) return;
 
@@ -77,4 +85,19 @@ void AContainer::SetupLoot()
 	for (UItemData* Item : ContainerLoot) {
 		InventoryComponent->AddNewItem(FItemInfos(Item, Item->Durability), 1);
 	}
+}
+
+void AContainer::CloseContainerInventory()
+{
+	if (HasAuthority()) {
+		Server_CloseContainerInventory_Implementation();
+	}
+	else {
+		Server_CloseContainerInventory();
+	}
+}
+
+void AContainer::Server_CloseContainerInventory_Implementation()
+{
+	bPlayerIsUsing = false;
 }

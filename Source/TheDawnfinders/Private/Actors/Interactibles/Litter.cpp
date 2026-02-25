@@ -198,6 +198,7 @@ void ALitter::BeginPlay()
 
 }
 
+
 // ============================================================================
 //                                PHYSICS LOOP
 // ============================================================================
@@ -217,6 +218,7 @@ void ALitter::Tick(float DeltaTime)
         SmoothClientTransform(DeltaTime);
     }
 }
+
 void ALitter::SmoothClientTransform(float DeltaTime)
 {
     FTransform Current = GetActorTransform();
@@ -499,12 +501,14 @@ void ALitter::ResolvePhysics(float DeltaTime)
     }
 }
 
+
 // ============================================================================
 //                                INTERACTION
 // ============================================================================
 
 void ALitter::Interact_Implementation(AActor* Interactor)
 {
+
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
     if (!Player) return;
 
@@ -537,12 +541,20 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     // CAS 2 : Inventaire (Zone Centrale)
     if (bInventory)
     {
-        if (InventoryComponent && !Player->bIsCarrying)
+        if (InventoryComponent && !Player->bIsCarrying && !bPlayerIsUsing)
         {
             if (!HasAuthority()) return;
 
+            bPlayerIsUsing = true;
+
             Player->Client_OpenInteractionUI(EInteractionUI::LitterInventory, this);
             IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+
+            return;
+        }
+
+        if (bPlayerIsUsing) {
+            //InteractibleWidget->DisplayErrorText("Someone Is Already Using");
 
             return;
         }
@@ -764,6 +776,23 @@ bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& Delt
     }
 
     return false;
+}
+
+void ALitter::ClosePalanquinInventory()
+{
+    if (HasAuthority()) 
+    {
+        Server_ClosePalanquinInventory();
+    }
+    else 
+    {
+        Server_ClosePalanquinInventory_Implementation();
+    }
+}
+
+void ALitter::Server_ClosePalanquinInventory_Implementation()
+{
+    bPlayerIsUsing = false;
 }
 
 void ALitter::ResolveWallPenetration(float DeltaTime)

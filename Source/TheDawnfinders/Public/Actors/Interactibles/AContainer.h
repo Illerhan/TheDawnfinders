@@ -23,6 +23,13 @@ public :
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void Multicast_SetupLoot(const TArray<UItemData*>& Items);
 
+	UFUNCTION()
+	void CloseContainerInventory();
+
+	UFUNCTION(Server, Reliable)
+	void Server_CloseContainerInventory();
+
+
 protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")
 	UInventoryComponent* InventoryComponent;

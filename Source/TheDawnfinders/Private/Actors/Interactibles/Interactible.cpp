@@ -221,6 +221,11 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 		}
 	}
 
+	if (bPlayerIsUsing) {
+		Server_DisplayErrorMessage("Already Used By Someone");
+		return false;
+	}
+
 	return bCanBeUsed;
 }
 

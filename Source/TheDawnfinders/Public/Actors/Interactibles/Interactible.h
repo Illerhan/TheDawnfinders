@@ -181,6 +181,9 @@ protected:
 	bool bCanBeUsed = true;
 
 	UPROPERTY()
+	bool bPlayerIsUsing = false;
+
+	UPROPERTY()
 	UWorldInteractibleWidget* InteractibleWidget;
 
 	UPROPERTY(Replicated)
