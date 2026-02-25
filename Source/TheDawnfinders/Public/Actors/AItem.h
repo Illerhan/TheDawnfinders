@@ -47,7 +47,6 @@ public:
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_Initialise(FItemInfos Data);
 
-
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
 private:

@@ -84,6 +84,9 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int Durability = 50;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	float UsedDurabilityMultiplier = 0.2f;
+
 
 // Consumable
 public:
