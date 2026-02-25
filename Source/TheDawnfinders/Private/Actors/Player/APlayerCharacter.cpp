@@ -614,7 +614,7 @@ void AAPlayerCharacter::StartDodge()
         GetMesh()->GetAnimInstance()->StopAllMontages(false); 
     }
 
-    CurrentState = EPlayerState::Dodging;
+    SetCurrentPlayerState_Implementation(EPlayerState::Dodging);
     DodgeTimer = 0;
 }
 
@@ -622,7 +622,7 @@ void AAPlayerCharacter::EndDodge()
 {
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
-    CurrentState = EPlayerState::None;
+    SetCurrentPlayerState_Implementation(EPlayerState::None);
     SetPlayerSpeed(PlayerConfig->WalkSpeed);
     PlaySoundOnServer_Implementation("", 0, 0, FVector(0, 0, 0));
 }
@@ -630,7 +630,8 @@ void AAPlayerCharacter::EndDodge()
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
 {
     DodgeTimer += DeltaTime;
-    SetPlayerSpeed(FMath::Clamp(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, FMath::Clamp(DodgeTimer / 0.9f, 0, 1)), 0, 2000), true);
+    if(DodgeTimer < 0.9f)
+        SetPlayerSpeed(FMath::Clamp(FMath::Lerp(PlayerConfig->DodgeStartSpeed, PlayerConfig->DodgeEndSpeed, FMath::Clamp(DodgeTimer / 0.9f, 0, 1)), 0, 2000), true);
 
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
