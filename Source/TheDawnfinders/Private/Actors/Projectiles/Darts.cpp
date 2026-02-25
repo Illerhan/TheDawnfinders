@@ -57,7 +57,9 @@ void ADarts::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 			Enemy->Execute_ReceiveDamage(Enemy,50,this);
 			Destroy();
 		}
-	}
+		
+	}else 
+		Destroy();
 }
 
 void ADarts::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
