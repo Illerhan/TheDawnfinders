@@ -635,7 +635,7 @@ void AAPlayerCharacter::ActualiseDodge(float DeltaTime)
     FVector FinalVector = PreviousPlayerInput;
     FinalVector.Normalize();
 
-    FRotator Rotation(0.0f, 30.0f - 90.0f, 0.0f);
+    FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
     AddMovementInput(FinalVector, 1.0f, false);
