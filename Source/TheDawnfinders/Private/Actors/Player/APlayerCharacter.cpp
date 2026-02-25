@@ -282,6 +282,15 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         SetPlayerSpeed(0.f);
         break;
     }
+
+    if (!HasAuthority()) {
+        Server_SetCurrentPlayerState(NewState);
+    }
+}
+
+void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState NewState)
+{
+    CurrentState = NewState;
 }
 
 void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) 
@@ -352,15 +361,15 @@ void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
     }
     else
     {
-        ServerSetPlayerSpeed(NewSpeed);
+        if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
+        else GetCharacterMovement()->MaxAcceleration = 1000;
+
+        ServerSetPlayerSpeed(NewSpeed, bInstant);
         PlayerSpeed = NewSpeed;
         TargetMaxSpeed = NewSpeed;
 
         GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
     }
-
-    if (bInstant) GetCharacterMovement()->MaxAcceleration = 2500;
-    else GetCharacterMovement()->MaxAcceleration = 1000;
 }
 
 bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInstant)
@@ -382,7 +391,6 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 {
     GetCharacterMovement()->MaxWalkSpeed = PlayerSpeed;
 }
-
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
@@ -456,13 +464,13 @@ void AAPlayerCharacter::ManageRun(bool Input)
     if (Input)
     {
         SetPlayerSpeed(PlayerConfig->RunSpeed);
-        CurrentState = EPlayerState::Running;
+        SetCurrentPlayerState_Implementation(EPlayerState::Running);
     }
     else
     {
         SetPlayerSpeed(PlayerConfig->WalkSpeed);
         if (CurrentState == EPlayerState::Running)
-            CurrentState = EPlayerState::None;
+            SetCurrentPlayerState_Implementation(EPlayerState::None);
     }
 }
 
@@ -616,6 +624,7 @@ void AAPlayerCharacter::EndDodge()
 
     CurrentState = EPlayerState::None;
     SetPlayerSpeed(PlayerConfig->WalkSpeed);
+    PlaySoundOnServer_Implementation("", 0, 0, FVector(0, 0, 0));
 }
 
 void AAPlayerCharacter::ActualiseDodge(float DeltaTime)

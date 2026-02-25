@@ -166,6 +166,9 @@ public:
 	
 	UFUNCTION(Client, Reliable)
 	void Client_OpenInteractionUI (EInteractionUI UIType, AActor* Context);
+
+	UFUNCTION(Server, Reliable)
+	void Server_SetCurrentPlayerState(EPlayerState NewState);
 	
 
 // === MOVEMENT METHODS ===
@@ -285,7 +288,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	EPlayerState CurrentState;
 
 	UPROPERTY(Replicated)
