@@ -554,8 +554,6 @@ void ALitter::Interact_Implementation(AActor* Interactor)
         }
 
         if (bPlayerIsUsing) {
-            //InteractibleWidget->DisplayErrorText("Someone Is Already Using");
-
             return;
         }
     }
@@ -782,11 +780,11 @@ void ALitter::ClosePalanquinInventory()
 {
     if (HasAuthority()) 
     {
-        Server_ClosePalanquinInventory();
+        Server_ClosePalanquinInventory_Implementation();
     }
     else 
     {
-        Server_ClosePalanquinInventory_Implementation();
+        Server_ClosePalanquinInventory();
     }
 }
 

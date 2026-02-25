@@ -72,6 +72,12 @@ void UInteractionComponent::AddInteractible(AActor* Interactible)
 void UInteractionComponent::RemoveInteractible(AActor* Interactible)
 {
 	InteractiblesAtRange.Remove(Interactible);
+
+	UE_LOG(LogTemp, Display, TEXT("Interactible"));
+
+	if (Interactible == InteractingQTEActor) {
+		CancelInteraction();
+	}
 }
 
 AActor* UInteractionComponent::GetNearestInteractible()
@@ -318,7 +324,7 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 void UInteractionComponent::CancelInteraction()
 {
 	AActor* Nearest = GetNearestInteractible();
-	if (!Nearest) return;
+	//if (!Nearest) return;
 
 	if (bIsDoingQTE)
 	{
