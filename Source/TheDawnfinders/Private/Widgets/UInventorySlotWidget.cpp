@@ -5,7 +5,7 @@
 
 void UInventorySlotWidget::ActualiseVisuals_Implementation(FInventorySlot Data, bool IsSelected)
 {
-	bIsSlotSelected = IsSelected;
+	//bIsSlotSelected = IsSelected;
 	CurrentData = Data;
 
 	//UE_LOG(LogTemp, Log, TEXT("ActualiseVisuals C++ - IsSelected: %s, bISlotSelected: %s, HasItemData: %s"),

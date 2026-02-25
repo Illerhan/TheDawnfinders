@@ -36,5 +36,8 @@ protected :
 	FInventorySlot CurrentData;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bIsSlotSelected;
+
+	UPROPERTY(BlueprintReadWrite)
 	int SlotIndex;
 };
