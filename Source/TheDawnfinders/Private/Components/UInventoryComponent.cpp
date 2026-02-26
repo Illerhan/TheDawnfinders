@@ -325,6 +325,7 @@ void UInventoryComponent::SortByCategories()
 	for (int i = 0; i < SortedInventory.Num(); i++) {
 		InventorySlots[i].CurrentInfos.ItemData = SortedInventory[i].CurrentInfos.ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
+		InventorySlots[i].CurrentInfos.Durability = SortedInventory[i].CurrentInfos.Durability;
 	}
 }
 
