@@ -326,7 +326,7 @@ void UInteractionComponent::CancelInteraction()
 	AActor* Nearest = GetNearestInteractible();
 	//if (!Nearest) return;
 
-	if (bIsDoingQTE)
+	if (bIsDoingQTE && CurrentQTEWidget)
 	{
 		CurrentQTEWidget->ExitQTE();
 
