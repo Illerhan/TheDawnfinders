@@ -124,7 +124,9 @@ void UInteractionComponent::StartInteract()
                 		return;
 			}
 			return;
-	}
+		}
+
+		return;
 	}
 
 	// We check if there is a player nearby to revive 
