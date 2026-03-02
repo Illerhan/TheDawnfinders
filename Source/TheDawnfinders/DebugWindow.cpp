@@ -6,6 +6,7 @@
 #include "Public/Actors/Player/APlayerCharacter.h"
 #include "Private/GameFramework/SessionManagerSubsystem.h"
 #include "Components/DebugComponent.h"
+#include "GameFramework/GameModeBase.h"
 
 FDebugWindow::FDebugWindow()
 	: FSlateIMWindowBase(TEXT("God Window"), FVector2f(400, 600), TEXT("GodWindow.Toggle"), TEXT("Ouvre ma fenêtre de debug"))
@@ -29,6 +30,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	{
 		GameWorld = GWorld->GetWorld();
 	}
+	
 
 	// 1. Si le monde n'existe pas ou est en train d'être détruit (IsTearingDown), on arrête TOUT de suite.
 	if (!GameWorld || GameWorld->bIsTearingDown)
@@ -70,21 +72,60 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	
 	SlateIM::SpinBox(PlayerChar->PlayerConfig->ReloadSpeed,0.f,75.f);
 	
-	if (SlateIM::Button(TEXT("CreateSession")))
+	SlateIM::Text(TEXT("=== SESSION MANAGEMENT ==="), FLinearColor::Blue);
+
+	if (SessionManager)
 	{
-		SessionManager->CreateAdvancesSession(
-		4,
-		4,
-		false,  
-		true, 
-		false,
-		true    
-	);
-		UGameplayStatics::OpenLevel(GameWorld, FName("L_GymRoom"),true,"listen?");
+		// BOUTON CRÉER SESSION
+		if (SlateIM::Button(TEXT("Create Online Session (Steam)")))
+		{
+			SessionManager->CreateAdvancesSession(
+				4,      // Max Players
+				0,      // Private Connections
+				false,  // LAN
+				true,   // Allow Invites
+				false,  // Dedicated
+				true    // Use Lobbies
+			);
+        
+			// On voyage vers la map de test en listen server
+			UGameplayStatics::OpenLevel(GameWorld, FName("L_GymRoom"), true, "listen");
+		}
+
+		// BOUTON INVITATION (Conditionnel : Seulement si une session existe)
+		// Note : On utilise la même logique que dans ton Widget
+		if (SessionManager->HasActiveSession())
+		{
+			if (SlateIM::Button(TEXT("Invite Friends (Steam Overlay)")))
+			{
+				SessionManager->OpenSteamInviteOverlay();
+			}
+		}
+		else 
+		{
+			SlateIM::Text(TEXT("No Active Session to Invite"), FLinearColor::Red);
+		}
+	}
+	else
+	{
+		SlateIM::Text(TEXT("Session Manager Unavailable"), FLinearColor::Red);
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
 		DebugComp->Server_TravelToMap("L_Dungeon_01?listen");
+	}
+	
+	SlateIM::Text(TEXT("=== TELEPORTATION ==="), FLinearColor::Green);
+	
+	if (SlateIM::Button(TEXT("GymRoom")))
+	{
+		DebugComp->Server_TravelToMap("L_GymRoom?listen");
+	}
+	
+	if (SlateIM::Button(TEXT("Teleport to Spawn")))
+	{
+		if (DebugComp)
+			DebugComp->Server_TeleportToSpawn();
 	}
 
 	SlateIM::Text(TEXT("------------------"), FLinearColor::Gray);
