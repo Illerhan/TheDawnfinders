@@ -4,6 +4,10 @@
 #include "DebugComponent.h"
 
 #include "Actors/AItem.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerStart.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values for this component's properties
@@ -97,4 +101,38 @@ void UDebugComponent::Server_TravelToMap_Implementation(const FString& MapName)
 		// bShouldSkipGameNotify = false par défaut
 		World->ServerTravel(TravelURL, true, false); 
 	}
+}
+
+void UDebugComponent::Server_TeleportToSpawn_Implementation()
+{
+	ACharacter* OwnerChar = Cast<ACharacter>(GetOwner());
+	if (!OwnerChar) return;
+
+	// Chercher le premier PlayerStart dans le niveau
+	TArray<AActor*> PlayerStarts;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
+
+	if (PlayerStarts.IsEmpty())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Aucun PlayerStart trouvé !"));
+		return;
+	}
+
+	AActor* StartSpot = PlayerStarts[0]; // Premier spawn trouvé
+    
+	UCharacterMovementComponent* CMC = OwnerChar->GetCharacterMovement();
+	if (CMC)
+	{
+		CMC->StopMovementImmediately();
+	}
+
+	OwnerChar->TeleportTo(
+		StartSpot->GetActorLocation(),
+		StartSpot->GetActorRotation(),
+		false,
+		true
+	);
+
+	APlayerController* PC = Cast<APlayerController>(OwnerChar->GetController());
+	if (PC) PC->SetControlRotation(StartSpot->GetActorRotation());
 }
