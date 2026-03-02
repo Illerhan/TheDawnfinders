@@ -31,4 +31,7 @@ public:
 
 	UFUNCTION(Server, Reliable, WithValidation)
 	void Server_TravelToMap(const FString& MapName);
+	
+	UFUNCTION(Server, Reliable)
+	void Server_TeleportToSpawn();
 };
