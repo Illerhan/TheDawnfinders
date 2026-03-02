@@ -1,45 +1,41 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-
-#include "SoundManager.h"
-
+﻿#include "SoundManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Perception/AISense_Hearing.h"
 
-
-// Sets default values
+// Constructeur : Configuration Réseau
 ASoundManager::ASoundManager()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false; // Désactivé pour la performance
+
+	// --- CONFIGURATION RÉSEAU INDISPENSABLE ---
+	bReplicates = true;
+	bAlwaysRelevant = true; // Permet aux clients de "voir" le manager même de loin
+	AActor::SetReplicateMovement(false); 
 }
 
-
-// Called when the game starts or when spawned
 void ASoundManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void ASoundManager::Tick(float DeltaTime)
+// Reçu par le serveur, renvoyé à tout le monde via Multicast
+void ASoundManager::ServerPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range, bool bNeedNoise)
 {
-	Super::Tick(DeltaTime);
+	MultiPlaySound(Sound, Location, Loudness, Range, bNeedNoise);
 }
 
-void ASoundManager::ServerPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range,bool bNeedNoise)
+// Exécuté sur TOUTES les instances (Serveur + tous les Clients)
+void ASoundManager::MultiPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range, bool bNeedNoise)
 {
-	MultiPlaySound(Sound, Location, Loudness,Range,bNeedNoise);
-}
-
-
-void ASoundManager::MultiPlaySound_Implementation(USoundBase* Sound, FVector Location, float Loudness, float Range,bool bNeedNoise)
-{
-	if(Sound)
+	if (Sound)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, Sound, Location);
-		if (bNeedNoise)
-			UAISense_Hearing::ReportNoiseEvent(this, Location, Loudness, this,Range);
+		// Joue le son localement sur chaque machine
+		UGameplayStatics::PlaySoundAtLocation(this, Sound, Location, Loudness);
+
+		// Seul le serveur gère la perception IA (pour éviter les doublons de calcul)
+		if (bNeedNoise && HasAuthority())
+		{
+			UAISense_Hearing::ReportNoiseEvent(this, Location, Loudness, this, Range);
+		}
 	}
 }
