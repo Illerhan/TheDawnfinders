@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Interactibles/Carriable.h"
 #include "Components/ActorComponent.h"
 #include "UInteractionComponent.generated.h"
 
@@ -125,7 +126,7 @@ public:
 
 // === PRIVATE PROPERTIES ===
 public:
-	UPROPERTY(Replicated, EditAnywhere, Blueprintable)
+	UPROPERTY(Replicated, EditAnywhere,BlueprintReadWrite,Blueprintable)
 	ACarriable* CarriedItem;
 	
 private:
