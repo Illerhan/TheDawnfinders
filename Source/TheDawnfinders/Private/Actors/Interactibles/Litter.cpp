@@ -521,43 +521,29 @@ void ALitter::Interact_Implementation(AActor* Interactor)
     // CAS 1 : Light (Zone Centrale)
     if (bInLight)
     {
-        if (LightComponent && !Player->bIsCarrying  && !bIsExtracting)
+        if (LightComponent && !bIsExtracting)
         {
             if (!HasAuthority()) return;
             IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
-            LightComponent->bLightOn?LightComponent->Server_TurnLightOff():LightComponent->Server_TurnLightOn();
+            if (LightComponent->bLightOn)
+            {
+                LightComponent->Server_TurnLightOff();
+                InteractibleWidget->DisplayText("Allumer la lumiere",InputIcon);
+            }else
+            {
+                LightComponent->Server_TurnLightOn();
+                InteractibleWidget->DisplayText("Eteindre la lumiere",InputIcon);
+            }
+            
+            
             LightComponent->FuelUpdate();
-            return;
-        }
-        if (bIsExtracting && !Player->bIsCarrying)
-        {
-            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
-            StartExtraction();
             return;
         }
     }
     if (Player->bIsCarrying) return;
     
     // CAS 2 : Inventaire (Zone Centrale)
-    if (bInventory)
-    {
-        if (InventoryComponent && !Player->bIsCarrying && !bPlayerIsUsing)
-        {
-            if (!HasAuthority()) return;
-
-            bPlayerIsUsing = true;
-
-            Player->Client_OpenInteractionUI(EInteractionUI::LitterInventory, this);
-            IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
-
-            return;
-        }
-
-        if (bPlayerIsUsing) {
-            return;
-        }
-    }
-
+   
     // CAS 3 : Portage (Zone Avant OU Arrière)
     int32 TargetSlot = -1;
 
@@ -863,16 +849,10 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         // Mise à jour du texte selon la zone touchée
         if (InteractibleWidget)
         {
-            if (OverlappedComp == InventoryTrigger)
+            if (OverlappedComp == LightTrigger)
             {
-                    InteractibleWidget->DisplayText("Ouvrir Inventaire",InputIcon);
-            }
-            else  if (OverlappedComp == LightTrigger)
-            {
-                if (Player->CurrentState == EPlayerState::Carrying)
-                    InteractibleWidget->DisplayText("Remplir le palanquin",InputIcon);
-                else if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction",InputIcon);
-                else InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
+                if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction",InputIcon);
+                else LightComponent->bLightOn?InteractibleWidget->DisplayText("Eteindre la lumiere",InputIcon):InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
             }
             // Front ou Back
             else
