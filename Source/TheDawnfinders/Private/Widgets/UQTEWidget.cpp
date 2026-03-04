@@ -30,9 +30,9 @@ void UQTEWidget::FailQTEStep()
 		{
 			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
 			{
-				PlayerCharacter->InventoryComponent->UseDurability(1);
+				PlayerCharacter->InventoryComponent->UseDurability(1, LinkedInteractible->GetNeededInteractItem());
 
-				if (IPlayerInterface::Execute_GetEquippedItem(PlayerCharacter) == LinkedInteractible->GetNeededInteractItem()) return;
+				if (PlayerCharacter->InventoryComponent->VerifyHasItemInInventory(LinkedInteractible->GetNeededInteractItem())) return;
 
 				PlayerCharacter->InteractionComponent->CancelInteraction();
 			}
@@ -51,9 +51,9 @@ void UQTEWidget::DoQTEStep()
 		{
 			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
 			{
-				PlayerCharacter->InventoryComponent->UseDurability(1);
+				PlayerCharacter->InventoryComponent->UseDurability(1, LinkedInteractible->GetNeededInteractItem());
 
-				if (IPlayerInterface::Execute_GetEquippedItem(PlayerCharacter) == LinkedInteractible->GetNeededInteractItem()) return;
+				if (PlayerCharacter->InventoryComponent->VerifyHasItemInInventory(LinkedInteractible->GetNeededInteractItem())) return;
 
 				PlayerCharacter->InteractionComponent->CancelInteraction();
 			}

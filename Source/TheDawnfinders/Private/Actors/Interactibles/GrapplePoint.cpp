@@ -73,7 +73,7 @@ void AGrapplePoint::Interact_Implementation(AActor* Interactor)
 
 	if (!Interactor) return;
 
-	if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr)
+	if (IPlayerInterface::Execute_GetInventoryComponent(Interactor)->GetCurrentItem() == nullptr)
 	{
 		OnGrappleFailed(Interactor, TEXT("Grappin required"));
 		return;
@@ -155,7 +155,7 @@ void AGrapplePoint::ServerTeleportPlayer_Implementation(AActor* Player)
 	}
 
 	// Double vérification côté serveur (sécurité)
-	if (IPlayerInterface::Execute_GetEquippedItem(Player) == nullptr)
+	if (IPlayerInterface::Execute_GetInventoryComponent(Player)->GetCurrentItem() == nullptr)
 	{
 		return;
 	}

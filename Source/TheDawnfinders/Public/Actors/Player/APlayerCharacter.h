@@ -141,7 +141,7 @@ public:
 
 	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
 
-	virtual UItemData* GetEquippedItem_Implementation() override;
+	virtual UInventoryComponent* GetInventoryComponent_Implementation() override;
 
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
