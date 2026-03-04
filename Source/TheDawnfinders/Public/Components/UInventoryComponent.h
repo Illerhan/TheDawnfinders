@@ -74,6 +74,9 @@ public :
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void RemoveItemAtIndex(int Index, bool bRemoveAll);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void LocalRemoveItemAtIndex(int Index, bool bRemoveAll);
+
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
 	void ServerRemoveItemAtIndex(int Index, bool bRemoveAll);
 
@@ -117,7 +120,13 @@ public :
 	FInventorySlot GetCurrentSlot();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void UseDurability(int NewDurability);
+	UItemData* GetCurrentItem();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool VerifyHasItemInInventory(UItemData* Item);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UseDurability(int NewDurability, UItemData* ItemToUse);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SelectSlotByAngle(int angle);

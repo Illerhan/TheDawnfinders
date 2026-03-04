@@ -170,24 +170,46 @@ void UInventoryComponent::RemoveItemAtIndex(int Index, bool bRemoveAll)
 {
 	if (!GetOwner()->HasAuthority())
 	{
+		LocalRemoveItemAtIndex(Index, bRemoveAll);
 		ServerRemoveItemAtIndex(Index, bRemoveAll);
+
 		return;
 	}
 
 	ServerRemoveItemAtIndex_Implementation(Index, bRemoveAll);
 }
 
+void UInventoryComponent::LocalRemoveItemAtIndex(int Index, bool bRemoveAll)
+{
+	TArray<FInventorySlot> NewSlots = InventorySlots;
+	FInventorySlot& CurrentSlot = NewSlots[Index];
+
+	if (!CurrentSlot.CurrentInfos.ItemData) return;
+
+	CurrentWeight -= CurrentSlot.CurrentInfos.ItemData->ItemWeight;
+
+	if (bRemoveAll) CurrentSlot.Quantity = 0;
+	else CurrentSlot.Quantity--;
+
+	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
+
+	InventorySlots = NewSlots;
+
+	SortInventory();
+	VerifyCurrentOverloadCount();
+}
+
 void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool bRemoveAll)
 {
 	TArray<FInventorySlot> NewSlots = InventorySlots;
-	
 	FInventorySlot& CurrentSlot = NewSlots[Index];
+
 	if (!CurrentSlot.CurrentInfos.ItemData) return;
+
 	CurrentWeight -= CurrentSlot.CurrentInfos.ItemData->ItemWeight;
-	if (bRemoveAll)
-		CurrentSlot.Quantity = 0;
-	else
-		CurrentSlot.Quantity--;
+
+	if (bRemoveAll) CurrentSlot.Quantity = 0;
+	else CurrentSlot.Quantity--;
 	
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
@@ -424,18 +446,49 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	return FInventorySlot();
 }
 
-void UInventoryComponent::UseDurability(int UsedDurability)
+UItemData* UInventoryComponent::GetCurrentItem()
 {
-	InventorySlots[CurrentSlotIndex].CurrentInfos.Durability -= UsedDurability;
-
-	UE_LOG(LogTemp, Display, TEXT("%f"), InventorySlots[CurrentSlotIndex].CurrentInfos.Durability);
-
-	if (InventorySlots[CurrentSlotIndex].CurrentInfos.Durability <= 0
-		&& InventorySlots[CurrentSlotIndex].CurrentInfos.ItemData->ItemType == EItemType::Consumable) {
-		RemoveCurrentItem();
+	if (InventorySlots.IsValidIndex(CurrentSlotIndex))
+	{
+		return InventorySlots[CurrentSlotIndex].CurrentInfos.ItemData;
 	}
 
-	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+	return nullptr;
+}
+
+
+bool UInventoryComponent::VerifyHasItemInInventory(UItemData* Item)
+{
+	for (int i = 0; i < InventorySlotCount; i++) {
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != Item) continue;
+
+		return true;
+	}
+
+	return false;
+}
+
+void UInventoryComponent::UseDurability(int UsedDurability, UItemData* ItemToUse)
+{
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != ItemToUse) continue;
+
+		InventorySlots[i].CurrentInfos.Durability -= UsedDurability;
+
+		UE_LOG(LogTemp, Display, TEXT("%f"), InventorySlots[i].CurrentInfos.Durability);
+
+		if (InventorySlots[i].CurrentInfos.Durability <= 0
+			&& InventorySlots[i].CurrentInfos.ItemData->ItemType == EItemType::Consumable) {
+			RemoveItemAtIndex(i, false);
+		}
+
+		OnInventoryChange.Broadcast(InventorySlots, i);
+
+		break;
+	}
 }
 
 

@@ -221,8 +221,7 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 {
 	if (NeededInteractItem != nullptr) {
 
-		if (IPlayerInterface::Execute_GetEquippedItem(Interactor) == nullptr ||
-			IPlayerInterface::Execute_GetEquippedItem(Interactor) != NeededInteractItem)
+		if (!IPlayerInterface::Execute_GetInventoryComponent(Interactor)->VerifyHasItemInInventory(NeededInteractItem))
 		{
 			Server_DisplayErrorMessage("You need a " + NeededInteractItem->ItemName);
 			return false;
