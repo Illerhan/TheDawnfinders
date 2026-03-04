@@ -1,10 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Components/UHealthComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "Widgets/UWorldPlayerWidget.h"
+#include "Widgets/UWorldHealthBar.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
@@ -124,6 +123,7 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
 	if (IsInvincible) return;
+
 	if (VFXType == Blood)
 	{
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::Blocking)
@@ -140,8 +140,14 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 		}
+
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth);
 	}
-	
+
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
 
 	// If Client

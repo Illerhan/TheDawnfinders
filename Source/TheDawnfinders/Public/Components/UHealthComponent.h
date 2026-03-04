@@ -6,6 +6,8 @@
 #include "UHealthComponent.generated.h"
 
 class UStaminaComponent;
+class UWorldHealthBar;
+
 
 UENUM()
 enum EVFXType
@@ -44,6 +46,7 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void LocalChangeHealth();
+
 	void RequestMaxHealthChange(float Amount);
 
 	UFUNCTION(Server,Unreliable,BlueprintCallable)
@@ -187,4 +190,7 @@ protected :
 
 	UPROPERTY()
 	AController* OwnerController;
+
+	UPROPERTY()
+	UWorldHealthBar* WorldHealthBar;
 };
