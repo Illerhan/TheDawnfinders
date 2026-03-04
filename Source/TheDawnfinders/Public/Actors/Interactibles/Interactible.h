@@ -48,6 +48,8 @@ public:
 
 // === INTERACTION INTERFACE ===
 public :
+	virtual void SelectInteractible_Implementation(AActor* Interactor) override;
+	virtual void UnselectInteractible_Implementation(AActor* Interactor) override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;

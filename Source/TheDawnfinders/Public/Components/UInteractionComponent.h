@@ -143,6 +143,12 @@ private:
 	bool bIsDoingQTE;
 
 	UPROPERTY()
+	bool bIsInInteraction;
+
+	UPROPERTY()
+	AActor* NearestInteractible;
+
+	UPROPERTY()
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 
 	UPROPERTY(ReplicatedUsing = OnRep_HelpState)

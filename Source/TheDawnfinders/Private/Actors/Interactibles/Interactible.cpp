@@ -141,9 +141,6 @@ void AInteractibleObjects::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 	{
 		Player->AddInteractibleAtRange_Implementation(this);
 		UE_LOG(LogTemp, Log, TEXT("Added interactible locally on client"));
-
-		if(InteractibleWidget)
-			InteractibleWidget->DisplayText("Interact");
 	}
 }
 
@@ -154,9 +151,6 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 	if (Player && Player->IsLocallyControlled())
 	{
 		Player->RemoveInteractibleAtRange_Implementation(this);
-
-		if (InteractibleWidget)
-			InteractibleWidget->HideText();
 	}
 }
 
@@ -178,6 +172,20 @@ void AInteractibleObjects::Server_DisplayErrorMessage_Implementation(const FStri
 
 
 #pragma region Interface
+
+void AInteractibleObjects::SelectInteractible_Implementation(AActor* Interactor)
+{
+	if (!InteractibleWidget) return;
+
+	InteractibleWidget->DisplayText("Interact");
+}
+
+void AInteractibleObjects::UnselectInteractible_Implementation(AActor* Interactor)
+{
+	if (!InteractibleWidget) return;
+
+	InteractibleWidget->HideText();
+}
 
 void AInteractibleObjects::Interact_Implementation(AActor* Interactor)
 {

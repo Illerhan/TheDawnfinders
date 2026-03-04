@@ -25,6 +25,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	// If the current interacting object is destroyed
 	if (bIsDoingQTE) {
 		AActor* Nearest = GetNearestInteractible();
 		if (Nearest != InteractingQTEActor) {
@@ -33,6 +34,24 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 		}
+	}
+
+	// Nearest Interactible management
+	if (InteractiblesAtRange.Num() > 0) {
+		AActor* Nearest = GetNearestInteractible();
+		if (!NearestInteractible || NearestInteractible != Nearest) 
+		{
+			if (NearestInteractible) {
+				IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
+			}
+
+			NearestInteractible = Nearest;
+			IInteractible::Execute_SelectInteractible(Nearest, GetOwner());
+		}
+	}
+	else if (NearestInteractible) {
+		IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
+		NearestInteractible = nullptr;
 	}
 
 	if (!bIsHelping || !CurrentHelpedTarget) return;
@@ -87,7 +106,7 @@ AActor* UInteractionComponent::GetNearestInteractible()
 
 	for (AActor* Inter : InteractiblesAtRange)
 	{
-		float Dist = FVector::Dist(
+		float Dist = FVector::DistSquared(
 			Inter->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
 		);
