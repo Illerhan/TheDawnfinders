@@ -99,7 +99,7 @@ public :
 	void StartPreviewThrow();
 
 	UFUNCTION(Server, Reliable)
-	void Server_ThrowItem(UItemData* Data);
+	void Server_ThrowItem(UItemData* Data, FVector FinalPosition);
 
 	UFUNCTION()
 	void ActualisePreviewThrow(FVector AimInput);

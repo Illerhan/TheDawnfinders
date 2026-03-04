@@ -258,7 +258,7 @@ void UItemComponent::UseConsumable()
 		{
 			if (!IsPreviewingThrow) return;
 
-			Server_ThrowItem(EquippedItem.CurrentInfos.ItemData);
+			Server_ThrowItem(EquippedItem.CurrentInfos.ItemData, CurrentThrowPosition);
 
 			InventoryComponent->RemoveCurrentItem();
 			StopPreviewThrow();
@@ -372,12 +372,8 @@ void UItemComponent::StartPreviewThrow()
 	ThrowPreviewTimer = 0;
 }
 
-void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data)
+void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector FinalPosition)
 {
-	//FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
-	//FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-	//FVector FinalPos = GetOwner()->GetActorLocation() + AimInput * 800.f;
-
 	FActorSpawnParameters Params;
 	Params.Owner = GetOwner();
 	Params.Instigator = Cast<APawn>(GetOwner());
@@ -388,7 +384,7 @@ void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data)
 
 	if (ThrowedObject)
 	{
-		ThrowedObject->Initialise(CurrentThrowPosition, Data);
+		ThrowedObject->Initialise(FinalPosition, Data);
 	}
 }
 
@@ -402,11 +398,6 @@ void UItemComponent::ActualisePreviewThrow(FVector AimInput)
 		StopPreviewThrow();
 		return;
 	}
-
-	//float Progress = ThrowPreviewTimer / 2.f;
-	//FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 200.f;
-	//FVector Pos2 = GetOwner()->GetActorLocation() + AimInput * 800.f;
-	//FVector FinalPos = GetOwner()->GetActorLocation() + AimInput * 800.f;
 
 	CurrentThrowPosition = GetOwner()->GetActorLocation() + AimInput * 800.f;
 
@@ -609,7 +600,7 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1);
+	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
 	//EquippedItem.CurrentInfos.Durability -= 1;
 
 	// Enemy Resistances

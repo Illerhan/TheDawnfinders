@@ -18,6 +18,12 @@ class IInteractible
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void SelectInteractible(AActor* Interactor);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void UnselectInteractible(AActor* Interactor);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void Interact(AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
