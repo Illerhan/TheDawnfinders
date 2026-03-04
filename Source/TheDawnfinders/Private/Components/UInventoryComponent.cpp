@@ -441,7 +441,8 @@ void UInventoryComponent::UseDurability(int UsedDurability)
 
 void UInventoryComponent::SelectSlotByAngle(int angle)
 {
-	int Index = (angle / 360.f) * InventorySlotCount;
+	int Index = FMath::RoundToInt((angle / 360.f) * InventorySlotCount);
+	Index = Index % InventorySlotCount;
 
 	ChangeCurrentSlot(true, Index);
 }

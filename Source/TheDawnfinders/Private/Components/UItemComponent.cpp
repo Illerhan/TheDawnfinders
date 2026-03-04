@@ -374,10 +374,6 @@ void UItemComponent::StartPreviewThrow()
 
 void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector FinalPosition)
 {
-	//FVector Pos1 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 250.f;
-	//FVector Pos2 = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 800.f;
-	//FVector FinalPos = GetOwner()->GetActorLocation() + AimInput * 800.f;
-
 	FActorSpawnParameters Params;
 	Params.Owner = GetOwner();
 	Params.Instigator = Cast<APawn>(GetOwner());
