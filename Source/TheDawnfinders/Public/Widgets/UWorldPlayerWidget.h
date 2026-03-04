@@ -7,6 +7,7 @@
 class UQTEMashButtonWidget;
 class UWorldProgressBar;
 class ULockpickQTEWidget;
+class UWorldHealthBar;
 
 
 UCLASS()
@@ -23,4 +24,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UQTEMashButtonWidget* GetQTEMashButton();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UWorldHealthBar* GetHealthBar();
 };

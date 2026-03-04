@@ -14,3 +14,8 @@ ULockpickQTEWidget* UWorldPlayerWidget::GetQTERotative_Implementation()
 {
 	return nullptr;
 }
+
+UWorldHealthBar* UWorldPlayerWidget::GetHealthBar_Implementation()
+{
+	return nullptr;
+}
