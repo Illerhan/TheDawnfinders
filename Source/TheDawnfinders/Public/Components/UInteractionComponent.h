@@ -142,7 +142,7 @@ private:
 	UPROPERTY()
 	bool bIsDoingQTE;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	bool bIsInInteraction;
 
 	UPROPERTY()
