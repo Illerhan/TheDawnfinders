@@ -330,7 +330,7 @@ protected :
 	UPROPERTY()
 	float CurrentAutoLockStrength = 0.f;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	bool bAutoLockIsActive = false;
 
 	UPROPERTY(BlueprintReadWrite)
