@@ -6,10 +6,11 @@
 
 void ACarriable::Interact_Implementation(AActor* Interactor)
 {
+	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
+
 	CarryActor = Interactor;
 	bIsCarried = true;
 	OnRep_IsCarried();
-	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
 }
 
 void ACarriable::StopCarry()

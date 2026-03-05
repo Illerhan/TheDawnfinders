@@ -600,7 +600,7 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1);
+	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
 	//EquippedItem.CurrentInfos.Durability -= 1;
 
 	// Enemy Resistances

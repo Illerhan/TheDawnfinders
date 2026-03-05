@@ -95,7 +95,7 @@ public :
 	void SetEquippedMesh(UStaticMesh* NewMesh);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
-	UItemData* GetEquippedItem();
+	UInventoryComponent* GetInventoryComponent();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	void PlayAttackMontage(UAnimMontage* AttackMontage, float Speed);

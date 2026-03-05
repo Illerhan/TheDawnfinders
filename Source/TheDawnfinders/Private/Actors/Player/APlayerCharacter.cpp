@@ -234,9 +234,9 @@ void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh)
     WeaponMeshComponent->SetStaticMesh(NewMesh); 
 }
 
-UItemData* AAPlayerCharacter::GetEquippedItem_Implementation()
-{ 
-    return ItemComponent->GetEquippedItem();
+UInventoryComponent* AAPlayerCharacter::GetInventoryComponent_Implementation()
+{
+    return InventoryComponent;
 }
 
 EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation() 

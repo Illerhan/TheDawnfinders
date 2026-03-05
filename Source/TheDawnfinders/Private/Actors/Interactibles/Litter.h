@@ -175,14 +175,23 @@ protected:
 	// Seuil de vitesse pour arrêt complet (pour éviter les micro-glissements)
 	float StopThreshold = 10.0f;
 
+
+// === INTERACTION API ===
 public:
-    // --- INTERACTION API ---
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
     void Interact(AActor* Interactor);
     
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
     void StopInteract(AActor* Interactor);
 
+	virtual void SelectInteractible_Implementation(AActor* Interactor) override;
+	virtual void UnselectInteractible_Implementation(AActor* Interactor) override;
+
+	UPROPERTY()
+	UPrimitiveComponent* CurrentOverappedComponent;
+
+
+public :
     // --- NETWORKED INPUT ---
     UFUNCTION(Server, Reliable)
 	void Server_StartPushing(AAPlayerCharacter* Player, int32 SlotIndex);
