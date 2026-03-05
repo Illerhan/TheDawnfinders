@@ -183,6 +183,7 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(AAPlayerCharacter, PlayerSpeed);
     DOREPLIFETIME(AAPlayerCharacter, bIsCarrying);
     DOREPLIFETIME(AAPlayerCharacter, CurrentPushedObject);
+    DOREPLIFETIME(AAPlayerCharacter, bAutoLockIsActive);
 }
 
 
@@ -264,6 +265,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     switch (CurrentState)
     {
     case EPlayerState::None :
+        StopAutoLock();
         SetPlayerSpeed(PlayerConfig->WalkSpeed);
         break;
 
@@ -358,8 +360,6 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 
 void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
 {
-    UE_LOG(LogTemp, Display, TEXT("New Speed : %f"), NewSpeed);
-
     if (HasAuthority())
     {
         PlayerSpeed = NewSpeed;
@@ -387,8 +387,6 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInst
 
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed, bool bInstant)
 {
-    UE_LOG(LogTemp, Display, TEXT("New Speed Server : %f"), NewSpeed);
-
     PlayerSpeed = NewSpeed;
     TargetMaxSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
@@ -599,14 +597,17 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 
 void AAPlayerCharacter::ActualiseAutoLock()
 {
-    if (!CurrentAutoLockTarget) 
+    if (!IsValid(CurrentAutoLockTarget)) 
     { 
+        StopAutoLock();
         return; 
     }
 
     FVector AimedForward = CurrentAutoLockTarget->GetActorLocation() - GetActorLocation();
     FRotator TargetRotation = AimedForward.Rotation();
     FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), CurrentAutoLockStrength);
+    NewRotation.SetComponentForAxis(EAxis::Y, 0);
+    NewRotation.SetComponentForAxis(EAxis::X, 0);
     SetActorRotation(NewRotation);
 }
 
@@ -695,7 +696,7 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
     if (!Montage) return;
     if (CurrentState == EPlayerState::UsingEquipment) 
     { 
-        CurrentState = EPlayerState::None; 
+        SetCurrentPlayerState_Implementation(EPlayerState::None);
         ItemComponent->AttackAnimEnd(); 
     }
     BP_OnMontageEnded(Montage, bInterrupted);
