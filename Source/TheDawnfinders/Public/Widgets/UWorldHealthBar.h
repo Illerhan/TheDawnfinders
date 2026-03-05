@@ -19,6 +19,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void Heal(float NewPercent);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ActualiseCurse(float NewPercent);
+
 
 protected :
 	UPROPERTY(BlueprintReadWrite)

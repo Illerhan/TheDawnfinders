@@ -11,3 +11,8 @@ void UWorldHealthBar::TakeDamage_Implementation(float NewPercent) {
 void UWorldHealthBar::Heal_Implementation(float NewPercent) {
 
 }
+
+void UWorldHealthBar::ActualiseCurse_Implementation(float NewPercent)
+{
+
+}
