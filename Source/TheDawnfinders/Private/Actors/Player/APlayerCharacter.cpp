@@ -248,6 +248,12 @@ void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
 {
     if (CurrentState == NewState) return;
 
+    switch (CurrentState) {
+    case EPlayerState::Carrying :
+        if (NewState == EPlayerState::Running || NewState == EPlayerState::Sneaking) return;
+        break;
+    }
+
     SetCurrentPlayerState_Implementation(NewState); 
 }
 
@@ -352,6 +358,8 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 
 void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
 {
+    UE_LOG(LogTemp, Display, TEXT("New Speed : %f"), NewSpeed);
+
     if (HasAuthority())
     {
         PlayerSpeed = NewSpeed;
@@ -379,6 +387,8 @@ bool AAPlayerCharacter::ServerSetPlayerSpeed_Validate(float NewSpeed, bool bInst
 
 void AAPlayerCharacter::ServerSetPlayerSpeed_Implementation(float NewSpeed, bool bInstant)
 {
+    UE_LOG(LogTemp, Display, TEXT("New Speed Server : %f"), NewSpeed);
+
     PlayerSpeed = NewSpeed;
     TargetMaxSpeed = NewSpeed;
     GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
@@ -457,20 +467,24 @@ void AAPlayerCharacter::ManageRun(bool Input)
 {
     if (!HasAuthority())
     {
-        ServerManageRun(Input);
-        return;
+        //ServerManageRun(Input);
+        //return;
     }
 
     if (Input)
     {
+        if (PlayerConfig->RunSpeed == GetCharacterMovement()->MaxWalkSpeed) return;
+
         SetPlayerSpeed(PlayerConfig->RunSpeed);
-        SetCurrentPlayerState_Implementation(EPlayerState::Running);
+        RequestStateChange_Implementation(EPlayerState::Running);
     }
     else
     {
+        if (PlayerConfig->WalkSpeed == GetCharacterMovement()->MaxWalkSpeed) return;
+
         SetPlayerSpeed(PlayerConfig->WalkSpeed);
         if (CurrentState == EPlayerState::Running)
-            SetCurrentPlayerState_Implementation(EPlayerState::None);
+            RequestStateChange_Implementation(EPlayerState::None);
     }
 }
 
