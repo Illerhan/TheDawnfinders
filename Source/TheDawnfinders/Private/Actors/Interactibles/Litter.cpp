@@ -847,19 +847,7 @@ void ALitter::OnZoneOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         Player->AddInteractibleAtRange_Implementation(this);
 
         // Mise à jour du texte selon la zone touchée
-        if (InteractibleWidget)
-        {
-            if (OverlappedComp == LightTrigger)
-            {
-                if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction",InputIcon);
-                else LightComponent->bLightOn?InteractibleWidget->DisplayText("Eteindre la lumiere",InputIcon):InteractibleWidget->DisplayText("Activer la lumiere",InputIcon);
-            }
-            // Front ou Back
-            else
-            {
-                InteractibleWidget->DisplayText("Porter",InputIcon);
-            }
-        }
+        CurrentOverappedComponent = OverlappedComp;
     }
 }
 
@@ -890,11 +878,30 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
     {
         // CAS A : On a tout quitté
         Player->RemoveInteractibleAtRange_Implementation(this);
-        
-        if (InteractibleWidget)
-        {
-            InteractibleWidget->HideText();
-        }
     }
     
+}
+
+void ALitter::SelectInteractible_Implementation(AActor* Interactor)
+{
+    if (!InteractibleWidget) return;
+
+    if (CurrentOverappedComponent == LightTrigger)
+    {
+        if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction", InputIcon);
+        else LightComponent->bLightOn ? InteractibleWidget->DisplayText("Eteindre la lumiere", InputIcon) :
+            InteractibleWidget->DisplayText("Activer la lumiere", InputIcon);
+    }
+    // Front ou Back
+    else
+    {
+        InteractibleWidget->DisplayText("Porter", InputIcon);
+    }
+}
+
+void ALitter::UnselectInteractible_Implementation(AActor* Interactor)
+{
+    if (!InteractibleWidget) return;
+    
+    InteractibleWidget->HideText();
 }

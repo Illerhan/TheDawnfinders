@@ -86,7 +86,13 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
 void UInteractionComponent::AddInteractible(AActor* Interactible)
 {
-	InteractiblesAtRange.Add(Interactible);
+	if (!InteractiblesAtRange.Contains(Interactible)) {
+		InteractiblesAtRange.Add(Interactible);
+	}
+
+	else {
+		NearestInteractible = nullptr;
+	}
 }
 
 void UInteractionComponent::RemoveInteractible(AActor* Interactible)
