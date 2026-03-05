@@ -42,7 +42,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		AActor* Nearest = GetNearestInteractible();
 		if (!NearestInteractible || NearestInteractible != Nearest) 
 		{
-			if (NearestInteractible) {
+			if (IsValid(NearestInteractible)) {
 				IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
 			}
 
@@ -50,7 +50,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			IInteractible::Execute_SelectInteractible(Nearest, GetOwner());
 		}
 	}
-	else if (NearestInteractible && (!bIsInInteraction || CarriedItem)) {
+	else if (IsValid(NearestInteractible) && (!bIsInInteraction || CarriedItem)) {
 		IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
 		NearestInteractible = nullptr;
 	} 
@@ -78,7 +78,8 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
 	DOREPLIFETIME(UInteractionComponent, bIsHelping);
 	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
-	DOREPLIFETIME(UInteractionComponent,CarriedItem)
+	DOREPLIFETIME(UInteractionComponent, CarriedItem);
+	DOREPLIFETIME(UInteractionComponent, bIsInInteraction);
 }
 
 
@@ -186,7 +187,7 @@ void UInteractionComponent::StartInteract()
 	if (!Nearest) return;
 	if (!IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner())) return;
 
-	IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
+	IInteractible::Execute_UnselectInteractible(Nearest, GetOwner());
 
 	// Starts QTE if needed
 	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE) 

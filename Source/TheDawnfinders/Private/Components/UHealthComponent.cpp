@@ -183,6 +183,12 @@ void UHealthComponent::Heal(float quantity)
 	CurrentHealth += quantity;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
 
+	if (!WorldHealthBar) {
+		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+		WorldHealthBar->Setup(3);
+	}
+	WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
+
 	// If client
 	if (!GetOwner()->HasAuthority())
 	{
@@ -311,7 +317,14 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
 
+	if (!WorldHealthBar) {
+		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+		WorldHealthBar->Setup(3);
+	}
+	WorldHealthBar->ActualiseCurse(CurseMaxHealth / MaxHealth);
+
 	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("%f"), CurseMaxHealth / MaxHealth);
 
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
