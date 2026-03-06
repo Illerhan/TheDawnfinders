@@ -47,10 +47,11 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	if (GetOwner()->HasAuthority())
+	if (OwnerController && OwnerController->IsLocalPlayerController())
 	{
 		ApplyCurse(DeltaTime);
 	}
+
 	if (GetOwner()->HasAuthority())
 	{
 		if (bIsPoisoned)
@@ -141,11 +142,13 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 		}
 
-		if (!WorldHealthBar) {
-			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
-			WorldHealthBar->Setup(3);
+		if (OwnerController && OwnerController->IsLocalPlayerController()) {
+			if (!WorldHealthBar) {
+				WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+				WorldHealthBar->Setup(3);
+			}
+			WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth);
 		}
-		WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth);
 	}
 
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
@@ -183,11 +186,13 @@ void UHealthComponent::Heal(float quantity)
 	CurrentHealth += quantity;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
 
-	if (!WorldHealthBar) {
-		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
-		WorldHealthBar->Setup(3);
+	if (OwnerController && OwnerController->IsLocalPlayerController()) {
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
 	}
-	WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
 
 	// If client
 	if (!GetOwner()->HasAuthority())
@@ -218,6 +223,8 @@ void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseHealth(newHealth, CurrentMaxHealth, MaxHealth);
+
+
 }
 
 
@@ -308,7 +315,6 @@ void UHealthComponent::RemoveProtectionZone()
 void UHealthComponent::ApplyCurse(float DeltaTime)
 {
 	if (bIsFallen || bIsDead) return;
-	if (!GetOwner()->HasAuthority()) return;
 	if (IsProtectedFromCurse()) return;
 	if (CurrentMaxHealth <= MinimumMaxHP) return;
 
@@ -317,11 +323,14 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	CurrentMaxHealth = FMath::Max(CurrentMaxHealth, MinimumMaxHP);
 	CurseMaxHealth = CurrentMaxHealth;
 
-	if (!WorldHealthBar) {
-		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
-		WorldHealthBar->Setup(3);
+	if (OwnerController && OwnerController->IsLocalPlayerController()) 
+	{
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->ActualiseCurse(CurseMaxHealth / MaxHealth);
 	}
-	WorldHealthBar->ActualiseCurse(CurseMaxHealth / MaxHealth);
 
 	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
 	UE_LOG(LogTemp, Warning, TEXT("%f"), CurseMaxHealth / MaxHealth);
