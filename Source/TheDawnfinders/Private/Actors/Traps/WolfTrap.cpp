@@ -196,7 +196,7 @@ void AWolfTrap::OnQTEFailed()
 {
     if (InteractibleWidget)
     {
-        Server_DisplayErrorMessage("QTE échoué !");
+        DisplayErrorMessage("QTE échoué !");
     }
     PlayerTemp = nullptr;
 }

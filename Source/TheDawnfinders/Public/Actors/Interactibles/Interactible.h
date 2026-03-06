@@ -104,6 +104,9 @@ public:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UFUNCTION(BlueprintCallable)
+	void DisplayErrorMessage(const FString& Message);
+
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_DisplayErrorMessage(const FString& Message);
 

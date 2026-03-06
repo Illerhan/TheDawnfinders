@@ -154,6 +154,12 @@ void AInteractibleObjects::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AAc
 	}
 }
 
+void AInteractibleObjects::DisplayErrorMessage(const FString& Message)
+{
+	if (InteractibleWidget->GetVisibility() == ESlateVisibility::Collapsed) return;
+	InteractibleWidget->DisplayErrorText(Message);
+}
+
 void AInteractibleObjects::Multicast_DisplayErrorMessage_Implementation(const FString& Message)
 {
 	if (InteractibleWidget->GetVisibility() == ESlateVisibility::Collapsed) return;
@@ -223,13 +229,13 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 
 		if (!IPlayerInterface::Execute_GetInventoryComponent(Interactor)->VerifyHasItemInInventory(NeededInteractItem))
 		{
-			Server_DisplayErrorMessage("You need a " + NeededInteractItem->ItemName);
+			DisplayErrorMessage("You need a " + NeededInteractItem->ItemName);
 			return false;
 		}
 	}
 
 	if (bPlayerIsUsing) {
-		Server_DisplayErrorMessage("Already Used By Someone");
+		DisplayErrorMessage("Already Used By Someone");
 		return false;
 	}
 
