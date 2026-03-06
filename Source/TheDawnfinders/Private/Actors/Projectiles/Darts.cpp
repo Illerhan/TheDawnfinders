@@ -13,7 +13,7 @@ ADarts::ADarts()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	SphereCollider = CreateDefaultSubobject<USphereComponent>("SphereCollider");
-	SphereCollider->SetupAttachment(RootComponent);
+	RootComponent = SphereCollider;
 	SphereCollider->SetSphereRadius(50);
 	
 	MoveComp = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");

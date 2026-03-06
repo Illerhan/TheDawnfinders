@@ -100,7 +100,22 @@ void UInventoryBarWidget::TryBindToInventory()
 
     // Forcer une update immédiate pour synchroniser avec l’état actuel
     SetupInventory(InventoryComponentRef->InventorySlotCount);
-    ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
+    UE_LOG(LogTemp, Error, TEXT("=== TryBind: InventorySlots au moment du bind ==="));
+    for (int i = 0; i < InventoryComponentRef->InventorySlots.Num(); i++)
+    {
+        UE_LOG(LogTemp, Error, TEXT("Slot %d: %s"), i,
+            InventoryComponentRef->InventorySlots[i].CurrentInfos.ItemData
+                ? *InventoryComponentRef->InventorySlots[i].CurrentInfos.ItemData->ItemName
+                : TEXT("VIDE"));
+    }
+    bool bHasItems = InventoryComponentRef->InventorySlots.ContainsByPredicate(
+       [](const FInventorySlot& S){ return S.CurrentInfos.ItemData != nullptr; }
+   );
+    
+    if (bHasItems)
+    {
+        ActualiseWidget(InventoryComponentRef->InventorySlots, InventoryComponentRef->CurrentSlotIndex);
+    }
 }
 
 void UInventoryBarWidget::SetupSlotsNavigation_Implementation()
@@ -123,6 +138,9 @@ void UInventoryBarWidget::SetupSlotsNavigation_Implementation()
 
 void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex)
 {
+    UE_LOG(LogTemp, Error, TEXT("ActualiseWidget: %d slots dispo, %d slot widgets créés"),
+       Slots.Num(), InventorySlotsWidgets.Num()); // ← ce chiffre est probablement 0
+    
     APlayerController* PC = GetOwningPlayer();
     if (!PC) return;
 

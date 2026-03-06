@@ -61,6 +61,9 @@ public :
 	int ItemValue;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int Price;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int ItemWeight = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
