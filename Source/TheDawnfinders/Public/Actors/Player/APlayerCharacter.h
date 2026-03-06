@@ -106,6 +106,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
 	class UDebugComponent* DebugComponent;
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void GetShopItems();
 
 
 // === CURSE ===
@@ -278,6 +281,9 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
+	
+	
+	
 
 
 // === PUBLIC PROPERTIES ===

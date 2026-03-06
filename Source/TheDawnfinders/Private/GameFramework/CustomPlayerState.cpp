@@ -134,6 +134,8 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ACustomPlayerState, CurrentStamina);
+	DOREPLIFETIME(ACustomPlayerState, ShopItems);
+	DOREPLIFETIME(ACustomPlayerState, SavedGold);
 }
 
 void ACustomPlayerState::OnRep_StaminaChange()
@@ -149,6 +151,112 @@ void ACustomPlayerState::OnRep_HealthChange()
 void ACustomPlayerState::OnRep_LanternChange()
 {
 	OnInfoChange.Broadcast();
+}
+
+void ACustomPlayerState::OnRep_ShopItems()
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnRep_ShopItems: %d items, %d listeners"), 
+		ShopItems.Num(), 
+		OnShopItemsChange.IsBound() ? 1 : 0);
+	OnShopItemsChange.Broadcast();
+}
+void ACustomPlayerState::OnRep_Gold()
+{
+	OnGoldChanged.Broadcast();
+}
+
+
+void ACustomPlayerState::Client_AddShopItemLocally(FItemInfos Item)
+{
+	if (HasAuthority()) return;
+	ShopItems.Add(Item);
+	OnShopItemsChange.Broadcast();
+}
+
+void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
+{
+	Super::CopyProperties(PlayerState);
+	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
+	{
+		NewPS->ShopItems = ShopItems;
+	}
+	
+	
+}
+
+void ACustomPlayerState::SaveInventoryBeforeTravel()
+{
+	APawn* Pawn = GetPawn();
+	if (!Pawn) return;
+
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Pawn);
+	if (!Player || !Player->InventoryComponent) return;
+	
+	UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
+	if (!Inv) return;
+	
+	SavedGold = Inv->Gold;
+
+}
+
+void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
+{
+	if (!Item.ItemData) return;
+    
+	//APawn* Pawn = Cast<APawn>(GetPawn());
+	//if (!Pawn) return;
+	//UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
+	//if (!Inv) return;
+    
+	//if (Inv->Gold < Item.ItemData->Price) return;
+	
+	int32 TotalRows = 0;
+	TMap<UItemData*, int32> TypeCounts;
+    
+	for (FItemInfos& S : ShopItems)
+	{
+		if (!S.ItemData) continue;
+        
+		if (S.ItemData->MaxStackingCapacity <= 1)
+		{
+			// Non-stackable = 1 row chacun
+			TotalRows++;
+		}
+		else
+		{
+			// Stackable = 1 row par type
+			if (!TypeCounts.Contains(S.ItemData))
+				TotalRows++;
+			TypeCounts.FindOrAdd(S.ItemData)++;
+		}
+	}
+    
+	// Validation
+	if (Item.ItemData->MaxStackingCapacity <= 1)
+	{
+		// Crée toujours une nouvelle row
+		if (TotalRows >= 5) return;
+	}
+	else
+	{
+		if (TypeCounts.Contains(Item.ItemData))
+		{
+			// Row existante → vérifier max stack
+			if (TypeCounts[Item.ItemData] >= Item.ItemData->MaxStackingCapacity) return;
+		}
+		else
+		{
+			// Nouvelle row
+			if (TotalRows >= 5) return;
+		}
+	}
+    
+	//Inv->Gold -= Item.ItemData->Price;
+	//Inv->OnRep_Gold();
+
+	ShopItems.Add(Item);
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 #pragma endregion

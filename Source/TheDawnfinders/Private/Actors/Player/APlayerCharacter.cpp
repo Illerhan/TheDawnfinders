@@ -16,6 +16,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Components/DebugComponent.h"
 #include "Engine/OverlapResult.h"
+#include "GameFramework/CustomPlayerState.h"
 #include "Widgets/UMainWidget.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldProgressBar.h"
@@ -129,6 +130,7 @@ void AAPlayerCharacter::BeginPlay()
     ItemComponent->OnThrowHidePreview.AddUniqueDynamic(this, &AAPlayerCharacter::HideThrowPreview);
     
     ProtectionZone->SetGenerateOverlapEvents(false);
+    
 }
 
 
@@ -486,6 +488,10 @@ void AAPlayerCharacter::ManageRun(bool Input)
     }
 }
 
+void AAPlayerCharacter::GetShopItems_Implementation()
+{
+}
+
 bool AAPlayerCharacter::IsProtectedFromCurse() const
 {
     return ProtectionZoneAmount > 0;
@@ -778,6 +784,25 @@ void AAPlayerCharacter::PossessedBy(AController* NewController)
 void AAPlayerCharacter::OnRep_PlayerState()
 {
     Super::OnRep_PlayerState();
+    ACustomPlayerState* PS = GetPlayerState<ACustomPlayerState>();
+    if (PS && InventoryComponent)
+    {
+        // Si on a des items achetés dans le shop
+        if (PS->ShopItems.Num() > 0)
+        {
+            // On demande au serveur (ou on le fait en local si l'inventaire est pré-rempli)
+            // de transférer ces items dans l'inventaire réel
+            for (const FItemInfos& Item : PS->ShopItems)
+            {
+                // Ici tu appelles ta fonction qui ajoute l'item
+                // Si c'est un item acheté, on l'ajoute à l'inventaire
+                InventoryComponent->AddNewItem(Item); 
+            }
+            
+            UE_LOG(LogTemp, Warning, TEXT("Items du Shop transférés dans l'inventaire après Travel"));
+        }
+    }
+    
 }
 
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
@@ -801,6 +826,8 @@ void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
 }
+
+
 
 void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI UIType, AActor* Context)
 {
