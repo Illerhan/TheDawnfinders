@@ -418,9 +418,9 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
         FVector PushDir = FVector(-Input.X, Input.Y, 0);
 
         // IMPORTANT : tester AVANT normalize
-        if (PushDir.SquaredLength() > 0.5f)
+        if (PushDir.SquaredLength() > 0.05f)
         {
-            PushDir.Normalize();
+            PushDir = PushDir.GetClampedToMaxSize(1);
 
             FRotator CameraRotation(0.0f, -45.0f, 0.0f);
             PushDir = CameraRotation.RotateVector(PushDir);
@@ -441,7 +441,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     // --- 2. STANDARD CHARACTER MOVEMENT ---
     CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
-    if (CurrentPlayerInput.SquaredLength() > 0.5f) {
+    if (CurrentPlayerInput.SquaredLength() > 0.05f) {
         PreviousPlayerInput = CurrentPlayerInput;
     }
     else {
@@ -450,7 +450,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     }
 
     FVector FinalVector = FVector(-Input.X, Input.Y, 0);
-    FinalVector.Normalize();
+    FinalVector = FinalVector.GetClampedToMaxSize(1);
 
     FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);

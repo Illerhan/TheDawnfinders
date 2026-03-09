@@ -349,10 +349,13 @@ void UInteractionComponent::StopInteract()
 {
 	ServerCancelHelp();
 
-	if (CurrentInteractible && CarriedItem == nullptr && Cast<AInteractibleObjects>(CurrentInteractible)->GetStopInteractOnRelease())
+	if (CurrentInteractible && Cast<AInteractibleObjects>(CurrentInteractible)->GetStopInteractOnRelease())
 	{
 		if (!GetOwner()->HasAuthority()) {
 			ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		}
+		else {
+			ServerStopInteract_Implementation(CurrentInteractible, PlayerCharacter);
 		}
 
 		NearestInteractible = nullptr;
