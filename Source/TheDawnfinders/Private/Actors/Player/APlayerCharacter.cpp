@@ -418,7 +418,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
         FVector PushDir = FVector(-Input.X, Input.Y, 0);
 
         // IMPORTANT : tester AVANT normalize
-        if (PushDir.SizeSquared() > 0.001f)
+        if (PushDir.SquaredLength() > 0.5f)
         {
             PushDir.Normalize();
 
@@ -441,7 +441,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     // --- 2. STANDARD CHARACTER MOVEMENT ---
     CurrentPlayerInput = FVector(-Input.X, Input.Y, 0);
 
-    if (CurrentPlayerInput.Length() > 0.5f) {
+    if (CurrentPlayerInput.SquaredLength() > 0.5f) {
         PreviousPlayerInput = CurrentPlayerInput;
     }
     else {

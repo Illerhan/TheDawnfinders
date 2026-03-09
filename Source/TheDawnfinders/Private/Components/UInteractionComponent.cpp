@@ -53,8 +53,6 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 	else if (IsValid(NearestInteractible) && (!bIsInInteraction || CarriedItem)) 
 	{
-		UE_LOG(LogTemp, Display, TEXT("Exited Interaction"));
-
 		IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
 		NearestInteractible = nullptr;
 	} 
@@ -140,8 +138,6 @@ void UInteractionComponent::StartInteract()
 {
 	if (!PlayerCharacter)
 		return;
-
-	UE_LOG(LogTemp, Display, TEXT("OUIIIII"));
 
 	// If the player is carrying an heavy object
 	if (CarriedItem != nullptr) {
