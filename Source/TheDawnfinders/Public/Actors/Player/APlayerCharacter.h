@@ -225,6 +225,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ForceRotation(FVector Input);
 
+	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	void Server_StopForceRotation(float Progress);
+
+	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	void Server_ForceRotation(FRotator Rotation, float Progress);
+
 	UFUNCTION()
 	void StartAutoLock(float AutoLockStrength);
 
@@ -282,9 +288,6 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
 	
-	
-	
-
 
 // === PUBLIC PROPERTIES ===
 public :

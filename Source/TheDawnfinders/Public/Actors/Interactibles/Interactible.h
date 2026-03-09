@@ -122,6 +122,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	EInteractItemConsuptionType GetInteractItemConsumptionType() { return InteractItemConsumptionType; }
 
+	UFUNCTION(BlueprintCallable)
+	bool GetStopInteractOnRelease() { return bStopInteractOnRelease; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetIsInInteractionStateOnInteract() { return bIsInInteractionStateOnInteract; }
+
 
 // === COMPONENTS ===
 public :
@@ -179,13 +185,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Noise")
 	float NoiseRange;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bStopInteractOnRelease = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsInInteractionStateOnInteract = false;
+
 	UPROPERTY()
 	FTimerHandle EnableTimer;
 
 	UPROPERTY()
 	bool bCanBeUsed = true;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	bool bPlayerIsUsing = false;
 
 	UPROPERTY()
