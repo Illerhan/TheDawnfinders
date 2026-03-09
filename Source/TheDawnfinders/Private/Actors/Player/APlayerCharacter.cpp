@@ -136,11 +136,9 @@ void AAPlayerCharacter::BeginPlay()
 
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
-    //GetCharacterMovement()->MaxWalkSpeed = FMath::Lerp(GetCharacterMovement()->MaxWalkSpeed, TargetMaxSpeed, DeltaTime * 5.0f);
-
     Super::Tick(DeltaTime);
 
-    if (!IsLocallyControlled()) return;
+    if (!IsLocallyControlled() && !bIsForcingRotation) return;
 
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
@@ -148,6 +146,8 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     else {
         ActualiseRotation();
     }
+
+    if (!IsLocallyControlled()) return;
 
     if (LoudnessTimer > 0) {
         LoudnessTimer -= DeltaTime;
@@ -531,6 +531,8 @@ void AAPlayerCharacter::ActualiseRotation()
     if (!bIsForcingRotation && CurrentForcedRotationRatio > 0) {
         CurrentForcedRotationRatio -= GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
         CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
+
+        Server_StopForceRotation(CurrentForcedRotationRatio);
     }
 
     float angle = FMath::Atan2(PreviousPlayerInput.Y, PreviousPlayerInput.X);
@@ -571,6 +573,29 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
 
     CurrentRotationInput = RotatedVector * Length;
     CurrentForcedRotation = NewRotation;
+
+    if (!HasAuthority()) {
+        Server_ForceRotation(CurrentForcedRotation, CurrentForcedRotationRatio);
+    }
+}
+
+void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
+{
+    bIsForcingRotation = false;
+    CurrentForcedRotationRatio = Progress;
+
+    SetActorRotation(FRotator(0, 0, 0));
+
+    GetCharacterMovement()->bOrientRotationToMovement = true;
+}
+
+void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, float Progress)
+{
+    bIsForcingRotation = true;
+    CurrentForcedRotation = Rotation;
+
+    CurrentForcedRotationRatio = Progress;
+    GetCharacterMovement()->bOrientRotationToMovement = false;
 }
 
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
