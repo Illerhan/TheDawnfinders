@@ -16,6 +16,7 @@ public :
 	virtual void BeginPlay() override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	//virtual void CancelInteraction_Implementation(AActor* Interactor) override;
 
 	UFUNCTION(BlueprintCallable)
 	void SetupLoot();
@@ -36,6 +37,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
 	FName DataTableRowName;
+
+	UPROPERTY()
+	AAPlayerCharacter* Player;
 
 	FTimerHandle DelayStartHandle;
 };

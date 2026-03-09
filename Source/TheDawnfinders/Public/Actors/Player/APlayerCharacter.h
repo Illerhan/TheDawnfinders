@@ -288,9 +288,6 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
 	
-	
-	
-
 
 // === PUBLIC PROPERTIES ===
 public :

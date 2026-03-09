@@ -178,12 +178,8 @@ protected:
 
 // === INTERACTION API ===
 public:
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-    void Interact(AActor* Interactor);
-    
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-    void StopInteract(AActor* Interactor);
-
+	virtual void Interact_Implementation(AActor* Interactor) override;
+	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	virtual void SelectInteractible_Implementation(AActor* Interactor) override;
 	virtual void UnselectInteractible_Implementation(AActor* Interactor) override;
 

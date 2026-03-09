@@ -36,7 +36,7 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 	}
 	bPlayerIsUsing = true;
 
-	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
+	Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player) return;
 
 	Player->Client_OpenInteractionUI(EInteractionUI::ContainerInventory, this);
@@ -45,7 +45,12 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 
 void AContainer::StopInteract_Implementation(AActor* Interactor)
 {
+	//bPlayerIsUsing = false;
 
+	//Player = Cast<AAPlayerCharacter>(Interactor);
+	//if (!Player) return;
+
+	//Player->InteractionComponent->CancelInteraction();
 }
 
 void AContainer::SetupLoot()
@@ -99,5 +104,6 @@ void AContainer::CloseContainerInventory()
 
 void AContainer::Server_CloseContainerInventory_Implementation()
 {
+	Player->InteractionComponent->CancelInteraction();
 	bPlayerIsUsing = false;
 }
