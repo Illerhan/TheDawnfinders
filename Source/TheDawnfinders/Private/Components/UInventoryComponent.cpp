@@ -3,6 +3,7 @@
 
 #include "Components/UInventoryComponent.h"
 #include "Actors/AItem.h"
+#include "GameFramework/CustomPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -120,6 +121,40 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 	VerifyCurrentOverloadCount();
 }
 
+void UInventoryComponent::RestoreShopItems()
+{
+	if (!GetOwner() || !GetOwner()->HasAuthority()) return;
+
+	APawn* Pawn = Cast<APawn>(GetOwner());
+	if (!Pawn) return;
+
+	APlayerController* PC = Cast<APlayerController>(Pawn->GetController());
+	if (!PC) return;
+
+	ACustomPlayerState* PS = PC->GetPlayerState<ACustomPlayerState>();
+	if (!PS || PS->ShopItems.Num() == 0) return;
+
+	if (PS->SavedGold > 0)
+	{
+		Server_AddGold_Implementation(PS->SavedGold);
+		PS->SavedGold = 0;
+	}
+	
+	bShopItemsRestored = false;
+	AddShopItems(PS->ShopItems);
+	
+	
+}
+
+void UInventoryComponent::AddShopItems(TArray<FItemInfos> Items)
+{
+    // Toujours exécuté là où on l'appelle
+    // Pas de vérification réseau, pas de HasRoomForItem
+    for (FItemInfos& Item : Items)
+    {
+        ServerAddNewItem_Implementation(Item, 1);
+    }
+}
 
 bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 {
@@ -516,6 +551,7 @@ int UInventoryComponent::GetCurrentOverloadCount()
 	int Count = 0;
 
 	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - CurrentOverloadSlotCount; i--) {
+		if (!InventorySlots.IsValidIndex(i)) continue;
 		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
 		if (!InventorySlots[i].bIsOverloadSlot) continue;
 

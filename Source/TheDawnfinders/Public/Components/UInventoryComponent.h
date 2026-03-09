@@ -61,6 +61,9 @@ public :
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerAddNewItem(FItemInfos NewItem, int Quantity = 1);
+	
+	UFUNCTION(BlueprintCallable,Category="Inventory")
+	void AddShopItems(TArray<FItemInfos> Items);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool HasRoomForItem(FItemInfos NewItem);
@@ -143,6 +146,9 @@ public :
 	UFUNCTION(Server, Reliable,BlueprintCallable, Category = "Inventory")
 	void ServerConsumeItemDirectly(FItemInfos Item);
 	
+	UFUNCTION(BlueprintCallable)
+    void RestoreShopItems();
+	
 
 
 // === PROTECTED PROPERTIES ===
@@ -191,6 +197,8 @@ public :
 
 	UFUNCTION()
 	void OnRep_Knowledge();
+	
+	bool bShopItemsRestored = false;
 
 
 // === PRIVATE PROPERTIES === 

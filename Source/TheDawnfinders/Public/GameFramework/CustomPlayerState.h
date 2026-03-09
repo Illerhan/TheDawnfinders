@@ -37,7 +37,30 @@ public :
 
 	UFUNCTION()
 	void OnRep_LanternChange();
+//  === SHOP ==
+	
+	UPROPERTY(ReplicatedUsing = OnRep_ShopItems,Blueprintable,BlueprintReadWrite)
+	TArray<FItemInfos> ShopItems;
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShopItemsChange);
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnShopItemsChange OnShopItemsChange;
 
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_AddShopItem(FItemInfos Item);
+	
+	UFUNCTION(BlueprintCallable)
+	void Client_AddShopItemLocally(FItemInfos Item);
+	
+
+	UFUNCTION()
+	void OnRep_ShopItems();
+	
+	virtual void CopyProperties(APlayerState* PlayerState) override;
+	
+	UFUNCTION(BlueprintCallable)
+	void SaveInventoryBeforeTravel();
 
 // === DELEGATES
 public :
@@ -112,6 +135,8 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ApplyContextualAmulet(EAmuletTriggerType Trigger);
 
+	UPROPERTY(ReplicatedUsing=OnRep_Gold, BlueprintReadOnly)
+	int32 SavedGold = 0;
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -141,4 +166,11 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	FInventorySlot CurrentSlot;
+		
+	UFUNCTION()
+	void OnRep_Gold();
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGoldChanged);
+	UPROPERTY(BlueprintAssignable)
+	FOnGoldChanged OnGoldChanged;
 };
