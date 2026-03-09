@@ -24,6 +24,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (!PlayerCharacter->IsLocallyControlled()) return;
 
 	// If the current interacting object is destroyed
 	if (bIsDoingQTE) {
@@ -50,7 +51,10 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			IInteractible::Execute_SelectInteractible(Nearest, GetOwner());
 		}
 	}
-	else if (IsValid(NearestInteractible) && (!bIsInInteraction || CarriedItem)) {
+	else if (IsValid(NearestInteractible) && (!bIsInInteraction || CarriedItem)) 
+	{
+		UE_LOG(LogTemp, Display, TEXT("Exited Interaction"));
+
 		IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
 		NearestInteractible = nullptr;
 	} 
@@ -137,6 +141,8 @@ void UInteractionComponent::StartInteract()
 	if (!PlayerCharacter)
 		return;
 
+	UE_LOG(LogTemp, Display, TEXT("OUIIIII"));
+
 	// If the player is carrying an heavy object
 	if (CarriedItem != nullptr) {
 		AActor* Nearest = GetNearestInteractible();
@@ -176,7 +182,7 @@ void UInteractionComponent::StartInteract()
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
 
-		TryInteract(NearestInteractible, PlayerCharacter);
+		TryInteract(CurrentInteractible, PlayerCharacter);
 		bIsDoingQTE = false;
 
 		return;
@@ -212,8 +218,10 @@ void UInteractionComponent::StartInteract()
 	}
 	else  // No QTE 
 	{
-		bIsInInteraction = true;
-		CurrentInteractible = Nearest;
+		if (Cast<AInteractibleObjects>(Nearest)->GetIsInInteractionStateOnInteract()) {
+			bIsInInteraction = true;
+			CurrentInteractible = Nearest;
+		}
 		TryInteract(Nearest, PlayerCharacter);
 	}
 }
@@ -239,6 +247,11 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 {
 	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible, Player))
 		return;
+
+	if (Cast<AInteractibleObjects>(Interactible)->GetIsInInteractionStateOnInteract()) {
+		bIsInInteraction = true;
+		CurrentInteractible = Interactible;
+	}
 
 	IInteractible::Execute_Interact(Interactible, Player);
 }
@@ -340,11 +353,13 @@ void UInteractionComponent::StopInteract()
 {
 	ServerCancelHelp();
 
-	if (CurrentInteractible && !CarriedItem)
+	if (CurrentInteractible && CarriedItem == nullptr && Cast<AInteractibleObjects>(CurrentInteractible)->GetStopInteractOnRelease())
 	{
-		IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
+		if (!GetOwner()->HasAuthority()) {
+			ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		}
 
-		ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		NearestInteractible = nullptr;
 		CurrentInteractible = nullptr;
 		bIsInInteraction = false;
 	}
@@ -353,6 +368,11 @@ void UInteractionComponent::StopInteract()
 void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactible, AAPlayerCharacter* Player)
 {
 	if (!Interactible || !Player) return;
+
+	NearestInteractible = nullptr;
+	CurrentInteractible = nullptr;
+	bIsInInteraction = false;
+
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
@@ -365,12 +385,22 @@ void UInteractionComponent::CancelInteraction()
 	{
 		CurrentQTEWidget->ExitQTE();
 
-		bIsInInteraction = false;
-		InteractingQTEActor = nullptr;
 		bIsDoingQTE = false;
+		InteractingQTEActor = nullptr;
+		bIsInInteraction = false;
+		CurrentInteractible = nullptr;
+		NearestInteractible = nullptr;
 
 		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+	}
+
+	else if (CurrentInteractible && bIsInInteraction) {
+		bIsInInteraction = false;
+		CurrentInteractible = nullptr;
+		NearestInteractible = nullptr;
+
+		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 	}
 }
 
