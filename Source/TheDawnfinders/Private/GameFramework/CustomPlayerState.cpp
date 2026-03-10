@@ -179,9 +179,70 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
 	{
 		NewPS->ShopItems = ShopItems;
+		NewPS->SavedGold = SavedGold;
 	}
 	
 	
+}
+
+void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
+{
+	if (!ItemToSell) return;
+
+	APawn* Pawn = Cast<APawn>(GetPawn());
+	if (!Pawn) return;
+
+	UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
+	if (!Inv) return;
+
+	// Chercher l'item dans l'inventaire
+	int32 FoundIndex = -1;
+	for (int32 i = 0; i < Inv->InventorySlots.Num(); i++)
+	{
+		if (Inv->InventorySlots[i].CurrentInfos.ItemData == ItemToSell)
+		{
+			FoundIndex = i;
+			break;
+		}
+	}
+
+	if (FoundIndex == -1) return; // pas trouvé dans l'inventaire
+
+	// Retirer l'item
+	Inv->RemoveItemAtIndex(FoundIndex, false);
+
+	// Ajouter le gold (moitié du prix)
+	int32 SellPrice = FMath::FloorToInt(ItemToSell->Price / 2.f);
+	Inv->Server_AddGold_Implementation(SellPrice);
+
+	// Mettre à jour le shop
+	// Retirer du ShopItems si non stackable
+	if (ItemToSell->MaxStackingCapacity <= 1)
+	{
+		for (int32 i = ShopItems.Num() - 1; i >= 0; i--)
+		{
+			if (ShopItems[i].ItemData == ItemToSell)
+			{
+				ShopItems.RemoveAt(i);
+				break;
+			}
+		}
+	}
+	else
+	{
+		// Stackable : décrémenter ou retirer
+		for (int32 i = ShopItems.Num() - 1; i >= 0; i--)
+		{
+			if (ShopItems[i].ItemData == ItemToSell)
+			{
+				ShopItems.RemoveAt(i);
+				break;
+			}
+		}
+	}
+
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()
@@ -189,26 +250,35 @@ void ACustomPlayerState::SaveInventoryBeforeTravel()
 	APawn* Pawn = GetPawn();
 	if (!Pawn) return;
 
-	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Pawn);
-	if (!Player || !Player->InventoryComponent) return;
-	
 	UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
-	if (!Inv) return;
-	
-	SavedGold = Inv->Gold;
+	if (!Inv || !Inv->GetOwner()->HasAuthority()) return; // Sécurité : Serveur uniquement
+    
+	// 1. On stocke l'or proprement
+	int32 GoldToSave = Inv->Gold;
+    
+	// 2. IMPORTANT : On vide le ShopItems AVANT de remplir
+	// Sinon, si tu avais déjà 2 items achetés, et que tu en as 3 sur toi
+	// tu vas te retrouver avec 5 items au total après le save.
+	ShopItems.Empty();
+
+	// 3. On transfère les items
+	for (const FInventorySlot& Slot : Inv->InventorySlots)
+	{
+		if (Slot.CurrentInfos.ItemData) 
+		{
+			ShopItems.Add(Slot.CurrentInfos);
+		}
+	}
+
+	SavedGold = GoldToSave;
 
 }
 
 void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 {
 	if (!Item.ItemData) return;
-    
-	//APawn* Pawn = Cast<APawn>(GetPawn());
-	//if (!Pawn) return;
-	//UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
-	//if (!Inv) return;
-    
-	//if (Inv->Gold < Item.ItemData->Price) return;
+	
+	if (SavedGold < Item.ItemData->Price) return;
 	
 	int32 TotalRows = 0;
 	TMap<UItemData*, int32> TypeCounts;
@@ -219,7 +289,6 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
         
 		if (S.ItemData->MaxStackingCapacity <= 1)
 		{
-			// Non-stackable = 1 row chacun
 			TotalRows++;
 		}
 		else
@@ -250,11 +319,9 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 			if (TotalRows >= 5) return;
 		}
 	}
-    
-	//Inv->Gold -= Item.ItemData->Price;
-	//Inv->OnRep_Gold();
 
 	ShopItems.Add(Item);
+	SavedGold-=Item.ItemData->Price;
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();
 }
