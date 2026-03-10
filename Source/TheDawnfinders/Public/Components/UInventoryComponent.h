@@ -31,7 +31,11 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeTimeProps) const override;
 	virtual bool IsSupportedForNetworking() const override {return true;}
-	
+
+// === GETTERS ===
+public :
+	UFUNCTION(BlueprintCallable)
+	bool GetHasTreasures() { return bHasTreasures; }
 	
 
 // ==== DELEGATES + REP NOTIFIES ====
@@ -120,6 +124,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseOverloadedSlots();
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseHasTreasures();
+
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void OpenInventory();
 
@@ -174,6 +181,9 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	int CurrentOverloadSlotCount;
+
+	UPROPERTY()
+	bool bHasTreasures;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;

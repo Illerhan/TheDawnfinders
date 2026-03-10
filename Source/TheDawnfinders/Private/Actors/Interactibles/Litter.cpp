@@ -149,14 +149,6 @@ void ALitter::ClampToGround()
     }
 }
 
-void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    DOREPLIFETIME(ALitter, CurrentLinearVelocity);
-    DOREPLIFETIME(ALitter, CurrentAngularVelocityYaw);
-    DOREPLIFETIME(ALitter, ServerTransform);
-}
-
 void ALitter::BeginPlay()
 {
     PrimaryActorTick.bStartWithTickEnabled = false;
@@ -199,9 +191,7 @@ void ALitter::BeginPlay()
 }
 
 
-// ============================================================================
-//                                PHYSICS LOOP
-// ============================================================================
+#pragma region Physics
 
 void ALitter::Tick(float DeltaTime)
 {
@@ -259,8 +249,8 @@ void ALitter::StartExtraction_Implementation()
     {
         UE_LOG(LogTemp, Error, TEXT("[EXTRACTION] Failed to get DoorRegistry!"));
     }
-    
-    
+
+
 }
 
 void ALitter::ResolvePhysics(float DeltaTime)
@@ -280,11 +270,12 @@ void ALitter::ResolvePhysics(float DeltaTime)
     for (int i = 0; i < 2; i++)
     {
         if (SoundManagerInstance && ActiveCount == 1)
-            SoundManagerInstance->MultiPlaySound(SoloSound,GetActorLocation(),800,1000,true);
+            SoundManagerInstance->MultiPlaySound(SoloSound, GetActorLocation(), 800, 1000, true);
         if (ActiveCount == 1 && InventoryComponent->CurrentWeight >= InventoryComponent->SoloMaxWeight)
         {
             Mass += InventoryComponent->CurrentWeight;
-        }else if (ActiveCount == 2 && InventoryComponent->CurrentWeight>= InventoryComponent->DuoMaxWeight)
+        }
+        else if (ActiveCount == 2 && InventoryComponent->CurrentWeight >= InventoryComponent->DuoMaxWeight)
         {
             Mass += InventoryComponent->CurrentWeight;
         }
@@ -301,7 +292,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
         {
             ActiveCount++;
             FVector PPos = CarryPoints[i]->GetComponentLocation();
-            DrawDebugDirectionalArrow(GetWorld(), PPos, PPos + InputDir * 100.f, 
+            DrawDebugDirectionalArrow(GetWorld(), PPos, PPos + InputDir * 100.f,
                 5.0f, FColor::Green, false, -1, 0, 3.0f);
         }
         // -------------------------------------------------
@@ -324,7 +315,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
         TotalTorqueZ += Torque3D.Z;
     }
 
-    Mass = BaseMass; 
+    Mass = BaseMass;
 
     // 2. Vérifier si on est en surcharge
     bool bIsOverloaded = false;
@@ -343,7 +334,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
     }
 
     // 3. Gestion du Son (Avec un délai de 2 secondes entre chaque cri/bruit)
-    if (ActiveCount == 1 &&  SoundManagerInstance)
+    if (ActiveCount == 1 && SoundManagerInstance)
     {
         // On vérifie si on pousse (inutile de crier si on est à l'arrêt)
         if (!CurrentLinearVelocity.IsZero() || !TotalForce.IsZero())
@@ -361,12 +352,12 @@ void ALitter::ResolvePhysics(float DeltaTime)
     // --- VISUAL DEBUG: Print status ---
     if (ActiveCount > 0 || !CurrentLinearVelocity.IsZero())
     {
-        FString Msg = FString::Printf(TEXT("Pushers: %d | Force: %s | Velocity: %s"), 
+        FString Msg = FString::Printf(TEXT("Pushers: %d | Force: %s | Velocity: %s"),
             ActiveCount, *TotalForce.ToString(), *CurrentLinearVelocity.ToString());
         GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Msg);
 
         // Draw Total Force Arrow from Center
-        DrawDebugDirectionalArrow(GetWorld(), GetActorLocation(), 
+        DrawDebugDirectionalArrow(GetWorld(), GetActorLocation(),
             GetActorLocation() + TotalForce * 0.001f, 10.f, FColor::Red, false, -1, 0, 5.f);
     }
     // ----------------------------------
@@ -379,7 +370,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
         // On applique l'accélération normale
         FVector Acceleration = TotalForce / Mass;
         CurrentLinearVelocity += Acceleration * DeltaTime;
-        
+
         // On applique une friction légère (Damping) pour limiter la vitesse max
         float LinearDrag = 1.0f - (LinearDamping * DeltaTime);
         CurrentLinearVelocity *= FMath::Clamp(LinearDrag, 0.f, 1.f);
@@ -389,15 +380,15 @@ void ALitter::ResolvePhysics(float DeltaTime)
         // CAS B : ON LACHE TOUT (FREINAGE)
         // On réduit la vitesse vers 0 rapidement
         float CurrentSpeed = CurrentLinearVelocity.Size();
-        
+
         if (CurrentSpeed > 0.f)
         {
             // On calcule combien de vitesse on perd ce tour-ci
             float SpeedDrop = BrakingDeceleration * DeltaTime;
-            
+
             // Nouvelle vitesse (on ne descend pas en dessous de 0)
             float NewSpeed = FMath::Max(0.f, CurrentSpeed - SpeedDrop);
-            
+
             // On réapplique la direction
             CurrentLinearVelocity = CurrentLinearVelocity.GetSafeNormal() * NewSpeed;
         }
@@ -412,12 +403,12 @@ void ALitter::ResolvePhysics(float DeltaTime)
     // Gestion de la Rotation (Même logique : freinage fort si pas de force)
     if (FMath::IsNearlyZero(TotalTorqueZ))
     {
-         // Freinage angulaire rapide
-         float AngSpeed = FMath::Abs(CurrentAngularVelocityYaw);
-         float AngDrop = (BrakingDeceleration * 0.1f) * DeltaTime; // 10% du freinage linéaire
-         float NewAngSpeed = FMath::Max(0.f, AngSpeed - AngDrop);
-         
-         CurrentAngularVelocityYaw = (CurrentAngularVelocityYaw > 0 ? 1 : -1) * NewAngSpeed;
+        // Freinage angulaire rapide
+        float AngSpeed = FMath::Abs(CurrentAngularVelocityYaw);
+        float AngDrop = (BrakingDeceleration * 0.1f) * DeltaTime; // 10% du freinage linéaire
+        float NewAngSpeed = FMath::Max(0.f, AngSpeed - AngDrop);
+
+        CurrentAngularVelocityYaw = (CurrentAngularVelocityYaw > 0 ? 1 : -1) * NewAngSpeed;
     }
     else
     {
@@ -435,10 +426,10 @@ void ALitter::ResolvePhysics(float DeltaTime)
 
         // --- DETECTION COLLISION JOUEURS ---
         FHitResult PlayerHit;
-    
+
         // On fait 3 itérations max pour glisser le long des murs (coin de mur, couloir étroit)
         int MaxIterations = 3;
-    
+
         // Copie de travail
         FVector ProposedMove = DeltaLoc;
         FRotator ProposedRot = DeltaRot;
@@ -452,7 +443,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
             }
 
             // --- COLLISION DETECTEE ---
-            
+
             // 1. Debug : Visualiser où ça tape
             DrawDebugPoint(GetWorld(), PlayerHit.ImpactPoint, 10.f, FColor::Red, false, 0.1f);
             DrawDebugLine(GetWorld(), PlayerHit.ImpactPoint, PlayerHit.ImpactPoint + PlayerHit.ImpactNormal * 50.f, FColor::Yellow, false, 0.1f);
@@ -501,21 +492,44 @@ void ALitter::ResolvePhysics(float DeltaTime)
     }
 }
 
+#pragma endregion
 
-// ============================================================================
-//                                INTERACTION
-// ============================================================================
+
+#pragma region Interaction
+
+void ALitter::SelectInteractible_Implementation(AActor* Interactor)
+{
+    if (!InteractibleWidget) return;
+
+    if (CurrentOverappedComponent == LightTrigger)
+    {
+        if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction", InputIcon);
+        else LightComponent->bLightOn ? InteractibleWidget->DisplayText("Eteindre la lumiere", InputIcon) :
+            InteractibleWidget->DisplayText("Activer la lumiere", InputIcon);
+    }
+    // Front ou Back
+    else
+    {
+        InteractibleWidget->DisplayText("Porter", InputIcon);
+    }
+}
+
+void ALitter::UnselectInteractible_Implementation(AActor* Interactor)
+{
+    if (!InteractibleWidget) return;
+
+    InteractibleWidget->HideText();
+}
 
 void ALitter::Interact_Implementation(AActor* Interactor)
 {
-
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
     if (!Player) return;
 
     // Vérifie dans quelle zone se trouve le joueur
     bool bInFront = FrontTrigger->IsOverlappingActor(Player);
-    bool bInBack  = BackTrigger->IsOverlappingActor(Player);
-    bool bInventory= InventoryTrigger->IsOverlappingActor(Player);
+    bool bInBack = BackTrigger->IsOverlappingActor(Player);
+    bool bInventory = InventoryTrigger->IsOverlappingActor(Player);
     bool bInLight = LightTrigger->IsOverlappingActor(Player);
 
     // CAS 1 : Light (Zone Centrale)
@@ -528,22 +542,23 @@ void ALitter::Interact_Implementation(AActor* Interactor)
             if (LightComponent->bLightOn)
             {
                 LightComponent->Server_TurnLightOff();
-                InteractibleWidget->DisplayText("Allumer la lumiere",InputIcon);
-            }else
+                InteractibleWidget->DisplayText("Allumer la lumiere", InputIcon);
+            }
+            else
             {
                 LightComponent->Server_TurnLightOn();
-                InteractibleWidget->DisplayText("Eteindre la lumiere",InputIcon);
+                InteractibleWidget->DisplayText("Eteindre la lumiere", InputIcon);
             }
-            
-            
+
+
             LightComponent->FuelUpdate();
             return;
         }
     }
     if (Player->bIsCarrying) return;
-    
+
     // CAS 2 : Inventaire (Zone Centrale)
-   
+
     // CAS 3 : Portage (Zone Avant OU Arrière)
     int32 TargetSlot = -1;
 
@@ -574,9 +589,18 @@ void ALitter::StopInteract_Implementation(AActor* Interactor)
     }
 }
 
-// ============================================================================
-//                                SERVER RPCs
-// ============================================================================
+#pragma endregion
+
+ 
+#pragma region Server RPC / Replciation
+
+void ALitter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    DOREPLIFETIME(ALitter, CurrentLinearVelocity);
+    DOREPLIFETIME(ALitter, CurrentAngularVelocityYaw);
+    DOREPLIFETIME(ALitter, ServerTransform);
+}
 
 void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player, int32 SlotIndex)
 {
@@ -603,7 +627,7 @@ void ALitter::Server_StartPushing_Implementation(AAPlayerCharacter* Player, int3
 
     // Notify Player State
     Player->Server_SetPushingState(this, true);
-    
+
     // Désactiver mouvement joueur
     Player->GetCharacterMovement()->DisableMovement();
 }
@@ -616,7 +640,7 @@ void ALitter::Server_EndPushing_Implementation(AAPlayerCharacter* Player)
     ActivePushers.Remove(Player);
 
     Player->Server_SetPushingState(this, false);
-    
+
     // On rend le contrôle standard au joueur
     Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 }
@@ -636,147 +660,10 @@ void ALitter::Server_UpdateInputs_Implementation(AAPlayerCharacter* Player, FVec
     }
 }
 
-// ============================================================================
-//                                HELPER FUNCTIONS
-// ============================================================================
+#pragma endregion
 
-void ALitter::AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex)
-{
-    if (!Player || !CarryPoints.IsValidIndex(SlotIndex)) return;
 
-    CarrySlots[SlotIndex] = Player;
-    
-    Player->AttachToComponent(CarryPoints[SlotIndex], FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-
-}
-
-void ALitter::DetachPlayer(AAPlayerCharacter* Player)
-{
-    if (!Player) return;
-
-    // Remove from slot array
-    for (int i = 0; i < 2; i++)
-    {
-        if (CarrySlots[i] == Player)
-        {
-            CarrySlots[i] = nullptr;
-            break;
-        }
-    }
-    
-    Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
-}
-
-bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit)
-{
-    // 1. Préparer la transformation future du Brancard
-    FTransform CurrentLitterTrans = GetActorTransform();
-    FTransform FutureLitterTrans = CurrentLitterTrans;
-    
-    // Appliquer la rotation et la translation prévues
-    FQuat RotQuat = DeltaRot.Quaternion();
-    FutureLitterTrans.SetRotation(RotQuat * CurrentLitterTrans.GetRotation());
-    FutureLitterTrans.AddToTranslation(DeltaLoc);
-
-    for (int i = 0; i < 2; i++)
-    {
-        AAPlayerCharacter* Player = CarrySlots[i].Get();
-        if (!Player) continue;
-
-        UCapsuleComponent* PlayerCapsule = Player->GetCapsuleComponent();
-        if (!PlayerCapsule) continue;
-
-        // --- CORRECTIF 1 : Offset Réel ---
-        // On ne suppose pas que le joueur est pile sur le CarryPoint.
-        // On calcule où il est VRAIMENT par rapport au centre du brancard maintenant.
-        FVector PlayerLocationWorld = Player->GetActorLocation();
-        FVector PlayerRelativeLoc = CurrentLitterTrans.InverseTransformPosition(PlayerLocationWorld);
-
-        // --- CALCUL DU MOUVEMENT ---
-        FVector StartPos = PlayerLocationWorld;
-        // La position de fin est : La future Transform du Litter + L'offset relatif du joueur
-        FVector EndPos = FutureLitterTrans.TransformPosition(PlayerRelativeLoc);
-
-     
-        float Radius = PlayerCapsule->GetScaledCapsuleRadius() * 1.1f; // +10% de marge en largeur
-        float HalfHeight = PlayerCapsule->GetScaledCapsuleHalfHeight() - 5.0f; // -5 unités en hauteur (Lift feet)
-
-        if (HalfHeight <= 0) HalfHeight = 10.f; // Sécurité
-
-        FCollisionQueryParams Params;
-        Params.AddIgnoredActor(this);
-        Params.AddIgnoredActor(Player);
-
-        // Debug visuel pour voir le tunnel de collision (Optionnel)
-        // DrawDebugCapsule(GetWorld(), (StartPos + EndPos) / 2, HalfHeight, Radius, FQuat::Identity, FColor::Cyan, false, -1);
-
-        bool bHit = GetWorld()->SweepSingleByChannel(
-            OutHit,
-            StartPos,
-            EndPos,
-            FQuat::Identity,
-            ECC_WorldStatic,
-            FCollisionShape::MakeCapsule(Radius, HalfHeight),
-            Params
-        );
-
-        if (bHit)
-        {
-            // --- CORRECTIF CRITIQUE POUR NE PAS RESTER BLOQUÉ ---
-            
-            // Cas 1 : On commence DÉJÀ dans le mur (bStartPenetrating)
-            if (OutHit.bStartPenetrating)
-            {
-                float Dot = FVector::DotProduct(DeltaLoc.GetSafeNormal(), OutHit.Normal);
-                
-                if (Dot > 0.1f) 
-                {
-                    continue; 
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            
-            // Cas 2 : C'est un sol (comme vu avant)
-            if (OutHit.ImpactNormal.Z > 0.7f) continue;
-
-            return true;
-        }
-        if (bHit)
-        {
-            // Vérification ultime : Si on touche quelque chose qui est "sous" nous (le sol), on ignore.
-            // Si la normale d'impact pointe vers le haut (Z > 0.7), c'est un sol/pente.
-            if (OutHit.ImpactNormal.Z > 0.7f) 
-            {
-                continue; // C'est juste le sol, on continue
-            }
-
-            return true; // C'est un mur !
-        }
-    }
-
-    return false;
-}
-
-void ALitter::ClosePalanquinInventory()
-{
-    if (HasAuthority()) 
-    {
-        Server_ClosePalanquinInventory_Implementation();
-    }
-    else 
-    {
-        Server_ClosePalanquinInventory();
-    }
-}
-
-void ALitter::Server_ClosePalanquinInventory_Implementation()
-{
-    bPlayerIsUsing = false;
-}
+#pragma region Collisions
 
 void ALitter::ResolveWallPenetration(float DeltaTime)
 {
@@ -799,7 +686,7 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
 
         // On utilise une sphère légèrement plus petite que la capsule pour être sûr
         // de ne réagir que si on est VRAIMENT dedans.
-        float TestRadius = Capsule->GetScaledCapsuleRadius() * 0.9f; 
+        float TestRadius = Capsule->GetScaledCapsuleRadius() * 0.9f;
 
         bool bOverlap = GetWorld()->OverlapMultiByChannel(
             Overlaps,
@@ -816,7 +703,7 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
             {
                 FVector DirectionToCenter = GetActorLocation() - Player->GetActorLocation();
                 DirectionToCenter.Z = 0.f; // On ne veut pas voler
-                
+
                 // Force de répulsion violente
                 TotalDepenetration += DirectionToCenter.GetSafeNormal() * 50.0f; // 50cm de poussée
                 StuckCount++;
@@ -830,7 +717,7 @@ void ALitter::ResolveWallPenetration(float DeltaTime)
     {
         FVector Nudge = TotalDepenetration * DeltaTime * 5.0f; // Vitesse d'éjection
         RootCollision->AddWorldOffset(Nudge, false); // false = Teleport (ignore collision)
-        
+
         // On tue la vélocité pour arrêter de foncer dans le mur
         CurrentLinearVelocity *= 0.1f;
         CurrentAngularVelocityYaw = 0.f;
@@ -878,29 +765,150 @@ void ALitter::OnZoneOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Othe
         // CAS A : On a tout quitté
         Player->RemoveInteractibleAtRange_Implementation(this);
     }
-    
+
 }
 
-void ALitter::SelectInteractible_Implementation(AActor* Interactor)
-{
-    if (!InteractibleWidget) return;
+#pragma endregion
 
-    if (CurrentOverappedComponent == LightTrigger)
+
+#pragma region Others
+
+void ALitter::AttachPlayerToSlot(AAPlayerCharacter* Player, int32 SlotIndex)
+{
+    if (!Player || !CarryPoints.IsValidIndex(SlotIndex)) return;
+
+    CarrySlots[SlotIndex] = Player;
+
+    Player->AttachToComponent(CarryPoints[SlotIndex], FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+}
+
+void ALitter::DetachPlayer(AAPlayerCharacter* Player)
+{
+    if (!Player) return;
+
+    // Remove from slot array
+    for (int i = 0; i < 2; i++)
     {
-        if (IsIsExtracting())  InteractibleWidget->DisplayText("Demarrer l'extraction", InputIcon);
-        else LightComponent->bLightOn ? InteractibleWidget->DisplayText("Eteindre la lumiere", InputIcon) :
-            InteractibleWidget->DisplayText("Activer la lumiere", InputIcon);
+        if (CarrySlots[i] == Player)
+        {
+            CarrySlots[i] = nullptr;
+            break;
+        }
     }
-    // Front ou Back
+
+    Player->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+}
+
+bool ALitter::CheckPlayerCollision(const FVector& DeltaLoc, const FRotator& DeltaRot, FHitResult& OutHit)
+{
+    // 1. Préparer la transformation future du Brancard
+    FTransform CurrentLitterTrans = GetActorTransform();
+    FTransform FutureLitterTrans = CurrentLitterTrans;
+
+    // Appliquer la rotation et la translation prévues
+    FQuat RotQuat = DeltaRot.Quaternion();
+    FutureLitterTrans.SetRotation(RotQuat * CurrentLitterTrans.GetRotation());
+    FutureLitterTrans.AddToTranslation(DeltaLoc);
+
+    for (int i = 0; i < 2; i++)
+    {
+        AAPlayerCharacter* Player = CarrySlots[i].Get();
+        if (!Player) continue;
+
+        UCapsuleComponent* PlayerCapsule = Player->GetCapsuleComponent();
+        if (!PlayerCapsule) continue;
+
+        // --- CORRECTIF 1 : Offset Réel ---
+        // On ne suppose pas que le joueur est pile sur le CarryPoint.
+        // On calcule où il est VRAIMENT par rapport au centre du brancard maintenant.
+        FVector PlayerLocationWorld = Player->GetActorLocation();
+        FVector PlayerRelativeLoc = CurrentLitterTrans.InverseTransformPosition(PlayerLocationWorld);
+
+        // --- CALCUL DU MOUVEMENT ---
+        FVector StartPos = PlayerLocationWorld;
+        // La position de fin est : La future Transform du Litter + L'offset relatif du joueur
+        FVector EndPos = FutureLitterTrans.TransformPosition(PlayerRelativeLoc);
+
+
+        float Radius = PlayerCapsule->GetScaledCapsuleRadius() * 1.1f; // +10% de marge en largeur
+        float HalfHeight = PlayerCapsule->GetScaledCapsuleHalfHeight() - 5.0f; // -5 unités en hauteur (Lift feet)
+
+        if (HalfHeight <= 0) HalfHeight = 10.f; // Sécurité
+
+        FCollisionQueryParams Params;
+        Params.AddIgnoredActor(this);
+        Params.AddIgnoredActor(Player);
+
+        // Debug visuel pour voir le tunnel de collision (Optionnel)
+        // DrawDebugCapsule(GetWorld(), (StartPos + EndPos) / 2, HalfHeight, Radius, FQuat::Identity, FColor::Cyan, false, -1);
+
+        bool bHit = GetWorld()->SweepSingleByChannel(
+            OutHit,
+            StartPos,
+            EndPos,
+            FQuat::Identity,
+            ECC_WorldStatic,
+            FCollisionShape::MakeCapsule(Radius, HalfHeight),
+            Params
+        );
+
+        if (bHit)
+        {
+            // --- CORRECTIF CRITIQUE POUR NE PAS RESTER BLOQUÉ ---
+
+            // Cas 1 : On commence DÉJÀ dans le mur (bStartPenetrating)
+            if (OutHit.bStartPenetrating)
+            {
+                float Dot = FVector::DotProduct(DeltaLoc.GetSafeNormal(), OutHit.Normal);
+
+                if (Dot > 0.1f)
+                {
+                    continue;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            // Cas 2 : C'est un sol (comme vu avant)
+            if (OutHit.ImpactNormal.Z > 0.7f) continue;
+
+            return true;
+        }
+        if (bHit)
+        {
+            // Vérification ultime : Si on touche quelque chose qui est "sous" nous (le sol), on ignore.
+            // Si la normale d'impact pointe vers le haut (Z > 0.7), c'est un sol/pente.
+            if (OutHit.ImpactNormal.Z > 0.7f)
+            {
+                continue; // C'est juste le sol, on continue
+            }
+
+            return true; // C'est un mur !
+        }
+    }
+
+    return false;
+}
+
+void ALitter::ClosePalanquinInventory()
+{
+    if (HasAuthority())
+    {
+        Server_ClosePalanquinInventory_Implementation();
+    }
     else
     {
-        InteractibleWidget->DisplayText("Porter", InputIcon);
+        Server_ClosePalanquinInventory();
     }
 }
 
-void ALitter::UnselectInteractible_Implementation(AActor* Interactor)
+void ALitter::Server_ClosePalanquinInventory_Implementation()
 {
-    if (!InteractibleWidget) return;
-    
-    InteractibleWidget->HideText();
+    bPlayerIsUsing = false;
 }
+
+#pragma endregion

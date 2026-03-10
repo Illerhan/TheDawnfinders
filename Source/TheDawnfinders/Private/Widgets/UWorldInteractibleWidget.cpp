@@ -12,4 +12,10 @@ void UWorldInteractibleWidget::DisplayErrorText_Implementation(const FString& Te
 
 void UWorldInteractibleWidget::DisplayText_Implementation(const FString& Text, UTexture2D* Icon)
 {
+
+}
+
+void UWorldInteractibleWidget::DoTreasureFeedback_Implementation(const FString& Text, FColor Color)
+{
+
 }
