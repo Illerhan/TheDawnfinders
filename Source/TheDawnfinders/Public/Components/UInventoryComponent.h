@@ -13,6 +13,7 @@
 class UItemData;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnInventoryChange, const TArray<FInventorySlot>&, CurrentSlots, int32, CurrentSlotIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnTreasureInventoryChange, const TArray<FInventorySlot>&, CurrentTreasureSlots);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOverloadCountChange, const int32, newCount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryOpenInput);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseInput);
@@ -39,6 +40,9 @@ public :
 	FOnInventoryChange OnInventoryChange;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
+	FOnTreasureInventoryChange OnTreasureInventoryChange;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
 	FOnInventoryOpenInput OnInventoryOpenInput;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Inventory")
@@ -49,6 +53,9 @@ public :
 
 	UFUNCTION()
 	void OnRep_InventorySlots();
+
+	UFUNCTION()
+	void OnRep_TreasureSlots();
 
 	UFUNCTION()
 	void OnRep_CurrentSlotIndex();
@@ -75,13 +82,13 @@ public :
 	void ServerRemoveCurrentItem();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void RemoveItemAtIndex(int Index, bool bRemoveAll);
+	void RemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory = false);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void LocalRemoveItemAtIndex(int Index, bool bRemoveAll);
+	void LocalRemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory);
 
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
-	void ServerRemoveItemAtIndex(int Index, bool bRemoveAll);
+	void ServerRemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory);
 
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void Throw();
@@ -153,8 +160,11 @@ public :
 
 // === PROTECTED PROPERTIES ===
 public : 
-	UPROPERTY(ReplicatedUsing = OnRep_InventorySlots, EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(ReplicatedUsing = OnRep_InventorySlots, BlueprintReadWrite, Category = "Inventory")
 	TArray<FInventorySlot> InventorySlots;
+
+	UPROPERTY(ReplicatedUsing = OnRep_TreasureSlots, BlueprintReadWrite, Category = "Inventory")
+	TArray<FInventorySlot> TreasureSlots;
 
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentSlotIndex, BlueprintReadWrite, Category = "Inventory")
 	int CurrentSlotIndex;
@@ -167,6 +177,9 @@ public :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int InventorySlotCount = 10;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	int TreasureSlotCount = 10;
 	
 	UPROPERTY(EditAnywhere, Category = "Litter Physics")
 	float CurrentWeight = 0.0f;
