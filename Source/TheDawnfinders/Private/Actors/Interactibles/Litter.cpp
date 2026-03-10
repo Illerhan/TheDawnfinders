@@ -143,6 +143,8 @@ void ALitter::ClampToGround()
 
     if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_WorldStatic, Params))
     {
+        if (Hit.GetActor()->ActorHasTag("Player")) return;
+
         FVector Loc = GetActorLocation();
         Loc.Z = Hit.ImpactPoint.Z + HalfHeight;
         SetActorLocation(Loc, false, nullptr, ETeleportType::TeleportPhysics);
