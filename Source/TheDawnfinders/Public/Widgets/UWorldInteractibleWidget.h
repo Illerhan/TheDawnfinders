@@ -19,4 +19,7 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DisplayErrorText(const FString& Text);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoTreasureFeedback(const FString& Text, FColor Color);
 };

@@ -200,7 +200,7 @@ protected:
 	UPROPERTY(Replicated)
 	bool bPlayerIsUsing = false;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	UWorldInteractibleWidget* InteractibleWidget;
 
 	UPROPERTY(Replicated)

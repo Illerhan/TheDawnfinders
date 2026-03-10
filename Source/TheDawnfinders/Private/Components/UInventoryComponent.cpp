@@ -49,7 +49,7 @@ void UInventoryComponent::OnRep_InventorySlots()
 
 void UInventoryComponent::OnRep_TreasureSlots()
 {
-	OnTreasureInventoryChange.Broadcast(InventorySlots);
+	OnTreasureInventoryChange.Broadcast(TreasureSlots);
 }
 
 
@@ -150,14 +150,26 @@ void UInventoryComponent::RestoreShopItems()
 	
 	bShopItemsRestored = false;
 	AddShopItems(PS->ShopItems);
-	
-	
+}
+
+void UInventoryComponent::UpdateValuable()
+{
+	CurrentValue = 0;
+
+	if (InventorySlots.Num() == 0) return;
+
+	for (const FInventorySlot& Slot : InventorySlots)
+	{
+		if (Slot.CurrentInfos.ItemData)
+		{
+			int32 ValueDuSlot = Slot.CurrentInfos.ItemData->ItemValue * Slot.Quantity;
+			CurrentValue += ValueDuSlot;
+		}
+	}
 }
 
 void UInventoryComponent::AddShopItems(TArray<FItemInfos> Items)
 {
-    // Toujours exécuté là où on l'appelle
-    // Pas de vérification réseau, pas de HasRoomForItem
     for (FItemInfos& Item : Items)
     {
         ServerAddNewItem_Implementation(Item, 1);
@@ -360,6 +372,8 @@ void UInventoryComponent::SortInventory()
 {
 	SortByCategories();
 	SortItems();
+
+	ActualiseHasTreasures();
 
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 	if(TreasureSlotCount > 0) OnTreasureInventoryChange.Broadcast(TreasureSlots);
@@ -691,6 +705,18 @@ void UInventoryComponent::ActualiseOverloadedSlots()
 
 	InventorySlots = NewInventorySlots;
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+}
+
+void UInventoryComponent::ActualiseHasTreasures()
+{
+	bHasTreasures = false; 
+
+	for (int i = 0; i < TreasureSlotCount; i++) {
+		if (!TreasureSlots[i].CurrentInfos.ItemData) continue;
+
+		bHasTreasures = true;
+		return;
+	}
 }
 
 void UInventoryComponent::OpenInventory()
