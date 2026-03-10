@@ -309,7 +309,7 @@ void ALitter::ResolvePhysics(float DeltaTime)
         if (InputDir.IsNearlyZero()) continue;
 
         // Force Calculation: Direction * Strength
-        FVector AppliedForce = InputDir.GetSafeNormal() * PushForce;
+        FVector AppliedForce = InputDir * PushForce;
 
         // A. Add to Linear Force
         TotalForce += AppliedForce;
@@ -565,6 +565,8 @@ void ALitter::Interact_Implementation(AActor* Interactor)
 
 void ALitter::StopInteract_Implementation(AActor* Interactor)
 {
+    Super::StopInteract_Implementation(Interactor);
+
     AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
     if (Player)
     {
@@ -628,9 +630,6 @@ void ALitter::Server_UpdateInputs_Implementation(AAPlayerCharacter* Player, FVec
         if (Data->InputVector.SizeSquared() < 0.001f)
         {
             Data->InputVector = FVector::ZeroVector;
-        }else
-        {
-            Data->InputVector = WorldInputDirection.GetClampedToMaxSize(1.0f);
         }
 
         Data->LastUpdateTime = GetWorld()->GetTimeSeconds();
