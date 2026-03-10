@@ -127,7 +127,6 @@ ALitter::ALitter()
 
     RootCollision->SetEnableGravity(false);
     RootCollision->SetSimulatePhysics(false);
-    
 }
 
 void ALitter::ClampToGround()
