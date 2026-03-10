@@ -34,6 +34,7 @@ void UInventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UInventoryComponent, InventorySlots);
+	DOREPLIFETIME(UInventoryComponent, TreasureSlots);
 	DOREPLIFETIME(UInventoryComponent, CurrentSlotIndex);
 	DOREPLIFETIME(UInventoryComponent, Gold);
 }
@@ -44,6 +45,11 @@ void UInventoryComponent::OnRep_InventorySlots()
 	VerifyCurrentOverloadCount();
 
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+}
+
+void UInventoryComponent::OnRep_TreasureSlots()
+{
+	OnTreasureInventoryChange.Broadcast(TreasureSlots);
 }
 
 
@@ -97,9 +103,11 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 
 	UE_LOG(LogTemp, Warning, TEXT("AddNewItem"));
 
-	for (int32 i = 0; i < InventorySlots.Num(); i++)
+	bool UseValueableInventory = NewItem.ItemData->ItemType == EItemType::Valuable;
+
+	for (int32 i = 0; i < (UseValueableInventory ? TreasureSlotCount : InventorySlotCount); i++)
 	{
-		FInventorySlot& Slot = InventorySlots[i];
+		FInventorySlot& Slot = UseValueableInventory ? TreasureSlots[i] : InventorySlots[i];
 		
 		if (!Slot.CurrentInfos.ItemData)
 		{
@@ -170,7 +178,26 @@ void UInventoryComponent::AddShopItems(TArray<FItemInfos> Items)
 
 bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 {
-	for (int32 i = 0; i < InventorySlots.Num(); i++)
+	if (NewItem.ItemData->ItemType == EItemType::Valuable && TreasureSlotCount > 0) {
+
+		for (int i = 0; i < TreasureSlotCount; i++)
+		{
+			FInventorySlot& Slot = TreasureSlots[i];
+
+			if (!Slot.CurrentInfos.ItemData)
+			{
+				return true;
+			}
+			else if (Slot.CurrentInfos.ItemData == NewItem.ItemData && Slot.Quantity < NewItem.ItemData->MaxStackingCapacity)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	for (int i = 0; i < InventorySlots.Num(); i++)
 	{
 		FInventorySlot& Slot = InventorySlots[i];
 
@@ -213,22 +240,22 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 }
 
 
-void UInventoryComponent::RemoveItemAtIndex(int Index, bool bRemoveAll)
+void UInventoryComponent::RemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory)
 {
 	if (!GetOwner()->HasAuthority())
 	{
-		LocalRemoveItemAtIndex(Index, bRemoveAll);
-		ServerRemoveItemAtIndex(Index, bRemoveAll);
+		LocalRemoveItemAtIndex(Index, bRemoveAll, TreasureInventory);
+		ServerRemoveItemAtIndex(Index, bRemoveAll, TreasureInventory);
 
 		return;
 	}
 
-	ServerRemoveItemAtIndex_Implementation(Index, bRemoveAll);
+	ServerRemoveItemAtIndex_Implementation(Index, bRemoveAll, TreasureInventory);
 }
 
-void UInventoryComponent::LocalRemoveItemAtIndex(int Index, bool bRemoveAll)
+void UInventoryComponent::LocalRemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory)
 {
-	TArray<FInventorySlot> NewSlots = InventorySlots;
+	TArray<FInventorySlot> NewSlots = TreasureInventory ? TreasureSlots : InventorySlots;
 	FInventorySlot& CurrentSlot = NewSlots[Index];
 
 	if (!CurrentSlot.CurrentInfos.ItemData) return;
@@ -240,15 +267,16 @@ void UInventoryComponent::LocalRemoveItemAtIndex(int Index, bool bRemoveAll)
 
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
-	InventorySlots = NewSlots;
+	if (TreasureInventory) TreasureSlots = NewSlots;
+	else InventorySlots = NewSlots;
 
 	SortInventory();
 	VerifyCurrentOverloadCount();
 }
 
-void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool bRemoveAll)
+void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool bRemoveAll, bool TreasureInventory)
 {
-	TArray<FInventorySlot> NewSlots = InventorySlots;
+	TArray<FInventorySlot> NewSlots = TreasureInventory ? TreasureSlots : InventorySlots;
 	FInventorySlot& CurrentSlot = NewSlots[Index];
 
 	if (!CurrentSlot.CurrentInfos.ItemData) return;
@@ -260,7 +288,8 @@ void UInventoryComponent::ServerRemoveItemAtIndex_Implementation(int Index, bool
 	
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
-	InventorySlots = NewSlots;
+	if(TreasureInventory) TreasureSlots = NewSlots;
+	else InventorySlots = NewSlots;
 
 	SortInventory();
 	VerifyCurrentOverloadCount();
@@ -344,7 +373,10 @@ void UInventoryComponent::SortInventory()
 	SortByCategories();
 	SortItems();
 
+	ActualiseHasTreasures();
+
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+	if(TreasureSlotCount > 0) OnTreasureInventoryChange.Broadcast(TreasureSlots);
 }
 
 void UInventoryComponent::SortByCategories()
@@ -673,6 +705,18 @@ void UInventoryComponent::ActualiseOverloadedSlots()
 
 	InventorySlots = NewInventorySlots;
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+}
+
+void UInventoryComponent::ActualiseHasTreasures()
+{
+	bHasTreasures = false; 
+
+	for (int i = 0; i < TreasureSlotCount; i++) {
+		if (!TreasureSlots[i].CurrentInfos.ItemData) continue;
+
+		bHasTreasures = true;
+		return;
+	}
 }
 
 void UInventoryComponent::OpenInventory()

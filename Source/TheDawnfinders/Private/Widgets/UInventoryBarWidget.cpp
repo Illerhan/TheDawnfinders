@@ -43,6 +43,7 @@ void UInventoryBarWidget::NativeDestruct()
     if (InventoryComponentRef)
     {
         InventoryComponentRef->OnInventoryChange.RemoveDynamic(this, &UInventoryBarWidget::ActualiseWidget);
+        InventoryComponentRef->OnTreasureInventoryChange.RemoveDynamic(this, &UInventoryBarWidget::ActualiseTreasuresWidgets);
         InventoryComponentRef = nullptr;
     }
 
@@ -73,28 +74,20 @@ void UInventoryBarWidget::HideWidget_Implementation()
 void UInventoryBarWidget::TryBindToInventory()
 {
     APlayerController* PC = GetOwningPlayer();
-    if (!PC || !PC->IsLocalController())
-    {
-        return;
-    }
-
+    if (!PC || !PC->IsLocalController()) return;
+   
     APawn* Pawn = PC->GetPawn();
-    if (!Pawn)
-    {
-        return;
-    }
+    if (!Pawn) return;
 
     AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn);
-    if (!PlayerCharacter || !PlayerCharacter->InventoryComponent)
-    {
-        return;
-    }
+    if (!PlayerCharacter || !PlayerCharacter->InventoryComponent) return;
 
     InventoryComponentRef = PlayerCharacter->InventoryComponent;
     GetWorld()->GetTimerManager().ClearTimer(BindDelayTimerHandle);
 
     // Bind TOUJOURS côté client
     InventoryComponentRef->OnInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseWidget);
+    InventoryComponentRef->OnTreasureInventoryChange.AddUniqueDynamic(this, &UInventoryBarWidget::ActualiseTreasuresWidgets);
 
     UE_LOG(LogTemp, Display, TEXT("%d"), InventoryComponentRef->InventorySlots.Num());
 
@@ -108,9 +101,10 @@ void UInventoryBarWidget::TryBindToInventory()
                 ? *InventoryComponentRef->InventorySlots[i].CurrentInfos.ItemData->ItemName
                 : TEXT("VIDE"));
     }
+
     bool bHasItems = InventoryComponentRef->InventorySlots.ContainsByPredicate(
        [](const FInventorySlot& S){ return S.CurrentInfos.ItemData != nullptr; }
-   );
+    );
     
     if (bHasItems)
     {
@@ -135,6 +129,7 @@ void UInventoryBarWidget::SetupSlotsNavigation_Implementation()
         }
     }
 }
+
 
 void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventorySlot>& Slots, int32 CurrentIndex)
 {
@@ -162,6 +157,31 @@ void UInventoryBarWidget::ActualiseWidget_Implementation(const TArray<FInventory
         {
             FInventorySlot EmptySlot;
             InventorySlotsWidgets[i]->ActualiseVisuals(EmptySlot, false);
+        }
+    }
+}
+
+
+void UInventoryBarWidget::ActualiseTreasuresWidgets_Implementation(const TArray<FInventorySlot>& Slots)
+{
+    APlayerController* PC = GetOwningPlayer();
+    if (!PC) return;
+
+    ACustomPlayerState* PSCustom = PC->GetPlayerState<ACustomPlayerState>();
+    if (!PSCustom) return;
+
+    for (int32 i = 0; i < InventoryTreasureSlotsWidgets.Num(); i++)
+    {
+        if (!InventoryTreasureSlotsWidgets[i]) continue;
+
+        if (Slots.IsValidIndex(i))
+        {
+            InventoryTreasureSlotsWidgets[i]->ActualiseVisuals(Slots[i], false);
+        }
+        else
+        {
+            FInventorySlot EmptySlot;
+            InventoryTreasureSlotsWidgets[i]->ActualiseVisuals(EmptySlot, false);
         }
     }
 }

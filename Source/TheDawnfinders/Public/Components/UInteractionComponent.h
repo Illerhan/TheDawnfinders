@@ -108,10 +108,19 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StartMashButtonQTE(AInteractibleObjects* Interactible);
 
+// === GETTERS ===
+public : 
+	UFUNCTION(BlueprintCallable)
+	AActor* GetCurrentInteractible() 
+	{
+		if (!bIsInInteraction) return nullptr;
+		return CurrentInteractible;
+	}
+
 
 // === PUBLIC PROPERTIES ===
 public:
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AActor* CurrentInteractible = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)

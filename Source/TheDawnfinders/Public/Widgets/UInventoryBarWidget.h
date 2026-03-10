@@ -31,6 +31,9 @@ public :
 	void ActualiseWidget(const TArray<FInventorySlot>& Slots, int32 CurrentIndex);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ActualiseTreasuresWidgets(const TArray<FInventorySlot>& Slots);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ShowWidget();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
@@ -56,6 +59,9 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<UInventorySlotWidget*> InventorySlotsWidgets;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<UInventorySlotWidget*> InventoryTreasureSlotsWidgets;
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsInContainer;
