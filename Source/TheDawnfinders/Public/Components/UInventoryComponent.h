@@ -149,6 +149,9 @@ public :
 	UFUNCTION(BlueprintCallable)
     void RestoreShopItems();
 	
+	UFUNCTION(BlueprintCallable)
+	void UpdateValuable();
+	
 
 
 // === PROTECTED PROPERTIES ===
@@ -182,6 +185,9 @@ public :
 
 	UPROPERTY(ReplicatedUsing = OnRep_Gold, EditAnywhere,BlueprintReadWrite, Category = "Inventory Ressources")
 	int Gold;
+	
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Inventory Ressources")
+	int CurrentValue;
 
 	UPROPERTY(ReplicatedUsing = OnRep_Knowledge, Blueprintable,BlueprintReadWrite, Category = "Inventory Ressources")
 	int Knowledge;

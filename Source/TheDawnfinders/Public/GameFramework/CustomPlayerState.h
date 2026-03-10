@@ -61,6 +61,9 @@ public :
 	
 	UFUNCTION(BlueprintCallable)
 	void SaveInventoryBeforeTravel();
+	
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_SellShopItem(UItemData* ItemToSell);
 
 // === DELEGATES
 public :
@@ -135,8 +138,8 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ApplyContextualAmulet(EAmuletTriggerType Trigger);
 
-	UPROPERTY(ReplicatedUsing=OnRep_Gold, BlueprintReadOnly)
-	int32 SavedGold = 0;
+	UPROPERTY(ReplicatedUsing=OnRep_Gold, BlueprintReadWrite)
+	int32 SavedGold = 150;
 
 // === PROTECTED PROPERTIES ===
 protected :
