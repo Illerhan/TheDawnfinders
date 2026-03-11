@@ -156,9 +156,9 @@ void UInventoryComponent::UpdateValuable()
 {
 	CurrentValue = 0;
 
-	if (InventorySlots.Num() == 0) return;
+	if (TreasureSlots.Num() == 0) return;
 
-	for (const FInventorySlot& Slot : InventorySlots)
+	for (const FInventorySlot& Slot : TreasureSlots)
 	{
 		if (Slot.CurrentInfos.ItemData)
 		{
@@ -178,6 +178,8 @@ void UInventoryComponent::AddShopItems(TArray<FItemInfos> Items)
 
 bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 {
+	if (!NewItem.ItemData) return false;
+
 	if (NewItem.ItemData->ItemType == EItemType::Valuable && TreasureSlotCount > 0) {
 
 		for (int i = 0; i < TreasureSlotCount; i++)
