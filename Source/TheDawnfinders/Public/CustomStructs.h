@@ -188,7 +188,19 @@ struct FWeaponActionData : public FTableRowBase {
 	float StaminaCost;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MoveForce;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MoveForceDuration;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bHoldToCharge;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UAnimMontage* Animation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* ChargeAnimation;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Shake")
 	float CameraShakeIntensity;

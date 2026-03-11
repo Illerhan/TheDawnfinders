@@ -80,6 +80,12 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void DoHeavyAttack();
 
+	UFUNCTION(BlueprintCallable)
+	void DoAttackInertia();
+
+	UFUNCTION(BlueprintCallable)
+	void ManageAttackInertia(float DeltaTime);
+
 	UFUNCTION()
 	void AttackAnimEnd();
 
@@ -172,6 +178,18 @@ private :
 
 	UPROPERTY()
 	float CurrentAttackDamages = 0;
+
+	UPROPERTY()
+	float AttackInertiaTimer = 0;
+
+	UPROPERTY()
+	float AttackInertiaDuration = 0;
+
+	UPROPERTY()
+	float AttackInertiaForce = 0;
+
+	UPROPERTY()
+	FWeaponActionData CurrentWeaponActionData;
 
 	UPROPERTY()
 	FVector CurrentThrowPosition;

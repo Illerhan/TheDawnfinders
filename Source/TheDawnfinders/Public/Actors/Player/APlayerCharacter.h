@@ -200,6 +200,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetPlayerSpeed(float NewSpeed, bool bInstant = false);
 
+	UFUNCTION(BlueprintCallable)
+	void SetPlayerAcceleration(float NewAcceleration);
+
+	UFUNCTION(Server, Reliable)
+	void ServerSetPlayerAcceleration(float NewAcceleration);
+
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ServerSetPlayerSpeed(float NewSpeed, bool bInstant = false);
 
