@@ -156,9 +156,9 @@ void UInventoryComponent::UpdateValuable()
 {
 	CurrentValue = 0;
 
-	if (InventorySlots.Num() == 0) return;
+	if (TreasureSlots.Num() == 0) return;
 
-	for (const FInventorySlot& Slot : InventorySlots)
+	for (const FInventorySlot& Slot : TreasureSlots)
 	{
 		if (Slot.CurrentInfos.ItemData)
 		{
