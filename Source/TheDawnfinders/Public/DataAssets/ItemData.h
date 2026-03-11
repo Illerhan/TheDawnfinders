@@ -114,6 +114,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	TSubclassOf<class AThrowableObject> ThrowedObjectClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
+	UAnimMontage* UseConsumableMontage;
+
 
 // Weapon
 public :
