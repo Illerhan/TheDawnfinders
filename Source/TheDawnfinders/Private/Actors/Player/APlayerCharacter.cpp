@@ -399,8 +399,6 @@ void AAPlayerCharacter::SetPlayerAcceleration(float NewAcceleration)
 {
     GetCharacterMovement()->MaxAcceleration = NewAcceleration;
 
-    UE_LOG(LogTemp, Display, TEXT("%f"), NewAcceleration);
-    
     if (!HasAuthority()) {
         ServerSetPlayerAcceleration(NewAcceleration);
     }
@@ -408,8 +406,6 @@ void AAPlayerCharacter::SetPlayerAcceleration(float NewAcceleration)
 
 void AAPlayerCharacter::ServerSetPlayerAcceleration_Implementation(float NewAcceleration)
 {
-    UE_LOG(LogTemp, Display, TEXT("%f"), NewAcceleration);
-
     GetCharacterMovement()->MaxAcceleration = NewAcceleration;
 }
 
