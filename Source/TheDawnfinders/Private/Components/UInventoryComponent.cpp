@@ -178,6 +178,8 @@ void UInventoryComponent::AddShopItems(TArray<FItemInfos> Items)
 
 bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 {
+	if (!NewItem.ItemData) return false;
+
 	if (NewItem.ItemData->ItemType == EItemType::Valuable && TreasureSlotCount > 0) {
 
 		for (int i = 0; i < TreasureSlotCount; i++)

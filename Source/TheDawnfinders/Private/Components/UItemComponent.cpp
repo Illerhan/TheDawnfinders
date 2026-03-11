@@ -57,8 +57,11 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	if (!GetOwner()) return;
 
+	if (AttackInertiaTimer > 0) {
+		ManageAttackInertia(DeltaTime);
+	}
+
 	ActualiseUseProgress(DeltaTime);
-	//ActualisePreviewThrow();
 }
 
 
@@ -455,16 +458,16 @@ void UItemComponent::DoLightAttack()
 		ComboIndex = 0;
 	}
 
-	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
+	CurrentWeaponActionData = *WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector);
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
-	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
-	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+	StaminaComponent->UseStamina(CurrentWeaponActionData.StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = CurrentWeaponActionData.DamageMultiplier * WeaponData->BaseDamage;
 
-	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
+	//PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 
@@ -505,16 +508,35 @@ void UItemComponent::DoHeavyAttack()
 		ComboIndex = 0;
 	}
 
-	FWeaponActionData* ActionData = WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
+	CurrentWeaponActionData = *WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->HeavyComboActionNames[ComboIndex], " ");
 
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 1.0f, FVector::ZeroVector);
-	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), ActionData->Animation, WeaponData->AnimsSpeedModifier);
+	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
-	StaminaComponent->UseStamina(ActionData->StaminaCost * WeaponData->StaminaMultiplier);
-	CurrentAttackDamages = ActionData->DamageMultiplier * WeaponData->BaseDamage;
+	StaminaComponent->UseStamina(CurrentWeaponActionData.StaminaCost * WeaponData->StaminaMultiplier);
+	CurrentAttackDamages = CurrentWeaponActionData.DamageMultiplier * WeaponData->BaseDamage;
 	
-	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
+	//PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
+}
+
+void UItemComponent::DoAttackInertia()
+{
+	AttackInertiaTimer = CurrentWeaponActionData.MoveForceDuration;
+	AttackInertiaDuration = CurrentWeaponActionData.MoveForceDuration;
+	AttackInertiaForce = CurrentWeaponActionData.MoveForce;
+
+	PlayerCharacter->SetPlayerAcceleration(15000);
+}
+
+void UItemComponent::ManageAttackInertia(float DeltaTime)
+{
+	AttackInertiaTimer -= DeltaTime;
+	if (AttackInertiaTimer < 0) {
+		return;
+	}
+
+	PlayerCharacter->AddMovementInput(PlayerCharacter->GetActorForwardVector(), FMath::Lerp(AttackInertiaForce / 1500.f, 0, 1 - (AttackInertiaTimer / AttackInertiaDuration)), false);
 }
 
 
@@ -522,10 +544,12 @@ void UItemComponent::AttackAnimEnd()
 {
 	if (!GetOwner()->Implements<UPlayerInterface>()) return;
 
-	PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed);
+	//PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed);
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
+
+	PlayerCharacter->SetPlayerAcceleration(4000);
 
 	PlayerCharacter->StopAutoLock();
 
@@ -579,7 +603,7 @@ void UItemComponent::DoAttackCollision()
 
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
-		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1.f);
+		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, CurrentWeaponActionData.CameraShakeIntensity);
 
 		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
 		if (!Enemy) return;
