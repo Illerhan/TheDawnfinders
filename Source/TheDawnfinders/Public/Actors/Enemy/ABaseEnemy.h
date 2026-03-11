@@ -152,11 +152,22 @@ public :
 	bool GetIsDisplayed_Implementation();
 
 
+// === GUETTERS === 
+public :
+	UFUNCTION(BlueprintCallable)
+	float GetPatrolDistance() {
+		if (PatrolDistanceOverride > 0) return PatrolDistanceOverride;
+		else return EnemyData->PatrolMaxDist;
+	}
+
 
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float EnableDistance = 3500.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float PatrolDistanceOverride = 0;
 
 	FTimerHandle EnableTimer;
 

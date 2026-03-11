@@ -712,7 +712,8 @@ void UInventoryComponent::ActualiseOverloadedSlots()
 void UInventoryComponent::ActualiseHasTreasures()
 {
 	bHasTreasures = false; 
-
+	
+	if (TreasureSlots.Num() == 0) return;
 	for (int i = 0; i < TreasureSlotCount; i++) {
 		if (!TreasureSlots[i].CurrentInfos.ItemData) continue;
 
