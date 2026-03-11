@@ -30,6 +30,12 @@ public :
 	void PlayListeningAnim();
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_StopListeningAnim();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StopListeningAnim();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_HideAnim();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

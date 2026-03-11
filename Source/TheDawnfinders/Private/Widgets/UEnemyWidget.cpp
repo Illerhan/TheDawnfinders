@@ -22,6 +22,12 @@ void UEnemyWidget::Multicast_HideAnim_Implementation()
 	PlayListeningAnim();
 }
 
+void UEnemyWidget::Multicast_StopListeningAnim_Implementation()
+{
+	StopListeningAnim();
+}
+
+
 
 void UEnemyWidget::PlayAggressiveAnim_Implementation()
 {
@@ -36,5 +42,9 @@ void UEnemyWidget::PlayListeningAnim_Implementation()
 }
 
 void UEnemyWidget::HideAnim_Implementation()
+{
+}
+
+void UEnemyWidget::StopListeningAnim_Implementation()
 {
 }
