@@ -172,6 +172,9 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void Server_SetCurrentPlayerState(EPlayerState NewState);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_SetCurrentPlayerState(EPlayerState NewState);
 	
 
 // === MOVEMENT METHODS ===
@@ -303,7 +306,7 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPlayerState CurrentState;
 
 	UPROPERTY(Replicated)

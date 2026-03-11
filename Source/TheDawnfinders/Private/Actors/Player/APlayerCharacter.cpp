@@ -296,12 +296,25 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     if (!HasAuthority()) {
         Server_SetCurrentPlayerState(NewState);
     }
+    else {
+        Multicast_SetCurrentPlayerState(NewState);
+    }
 }
 
 void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState NewState)
 {
     CurrentState = NewState;
+
+    Multicast_SetCurrentPlayerState(NewState);
 }
+
+void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerState NewState)
+{
+    if (GetController()) return;
+
+    CurrentState = NewState;
+}
+
 
 void AAPlayerCharacter::PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) 
 {
