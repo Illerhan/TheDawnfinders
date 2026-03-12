@@ -11,6 +11,8 @@ void AMiningInteractible::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//if (!HasAuthority()) return;
+
 	CurrentHealth = StartHealth;
 
 	HealthBarWidget = Cast<UWorldHealthBar>(HealthBarWidgetComponent->GetWidget());
@@ -63,9 +65,15 @@ void AMiningInteractible::ReceiveDamage_Implementation(float Quantity, AActor* O
 {
 	CurrentHealth -= Quantity;
 
-	HealthBarWidget->TakeDamage(CurrentHealth / StartHealth);
+	//HealthBarWidget->TakeDamage(CurrentHealth / StartHealth);
+	DamageFeedback(CurrentHealth / StartHealth);
 
 	if (CurrentHealth <= 0) {
 		Interact_Implementation(Origin);
 	}
+}
+
+void AMiningInteractible::DamageFeedback_Implementation(float HealthProgress)
+{
+	HealthBarWidget->TakeDamage(HealthProgress);
 }

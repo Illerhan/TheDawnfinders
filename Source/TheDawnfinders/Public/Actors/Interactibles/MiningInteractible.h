@@ -22,6 +22,9 @@ public :
 
 	virtual void ReceiveDamage_Implementation(float Quantity, AActor* Origin) override;
 
+	UFUNCTION(NetMulticast, Reliable)
+	void DamageFeedback(float HealthProgress);
+
 
 // === PARAMETERS === 
 protected :
