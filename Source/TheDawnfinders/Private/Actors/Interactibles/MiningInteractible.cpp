@@ -1,7 +1,23 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Actors/Interactibles/MiningInteractible.h"
+
+
+AMiningInteractible::AMiningInteractible()
+{
+	HealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("HealthBarWidget"));
+	HealthBarWidgetComponent->SetupAttachment(InteractibleWidgetComponent);
+}
+
+void AMiningInteractible::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//if (!HasAuthority()) return;
+
+	CurrentHealth = StartHealth;
+
+	HealthBarWidget = Cast<UWorldHealthBar>(HealthBarWidgetComponent->GetWidget());
+	HealthBarWidget->Setup(1);
+}
 
 void AMiningInteractible::Interact_Implementation(AActor* Interactor)
 {
@@ -39,9 +55,25 @@ FVector AMiningInteractible::GetPossibleSpawnLocation()
 			continue;
 		}
 
-
 		return Hit.ImpactPoint + FVector(0.f, 0.f, 75.f);
 	}
 
 	return FVector();
+}
+
+void AMiningInteractible::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
+{
+	CurrentHealth -= Quantity;
+
+	//HealthBarWidget->TakeDamage(CurrentHealth / StartHealth);
+	DamageFeedback(CurrentHealth / StartHealth);
+
+	if (CurrentHealth <= 0) {
+		Interact_Implementation(Origin);
+	}
+}
+
+void AMiningInteractible::DamageFeedback_Implementation(float HealthProgress)
+{
+	HealthBarWidget->TakeDamage(HealthProgress);
 }

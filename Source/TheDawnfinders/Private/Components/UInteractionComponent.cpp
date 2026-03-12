@@ -33,7 +33,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			bIsDoingQTE = false;
 			bIsInInteraction = false;
 			if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 		}
 	}
 
@@ -179,7 +179,7 @@ void UInteractionComponent::StartInteract()
 		bIsInInteraction = false;
 		CurrentInteractible = NearestInteractible;
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None);
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, true);
 
 		TryInteract(CurrentInteractible, PlayerCharacter);
 		bIsDoingQTE = false;
@@ -198,7 +198,7 @@ void UInteractionComponent::StartInteract()
 	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE) 
 	{
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized, true);
 
 		switch (IInteractible::Execute_GetNeededQTE(Nearest))
 		{
@@ -317,7 +317,7 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 
 	// Immobilise le joueur (cohérent avec StartInteract)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized);
+		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized, true);
 }
 
 #pragma endregion
@@ -394,7 +394,7 @@ void UInteractionComponent::CancelInteraction()
 		NearestInteractible = nullptr;
 
 		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 	}
 
 	else if (CurrentInteractible && bIsInInteraction) {
@@ -402,7 +402,7 @@ void UInteractionComponent::CancelInteraction()
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
 
-		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 	}
 }
 
@@ -416,7 +416,7 @@ void UInteractionComponent::StartCarryHeavyItem(ACarriable* Item)
 	CarriedItem = Item;
 	bIsInInteraction = true;
 
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::Carrying);
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::Carrying, true);
 }
 
 void UInteractionComponent::PutInHeavyItem(AActor* Target)
@@ -439,7 +439,7 @@ void UInteractionComponent::Server_PutInHeavyItem_Implementation(AActor* Target)
 	CarriedItem = nullptr;
 	bIsInInteraction = false;
 
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, true);
 }
 
 void UInteractionComponent::EndCarryHeavyItem()
@@ -451,7 +451,7 @@ void UInteractionComponent::EndCarryHeavyItem()
 
 	bIsInInteraction = false;
 	CarriedItem = nullptr;
-	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None);
+	IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, true);
 }
 
 

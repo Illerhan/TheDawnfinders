@@ -250,7 +250,7 @@ EPlayerState AAPlayerCharacter::GetCurrentPlayerState_Implementation()
     return CurrentState;
 }
 
-void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
+void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState, bool bOverrideClient)
 {
     if (CurrentState == NewState) return;
 
@@ -260,10 +260,10 @@ void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState)
         break;
     }
 
-    SetCurrentPlayerState_Implementation(NewState); 
+    SetCurrentPlayerState_Implementation(NewState, bOverrideClient);
 }
 
-void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewState)
+void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewState, bool bOverrideClient)
 {
     CurrentState = NewState;
 
@@ -297,23 +297,23 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     }
 
     if (!HasAuthority()) {
-        Server_SetCurrentPlayerState(NewState);
+        Server_SetCurrentPlayerState(NewState, false);
     }
     else {
-        Multicast_SetCurrentPlayerState(NewState);
+        Multicast_SetCurrentPlayerState(NewState, bOverrideClient);
     }
 }
 
-void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState NewState)
+void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState NewState, bool bOverrideClient)
 {
     CurrentState = NewState;
 
-    Multicast_SetCurrentPlayerState(NewState);
+    Multicast_SetCurrentPlayerState(NewState, bOverrideClient);
 }
 
-void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerState NewState)
+void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerState NewState, bool bOverrideClient)
 {
-    if (GetController()) return;
+    if (GetController() && !bOverrideClient) return;
 
     CurrentState = NewState;
 }
@@ -499,6 +499,9 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     else if (CurrentState == EPlayerState::UsingEquipment)
         AddMovementInput(FinalVector, PlayerConfig->WalkSpeed * 0.4f / 1500.f, true);
+
+    else if (CurrentState == EPlayerState::Carrying)
+        AddMovementInput(FinalVector, PlayerConfig->CarrySpeed / 1500.f, true);
 }
 
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
@@ -817,8 +820,9 @@ void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
 void AAPlayerCharacter::OnRevive()
 {
     if (!HasAuthority()) Server_OnRevive(); 
-    CurrentState = EPlayerState::None; 
-    //SetPlayerSpeed(PlayerConfig->WalkSpeed); 
+
+    SetCurrentPlayerState_Implementation(EPlayerState::None, true);
+   
     GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
 }
 

@@ -157,6 +157,9 @@ struct FWeaponInfos : public FTableRowBase {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType DamageType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MineDamageMultiplier = 1.f;
 };
 
 

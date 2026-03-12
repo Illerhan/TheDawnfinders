@@ -27,7 +27,7 @@ public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	UPROPERTY(Replicated,EditAnywhere, BlueprintReadWrite)
-    	bool bUsed;
+    bool bUsed;
 
 
 protected :
@@ -41,6 +41,6 @@ protected :
 	UFUNCTION()
 	void OnRep_IsCarried();
 	
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AActor* CarryActor;
 };

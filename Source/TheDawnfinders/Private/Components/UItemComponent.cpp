@@ -193,7 +193,7 @@ void UItemComponent::DoMainAction()
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
 				
-				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
+				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
 				return;
 			}
@@ -228,7 +228,7 @@ void UItemComponent::UseConsumable()
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
 		IPlayerInterface::Execute_HideProgress(GetOwner());
-		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
@@ -328,7 +328,7 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None);
+		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
@@ -349,12 +349,12 @@ void UItemComponent::DoSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StartPreviewThrow();
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment);
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
 		return;
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking);
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking, false);
 	}
 }
 
@@ -363,13 +363,13 @@ void UItemComponent::StopSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StopPreviewThrow();
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 		return;
 	}
 }
@@ -475,7 +475,7 @@ void UItemComponent::DoLightAttack()
 
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector);
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
-	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
 	StaminaComponent->UseStamina(CurrentWeaponActionData.StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = CurrentWeaponActionData.DamageMultiplier * WeaponData->BaseDamage;
@@ -525,7 +525,7 @@ void UItemComponent::DoHeavyAttack()
 
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 1.0f, FVector::ZeroVector);
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
-	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
+	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
 	StaminaComponent->UseStamina(CurrentWeaponActionData.StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = CurrentWeaponActionData.DamageMultiplier * WeaponData->BaseDamage;
@@ -560,7 +560,7 @@ void UItemComponent::AttackAnimEnd()
 	//PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed);
 
 	IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None);
+	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None, false);
 
 	PlayerCharacter->SetPlayerAcceleration(4000);
 
@@ -611,22 +611,45 @@ void UItemComponent::DoAttackCollision()
 
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
-		if (!Hit[i].GetActor()->ActorHasTag("Enemy")) continue;
+		if (!Hit[i].GetActor()->ActorHasTag("Enemy") && !Hit[i].GetActor()->ActorHasTag("Destructible")) continue;
 		if (AlreadyHitActors.Contains(Hit[i].GetActor())) continue;
 
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, CurrentWeaponActionData.CameraShakeIntensity);
 
-		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-		if (!Enemy) return;
+		// We hit an enemy
+		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
+			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+			if (!GetOwner()->HasAuthority())
+				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 
-		if (!GetOwner()->HasAuthority())
-			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+			else
+				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		}
 
-		else
-			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		// Others
+		else {
+			if (!GetOwner()->HasAuthority())
+				Server_ApplyDamagesToDestructible(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+
+			else
+				Server_ApplyDamagesToDestructible_Implementation(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		}
 	}
+}
+
+void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Target, UItemData* Data, float BaseDamages)
+{
+	float FinalDamage = BaseDamages;
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
+
+	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+	FinalDamage *= WeaponData->MineDamageMultiplier;
+
+	IDamageable::Execute_ReceiveDamage(Target, FinalDamage, GetOwner());
 }
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
