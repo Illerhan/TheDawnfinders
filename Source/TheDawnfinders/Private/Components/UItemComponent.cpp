@@ -611,22 +611,45 @@ void UItemComponent::DoAttackCollision()
 
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
-		if (!Hit[i].GetActor()->ActorHasTag("Enemy")) continue;
+		if (!Hit[i].GetActor()->ActorHasTag("Enemy") && !Hit[i].GetActor()->ActorHasTag("Destructible")) continue;
 		if (AlreadyHitActors.Contains(Hit[i].GetActor())) continue;
 
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, CurrentWeaponActionData.CameraShakeIntensity);
 
-		ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-		if (!Enemy) return;
+		// We hit an enemy
+		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
+			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+			if (!GetOwner()->HasAuthority())
+				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 
-		if (!GetOwner()->HasAuthority())
-			Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+			else
+				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		}
 
-		else
-			Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		// Others
+		else {
+			if (!GetOwner()->HasAuthority())
+				Server_ApplyDamagesToDestructible(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+
+			else
+				Server_ApplyDamagesToDestructible_Implementation(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+		}
 	}
+}
+
+void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Target, UItemData* Data, float BaseDamages)
+{
+	float FinalDamage = BaseDamages;
+	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
+
+	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+	FinalDamage *= WeaponData->MineDamageMultiplier;
+
+	IDamageable::Execute_ReceiveDamage(Target, FinalDamage, GetOwner());
 }
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)

@@ -98,6 +98,9 @@ public :
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_ApplyDamagesToEnemy(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages);
 
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_ApplyDamagesToDestructible(AActor* Target, UItemData* Data, float BaseDamages);
+
 
 // === THROW ===
 public :
