@@ -297,6 +297,9 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
 	
+	UFUNCTION(BlueprintImplementableEvent, Category = "InitNames")
+	void InitPlayerNames();
+	
 
 // === PUBLIC PROPERTIES ===
 public :
