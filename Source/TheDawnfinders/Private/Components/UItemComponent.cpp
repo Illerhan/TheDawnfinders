@@ -349,6 +349,7 @@ void UItemComponent::DoSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StartPreviewThrow();
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment);
 		return;
 	}
 
@@ -368,6 +369,7 @@ void UItemComponent::StopSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StopPreviewThrow();
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 		return;
 	}
 }
