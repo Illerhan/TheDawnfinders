@@ -131,6 +131,9 @@ void AAPlayerCharacter::BeginPlay()
     
     ProtectionZone->SetGenerateOverlapEvents(false);
     
+    if (HasAuthority())
+        InitPlayerNames();
+    
 }
 
 
@@ -855,22 +858,17 @@ void AAPlayerCharacter::OnRep_PlayerState()
     ACustomPlayerState* PS = GetPlayerState<ACustomPlayerState>();
     if (PS && InventoryComponent)
     {
-        // Si on a des items achetés dans le shop
         if (PS->ShopItems.Num() > 0)
         {
-            // On demande au serveur (ou on le fait en local si l'inventaire est pré-rempli)
-            // de transférer ces items dans l'inventaire réel
             for (const FItemInfos& Item : PS->ShopItems)
             {
-                // Ici tu appelles ta fonction qui ajoute l'item
-                // Si c'est un item acheté, on l'ajoute à l'inventaire
                 InventoryComponent->AddNewItem(Item); 
             }
             
             UE_LOG(LogTemp, Warning, TEXT("Items du Shop transférés dans l'inventaire après Travel"));
         }
     }
-    
+    InitPlayerNames();
 }
 
 void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineItem)
