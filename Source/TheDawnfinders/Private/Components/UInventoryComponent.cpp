@@ -649,6 +649,45 @@ void UInventoryComponent::OnRep_Knowledge()
 }
 
 
+FInventorySlot UInventoryComponent::QuickChange(bool bGoRight)
+{
+	// Client
+	if (!GetOwner()->HasAuthority())
+	{
+		ServerQuickChange(bGoRight);
+		return GetCurrentSlot();
+	}
+
+	// Server
+	ServerQuickChange_Implementation(bGoRight);
+	return GetCurrentSlot();
+}
+
+void UInventoryComponent::ServerQuickChange_Implementation(bool bGoRight)
+{
+	int Added = 1;
+
+	while (Added < InventorySlotCount) {
+		int Current = bGoRight ? CurrentSlotIndex + Added : CurrentSlotIndex - Added;
+		Added++;
+
+		if (Current < 0) {
+			Current += InventorySlotCount;
+		}
+		else if (Current >= InventorySlotCount) {
+			Current -= InventorySlotCount;
+		}
+
+		if (InventorySlots[Current].CurrentInfos.ItemData == nullptr) continue;
+
+		CurrentSlotIndex = Current;
+		OnRep_CurrentSlotIndex();
+		OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+
+		break;
+	}
+}
+
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
 	if (!bIsOpened) return GetCurrentSlot();
