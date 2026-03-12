@@ -494,6 +494,7 @@ void UInteractionComponent::ServerCancelHelp_Implementation()
 
 	Client_HideHelpProgress();
 }
+
 void UInteractionComponent::Client_ShowHelpProgress_Implementation(float Duration)
 {
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())

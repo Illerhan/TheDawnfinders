@@ -100,12 +100,6 @@ public :
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void ServerThrow();
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FInventorySlot ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
-
-	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
-	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
-
 
 // ==== SORTING ====
 public :
@@ -118,6 +112,20 @@ public :
 	UFUNCTION()
 	void SortItems();
 
+
+// === SELECT SLOT === 
+public : 
+	UFUNCTION(BlueprintCallable, Category = "Select Slot")
+	FInventorySlot QuickChange(bool bGoRight);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Select Slot")
+	void ServerQuickChange(bool bGoRight);
+
+	UFUNCTION(BlueprintCallable, Category = "Select Slot")
+	FInventorySlot ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Select Slot")
+	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
 // ==== OTHERS ====
 public :
