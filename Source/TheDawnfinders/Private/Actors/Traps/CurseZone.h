@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "CurseZone.generated.h"
 
@@ -42,7 +43,7 @@ public:
 
 protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	USphereComponent* CurseCollider;
+	UBoxComponent* CurseCollider;
 	
 	UPROPERTY(EditAnywhere)
 	float CurseRadius;
