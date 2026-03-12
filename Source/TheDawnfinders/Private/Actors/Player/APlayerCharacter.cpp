@@ -313,7 +313,7 @@ void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState
 
 void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerState NewState)
 {
-    if (GetController()) return;
+    if (NewState == EPlayerState::None) return;
 
     CurrentState = NewState;
 }
