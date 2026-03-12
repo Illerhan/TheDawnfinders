@@ -188,19 +188,19 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
 {
 	if (!ItemToSell) return;
-
+	int SellPrice = 0;
 	// Chercher dans ShopItems (pas dans l'inventaire pawn)
 	for (int32 i = ShopItems.Num() - 1; i >= 0; i--)
 	{
 		if (ShopItems[i].ItemData == ItemToSell)
 		{
+			SellPrice = ShopItems[i].ItemData->SellValue;
 			ShopItems.RemoveAt(i);
-			break; // on retire 1 seul exemplaire
+			break;
 		}
 	}
 
-	// Gold = moitié du prix (ta logique actuelle)
-	int32 SellPrice = FMath::FloorToInt(ItemToSell->Price / 2.f);
+	
 	SavedGold += SellPrice;
 
 	OnShopItemsChange.Broadcast();

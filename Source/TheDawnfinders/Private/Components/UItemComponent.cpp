@@ -193,7 +193,7 @@ void UItemComponent::DoMainAction()
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
 				
-				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::Immobilized);
+				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment);
 
 				return;
 			}
@@ -233,6 +233,15 @@ void UItemComponent::UseConsumable()
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
+	if (EquippedItem.CurrentInfos.ItemData->UseConsumableMontage)
+	{
+		if (GetOwner()->HasAuthority())
+			PlayerCharacter->ServerPlayMontage_Implementation(EquippedItem.CurrentInfos.ItemData->UseConsumableMontage, 1.0f);
+
+		else
+			PlayerCharacter->ServerPlayMontage(EquippedItem.CurrentInfos.ItemData->UseConsumableMontage, 1.0f);
+	}
+
 	switch (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType)
 	{
 		case EConsumableEffectType::Heal:
@@ -249,24 +258,27 @@ void UItemComponent::UseConsumable()
 			Server_StartTimedEffect(EConsumableEffectType::Adrenaline,EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
 			break;
+
 		case EConsumableEffectType::Protector:
 			Server_StartTimedEffect(EConsumableEffectType::Protector,EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
 			break;
+
 		case EConsumableEffectType::Antidote:
 			HealthComponent->SetIsPoisoned(false);
 			InventoryComponent->RemoveCurrentItem();
+			break;
 	
 		case EConsumableEffectType::ThrowObject:
-		{
-			if (!IsPreviewingThrow) return;
+			{
+				if (!IsPreviewingThrow) return;
 
-			Server_ThrowItem(EquippedItem.CurrentInfos.ItemData, CurrentThrowPosition);
+				Server_ThrowItem(EquippedItem.CurrentInfos.ItemData, CurrentThrowPosition);
 
-			InventoryComponent->RemoveCurrentItem();
-			StopPreviewThrow();
-		}
-		break;
+				InventoryComponent->RemoveCurrentItem();
+				StopPreviewThrow();
+			}
+			break;
 
 		case EConsumableEffectType::Revive:
 			if (!PlayerCharacter || !Ally) return;
@@ -301,7 +313,6 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 	}
-	
 }
 
 
@@ -338,6 +349,7 @@ void UItemComponent::DoSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StartPreviewThrow();
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment);
 		return;
 	}
 
@@ -357,6 +369,7 @@ void UItemComponent::StopSecondaryAction()
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
 	{
 		StopPreviewThrow();
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None);
 		return;
 	}
 }

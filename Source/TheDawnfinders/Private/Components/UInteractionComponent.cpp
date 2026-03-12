@@ -40,6 +40,8 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	// Nearest Interactible management
 	if (InteractiblesAtRange.Num() > 0 && !bIsInInteraction) 
 	{
+		InteractiblesAtRange.RemoveAll([](AActor* Actor) {
+	   return !IsValid(Actor);});
 		AActor* Nearest = GetNearestInteractible();
 		if (!NearestInteractible || NearestInteractible != Nearest) 
 		{
@@ -48,7 +50,10 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			}
 
 			NearestInteractible = Nearest;
-			IInteractible::Execute_SelectInteractible(Nearest, GetOwner());
+			
+			if (IsValid(Nearest)) {
+				IInteractible::Execute_SelectInteractible(Nearest, GetOwner());
+			}
 		}
 	}
 	else if (IsValid(NearestInteractible) && (!bIsInInteraction || CarriedItem)) 
@@ -92,10 +97,6 @@ void UInteractionComponent::AddInteractible(AActor* Interactible)
 	if (!InteractiblesAtRange.Contains(Interactible)) {
 		InteractiblesAtRange.Add(Interactible);
 	}
-
-	else {
-		NearestInteractible = nullptr;
-	}
 }
 
 void UInteractionComponent::RemoveInteractible(AActor* Interactible)
@@ -111,9 +112,11 @@ AActor* UInteractionComponent::GetNearestInteractible()
 {
 	float BestDist = FLT_MAX;
 	AActor* BestActor = nullptr;
+	
 
 	for (AActor* Inter : InteractiblesAtRange)
 	{
+		if (!IsValid(Inter)) continue;
 		float Dist = FVector::DistSquared(
 			Inter->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
