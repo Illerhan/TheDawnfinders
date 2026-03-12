@@ -148,9 +148,9 @@ public:
 
 	virtual EPlayerState GetCurrentPlayerState_Implementation() override;
 
-	virtual void RequestStateChange_Implementation(EPlayerState NewState) override;
+	virtual void RequestStateChange_Implementation(EPlayerState NewState, bool bOverrideClient = false) override;
 
-	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState) override;
+	virtual void SetCurrentPlayerState_Implementation(EPlayerState NewState, bool bOverrideClient = false) override;
 
 	virtual void PlayAttackMontage_Implementation(UAnimMontage* AttackMontage, float Speed) override;
 
@@ -171,10 +171,10 @@ public:
 	void Client_OpenInteractionUI (EInteractionUI UIType, AActor* Context);
 
 	UFUNCTION(Server, Reliable)
-	void Server_SetCurrentPlayerState(EPlayerState NewState);
+	void Server_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
 
 	UFUNCTION(NetMulticast, Reliable)
-	void Multicast_SetCurrentPlayerState(EPlayerState NewState);
+	void Multicast_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
 	
 
 // === MOVEMENT METHODS ===

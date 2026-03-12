@@ -59,7 +59,7 @@ void AWolfTrap::DoTrapAction(AActor* OtherActor)
     // 2. Immobiliser le joueur
     if (TrappedActor && TrappedActor->Implements<UPlayerInterface>())
     {
-        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Trapped);
+        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::Trapped, true);
     }
     
     // 3. Mise à jour widget
@@ -181,8 +181,9 @@ void AWolfTrap::Multicast_StartTrapQTE_Implementation(AAPlayerCharacter* TargetP
         if (!IC) return;
         
         IC->StartExternalQTE(this);
-    if (IPlayerInterface::Execute_GetCurrentPlayerState(TargetPlayer)!= EPlayerState::Trapped)
-            IPlayerInterface::Execute_RequestStateChange(TargetPlayer, EPlayerState::Immobilized);
+
+        if (IPlayerInterface::Execute_GetCurrentPlayerState(TargetPlayer)!= EPlayerState::Trapped)
+                IPlayerInterface::Execute_RequestStateChange(TargetPlayer, EPlayerState::Immobilized, true);
 
     }
 }
@@ -209,7 +210,7 @@ void AWolfTrap::Server_ReleaseTrappedActor_Implementation()
     
     if (TrappedActor->Implements<UPlayerInterface>())
     {
-        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::None);
+        IPlayerInterface::Execute_RequestStateChange(TrappedActor, EPlayerState::None, true);
     }
 
     Multicast_ReleaseTrappedActor();

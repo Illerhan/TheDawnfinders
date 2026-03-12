@@ -409,7 +409,7 @@ void UHealthComponent::Fallen()
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
 
-	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen);
+	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
 
 	CurrentMaxHealth = MaxHealth;
 	Heal(MaxHealth);
@@ -434,7 +434,7 @@ void UHealthComponent::Die()
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
-	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead);
+	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
 }
 
 void UHealthComponent::Server_Revive_Implementation()
