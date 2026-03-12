@@ -493,6 +493,9 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     else if (CurrentState == EPlayerState::Fallen)
         AddMovementInput(FinalVector, PlayerConfig->FallenSpeed / 1500.f, true);
+
+    else if (CurrentState == EPlayerState::UsingEquipment)
+        AddMovementInput(FinalVector, PlayerConfig->WalkSpeed * 0.4f / 1500.f, true);
 }
 
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
@@ -502,12 +505,6 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {
-    if (!HasAuthority())
-    {
-        //ServerManageRun(Input);
-        //return;
-    }
-
     if (Input)
     {
         if (PlayerConfig->RunSpeed == GetCharacterMovement()->MaxWalkSpeed) return;
