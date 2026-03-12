@@ -496,6 +496,9 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     else if (CurrentState == EPlayerState::UsingEquipment)
         AddMovementInput(FinalVector, PlayerConfig->WalkSpeed * 0.4f / 1500.f, true);
+
+    else if (CurrentState == EPlayerState::Carrying)
+        AddMovementInput(FinalVector, PlayerConfig->CarrySpeed / 1500.f, true);
 }
 
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
