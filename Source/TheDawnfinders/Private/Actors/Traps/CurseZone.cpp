@@ -11,9 +11,8 @@ ACurseZone::ACurseZone()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	
-	CurseCollider = CreateDefaultSubobject<USphereComponent>("CurseCollider");
+	CurseCollider = CreateDefaultSubobject<UBoxComponent>("CurseCollider");
 	CurseCollider->SetupAttachment(RootComponent);
-	CurseCollider->SetSphereRadius(CurseRadius);
 	
 }
 
@@ -30,8 +29,6 @@ void ACurseZone::BeginPlay()
 void ACurseZone::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	float CurrentRadius = CurseCollider->GetUnscaledSphereRadius();
-	CurseCollider->SetSphereRadius(CurrentRadius + (CurseRate*DeltaTime));
 
 	if (!DestroyAfterTimer) return;
 
@@ -51,7 +48,6 @@ void ACurseZone::Initialise(float Radius, float CurseZoneDelay, float Duration)
 
 void ACurseZone::Multicast_Initialise_Implementation(float Radius, float CurseZoneDelay)
 {
-	CurseCollider->SetSphereRadius(Radius);
 	CurseCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	GetWorldTimerManager().SetTimer(StartCurseDelayHandle, this, &ACurseZone::InitialiseAfterDelay, CurseZoneDelay, false);

@@ -43,10 +43,10 @@ public:
 	EPlayerState GetCurrentPlayerState();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void SetCurrentPlayerState(EPlayerState NewState);
+	void SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void RequestStateChange(EPlayerState NewState);
+	void RequestStateChange(EPlayerState NewState, bool bOverrideClient = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	void DoCameraShake(float Intensity);
