@@ -7,6 +7,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "UCameraComponent.generated.h"
 
+class AAPlayerCharacter;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UPlayerCameraComponent : public UActorComponent
@@ -45,6 +47,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseEnviroInfos();
 
+	UFUNCTION(BlueprintCallable)
+	void ActualisePlayerInfos(float DeltaTime);
+
 
 // === PARAMETERS ===
 protected :
@@ -76,12 +81,43 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enemies")
 	float EnemiesOffsetMaxImpact;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerRunDistance = 250.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerWalkDistance = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerIdleDistance = 0.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerCrouchDistance = -150.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerForceRotationOffset;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerForceRotationDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerOffsetSpeed = 25.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerDistanceSpeed = 5.f;
 		
 
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY()
+	AAPlayerCharacter* Player;
+
+	UPROPERTY()
 	FVector CurrentOffset = FVector::ZeroVector;
+
+	UPROPERTY()
+	FVector CurrentPlayerOffset = FVector::ZeroVector;
 
 	UPROPERTY()
 	FVector ForcedPosition;
@@ -91,6 +127,9 @@ protected :
 
 	UPROPERTY()
 	float CurrentDist;
+
+	UPROPERTY()
+	float CurrentPlayerDist = 0;
 
 	UPROPERTY()
 	float bIsOnForcedPosition = false;

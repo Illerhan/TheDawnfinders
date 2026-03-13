@@ -163,6 +163,9 @@ private:
 	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
 	bool bIsHelping = false;
 
+	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
+	bool bWasCrouched = false;
+
 	UPROPERTY()
 	float HelpDuration = 4.f;
 

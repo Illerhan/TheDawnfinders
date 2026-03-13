@@ -252,6 +252,8 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 		CurrentInteractible = Interactible;
 	}
 
+	bWasCrouched = Player->CurrentState == EPlayerState::Sneaking;
+
 	IInteractible::Execute_Interact(Interactible, Player);
 }
 
@@ -393,8 +395,8 @@ void UInteractionComponent::CancelInteraction()
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
 
-		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped) 
+			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, false);
 	}
 
 	else if (CurrentInteractible && bIsInInteraction) {
@@ -402,7 +404,7 @@ void UInteractionComponent::CancelInteraction()
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
 
-		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, false);
 	}
 }
 

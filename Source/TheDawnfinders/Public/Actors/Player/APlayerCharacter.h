@@ -282,6 +282,11 @@ public :
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
+public :
+	FVector GetCurrentRotationInput() { return CurrentRotationInput; }
+	bool GetIsForcingRotation() { return bIsForcingRotation; }
+	bool GetAutoLockIsActive() { return bAutoLockIsActive; }
+
 
 // === OTHERS ===
 protected:
