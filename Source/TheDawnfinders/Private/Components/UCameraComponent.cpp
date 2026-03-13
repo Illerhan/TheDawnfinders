@@ -1,4 +1,5 @@
 #include "Components/UCameraComponent.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Interfaces/IFadeable.h"
 
 
@@ -9,6 +10,8 @@ UPlayerCameraComponent::UPlayerCameraComponent()
 
 void UPlayerCameraComponent::BeginPlay()
 {
+	Player = Cast<AAPlayerCharacter>(GetOwner());
+
 	Super::BeginPlay();
 }
 
@@ -26,6 +29,7 @@ void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	if (!bIsOnForcedPosition) {
 		ActualiseEnemiesInfos();
 		ActualiseEnviroInfos();
+		ActualisePlayerInfos(DeltaTime);
 
 		UpdateOffset(DeltaTime);
 		UpdateDistance(DeltaTime);
@@ -63,6 +67,8 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	if(EnemiesAtRange.Num() != 0)
 		NewOffset /= EnemiesAtRange.Num();
 
+	NewOffset += CurrentPlayerOffset;
+
 	CurrentOffset = FMath::Lerp(CurrentOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
 }
 
@@ -83,7 +89,7 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 		AverageDist += Distance;
 	}
 	AverageDist /= NearbyWallsLocations.Num();
-	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f));
+	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f)) + CurrentPlayerDist;
 
 	CurrentDist = FMath::Lerp(CurrentDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
 }
@@ -102,6 +108,7 @@ void UPlayerCameraComponent::StartAutomaticControl()
 }
 
 
+#pragma region Actualise Modificators
 
 void UPlayerCameraComponent::ActualiseEnemiesInfos()
 {
@@ -111,16 +118,16 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	FCollisionQueryParams Params;
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
 
-    
+
 	bool bHit = GetWorld()->SweepMultiByChannel(
-	   HitResults,
-	   Start,
-	   Start,
-	   FQuat::Identity,
-	   ECC_GameTraceChannel1,   
-	   Sphere,
-	   Params,
-	   FCollisionResponseParams::DefaultResponseParam
+		HitResults,
+		Start,
+		Start,
+		FQuat::Identity,
+		ECC_GameTraceChannel1,
+		Sphere,
+		Params,
+		FCollisionResponseParams::DefaultResponseParam
 	);
 
 	EnemiesAtRange.Reset();
@@ -129,28 +136,23 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	if (!bHit) return;
 
 	float BestDist = 0;
-	for (int i = 0; i < HitResults.Num(); i++) 
+	for (int i = 0; i < HitResults.Num(); i++)
 	{
 		AActor* Actor = HitResults[i].GetActor();
 
 		if (!IsValid(Actor))
-		{
-			continue; 
-		}
+			continue;
 
 		if (!Actor->Implements<UFadeable>())
-		{
-			continue; 
-		}
-
-		if (!IFadeable::Execute_GetIsDisplayed(Actor)) 
-		{
 			continue;
-		}
+		
+		if (!IFadeable::Execute_GetIsDisplayed(Actor))
+			continue;
+		
 
 		// Le reste de la logique peut continuer
 		float Dist = (Actor->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
-       
+
 		EnemiesAtRange.Add(Actor);
 
 		if (Dist < BestDist) continue;
@@ -164,8 +166,8 @@ void UPlayerCameraComponent::ActualiseEnviroInfos()
 {
 	NearbyWallsLocations.Reset();
 	FVector BasePos = GetOwner()->GetActorLocation();
-	
-	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 20) 
+
+	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 20)
 	{
 		FVector Dir = FVector(FMath::Cos(CurrentAngle), FMath::Sin(CurrentAngle), 0);
 		FVector EndPos = BasePos + Dir * 2000.f;
@@ -189,3 +191,41 @@ void UPlayerCameraComponent::ActualiseEnviroInfos()
 		NearbyWallsLocations.Add(HitResult.ImpactPoint);
 	}
 }
+
+void UPlayerCameraComponent::ActualisePlayerInfos(float DeltaTime)
+{
+	EPlayerState CurrentState = IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner());
+	float TargetDist = 0;
+
+	switch (CurrentState) {
+	case EPlayerState::None :
+		if (GetOwner()->GetVelocity().SquaredLength() > 1) TargetDist = -PlayerWalkDistance;
+		else TargetDist = -PlayerIdleDistance;
+		break;
+
+	case EPlayerState::Running:
+		TargetDist = -PlayerRunDistance;
+		break;
+
+	case EPlayerState::Sneaking:
+		TargetDist = -PlayerCrouchDistance;
+		break;
+
+	case EPlayerState::Dodging:
+		TargetDist = -PlayerRunDistance;
+		break;
+	}
+
+	if (!Player->GetIsForcingRotation()) {
+		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, FVector(0, 0, 0), DeltaTime * 5.f);
+	}
+	else {
+		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, Player->GetCurrentRotationInput() * PlayerForceRotationOffset, DeltaTime * 5.f);
+		TargetDist -= PlayerForceRotationDistance;
+	}
+
+	CurrentPlayerDist = FMath::Lerp(CurrentPlayerDist, TargetDist, DeltaTime * 5.f);
+}
+
+
+#pragma endregion
