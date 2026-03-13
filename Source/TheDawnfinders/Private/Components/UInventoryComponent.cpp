@@ -82,7 +82,6 @@ bool UInventoryComponent::AddNewItem(FItemInfos NewItem, int Quantity)
 
 	if (!GetOwner()->HasAuthority())
 	{
-		UE_LOG(LogTemp, Display, TEXT("%s"), *NewItem.ItemData->ItemName);
 
 		ServerAddNewItem(NewItem, Quantity);
 		return true;
@@ -97,11 +96,8 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 {
 	if (!NewItem.ItemData)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AddNewItem: NewItem is null"));
 		return;
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("AddNewItem"));
 
 	bool UseValueableInventory = NewItem.ItemData->ItemType == EItemType::Valuable;
 
@@ -481,8 +477,7 @@ void UInventoryComponent::SortItems()
 				SameItemSlots[j].Quantity = FMath::Clamp(FinalQuantity, 0, SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity);
 				SameItemSlots[k].Quantity = FMath::Clamp(FinalQuantity - SameItemSlots[j].Quantity, 0, SameItemSlots[j].CurrentInfos.ItemData->MaxStackingCapacity);
 			}
-
-			UE_LOG(LogTemp, Display, TEXT("Stack First Slot = %d"), SameItemSlots[j].Quantity);
+			
 
 			SortedInventory.Add(SameItemSlots[j]);
 		}
@@ -558,8 +553,7 @@ void UInventoryComponent::UseDurability(int UsedDurability, UItemData* ItemToUse
 		if (InventorySlots[i].CurrentInfos.ItemData != ItemToUse) continue;
 
 		InventorySlots[i].CurrentInfos.Durability -= UsedDurability;
-
-		UE_LOG(LogTemp, Display, TEXT("%f"), InventorySlots[i].CurrentInfos.Durability);
+		
 
 		if (InventorySlots[i].CurrentInfos.Durability <= 0
 			&& InventorySlots[i].CurrentInfos.ItemData->ItemType == EItemType::Consumable) {
@@ -691,9 +685,7 @@ void UInventoryComponent::ServerQuickChange_Implementation(bool bGoRight)
 FInventorySlot UInventoryComponent::ChangeCurrentSlot(bool IndexGoUp, int ForcedIndex)
 {
 	if (!bIsOpened) return GetCurrentSlot();
-
-	UE_LOG(LogTemp, Display, TEXT("Change Inedx : %d"), CurrentSlotIndex);
-
+	
 	// Client
 	if (!GetOwner()->HasAuthority())
 	{
