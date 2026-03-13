@@ -15,7 +15,7 @@ void AContainer::BeginPlay()
 
 	if (!HasAuthority()) return;
 
-	GetWorldTimerManager().SetTimer(DelayStartHandle, this, &AContainer::SetupLoot, 1.f, false);
+	GetWorldTimerManager().SetTimer(DelayStartHandle, this, &AContainer::SetupLoot, 0.5f, false);
 }
 
 void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& Items)

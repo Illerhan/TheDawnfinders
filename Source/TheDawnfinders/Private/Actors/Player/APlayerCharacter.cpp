@@ -646,12 +646,13 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
 
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_Destructible);
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
 
     bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(1000.f));
     if (!bHit) return;
 
-    float BestDist = 10000.f;
+    float BestDist = 2000.f;
 
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
