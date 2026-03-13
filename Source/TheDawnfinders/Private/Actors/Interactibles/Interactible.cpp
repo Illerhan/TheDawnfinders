@@ -70,6 +70,8 @@ void AInteractibleObjects::BeginPlay()
 		FadeTimeline.SetLooping(false);
 	}
 
+	if (!HasAuthority()) return;
+
 	GetWorldTimerManager().SetTimer(
 		EnableTimer,
 		this,

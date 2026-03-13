@@ -99,7 +99,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 		return;
 	}
 
-	bool UseValueableInventory = NewItem.ItemData->ItemType == EItemType::Valuable;
+	bool UseValueableInventory = (NewItem.ItemData->ItemType == EItemType::Valuable && TreasureSlotCount > 0);
 
 	for (int32 i = 0; i < (UseValueableInventory ? TreasureSlotCount : InventorySlotCount); i++)
 	{
