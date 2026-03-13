@@ -200,7 +200,7 @@ public :
 	int InventorySlotCount = 10;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
-	int TreasureSlotCount = 10;
+	int TreasureSlotCount = 0;
 	
 	UPROPERTY(EditAnywhere, Category = "Litter Physics")
 	float CurrentWeight = 0.0f;

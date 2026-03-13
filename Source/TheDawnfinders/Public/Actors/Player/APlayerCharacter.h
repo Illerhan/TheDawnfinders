@@ -238,7 +238,7 @@ public :
 	void Server_StopForceRotation(float Progress);
 
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
-	void Server_ForceRotation(FRotator Rotation, float Progress);
+	void Server_ForceRotation(FRotator Rotation, FVector Input, float Progress);
 
 	UFUNCTION()
 	void StartAutoLock(float AutoLockStrength);
@@ -354,16 +354,16 @@ protected :
 	UPROPERTY(Replicated)
 	bool bAutoLockIsActive = false;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsForcingRotation;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	float CurrentForcedRotationRatio;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	FRotator CurrentForcedRotation;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	FVector CurrentRotationInput;
 
 	UPROPERTY()
