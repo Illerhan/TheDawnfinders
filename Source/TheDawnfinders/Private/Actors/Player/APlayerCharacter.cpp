@@ -146,9 +146,9 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
     }
-    else {
-        ActualiseRotation();
-    }
+    
+    ActualiseRotation();
+    
 
     if (!IsLocallyControlled()) return;
 
@@ -189,6 +189,10 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(AAPlayerCharacter, bIsCarrying);
     DOREPLIFETIME(AAPlayerCharacter, CurrentPushedObject);
     DOREPLIFETIME(AAPlayerCharacter, bAutoLockIsActive);
+    DOREPLIFETIME(AAPlayerCharacter, bIsForcingRotation);
+    DOREPLIFETIME(AAPlayerCharacter, CurrentForcedRotationRatio);
+    DOREPLIFETIME(AAPlayerCharacter, CurrentForcedRotation);
+    DOREPLIFETIME(AAPlayerCharacter, CurrentRotationInput);
 }
 
 
@@ -585,6 +589,8 @@ void AAPlayerCharacter::ActualiseRotation()
     ItemComponent->ActualisePreviewThrow(CurrentRotationInput);
 
     FRotator NewRotation = FQuat::Slerp(MovementRotation.Quaternion(), CurrentForcedRotation.Quaternion(), CurrentForcedRotationRatio).Rotator();
+    if (CurrentPlayerInput.SquaredLength() < 0.1f && CurrentForcedRotation != FRotator(0, 0, 0)) NewRotation = CurrentForcedRotation;
+    else if (!bIsForcingRotation) CurrentForcedRotation = FRotator(0, 0, 0);
 
     SetActorRotation(NewRotation);
 }
@@ -615,7 +621,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     CurrentForcedRotation = NewRotation;
 
     if (!HasAuthority()) {
-        Server_ForceRotation(CurrentForcedRotation, CurrentForcedRotationRatio);
+        Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
     }
 }
 
@@ -624,15 +630,14 @@ void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
     bIsForcingRotation = false;
     CurrentForcedRotationRatio = Progress;
 
-    SetActorRotation(FRotator(0, 0, 0));
-
     GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
-void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, float Progress)
+void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress)
 {
     bIsForcingRotation = true;
     CurrentForcedRotation = Rotation;
+    CurrentRotationInput = Input;
 
     CurrentForcedRotationRatio = Progress;
     GetCharacterMovement()->bOrientRotationToMovement = false;
@@ -680,12 +685,39 @@ void AAPlayerCharacter::ActualiseAutoLock()
     FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), CurrentAutoLockStrength);
     NewRotation.SetComponentForAxis(EAxis::Y, 0);
     NewRotation.SetComponentForAxis(EAxis::X, 0);
-    SetActorRotation(NewRotation);
+
+    bIsForcingRotation = true;
+    CurrentForcedRotationRatio = 1;
+    CurrentForcedRotation = NewRotation;
+
+    FVector InputDir = GetActorForwardVector();
+    float angle = FMath::Atan2(InputDir.Y, InputDir.X);
+    angle -= FMath::DegreesToRadians(50 + 180);
+    FVector RotatedVector = FVector(FMath::Cos(angle), FMath::Sin(angle), 0);
+
+    CurrentRotationInput = RotatedVector;
+
+    if (!HasAuthority()) {
+        Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, 1);
+    }
+    else {
+        Server_ForceRotation_Implementation(CurrentForcedRotation, CurrentRotationInput, 1);
+    }
 }
 
 void AAPlayerCharacter::StopAutoLock()
 {
     bAutoLockIsActive = false;
+
+    bIsForcingRotation = false;
+    CurrentForcedRotationRatio = 0;
+
+    if (!HasAuthority()) {
+        Server_StopForceRotation(CurrentForcedRotationRatio);
+    }
+    else {
+        Server_StopForceRotation_Implementation(CurrentForcedRotationRatio);
+    }
 }
 
 #pragma endregion
