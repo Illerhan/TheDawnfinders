@@ -100,6 +100,12 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
 	float PlayerForceRotationDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerOffsetSpeed = 25.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerDistanceSpeed = 5.f;
 		
 
 // === PROTECTED PROPERTIES ===

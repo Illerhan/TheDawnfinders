@@ -285,6 +285,7 @@ public :
 public :
 	FVector GetCurrentRotationInput() { return CurrentRotationInput; }
 	bool GetIsForcingRotation() { return bIsForcingRotation; }
+	bool GetAutoLockIsActive() { return bAutoLockIsActive; }
 
 
 // === OTHERS ===
