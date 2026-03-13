@@ -655,7 +655,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
-        if (!Actor || !Actor->ActorHasTag("Enemy")) continue;
+        if (!Actor || (!Actor->ActorHasTag("Enemy") && !Actor->ActorHasTag("Destructible"))) continue;
 
         float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
         if (CurrentDist < BestDist) 
