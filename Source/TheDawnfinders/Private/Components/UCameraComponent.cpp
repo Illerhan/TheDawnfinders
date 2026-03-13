@@ -216,15 +216,15 @@ void UPlayerCameraComponent::ActualisePlayerInfos(float DeltaTime)
 		break;
 	}
 
-	if (!Player->GetIsForcingRotation()) {
-		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, FVector(0, 0, 0), DeltaTime * 5.f);
+	if (!Player->GetIsForcingRotation() || Player->GetAutoLockIsActive() || Player->InventoryComponent->GetIsOpened()) {
+		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, FVector(0, 0, 0), DeltaTime * PlayerOffsetSpeed);
 	}
 	else {
-		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, Player->GetCurrentRotationInput() * PlayerForceRotationOffset, DeltaTime * 5.f);
+		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, Player->GetCurrentRotationInput() * PlayerForceRotationOffset, DeltaTime * PlayerOffsetSpeed);
 		TargetDist -= PlayerForceRotationDistance;
 	}
 
-	CurrentPlayerDist = FMath::Lerp(CurrentPlayerDist, TargetDist, DeltaTime * 5.f);
+	CurrentPlayerDist = FMath::Lerp(CurrentPlayerDist, TargetDist, DeltaTime * PlayerDistanceSpeed);
 }
 
 

@@ -36,6 +36,9 @@ public:
 public :
 	UFUNCTION(BlueprintCallable)
 	bool GetHasTreasures() { return bHasTreasures; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetIsOpened() { return bIsOpened; }
 	
 
 // ==== DELEGATES + REP NOTIFIES ====
