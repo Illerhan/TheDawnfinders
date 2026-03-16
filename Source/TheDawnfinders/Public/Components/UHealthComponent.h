@@ -158,6 +158,9 @@ protected :
 	UPROPERTY(EditAnywhere)
 	float InjureDecreaseSpeed = 0.02f;
 
+	UPROPERTY(EditAnywhere)
+	float PostProcessMaxOpacity = 2500.f;
+
 	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
 	bool bIsFallen;
 	

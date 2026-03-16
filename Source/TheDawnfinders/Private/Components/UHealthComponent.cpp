@@ -355,7 +355,7 @@ void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
 		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 0.f, DeltaTime * 1.5f);
 	}
 	else {
-		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 2500.f, DeltaTime * 1.f);
+		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, PostProcessMaxOpacity, DeltaTime * 1.f);
 	}
 	CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentCurseVolumeStrength);
 }
