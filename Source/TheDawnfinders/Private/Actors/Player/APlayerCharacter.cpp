@@ -189,9 +189,6 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(AAPlayerCharacter, CurrentPushedObject);
     DOREPLIFETIME(AAPlayerCharacter, bAutoLockIsActive);
     DOREPLIFETIME(AAPlayerCharacter, bIsForcingRotation);
-    DOREPLIFETIME(AAPlayerCharacter, CurrentForcedRotationRatio);
-    DOREPLIFETIME(AAPlayerCharacter, CurrentForcedRotation);
-    DOREPLIFETIME(AAPlayerCharacter, CurrentRotationInput);
 }
 
 
@@ -625,6 +622,9 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     if (!HasAuthority()) {
         Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
     }
+    else {
+        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
+    }
 }
 
 void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
@@ -637,6 +637,20 @@ void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
 
 void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress)
 {
+    bIsForcingRotation = true;
+    CurrentForcedRotation = Rotation;
+    CurrentRotationInput = Input;
+
+    CurrentForcedRotationRatio = Progress;
+    GetCharacterMovement()->bOrientRotationToMovement = false;
+
+    Multicast_ForceRotation(Rotation, Input, Progress);
+}
+
+void AAPlayerCharacter::Multicast_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress)
+{
+    if (IsLocallyControlled()) return;
+
     bIsForcingRotation = true;
     CurrentForcedRotation = Rotation;
     CurrentRotationInput = Input;
@@ -917,7 +931,7 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
     if (NewZip) InventoryComponent->RemoveCurrentItem();
 }
 
-void AAPlayerCharacter::DisplayThrowPreview(FVector Position, float Range)
+void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Position, float Range)
 {
     ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
     ThrowablePreviewMeshComponent->SetHiddenInGame(false);

@@ -240,6 +240,9 @@ public :
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_ForceRotation(FRotator Rotation, FVector Input, float Progress);
 
+	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
+	void Multicast_ForceRotation(FRotator Rotation, FVector Input, float Progress);
+
 	UFUNCTION()
 	void StartAutoLock(float AutoLockStrength);
 
@@ -293,7 +296,7 @@ protected:
 	UFUNCTION(Server, Unreliable)
 	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisplayThrowPreview(FVector Position, float Range);
 
 	UFUNCTION()
@@ -362,13 +365,13 @@ protected :
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsForcingRotation;
 
-	UPROPERTY(BlueprintReadWrite, Replicated)
+	UPROPERTY(BlueprintReadWrite)
 	float CurrentForcedRotationRatio;
 
-	UPROPERTY(BlueprintReadWrite, Replicated)
+	UPROPERTY(BlueprintReadWrite)
 	FRotator CurrentForcedRotation;
 
-	UPROPERTY(BlueprintReadWrite, Replicated)
+	UPROPERTY(BlueprintReadWrite)
 	FVector CurrentRotationInput;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
