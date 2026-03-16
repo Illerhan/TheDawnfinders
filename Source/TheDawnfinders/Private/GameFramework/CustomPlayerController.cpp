@@ -3,6 +3,10 @@
 
 #include "CustomPlayerController.h"
 
+#include "Actors/Mule/Mule.h"
+#include "Actors/Mule/MuleAIController.h"
+#include "Widgets/Mule/MuleWidget.h"
+
 void ACustomPlayerController::Server_RequestSwitchPanel_Implementation(int32 PanelIndex)
 {
 	// Le serveur broadcast à tout le monde
@@ -17,4 +21,31 @@ void ACustomPlayerController::Multicast_SwitchPanel_Implementation(int32 PanelIn
 {
 	if (!IsLocalController()) return;
 	SwitchPanelBP(PanelIndex);
+}
+
+void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
+{
+	AMuleAIController* MuleAIController = Cast<AMuleAIController>(Mule->GetController());
+	if (MuleAIController)
+	{
+		MuleAIController->CallMule(Actor);
+	}
+}
+
+void ACustomPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (!IsLocalController() || !MuleWidget || !Mule) return;
+	float ChargesPercent = 0.f;
+	if (Mule->ChargeCooldown > 0.f)
+	{
+		ChargesPercent = Mule->ChargesTimer / Mule->ChargeCooldown;
+	}
+
+	MuleWidget->UpdateMuleWidget(
+		Mule->CallCharges,
+		ChargesPercent,
+		Mule->CooldownTimer
+	);
 }

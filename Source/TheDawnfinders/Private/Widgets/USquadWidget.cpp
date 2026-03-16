@@ -37,7 +37,7 @@ void USquadWidget::NativeDestruct()
         CustomPS->OnInfoChange.RemoveDynamic(this, &USquadWidget::ActualiseSquadInfos);
     }
 
-    CustomGS->OnPlayerListChanged.RemoveDynamic(this, &USquadWidget::BindNewPlayerState);
+    //CustomGS->OnPlayerListChanged.RemoveDynamic(this, &USquadWidget::BindNewPlayerState);
 }
 
 #pragma endregion
@@ -143,10 +143,7 @@ void USquadWidget::BindAllCurrentPlayerStates()
     if (bAlreadyBound) return;
 
     APlayerController* PC = GetOwningPlayer();
-    if (!PC || !PC->IsLocalController())
-    {
-        return;
-    }
+    if (!PC || !PC->IsLocalController()) return;
 
     AGameStateBase* GS = GetWorld()->GetGameState();
     if (!GS || GS->PlayerArray.Num() == 0)
@@ -186,7 +183,7 @@ void USquadWidget::BindAllCurrentPlayerStates()
     }
 
     // ---- Bind delegate for new players joining ----
-    CustomGS->OnPlayerListChanged.AddUniqueDynamic(this, &USquadWidget::BindNewPlayerState);
+    //CustomGS->OnPlayerListChanged.AddUniqueDynamic(this, &USquadWidget::BindNewPlayerState);
 
     // ---- Bind delegates for existing players ----
     for (APlayerState* PS : GS->PlayerArray)
@@ -213,16 +210,9 @@ void USquadWidget::BindAllCurrentPlayerStates()
 
 
 // WHEN A NEW PLAYER JOINS
-void USquadWidget::BindNewPlayerState()
+void USquadWidget::BindNewPlayerState(APlayerState* State)
 {
-    APlayerController* PC = GetOwningPlayer();
-    if (!PC || !PC->IsLocalController()) return;
-    
-    AGameStateBase* GS = GetWorld()->GetGameState();
-    if (!GS || GS->PlayerArray.Num() == 0) return;
-    
-    APlayerState* NewPS = GS->PlayerArray.Last();
-    if (ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(NewPS))
+    if (ACustomPlayerState* CustomPS = Cast<ACustomPlayerState>(State))
     {
         CustomPS->OnInfoChange.AddUniqueDynamic(this, &USquadWidget::ActualiseSquadInfos);
     

@@ -332,9 +332,6 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 		WorldHealthBar->ActualiseCurse(CurseMaxHealth / MaxHealth);
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("%f"), CurseMaxHealth / MaxHealth);
-
 	// Clamp current health if it exceeds new max
 	if (CurrentHealth > CurrentMaxHealth)
 	{

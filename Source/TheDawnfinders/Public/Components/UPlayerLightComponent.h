@@ -137,9 +137,6 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	float MaxRadius;
 	
-	
-
-
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadOnly)

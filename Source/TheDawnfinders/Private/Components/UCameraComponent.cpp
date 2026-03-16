@@ -118,7 +118,6 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	FCollisionQueryParams Params;
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
 
-
 	bool bHit = GetWorld()->SweepMultiByChannel(
 		HitResults,
 		Start,
@@ -140,16 +139,10 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 	{
 		AActor* Actor = HitResults[i].GetActor();
 
-		if (!IsValid(Actor))
-			continue;
-
-		if (!Actor->Implements<UFadeable>())
-			continue;
+		if (!IsValid(Actor)) continue;
+		if (!Actor->Implements<UFadeable>()) continue;
+		if (!IFadeable::Execute_GetIsDisplayed(Actor)) continue;
 		
-		if (!IFadeable::Execute_GetIsDisplayed(Actor))
-			continue;
-		
-
 		// Le reste de la logique peut continuer
 		float Dist = (Actor->GetActorLocation() - GetOwner()->GetActorLocation()).Length();
 

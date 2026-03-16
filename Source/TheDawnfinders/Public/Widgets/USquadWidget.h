@@ -25,7 +25,7 @@ public :
 	void BindAllCurrentPlayerStates();
 
 	UFUNCTION(BlueprintCallable)
-	void BindNewPlayerState();
+	void BindNewPlayerState(APlayerState* State);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void AddNewSquadMember();
