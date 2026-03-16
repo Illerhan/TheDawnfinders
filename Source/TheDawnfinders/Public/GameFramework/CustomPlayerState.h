@@ -37,8 +37,8 @@ public :
 
 	UFUNCTION()
 	void OnRep_LanternChange();
+
 //  === SHOP ==
-	
 	UPROPERTY(ReplicatedUsing = OnRep_ShopItems,Blueprintable,BlueprintReadWrite)
 	TArray<FItemInfos> ShopItems;
 	
@@ -65,9 +65,12 @@ public :
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_SellShopItem(UItemData* ItemToSell);
 
-// === DELEGATES
+
+// === DELEGATES ===
 public :
+	UPROPERTY(BlueprintAssignable)
 	FOnInfoChange OnInfoChange;
+
 	FOnInfoChangeLocal OnInfoChangeLocal;
 
 	UPROPERTY(BlueprintAssignable)
@@ -174,6 +177,7 @@ protected :
 	void OnRep_Gold();
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGoldChanged);
+
 	UPROPERTY(BlueprintAssignable)
 	FOnGoldChanged OnGoldChanged;
 };

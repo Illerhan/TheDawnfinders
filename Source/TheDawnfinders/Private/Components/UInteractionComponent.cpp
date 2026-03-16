@@ -106,6 +106,10 @@ void UInteractionComponent::RemoveInteractible(AActor* Interactible)
 	if (Interactible == InteractingQTEActor) {
 		CancelInteraction();
 	}
+
+	if (Interactible == CurrentInteractible) {
+		StopInteract();
+	}
 }
 
 AActor* UInteractionComponent::GetNearestInteractible()
@@ -356,6 +360,8 @@ void UInteractionComponent::StopInteract()
 
 	if (CurrentInteractible && Cast<AInteractibleObjects>(CurrentInteractible)->GetStopInteractOnRelease())
 	{
+		UE_LOG(LogTemp, Display, TEXT("Blaaaaa"));
+
 		if (!GetOwner()->HasAuthority()) {
 			ServerStopInteract(CurrentInteractible, PlayerCharacter);
 		}

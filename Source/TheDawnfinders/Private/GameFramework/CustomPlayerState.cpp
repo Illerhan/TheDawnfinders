@@ -78,6 +78,9 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 	CurrentStamina = current;
 	CurrentMaxStamina = max;
 
+	UE_LOG(LogTemp, Display, TEXT("%f"), current);
+
+	OnInfoChangeLocal.ExecuteIfBound();
 	OnRep_HealthChange();
 }
 
@@ -134,6 +137,9 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ACustomPlayerState, CurrentStamina);
+	DOREPLIFETIME(ACustomPlayerState, CurrentMaxStamina);
+	DOREPLIFETIME(ACustomPlayerState, CurrentMaxHealth);
+	DOREPLIFETIME(ACustomPlayerState, CurrentHealth);
 	DOREPLIFETIME(ACustomPlayerState, ShopItems);
 	DOREPLIFETIME(ACustomPlayerState, SavedGold);
 }
@@ -160,6 +166,7 @@ void ACustomPlayerState::OnRep_ShopItems()
 		OnShopItemsChange.IsBound() ? 1 : 0);
 	OnShopItemsChange.Broadcast();
 }
+
 void ACustomPlayerState::OnRep_Gold()
 {
 	OnGoldChanged.Broadcast();
