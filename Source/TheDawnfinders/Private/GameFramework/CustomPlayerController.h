@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "CustomPlayerController.generated.h"
 
+class UMuleWidget;
+class AMule;
 /**
  * 
  */
@@ -23,5 +25,16 @@ public:
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void SwitchPanelBP(int32 PanelIndex);
+	
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_CallMule(AActor* Actor);
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UMuleWidget* MuleWidget;
+
+	virtual void Tick(float DeltaTime) override;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	AMule* Mule;
 
 };
