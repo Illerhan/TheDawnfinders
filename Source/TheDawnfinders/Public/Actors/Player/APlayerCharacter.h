@@ -237,6 +237,9 @@ public :
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_StopForceRotation(float Progress);
 
+	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
+	void Multicast_StopForceRotation(float Progress);
+
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_ForceRotation(FRotator Rotation, FVector Input, float Progress);
 
