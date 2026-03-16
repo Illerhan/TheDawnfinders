@@ -142,7 +142,7 @@ public :
 	void ApplyContextualAmulet(EAmuletTriggerType Trigger);
 
 	UPROPERTY(ReplicatedUsing=OnRep_Gold, BlueprintReadWrite)
-	int32 SavedGold = 150;
+	int32 SavedGold = 300;
 
 // === PROTECTED PROPERTIES ===
 protected :

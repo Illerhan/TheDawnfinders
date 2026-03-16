@@ -149,7 +149,7 @@ void UInventoryComponent::RestoreShopItems()
 }
 
 void UInventoryComponent::UpdateValuable()
-{
+	{
 	CurrentValue = 0;
 
 	if (TreasureSlots.Num() == 0) return;
