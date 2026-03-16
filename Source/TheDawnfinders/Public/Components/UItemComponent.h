@@ -150,6 +150,11 @@ public:
 	FOnThrowHidePreview OnThrowHidePreview;
 
 
+// === GETTERS ===
+public :
+	bool GetIsPreviewingThrow() { return IsPreviewingThrow; }
+
+
 // === PRIVATE PROPERTIES ===
 private :
 	UPROPERTY()

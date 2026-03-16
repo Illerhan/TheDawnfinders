@@ -78,8 +78,6 @@ void ACustomPlayerState::ActualiseStamina(float current, float max)
 	CurrentStamina = current;
 	CurrentMaxStamina = max;
 
-	UE_LOG(LogTemp, Display, TEXT("%f"), current);
-
 	OnInfoChangeLocal.ExecuteIfBound();
 	OnRep_HealthChange();
 }

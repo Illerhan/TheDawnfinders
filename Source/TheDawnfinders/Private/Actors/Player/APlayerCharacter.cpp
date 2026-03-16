@@ -161,7 +161,6 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     {
         UpdatePushingMovement(DeltaTime);
     }
-
     
     switch (CurrentState) {
     case EPlayerState::Dodging :
@@ -611,7 +610,10 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     Input.Normalize();
 
     float angle = FMath::Atan2(Input.Y, Input.X);
-    angle -= FMath::DegreesToRadians(50 + 180);
+
+    if(ItemComponent->GetIsPreviewingThrow()) angle -= FMath::DegreesToRadians(50);
+    else angle -= FMath::DegreesToRadians(50 + 180);
+
     FVector RotatedVector = FVector(FMath::Cos(angle), FMath::Sin(angle), 0);
 
     FRotator TargetRotation = RotatedVector.Rotation();
