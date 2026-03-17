@@ -358,32 +358,27 @@ void USessionManagerSubsystem::OnJoinSessionComplete(FName SessionName, EOnJoinS
     {
         UE_LOG(LogTemp, Error, TEXT("Failed to join session!"));
         OnSessionJoined.Broadcast(false);
+        OnInviteJoinCompleted.Broadcast(false); // notif échec
         return;
     }
-
-    UE_LOG(LogTemp, Log, TEXT("Join session complete"));
 
     FString ConnectInfo;
     if (SessionInterface->GetResolvedConnectString(NAME_GameSession, ConnectInfo))
     {
-        UE_LOG(LogTemp, Log, TEXT("Connecting to server: %s"), *ConnectInfo);
-
         APlayerController* PC = GetWorld()->GetFirstPlayerController();
         if (PC)
         {
-            PC->ClientTravel(ConnectInfo, ETravelType::TRAVEL_Absolute);
+            // Marquer que ce join vient d'une invitation
+            // pour que WBP_MainMenu sache quoi faire au PostTravel
+            if (bHasPendingInvite)
+            {
+                bCameFromInvite = true; // nouvelle variable bool dans le .h
+            }
+
             OnSessionJoined.Broadcast(true);
+            OnInviteJoinCompleted.Broadcast(true); // notif succès
+            PC->ClientTravel(ConnectInfo, ETravelType::TRAVEL_Absolute);
         }
-        else
-        {
-            UE_LOG(LogTemp, Error, TEXT("PlayerController is invalid"));
-            OnSessionJoined.Broadcast(false);
-        }
-    }
-    else
-    {
-        UE_LOG(LogTemp, Error, TEXT("Failed to get connect string"));
-        OnSessionJoined.Broadcast(false);
     }
 }
 
@@ -431,3 +426,4 @@ void USessionManagerSubsystem::OnFindFriendSessionComplete(int32 LocalUserNum, b
     bHasPendingInvite = true;
     JoinSessionViaInvite();
 }
+

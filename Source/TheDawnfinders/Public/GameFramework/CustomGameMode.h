@@ -18,6 +18,6 @@ public:
 	
 	
 	UFUNCTION(BlueprintCallable, Category = "Travel")
-	void StartLevelTransition(FString MapName);
+	void StartLevelTransition(FString MapName, int32 PanelIndex);
 
 };

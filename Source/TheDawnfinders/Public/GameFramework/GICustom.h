@@ -13,4 +13,7 @@ class THEDAWNFINDERS_API UGICustom : public UGameInstance
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FColor> ColorPerRarity;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 RequestedPanel = 1;
 };
