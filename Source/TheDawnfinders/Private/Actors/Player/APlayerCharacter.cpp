@@ -150,9 +150,8 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
     }
-    
+
     ActualiseRotation();
-    
 
     if (!IsLocallyControlled()) return;
 
