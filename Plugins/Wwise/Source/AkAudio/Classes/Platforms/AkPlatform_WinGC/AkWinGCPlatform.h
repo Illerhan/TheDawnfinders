@@ -15,6 +15,30 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if defined(PLATFORM_IOS) && PLATFORM_IOS
+#pragma once
+
+#ifdef AK_WINDOWSGC
+
+#include "Platforms/AkPlatformBase.h"
+#include "AkWinGDKInitializationSettings.h"
+
+#define TCHAR_TO_AK(Text) (const WIDECHAR*)(Text)
+
+using UAkInitializationSettings = UAkWinGDKInitializationSettings;
+
+struct FAkWinGCPlatform : FAkPlatformBase
+{
+	static const UAkInitializationSettings* GetInitializationSettings()
+	{
+		return GetDefault<UAkWinGDKInitializationSettings>();
+	}
+
+	static const FString GetPlatformBasePath()
+	{
+		return FString("Windows");
+	}
+};
+
+using FAkPlatform = FAkWinGCPlatform;
 
 #endif

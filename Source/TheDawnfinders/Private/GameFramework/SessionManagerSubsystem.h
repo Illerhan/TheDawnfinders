@@ -13,6 +13,8 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSessionCreated, bool, bWasSuccesful);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSessionJoined, bool, bWasSuccesful);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSessionsFound, const TArray<FBlueprintSessionResult>&, Results, bool, bWasSuccesfull);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInviteJoinResult, bool, bSuccess);
+
 
 // Structure pour sauvegarder les paramètres de session
 USTRUCT()
@@ -120,6 +122,10 @@ public:
 
     UPROPERTY(BlueprintAssignable, Category = "SessionManager")
     FOnSessionJoined OnSessionJoined;
+    
+    UPROPERTY(BlueprintAssignable, Category = "Session|Invite")
+    FOnInviteJoinResult OnInviteJoinCompleted;
+    bool bCameFromInvite;
 
 private:
     // Callbacks des sessions

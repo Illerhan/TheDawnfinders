@@ -5,6 +5,7 @@
 
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
+#include "GameFramework/GICustom.h"
 #include "Widgets/Mule/MuleWidget.h"
 
 void ACustomPlayerController::Server_RequestSwitchPanel_Implementation(int32 PanelIndex)
@@ -29,6 +30,15 @@ void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
 	if (MuleAIController)
 	{
 		MuleAIController->CallMule(Actor);
+	}
+}
+
+void ACustomPlayerController::Client_SetRequestedPanel_Implementation(int32 PanelIndex)
+{
+	UGICustom* GI = (Cast<UGICustom>(GetGameInstance()));
+	if (GI)
+	{
+		GI->RequestedPanel = PanelIndex;
 	}
 }
 
