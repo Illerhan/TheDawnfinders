@@ -416,7 +416,7 @@ void UItemComponent::ActualisePreviewThrow(FVector AimInput)
 		return;
 	}
 
-	CurrentThrowDirection = AimInput + FVector(0, 0, 0.5f);
+	CurrentThrowDirection = FMath::Lerp(CurrentThrowDirection, AimInput + FVector(0, 0, 0.5f), GetWorld()->GetDeltaSeconds() * 5.f);
 
 	AThrowableObject* Throwable = EquippedItem.CurrentInfos.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
 	OnThrowPreviewDisplay.Broadcast(CurrentThrowDirection, ThrowStrength);
