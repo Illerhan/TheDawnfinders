@@ -224,6 +224,8 @@ void UInteractionComponent::StartInteract()
 		if (Cast<AInteractibleObjects>(Nearest)->GetIsInInteractionStateOnInteract()) {
 			bIsInInteraction = true;
 			CurrentInteractible = Nearest;
+
+			bWasCrouched = (PlayerCharacter->CurrentState == EPlayerState::Sneaking);
 		}
 		TryInteract(Nearest, PlayerCharacter);
 	}
@@ -256,7 +258,7 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 		CurrentInteractible = Interactible;
 	}
 
-	bWasCrouched = Player->CurrentState == EPlayerState::Sneaking;
+	bWasCrouched = (Player->CurrentState == EPlayerState::Sneaking);
 
 	IInteractible::Execute_Interact(Interactible, Player);
 }
@@ -360,8 +362,6 @@ void UInteractionComponent::StopInteract()
 
 	if (CurrentInteractible && Cast<AInteractibleObjects>(CurrentInteractible)->GetStopInteractOnRelease())
 	{
-		UE_LOG(LogTemp, Display, TEXT("Blaaaaa"));
-
 		if (!GetOwner()->HasAuthority()) {
 			ServerStopInteract(CurrentInteractible, PlayerCharacter);
 		}
@@ -401,8 +401,8 @@ void UInteractionComponent::CancelInteraction()
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
 
-		if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped) 
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, false);
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
+			IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 	}
 
 	else if (CurrentInteractible && bIsInInteraction) {
@@ -410,7 +410,7 @@ void UInteractionComponent::CancelInteraction()
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
 
-		PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, false);
+		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 	}
 }
 
