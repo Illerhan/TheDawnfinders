@@ -89,6 +89,9 @@ public:
 	USceneComponent* CarriablePosRef;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USceneComponent* ThrowStartPosRef;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USphereComponent* NoiseZone;
 	
 
@@ -300,7 +303,7 @@ protected:
 	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void DisplayThrowPreview(FVector Position, float Range);
+	void DisplayThrowPreview(FVector Direction, float Strength);
 
 	UFUNCTION()
 	void HideThrowPreview();

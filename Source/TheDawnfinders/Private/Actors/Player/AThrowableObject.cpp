@@ -29,32 +29,29 @@ void AThrowableObject::Tick(float DeltaTime)
 	ProgressTimer += DeltaTime;
 
 	if (ProgressTimer < ThrowDuration) {
-		ActualisePosition();
+		//ActualisePosition();
 	}
 	else {
-		Server_DoCollisionEffect();
+		//Server_DoCollisionEffect();
 	}
 }
 
 
-void AThrowableObject::Initialise(FVector FinalPos, UItemData* Data)
+void AThrowableObject::Initialise(UItemData* Data)
 {
-	StartPos = GetActorLocation();
-	EndPos = FinalPos;
 	ProgressTimer = 0;
 
 	ItemData = Data;
 }
 
+void AThrowableObject::DoStartImpulse_Implementation(FVector Direction, float Strength)
+{
+	
+}
+
 
 void AThrowableObject::ActualisePosition()
 {
-	FVector CurrentPos = FMath::Lerp(StartPos, EndPos, ProgressTimer / ThrowDuration);
-	float AddedY = FMath::Sin(FMath::Lerp(0, 3.14f, ProgressTimer / ThrowDuration)) * 300.f;
-
-	CurrentPos += FVector(0, 0, AddedY);
-
-	SetActorLocation(CurrentPos);
 }
 
 void AThrowableObject::Server_DoCollisionEffect_Implementation()

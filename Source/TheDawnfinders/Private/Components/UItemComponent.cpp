@@ -273,7 +273,7 @@ void UItemComponent::UseConsumable()
 			{
 				if (!IsPreviewingThrow) return;
 
-				Server_ThrowItem(EquippedItem.CurrentInfos.ItemData, CurrentThrowPosition);
+				Server_ThrowItem(EquippedItem.CurrentInfos.ItemData, CurrentThrowDirection);
 
 				InventoryComponent->RemoveCurrentItem();
 				StopPreviewThrow();
@@ -388,7 +388,7 @@ void UItemComponent::StartPreviewThrow()
 	ThrowPreviewTimer = 0;
 }
 
-void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector FinalPosition)
+void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector Direc)
 {
 	FActorSpawnParameters Params;
 	Params.Owner = GetOwner();
@@ -396,11 +396,12 @@ void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector Fi
 
 	AThrowableObject* ThrowedObject =
 		GetWorld()->SpawnActor<AThrowableObject>(Data->ThrowedObjectClass,
-			GetOwner()->GetActorLocation(), FRotator(0.f, 0.f, 0.f), Params);
+			PlayerCharacter->ThrowStartPosRef->GetComponentLocation(), FRotator(0.f, 0.f, 0.f), Params);
 
 	if (ThrowedObject)
 	{
-		ThrowedObject->Initialise(FinalPosition, Data);
+		ThrowedObject->Initialise(Data);
+		ThrowedObject->DoStartImpulse(Direc, ThrowStrength);
 	}
 }
 
@@ -415,10 +416,10 @@ void UItemComponent::ActualisePreviewThrow(FVector AimInput)
 		return;
 	}
 
-	CurrentThrowPosition = GetOwner()->GetActorLocation() + AimInput * 800.f;
+	CurrentThrowDirection = AimInput + FVector(0, 0, 0.5f);
 
 	AThrowableObject* Throwable = EquippedItem.CurrentInfos.ItemData->ThrowedObjectClass->GetDefaultObject<AThrowableObject>();
-	OnThrowPreviewDisplay.Broadcast(CurrentThrowPosition, Throwable->EffectRange);
+	OnThrowPreviewDisplay.Broadcast(CurrentThrowDirection, ThrowStrength);
 }
 
 
