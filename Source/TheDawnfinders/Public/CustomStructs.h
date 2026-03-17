@@ -115,51 +115,59 @@ enum class EDamageType : uint8 {
 	Blunt UMETA(DisplayName = "Blunt")
 };
 
-UENUM(BlueprintType)
-enum class EWeaponType : uint8 {
-	OneHanded UMETA(DisplayName = "OneHanded"),
-	TwoHanded UMETA(DisplayName = "TwoHanded"),
-	AtRange UMETA(DisplayName = "AtRange")
-};
-
 
 USTRUCT(BlueprintType)
 struct FWeaponInfos : public FTableRowBase {
 
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	FName WeaponTypeName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float BaseDamage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float StaminaMultiplier = 1.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float PlayerSpeedModifier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
+	float StaminaMultiplier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	float AnimsSpeedModifier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "100.0"), Category = "Melee")
 	float CriticalChance;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	float Range;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	float Radius = 40.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	bool DisplayCollisionDebug;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	EDamageType DamageType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	float MineDamageMultiplier = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	UItemData* NeededAmmo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	int MagazineSize;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float DelayBetweenShots;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float AutoLockStartAngle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float AutoLockStrength;
 };
 
 
@@ -167,6 +175,9 @@ USTRUCT(BlueprintType)
 struct FWeaponTypesData : public FTableRowBase {
 
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsRangedWeapon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FName> LightComboActionNames;

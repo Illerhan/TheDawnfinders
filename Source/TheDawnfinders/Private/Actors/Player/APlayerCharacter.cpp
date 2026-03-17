@@ -299,6 +299,8 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         break;
     }
 
+    UE_LOG(LogTemp, Display, TEXT("%s"), *UEnum::GetValueAsString(CurrentState));
+
     if (!HasAuthority()) {
         Server_SetCurrentPlayerState(NewState, false);
     }
