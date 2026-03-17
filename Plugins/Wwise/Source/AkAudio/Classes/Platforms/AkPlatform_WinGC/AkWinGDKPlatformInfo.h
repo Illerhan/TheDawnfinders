@@ -15,6 +15,44 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-#if defined(PLATFORM_IOS) && PLATFORM_IOS
+#pragma once
 
+#include "Platforms/AkPlatformInfo.h"
+#include "AkWinGDKPlatformInfo.generated.h"
+
+UCLASS()
+class UAkWinGDKPlatformInfo : public UAkPlatformInfo
+{
+	GENERATED_BODY()
+
+public:
+	UAkWinGDKPlatformInfo()
+	{
+		WwisePlatform = "Windows";
+
+#ifdef AK_WINGC_VS_VERSION
+		Architecture = "WinGC_" AK_WINGC_VS_VERSION;
+#else
+		Architecture = "WinGC_vc160";
 #endif
+
+		LibraryFileNameFormat = "{0}.dll";
+		DebugFileNameFormat = "{0}.pdb";
+
+#if WITH_EDITORONLY_DATA
+		UAkPlatformInfo::UnrealNameToPlatformInfo.Add("WinGDK", this);
+#endif
+	}
+};
+
+UCLASS()
+class UAkWinAnvilPlatformInfo : public UAkWinGDKPlatformInfo
+{
+	GENERATED_BODY()
+	UAkWinAnvilPlatformInfo()
+	{
+#if WITH_EDITORONLY_DATA
+		UAkPlatformInfo::UnrealNameToPlatformInfo.Add("WinAnvil", this);
+#endif
+	}
+};
