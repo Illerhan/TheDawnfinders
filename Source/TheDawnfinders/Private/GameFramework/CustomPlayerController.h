@@ -6,8 +6,10 @@
 #include "GameFramework/PlayerController.h"
 #include "CustomPlayerController.generated.h"
 
+
 class UMuleWidget;
 class AMule;
+
 /**
  * 
  */
@@ -28,6 +30,10 @@ public:
 	
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_CallMule(AActor* Actor);
+	
+	UFUNCTION(Client, Reliable)
+	void Client_SetRequestedPanel(int32 TargetPanel);
+	
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMuleWidget* MuleWidget;
