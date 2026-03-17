@@ -104,6 +104,6 @@ void AContainer::CloseContainerInventory()
 
 void AContainer::Server_CloseContainerInventory_Implementation()
 {
-	Player->InteractionComponent->CancelInteraction();
+	//Player->InteractionComponent->CancelInteraction();
 	bPlayerIsUsing = false;
 }
