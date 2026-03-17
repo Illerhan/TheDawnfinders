@@ -62,8 +62,12 @@ AAPlayerCharacter::AAPlayerCharacter()
     DebugComponent = CreateDefaultSubobject<UDebugComponent>(TEXT("DebugComponent"));
     WeaponCollisionPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponCollisionPosRef"));
     WeaponCollisionPosRef->SetupAttachment(GetMesh());
+
     CarriablePosRef = CreateDefaultSubobject<USceneComponent>(TEXT("CarriablePosRef"));
     CarriablePosRef->SetupAttachment(GetMesh());
+
+    ThrowStartPosRef = CreateDefaultSubobject<USceneComponent>(TEXT("ThrowStartPosRef"));
+    ThrowStartPosRef->SetupAttachment(GetMesh());
 
     PointLight = CreateDefaultSubobject<UPointLightComponent>(FName("Light"));
     PointLight->SetupAttachment(RootComponent);
@@ -943,11 +947,11 @@ void AAPlayerCharacter::ServerUseZiplineItem_Implementation(UItemData* ZiplineIt
     if (NewZip) InventoryComponent->RemoveCurrentItem();
 }
 
-void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Position, float Range)
+void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Direction, float Strength)
 {
-    ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
-    ThrowablePreviewMeshComponent->SetHiddenInGame(false);
-    ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
+    //ThrowablePreviewMeshComponent->SetWorldLocation(FVector(Position.X, Position.Y, Position.Z));
+    //ThrowablePreviewMeshComponent->SetHiddenInGame(false);
+    //ThrowablePreviewMeshComponent->SetRelativeScale3D(FVector(Range, Range, 1) * 0.01f);
 }
 
 void AAPlayerCharacter::HideThrowPreview()

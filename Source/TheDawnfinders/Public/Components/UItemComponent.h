@@ -155,8 +155,8 @@ public :
 	bool GetIsPreviewingThrow() { return IsPreviewingThrow; }
 
 
-// === PRIVATE PROPERTIES ===
-private :
+// === PROTECTED PROPERTIES ===
+protected :
 	UPROPERTY()
 	FInventorySlot EquippedItem;
 
@@ -200,7 +200,10 @@ private :
 	FWeaponActionData CurrentWeaponActionData;
 
 	UPROPERTY()
-	FVector CurrentThrowPosition;
+	FVector CurrentThrowDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float ThrowStrength;
 
 	UPROPERTY()
 	UDataTable* WeaponDataTable;
