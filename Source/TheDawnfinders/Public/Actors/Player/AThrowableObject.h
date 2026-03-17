@@ -27,7 +27,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void Initialise(FVector FinalPos, UItemData* Data);
+	void Initialise(UItemData* Data);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoStartImpulse(FVector Direction, float Strength);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualisePosition();
@@ -47,12 +50,6 @@ public :
 	float EffectRange;
 
 protected :
-	UPROPERTY()
-	FVector StartPos;
-
-	UPROPERTY()
-	FVector EndPos;
-
 	UPROPERTY()
 	float ProgressTimer;
 
