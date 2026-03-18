@@ -125,28 +125,6 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 	VerifyCurrentOverloadCount();
 }
 
-void UInventoryComponent::RestoreShopItems()
-{
-	if (!GetOwner() || !GetOwner()->HasAuthority()) return;
-
-	APawn* Pawn = Cast<APawn>(GetOwner());
-	if (!Pawn) return;
-
-	APlayerController* PC = Cast<APlayerController>(Pawn->GetController());
-	if (!PC) return;
-
-	ACustomPlayerState* PS = PC->GetPlayerState<ACustomPlayerState>();
-	if (!PS || PS->ShopItems.Num() == 0) return;
-
-	if (PS->SavedGold > 0)
-	{
-		Server_AddGold_Implementation(PS->SavedGold);
-		PS->SavedGold = 0;
-	}
-	
-	bShopItemsRestored = false;
-	AddShopItems(PS->ShopItems);
-}
 
 void UInventoryComponent::UpdateValuable()
 	{
@@ -232,6 +210,39 @@ void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 	if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
 
 	InventorySlots = NewSlots;
+
+	SortInventory();
+	VerifyCurrentOverloadCount();
+}
+
+
+void UInventoryComponent::RemoveItem(UItemData* ItemToRemove, int Quantity)
+{
+	if (!GetOwner()->HasAuthority())
+	{
+		ServerRemoveItem(ItemToRemove, Quantity);
+		return;
+	}
+
+	ServerRemoveItem_Implementation(ItemToRemove, Quantity);
+}
+
+void UInventoryComponent::ServerRemoveItem_Implementation(UItemData* ItemToRemove, int Quantity)
+{
+	int RemainingQuantity = Quantity;
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != ItemToRemove) continue;
+		
+		RemainingQuantity -= InventorySlots[i].Quantity;
+
+		InventorySlots[i].Quantity -= Quantity;
+		InventorySlots[i].Quantity = FMath::Clamp(InventorySlots[i].Quantity, 0, 1000);
+
+		if (InventorySlots[i].Quantity <= 0) InventorySlots[i].CurrentInfos.ItemData = nullptr;
+		if (RemainingQuantity <= 0) break;
+	}
 
 	SortInventory();
 	VerifyCurrentOverloadCount();
@@ -510,6 +521,55 @@ void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
 #pragma endregion
 
 
+#pragma region Gun
+
+void UInventoryComponent::UseAmmo(int UsedAmmo, UItemData* ItemToUse)
+{
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != ItemToUse) continue;
+
+		InventorySlots[i].CurrentInfos.AmmoInMagazine -= UsedAmmo;
+
+		OnInventoryChange.Broadcast(InventorySlots, i);
+
+		break;
+	}
+}
+
+void UInventoryComponent::ReloadGun(UItemData* ItemToReload, UItemData* NeededAmmo, int MaxAmmo)
+{
+	// Find number of ammo available
+	int AmmoCount = 0;
+
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != NeededAmmo) continue;
+
+		AmmoCount += InventorySlots[i].Quantity;
+	}
+
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != ItemToReload) continue;
+
+		int AddedAmmo = FMath::Clamp(MaxAmmo - InventorySlots[i].CurrentInfos.AmmoInMagazine, 0, AmmoCount);
+
+		UE_LOG(LogTemp, Display, TEXT("Added Ammo : %f"), (float)AmmoCount);
+
+		InventorySlots[i].CurrentInfos.AmmoInMagazine += AddedAmmo;
+		RemoveItem(NeededAmmo, AddedAmmo);
+
+		break;
+	}
+}
+
+#pragma endregion
+
+
 #pragma region Others
 
 FInventorySlot UInventoryComponent::GetCurrentSlot()
@@ -520,6 +580,29 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	}
 
 	return FInventorySlot();
+}
+
+void UInventoryComponent::RestoreShopItems()
+{
+	if (!GetOwner() || !GetOwner()->HasAuthority()) return;
+
+	APawn* Pawn = Cast<APawn>(GetOwner());
+	if (!Pawn) return;
+
+	APlayerController* PC = Cast<APlayerController>(Pawn->GetController());
+	if (!PC) return;
+
+	ACustomPlayerState* PS = PC->GetPlayerState<ACustomPlayerState>();
+	if (!PS || PS->ShopItems.Num() == 0) return;
+
+	if (PS->SavedGold > 0)
+	{
+		Server_AddGold_Implementation(PS->SavedGold);
+		PS->SavedGold = 0;
+	}
+
+	bShopItemsRestored = false;
+	AddShopItems(PS->ShopItems);
 }
 
 UItemData* UInventoryComponent::GetCurrentItem()

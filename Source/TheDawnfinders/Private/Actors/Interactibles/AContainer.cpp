@@ -62,6 +62,8 @@ void AContainer::SetupLoot()
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 
 	FChestSpawn* SpawnData = LootDataTable->FindRow<FChestSpawn>(DataTableRowName, " ");
+	if (!SpawnData) return;
+
 	int ItemToSpawnCount = FMath::RandRange(SpawnData->MinItemCount, SpawnData->MaxItemCount);
 
 	for (int i = 0; i < ItemToSpawnCount; i++)

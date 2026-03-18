@@ -51,6 +51,7 @@ void UItemComponent::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 }
 
+
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -63,8 +64,15 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	ActualiseUseProgress(DeltaTime);
 
-	if (bIsAiming) {
+	if (bIsAiming && !bIsReloading) {
 		ActualiseAim(DeltaTime);
+	}
+	else if (bIsReloading) {
+		TimerReload -= DeltaTime;
+
+		if (TimerReload <= 0) {
+			CompleteReload();
+		}
 	}
 }
 
@@ -685,9 +693,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
-	//EquippedItem.CurrentInfos.Durability -= 1;
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	}
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -731,9 +741,24 @@ void UItemComponent::StopAim()
 
 void UItemComponent::Reload()
 {
-	bIsAiming = false;
+	bIsReloading = true;
+	TimerReload = CurrentWeaponData.ReloadDuration;
 
 	HideAimLines();
+}
+
+void UItemComponent::CompleteReload()
+{
+	bIsReloading = false;
+	InventoryComponent->ReloadGun(EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.NeededAmmo, CurrentWeaponData.MagazineSize);
+
+	if (bIsAiming) ActualiseAimLines();
+}
+
+void UItemComponent::CancelReload()
+{
+	bIsReloading = false;
+	TimerReload = 0;
 }
 
 void UItemComponent::ActualiseAim(float DeltaTime)
@@ -754,8 +779,13 @@ void UItemComponent::ActualiseAimLines_Implementation()
 {
 }
 
+void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
+{
+}
+
 void UItemComponent::Shoot()
 {
+	if (bIsReloading) return;
 	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
@@ -764,10 +794,11 @@ void UItemComponent::Shoot()
 		ShootDir = ShootDir.RotateAngleAxis(ModificatorAngle, FVector::UpVector);
 
 		DoShootRaycast(ShootDir);
+		DoShootFeedbacks(ShootDir);
 	}
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
-	EquippedItem.CurrentInfos.AmmoInMagazine--;
+	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
 void UItemComponent::DoShootRaycast(FVector Direction)
@@ -784,22 +815,12 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		HitResult,
 		Start,
 		End,
-		ECC_EngineTraceChannel3,
+		ECC_GameTraceChannel2,
 		Params
 	);
 
-	DrawDebugLine(
-		GetWorld(),
-		Start,
-		End,
-		FColor::Green,
-		false,
-		2.0f,
-		0,
-		2.0f
-	);
-
 	if (!bHit) return;
+	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
 
 	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
 	if (!GetOwner()->HasAuthority())
