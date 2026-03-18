@@ -119,6 +119,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ActualiseAimLines();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoShootFeedbacks(FVector Direction);
+
 	UFUNCTION(BlueprintCallable)
 	void Shoot();
 

@@ -685,9 +685,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
-	//EquippedItem.CurrentInfos.Durability -= 1;
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	}
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -754,6 +756,10 @@ void UItemComponent::ActualiseAimLines_Implementation()
 {
 }
 
+void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
+{
+}
+
 void UItemComponent::Shoot()
 {
 	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
@@ -764,10 +770,11 @@ void UItemComponent::Shoot()
 		ShootDir = ShootDir.RotateAngleAxis(ModificatorAngle, FVector::UpVector);
 
 		DoShootRaycast(ShootDir);
+		DoShootFeedbacks(ShootDir);
 	}
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
-	EquippedItem.CurrentInfos.AmmoInMagazine--;
+	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
 void UItemComponent::DoShootRaycast(FVector Direction)
@@ -784,7 +791,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		HitResult,
 		Start,
 		End,
-		ECC_EngineTraceChannel3,
+		ECC_GameTraceChannel2,
 		Params
 	);
 
@@ -800,6 +807,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 	);
 
 	if (!bHit) return;
+	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
 
 	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
 	if (!GetOwner()->HasAuthority())
