@@ -685,9 +685,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
-	//EquippedItem.CurrentInfos.Durability -= 1;
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	}
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -772,7 +774,7 @@ void UItemComponent::Shoot()
 	}
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
-	EquippedItem.CurrentInfos.AmmoInMagazine--;
+	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
 void UItemComponent::DoShootRaycast(FVector Direction)
