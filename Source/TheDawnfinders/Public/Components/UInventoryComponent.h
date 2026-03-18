@@ -89,6 +89,13 @@ public :
 	void ServerRemoveCurrentItem();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void RemoveItem(UItemData* ItemToRemove, int Quantity);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Inventory")
+	void ServerRemoveItem(UItemData* ItemToRemove, int Quantity);
+
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void RemoveItemAtIndex(int Index, bool bRemoveAll, bool TreasureInventory = false);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -130,6 +137,15 @@ public :
 	UFUNCTION(Server, Reliable, BlueprintCallable, Category = "Select Slot")
 	void ServerChangeCurrentSlot(bool IndexGoUp, int ForcedIndex = -1);
 
+// === GUN === 
+public :
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UseAmmo(int UsedAmmo, UItemData* ItemToUse);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void ReloadGun(UItemData* ItemToReload, UItemData* NeededAmmo, int MaxAmmo);
+
+
 // ==== OTHERS ====
 public :
 	UFUNCTION(BlueprintCallable)
@@ -155,9 +171,6 @@ public :
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void UseDurability(int NewDurability, UItemData* ItemToUse);
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void UseAmmo(int UsedAmmo, UItemData* ItemToUse);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SelectSlotByAngle(int angle);

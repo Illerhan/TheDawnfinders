@@ -51,6 +51,7 @@ void UItemComponent::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
 }
 
+
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -63,8 +64,15 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	ActualiseUseProgress(DeltaTime);
 
-	if (bIsAiming) {
+	if (bIsAiming && !bIsReloading) {
 		ActualiseAim(DeltaTime);
+	}
+	else if (bIsReloading) {
+		TimerReload -= DeltaTime;
+
+		if (TimerReload <= 0) {
+			CompleteReload();
+		}
 	}
 }
 
@@ -733,9 +741,24 @@ void UItemComponent::StopAim()
 
 void UItemComponent::Reload()
 {
-	bIsAiming = false;
+	bIsReloading = true;
+	TimerReload = CurrentWeaponData.ReloadDuration;
 
 	HideAimLines();
+}
+
+void UItemComponent::CompleteReload()
+{
+	bIsReloading = false;
+	InventoryComponent->ReloadGun(EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.NeededAmmo, CurrentWeaponData.MagazineSize);
+
+	if (bIsAiming) ActualiseAimLines();
+}
+
+void UItemComponent::CancelReload()
+{
+	bIsReloading = false;
+	TimerReload = 0;
 }
 
 void UItemComponent::ActualiseAim(float DeltaTime)
@@ -762,6 +785,7 @@ void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
 
 void UItemComponent::Shoot()
 {
+	if (bIsReloading) return;
 	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
@@ -793,17 +817,6 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		End,
 		ECC_GameTraceChannel2,
 		Params
-	);
-
-	DrawDebugLine(
-		GetWorld(),
-		Start,
-		End,
-		FColor::Green,
-		false,
-		2.0f,
-		0,
-		2.0f
 	);
 
 	if (!bHit) return;

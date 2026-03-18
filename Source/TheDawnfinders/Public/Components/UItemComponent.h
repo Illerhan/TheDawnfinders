@@ -129,6 +129,12 @@ public :
 	void Reload();
 
 	UFUNCTION(BlueprintCallable)
+	void CompleteReload();
+
+	UFUNCTION(BlueprintCallable)
+	void CancelReload();
+
+	UFUNCTION(BlueprintCallable)
 	void DoShootRaycast(FVector Direction);
 
 
@@ -236,13 +242,13 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float ThrowStrength;
 
-	UPROPERTY()
+	UPROPERTY() 
 	UDataTable* WeaponDataTable;
 
-	UPROPERTY()
+	UPROPERTY() 
 	UDataTable* WeaponActionsDataTable;
 
-	UPROPERTY()
+	UPROPERTY() 
 	UDataTable* WeaponTypeActionsDataTable;
 
 	UPROPERTY(BlueprintReadWrite)
@@ -250,6 +256,12 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsAiming;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsReloading;
+
+	UPROPERTY(BlueprintReadWrite)
+	float TimerReload;
 
 	UPROPERTY(BlueprintReadWrite)
 	FWeaponInfos CurrentWeaponData;
