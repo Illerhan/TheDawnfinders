@@ -126,6 +126,11 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Session|Invite")
     FOnInviteJoinResult OnInviteJoinCompleted;
     bool bCameFromInvite;
+    UPROPERTY()
+    bool bHasPendingInviteJoinResult = false;
+    UPROPERTY()
+    
+    bool PendingInviteJoinSuccess = false;
 
 private:
     // Callbacks des sessions
@@ -137,6 +142,8 @@ private:
     // Callbacks spécifiques Steam
     void OnSessionUserInviteAccepted(const bool bWasSuccessful, const int32 ControllerId, FUniqueNetIdPtr UserId, const FOnlineSessionSearchResult& InviteResult);
     void OnFindFriendSessionComplete(int32 LocalUserNum, bool bWasSuccessful, const TArray<FOnlineSessionSearchResult>& SearchResults);
+    UFUNCTION(BlueprintCallable)
+    bool ConsumePendingInviteJoinResult(bool& bOutSuccess);
 
     // Handles des delegates
     FDelegateHandle OnCreateSessionCompleteDelegateHandle;
