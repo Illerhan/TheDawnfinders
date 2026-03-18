@@ -566,6 +566,21 @@ void UInventoryComponent::UseDurability(int UsedDurability, UItemData* ItemToUse
 	}
 }
 
+void UInventoryComponent::UseAmmo(int UsedAmmo, UItemData* ItemToUse)
+{
+	for (int i = 0; i < InventorySlotCount; i++) {
+
+		if (InventorySlots[i].CurrentInfos.ItemData == nullptr) continue;
+		if (InventorySlots[i].CurrentInfos.ItemData != ItemToUse) continue;
+
+		InventorySlots[i].CurrentInfos.AmmoInMagazine -= UsedAmmo;
+
+		OnInventoryChange.Broadcast(InventorySlots, i);
+
+		break;
+	}
+}
+
 
 void UInventoryComponent::SelectSlotByAngle(int angle)
 {
