@@ -754,6 +754,10 @@ void UItemComponent::ActualiseAimLines_Implementation()
 {
 }
 
+void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
+{
+}
+
 void UItemComponent::Shoot()
 {
 	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
@@ -764,6 +768,7 @@ void UItemComponent::Shoot()
 		ShootDir = ShootDir.RotateAngleAxis(ModificatorAngle, FVector::UpVector);
 
 		DoShootRaycast(ShootDir);
+		DoShootFeedbacks(ShootDir);
 	}
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
@@ -784,7 +789,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		HitResult,
 		Start,
 		End,
-		ECC_EngineTraceChannel3,
+		ECC_GameTraceChannel2,
 		Params
 	);
 
@@ -800,6 +805,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 	);
 
 	if (!bHit) return;
+	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
 
 	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
 	if (!GetOwner()->HasAuthority())
