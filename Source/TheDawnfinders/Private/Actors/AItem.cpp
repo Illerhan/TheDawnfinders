@@ -32,7 +32,18 @@ void AItem::BeginPlay()
 	if (ItemData && ItemData->ItemMesh)
 	{
 		ItemMesh->SetStaticMesh(ItemData->ItemMesh);
-		ItemInfos = FItemInfos(ItemData, ItemData->Durability);
+
+		if (!ItemData->bIsRangedWeapon) {
+			ItemInfos = FItemInfos(ItemData, ItemData->Durability);
+			return;
+		}
+
+		UDataTable* WeaponDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+		if (!WeaponDataTable)
+			UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+		FWeaponInfos CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(ItemData->WeaponDataTableRow, " ");
+		ItemInfos = FItemInfos(ItemData, ItemData->Durability, CurrentWeaponData.MagazineSize);
 	}
 }
 

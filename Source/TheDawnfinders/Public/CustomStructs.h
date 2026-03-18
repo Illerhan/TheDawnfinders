@@ -19,7 +19,7 @@ public:
 	float Durability;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int AmmosInMagazine;
+	int AmmoInMagazine;
 
 
 	FItemInfos()
@@ -27,7 +27,12 @@ public:
 	{}
 
 	FItemInfos(UItemData* Data, int Durability)
-		: ItemData(Data), Durability(Durability)
+		: ItemData(Data), Durability(Durability), AmmoInMagazine(0)
+	{
+	}
+
+	FItemInfos(UItemData* Data, int Durability, int Ammo)
+		: ItemData(Data), Durability(Durability), AmmoInMagazine(Ammo)
 	{
 	}
 
@@ -175,7 +180,7 @@ struct FWeaponInfos : public FTableRowBase {
 	float NoiseRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
-	float NumberOfShots;
+	int NumberOfShots;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
 	float MaxRange;
