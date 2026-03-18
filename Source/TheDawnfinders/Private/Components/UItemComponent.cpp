@@ -480,8 +480,6 @@ void UItemComponent::DoLightAttack()
 
 	StaminaComponent->UseStamina(CurrentWeaponActionData.StaminaCost * WeaponData->StaminaMultiplier);
 	CurrentAttackDamages = CurrentWeaponActionData.DamageMultiplier * WeaponData->BaseDamage;
-
-	//PlayerCharacter->SetPlayerSpeed(PlayerCharacter->PlayerConfig->WalkSpeed * WeaponData->PlayerSpeedModifier);
 }
 
 

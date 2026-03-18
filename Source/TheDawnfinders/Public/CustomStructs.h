@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 #include "CoreMinimal.h"
@@ -18,6 +17,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Durability;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int AmmosInMagazine;
 
 
 	FItemInfos()
@@ -155,19 +157,37 @@ struct FWeaponInfos : public FTableRowBase {
 	float MineDamageMultiplier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
-	UItemData* NeededAmmo;
+	float MaxAngle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float MinAngle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float AimingSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
 	int MagazineSize;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float ReloadDuration;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float NoiseRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float NumberOfShots;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float MaxRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	float WalkAimModifier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
 	float DelayBetweenShots;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
-	float AutoLockStartAngle;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
-	float AutoLockStrength;
+	UItemData* NeededAmmo;
 };
 
 
