@@ -62,6 +62,10 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	}
 
 	ActualiseUseProgress(DeltaTime);
+
+	if (bIsAiming) {
+		ActualiseAim(DeltaTime);
+	}
 }
 
 
@@ -199,6 +203,16 @@ void UItemComponent::DoMainAction()
 			}
 		}
 		UseConsumable();
+		return;
+	}
+
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) 
+	{
+		if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon && bIsAiming) 
+		{
+			Shoot();
+			return;
+		}
 		return;
 	}
 }
@@ -353,8 +367,14 @@ void UItemComponent::DoSecondaryAction()
 		return;
 	}
 
-	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::Blocking, false);
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) 
+	{
+		if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon)
+		{
+			StartAim();
+			return;
+		}
+		return;
 	}
 }
 
@@ -362,8 +382,14 @@ void UItemComponent::StopSecondaryAction()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) {
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) 
+	{
+		if (bIsAiming)
+		{
+			StopAim();
+			return;
+		}
+		return;
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::ThrowObject)
@@ -442,6 +468,7 @@ void UItemComponent::DoLightAttack()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
+	if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) return;
 
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
@@ -658,9 +685,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
-	//EquippedItem.CurrentInfos.Durability -= 1;
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
+		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	}
 
 	// Enemy Resistances
 	switch (WeaponData->DamageType) {
@@ -680,6 +709,111 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	}
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+}
+
+#pragma endregion
+
+
+#pragma region Use Ranged Weapon
+
+void UItemComponent::StartAim()
+{
+	CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
+
+	bIsAiming = true;
+	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+}
+
+void UItemComponent::StopAim()
+{
+	bIsAiming = false;
+
+	HideAimLines();
+}
+
+void UItemComponent::Reload()
+{
+	bIsAiming = false;
+
+	HideAimLines();
+}
+
+void UItemComponent::ActualiseAim(float DeltaTime)
+{
+	bool bIsMoving = GetOwner()->GetVelocity().SquaredLength() > 1.0f;
+
+	if (bIsMoving) AimCurrentAngle = FMath::Lerp(AimCurrentAngle, CurrentWeaponData.MinAngle, DeltaTime * CurrentWeaponData.AimingSpeed * CurrentWeaponData.WalkAimModifier);
+	else AimCurrentAngle = FMath::Lerp(AimCurrentAngle, CurrentWeaponData.MinAngle, DeltaTime * CurrentWeaponData.AimingSpeed);
+
+	ActualiseAimLines();
+}
+
+void UItemComponent::HideAimLines_Implementation()
+{
+}
+
+void UItemComponent::ActualiseAimLines_Implementation()
+{
+}
+
+void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
+{
+}
+
+void UItemComponent::Shoot()
+{
+	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
+
+	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
+		FVector ShootDir = GetOwner()->GetActorForwardVector();
+		float ModificatorAngle = FMath::RandRange(-AimCurrentAngle, AimCurrentAngle);
+		ShootDir = ShootDir.RotateAngleAxis(ModificatorAngle, FVector::UpVector);
+
+		DoShootRaycast(ShootDir);
+		DoShootFeedbacks(ShootDir);
+	}
+
+	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
+}
+
+void UItemComponent::DoShootRaycast(FVector Direction)
+{
+	FHitResult HitResult;
+
+	FVector Start = GetOwner()->GetActorLocation();
+	FVector End = Start + (Direction * CurrentWeaponData.MaxRange);
+
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(GetOwner()); 
+
+	bool bHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		Start,
+		End,
+		ECC_GameTraceChannel2,
+		Params
+	);
+
+	DrawDebugLine(
+		GetWorld(),
+		Start,
+		End,
+		FColor::Green,
+		false,
+		2.0f,
+		0,
+		2.0f
+	);
+
+	if (!bHit) return;
+	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
+
+	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
+	if (!GetOwner()->HasAuthority())
+		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+	else
+		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
 }
 
 #pragma endregion

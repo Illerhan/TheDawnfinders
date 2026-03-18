@@ -18,7 +18,7 @@ class UInventoryComponent;
 class UStaminaComponent;
 class AAPlayerCharacter;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
 class THEDAWNFINDERS_API UItemComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -72,7 +72,7 @@ public :
 	void StopSecondaryAction();
 
 
-// === WEAPONS ===
+// === MELEE WEAPON ===
 public :
 	UFUNCTION(BlueprintCallable)
 	void DoLightAttack();
@@ -100,6 +100,36 @@ public :
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_ApplyDamagesToDestructible(AActor* Target, UItemData* Data, float BaseDamages);
+
+
+// === RANGED WEAPON ===
+public :
+	UFUNCTION(BlueprintCallable)
+	void StartAim();
+
+	UFUNCTION(BlueprintCallable)
+	void StopAim();
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseAim(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void HideAimLines();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ActualiseAimLines();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoShootFeedbacks(FVector Direction);
+
+	UFUNCTION(BlueprintCallable)
+	void Shoot();
+
+	UFUNCTION(BlueprintCallable)
+	void Reload();
+
+	UFUNCTION(BlueprintCallable)
+	void DoShootRaycast(FVector Direction);
 
 
 // === THROW ===
@@ -153,6 +183,7 @@ public:
 // === GETTERS ===
 public :
 	bool GetIsPreviewingThrow() { return IsPreviewingThrow; }
+	bool GetIsAiming() { return bIsAiming; }
 
 
 // === PROTECTED PROPERTIES ===
@@ -213,6 +244,15 @@ protected :
 
 	UPROPERTY()
 	UDataTable* WeaponTypeActionsDataTable;
+
+	UPROPERTY(BlueprintReadWrite)
+	float AimCurrentAngle;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsAiming;
+
+	UPROPERTY(BlueprintReadWrite)
+	FWeaponInfos CurrentWeaponData;
 
 
 // === PRIVATE REFERENCES ===

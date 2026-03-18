@@ -322,11 +322,16 @@ void USessionManagerSubsystem::OnSessionDestroyComplete(FName SessionName, bool 
                 LastSessionSettings.bIsLobbiesIfAvailable
             );
         }
+        else if (bHasPendingInvite)
+        {
+            JoinSessionViaInvite();
+        }
     }
     else
     {
         UE_LOG(LogTemp, Error, TEXT("Failed to destroy session!"));
         bCreateSessionOnDestroy = false;
+        bHasPendingInvite = false;
     }
 }
 
@@ -354,31 +359,35 @@ void USessionManagerSubsystem::OnFindSessionsComplete(bool bWasSuccessful)
 
 void USessionManagerSubsystem::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
-    if (Result != EOnJoinSessionCompleteResult::Success)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Failed to join session!"));
-        OnSessionJoined.Broadcast(false);
-        OnInviteJoinCompleted.Broadcast(false); // notif échec
-        return;
-    }
+    bool bSuccess = (Result == EOnJoinSessionCompleteResult::Success);
 
-    FString ConnectInfo;
-    if (SessionInterface->GetResolvedConnectString(NAME_GameSession, ConnectInfo))
+    if (bSuccess)
     {
-        APlayerController* PC = GetWorld()->GetFirstPlayerController();
-        if (PC)
+        FString ConnectInfo;
+        if (SessionInterface->GetResolvedConnectString(NAME_GameSession, ConnectInfo))
         {
-            // Marquer que ce join vient d'une invitation
-            // pour que WBP_MainMenu sache quoi faire au PostTravel
-            if (bHasPendingInvite)
+            APlayerController* PC = GetWorld()->GetFirstPlayerController();
+            if (PC)
             {
-                bCameFromInvite = true; // nouvelle variable bool dans le .h
+                OnSessionJoined.Broadcast(true);
+                
+                // ✅ Stocke le résultat AVANT de broadcaster
+                // Au cas où le widget n'est pas encore bindé
+                bHasPendingInviteJoinResult = true;
+                PendingInviteJoinSuccess = true;
+                
+                OnInviteJoinCompleted.Broadcast(true);
+                PC->ClientTravel(ConnectInfo, ETravelType::TRAVEL_Absolute);
             }
-
-            OnSessionJoined.Broadcast(true);
-            OnInviteJoinCompleted.Broadcast(true); // notif succès
-            PC->ClientTravel(ConnectInfo, ETravelType::TRAVEL_Absolute);
         }
+    }
+    else
+    {
+        bHasPendingInviteJoinResult = true;
+        PendingInviteJoinSuccess = false;
+        
+        OnSessionJoined.Broadcast(false);
+        OnInviteJoinCompleted.Broadcast(false);
     }
 }
 
@@ -427,3 +436,11 @@ void USessionManagerSubsystem::OnFindFriendSessionComplete(int32 LocalUserNum, b
     JoinSessionViaInvite();
 }
 
+bool USessionManagerSubsystem::ConsumePendingInviteJoinResult(bool& bOutSuccess)
+{
+    if (!bHasPendingInviteJoinResult) return false;
+    
+    bOutSuccess = PendingInviteJoinSuccess;
+    bHasPendingInviteJoinResult = false; // ✅ Consommé, reset
+    return true;
+}

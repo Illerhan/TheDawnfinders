@@ -157,6 +157,9 @@ public :
 	void UseDurability(int NewDurability, UItemData* ItemToUse);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UseAmmo(int UsedAmmo, UItemData* ItemToUse);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SelectSlotByAngle(int angle);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
