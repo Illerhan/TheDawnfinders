@@ -820,7 +820,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 {
 	FHitResult HitResult;
 
-	FVector Start = GetOwner()->GetActorLocation() + FVector(0, 0, 100);
+	FVector Start = GetOwner()->GetActorLocation() + FVector(0, 0, 50);
 	FVector End = Start + (Direction * CurrentWeaponData.MaxRange);
 
 	FCollisionQueryParams Params;
@@ -830,7 +830,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		HitResult,
 		Start,
 		End,
-		ECC_GameTraceChannel2,
+		ECC_GameTraceChannel1,
 		Params
 	);
 
