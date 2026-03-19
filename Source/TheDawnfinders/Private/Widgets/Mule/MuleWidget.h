@@ -15,5 +15,5 @@ class THEDAWNFINDERS_API UMuleWidget : public UUserWidget
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintNativeEvent, Category = Mule)
-	void UpdateMuleWidget(int Charges, float ChargesCooldown, float CallCooldown);
+	void UpdateMuleWidget(int Charges, float ChargesCooldown, float CallCooldown, int GoldAmount);
 };

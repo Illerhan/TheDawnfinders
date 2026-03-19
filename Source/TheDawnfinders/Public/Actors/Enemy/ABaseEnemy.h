@@ -52,6 +52,9 @@ public :
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USceneComponent* AttackCollisionPosRef;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int DangerLevel;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartAttack(FEnemyActionData AttackData, AActor* Target);
