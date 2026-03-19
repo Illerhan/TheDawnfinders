@@ -747,7 +747,7 @@ void UItemComponent::StopAim()
 void UItemComponent::Reload()
 {
 	if (!InventoryComponent->VerifyHasItemInInventory(CurrentWeaponData.NeededAmmo)) return;
-	if (!CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
+	if ((CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine)) return;
 
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
@@ -820,7 +820,7 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 {
 	FHitResult HitResult;
 
-	FVector Start = GetOwner()->GetActorLocation();
+	FVector Start = GetOwner()->GetActorLocation() + FVector(0, 0, 100);
 	FVector End = Start + (Direction * CurrentWeaponData.MaxRange);
 
 	FCollisionQueryParams Params;
