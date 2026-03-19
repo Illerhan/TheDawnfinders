@@ -10,6 +10,7 @@
 #include "Mule.generated.h"
 
 
+class ADangerManager;
 class UWorldInteractibleWidget;
 
 UCLASS()
@@ -63,5 +64,8 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = Mule)
 	float ChargesTimer = 0.f;
+	
+	UPROPERTY(BlueprintReadWrite, Category = Mule)
+	ADangerManager* DangerManager;
 			
 };

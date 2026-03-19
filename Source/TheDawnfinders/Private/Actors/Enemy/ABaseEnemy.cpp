@@ -7,6 +7,7 @@
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/EnemyRegistry.h"
 
 
 ABaseEnemy::ABaseEnemy()
@@ -37,6 +38,14 @@ void ABaseEnemy::BeginPlay()
         1.5f,   // time in seconds
         true    // looping
     );
+    
+    if (UGameInstance* GI = GetGameInstance())
+    {
+        if (UEnemyRegistry* Registry = GI->GetSubsystem<UEnemyRegistry>())
+        {
+            Registry->RegisterEnemy(this);
+        }
+    }
 }
 
 

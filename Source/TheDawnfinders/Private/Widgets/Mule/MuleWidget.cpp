@@ -3,6 +3,7 @@
 
 #include "MuleWidget.h"
 
-void UMuleWidget::UpdateMuleWidget_Implementation(int Charges, float ChargesCooldown, float CallCooldown)
+void UMuleWidget::UpdateMuleWidget_Implementation(int Charges, float ChargesCooldown, float CallCooldown, int GoldAmount
+)
 {
 }
