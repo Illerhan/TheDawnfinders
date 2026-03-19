@@ -3,6 +3,7 @@
 
 #include "CustomPlayerController.h"
 
+#include "Actors/Mule/DangerManager.h"
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
 #include "GameFramework/GICustom.h"
@@ -30,6 +31,7 @@ void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
 	if (MuleAIController)
 	{
 		MuleAIController->CallMule(Actor);
+		Mule->DangerManager->MuleCalled();
 	}
 }
 
@@ -56,6 +58,7 @@ void ACustomPlayerController::Tick(float DeltaTime)
 	MuleWidget->UpdateMuleWidget(
 		Mule->CallCharges,
 		ChargesPercent,
-		Mule->CooldownTimer
+		Mule->CooldownTimer,
+		Mule->InventoryComponent->CurrentValue
 	);
 }
