@@ -34,15 +34,15 @@ void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		UpdateOffset(DeltaTime);
 		UpdateDistance(DeltaTime);
 
-		SpringArmComponent->TargetArmLength = CurrentDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentOffset);
+		SpringArmComponent->TargetArmLength = CurrentTotalDist;
+		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentTotalOffset);
 	}
 	else {
-		CurrentDist = FMath::Lerp(CurrentDist, ForcedDist, DeltaTime * CameraDistanceLerpSpeed);
-		CurrentOffset = FMath::Lerp(CurrentOffset, ForcedPosition - GetOwner()->GetActorLocation(), DeltaTime * CameraOffsetLerpSpeed);
+		CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, ForcedDist, DeltaTime * CameraDistanceLerpSpeed);
+		CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, ForcedPosition - GetOwner()->GetActorLocation(), DeltaTime * CameraOffsetLerpSpeed);
 
-		SpringArmComponent->TargetArmLength = CurrentDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentOffset);
+		SpringArmComponent->TargetArmLength = CurrentEnviroDist;
+		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentEnviroOffset);
 	}
 }
 
@@ -67,9 +67,8 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	if(EnemiesAtRange.Num() != 0)
 		NewOffset /= EnemiesAtRange.Num();
 
-	NewOffset += CurrentPlayerOffset;
-
-	CurrentOffset = FMath::Lerp(CurrentOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
+	CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
+	CurrentTotalOffset = CurrentEnviroOffset + CurrentPlayerOffset;
 }
 
 void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
@@ -89,9 +88,10 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 		AverageDist += Distance;
 	}
 	AverageDist /= NearbyWallsLocations.Num();
-	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f)) + CurrentPlayerDist;
+	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f));
 
-	CurrentDist = FMath::Lerp(CurrentDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
+	CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
+	CurrentTotalDist = CurrentEnviroDist + CurrentPlayerDist;
 }
 
 void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist)
@@ -192,20 +192,20 @@ void UPlayerCameraComponent::ActualisePlayerInfos(float DeltaTime)
 
 	switch (CurrentState) {
 	case EPlayerState::None :
-		if (GetOwner()->GetVelocity().SquaredLength() > 1) TargetDist = -PlayerWalkDistance;
-		else TargetDist = -PlayerIdleDistance;
+		if (GetOwner()->GetVelocity().SquaredLength() > 1) TargetDist = PlayerWalkDistance;
+		else TargetDist = PlayerIdleDistance;
 		break;
 
 	case EPlayerState::Running:
-		TargetDist = -PlayerRunDistance;
+		TargetDist = PlayerRunDistance;
 		break;
 
 	case EPlayerState::Sneaking:
-		TargetDist = -PlayerCrouchDistance;
+		TargetDist = PlayerCrouchDistance;
 		break;
 
 	case EPlayerState::Dodging:
-		TargetDist = -PlayerRunDistance;
+		TargetDist = PlayerRunDistance;
 		break;
 	}
 
@@ -214,7 +214,7 @@ void UPlayerCameraComponent::ActualisePlayerInfos(float DeltaTime)
 	}
 	else {
 		CurrentPlayerOffset = FMath::Lerp(CurrentPlayerOffset, Player->GetCurrentRotationInput() * PlayerForceRotationOffset, DeltaTime * PlayerOffsetSpeed);
-		TargetDist -= PlayerForceRotationDistance;
+		TargetDist += PlayerForceRotationDistance;
 	}
 
 	CurrentPlayerDist = FMath::Lerp(CurrentPlayerDist, TargetDist, DeltaTime * PlayerDistanceSpeed);
