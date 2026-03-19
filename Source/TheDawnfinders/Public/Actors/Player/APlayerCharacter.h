@@ -299,7 +299,7 @@ public :
 
 // === OTHERS ===
 protected:
-	UFUNCTION(Server, Unreliable)
+	UFUNCTION(Server, Reliable)
 	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
