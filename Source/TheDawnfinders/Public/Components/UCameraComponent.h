@@ -114,7 +114,10 @@ protected :
 	AAPlayerCharacter* Player;
 
 	UPROPERTY()
-	FVector CurrentOffset = FVector::ZeroVector;
+	FVector CurrentTotalOffset = FVector::ZeroVector;
+
+	UPROPERTY()
+	FVector CurrentEnviroOffset = FVector::ZeroVector;
 
 	UPROPERTY()
 	FVector CurrentPlayerOffset = FVector::ZeroVector;
@@ -126,7 +129,10 @@ protected :
 	float ForcedDist;
 
 	UPROPERTY()
-	float CurrentDist;
+	float CurrentTotalDist;
+
+	UPROPERTY()
+	float CurrentEnviroDist;
 
 	UPROPERTY()
 	float CurrentPlayerDist = 0;
