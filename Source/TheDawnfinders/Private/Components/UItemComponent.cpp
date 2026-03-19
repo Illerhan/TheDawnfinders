@@ -69,6 +69,7 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	}
 	else if (bIsReloading) {
 		TimerReload -= DeltaTime;
+		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, TimerReload);
 
 		if (TimerReload <= 0) {
 			CompleteReload();
@@ -726,6 +727,8 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 void UItemComponent::StartAim()
 {
+	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
+
 	CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
 	bIsAiming = true;
@@ -734,6 +737,8 @@ void UItemComponent::StartAim()
 
 void UItemComponent::StopAim()
 {
+	if(!bIsReloading) IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+
 	bIsAiming = false;
 
 	HideAimLines();
@@ -741,8 +746,13 @@ void UItemComponent::StopAim()
 
 void UItemComponent::Reload()
 {
+	if (!InventoryComponent->VerifyHasItemInInventory(CurrentWeaponData.NeededAmmo)) return;
+	if (!CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
+
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
+
+	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
 
 	HideAimLines();
 }
@@ -752,11 +762,16 @@ void UItemComponent::CompleteReload()
 	bIsReloading = false;
 	InventoryComponent->ReloadGun(EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.NeededAmmo, CurrentWeaponData.MagazineSize);
 
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
 	if (bIsAiming) ActualiseAimLines();
+	else IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 }
 
 void UItemComponent::CancelReload()
 {
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
 	bIsReloading = false;
 	TimerReload = 0;
 }
