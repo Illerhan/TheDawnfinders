@@ -436,6 +436,7 @@ void UInventoryComponent::SortByCategories()
 		InventorySlots[i].CurrentInfos.ItemData = SortedInventory[i].CurrentInfos.ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
 		InventorySlots[i].CurrentInfos.Durability = SortedInventory[i].CurrentInfos.Durability;
+		InventorySlots[i].CurrentInfos.AmmoInMagazine = SortedInventory[i].CurrentInfos.AmmoInMagazine;
 	}
 }
 
@@ -498,6 +499,8 @@ void UInventoryComponent::SortItems()
 	for (int i = 0; i < SortedInventory.Num(); i++) {
 		InventorySlots[i].CurrentInfos.ItemData = SortedInventory[i].CurrentInfos.ItemData;
 		InventorySlots[i].Quantity = SortedInventory[i].Quantity;
+		InventorySlots[i].CurrentInfos.Durability = SortedInventory[i].CurrentInfos.Durability;
+		InventorySlots[i].CurrentInfos.AmmoInMagazine = SortedInventory[i].CurrentInfos.AmmoInMagazine;
 	}
 
 	for (int i = SortedInventory.Num(); i < InventorySlots.Num(); i++) {
