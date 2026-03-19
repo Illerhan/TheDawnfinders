@@ -689,7 +689,7 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     FCollisionObjectQueryParams ObjectQueryParams;
 
     ObjectQueryParams.AddObjectTypesToQuery(ECC_Destructible);
-    ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
+    ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel1);
 
     bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(1000.f));
     if (!bHit) return;
