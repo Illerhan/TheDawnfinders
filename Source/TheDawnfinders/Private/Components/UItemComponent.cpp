@@ -747,7 +747,9 @@ void UItemComponent::StopAim()
 void UItemComponent::Reload()
 {
 	if (!InventoryComponent->VerifyHasItemInInventory(CurrentWeaponData.NeededAmmo)) return;
-	if ((CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine)) return;
+	if (CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
+	if (!(InventoryComponent->GetCurrentItem()->ItemType == EItemType::Equipment)) return;
+	if (!InventoryComponent->GetCurrentItem()->bIsRangedWeapon) return;
 
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
