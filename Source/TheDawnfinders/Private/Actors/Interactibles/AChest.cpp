@@ -72,8 +72,23 @@ void AChest::SpawnLoot_Implementation()
 			}
 		}
 
-		AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
-		NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->Durability));
+		if (!SpawnedData) continue;
+
+		if (SpawnedData->bIsRangedWeapon) {
+
+			UDataTable* WeaponDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
+			if (!WeaponDataTable)
+				UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+
+			FWeaponInfos CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(SpawnedData->WeaponDataTableRow, " ");
+
+			AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
+			NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->Durability, CurrentWeaponData.MagazineSize));
+		}
+		else {
+			AItem* NewItem = GetWorld()->SpawnActor<AItem>(LootActor, ItemLocation, FRotator());
+			NewItem->Initialise(FItemInfos(SpawnedData, SpawnedData->Durability));
+		}
 	}
 
 	// Trapped chest check
