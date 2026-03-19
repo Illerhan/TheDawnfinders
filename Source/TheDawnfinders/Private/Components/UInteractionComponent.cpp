@@ -406,6 +406,13 @@ void UInteractionComponent::CancelInteraction()
 	}
 
 	else if (CurrentInteractible && bIsInInteraction) {
+		if (!GetOwner()->HasAuthority()) {
+			ServerStopInteract(CurrentInteractible, PlayerCharacter);
+		}
+		else {
+			ServerStopInteract_Implementation(CurrentInteractible, PlayerCharacter);
+		}
+
 		bIsInInteraction = false;
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;

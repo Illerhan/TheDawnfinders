@@ -70,7 +70,6 @@ public :
 	
 	UFUNCTION(Server, Reliable)
 	void Server_PutInHeavyItem(AActor* Target);
-	
 
 	UFUNCTION(BlueprintCallable)
 	void EndCarryHeavyItem();
