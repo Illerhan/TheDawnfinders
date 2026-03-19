@@ -812,6 +812,10 @@ void UItemComponent::Shoot()
 		DoShootFeedbacks(ShootDir);
 	}
 
+	UE_LOG(LogTemp, Display, TEXT("%f"), CurrentWeaponData.NoiseRange);
+
+	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "", CurrentWeaponData.NoiseRange, 1, FVector(0, 0, 0));
+
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
 	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
