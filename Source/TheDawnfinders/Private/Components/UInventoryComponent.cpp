@@ -842,6 +842,7 @@ void UInventoryComponent::ActualiseHasTreasures()
 void UInventoryComponent::OpenInventory()
 {
 	if (bIsOpened) return;
+
 	bIsOpened = true;
 	OnInventoryOpenInput.Broadcast();
 }
