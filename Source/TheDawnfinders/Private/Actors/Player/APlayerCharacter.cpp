@@ -581,7 +581,7 @@ void AAPlayerCharacter::ActualiseRotation()
         CurrentForcedRotationRatio -= GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
         CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
 
-        Server_StopForceRotation(CurrentForcedRotationRatio);
+        //Server_StopForceRotation(CurrentForcedRotationRatio);
     }
 
     float angle = FMath::Atan2(PreviousPlayerInput.Y, PreviousPlayerInput.X);
@@ -595,7 +595,7 @@ void AAPlayerCharacter::ActualiseRotation()
 
     FRotator NewRotation = FQuat::Slerp(MovementRotation.Quaternion(), CurrentForcedRotation.Quaternion(), CurrentForcedRotationRatio).Rotator();
     if (CurrentPlayerInput.SquaredLength() < 0.1f && CurrentForcedRotation != FRotator(0, 0, 0)) NewRotation = CurrentForcedRotation;
-    else if (!bIsForcingRotation) CurrentForcedRotation = FRotator(0, 0, 0);
+    else if (!bIsForcingRotation && CurrentForcedRotationRatio <= 0) CurrentForcedRotation = FRotator(0, 0, 0);
 
     SetActorRotation(NewRotation);
 }
