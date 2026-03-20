@@ -2,6 +2,7 @@
 
 #include "CustomPlayerController.h"
 #include "GameFramework/GameStateBase.h"
+#include "GameFramework/GICustom.h"
 
 
 void ACustomGameMode::HandleSeamlessTravelPlayer(AController*& C)
