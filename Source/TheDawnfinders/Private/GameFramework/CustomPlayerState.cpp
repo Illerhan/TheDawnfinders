@@ -219,8 +219,6 @@ void ACustomPlayerState::SaveInventoryBeforeTravel()
 
 	UInventoryComponent* Inv = Pawn->FindComponentByClass<UInventoryComponent>();
 	if (!Inv || !Inv->GetOwner()->HasAuthority()) return;
-
-	int32 GoldToSave = Inv->Gold;
 	
 	ShopItems.Empty();
 
@@ -232,8 +230,6 @@ void ACustomPlayerState::SaveInventoryBeforeTravel()
 			ShopItems.Add(Slot.CurrentInfos);
 		}
 	}
-
-	SavedGold = GoldToSave;
 
 }
 
