@@ -33,7 +33,7 @@ public:
 	UStaticMesh* ItemMeshAsset;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
-	bool bShouldLevitate = true;
+	bool bShouldLevitate = false;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Levitation")
 	float LevitationAmplitude = 20.f;

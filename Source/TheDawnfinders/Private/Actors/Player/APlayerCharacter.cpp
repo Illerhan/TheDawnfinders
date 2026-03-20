@@ -636,26 +636,6 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     }
 }
 
-void AAPlayerCharacter::Multicast_StopForceRotation_Implementation(float Progress)
-{
-    if (IsLocallyControlled()) return;
-
-    bIsForcingRotation = false;
-    CurrentForcedRotationRatio = Progress;
-
-    GetCharacterMovement()->bOrientRotationToMovement = true;
-}
-
-void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
-{
-    bIsForcingRotation = false;
-    CurrentForcedRotationRatio = Progress;
-
-    GetCharacterMovement()->bOrientRotationToMovement = true;
-
-    Multicast_StopForceRotation(Progress);
-}
-
 void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress)
 {
     bIsForcingRotation = true;
@@ -679,6 +659,43 @@ void AAPlayerCharacter::Multicast_ForceRotation_Implementation(FRotator Rotation
     CurrentForcedRotationRatio = Progress;
     GetCharacterMovement()->bOrientRotationToMovement = false;
 }
+
+void AAPlayerCharacter::StopForceRotation(float Progress)
+{
+    bIsForcingRotation = false;
+    CurrentForcedRotationRatio = Progress;
+
+    GetCharacterMovement()->bOrientRotationToMovement = false;
+
+    if (HasAuthority()) {
+        Multicast_StopForceRotation(CurrentForcedRotationRatio);
+    }
+    else {
+        Server_StopForceRotation(CurrentForcedRotationRatio);
+    }
+}
+
+
+void AAPlayerCharacter::Multicast_StopForceRotation_Implementation(float Progress)
+{
+    if (IsLocallyControlled()) return;
+
+    bIsForcingRotation = false;
+    CurrentForcedRotationRatio = Progress;
+
+    GetCharacterMovement()->bOrientRotationToMovement = true;
+}
+
+void AAPlayerCharacter::Server_StopForceRotation_Implementation(float Progress)
+{
+    bIsForcingRotation = false;
+    CurrentForcedRotationRatio = Progress;
+
+    GetCharacterMovement()->bOrientRotationToMovement = true;
+
+    Multicast_StopForceRotation(Progress);
+}
+
 
 void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
 {
