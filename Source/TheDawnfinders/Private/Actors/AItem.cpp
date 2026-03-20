@@ -36,6 +36,7 @@ void AItem::BeginPlay()
 
 		if (!ItemData->bIsRangedWeapon) {
 			ItemInfos = FItemInfos(ItemData, ItemData->Durability);
+			Initialise(ItemInfos);
 			return;
 		}
 
@@ -45,6 +46,7 @@ void AItem::BeginPlay()
 
 		FWeaponInfos CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(ItemData->WeaponDataTableRow, " ");
 		ItemInfos = FItemInfos(ItemData, ItemData->Durability, CurrentWeaponData.MagazineSize);
+		Initialise(ItemInfos);
 	}
 }
 
