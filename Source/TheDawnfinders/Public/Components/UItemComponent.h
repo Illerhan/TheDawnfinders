@@ -120,7 +120,7 @@ public :
 	void ActualiseAimLines();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void DoShootFeedbacks(FVector Direction);
+	void DoShootFeedbacks(FVector Direction, bool bDoShootLight);
 
 	UFUNCTION(BlueprintCallable)
 	void Shoot();

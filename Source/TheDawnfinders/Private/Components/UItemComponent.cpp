@@ -798,7 +798,7 @@ void UItemComponent::ActualiseAimLines_Implementation()
 {
 }
 
-void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction)
+void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction, bool bDoShootLight)
 {
 }
 
@@ -813,7 +813,7 @@ void UItemComponent::Shoot()
 		ShootDir = ShootDir.RotateAngleAxis(ModificatorAngle, FVector::UpVector);
 
 		DoShootRaycast(ShootDir);
-		DoShootFeedbacks(ShootDir);
+		DoShootFeedbacks(ShootDir, i == 0);
 	}
 
 	UE_LOG(LogTemp, Display, TEXT("%f"), CurrentWeaponData.NoiseRange);
