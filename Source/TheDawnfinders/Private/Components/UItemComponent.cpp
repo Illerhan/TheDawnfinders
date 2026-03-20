@@ -676,6 +676,8 @@ void UItemComponent::DoAttackCollision()
 
 void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Target, UItemData* Data, float BaseDamages)
 {
+	if (!Target) return;
+
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
