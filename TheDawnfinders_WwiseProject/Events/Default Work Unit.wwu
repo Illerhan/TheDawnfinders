@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}" SchemaVersion="133">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_AMB_Sandfall" ID="{80BA34DE-5150-47F8-9ECB-2FB0D563D3A4}">
+					<ChildrenList>
+						<Action Name="" ID="{CAE96201-672C-4099-8860-823AF2C9C70A}" ShortID="927865038">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Sandfall" ID="{E33926C9-1FD4-405F-AE1A-5F092E560A37}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AMB_EerieWhistle" ID="{247371C1-731F-4F07-B5AF-70AA64FB9C25}">
+					<ChildrenList>
+						<Action Name="" ID="{B01F1B4F-4D54-4801-8DFA-CEA0D3F38DDE}" ShortID="1048980299">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_EerieWhistle" ID="{1870039A-B26D-460C-888E-5F5E585DE1FD}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AMB_Crackle" ID="{19BE017F-434C-4A31-95FE-77BD532E5881}">
+					<ChildrenList>
+						<Action Name="" ID="{57046DE1-F2AA-4C9E-BA32-9314E1406DD1}" ShortID="81417084">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Crackle" ID="{8558CE58-5F8D-4336-A8AE-E1F552AACBA6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AMB_LoudWind" ID="{2CC23F9A-27E6-4046-A2E1-1D975CA721A4}">
+					<ChildrenList>
+						<Action Name="" ID="{8C1D0683-CD03-4100-A6EE-1B22901D4C98}" ShortID="677327124">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_LoudWind" ID="{D23B8019-7A46-41DE-A179-73923F68E7BB}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{21AFFE84-B755-4754-9AC4-A35D58ED2147}" SchemaVersion="133">
+	<Containers>
+		<WorkUnit Name="Soundly" ID="{21AFFE84-B755-4754-9AC4-A35D58ED2147}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="placeholder" ID="{EB86167A-ED2D-4546-B1E4-58A44E9B02EE}" ShortID="247725619">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="DSGNWhsh_WHOOSH HOLY-Beacon Of Truth_B00M_MALDS" ID="{79ED3912-65E4-40BC-A1AD-E4E016F29C69}">
+							<PropertyList>
+								<Property Name="FadeInDuration" Type="Real64" Value="0.182315666005359"/>
+								<Property Name="FadeOutDuration" Type="Real64" Value="0.802188930423578"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimBegin" Type="Real64" Value="0.2225390625"/>
+								<Property Name="TrimEnd" Type="Real64" Value="2.13884765625"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Soundly Audio\DSGNWhsh_WHOOSH HOLY-Beacon Of Truth_B00M_MALDS.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1029570780"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="DSGNWhsh_WHOOSH HOLY-Beacon Of Truth_B00M_MALDS" ID="{79ED3912-65E4-40BC-A1AD-E4E016F29C69}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</Containers>
+</WwiseDocument>
