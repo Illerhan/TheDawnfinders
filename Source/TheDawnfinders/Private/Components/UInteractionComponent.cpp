@@ -24,6 +24,23 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (bIsHelping && CurrentHelpedTarget) {
+		HelpTimeRemaining -= DeltaTime;
+
+		// update UI locally
+		if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
+		{
+			IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
+		}
+
+		if (HelpTimeRemaining <= 0.f)
+		{
+			bIsHelping = false;
+			CompleteHelp();
+		}
+	}
+
 	if (!PlayerCharacter->IsLocallyControlled()) return;
 
 	// If the current interacting object is destroyed
@@ -61,22 +78,6 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
 		NearestInteractible = nullptr;
 	} 
-
-	if (!bIsHelping || !CurrentHelpedTarget) return;
-
-	HelpTimeRemaining -= DeltaTime;
-
-	// update UI locally
-	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
-	{
-		IPlayerInterface::Execute_ShowProgress(PlayerCharacter, HelpTimeRemaining);
-	}
-
-	if (HelpTimeRemaining <= 0.f)
-	{
-		bIsHelping = false;
-		CompleteHelp();
-	}
 }
 
 void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
