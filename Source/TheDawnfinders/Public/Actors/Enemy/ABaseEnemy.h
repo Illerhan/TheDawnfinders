@@ -163,6 +163,11 @@ public :
 		else return EnemyData->PatrolMaxDist;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	EEnemyState GetCurrentEnemyState() {
+		return CurrentEnemyState;
+	}
+
 
 // === PROTECTED PROPERTIES ===
 protected :

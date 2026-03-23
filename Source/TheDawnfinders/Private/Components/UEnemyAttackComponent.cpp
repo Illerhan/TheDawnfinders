@@ -97,8 +97,20 @@ FEnemyActionData UEnemyAttackComponent::GetLastAttackUsed()
 	return LastAttackUsed;
 }
 
+void UEnemyAttackComponent::EnableAttacks()
+{
+	bCanAttack = true;
+}
+
+void UEnemyAttackComponent::DisableAttacks()
+{
+	bCanAttack = false;
+}
+
 bool UEnemyAttackComponent::VerifyTrigger(FEnemyAttackTrigger Trigger, TArray<AActor*> PlayersAtRange)
 {
+	if (!bCanAttack) return false;
+
 	switch (Trigger.EnemyAttackTriggerType) {
 	case EEnemyAttackTriggerType::DistanceMin:
 		for (AActor* Player : PlayersAtRange) {

@@ -30,6 +30,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FEnemyActionData GetLastAttackUsed();
 
+	UFUNCTION(BlueprintCallable)
+	void DisableAttacks();
+
+	UFUNCTION(BlueprintCallable)
+	void EnableAttacks();
+
+
 	UPROPERTY(BlueprintReadWrite)
 	bool bCanAttack;
 

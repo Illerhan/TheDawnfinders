@@ -656,11 +656,18 @@ void UItemComponent::DoAttackCollision()
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
 			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
+
+			// Sneak Attack
+			float Multiplicator = 1;
+			if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
+				Multiplicator = CurrentWeaponData.SneakMultiplier;
+			}
+
 			if (!GetOwner()->HasAuthority())
-				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
 
 			else
-				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
+				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
 		}
 
 		// Others

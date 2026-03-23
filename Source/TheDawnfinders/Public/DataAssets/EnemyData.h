@@ -44,6 +44,12 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
 	float SuspiciousStateDuration = 10.0f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float AlertOthersDelayDuration = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
+	float EnterAggressiveWaitDuration = 1.5f;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
 	float NormalHearingRadius;
