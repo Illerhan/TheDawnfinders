@@ -3,50 +3,213 @@
 	<Events>
 		<WorkUnit Name="Default Work Unit" ID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}" PersistMode="Standalone">
 			<ChildrenList>
-				<Event Name="Play_AMB_Sandfall" ID="{80BA34DE-5150-47F8-9ECB-2FB0D563D3A4}">
+				<Folder Name="Ambiance" ID="{A7AEF178-0A35-44F8-94C5-80E8592188F1}" ShortID="370364634">
 					<ChildrenList>
-						<Action Name="" ID="{CAE96201-672C-4099-8860-823AF2C9C70A}" ShortID="927865038">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_Sandfall" ID="{E33926C9-1FD4-405F-AE1A-5F092E560A37}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
+						<Event Name="Play_AMB_Sandfall" ID="{80BA34DE-5150-47F8-9ECB-2FB0D563D3A4}">
+							<ChildrenList>
+								<Action Name="" ID="{CAE96201-672C-4099-8860-823AF2C9C70A}" ShortID="927865038">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Sandfall" ID="{E33926C9-1FD4-405F-AE1A-5F092E560A37}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_AMB_Crackle" ID="{19BE017F-434C-4A31-95FE-77BD532E5881}">
+							<ChildrenList>
+								<Action Name="" ID="{57046DE1-F2AA-4C9E-BA32-9314E1406DD1}" ShortID="81417084">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Crackle" ID="{8558CE58-5F8D-4336-A8AE-E1F552AACBA6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_AMB_EerieWhistle" ID="{247371C1-731F-4F07-B5AF-70AA64FB9C25}">
+							<ChildrenList>
+								<Action Name="" ID="{B01F1B4F-4D54-4801-8DFA-CEA0D3F38DDE}" ShortID="1048980299">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_EerieWhistle" ID="{1870039A-B26D-460C-888E-5F5E585DE1FD}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_AMB_LoudWind" ID="{2CC23F9A-27E6-4046-A2E1-1D975CA721A4}">
+							<ChildrenList>
+								<Action Name="" ID="{8C1D0683-CD03-4100-A6EE-1B22901D4C98}" ShortID="677327124">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_LoudWind" ID="{D23B8019-7A46-41DE-A179-73923F68E7BB}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
-				</Event>
-				<Event Name="Play_AMB_EerieWhistle" ID="{247371C1-731F-4F07-B5AF-70AA64FB9C25}">
+				</Folder>
+				<Folder Name="Joueur" ID="{823FA990-7F9B-4C6A-B009-ADDCB7AD4BF0}" ShortID="825401320">
 					<ChildrenList>
-						<Action Name="" ID="{B01F1B4F-4D54-4801-8DFA-CEA0D3F38DDE}" ShortID="1048980299">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_EerieWhistle" ID="{1870039A-B26D-460C-888E-5F5E585DE1FD}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
+						<Folder Name="Deplacement" ID="{12DFA957-B834-424C-8D18-AE3AA8F198C0}" ShortID="233795933">
+							<ChildrenList>
+								<Event Name="Play_StoneWalk" ID="{23119412-2FFD-4AF2-90E5-CD6D1D2CB955}">
+									<ChildrenList>
+										<Action Name="" ID="{85786A63-A7B6-429C-872E-E064A1DE00EC}" ShortID="751077931">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="StoneWalk" ID="{CB1ED479-5824-4EAE-B133-DA6958D9C304}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_WoodRun" ID="{03312179-77EB-4776-8A94-4FC59248E924}">
+									<ChildrenList>
+										<Action Name="" ID="{97919690-C683-43CD-BD14-AB1E1DAA245B}" ShortID="442647595">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="WoodRun" ID="{6DE22370-0C52-4EA9-B96B-5BF6A98A6441}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_WoodRunCrack" ID="{04FB3B50-A801-408C-9E75-6ECFE28D48E5}">
+									<ChildrenList>
+										<Action Name="" ID="{59D56860-E772-4B10-9F33-65F5624F299C}" ShortID="99975061">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="WoodRunCrack" ID="{AA25167D-0F75-483D-BB88-E624A80DDDC6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_WoodWalk" ID="{4816BB69-2BE9-4F58-B6C7-C9A5C27B7E46}">
+									<ChildrenList>
+										<Action Name="" ID="{813C4061-B8CB-41EB-9980-7FA45E81A433}" ShortID="682323309">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="WoodWalk" ID="{EA3418A1-67EE-4D96-9C2E-FF3AA41AC4E5}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_StoneRun" ID="{D64A690B-9124-430F-9030-CBC62D0CF0B5}">
+									<ChildrenList>
+										<Action Name="" ID="{F6E477B1-A6AB-406F-AE28-F217C7ABD7A0}" ShortID="357448591">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="StoneRun" ID="{B1E15ABD-B457-48D6-AB4B-805EE3B2A1E3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_WoodWalkCrack" ID="{F79D9AF7-494F-42C4-A943-2F4D8076B7E9}">
+									<ChildrenList>
+										<Action Name="" ID="{B3D2C0EA-B6C1-41B9-BE06-2270F5D99573}" ShortID="79943800">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="WoodWalkCrack" ID="{C435BC5B-8B8C-4AD5-B2C2-BF993D54AE43}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_SandWalk" ID="{1733DC8D-614A-48D9-B0E3-057A2F398D48}">
+									<ChildrenList>
+										<Action Name="" ID="{9665E57A-CCB4-444C-BC2D-F2550ED6C826}" ShortID="454759520">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="SandWalk" ID="{0DF30437-3D76-476A-8503-30F0B01F033B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_SandRun" ID="{DFC7FA5B-FB30-4FB0-8247-427A0F263B59}">
+									<ChildrenList>
+										<Action Name="" ID="{EE2B2320-3734-441B-A7EE-55F2CD15EE01}" ShortID="377441382">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Feedbakcs" ID="{E7F89F8F-5474-47D9-B261-E0B34D39EFC9}" ShortID="537661421"/>
+						<Folder Name="Actions" ID="{68901D95-CD16-4BB7-BA38-CA1811FAF341}" ShortID="310585558"/>
+						<Folder Name="Etats" ID="{77E6FEA5-9734-4CC5-B039-704790C7EF7F}" ShortID="702691761">
+							<ChildrenList>
+								<Event Name="Play_DownedBreath" ID="{490678ED-6B7F-4FDB-8A75-7B817113C191}">
+									<ChildrenList>
+										<Action Name="" ID="{A248227C-4EC7-48E2-BF3B-389E97132793}" ShortID="749951736">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DownedBreath" ID="{73D9E7AD-0AA7-40F1-BC3E-66BAF12EE6BE}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_DownedHeartbeat" ID="{7D23A7D5-C14B-4A71-9A18-E693CC57E477}">
+									<ChildrenList>
+										<Action Name="" ID="{3DF3607B-BF6F-4593-A89F-E270AEA0FE9F}" ShortID="549399850">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DownedHeartbeat" ID="{C130BEE8-49BB-491E-BD61-7A729C6153E8}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_CrazyStatus" ID="{8EFE2D02-E24D-4788-80B3-D994A760EDD9}">
+									<ChildrenList>
+										<Action Name="" ID="{0922EF15-DA8A-46FA-A0A9-41AC3A7C8A16}" ShortID="778241104">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="CrazyStatus" ID="{F3B3FA15-B393-4C06-B4F2-629CB2E79DC5}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_OutOfBreath" ID="{8FA3D2DA-3815-49B7-923B-FF7E075F5738}">
+									<ChildrenList>
+										<Action Name="" ID="{777E6CA0-C0E4-4C28-B66B-001CAEAB787E}" ShortID="397083630">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="OutOfBreath" ID="{95A4D017-A53B-4D7E-AE06-8AD32EBDA80E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
-				</Event>
-				<Event Name="Play_AMB_Crackle" ID="{19BE017F-434C-4A31-95FE-77BD532E5881}">
+				</Folder>
+				<Folder Name="Objets" ID="{0EA238A2-2834-49C6-BF1E-D3BFAFAD1EE7}" ShortID="592476464">
 					<ChildrenList>
-						<Action Name="" ID="{57046DE1-F2AA-4C9E-BA32-9314E1406DD1}" ShortID="81417084">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_Crackle" ID="{8558CE58-5F8D-4336-A8AE-E1F552AACBA6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
+						<Folder Name="Elements de LD" ID="{D0EC438E-95DB-4A88-86DD-D915203D355A}" ShortID="388858137"/>
+						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304"/>
 					</ChildrenList>
-				</Event>
-				<Event Name="Play_AMB_LoudWind" ID="{2CC23F9A-27E6-4046-A2E1-1D975CA721A4}">
+				</Folder>
+				<Folder Name="Ennemis" ID="{561CE68B-46B0-4675-B41A-235295D46A7B}" ShortID="979282281">
 					<ChildrenList>
-						<Action Name="" ID="{8C1D0683-CD03-4100-A6EE-1B22901D4C98}" ShortID="677327124">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_LoudWind" ID="{D23B8019-7A46-41DE-A179-73923F68E7BB}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
+						<Folder Name="Fidele" ID="{E7F71B35-8B9E-4E70-B249-6986182628C9}" ShortID="46726563"/>
+						<Folder Name="Zelote" ID="{E5068A34-6FF1-4BD2-9E4F-63E802603958}" ShortID="39062731"/>
 					</ChildrenList>
-				</Event>
+				</Folder>
+				<Folder Name="UI" ID="{F2239936-8B8E-489A-8195-56F9145207A6}" ShortID="138649347"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

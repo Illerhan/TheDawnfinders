@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{54CFCB30-FDF3-4347-9714-3A93B48895D3}" SchemaVersion="133">
 	<Switches>
-		<WorkUnit Name="Default Work Unit" ID="{54CFCB30-FDF3-4347-9714-3A93B48895D3}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{54CFCB30-FDF3-4347-9714-3A93B48895D3}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="Material" ID="{C2F8F198-F33F-48A6-BCFA-A4F225A5C42A}">
+					<ChildrenList>
+						<Switch Name="Sand" ID="{9ECDEA0B-BC74-479A-A685-290FEBCC07C7}"/>
+						<Switch Name="Stone" ID="{517D6FE8-08D1-4D27-8443-EC414D37E7EC}"/>
+						<Switch Name="Wood" ID="{6C416689-8BAA-4B32-B117-FF3C10CD8C3D}"/>
+						<Switch Name="WoodCrack" ID="{1F60FF79-78FE-4114-80EB-95135A2E3C4F}"/>
+					</ChildrenList>
+				</SwitchGroup>
+				<SwitchGroup Name="EnnemyMovement" ID="{D783C88B-76A6-4BE3-8DA6-D8C446476F61}">
+					<ChildrenList>
+						<Switch Name="Walk" ID="{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"/>
+						<Switch Name="Run" ID="{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</Switches>
 </WwiseDocument>
