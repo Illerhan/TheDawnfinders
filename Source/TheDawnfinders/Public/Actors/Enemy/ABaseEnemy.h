@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Actors/Enemy/AWaypoints.h"
 #include "DataAssets/EnemyData.h"
 #include "Interfaces/IDamageable.h"
 #include "Interfaces/IFadeable.h"
@@ -147,6 +148,11 @@ public :
 	UFUNCTION(Server, Reliable)
 	void Server_TakeDamages(float Quantity, AActor* Origin);
 
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentWaypointTarget(AWaypoint* Waypoint) {
+		CurrentTargetWaypoint = Waypoint;
+	}
+
 
 // === FADE === 
 public :
@@ -166,6 +172,16 @@ public :
 	UFUNCTION(BlueprintCallable)
 	EEnemyState GetCurrentEnemyState() {
 		return CurrentEnemyState;
+	}
+
+	UFUNCTION(BlueprintCallable)
+	TArray<AWaypoint*> GetWaypoints() {
+		return Waypoints;
+	}
+
+	UFUNCTION(BlueprintCallable)
+	AWaypoint* GetCurrentTargetWaypoint() {
+		return CurrentTargetWaypoint;
 	}
 
 
@@ -205,4 +221,10 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ABasicEnemyAIController* AIController;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<AWaypoint*> Waypoints;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	AWaypoint* CurrentTargetWaypoint;
 };
