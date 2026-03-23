@@ -926,7 +926,7 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 
 void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc)
 {
-    NoiseZone->SetSphereRadius(Range);
+    NoiseZone->SetSphereRadius(Range * NoiseModifier);
 
     if (Range <= 0) {
         NoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);

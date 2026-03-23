@@ -93,6 +93,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USphereComponent* NoiseZone;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float NoiseModifier = 1.0f;
 	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
