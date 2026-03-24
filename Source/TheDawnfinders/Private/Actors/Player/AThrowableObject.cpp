@@ -23,24 +23,14 @@ void AThrowableObject::BeginPlay()
 void AThrowableObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (!HasAuthority()) return;
-
-	ProgressTimer += DeltaTime;
-
-	if (ProgressTimer < ThrowDuration) {
-		//ActualisePosition();
-	}
-	else {
-		//Server_DoCollisionEffect();
-	}
 }
 
 
-void AThrowableObject::Initialise(UItemData* Data)
+void AThrowableObject::Initialise(UItemData* Data, AActor* Origin)
 {
 	ProgressTimer = 0;
 
+	OriginActor = Origin;
 	ItemData = Data;
 }
 
@@ -48,7 +38,6 @@ void AThrowableObject::DoStartImpulse_Implementation(FVector Direction, float St
 {
 	
 }
-
 
 void AThrowableObject::ActualisePosition()
 {
@@ -92,6 +81,15 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 			break;
 		}
 	}
+
+	FActorSpawnParameters Params;
+	Params.Owner = GetOwner();
+	Params.Instigator = Cast<APawn>(GetOwner());
+
+	ANoise* Noise = GetWorld()->SpawnActor<ANoise>(NoiseObject, GetActorLocation(), FRotator(0, 0, 0), Params);
+	Noise->Radius = NoiseRange;
+	Noise->bIsLoud = bIsLoud;
+	Noise->NoiseOriginActor = OriginActor;
 
 	AActor::Destroy();
 }

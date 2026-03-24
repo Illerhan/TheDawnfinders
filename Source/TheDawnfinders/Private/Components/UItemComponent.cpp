@@ -435,7 +435,7 @@ void UItemComponent::Server_ThrowItem_Implementation(UItemData* Data, FVector Di
 
 	if (ThrowedObject)
 	{
-		ThrowedObject->Initialise(Data);
+		ThrowedObject->Initialise(Data, GetOwner());
 		ThrowedObject->DoStartImpulse(Direc, ThrowStrength);
 	}
 }
