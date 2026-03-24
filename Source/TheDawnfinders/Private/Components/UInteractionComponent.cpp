@@ -351,6 +351,17 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 	MashQTE->SetLinkedInteractible(Interactible);
 }
 
+void UInteractionComponent::DoInteractAnimation(AActor* Target)
+{
+	bIsInInteraction = true;
+	CurrentAnimInteractible = Target;
+}
+
+void UInteractionComponent::EndInteractAnimatiopn()
+{
+	bIsInInteraction = false;
+	CurrentAnimInteractible = nullptr;
+}
 
 #pragma endregion
 

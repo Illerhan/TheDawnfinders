@@ -33,6 +33,9 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever", meta = (min = 1, max = 4))
 	int HoldPlayerCountNeeded = 1;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoPlayerAutoMove(AAPlayerCharacter* Player);
+
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	void StartHoldInteraction(AActor* Player);
 	virtual void StopInteract_Implementation(AActor* Interactor) override;

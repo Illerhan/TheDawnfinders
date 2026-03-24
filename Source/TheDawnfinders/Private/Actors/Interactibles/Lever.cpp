@@ -1,4 +1,6 @@
 ﻿#include "Actors/Interactibles/Lever.h"
+#include "Actors/Player/APlayerCharacter.h"
+
 
 ALever::ALever()
 {
@@ -16,9 +18,24 @@ void ALever::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
 }
 
+void ALever::DoPlayerAutoMove_Implementation(AAPlayerCharacter* Player)
+{
+}
+
 void ALever::Interact_Implementation(AActor* Interactor)
 {
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
+
+    // We need to go to the lever first 
+    if (bHasInteractAnim && !CurrentInteractActor) {
+        CurrentInteractActor = Interactor;
+        AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
+        DoPlayerAutoMove(Player);
+        return;
+    }
+    else if (bHasInteractAnim && CurrentInteractActor != Interactor) {
+        return;
+    }
 
     if (bRequiresHold)
     {
@@ -86,6 +103,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
             }
         }
 
+        CurrentInteractActor = nullptr;
+
         Super::Interact_Implementation(Interactor);
     }
 }
@@ -125,6 +144,9 @@ void ALever::StopInteract_Implementation(AActor* Interactor)
     if (bRequiresHold)
     {
         StopHoldInteraction(Interactor);
+    }
+    else {
+        CurrentInteractActor = nullptr;
     }
 }
 

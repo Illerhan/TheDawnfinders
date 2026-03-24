@@ -96,11 +96,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USphereComponent* LoudNoiseZone;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	float NoiseModifier = 1.0f;
 	
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Lantern")
 	UPointLightComponent* PointLight;
 
@@ -187,21 +183,21 @@ public:
 public:	
 	UFUNCTION(BlueprintCallable)
 	void MoveCharacter(FVector2D Input);
+
+	UFUNCTION(BlueprintCallable)
+	void StartAutoMoveCharacter(FVector TargetPos, FRotator TargetRot, AActor* Target);
+
+	UFUNCTION(BlueprintCallable)
+	void AutoMoveCharacter();
+
+	UFUNCTION(BlueprintCallable)
+	void StopAutoMoveCharacter(bool bCancel);
 	
 	UFUNCTION(Server, Reliable)
 	void ServerManageRun(bool Input);
 
 	UFUNCTION(BlueprintCallable)
 	void ManageRun(bool Input);
-
-	UFUNCTION(BlueprintCallable)
-	void StartDodge();
-
-	UFUNCTION(BlueprintCallable)
-	void EndDodge();
-
-	UFUNCTION(BlueprintCallable)
-	void ActualiseDodge(float DeltaTime);
 
 	UFUNCTION()
 	void OnRep_PlayerSpeed();
@@ -231,6 +227,18 @@ public:
 	void Server_SetPushingState(ALitter* Obj, bool bCarrying);
 	
 
+// === DODGE ===
+public : 
+	UFUNCTION(BlueprintCallable)
+	void StartDodge();
+
+	UFUNCTION(BlueprintCallable)
+	void EndDodge();
+
+	UFUNCTION(BlueprintCallable)
+	void ActualiseDodge(float DeltaTime);
+
+
 // === ROTATION / AUTO-LOCK ===
 public :
 	UFUNCTION(BlueprintCallable)
@@ -238,6 +246,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void ForceRotation(FVector Input);
+
+	UFUNCTION(BlueprintCallable)
+	void ForceRotationInstant(FRotator Rotation);
 
 	UFUNCTION(Server, Unreliable, BlueprintCallable)
 	void Server_StopForceRotation(float Progress);
@@ -296,6 +307,7 @@ public :
 	UFUNCTION(BlueprintImplementableEvent, Category = "Animation")
 	void BP_OnMontageNotifyBegin(FName NotifyName);
 
+
 public :
 	FVector GetCurrentRotationInput() { return CurrentRotationInput; }
 	bool GetIsForcingRotation() { return bIsForcingRotation; }
@@ -312,6 +324,9 @@ protected:
 
 	UFUNCTION()
 	void HideThrowPreview();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ReachAutoMoveDestination();
 
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
@@ -362,6 +377,18 @@ protected :
 	UPROPERTY(BlueprintReadOnly)
 	FVector PreviousPlayerInput;
 
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	bool bIsAutoMoving = false;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	FVector AutoMoveTargetPos;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	FRotator AutoMoveTargetRot;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	AActor* AutoMoveTarget;
+
 	UPROPERTY()
 	float DodgeTimer;
 
@@ -400,4 +427,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float NoiseModifier = 1.0f;
 };
