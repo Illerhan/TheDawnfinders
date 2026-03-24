@@ -153,10 +153,11 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     if (bAutoLockIsActive) {
         ActualiseAutoLock();
     }
-
     ActualiseRotation();
 
     if (!IsLocallyControlled()) return;
+
+    if (bIsAutoMoving) AutoMoveCharacter();
 
     if (LoudnessTimer > 0) {
         LoudnessTimer -= DeltaTime;
@@ -446,6 +447,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
+    if (bIsAutoMoving) return;
     if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized)
         return;
 
@@ -514,6 +516,45 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     else if (CurrentState == EPlayerState::Carrying)
         AddMovementInput(FinalVector, PlayerConfig->CarrySpeed / 1500.f, true);
+}
+
+void AAPlayerCharacter::StartAutoMoveCharacter(FVector TargetPos, FRotator TargetRot, AActor* Target)
+{
+    bIsAutoMoving = true;
+
+    AutoMoveTargetPos = TargetPos;
+    AutoMoveTargetRot = TargetRot;
+    AutoMoveTarget = Target;
+}
+
+void AAPlayerCharacter::AutoMoveCharacter()
+{
+    FVector Dir = AutoMoveTargetPos - GetActorLocation();
+    Dir.Z = 0;
+    if (Dir.SquaredLength() < 50) {
+        StopAutoMoveCharacter(false);
+        return;
+    }
+
+    Dir.Normalize();
+
+    FVector InputDir = FVector(Dir.X, Dir.Y, 0);
+    FRotator Rotation(0.0f, 45.0f, 0.0f);
+
+    InputDir = Rotation.RotateVector(InputDir);
+    CurrentPlayerInput = InputDir;
+    PreviousPlayerInput = InputDir;
+
+    AddMovementInput(Dir, PlayerConfig->WalkSpeed / 1500.f, true);
+}
+
+void AAPlayerCharacter::StopAutoMoveCharacter(bool bCancel)
+{
+    bIsAutoMoving = false;
+
+    if (bCancel) return;
+
+    ReachAutoMoveDestination();
 }
 
 void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
@@ -630,6 +671,20 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
 
     CurrentRotationInput = RotatedVector * Length;
     CurrentForcedRotation = NewRotation;
+
+    if (!HasAuthority()) {
+        Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
+    }
+    else {
+        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
+    }
+}
+
+void AAPlayerCharacter::ForceRotationInstant(FRotator Rotation)
+{
+    CurrentForcedRotationRatio = 1;
+    bIsForcingRotation = true;
+    CurrentForcedRotation = Rotation;
 
     if (!HasAuthority()) {
         Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
@@ -785,6 +840,8 @@ void AAPlayerCharacter::StopAutoLock()
 
 void AAPlayerCharacter::StartDodge()
 {
+    if (bIsAutoMoving) return;
+
     if (CurrentState == EPlayerState::Dodging) return;
     if (CurrentState == EPlayerState::UsingEquipment) 
     { 
@@ -996,6 +1053,11 @@ void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Direction, fl
 void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+void AAPlayerCharacter::ReachAutoMoveDestination_Implementation()
+{
+
 }
 
 

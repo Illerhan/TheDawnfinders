@@ -174,6 +174,12 @@ protected:
 	float EnableDistance = 3500.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bHasInteractAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float InteractAnimDuration = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* NeededInteractItem;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -190,6 +196,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsInInteractionStateOnInteract = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	AActor* CurrentInteractActor;
 
 	UPROPERTY()
 	FTimerHandle EnableTimer;

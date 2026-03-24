@@ -1,4 +1,6 @@
 ﻿#include "Actors/Interactibles/Lever.h"
+#include "Actors/Player/APlayerCharacter.h"
+
 
 ALever::ALever()
 {
@@ -16,9 +18,24 @@ void ALever::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
 }
 
+void ALever::DoPlayerAutoMove_Implementation(AAPlayerCharacter* Player)
+{
+}
+
 void ALever::Interact_Implementation(AActor* Interactor)
 {
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
+
+    // We need to go to the lever first 
+    if (bHasInteractAnim && !CurrentInteractActor) {
+        CurrentInteractActor = Interactor;
+        AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
+        DoPlayerAutoMove(Player);
+        return;
+    }
+    else if (bHasInteractAnim && CurrentInteractActor != Interactor) {
+        return;
+    }
 
     if (bRequiresHold)
     {
@@ -27,6 +44,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
     }
     else
     {
+        bIsOn = !bIsOn;
+
         // Mode TOGGLE : clic pour ouvrir/fermer
         for (AMovableObjects* const Object : LinkedObjects)
         {
@@ -67,6 +86,7 @@ void ALever::Interact_Implementation(AActor* Interactor)
             }
             
         }
+
         for (AActor* Actor : LinkedToggleables)
         {
             if (!Actor || !Actor->Implements<UToggleable>()) continue;
@@ -82,7 +102,9 @@ void ALever::Interact_Implementation(AActor* Interactor)
                 UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Activating %s"), *Actor->GetName());
             }
         }
-        
+
+        CurrentInteractActor = nullptr;
+
         Super::Interact_Implementation(Interactor);
     }
 }
@@ -122,6 +144,9 @@ void ALever::StopInteract_Implementation(AActor* Interactor)
     if (bRequiresHold)
     {
         StopHoldInteraction(Interactor);
+    }
+    else {
+        CurrentInteractActor = nullptr;
     }
 }
 

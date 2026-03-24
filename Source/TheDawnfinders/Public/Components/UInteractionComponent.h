@@ -107,6 +107,15 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StartMashButtonQTE(AInteractibleObjects* Interactible);
 
+
+public : 
+	UFUNCTION(BlueprintCallable)
+	void DoInteractAnimation(AActor* Target);
+
+	UFUNCTION(BlueprintCallable)
+	void EndInteractAnimatiopn();
+
+
 // === GETTERS ===
 public : 
 	UFUNCTION(BlueprintCallable)
@@ -116,11 +125,21 @@ public :
 		return CurrentInteractible;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	AActor* GetCurrentAnimInteractible()
+	{
+		if (!bIsInInteraction) return nullptr;
+		return CurrentAnimInteractible;
+	}
+
 
 // === PUBLIC PROPERTIES ===
 public:
 	UPROPERTY(Replicated)
 	AActor* CurrentInteractible = nullptr;
+
+	UPROPERTY(Replicated)
+	AActor* CurrentAnimInteractible = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
