@@ -84,6 +84,9 @@ AAPlayerCharacter::AAPlayerCharacter()
     NoiseZone = CreateDefaultSubobject<USphereComponent>(FName("NoiseZone"));
     NoiseZone->SetupAttachment(GetMesh());
 
+    LoudNoiseZone = CreateDefaultSubobject<USphereComponent>(FName("LoudNoiseZone"));
+    LoudNoiseZone->SetupAttachment(GetMesh());
+
     FogOfWarLightOn = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOn"));
     FogOfWarLightOn->SetupAttachment(RootComponent);
 
@@ -350,16 +353,16 @@ float AAPlayerCharacter::GetSoundAlertness_Implementation(FName SoundTag)
     return .0f;
 }
 
-void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc)
+void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc, bool bLoudNoise)
 {
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
 
     if(!HasAuthority())
-        Server_PlaySound(SoundTag, Range, Loc);
+        Server_PlaySound(SoundTag, Range, Loc, bLoudNoise);
     
     else
-        Server_PlaySound_Implementation(SoundTag, Range, Loc);
+        Server_PlaySound_Implementation(SoundTag, Range, Loc, bLoudNoise);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
@@ -924,15 +927,28 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
     return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
 }
 
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc)
+void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
 {
-    NoiseZone->SetSphereRadius(Range * NoiseModifier);
+    if (bLoudNoise) {
+        LoudNoiseZone->SetSphereRadius(Range * NoiseModifier);
 
-    if (Range <= 0) {
-        NoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        if (Range <= 0) {
+            LoudNoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
+        else {
+            LoudNoiseZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        }
     }
+
     else {
-        NoiseZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        NoiseZone->SetSphereRadius(Range * NoiseModifier);
+
+        if (Range <= 0) {
+            NoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
+        else {
+            NoiseZone->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        }
     }
 }
 

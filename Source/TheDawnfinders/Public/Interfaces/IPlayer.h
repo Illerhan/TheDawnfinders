@@ -55,7 +55,7 @@ public:
 	void DoDamagePostProcess(float Speed);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
-	void PlaySoundOnServer(FName SoundTag, float Range, float WaveStrength, FVector Loc = FVector::ZeroVector);
+	void PlaySoundOnServer(FName SoundTag, float Range, float WaveStrength, FVector Loc = FVector::ZeroVector, bool bLoudNoise = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	float GetSoundAlertness(FName SoundTag);

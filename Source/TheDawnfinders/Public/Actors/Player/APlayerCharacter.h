@@ -94,6 +94,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USphereComponent* NoiseZone;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USphereComponent* LoudNoiseZone;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float NoiseModifier = 1.0f;
 	
@@ -112,9 +115,6 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
 	class UDebugComponent* DebugComponent;
-	
-	UFUNCTION(BlueprintNativeEvent)
-	void GetShopItems();
 
 
 // === CURSE ===
@@ -166,7 +166,7 @@ public:
 
 	virtual float GetSoundAlertness_Implementation(FName SoundTag) override;
 
-	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc = FVector::ZeroVector) override;
+	virtual void PlaySoundOnServer_Implementation(FName SoundTag, float Range, float WaveStrength, FVector Loc = FVector::ZeroVector, bool bLoudNoise = false) override;
 
 	virtual UWorldPlayerWidget* GetPlayerWidget_Implementation() override;
 
@@ -230,7 +230,6 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_SetPushingState(ALitter* Obj, bool bCarrying);
 	
-
 
 // === ROTATION / AUTO-LOCK ===
 public :
@@ -306,7 +305,7 @@ public :
 // === OTHERS ===
 protected:
 	UFUNCTION(Server, Reliable)
-	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector);
+	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector, bool bLoudNoise = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisplayThrowPreview(FVector Direction, float Strength);
@@ -316,9 +315,13 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void Server_EndCarryHeavyItem();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void GetShopItems();
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "InitNames")
 	void InitPlayerNames();
+
 	
 
 // === PUBLIC PROPERTIES ===
