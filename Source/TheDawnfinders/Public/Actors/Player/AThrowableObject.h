@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Player/ANoise.h"
 #include "GameFramework/Actor.h"
 #include "AThrowableObject.generated.h"
 
@@ -27,7 +28,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void Initialise(UItemData* Data);
+	void Initialise(UItemData* Data, AActor* Origin);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoStartImpulse(FVector Direction, float Strength);
@@ -48,6 +49,19 @@ public :
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	float EffectRange;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	float NoiseRange;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	bool bIsLoud;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	AActor* OriginActor;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TSubclassOf<class ANoise> NoiseObject;
+
 
 protected :
 	UPROPERTY()

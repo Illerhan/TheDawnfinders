@@ -39,7 +39,10 @@ public :
 	void StopHoldInteraction(AActor* Player);
 
 
-private:
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsOn;
+
 	UPROPERTY()
 	bool bIsBeingHeld;
 

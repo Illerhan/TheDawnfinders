@@ -27,6 +27,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
     }
     else
     {
+        bIsOn = !bIsOn;
+
         // Mode TOGGLE : clic pour ouvrir/fermer
         for (AMovableObjects* const Object : LinkedObjects)
         {
@@ -67,6 +69,7 @@ void ALever::Interact_Implementation(AActor* Interactor)
             }
             
         }
+
         for (AActor* Actor : LinkedToggleables)
         {
             if (!Actor || !Actor->Implements<UToggleable>()) continue;
@@ -82,7 +85,7 @@ void ALever::Interact_Implementation(AActor* Interactor)
                 UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Activating %s"), *Actor->GetName());
             }
         }
-        
+
         Super::Interact_Implementation(Interactor);
     }
 }

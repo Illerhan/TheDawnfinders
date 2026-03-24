@@ -23,6 +23,12 @@ public :
 	UPROPERTY(BlueprintReadWrite)
 	AActor* NoiseOriginActor;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bIsLoud;
+
+	UPROPERTY()
+	float Radius = 0.0f;
+
 protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bIsConstant;
