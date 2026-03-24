@@ -236,7 +236,7 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 {
 	if (!Item.ItemData) return;
 	
-	if (SavedGold < Item.ItemData->Price) return;
+	if (SavedGold < Item.ItemData->ItemValue) return;
 	
 	int32 TotalRows = 0;
 	TMap<UItemData*, int32> TypeCounts;
@@ -279,7 +279,7 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 	}
 
 	ShopItems.Add(Item);
-	SavedGold-=Item.ItemData->Price;
+	SavedGold-=Item.ItemData->ItemValue;
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();
 }
