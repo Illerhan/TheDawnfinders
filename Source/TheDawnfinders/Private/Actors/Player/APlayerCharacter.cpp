@@ -647,6 +647,9 @@ void AAPlayerCharacter::ActualiseRotation()
 
 void AAPlayerCharacter::ForceRotation(FVector Input)
 {
+    if (bIsAutoMoving) return;
+    if (CurrentState == EPlayerState::Immobilized) return;
+
     if(CurrentForcedRotationRatio < 1)
         CurrentForcedRotationRatio += GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
 

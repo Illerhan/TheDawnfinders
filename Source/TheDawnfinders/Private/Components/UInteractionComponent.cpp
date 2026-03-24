@@ -144,8 +144,8 @@ AActor* UInteractionComponent::GetNearestInteractible()
 
 void UInteractionComponent::StartInteract()
 {
-	if (!PlayerCharacter)
-		return;
+	if (!PlayerCharacter) return;
+	if (CurrentAnimInteractible) return;
 
 	// If the player is carrying an heavy object
 	if (CarriedItem != nullptr) {
@@ -351,19 +351,24 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 	MashQTE->SetLinkedInteractible(Interactible);
 }
 
+#pragma endregion
+
+
 void UInteractionComponent::DoInteractAnimation(AActor* Target)
 {
+	UE_LOG(LogTemp, Display, TEXT("Start Interact Anim"));
+
 	bIsInInteraction = true;
 	CurrentAnimInteractible = Target;
 }
 
 void UInteractionComponent::EndInteractAnimatiopn()
 {
+	UE_LOG(LogTemp, Display, TEXT("End Interact Anim"));
+
 	bIsInInteraction = false;
 	CurrentAnimInteractible = nullptr;
 }
-
-#pragma endregion
 
 
 #pragma region Stop Interaction
