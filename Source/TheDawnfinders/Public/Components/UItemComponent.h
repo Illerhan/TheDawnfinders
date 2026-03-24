@@ -53,7 +53,7 @@ public:
 	UFUNCTION()
 	void OnEffectExpired(EConsumableEffectType EffectType);
 	
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_StartTimedEffect(EConsumableEffectType EffectType, float Duration);
 
 
