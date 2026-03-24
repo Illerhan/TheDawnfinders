@@ -230,7 +230,6 @@ void ACustomPlayerState::SaveInventoryBeforeTravel()
 			ShopItems.Add(Slot.CurrentInfos);
 		}
 	}
-
 }
 
 void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)

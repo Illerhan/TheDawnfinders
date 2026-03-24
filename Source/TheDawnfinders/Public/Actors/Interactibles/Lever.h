@@ -6,6 +6,7 @@
 #include "Interactible.h"
 #include "Actors/MovableObjects/MovableObjects.h"
 #include "Actors/MovableObjects/Doors.h"
+#include "Interfaces/Toggleable.h"
 #include "Lever.generated.h"
 
 UCLASS()
@@ -22,6 +23,9 @@ public:
 public :
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Interactibles")
 	TArray<AMovableObjects*> LinkedObjects;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever|Toggleables")
+	TArray<AActor*> LinkedToggleables;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
 	bool bRequiresHold = false;

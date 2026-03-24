@@ -18,7 +18,7 @@ void ALever::Tick(float DeltaTime)
 
 void ALever::Interact_Implementation(AActor* Interactor)
 {
-    if (!bCanBeUsed || LinkedObjects.Num() == 0) return;
+    if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
 
     if (bRequiresHold)
     {
@@ -64,6 +64,22 @@ void ALever::Interact_Implementation(AActor* Interactor)
                 {
                     Object->DoMovement();
                 }
+            }
+            
+        }
+        for (AActor* Actor : LinkedToggleables)
+        {
+            if (!Actor || !Actor->Implements<UToggleable>()) continue;
+
+            if (IToggleable::Execute_IsActive(Actor))
+            {
+                IToggleable::Execute_Deactivate(Actor);
+                UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Deactivating %s"), *Actor->GetName());
+            }
+            else
+            {
+                IToggleable::Execute_Activate(Actor);
+                UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Activating %s"), *Actor->GetName());
             }
         }
         
