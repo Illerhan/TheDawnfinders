@@ -43,7 +43,7 @@ public :
 
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Replicated)
 	bool bIsOn;
 
 	UPROPERTY()

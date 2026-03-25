@@ -45,6 +45,7 @@ void AInteractibleObjects::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(AInteractibleObjects, bIsInteracting);
 	DOREPLIFETIME(AInteractibleObjects, PlayerTemp);
 	DOREPLIFETIME(AInteractibleObjects, InteractionTimer);
+	DOREPLIFETIME(AInteractibleObjects, CurrentInteractActor);
 }
 
 void AInteractibleObjects::BeginPlay()

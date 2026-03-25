@@ -57,8 +57,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	// Nearest Interactible management
 	if (InteractiblesAtRange.Num() > 0 && !bIsInInteraction) 
 	{
-		InteractiblesAtRange.RemoveAll([](AActor* Actor) {
-	   return !IsValid(Actor);});
+		InteractiblesAtRange.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
 		AActor* Nearest = GetNearestInteractible();
 		if (!NearestInteractible || NearestInteractible != Nearest) 
 		{
@@ -197,6 +196,7 @@ void UInteractionComponent::StartInteract()
 	if (!Nearest) return;
 	if (!IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner())) return;
 
+
 	IInteractible::Execute_UnselectInteractible(Nearest, GetOwner());
 
 	// Starts QTE if needed
@@ -228,6 +228,7 @@ void UInteractionComponent::StartInteract()
 
 			bWasCrouched = (PlayerCharacter->CurrentState == EPlayerState::Sneaking);
 		}
+
 		TryInteract(Nearest, PlayerCharacter);
 	}
 }
@@ -238,11 +239,11 @@ void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter*
 	if (!Player || !Player->IsLocallyControlled()) return;
 	if (!Interactible) return;
 
-	// Server
+	// Client
 	if (!GetOwner()->HasAuthority()) {
 		ServerInteract(Interactible, Player);
 	}
-	// Client
+	// Server
 	else {
 		ServerInteract_Implementation(Interactible, Player);
 	}
@@ -334,7 +335,6 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 
 #pragma region QTE
 
-
 void UInteractionComponent::StartRotativeQTE(AInteractibleObjects* Interactible)
 {
 	ULockpickQTEWidget* RotativeQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTERotative();
@@ -356,16 +356,12 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 
 void UInteractionComponent::DoInteractAnimation(AActor* Target)
 {
-	UE_LOG(LogTemp, Display, TEXT("Start Interact Anim"));
-
 	bIsInInteraction = true;
 	CurrentAnimInteractible = Target;
 }
 
 void UInteractionComponent::EndInteractAnimatiopn()
 {
-	UE_LOG(LogTemp, Display, TEXT("End Interact Anim"));
-
 	bIsInInteraction = false;
 	CurrentAnimInteractible = nullptr;
 }

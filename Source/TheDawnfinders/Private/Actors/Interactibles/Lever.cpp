@@ -1,10 +1,12 @@
 ﻿#include "Actors/Interactibles/Lever.h"
+#include "Net/UnrealNetwork.h"
 #include "Actors/Player/APlayerCharacter.h"
 
 
 ALever::ALever()
 {
     PrimaryActorTick.bCanEverTick = true;
+    bReplicates = true;
 }
 
 void ALever::BeginPlay()
@@ -20,6 +22,7 @@ void ALever::Tick(float DeltaTime)
 
 void ALever::DoPlayerAutoMove_Implementation(AAPlayerCharacter* Player)
 {
+
 }
 
 void ALever::Interact_Implementation(AActor* Interactor)
@@ -31,6 +34,7 @@ void ALever::Interact_Implementation(AActor* Interactor)
         CurrentInteractActor = Interactor;
         AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
         DoPlayerAutoMove(Player);
+        UE_LOG(LogTemp, Error, TEXT("Start Interact With lever"));
         return;
     }
     else if (bHasInteractAnim && CurrentInteractActor != Interactor) {
@@ -45,6 +49,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
     else
     {
         bIsOn = !bIsOn;
+
+        UE_LOG(LogTemp, Error, TEXT("Interact With lever"));
 
         // Mode TOGGLE : clic pour ouvrir/fermer
         for (AMovableObjects* const Object : LinkedObjects)
@@ -146,7 +152,7 @@ void ALever::StopInteract_Implementation(AActor* Interactor)
         StopHoldInteraction(Interactor);
     }
     else {
-        CurrentInteractActor = nullptr;
+        //CurrentInteractActor = nullptr;
     }
 }
 
@@ -193,4 +199,11 @@ void ALever::StopHoldInteraction(AActor* Player)
             UE_LOG(LogTemp, Warning, TEXT("[SERVER] Hold: Closing door: %s"), *Door->GetName());
         }
     }
+}
+
+void ALever::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(ALever, bIsOn);
 }
