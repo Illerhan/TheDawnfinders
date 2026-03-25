@@ -44,6 +44,15 @@ void ACustomPlayerController::Client_SetRequestedPanel_Implementation(int32 Pane
 	}
 }
 
+void ACustomPlayerController::RespawnToCheckpoint()
+{
+	
+	ACharacter* OwnerChar = Cast<ACharacter>(GetPawn());
+	if (!OwnerChar) return;
+	
+	OwnerChar->TeleportTo(SpawnPoint->GetActorLocation(), SpawnPoint->GetActorRotation());
+}
+
 void ACustomPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

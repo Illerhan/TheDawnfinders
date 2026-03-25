@@ -2,10 +2,12 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "GameFramework/CustomPlayerController.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldHealthBar.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
+#include "GameFramework/PlayerStart.h"
 
 
 UHealthComponent::UHealthComponent()
@@ -400,12 +402,26 @@ void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
 
 void UHealthComponent::Fallen()
 {
-	bIsFallen = true;
-	bIsPoisoned = false;
-
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
+	
+	FString CurrentLevel = GetWorld()->GetMapName();
+	if (CurrentLevel.Contains("Tutorial"))
+	{
+		AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(GetOwner());
+		if (!PC) return;
+	
+		ACustomPlayerController* Controller = Cast<ACustomPlayerController>(PC->GetController());
+		if (!Controller) return;
 
+		Controller->RespawnToCheckpoint();
+		Heal(MaxHealth);
+		return;
+	}
+
+	bIsFallen = true;
+	bIsPoisoned = false;
+	
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
 
 	CurrentMaxHealth = MaxHealth;
@@ -443,13 +459,14 @@ void UHealthComponent::Server_Revive_Implementation()
 	bIsFallen = false;
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
-
+	
 	// Notify Player 
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
 		bIsDead = false;
 	}
+	
 }
 
 #pragma endregion
@@ -500,6 +517,8 @@ void UHealthComponent::OnRep_IsDead()
 
 void UHealthComponent::OnRep_IsFallen()
 {
+
+
 }
 
 void UHealthComponent::OnRep_ProtectionZoneAmount()
