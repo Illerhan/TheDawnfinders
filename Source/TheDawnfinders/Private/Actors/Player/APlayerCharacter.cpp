@@ -279,28 +279,22 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     {
     case EPlayerState::None :
         StopAutoLock();
-        //SetPlayerSpeed(PlayerConfig->WalkSpeed);
         break;
 
     case EPlayerState::Carrying:
-        //SetPlayerSpeed(PlayerConfig->CarrySpeed);
         break;
 
     case EPlayerState::Fallen :
         StopAutoLock();
-        //SetPlayerSpeed(PlayerConfig->FallenSpeed);
         break;
 
     case EPlayerState::Immobilized :
-        //SetPlayerSpeed(0.f);
         break;
         
     case EPlayerState::Trapped :
-        //SetPlayerSpeed(0.f);
         break;
 
     case EPlayerState::Dead :
-        //SetPlayerSpeed(0.f);
         break;
     }
 

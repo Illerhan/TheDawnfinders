@@ -204,13 +204,16 @@ struct FWeaponTypesData : public FTableRowBase {
 
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ranged")
 	bool IsRangedWeapon;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ranged")
+	UAnimMontage* ShootAnim;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	TArray<FName> LightComboActionNames;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
 	TArray<FName> HeavyComboActionNames;
 };
 

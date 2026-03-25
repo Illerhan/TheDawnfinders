@@ -823,7 +823,8 @@ void UItemComponent::Shoot()
 		DoShootFeedbacks(ShootDir, i == 0);
 	}
 
-	UE_LOG(LogTemp, Display, TEXT("%f"), CurrentWeaponData.NoiseRange);
+	FWeaponTypesData* WeaponTypeActions = WeaponTypeActionsDataTable->FindRow<FWeaponTypesData>(CurrentWeaponData.WeaponTypeName, " ");
+	PlayerCharacter->PlayAttackMontage_Implementation(WeaponTypeActions->ShootAnim, 1.0f);
 
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "", CurrentWeaponData.NoiseRange, 1, FVector(0, 0, 0), true);
 
