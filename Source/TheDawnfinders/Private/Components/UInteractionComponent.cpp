@@ -50,15 +50,14 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			bIsDoingQTE = false;
 			bIsInInteraction = false;
 			if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+				PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 		}
 	}
 
 	// Nearest Interactible management
 	if (InteractiblesAtRange.Num() > 0 && !bIsInInteraction) 
 	{
-		InteractiblesAtRange.RemoveAll([](AActor* Actor) {
-	   return !IsValid(Actor);});
+		InteractiblesAtRange.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
 		AActor* Nearest = GetNearestInteractible();
 		if (!NearestInteractible || NearestInteractible != Nearest) 
 		{
@@ -88,6 +87,8 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
 	DOREPLIFETIME(UInteractionComponent, CarriedItem);
 	DOREPLIFETIME(UInteractionComponent, bIsInInteraction);
+	DOREPLIFETIME(UInteractionComponent, NearestInteractible);
+	DOREPLIFETIME(UInteractionComponent, CurrentInteractible);
 }
 
 
@@ -197,6 +198,7 @@ void UInteractionComponent::StartInteract()
 	if (!Nearest) return;
 	if (!IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner())) return;
 
+
 	IInteractible::Execute_UnselectInteractible(Nearest, GetOwner());
 
 	// Starts QTE if needed
@@ -222,12 +224,6 @@ void UInteractionComponent::StartInteract()
 	}
 	else  // No QTE 
 	{
-		if (Cast<AInteractibleObjects>(Nearest)->GetIsInInteractionStateOnInteract()) {
-			bIsInInteraction = true;
-			CurrentInteractible = Nearest;
-
-			bWasCrouched = (PlayerCharacter->CurrentState == EPlayerState::Sneaking);
-		}
 		TryInteract(Nearest, PlayerCharacter);
 	}
 }
@@ -238,11 +234,11 @@ void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter*
 	if (!Player || !Player->IsLocallyControlled()) return;
 	if (!Interactible) return;
 
-	// Server
+	// Client
 	if (!GetOwner()->HasAuthority()) {
 		ServerInteract(Interactible, Player);
 	}
-	// Client
+	// Server
 	else {
 		ServerInteract_Implementation(Interactible, Player);
 	}
@@ -253,6 +249,8 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 {
 	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible, Player))
 		return;
+
+	if (bIsInInteraction) return;
 
 	if (Cast<AInteractibleObjects>(Interactible)->GetIsInInteractionStateOnInteract()) {
 		bIsInInteraction = true;
@@ -334,7 +332,6 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 
 #pragma region QTE
 
-
 void UInteractionComponent::StartRotativeQTE(AInteractibleObjects* Interactible)
 {
 	ULockpickQTEWidget* RotativeQTE = (IPlayerInterface::Execute_GetPlayerWidget(GetOwner()))->GetQTERotative();
@@ -356,18 +353,16 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 
 void UInteractionComponent::DoInteractAnimation(AActor* Target)
 {
-	UE_LOG(LogTemp, Display, TEXT("Start Interact Anim"));
-
 	bIsInInteraction = true;
 	CurrentAnimInteractible = Target;
 }
 
 void UInteractionComponent::EndInteractAnimatiopn()
 {
-	UE_LOG(LogTemp, Display, TEXT("End Interact Anim"));
-
 	bIsInInteraction = false;
+	CurrentInteractible = nullptr;
 	CurrentAnimInteractible = nullptr;
+	NearestInteractible = nullptr;
 }
 
 

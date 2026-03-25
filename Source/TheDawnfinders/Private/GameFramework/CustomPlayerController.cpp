@@ -30,6 +30,7 @@ void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
 	AMuleAIController* MuleAIController = Cast<AMuleAIController>(Mule->GetController());
 	if (MuleAIController)
 	{
+		if (Mule->CooldownTimer > 0.f) return;
 		MuleAIController->CallMule(Actor);
 		Mule->DangerManager->MuleCalled();
 	}
@@ -42,6 +43,15 @@ void ACustomPlayerController::Client_SetRequestedPanel_Implementation(int32 Pane
 	{
 		GI->RequestedPanel = PanelIndex;
 	}
+}
+
+void ACustomPlayerController::RespawnToCheckpoint()
+{
+	
+	ACharacter* OwnerChar = Cast<ACharacter>(GetPawn());
+	if (!OwnerChar) return;
+	
+	OwnerChar->TeleportTo(SpawnPoint->GetActorLocation(), SpawnPoint->GetActorRotation());
 }
 
 void ACustomPlayerController::Tick(float DeltaTime)

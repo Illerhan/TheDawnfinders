@@ -42,7 +42,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StartInteract();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void TryInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 	UFUNCTION(Server, Reliable)
@@ -172,7 +172,7 @@ private:
 	UPROPERTY(Replicated)
 	bool bIsInInteraction;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AActor* NearestInteractible;
 
 	UPROPERTY()

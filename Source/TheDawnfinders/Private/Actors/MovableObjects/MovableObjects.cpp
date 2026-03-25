@@ -162,12 +162,12 @@ void AMovableObjects::OnTimeLineFinished()
 		return;
 	}
 	if (!bIsMovingForward)   
-		{
-			CurrentTimelineProgress = 0.f;
-			bCanMove = true;
-			return;
-		}
+	{
+		CurrentTimelineProgress = 0.f;
 		bCanMove = true;
+		return;
+	}
+	bCanMove = true;
 	
 	FinalPosition = StartPosition;
 	StartPosition = GetActorLocation();
