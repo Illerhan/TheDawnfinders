@@ -55,6 +55,7 @@ public :
 	UCurveFloat* MoveCurve;
 
 	FTimeline Timeline;
+
 	FOnTimelineFloat TimelineProgress;
 	FOnTimelineEvent TimelineFinished;
 
@@ -69,7 +70,9 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timeline");
 	float MovementDuration;
 
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsMovingForward;
+
 	float CurrentTimelineProgress;
 	float LastReverseTime;
 	float ReverseCooldown;
