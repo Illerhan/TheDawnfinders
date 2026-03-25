@@ -105,6 +105,7 @@ void ADoors::StartOpening()
     // La porte était en train de se fermer, on inverse le mouvement immédiatement
     if (Timeline.IsReversing())
     {
+        bIsMovingForward = true;
         Timeline.Play();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door reversing to OPEN (was closing)"));
         return;
@@ -114,6 +115,7 @@ void ADoors::StartOpening()
         Timeline.ReverseFromEnd();
         bIsFullyOpen = false;
         bCanMove = false;
+        bIsMovingForward = false;
 
         return;
     }
@@ -125,6 +127,7 @@ void ADoors::StartOpening()
         if (CurrentTimelineProgress < 0.1f)
         {
             Timeline.PlayFromStart();
+            bIsMovingForward = true;
             UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door opening from START"));
         }
         else
@@ -133,6 +136,7 @@ void ADoors::StartOpening()
             Timeline.SetPlaybackPosition(CurrentTimelineProgress, false);
             Timeline.Play();
             UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door resuming opening from: %f"), CurrentTimelineProgress);
+            bIsMovingForward = true;
         }
 
         bIsFullyOpen = false;
@@ -215,6 +219,7 @@ void ADoors::StopOpening()
     // Si elle est en train d'ouvrir → on inverse
     if (!Timeline.IsReversing())
     {
+        bIsMovingForward = false;
         Timeline.Reverse();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door reversing to close"));
     }
@@ -258,6 +263,8 @@ void ADoors::CloseDoor()
 {
     if (!HasAuthority()) return;
     if (bIsPermanentlyOpen) return;
+
+    bIsMovingForward = false;
 
     float ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     Timeline.SetPlayRate(ForwardRate);

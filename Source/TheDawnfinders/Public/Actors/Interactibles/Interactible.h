@@ -197,7 +197,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsInInteractionStateOnInteract = false;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	AActor* CurrentInteractActor;
 
 	UPROPERTY()

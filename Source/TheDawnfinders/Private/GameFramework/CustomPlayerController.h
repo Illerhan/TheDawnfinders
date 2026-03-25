@@ -34,6 +34,9 @@ public:
 	UFUNCTION(Client, Reliable)
 	void Client_SetRequestedPanel(int32 TargetPanel);
 	
+	UFUNCTION(BlueprintCallable)
+	void RespawnToCheckpoint();
+	
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMuleWidget* MuleWidget;
@@ -42,5 +45,11 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	AMule* Mule;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsInTuto;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	AActor* SpawnPoint;
 
 };
