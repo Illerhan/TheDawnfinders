@@ -268,7 +268,7 @@ protected :
 
 
 // === PRIVATE REFERENCES ===
-private :
+protected :
 	UPROPERTY()
 	UHealthComponent* HealthComponent = nullptr;
 
@@ -278,7 +278,7 @@ private :
 	UPROPERTY()
 	UStaminaComponent* StaminaComponent = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	AAPlayerCharacter* PlayerCharacter = nullptr;
 
 	UPROPERTY()

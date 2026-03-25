@@ -77,6 +77,9 @@ public:
 	UStaticMeshComponent* WeaponMeshComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UStaticMeshComponent* GunMeshComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UPlayerLightComponent* LightComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
@@ -144,7 +147,7 @@ public:
 
 	virtual void HideProgress_Implementation() override;
 
-	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh) override;
+	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh, bool bIsRanged) override;
 
 	virtual UInventoryComponent* GetInventoryComponent_Implementation() override;
 

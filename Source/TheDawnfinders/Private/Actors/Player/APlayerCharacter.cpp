@@ -55,8 +55,12 @@ AAPlayerCharacter::AAPlayerCharacter()
     
     PlayerWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("PlayerWidgetComponent"));
     PlayerWidgetComponent->SetupAttachment(GetMesh());
+
     WeaponMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     WeaponMeshComponent->SetupAttachment(GetMesh());
+    GunMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GunMeshComponent"));
+    GunMeshComponent->SetupAttachment(GetMesh());
+
     ThrowablePreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThrowablePreviewMeshComponent"));
     ThrowablePreviewMeshComponent->SetupAttachment(GetMesh());
     DebugComponent = CreateDefaultSubobject<UDebugComponent>(TEXT("DebugComponent"));
@@ -243,9 +247,17 @@ void AAPlayerCharacter::HideProgress_Implementation()
     ProgressBar->Hide();
 }
 
-void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh) 
+void AAPlayerCharacter::SetEquippedMesh_Implementation(UStaticMesh* NewMesh, bool bIsRanged)
 {
-    WeaponMeshComponent->SetStaticMesh(NewMesh); 
+    WeaponMeshComponent->SetStaticMesh(nullptr);
+    GunMeshComponent->SetStaticMesh(nullptr);
+
+    if (bIsRanged) {
+        GunMeshComponent->SetStaticMesh(NewMesh);
+    }
+    else {
+        WeaponMeshComponent->SetStaticMesh(NewMesh);
+    }
 }
 
 UInventoryComponent* AAPlayerCharacter::GetInventoryComponent_Implementation()
