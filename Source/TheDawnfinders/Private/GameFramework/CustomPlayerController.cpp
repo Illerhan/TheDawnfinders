@@ -30,6 +30,7 @@ void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
 	AMuleAIController* MuleAIController = Cast<AMuleAIController>(Mule->GetController());
 	if (MuleAIController)
 	{
+		if (Mule->CooldownTimer > 0.f) return;
 		MuleAIController->CallMule(Actor);
 		Mule->DangerManager->MuleCalled();
 	}
