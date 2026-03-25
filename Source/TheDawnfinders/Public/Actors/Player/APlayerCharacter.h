@@ -192,6 +192,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void StopAutoMoveCharacter(bool bCancel);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_StopAutoMoveCharacter(bool bCancel);
 	
 	UFUNCTION(Server, Reliable)
 	void ServerManageRun(bool Input);
@@ -263,7 +266,7 @@ public :
 	void Server_ForceRotation(FRotator Rotation, FVector Input, float Progress);
 
 	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable)
-	void Multicast_ForceRotation(FRotator Rotation, FVector Input, float Progress);
+	void Multicast_ForceRotation(FRotator Rotation, FVector Input, float Progress, bool bOverrideClient);
 
 	UFUNCTION()
 	void StartAutoLock(float AutoLockStrength);

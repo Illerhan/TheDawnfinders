@@ -196,6 +196,7 @@ void AAPlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(AAPlayerCharacter, CurrentPushedObject);
     DOREPLIFETIME(AAPlayerCharacter, bAutoLockIsActive);
     DOREPLIFETIME(AAPlayerCharacter, bIsForcingRotation);
+    DOREPLIFETIME(AAPlayerCharacter, bIsAutoMoving);
 }
 
 
@@ -551,6 +552,19 @@ void AAPlayerCharacter::AutoMoveCharacter()
 void AAPlayerCharacter::StopAutoMoveCharacter(bool bCancel)
 {
     bIsAutoMoving = false;
+    SetCurrentPlayerState_Implementation(EPlayerState::Immobilized, false);
+
+    if (HasAuthority()) {
+        Server_StopAutoMoveCharacter_Implementation(bCancel);
+    }
+    else {
+        Server_StopAutoMoveCharacter(bCancel);
+    }
+}
+
+void AAPlayerCharacter::Server_StopAutoMoveCharacter_Implementation(bool bCancel)
+{
+    bIsAutoMoving = false;
 
     if (bCancel) return;
 
@@ -679,7 +693,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
         Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
     }
     else {
-        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
+        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio, true);
     }
 }
 
@@ -693,7 +707,7 @@ void AAPlayerCharacter::ForceRotationInstant(FRotator Rotation)
         Server_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
     }
     else {
-        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio);
+        Multicast_ForceRotation(CurrentForcedRotation, CurrentRotationInput, CurrentForcedRotationRatio, true);
     }
 }
 
@@ -706,12 +720,12 @@ void AAPlayerCharacter::Server_ForceRotation_Implementation(FRotator Rotation, F
     CurrentForcedRotationRatio = Progress;
     GetCharacterMovement()->bOrientRotationToMovement = false;
 
-    Multicast_ForceRotation(Rotation, Input, Progress);
+    Multicast_ForceRotation(Rotation, Input, Progress, false);
 }
 
-void AAPlayerCharacter::Multicast_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress)
+void AAPlayerCharacter::Multicast_ForceRotation_Implementation(FRotator Rotation, FVector Input, float Progress, bool bOverrideClient)
 {
-    if (IsLocallyControlled()) return;
+    if (IsLocallyControlled() && !bOverrideClient) return;
 
     bIsForcingRotation = true;
     CurrentForcedRotation = Rotation;
@@ -723,6 +737,9 @@ void AAPlayerCharacter::Multicast_ForceRotation_Implementation(FRotator Rotation
 
 void AAPlayerCharacter::StopForceRotation(float Progress)
 {
+    if (bIsAutoMoving) return;
+    if (CurrentState == EPlayerState::Immobilized) return;
+
     bIsForcingRotation = false;
     CurrentForcedRotationRatio = Progress;
 
