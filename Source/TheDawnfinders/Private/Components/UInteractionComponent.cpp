@@ -50,7 +50,7 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			bIsDoingQTE = false;
 			bIsInInteraction = false;
 			if (PlayerCharacter->Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+				PlayerCharacter->Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
 		}
 	}
 
@@ -87,6 +87,8 @@ void UInteractionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	DOREPLIFETIME(UInteractionComponent, HelpTimeRemaining);
 	DOREPLIFETIME(UInteractionComponent, CarriedItem);
 	DOREPLIFETIME(UInteractionComponent, bIsInInteraction);
+	DOREPLIFETIME(UInteractionComponent, NearestInteractible);
+	DOREPLIFETIME(UInteractionComponent, CurrentInteractible);
 }
 
 
@@ -222,13 +224,6 @@ void UInteractionComponent::StartInteract()
 	}
 	else  // No QTE 
 	{
-		if (Cast<AInteractibleObjects>(Nearest)->GetIsInInteractionStateOnInteract()) {
-			bIsInInteraction = true;
-			CurrentInteractible = Nearest;
-
-			bWasCrouched = (PlayerCharacter->CurrentState == EPlayerState::Sneaking);
-		}
-
 		TryInteract(Nearest, PlayerCharacter);
 	}
 }
@@ -254,6 +249,8 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 {
 	if (!Interactible || !IInteractible::Execute_GetCanBeUsed(Interactible, Player))
 		return;
+
+	if (bIsInInteraction) return;
 
 	if (Cast<AInteractibleObjects>(Interactible)->GetIsInInteractionStateOnInteract()) {
 		bIsInInteraction = true;
@@ -363,7 +360,9 @@ void UInteractionComponent::DoInteractAnimation(AActor* Target)
 void UInteractionComponent::EndInteractAnimatiopn()
 {
 	bIsInInteraction = false;
+	CurrentInteractible = nullptr;
 	CurrentAnimInteractible = nullptr;
+	NearestInteractible = nullptr;
 }
 
 

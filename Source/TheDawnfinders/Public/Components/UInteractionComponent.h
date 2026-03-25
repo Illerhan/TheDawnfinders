@@ -172,7 +172,7 @@ private:
 	UPROPERTY(Replicated)
 	bool bIsInInteraction;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AActor* NearestInteractible;
 
 	UPROPERTY()
