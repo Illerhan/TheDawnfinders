@@ -106,6 +106,8 @@ void UItemComponent::EquipWeapon()
 	{
 		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
 		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.CurrentInfos.ItemData->ItemMesh, EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon);
+
+		CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 	}
 }
 

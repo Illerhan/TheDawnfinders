@@ -684,7 +684,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
 
     float angle = FMath::Atan2(Input.Y, Input.X);
 
-    if(ItemComponent->GetIsPreviewingThrow()) angle -= FMath::DegreesToRadians(50);
+    if(ItemComponent->GetIsPreviewingThrow()) angle -= FMath::DegreesToRadians(50 + 180);
     else angle -= FMath::DegreesToRadians(50 + 180);
 
     FVector RotatedVector = FVector(FMath::Cos(angle), FMath::Sin(angle), 0);
