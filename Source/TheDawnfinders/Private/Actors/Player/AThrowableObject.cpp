@@ -66,6 +66,8 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 		2.0f            
 	);
 
+	Client_DoCollisionEffect();
+
 	for (FHitResult& Hit : HitResults)
 	{
 		if (!Hit.GetActor()) continue;
@@ -90,6 +92,32 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 	Noise->Radius = NoiseRange;
 	Noise->bIsLoud = bIsLoud;
 	Noise->NoiseOriginActor = OriginActor;
+
+	AActor::Destroy();
+}
+
+void AThrowableObject::Client_DoCollisionEffect_Implementation()
+{
+	// We get the in range actors
+	TArray<FHitResult> HitResults;
+	bool bHit = GetWorld()->SweepMultiByChannel(
+		HitResults,
+		GetActorLocation(),
+		GetActorLocation(),
+		FQuat::Identity,
+		ECC_GameTraceChannel1,
+		FCollisionShape::MakeSphere(EffectRange)
+	);
+
+	DrawDebugSphere(
+		GetWorld(),
+		GetActorLocation(),
+		EffectRange,
+		16,
+		bHit ? FColor::Red : FColor::Green,
+		false,
+		2.0f
+	);
 
 	AActor::Destroy();
 }

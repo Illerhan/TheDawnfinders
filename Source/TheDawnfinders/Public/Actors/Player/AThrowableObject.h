@@ -39,6 +39,9 @@ public:
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_DoCollisionEffect();
 
+	UFUNCTION(BlueprintCallable, Client, Reliable)
+	void Client_DoCollisionEffect();
+
 
 public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
