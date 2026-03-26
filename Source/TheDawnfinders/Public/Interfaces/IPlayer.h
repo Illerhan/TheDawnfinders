@@ -92,7 +92,7 @@ public :
 
 public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
-	void SetEquippedMesh(UStaticMesh* NewMesh);
+	void SetEquippedMesh(UStaticMesh* NewMesh, bool bIsRanged);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment")
 	UInventoryComponent* GetInventoryComponent();

@@ -105,7 +105,7 @@ void UItemComponent::EquipWeapon()
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
 		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.CurrentInfos.ItemData->ItemMesh);
+		PlayerInterface->SetEquippedMesh_Implementation(EquippedItem.CurrentInfos.ItemData->ItemMesh, EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon);
 	}
 }
 
@@ -114,7 +114,7 @@ void UItemComponent::UnequipWeapon()
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
 		IPlayerInterface* PlayerInterface = Cast<IPlayerInterface>(GetOwner());
-		PlayerInterface->SetEquippedMesh_Implementation(nullptr);
+		PlayerInterface->SetEquippedMesh_Implementation(nullptr, false);
 	}
 }
 

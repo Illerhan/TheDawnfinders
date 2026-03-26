@@ -16,7 +16,6 @@ AMule::AMule()
 	LootCollider = CreateDefaultSubobject<UBoxComponent>(FName("LootCollider"));
 	LootCollider->SetupAttachment(RootComponent);
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(FName("InventoryComponent"));
-	InteractibleWidget = CreateDefaultSubobject<UWorldInteractibleWidget>(FName("InteractibleWidget"));
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidgetComponent"));
 	InteractibleWidgetComponent->SetupAttachment(RootComponent);
 }
@@ -24,6 +23,8 @@ AMule::AMule()
 // Called when the game starts or when spawned
 void AMule::BeginPlay()
 {
+	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
+
 	Super::BeginPlay();
 	
 }
