@@ -114,8 +114,6 @@ public:
 	}
 };
 
-
-
 UENUM(BlueprintType)
 enum class EDamageType : uint8 {
 	Piercing UMETA(DisplayName = "Piercing"),
