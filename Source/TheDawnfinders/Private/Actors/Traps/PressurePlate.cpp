@@ -41,7 +41,10 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	{
 		if (LinkedActor->Implements<UActivable>())
 		{
+			IActivable::Execute_SetPlayerCount(LinkedActor,1);
+			if (IActivable::Execute_GetPlayerCount(LinkedActor) >1) continue;
 			IActivable::Execute_DoMainAction(LinkedActor);
+			
 		}
 	}
 }
@@ -56,6 +59,8 @@ void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 	{
 		if (LinkedActor->Implements<UActivable>())
 		{
+			IActivable::Execute_SetPlayerCount(LinkedActor,-1);
+			if (IActivable::Execute_GetPlayerCount(LinkedActor) <= 0)
 			IActivable::Execute_StopMainAction(LinkedActor);
 		}
 	}

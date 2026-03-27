@@ -22,4 +22,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StopMainAction();
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	int GetPlayerCount();
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetPlayerCount(int Value);
 };

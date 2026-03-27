@@ -1,5 +1,6 @@
 ﻿#include "Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Components/BoxComponent.h"
 #include "Interfaces/IPlayer.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SoundManager.h"

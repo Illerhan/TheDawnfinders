@@ -89,6 +89,16 @@ void AInteractibleObjects::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+int AInteractibleObjects::GetPlayerCount_Implementation()
+{
+	return PlayerCount;
+}
+
+void AInteractibleObjects::SetPlayerCount_Implementation(int Value)
+{
+	PlayerCount+= Value;
+}
+
 void AInteractibleObjects::HoldTimer(float DeltaTime)
 {
 	IPlayerInterface::Execute_ShowProgress(PlayerTemp, InteractionTimer);
