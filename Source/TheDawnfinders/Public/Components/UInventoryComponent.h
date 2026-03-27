@@ -203,6 +203,9 @@ public :
 	UPROPERTY(ReplicatedUsing = OnRep_TreasureSlots, BlueprintReadWrite, Category = "Inventory")
 	TArray<FInventorySlot> TreasureSlots;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory")
+	TArray<bool> RevealedSlots;
+
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentSlotIndex, BlueprintReadWrite, Category = "Inventory")
 	int CurrentSlotIndex;
 
