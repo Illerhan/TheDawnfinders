@@ -47,6 +47,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	UEnemyAttackComponent* GetEnemyAttackComponent();
 
+	UPROPERTY(BlueprintReadWrite)
+	int CurrentWaypointIndex;
+
 
 protected :
 	UPROPERTY(BlueprintReadWrite)

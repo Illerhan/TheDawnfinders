@@ -184,6 +184,11 @@ public :
 		return CurrentTargetWaypoint;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	bool GetRandomWaypointsOrder() {
+		return bRandomWaypointsOrder;
+	}
+
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -192,6 +197,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float PatrolDistanceOverride = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bRandomWaypointsOrder;
 
 	FTimerHandle EnableTimer;
 
