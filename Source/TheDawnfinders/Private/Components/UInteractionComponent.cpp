@@ -1,6 +1,7 @@
 #include "Components/UInteractionComponent.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Interactibles/Carriable.h"
+#include "Components/BoxComponent.h"
 #include "Widgets/ULockpickQTEWidget.h"
 #include "Widgets/UQTEMashButtonWidget.h"
 #include "Widgets/UWorldPlayerWidget.h"

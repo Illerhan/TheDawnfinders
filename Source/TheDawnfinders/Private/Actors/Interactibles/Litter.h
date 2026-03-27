@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Actors/Interactibles/Interactible.h"
-#include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UPlayerLightComponent.h"
 #include "Litter.generated.h"

@@ -40,6 +40,7 @@ void AMovableObjects::Tick(float DeltaTime)
 }
 
 
+
 #pragma region Activable Interface
 
 void AMovableObjects::DoMainAction_Implementation()
@@ -50,6 +51,17 @@ void AMovableObjects::DoMainAction_Implementation()
 void AMovableObjects::StopMainAction_Implementation()
 {
 
+}
+
+
+int AMovableObjects::GetPlayerCount_Implementation()
+{
+	return PlayerCount;
+}
+
+void AMovableObjects::SetPlayerCount_Implementation(int Value)
+{
+	PlayerCount+= Value;
 }
 
 #pragma endregion

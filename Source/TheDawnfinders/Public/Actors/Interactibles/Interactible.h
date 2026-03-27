@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/TimelineComponent.h" 
 #include "Actors/Player/ANoise.h" 
 #include "GameFramework/Actor.h"
 #include "Interfaces/IInteractible.h"
 #include "Interfaces/IFadeable.h"
+#include "Interfaces/Activable.h"
 #include "Curves/CurveFloat.h"
 #include "Interactible.generated.h"
 
@@ -30,7 +30,7 @@ enum class EInteractItemConsuptionType : uint8
 
 
 UCLASS()
-class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible, public IFadeable
+class THEDAWNFINDERS_API AInteractibleObjects : public AActor, public IInteractible, public IFadeable, public IActivable
 {
 	GENERATED_BODY()
 
@@ -38,6 +38,9 @@ public:
 	AInteractibleObjects();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	
+	virtual int GetPlayerCount_Implementation() override;
+	virtual  void SetPlayerCount_Implementation(int Value) override;
 	
 	UFUNCTION(BlueprintCallable)
 	virtual void HoldTimer(float DeltaTime);
@@ -232,4 +235,7 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<UMaterialInstanceDynamic*> Materials;
+	
+	UPROPERTY(BlueprintReadWrite)
+	int PlayerCount;
 };

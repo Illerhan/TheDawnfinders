@@ -17,12 +17,15 @@ public:
 	AMovableObjects();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	
 
 
 // === Interface ===
 public :
 	virtual void DoMainAction_Implementation() override;
 	virtual void StopMainAction_Implementation() override;
+	virtual int GetPlayerCount_Implementation() override;
+	virtual void SetPlayerCount_Implementation(int Value) override;
 
 
 // === Functions ===
@@ -78,4 +81,7 @@ public :
 	float ReverseCooldown;
 	FVector FinalPosition;
 	FVector OriginalStart;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int PlayerCount;
 };
