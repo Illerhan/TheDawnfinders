@@ -625,6 +625,8 @@ void UItemComponent::DoAttackCollision()
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
+	if (!WeaponData) return;
+
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
 	FVector HalfSize = FVector(WeaponData->Range * 0.5f, WeaponData->Radius * 0.5f, WeaponData->Radius * 0.5f);

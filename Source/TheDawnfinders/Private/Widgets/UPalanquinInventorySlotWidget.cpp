@@ -7,3 +7,17 @@ void UPalanquinInventorySlotWidget::ActualiseSlot_Implementation(FInventorySlot 
 	CurrentData = ItemData;
 	SlotIndex = Index;
 }
+
+void UPalanquinInventorySlotWidget::RevealSlot_Implementation(float Duration)
+{
+
+}
+
+void UPalanquinInventorySlotWidget::CancelSlotReveal_Implementation()
+{
+
+}
+
+void UPalanquinInventorySlotWidget::ResetSlot_Implementation()
+{
+}

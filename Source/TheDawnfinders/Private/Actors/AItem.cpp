@@ -54,21 +54,6 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (bShouldLevitate)
-	{
-		 LevitationTime += DeltaTime;
-
-		float ZOffset = FMath::Sin(LevitationTime * LevitationSpeed) * LevitationAmplitude;
-
-		FVector NewLocation = InitialeLocation + FVector(0, 0, ZOffset);
-		SetActorLocation(NewLocation);
-
-		FRotator NewRotation = GetActorRotation();
-		NewRotation.Yaw += DeltaTime * 30.f;
-		SetActorRotation(NewRotation);
-	}
-
 }
 
 void AItem::Initialise_Implementation(FItemInfos Data)

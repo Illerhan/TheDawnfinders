@@ -62,9 +62,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsOverloadSlot;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsRevealed;
+
 	FInventorySlot()
-	: CurrentInfos(), Quantity(), bIsOverloadSlot(false)
-	{}
+	: CurrentInfos(), Quantity(), bIsOverloadSlot(false), bIsRevealed(false) {}
 
 	bool operator==(const FInventorySlot& Other) const
 	{
