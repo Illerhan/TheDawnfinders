@@ -199,11 +199,10 @@ void UInteractionComponent::StartInteract()
 	if (!Nearest) return;
 	if (!IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner())) return;
 
-
 	IInteractible::Execute_UnselectInteractible(Nearest, GetOwner());
 
 	// Starts QTE if needed
-	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE) 
+	if (IInteractible::Execute_GetNeededQTE(Nearest) != EQTEType::NoQTE && !IInteractible::Execute_GetQTEDone(Nearest))
 	{
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized, true);

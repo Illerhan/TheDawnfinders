@@ -260,6 +260,11 @@ EQTEType AInteractibleObjects::GetNeededQTE_Implementation()
 	return QTEType;
 }
 
+bool AInteractibleObjects::GetQTEDone_Implementation()
+{
+	return bQTEDone;
+}
+
 void AInteractibleObjects::FadeIn_Implementation()
 {
 	FadeIn_Multicast();

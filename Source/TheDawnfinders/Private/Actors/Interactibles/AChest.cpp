@@ -24,6 +24,8 @@ void AChest::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
 
+	bQTEDone = true;
+
 	PlayerTemp = Interactor;
 	InteractionTimer = InteractionDuration;
 	bIsInteracting = true;

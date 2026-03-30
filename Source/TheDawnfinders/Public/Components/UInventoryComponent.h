@@ -194,7 +194,6 @@ public :
 	void UpdateValuable();
 	
 
-
 // === PROTECTED PROPERTIES ===
 public : 
 	UPROPERTY(ReplicatedUsing = OnRep_InventorySlots, BlueprintReadWrite, Category = "Inventory")

@@ -34,4 +34,7 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
 	EQTEType GetNeededQTE();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
+	bool GetQTEDone();
 };

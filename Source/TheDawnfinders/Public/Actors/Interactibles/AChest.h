@@ -43,19 +43,19 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
 	float InteractionDuration;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trapped Chest")
 	float TrapProba;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trapped Chest")
 	float TrapRadius;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trapped Chest")
 	float TrapDelay;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trapped Chest")
 	float TrapDuration;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trapped Chest")
 	TSubclassOf<ACurseZone> TrapCurseZone;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
@@ -63,5 +63,4 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chest")
 	TSubclassOf<AItem> LootActor;
-	
 };

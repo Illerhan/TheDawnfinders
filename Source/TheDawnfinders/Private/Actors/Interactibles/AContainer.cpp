@@ -34,7 +34,9 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 
 		return;
 	}
+
 	bPlayerIsUsing = true;
+	bQTEDone = true;
 
 	Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player) return;

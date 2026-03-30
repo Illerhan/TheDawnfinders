@@ -57,6 +57,7 @@ public :
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
 	virtual EQTEType GetNeededQTE_Implementation() override;
+	virtual bool GetQTEDone_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
@@ -169,6 +170,9 @@ public :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QTE")
 	float MashQTEDecresePerSeconds = 2.f;
+
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "QTE")
+	bool bQTEDone = false;
 
 
 // === PROTECTED INFOS ===
