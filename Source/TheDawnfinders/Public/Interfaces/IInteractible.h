@@ -32,6 +32,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	bool GetCanBeUsed(AActor* Interactor);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void DoInteractionAnim(AActor* Interactor);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
 	EQTEType GetNeededQTE();
 

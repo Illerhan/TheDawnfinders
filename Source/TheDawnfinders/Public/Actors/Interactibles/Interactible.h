@@ -189,6 +189,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float InteractAnimDuration = 0;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool DidInteractionAnim = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* NeededInteractItem;
 

@@ -16,6 +16,7 @@ public :
 	virtual void BeginPlay() override;
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
+	virtual void DoInteractionAnim_Implementation(AActor* Interactor) override;
 	//virtual void CancelInteraction_Implementation(AActor* Interactor) override;
 
 	UFUNCTION(BlueprintCallable)
@@ -29,6 +30,9 @@ public :
 
 	UFUNCTION(Server, Reliable)
 	void Server_CloseContainerInventory();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DoPlayerAutoMove(AAPlayerCharacter* PlayerToMove);
 
 
 protected :

@@ -211,6 +211,7 @@ void AInteractibleObjects::Interact_Implementation(AActor* Interactor)
 {
 	if (!bCanBeUsed) return;
 
+	bQTEDone = true;
 	BP_OnInteraction(Cast<AAPlayerCharacter>(Interactor));
 }
 
@@ -239,7 +240,7 @@ void AInteractibleObjects::BP_OnInteractionFinished_Implementation()
 
 bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 {
-	if (NeededInteractItem != nullptr) {
+	if (NeededInteractItem != nullptr && !bQTEDone) {
 
 		if (!IPlayerInterface::Execute_GetInventoryComponent(Interactor)->VerifyHasItemInInventory(NeededInteractItem))
 		{

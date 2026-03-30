@@ -30,13 +30,25 @@ void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& It
 void AContainer::Interact_Implementation(AActor* Interactor)
 {
 	if (bPlayerIsUsing) {
-		//InteractibleWidget->DisplayErrorText("Someone Is Already Using");
+		return;
+	}
 
+	bQTEDone = true;
+
+	// We need to go to the lever first 
+	if (bHasInteractAnim && !CurrentInteractActor && !DidInteractionAnim) {
+		CurrentInteractActor = Interactor;
+		AAPlayerCharacter* PlayerToMove = Cast<AAPlayerCharacter>(Interactor);
+		DoPlayerAutoMove(PlayerToMove);
+		UE_LOG(LogTemp, Error, TEXT("Start Interact With container"));
+		return;
+	}
+	else if (bHasInteractAnim && CurrentInteractActor != Interactor && !DidInteractionAnim) {
 		return;
 	}
 
 	bPlayerIsUsing = true;
-	bQTEDone = true;
+	DidInteractionAnim = true;
 
 	Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player) return;
@@ -47,12 +59,12 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 
 void AContainer::StopInteract_Implementation(AActor* Interactor)
 {
-	//bPlayerIsUsing = false;
 
-	//Player = Cast<AAPlayerCharacter>(Interactor);
-	//if (!Player) return;
+}
 
-	//Player->InteractionComponent->CancelInteraction();
+void AContainer::DoInteractionAnim_Implementation(AActor* Interactor)
+{
+
 }
 
 void AContainer::SetupLoot()
@@ -104,6 +116,10 @@ void AContainer::CloseContainerInventory()
 	else {
 		Server_CloseContainerInventory();
 	}
+}
+
+void AContainer::DoPlayerAutoMove_Implementation(AAPlayerCharacter* PlayerToMove)
+{
 }
 
 void AContainer::Server_CloseContainerInventory_Implementation()
