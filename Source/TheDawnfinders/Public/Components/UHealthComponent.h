@@ -68,7 +68,7 @@ public :
 	void ApplyCurse(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	void ActualiseCursePostProcess(float DeltaTime);
+	void ActualiseHurtPostProcess(float DeltaTime);
 
 
 // === POISON ===
@@ -186,10 +186,10 @@ protected :
 	float PoisonDmg;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UMaterialInstanceDynamic* CurseMaterial;
+	UMaterialInstanceDynamic* HurtMaterial;
 
 	UPROPERTY()
-	float CurrentCurseVolumeStrength;
+	float CurrentHurtVolumeStrength;
 
 	UPROPERTY()
 	AController* OwnerController;

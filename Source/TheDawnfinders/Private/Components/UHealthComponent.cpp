@@ -63,8 +63,8 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		}
 	}
 
-	if(CurseMaterial)
-		ActualiseCursePostProcess(DeltaTime);
+	if(HurtMaterial)
+		ActualiseHurtPostProcess(DeltaTime);
 	
 
 	if (GetOwner()->HasAuthority())
@@ -104,8 +104,8 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 
 				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
 				{
-					CurseMaterial = UMaterialInstanceDynamic::Create(MI, this);
-					PPV->Settings.WeightedBlendables.Array[1].Object = CurseMaterial;
+					HurtMaterial = UMaterialInstanceDynamic::Create(MI, this);
+					PPV->Settings.WeightedBlendables.Array[1].Object = HurtMaterial;
 				}
 			}
 		}
@@ -343,25 +343,20 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
-void UHealthComponent::ActualiseCursePostProcess(float DeltaTime)
+void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 {
 	APawn* PawnOwner = Cast<APawn>(GetOwner());
-	if (!PawnOwner || !PawnOwner->IsLocallyControlled()) 
+	if (!PawnOwner || !PawnOwner->IsLocallyControlled())
 	{
-		return; 
+		return;
 	}
 
-	if (!CurseMaterial) return;
+	if (!HurtMaterial) return;
+
+	CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - (CurrentHealth * 1.5f) / CurrentMaxHealth), DeltaTime * 1.f);
 	
-	if (IsProtectedFromCurse()) {
-		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, 0.f, DeltaTime * 1.5f);
-	}
-	else {
-		CurrentCurseVolumeStrength = FMath::Lerp(CurrentCurseVolumeStrength, PostProcessMaxOpacity, DeltaTime * 1.f);
-	}
-	CurseMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentCurseVolumeStrength);
+	HurtMaterial->SetScalarParameterValue(TEXT("VIGNETTE-GeneralOpacity"), CurrentHurtVolumeStrength);
 }
-
 
 #pragma endregion
 
