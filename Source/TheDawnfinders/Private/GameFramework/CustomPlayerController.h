@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Player/ANoise.h"
 #include "GameFramework/PlayerController.h"
 #include "CustomPlayerController.generated.h"
 
@@ -34,14 +35,35 @@ public:
 	UFUNCTION(Client, Reliable)
 	void Client_SetRequestedPanel(int32 TargetPanel);
 	
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Server_HoldMule(float DeltaTime);
+	
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Server_StopHoldMule();
+	
 	UFUNCTION(BlueprintCallable)
 	void RespawnToCheckpoint();
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsHolding;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMuleWidget* MuleWidget;
-
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
+	float NoiseRange;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
+	bool bIsLoud;
+		
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Mule)
+	ANoise* NoiseActor;
+	
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TSubclassOf<class ANoise> NoiseObject;
+	
 	virtual void Tick(float DeltaTime) override;
+	
+	virtual void BeginPlay() override;
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	AMule* Mule;
@@ -51,5 +73,11 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	AActor* SpawnPoint;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float InputHoldDuration;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float HoldTimer;
 
 };

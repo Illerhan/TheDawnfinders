@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Widgets/UWorldHealthBar.h"
 #include "UEnemyWidget.generated.h"
 
 
@@ -40,4 +41,7 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideAnim();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UWorldHealthBar* GetHealthBarWidget();
 };

@@ -57,6 +57,9 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
+	UFUNCTION(Client, Reliable)
+	void ClientStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
+
 	void StartExternalQTE(AActor* QTEActor);
 
 

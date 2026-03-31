@@ -18,55 +18,6 @@ void AContainer::BeginPlay()
 	GetWorldTimerManager().SetTimer(DelayStartHandle, this, &AContainer::SetupLoot, 0.5f, false);
 }
 
-void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& Items)
-{
-	for (UItemData* Item : Items) {
-		InventoryComponent->AddNewItem(FItemInfos(Item, Item->Durability));
-	}
-}
-
-
-
-void AContainer::Interact_Implementation(AActor* Interactor)
-{
-	if (bPlayerIsUsing) {
-		return;
-	}
-
-	bQTEDone = true;
-
-	// We need to go to the lever first 
-	if (bHasInteractAnim && !CurrentInteractActor && !DidInteractionAnim) {
-		CurrentInteractActor = Interactor;
-		AAPlayerCharacter* PlayerToMove = Cast<AAPlayerCharacter>(Interactor);
-		DoPlayerAutoMove(PlayerToMove);
-		UE_LOG(LogTemp, Error, TEXT("Start Interact With container"));
-		return;
-	}
-	else if (bHasInteractAnim && CurrentInteractActor != Interactor && !DidInteractionAnim) {
-		return;
-	}
-
-	bPlayerIsUsing = true;
-	DidInteractionAnim = true;
-
-	Player = Cast<AAPlayerCharacter>(Interactor);
-	if (!Player) return;
-
-	Player->Client_OpenInteractionUI(EInteractionUI::ContainerInventory, this);
-	IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
-}
-
-void AContainer::StopInteract_Implementation(AActor* Interactor)
-{
-
-}
-
-void AContainer::DoInteractionAnim_Implementation(AActor* Interactor)
-{
-
-}
-
 void AContainer::SetupLoot()
 {
 	TArray<UItemData*> ContainerLoot;
@@ -108,6 +59,66 @@ void AContainer::SetupLoot()
 	}
 }
 
+void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& Items)
+{
+	for (UItemData* Item : Items) {
+		InventoryComponent->AddNewItem(FItemInfos(Item, Item->Durability));
+	}
+}
+
+
+
+void AContainer::Interact_Implementation(AActor* Interactor)
+{
+	if (bPlayerIsUsing) {
+		return;
+	}
+
+	bQTEDone = true;
+
+	// We need to go to the lever first 
+	if (bHasInteractAnim && !CurrentInteractActor && !DidInteractionAnim) {
+		CurrentInteractActor = Interactor;
+		AAPlayerCharacter* PlayerToMove = Cast<AAPlayerCharacter>(Interactor);
+		DoPlayerAutoMove(PlayerToMove);
+		UE_LOG(LogTemp, Error, TEXT("Start Interact With container"));
+		return;
+	}
+	else if (bHasInteractAnim && CurrentInteractActor != Interactor && !DidInteractionAnim) {
+		return;
+	}
+
+	bPlayerIsUsing = true;
+	DidInteractionAnim = true;
+
+	if (!bIsOpened && OpenedMesh) {
+		Multicast_ChangeStaticMesh();
+	}
+
+	Player = Cast<AAPlayerCharacter>(Interactor);
+	if (!Player) return;
+
+	Player->Client_OpenInteractionUI(EInteractionUI::ContainerInventory, this);
+	IPlayerInterface::Execute_Server_AskOwnershipPermission(Interactor, this, Player->GetController());
+}
+
+void AContainer::StopInteract_Implementation(AActor* Interactor)
+{
+
+}
+
+void AContainer::DoInteractionAnim_Implementation(AActor* Interactor)
+{
+
+}
+
+void AContainer::Multicast_ChangeStaticMesh_Implementation()
+{
+	bIsOpened = true;
+	StaticMesh->SetStaticMesh(OpenedMesh);
+}
+
+
 void AContainer::CloseContainerInventory()
 {
 	if (HasAuthority()) {
@@ -118,12 +129,21 @@ void AContainer::CloseContainerInventory()
 	}
 }
 
+void AContainer::Server_CloseContainerInventory_Implementation()
+{
+	bPlayerIsUsing = false;
+
+	if (InventoryComponent->GetIsEmpty()) {
+		DisableInterestPointVFX();
+	}
+}
+
+void AContainer::DisableInterestPointVFX_Implementation()
+{
+	InterestPointVFXComponent->Deactivate();
+}
+
 void AContainer::DoPlayerAutoMove_Implementation(AAPlayerCharacter* PlayerToMove)
 {
 }
 
-void AContainer::Server_CloseContainerInventory_Implementation()
-{
-	//Player->InteractionComponent->CancelInteraction();
-	bPlayerIsUsing = false;
-}

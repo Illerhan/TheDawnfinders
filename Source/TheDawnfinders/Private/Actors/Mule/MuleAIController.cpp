@@ -48,15 +48,27 @@ void AMuleAIController::CallMule(AActor* Actor)
 	if (!MyMule) return;
 
 	if (MyMule->CooldownTimer > 0.f || MyMule->CallCharges <= 0) return;
-
-	MoveToLocation(Actor->GetActorLocation());
-
+	
+	FVector CorrectedForward = Actor->GetActorForwardVector();
+    
+	FVector SpawnPosition = Actor->GetActorLocation() + (CorrectedForward * SpawnOffset);
+	    
+	FTimerDelegate TimerDelegate;
+	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
+	
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
 
-	// Si on vient de tomber à 0, on démarre le timer de recharge
 	if (MyMule->CallCharges <= 0)
 	{
 		MyMule->ChargesTimer = MyMule->ChargeCooldown;
 	}
+}
+
+void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
+{
+	AMule* MyMule = Cast<AMule>(GetPawn());
+	if (!MyMule) return;
+	MyMule->SetActorLocation(SpawnPos);	
 }
