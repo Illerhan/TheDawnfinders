@@ -33,6 +33,13 @@ protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bIsConstant;
 
+public:
+	void SetIsConstant(const bool bConstant)
+	{
+		this->bIsConstant = bConstant;
+	}
+
+protected:
 	UPROPERTY()
 	float Timer = 0.0f;
 };
