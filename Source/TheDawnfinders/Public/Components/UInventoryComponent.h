@@ -39,6 +39,14 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	bool GetIsOpened() { return bIsOpened; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetIsEmpty() {
+		for (FInventorySlot Slot : InventorySlots) {
+			if (Slot.CurrentInfos.ItemData) return false;
+		}
+		return true;
+	}
 	
 
 // ==== DELEGATES + REP NOTIFIES ====

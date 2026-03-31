@@ -34,6 +34,9 @@ public :
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_ChangeStaticMesh();
 
+	UFUNCTION(NetMulticast, Reliable)
+	void DisableInterestPointVFX();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoPlayerAutoMove(AAPlayerCharacter* PlayerToMove);
 

@@ -10,6 +10,8 @@
 #include "Interfaces/IInteractible.h"
 #include "Interfaces/IFadeable.h"
 #include "Interfaces/Activable.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Curves/CurveFloat.h"
 #include "Interactible.generated.h"
 
@@ -152,6 +154,9 @@ public :
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UTexture2D* InputIcon;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UNiagaraComponent* InterestPointVFXComponent;
 
 
 // === QTE INFOS ===

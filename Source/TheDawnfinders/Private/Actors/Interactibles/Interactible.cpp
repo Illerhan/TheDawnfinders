@@ -33,6 +33,9 @@ AInteractibleObjects::AInteractibleObjects()
 	StaticMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 	StaticMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel3, ECR_Overlap);
 
+	InterestPointVFXComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("InterestPointVFXComponent"));
+	InterestPointVFXComponent->SetupAttachment(RootComponent);
+
 	InteractibleWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(FName("InteractibleWidget"));
 	InteractibleWidgetComponent->SetupAttachment(InteractCollider);
 	
