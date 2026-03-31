@@ -48,3 +48,8 @@ void UEnemyWidget::HideAnim_Implementation()
 void UEnemyWidget::StopListeningAnim_Implementation()
 {
 }
+
+UWorldHealthBar* UEnemyWidget::GetHealthBarWidget_Implementation()
+{
+	return nullptr;
+}

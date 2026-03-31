@@ -14,6 +14,7 @@
 
 
 class UEnemyWidget;
+class UWorldHealthBar;
 class UWidgetComponent;
 class ABasicEnemyAIController;
 
@@ -148,6 +149,9 @@ public :
 	UFUNCTION(Server, Reliable)
 	void Server_TakeDamages(float Quantity, AActor* Origin);
 
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_DisplayDamageBar(float Percent);
+
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentWaypointTarget(AWaypoint* Waypoint) {
 		CurrentTargetWaypoint = Waypoint;
@@ -235,4 +239,7 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	AWaypoint* CurrentTargetWaypoint;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UWorldHealthBar* HealthBarWidget;
 };
