@@ -31,6 +31,9 @@ public :
 	UFUNCTION(Server, Reliable)
 	void Server_CloseContainerInventory();
 
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_ChangeStaticMesh();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoPlayerAutoMove(AAPlayerCharacter* PlayerToMove);
 
@@ -42,8 +45,14 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
 	FName DataTableRowName;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
+	UStaticMesh* OpenedMesh;
+
 	UPROPERTY()
 	AAPlayerCharacter* Player;
+
+	UPROPERTY()
+	bool bIsOpened;
 
 	FTimerHandle DelayStartHandle;
 };

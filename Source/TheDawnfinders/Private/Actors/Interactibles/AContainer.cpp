@@ -50,6 +50,10 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 	bPlayerIsUsing = true;
 	DidInteractionAnim = true;
 
+	if (!bIsOpened && OpenedMesh) {
+		Multicast_ChangeStaticMesh();
+	}
+
 	Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player) return;
 
@@ -107,6 +111,13 @@ void AContainer::SetupLoot()
 		InventoryComponent->AddNewItem(FItemInfos(Item, Item->Durability), 1);
 	}
 }
+
+void AContainer::Multicast_ChangeStaticMesh_Implementation()
+{
+	bIsOpened = true;
+	StaticMesh->SetStaticMesh(OpenedMesh);
+}
+
 
 void AContainer::CloseContainerInventory()
 {
