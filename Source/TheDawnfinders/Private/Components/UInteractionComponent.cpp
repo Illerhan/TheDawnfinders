@@ -359,10 +359,10 @@ void UInteractionComponent::DoInteractAnimation(AActor* Target)
 
 void UInteractionComponent::EndInteractAnimatiopn()
 {
-	bIsInInteraction = false;
-	CurrentInteractible = nullptr;
+	//bIsInInteraction = false;
+	//CurrentInteractible = nullptr;
 	CurrentAnimInteractible = nullptr;
-	NearestInteractible = nullptr;
+	//NearestInteractible = nullptr;
 }
 
 
@@ -398,6 +398,15 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
+void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactible, AAPlayerCharacter* Player)
+{
+	if (!Interactible || !Player) return;
+
+	NearestInteractible = nullptr;
+	CurrentInteractible = nullptr;
+	bIsInInteraction = false;
+}
+
 void UInteractionComponent::CancelInteraction()
 {
 	AActor* Nearest = GetNearestInteractible();
@@ -422,7 +431,8 @@ void UInteractionComponent::CancelInteraction()
 			ServerStopInteract(CurrentInteractible, PlayerCharacter);
 		}
 		else {
-			ServerStopInteract_Implementation(CurrentInteractible, PlayerCharacter);
+			IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
+			ClientStopInteract(CurrentInteractible, PlayerCharacter);
 		}
 
 		bIsInInteraction = false;
