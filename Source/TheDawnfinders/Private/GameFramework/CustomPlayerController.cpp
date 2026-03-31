@@ -6,6 +6,7 @@
 #include "Actors/Mule/DangerManager.h"
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/GICustom.h"
 #include "Widgets/Mule/MuleWidget.h"
 
@@ -45,6 +46,56 @@ void ACustomPlayerController::Client_SetRequestedPanel_Implementation(int32 Pane
 	}
 }
 
+void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
+{
+	AAPlayerCharacter* OwningPlayer = Cast<AAPlayerCharacter>(GetCharacter());
+	if (!OwningPlayer) return;
+	
+	AMuleAIController* MuleAIController = Cast<AMuleAIController>(Mule->GetController());
+	if (MuleAIController) if (Mule->CooldownTimer > 0.f) return;
+	
+	HoldTimer -= DeltaTime;
+	
+	
+	if (!NoiseActor)
+	{
+		FActorSpawnParameters Params;
+		Params.Owner = GetOwner();
+		Params.Instigator = Cast<APawn>(GetOwner());
+		
+		ANoise* Noise = GetWorld()->SpawnActor<ANoise>(NoiseObject, OwningPlayer->GetActorLocation(), FRotator(0, 0, 0), Params);
+		Noise->Radius = NoiseRange;
+		Noise->bIsLoud = bIsLoud;
+		Noise->NoiseOriginActor = OwningPlayer;
+		Noise->SetIsConstant(true);
+		NoiseActor = Noise;
+	}
+	NoiseActor->SetActorLocation(OwningPlayer->GetActorLocation());
+		
+	OwningPlayer->Execute_ShowProgress(OwningPlayer,HoldTimer);
+	if (HoldTimer <= 0.f)
+	{
+		Server_CallMule(OwningPlayer);
+		Server_StopHoldMule();
+	}
+		
+}
+
+void ACustomPlayerController::Server_StopHoldMule_Implementation()
+{
+	HoldTimer = InputHoldDuration;
+	AAPlayerCharacter* OwningPlayer = Cast<AAPlayerCharacter>(GetCharacter());
+	if (NoiseActor)
+	{
+		NoiseActor->Destroy();
+		NoiseActor = nullptr;
+	}
+	
+	if (!OwningPlayer) return;
+	OwningPlayer->Execute_HideProgress(OwningPlayer);
+	bIsHolding = false;
+}
+
 void ACustomPlayerController::RespawnToCheckpoint()
 {
 	
@@ -71,4 +122,16 @@ void ACustomPlayerController::Tick(float DeltaTime)
 		Mule->CooldownTimer,
 		Mule->InventoryComponent->CurrentValue
 	);
+	
+	if (bIsHolding)
+	{
+		Server_HoldMule(DeltaTime);
+	}
+}
+
+void ACustomPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	HoldTimer= InputHoldDuration;
 }

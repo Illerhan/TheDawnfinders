@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Actors/Player/ANoise.h"
 #include "MuleAIController.generated.h"
 
 UCLASS()
@@ -20,4 +21,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Mule)
 	void CallMule(AActor* Actor);
+	
+	FTimerHandle TimerHandle_SpawnObject;
+	
+	UFUNCTION(BlueprintCallable, Category = Mule)
+	void OnSpawnTimerExpired(FVector SpawnPos);
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Mule)
+	float SpawnOffset;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
+	float SpawnDelay;
+	
 };
