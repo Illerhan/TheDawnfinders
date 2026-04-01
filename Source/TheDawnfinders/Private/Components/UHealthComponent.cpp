@@ -62,11 +62,8 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		}
 	}
 
-	if(HurtMaterial)
-		ActualiseHurtPostProcess(DeltaTime);
-
-	if(PoisonMaterial)
-		ActualisePoisonPostProcess(DeltaTime);
+	ActualiseHurtPostProcess(DeltaTime);
+	ActualisePoisonPostProcess(DeltaTime);
 	
 
 	if (GetOwner()->HasAuthority())
@@ -88,40 +85,6 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 	InjureDecreaseSpeed = InjureSpeed;
 	CurseRatio = CurseRate;
 	PoisonDmg = DmgPoison;
-
-	// On ne crée le matériau de Post-Process QUE si on contrôle localement ce perso
-	APawn* PawnOwner = Cast<APawn>(GetOwner());
-	if (PawnOwner && PawnOwner->IsLocallyControlled()) 
-	{
-		TArray<AActor*> PPActors; // Nom unique pour éviter l'erreur C4456
-		UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PP"), PPActors);
-
-		for (AActor* Actor : PPActors)
-		{
-			APostProcessVolume* PPV = Cast<APostProcessVolume>(Actor);
-			if (PPV && PPV->Settings.WeightedBlendables.Array.Num() > 1 && !GetOwner())
-			{
-				UObject* Obj = PPV->Settings.WeightedBlendables.Array[2].Object;
-
-				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
-				{
-					HurtMaterial = UMaterialInstanceDynamic::Create(MI, this);
-					PPV->Settings.WeightedBlendables.Array[2].Object = HurtMaterial;
-				}
-			}
-
-			if (PPV && PPV->Settings.WeightedBlendables.Array.Num() > 2)
-			{
-				UObject* Obj = PPV->Settings.WeightedBlendables.Array[1].Object;
-
-				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
-				{
-					PoisonMaterial = UMaterialInstanceDynamic::Create(MI, this);
-					PPV->Settings.WeightedBlendables.Array[1].Object = PoisonMaterial;
-				}
-			}
-		}
-	}
 
 	// Gestion de la réplication de la santé
 	if (!GetOwner()->HasAuthority()) {
@@ -365,7 +328,7 @@ void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 	}
 
 	CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
-	HurtMaterial->SetScalarParameterValue(TEXT("DAMAGE-GeneralOpacity"), CurrentHurtVolumeStrength);
+	//HurtMaterial->SetScalarParameterValue(TEXT("DAMAGE-GeneralOpacity"), CurrentHurtVolumeStrength);
 }
 
 #pragma endregion
@@ -397,9 +360,7 @@ void UHealthComponent::ActualisePoisonPostProcess(float DeltaTime)
 	else
 		CurrentPoisonVolumeStrength = FMath::Lerp(CurrentPoisonVolumeStrength, 0, DeltaTime * 1.f);
 
-	UE_LOG(LogTemp, Display, TEXT("%f"), CurrentPoisonVolumeStrength);
-
-	PoisonMaterial->SetScalarParameterValue(TEXT("POISON-GeneralOpacity"), CurrentPoisonVolumeStrength);
+	//PoisonMaterial->SetScalarParameterValue(TEXT("POISON-GeneralOpacity"), CurrentPoisonVolumeStrength);
 }
 
 void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)

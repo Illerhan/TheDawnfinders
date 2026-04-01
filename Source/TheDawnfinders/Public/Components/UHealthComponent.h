@@ -194,10 +194,10 @@ protected :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* PoisonMaterial;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	float CurrentHurtVolumeStrength;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	float CurrentPoisonVolumeStrength;
 
 	UPROPERTY()
