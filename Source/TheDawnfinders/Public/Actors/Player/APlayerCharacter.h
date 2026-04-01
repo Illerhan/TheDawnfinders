@@ -370,6 +370,8 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	float UILoudness;
+	
+
 
 
 // === PROTECTED PROPERTIES ===
