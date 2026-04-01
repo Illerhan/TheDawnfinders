@@ -147,6 +147,21 @@ public :
 	int CurseZone = 0;
 
 
+// === FALLEN PROPERTIES ===
+public : 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float FallenDuration;
+
+	UPROPERTY(BlueprintReadOnly)
+	float FallenTimer;
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
+	bool bIsFallen;
+
+	UPROPERTY(EditAnywhere)
+	float PostProcessFallenOpacity = 2500.f;
+
+
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(Replicated)
@@ -163,9 +178,6 @@ protected :
 
 	UPROPERTY(EditAnywhere)
 	float PostProcessMaxOpacity = 2500.f;
-
-	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
-	bool bIsFallen;
 	
 	UPROPERTY(ReplicatedUsing = OnRep_ProtectionZoneAmount)
 	int32 ProtectionZoneAmount = 0;
