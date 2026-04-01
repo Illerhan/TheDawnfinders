@@ -96,6 +96,25 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 	}
 }
 
+void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
+{
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
+	if (!PawnOwner || !PawnOwner->IsLocallyControlled())
+	{
+		return;
+	}
+
+	if (bIsFallen && !bIsDead) {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, PostProcessFallenOpacity, DeltaTime * 1.f);
+	}
+	else if (bIsDead) {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, 0, DeltaTime * 1.f);
+	}
+	else {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
+	}
+}
+
 
 #pragma region Main Health Functions
 
@@ -319,18 +338,6 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
-void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
-{
-	APawn* PawnOwner = Cast<APawn>(GetOwner());
-	if (!PawnOwner || !PawnOwner->IsLocallyControlled())
-	{
-		return;
-	}
-
-	CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
-	//HurtMaterial->SetScalarParameterValue(TEXT("DAMAGE-GeneralOpacity"), CurrentHurtVolumeStrength);
-}
-
 #pragma endregion
 
 
@@ -411,8 +418,10 @@ void UHealthComponent::Fallen()
 	
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
 
-	CurrentMaxHealth = MaxHealth;
-	Heal(MaxHealth);
+	FallenTimer = FallenDuration;
+
+	//CurrentMaxHealth = MaxHealth;
+	//Heal(MaxHealth);
 }
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
@@ -420,8 +429,8 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 	if (!bIsFallen) return;
 	if (!GetOwner()->HasAuthority()) return;
 
-	TakeDamage(InjureDecreaseSpeed * MaxHealth * DeltaTime);
-	if (CurrentHealth <= 0)
+	FallenTimer -= DeltaTime;
+	if (FallenTimer <= 0)
 	{
 		Die();
 	}
