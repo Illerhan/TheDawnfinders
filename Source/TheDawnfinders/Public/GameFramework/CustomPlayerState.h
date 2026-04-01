@@ -172,9 +172,15 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	FInventorySlot CurrentSlot;
+	
+	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Protected)
+	bool bIsProtected;
 		
 	UFUNCTION()
 	void OnRep_Gold();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnRep_Protected();
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGoldChanged);
 
