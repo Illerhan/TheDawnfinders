@@ -65,9 +65,8 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	ActualiseHurtPostProcess(DeltaTime);
 	ActualisePoisonPostProcess(DeltaTime);
-	
 
-	if (GetOwner()->HasAuthority()&& !bIsDead)
+	if (GetOwner()->HasAuthority())
 	{
 		FallenLoseHP(DeltaTime);
 	}
@@ -204,7 +203,6 @@ void UHealthComponent::Heal(float quantity)
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
-
 // Called to actualise the player's infos for every other clients
 void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 {
@@ -221,8 +219,6 @@ void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
 	PSCustom->ActualiseHealth(newHealth, CurrentMaxHealth, MaxHealth);
-
-
 }
 
 
@@ -416,6 +412,9 @@ void UHealthComponent::Fallen()
 
 	bIsFallen = true;
 	bIsPoisoned = false;
+
+	Multicast_DisplayFallen();
+	Multicast_ActualiseFallen(1);
 	
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
 
@@ -427,8 +426,10 @@ void UHealthComponent::Fallen()
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
 {
-	if (!bIsFallen) return;
+	if (!bIsFallen || bIsDead) return;
 	if (!GetOwner()->HasAuthority()) return;
+
+	Multicast_ActualiseFallen(FallenTimer / FallenDuration);
 
 	FallenTimer -= DeltaTime;
 	if (FallenTimer <= 0)
@@ -440,7 +441,7 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 void UHealthComponent::Die()
 {
 	bIsDead = true;
-	
+
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
@@ -454,6 +455,33 @@ void UHealthComponent::Die()
 	}
 }
 
+void UHealthComponent::Multicast_HideFallen_Implementation()
+{
+	if (!WorldHealthBar) {
+		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+		WorldHealthBar->Setup(3);
+	}
+	WorldHealthBar->HideFallenIcon();
+}
+
+void UHealthComponent::Multicast_ActualiseFallen_Implementation(float Percent)
+{
+	if (!WorldHealthBar) {
+		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+		WorldHealthBar->Setup(3);
+	}
+	WorldHealthBar->ActualiseFallenIcon(Percent);
+}
+
+void UHealthComponent::Multicast_DisplayFallen_Implementation()
+{
+	if (!WorldHealthBar) {
+		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+		WorldHealthBar->Setup(3);
+	}
+	WorldHealthBar->DisplayFallenIcon();
+}
+
 void UHealthComponent::Server_Revive_Implementation()
 {
 	if (!bIsFallen) return;
@@ -461,6 +489,9 @@ void UHealthComponent::Server_Revive_Implementation()
 	CurrentHealth = FMath::Clamp(MinReviveHP, MinReviveHP, CurseMaxHealth);
 	ServerChangeHealth_Implementation(CurrentHealth);
 	bIsFallen = false;
+
+	Multicast_HideFallen();
+
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 	

@@ -105,6 +105,15 @@ public :
 	UFUNCTION(Server,Reliable,BlueprintCallable)
 	void Server_Revive();
 
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_DisplayFallen();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_ActualiseFallen(float Percent);
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void Multicast_HideFallen();
+
 
 // === INVINCIBILITY ===
 public :

@@ -22,6 +22,15 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ActualiseCurse(float NewPercent);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DisplayFallenIcon();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ActualiseFallenIcon(float NewPercent);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void HideFallenIcon();
+
 
 protected :
 	UPROPERTY(BlueprintReadWrite)
