@@ -122,7 +122,7 @@ public :
 public :
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintImplementableEvent)
 	void OnRep_IsDead();
 
 	UFUNCTION()
