@@ -287,6 +287,7 @@ void ABaseEnemy::Die() {
     Destroy();
 }
 
+
 void ABaseEnemy::StartInvincibilityFrames(float Duration)
 {
     if (IsInvincible) return;
