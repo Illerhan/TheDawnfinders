@@ -140,6 +140,7 @@ void ACustomPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	DOREPLIFETIME(ACustomPlayerState, CurrentHealth);
 	DOREPLIFETIME(ACustomPlayerState, ShopItems);
 	DOREPLIFETIME(ACustomPlayerState, SavedGold);
+	DOREPLIFETIME(ACustomPlayerState, bIsProtected);
 }
 
 void ACustomPlayerState::OnRep_StaminaChange()
