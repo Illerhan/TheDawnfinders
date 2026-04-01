@@ -52,6 +52,9 @@ public :
 	UFUNCTION(Server,Unreliable,BlueprintCallable)
 	void ChangeCurrentMaxHealth(float newValue);
 
+	UFUNCTION(BlueprintCallable)
+	void ActualiseHurtPostProcess(float DeltaTime);
+
 
 // === CURSE === 
 public :
@@ -66,9 +69,6 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void ApplyCurse(float DeltaTime);
-
-	UFUNCTION(BlueprintCallable)
-	void ActualiseHurtPostProcess(float DeltaTime);
 
 
 // === POISON ===
@@ -86,6 +86,9 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void EndPoisonEffects();
+
+	UFUNCTION(BlueprintCallable)
+	void ActualisePoisonPostProcess(float DeltaTime);
 
 
 // === DEATH ===
@@ -188,8 +191,14 @@ protected :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* HurtMaterial;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UMaterialInstanceDynamic* PoisonMaterial;
+
 	UPROPERTY()
 	float CurrentHurtVolumeStrength;
+
+	UPROPERTY()
+	float CurrentPoisonVolumeStrength;
 
 	UPROPERTY()
 	AController* OwnerController;
