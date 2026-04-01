@@ -207,6 +207,14 @@ void UPlayerCameraComponent::ActualisePlayerInfos(float DeltaTime)
 	case EPlayerState::Dodging:
 		TargetDist = PlayerRunDistance;
 		break;
+
+	case EPlayerState::Fallen:
+		TargetDist = PlayerFallenDistance;
+		break;
+
+	case EPlayerState::Dead:
+		TargetDist = PlayerDeadDistance;
+		break;
 	}
 
 	if (!Player->GetIsForcingRotation() || Player->GetAutoLockIsActive() || Player->InventoryComponent->GetIsOpened()) {

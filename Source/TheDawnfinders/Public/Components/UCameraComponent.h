@@ -96,6 +96,12 @@ protected :
 	float PlayerCrouchDistance = -150.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerFallenDistance = -250.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
+	float PlayerDeadDistance = -300.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
 	float PlayerForceRotationOffset;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Actions")
