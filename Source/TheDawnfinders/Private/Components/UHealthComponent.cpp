@@ -2,6 +2,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "GameFramework/CustomGameMode.h"
 #include "GameFramework/CustomPlayerController.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldHealthBar.h"
@@ -119,7 +120,7 @@ void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 
 void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
-	if (IsInvincible) return;
+	if (IsInvincible || bIsDead) return;
 
 	if (VFXType == Blood)
 	{
@@ -441,12 +442,17 @@ void UHealthComponent::Die()
 {
 	bIsDead = true;
 
-	Multicast_HideFallen();
-
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
+	
+	ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
+	if (GM)
+	{
+		GM->AddDeadPlayer();
+		GM->CheckAllDead();
+	}
 }
 
 void UHealthComponent::Multicast_HideFallen_Implementation()
@@ -494,6 +500,12 @@ void UHealthComponent::Server_Revive_Implementation()
 	{
 		PC->OnRevive();
 		bIsDead = false;
+		ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
+		if (GM)
+		{
+			GM->RemoveDeadPlayer();
+			GM->CheckAllDead();
+		}
 	}
 	
 }
@@ -540,14 +552,8 @@ void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UHealthComponent, bIsPoisoned);
 }
 
-void UHealthComponent::OnRep_IsDead()
-{
-}
-
 void UHealthComponent::OnRep_IsFallen()
 {
-
-
 }
 
 void UHealthComponent::OnRep_ProtectionZoneAmount()
