@@ -175,12 +175,21 @@ protected :
 	
 	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Protected)
 	bool bIsProtected;
-		
+	
 	UFUNCTION()
 	void OnRep_Gold();
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnRep_Protected();
+	
+	UPROPERTY(ReplicatedUsing=OnRep_Dead)
+	bool bIsDead;
+		
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnRep_Dead();
+
+	
+	
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGoldChanged);
 

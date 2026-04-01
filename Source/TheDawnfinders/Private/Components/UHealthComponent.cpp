@@ -2,6 +2,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
+#include "GameFramework/CustomGameMode.h"
 #include "GameFramework/CustomPlayerController.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldHealthBar.h"
@@ -62,14 +63,11 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		}
 	}
 
-	if(HurtMaterial)
-		ActualiseHurtPostProcess(DeltaTime);
-
-	if(PoisonMaterial)
-		ActualisePoisonPostProcess(DeltaTime);
+	ActualiseHurtPostProcess(DeltaTime);
+	ActualisePoisonPostProcess(DeltaTime);
 	
 
-	if (GetOwner()->HasAuthority())
+	if (GetOwner()->HasAuthority()&& !bIsDead)
 	{
 		FallenLoseHP(DeltaTime);
 	}
@@ -89,40 +87,6 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 	CurseRatio = CurseRate;
 	PoisonDmg = DmgPoison;
 
-	// On ne crée le matériau de Post-Process QUE si on contrôle localement ce perso
-	APawn* PawnOwner = Cast<APawn>(GetOwner());
-	if (PawnOwner && PawnOwner->IsLocallyControlled()) 
-	{
-		TArray<AActor*> PPActors; // Nom unique pour éviter l'erreur C4456
-		UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PP"), PPActors);
-
-		for (AActor* Actor : PPActors)
-		{
-			APostProcessVolume* PPV = Cast<APostProcessVolume>(Actor);
-			if (PPV && PPV->Settings.WeightedBlendables.Array.Num() > 1 && !GetOwner())
-			{
-				UObject* Obj = PPV->Settings.WeightedBlendables.Array[2].Object;
-
-				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
-				{
-					HurtMaterial = UMaterialInstanceDynamic::Create(MI, this);
-					PPV->Settings.WeightedBlendables.Array[2].Object = HurtMaterial;
-				}
-			}
-
-			if (PPV && PPV->Settings.WeightedBlendables.Array.Num() > 2)
-			{
-				UObject* Obj = PPV->Settings.WeightedBlendables.Array[1].Object;
-
-				if (UMaterialInterface* MI = Cast<UMaterialInterface>(Obj))
-				{
-					PoisonMaterial = UMaterialInstanceDynamic::Create(MI, this);
-					PPV->Settings.WeightedBlendables.Array[1].Object = PoisonMaterial;
-				}
-			}
-		}
-	}
-
 	// Gestion de la réplication de la santé
 	if (!GetOwner()->HasAuthority()) {
 		LocalChangeHealth();
@@ -133,12 +97,31 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 	}
 }
 
+void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
+{
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
+	if (!PawnOwner || !PawnOwner->IsLocallyControlled())
+	{
+		return;
+	}
+
+	if (bIsFallen && !bIsDead) {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, PostProcessFallenOpacity, DeltaTime * 1.f);
+	}
+	else if (bIsDead) {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, 0, DeltaTime * 1.f);
+	}
+	else {
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
+	}
+}
+
 
 #pragma region Main Health Functions
 
 void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
-	if (IsInvincible) return;
+	if (IsInvincible || bIsDead) return;
 
 	if (VFXType == Blood)
 	{
@@ -356,18 +339,6 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
-void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
-{
-	APawn* PawnOwner = Cast<APawn>(GetOwner());
-	if (!PawnOwner || !PawnOwner->IsLocallyControlled())
-	{
-		return;
-	}
-
-	CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
-	HurtMaterial->SetScalarParameterValue(TEXT("DAMAGE-GeneralOpacity"), CurrentHurtVolumeStrength);
-}
-
 #pragma endregion
 
 
@@ -397,9 +368,7 @@ void UHealthComponent::ActualisePoisonPostProcess(float DeltaTime)
 	else
 		CurrentPoisonVolumeStrength = FMath::Lerp(CurrentPoisonVolumeStrength, 0, DeltaTime * 1.f);
 
-	UE_LOG(LogTemp, Display, TEXT("%f"), CurrentPoisonVolumeStrength);
-
-	PoisonMaterial->SetScalarParameterValue(TEXT("POISON-GeneralOpacity"), CurrentPoisonVolumeStrength);
+	//PoisonMaterial->SetScalarParameterValue(TEXT("POISON-GeneralOpacity"), CurrentPoisonVolumeStrength);
 }
 
 void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
@@ -450,8 +419,10 @@ void UHealthComponent::Fallen()
 	
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
 
-	CurrentMaxHealth = MaxHealth;
-	Heal(MaxHealth);
+	FallenTimer = FallenDuration;
+
+	//CurrentMaxHealth = MaxHealth;
+	//Heal(MaxHealth);
 }
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
@@ -459,8 +430,8 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 	if (!bIsFallen) return;
 	if (!GetOwner()->HasAuthority()) return;
 
-	TakeDamage(InjureDecreaseSpeed * MaxHealth * DeltaTime);
-	if (CurrentHealth <= 0)
+	FallenTimer -= DeltaTime;
+	if (FallenTimer <= 0)
 	{
 		Die();
 	}
@@ -469,11 +440,18 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 void UHealthComponent::Die()
 {
 	bIsDead = true;
-
+	
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
+	
+	ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
+	if (GM)
+	{
+		GM->AddDeadPlayer();
+		GM->CheckAllDead();
+	}
 }
 
 void UHealthComponent::Server_Revive_Implementation()
@@ -491,6 +469,12 @@ void UHealthComponent::Server_Revive_Implementation()
 	{
 		PC->OnRevive();
 		bIsDead = false;
+		ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
+		if (GM)
+		{
+			GM->RemoveDeadPlayer();
+			GM->CheckAllDead();
+		}
 	}
 	
 }
@@ -537,14 +521,8 @@ void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UHealthComponent, bIsPoisoned);
 }
 
-void UHealthComponent::OnRep_IsDead()
-{
-}
-
 void UHealthComponent::OnRep_IsFallen()
 {
-
-
 }
 
 void UHealthComponent::OnRep_ProtectionZoneAmount()

@@ -32,3 +32,13 @@ void ACustomGameMode::StartLevelTransition(FString MapName, int32 TargetPanel)
 	}
 	GetWorld()->ServerTravel(MapName);
 }
+
+void ACustomGameMode::AddDeadPlayer()
+{
+	DeadPlayerCount++;
+}
+
+void ACustomGameMode::RemoveDeadPlayer()
+{
+	DeadPlayerCount--;
+}

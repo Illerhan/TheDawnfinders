@@ -52,6 +52,7 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
 	float NoiseRange;
+	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
 	bool bIsLoud;
 		
