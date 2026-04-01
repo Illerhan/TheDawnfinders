@@ -56,7 +56,6 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 	
 	HoldTimer -= DeltaTime;
 	
-	
 	if (!NoiseActor)
 	{
 		FActorSpawnParameters Params;
