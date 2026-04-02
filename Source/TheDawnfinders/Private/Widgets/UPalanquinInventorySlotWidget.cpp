@@ -21,3 +21,7 @@ void UPalanquinInventorySlotWidget::CancelSlotReveal_Implementation()
 void UPalanquinInventorySlotWidget::ResetSlot_Implementation()
 {
 }
+
+void UPalanquinInventorySlotWidget::RevealSlotInstant_Implementation()
+{
+}
