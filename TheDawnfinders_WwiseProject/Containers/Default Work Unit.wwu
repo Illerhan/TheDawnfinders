@@ -40,6 +40,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Roll 2" ID="{56028521-F1A2-4609-B2BE-71CE69EDB201}" ShortID="652819088">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -62,6 +69,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Roll 3" ID="{67F4A7D2-8999-4F0F-B666-D12EF90BE68B}" ShortID="486350209">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -84,6 +98,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Roll 4" ID="{278978BC-F978-4E23-B552-318EF1592B7C}" ShortID="831555613">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1420,6 +1441,13 @@
 											</ChildrenList>
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="WoodRunCrack" ID="{D6246266-2ABA-4505-BD43-883A7729B0D9}" ShortID="816439290">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1850,6 +1878,13 @@
 									</GroupingInfo>
 								</SwitchContainer>
 								<SwitchContainer Name="Walk" ID="{21E82921-6313-441D-AFB6-F4E32C33F5C9}" ShortID="522960007">
+									<PropertyList>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3567,6 +3602,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="OutOfBreath 1" ID="{F8C6AC32-AD27-48A8-9972-01E6E9726F78}" ShortID="720845861">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3589,6 +3631,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="OutOfBreath 2" ID="{181657CD-4A49-4939-8B14-E7FC512AFA44}" ShortID="809553251">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3611,6 +3660,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="OutOfBreath 3" ID="{A504F60C-C912-425D-8A44-3DF5CC648610}" ShortID="171200397">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3633,6 +3689,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="OutOfBreath 4" ID="{257311A7-F71E-4683-A1E6-E032C85D616A}" ShortID="557150180">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3655,6 +3718,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="OutOfBreath 5" ID="{0BAECB28-3DCE-47D5-87A6-BF93C0B5290D}" ShortID="331573367">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -3677,6 +3747,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="OutOfBreath 6" ID="{927B4B90-CDBE-4A7C-80D6-E31A2D9AA412}" ShortID="813273634">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -5952,6 +6029,11 @@
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="EliteEnnemyWalk" ID="{AA41D5D2-9ADD-4E7C-B338-638CE433FA43}" ShortID="693560371">
 											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 											</PropertyList>
@@ -6643,6 +6725,11 @@
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="BasicEnnemyWalk" ID="{601AEC65-869F-455B-8ABB-CDB9A2B9F52C}" ShortID="977259115">
 											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 											</PropertyList>

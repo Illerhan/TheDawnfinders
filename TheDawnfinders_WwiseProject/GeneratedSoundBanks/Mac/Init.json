@@ -41,9 +41,63 @@
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
      }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "3865314626",
+      "Name": "Material",
+      "ObjectPath": "\\Switches\\Default Work Unit\\Material",
+      "GUID": "{C2F8F198-F33F-48A6-BCFA-A4F225A5C42A}",
+      "Switches": [
+       {
+        "Id": "803837735",
+        "Name": "Sand",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Sand",
+        "GUID": "{9ECDEA0B-BC74-479A-A685-290FEBCC07C7}"
+       },
+       {
+        "Id": "1031440768",
+        "Name": "WoodCrack",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\WoodCrack",
+        "GUID": "{1F60FF79-78FE-4114-80EB-95135A2E3C4F}"
+       },
+       {
+        "Id": "1216965916",
+        "Name": "Stone",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Stone",
+        "GUID": "{517D6FE8-08D1-4D27-8443-EC414D37E7EC}"
+       },
+       {
+        "Id": "2058049674",
+        "Name": "Wood",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Wood",
+        "GUID": "{6C416689-8BAA-4B32-B117-FF3C10CD8C3D}"
+       }
+      ]
+     },
+     {
+      "Id": "3995124918",
+      "Name": "EnnemyMovement",
+      "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement",
+      "GUID": "{D783C88B-76A6-4BE3-8DA6-D8C446476F61}",
+      "Switches": [
+       {
+        "Id": "712161704",
+        "Name": "Run",
+        "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement\\Run",
+        "GUID": "{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement\\Walk",
+        "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+       }
+      ]
+     }
     ]
    }
   ],
-  "FileHash": "{A889DF4E-97EF-A05E-8F6D-18A65768492F}"
+  "FileHash": "{CE82DF12-8087-4A70-E73F-30FEF6F976BB}"
  }
 }

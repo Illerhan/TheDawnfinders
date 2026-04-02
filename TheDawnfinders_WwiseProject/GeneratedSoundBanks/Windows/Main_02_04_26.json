@@ -1,0 +1,3139 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1440551045",
+    "Type": "User",
+    "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
+    "Language": "SFX",
+    "Hash": "{4239D465-37C8-B944-3842-5FE82FE43365}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_02_04_26",
+    "ShortName": "Main_02_04_26",
+    "Path": "Main_02_04_26.bnk",
+    "Media": [
+     {
+      "Id": "6845002",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 21.wav",
+      "CachePath": "BC/{BC83F5F1-E0AA-FEB3-B0B1-2EF6B1EE0CF7}.wem"
+     },
+     {
+      "Id": "9463951",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_End\\Palanquin_End 4.wav",
+      "CachePath": "E0/{E097F2F3-4613-30E1-F645-C6977C1D4D50}.wem"
+     },
+     {
+      "Id": "11586860",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Start\\Palanquin_Start 1.wav",
+      "CachePath": "53/{533FD854-14B0-90B3-2D44-94765E67ABE9}.wem"
+     },
+     {
+      "Id": "19526635",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 7.wav",
+      "CachePath": "C4/{C4668D9A-35F3-D624-BBFD-639959BCEAF0}.wem"
+     },
+     {
+      "Id": "29652185",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 8.wav",
+      "CachePath": "EB/{EBE2A4B8-C154-9269-239A-DC907FE72B9B}.wem"
+     },
+     {
+      "Id": "31134778",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 8.wav",
+      "CachePath": "BE/{BE22A5AC-0092-3D39-CD76-AC97F068DD18}.wem"
+     },
+     {
+      "Id": "34068047",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 4.wav",
+      "CachePath": "B5/{B58233F9-A523-CEB1-F420-FB796B8E1642}.wem"
+     },
+     {
+      "Id": "39757222",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 4.wav",
+      "CachePath": "C0/{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem"
+     },
+     {
+      "Id": "48180023",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 11.wav",
+      "CachePath": "74/{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem"
+     },
+     {
+      "Id": "49676772",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Start\\Palanquin_Start 5.wav",
+      "CachePath": "CC/{CCBFAFDB-FB57-9C3C-884D-048BBD5C47EB}.wem"
+     },
+     {
+      "Id": "52894827",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle1-01.wav",
+      "CachePath": "48/{48C2A5B3-2DC7-1029-916D-14F9329E9C1C}.wem"
+     },
+     {
+      "Id": "54177496",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 10.wav",
+      "CachePath": "49/{4973CD95-AA79-0C3B-AB96-82D85AC43064}.wem"
+     },
+     {
+      "Id": "59431872",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle3-01.wav",
+      "CachePath": "38/{38259D15-1358-36AB-CC38-8DBDD501E92A}.wem"
+     },
+     {
+      "Id": "64511599",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 4.wav",
+      "CachePath": "8C/{8C987078-1EBE-A9F6-8FFC-F1C0EDDCD239}.wem"
+     },
+     {
+      "Id": "70981290",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 9.wav",
+      "CachePath": "D2/{D29DFE1F-ED45-D1ED-6778-16E5086D2B71}.wem"
+     },
+     {
+      "Id": "83414938",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Travel\\Palanquin_Travel.wav",
+      "CachePath": "65/{65ACC4B8-FBFF-A75D-E099-7FF4F336B63E}.wem"
+     },
+     {
+      "Id": "88711003",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_2.wav",
+      "CachePath": "08/{0829947B-9B29-AF20-8B2B-53B55344F122}.wem"
+     },
+     {
+      "Id": "96992672",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 11.wav",
+      "CachePath": "6F/{6F0BF2F3-EDED-888E-CB22-09075E09222A}.wem"
+     },
+     {
+      "Id": "98324690",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 4.wav",
+      "CachePath": "04/{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem"
+     },
+     {
+      "Id": "101177060",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 17.wav",
+      "CachePath": "DF/{DF3D9661-36F9-9FD7-0E91-C784B698DB6A}.wem"
+     },
+     {
+      "Id": "101298648",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 2.wav",
+      "CachePath": "FC/{FC7A9746-03FD-BCEA-F558-85C9ECE473E5}.wem"
+     },
+     {
+      "Id": "105123598",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 7.wav",
+      "CachePath": "70/{70001196-890C-B06A-E4C9-41A15269BD49}.wem"
+     },
+     {
+      "Id": "105445102",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 10.wav",
+      "CachePath": "40/{40002CAE-C5D9-CFD5-F925-FED6328943B1}.wem"
+     },
+     {
+      "Id": "108070285",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 1.wav",
+      "CachePath": "9B/{9B9389DC-F3B8-CC52-DA84-F7B46C30D73D}.wem"
+     },
+     {
+      "Id": "111688257",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 6.wav",
+      "CachePath": "D0/{D0712045-23DF-7ABB-91DA-1296BBFB1FB2}.wem"
+     },
+     {
+      "Id": "114231804",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 3.wav",
+      "CachePath": "8D/{8DBBF61F-1AF5-7D41-A956-3D2060C596AD}.wem"
+     },
+     {
+      "Id": "114397212",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 18.wav",
+      "CachePath": "89/{8959135B-E3A7-56CC-40AC-0BEBE736EC35}.wem"
+     },
+     {
+      "Id": "115861136",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 3.wav",
+      "CachePath": "49/{491B0846-5A3A-68F4-A69D-E58F6537447F}.wem"
+     },
+     {
+      "Id": "119088602",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 1.wav",
+      "CachePath": "8D/{8DC58D65-DF3D-3D14-B410-68C4D44A93BF}.wem"
+     },
+     {
+      "Id": "122144981",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle6-01.wav",
+      "CachePath": "10/{10EFA247-1F9C-93F1-20BB-C5BD81BA5063}.wem"
+     },
+     {
+      "Id": "153202755",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 8.wav",
+      "CachePath": "3B/{3B0C44E1-33EB-2093-C007-865018E78BF0}.wem"
+     },
+     {
+      "Id": "165708073",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 2.wav",
+      "CachePath": "A2/{A2633BB8-6390-90F4-4EB4-29AFF617D6EE}.wem"
+     },
+     {
+      "Id": "166799515",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FIDELE_ATTACK_1.wav",
+      "CachePath": "4E/{4E97518C-AAD6-6187-6E4C-CC803664292C}.wem"
+     },
+     {
+      "Id": "173846091",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 14.wav",
+      "CachePath": "E7/{E7D2BA5C-F44D-1C14-2E24-9B5C967D01CF}.wem"
+     },
+     {
+      "Id": "185441988",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 6.wav",
+      "CachePath": "19/{19DACCBB-24D0-4E44-27F1-C1EC3AF8C918}.wem"
+     },
+     {
+      "Id": "188388410",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 3.wav",
+      "CachePath": "7F/{7F8C4842-7266-6400-274B-81367BBC4C11}.wem"
+     },
+     {
+      "Id": "189422600",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 5.wav",
+      "CachePath": "E3/{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem"
+     },
+     {
+      "Id": "195665557",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 11.wav",
+      "CachePath": "96/{968BC5BB-E3EC-9090-E7B5-E9C72246B14B}.wem"
+     },
+     {
+      "Id": "201842153",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 20.wav",
+      "CachePath": "C9/{C93EE898-D5E2-35D0-FB19-51D938832594}.wem"
+     },
+     {
+      "Id": "203374027",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Pressure\\Trap_Pressure 2.wav",
+      "CachePath": "C9/{C99862A6-61C6-86CE-6193-66FD56F45402}.wem"
+     },
+     {
+      "Id": "204860484",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 11.wav",
+      "CachePath": "CC/{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem"
+     },
+     {
+      "Id": "215028229",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 15.wav",
+      "CachePath": "09/{0952EDFE-A7CF-80B2-1415-DF2E25E61BB8}.wem"
+     },
+     {
+      "Id": "215911120",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Roll\\Roll 1.wav",
+      "CachePath": "59/{59022E95-0808-DB26-8E38-8CB184711BA3}.wem"
+     },
+     {
+      "Id": "216827798",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 8.wav",
+      "CachePath": "10/{10D15F3A-5259-AA48-F84C-0AA2943F5A1E}.wem"
+     },
+     {
+      "Id": "220434834",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_6.wav",
+      "CachePath": "18/{182164C1-3690-9266-7292-F1D56D1EE096}.wem"
+     },
+     {
+      "Id": "221390978",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Calling\\Palanquin_Inventory 4.wav",
+      "CachePath": "E8/{E856C60C-5E3F-D6F9-1CF5-2AFA83BBBCAA}.wem"
+     },
+     {
+      "Id": "227490105",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 12.wav",
+      "CachePath": "D7/{D749F4F2-AA9C-795D-66FB-30A771C0ECA8}.wem"
+     },
+     {
+      "Id": "227987791",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Start\\Palanquin_Start 4.wav",
+      "CachePath": "02/{025E4663-FEEC-1039-FBB8-55B5FC4E55B7}.wem"
+     },
+     {
+      "Id": "228862855",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 4.wav",
+      "CachePath": "D3/{D342AE9D-2808-8BE9-5267-7CC50D35E7AB}.wem"
+     },
+     {
+      "Id": "231986240",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 4.wav",
+      "CachePath": "A7/{A7CB0676-E956-16F7-E2A0-BA9809110B63}.wem"
+     },
+     {
+      "Id": "233443900",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ZELOTH_MAIN (2).wav",
+      "CachePath": "CF/{CF26AFE9-0107-9392-B428-19001DD473A5}.wem"
+     },
+     {
+      "Id": "245422922",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 3.wav",
+      "CachePath": "8F/{8F004CD9-33A7-8989-707C-96BC3C90F258}.wem"
+     },
+     {
+      "Id": "249555483",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 10.wav",
+      "CachePath": "36/{360B13BC-A75C-BB3D-E9DA-E581D46757DD}.wem"
+     },
+     {
+      "Id": "254982589",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FIDELE_ATTACK_3.wav",
+      "CachePath": "81/{815496B5-7FBC-A160-3FDC-F56A715AA63D}.wem"
+     },
+     {
+      "Id": "260955044",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 7.wav",
+      "CachePath": "E7/{E7ABB31B-60FC-4830-011C-5D7D2374E982}.wem"
+     },
+     {
+      "Id": "264105844",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DamagesHit.wav",
+      "CachePath": "CB/{CBA2DAA9-5AAE-FC54-CE3B-19D416BCA947}.wem"
+     },
+     {
+      "Id": "264407934",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle5-01.wav",
+      "CachePath": "41/{415CC335-B9CC-5716-9519-61245AF52D30}.wem"
+     },
+     {
+      "Id": "268505134",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_End\\Palanquin_End 3.wav",
+      "CachePath": "4F/{4FB7388E-595A-2A18-5577-D9660461A963}.wem"
+     },
+     {
+      "Id": "269450443",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 3.wav",
+      "CachePath": "F1/{F1EC1FA8-8928-BAE1-820C-7A7E119F4E8A}.wem"
+     },
+     {
+      "Id": "272892538",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 8.wav",
+      "CachePath": "5E/{5EF29464-78D1-8F43-843D-80254C0EC616}.wem"
+     },
+     {
+      "Id": "274995480",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Sand3.wav",
+      "CachePath": "C4/{C4D4886A-88DA-A704-D6F8-85F5DE80E270}.wem"
+     },
+     {
+      "Id": "275003731",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 2.wav",
+      "CachePath": "F2/{F2B435A6-4E7F-466F-895B-E5AA4D045EF9}.wem"
+     },
+     {
+      "Id": "278825995",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 4.wav",
+      "CachePath": "A1/{A185CD04-8AD2-D611-3B56-40316516AF0D}.wem"
+     },
+     {
+      "Id": "279136364",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 6.wav",
+      "CachePath": "94/{94699130-538A-CCAB-2C3B-610534C6F169}.wem"
+     },
+     {
+      "Id": "281091351",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 15.wav",
+      "CachePath": "0B/{0BDDDC9F-8C65-2D42-0D5D-56700493E21B}.wem"
+     },
+     {
+      "Id": "281151790",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 11.wav",
+      "CachePath": "FB/{FBEE2B6A-6D87-A52B-29B5-5FAC29397BC6}.wem"
+     },
+     {
+      "Id": "282780422",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 15.wav",
+      "CachePath": "3F/{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem"
+     },
+     {
+      "Id": "287093398",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 3.wav",
+      "CachePath": "F9/{F9A84C13-F1F4-36C4-E245-12325C979E1E}.wem"
+     },
+     {
+      "Id": "294569269",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 7.wav",
+      "CachePath": "25/{25870F01-D86A-7B3E-9388-1DBEC05F9827}.wem"
+     },
+     {
+      "Id": "303742668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 15.wav",
+      "CachePath": "8D/{8D9E17CE-5D25-20F4-50B5-43F2F8F9C2E4}.wem"
+     },
+     {
+      "Id": "315756396",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_End\\Palanquin_End 2.wav",
+      "CachePath": "EF/{EFE0455D-B59F-79CC-6E82-82FF398A0BC0}.wem"
+     },
+     {
+      "Id": "319287659",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 17.wav",
+      "CachePath": "C3/{C322785B-4993-2B76-EC5D-299F745AF7B3}.wem"
+     },
+     {
+      "Id": "327833139",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 3.wav",
+      "CachePath": "35/{35C6D972-A010-44B2-2BAC-5992440B9487}.wem"
+     },
+     {
+      "Id": "331545351",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 5.wav",
+      "CachePath": "CB/{CB29EDFD-8FF4-5B40-9922-0CB08CB814D6}.wem"
+     },
+     {
+      "Id": "337621557",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 1.wav",
+      "CachePath": "A6/{A65C5C8A-B580-E71B-BC9D-E45E29DF1301}.wem"
+     },
+     {
+      "Id": "350124382",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 11.wav",
+      "CachePath": "38/{38D24751-0FF6-A70D-50C1-ACA07C8403DB}.wem"
+     },
+     {
+      "Id": "351180192",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open2.wav",
+      "CachePath": "9B/{9B02ADC2-F534-DCAC-008D-0834040724CA}.wem"
+     },
+     {
+      "Id": "353854774",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Roll\\Roll 3.wav",
+      "CachePath": "23/{230D7A28-7012-A3AA-572B-C185E6C804A6}.wem"
+     },
+     {
+      "Id": "354428242",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_LoudWind.wav",
+      "CachePath": "F7/{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem"
+     },
+     {
+      "Id": "364748855",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 17.wav",
+      "CachePath": "D2/{D2972DC9-56F4-225D-3106-F75FA7E7C48B}.wem"
+     },
+     {
+      "Id": "371682056",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerHealing\\PlayerHealing 2.wav",
+      "CachePath": "CA/{CA52A191-9079-0EBA-657F-B2F04FD62321}.wem"
+     },
+     {
+      "Id": "376331356",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 6.wav",
+      "CachePath": "CB/{CB2CB22A-CFD7-A4A8-A0D3-B34E42152201}.wem"
+     },
+     {
+      "Id": "385107083",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 5.wav",
+      "CachePath": "7E/{7E89FEC0-8C8C-7B78-33E8-FE1E6AB754AE}.wem"
+     },
+     {
+      "Id": "386978507",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 8.wav",
+      "CachePath": "57/{5798CF92-659E-C62E-C536-5EDDBA43007E}.wem"
+     },
+     {
+      "Id": "390993366",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 1.wav",
+      "CachePath": "2F/{2F79BDA5-5964-DDDE-7BFB-5CE728C4B5FB}.wem"
+     },
+     {
+      "Id": "391905191",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 3.wav",
+      "CachePath": "92/{922926FB-0402-C7D8-6976-0751FD68D503}.wem"
+     },
+     {
+      "Id": "395987367",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 2.wav",
+      "CachePath": "F1/{F1B206AB-478D-6704-C193-042DD5F6F2BF}.wem"
+     },
+     {
+      "Id": "399958177",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 17.wav",
+      "CachePath": "94/{9494D08F-A240-71D4-878B-653ADCFF5FF0}.wem"
+     },
+     {
+      "Id": "403097929",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 1.wav",
+      "CachePath": "DA/{DA8BD0DC-7559-9976-2BAD-D555B6A4FD40}.wem"
+     },
+     {
+      "Id": "403290721",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 15.wav",
+      "CachePath": "95/{9540F65D-00B4-EA17-A23F-41ED55872A39}.wem"
+     },
+     {
+      "Id": "403493255",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 4.wav",
+      "CachePath": "B4/{B4FDAEBD-B7F4-B42F-0A48-E7833392594C}.wem"
+     },
+     {
+      "Id": "408684288",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 2.wav",
+      "CachePath": "41/{412A40F6-675C-777B-C10D-205763B6BF56}.wem"
+     },
+     {
+      "Id": "410635671",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 6.wav",
+      "CachePath": "10/{10CC30D6-376B-D8E1-D1AE-9D3AE5754CF8}.wem"
+     },
+     {
+      "Id": "414622692",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 9.wav",
+      "CachePath": "A9/{A96794E2-1C89-E3DB-CDC5-8556CE7B2A4B}.wem"
+     },
+     {
+      "Id": "418296632",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Roll\\Roll 2.wav",
+      "CachePath": "8B/{8B39CEDD-7177-AFB6-7AEF-794CA3E9AF4B}.wem"
+     },
+     {
+      "Id": "420215414",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 14.wav",
+      "CachePath": "49/{49A0D926-6791-FADA-2192-57C5AFC99891}.wem"
+     },
+     {
+      "Id": "420583643",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open3.wav",
+      "CachePath": "A6/{A6E51F56-A712-9D76-FEF1-29EF2B3B31BB}.wem"
+     },
+     {
+      "Id": "424882500",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open1.wav",
+      "CachePath": "D8/{D8AE9875-C677-D776-C773-3358DA4FA1FF}.wem"
+     },
+     {
+      "Id": "427103364",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerHealing\\PlayerHealing 1.wav",
+      "CachePath": "E2/{E20D3A7F-D2A9-094B-D876-D97595857A78}.wem"
+     },
+     {
+      "Id": "436998747",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 1.wav",
+      "CachePath": "D2/{D22CC55D-0BDE-B51F-5A10-AA6B9859CB40}.wem"
+     },
+     {
+      "Id": "438106016",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 5.wav",
+      "CachePath": "65/{653A6A63-4C3E-AB85-DD62-50F3B35EAEBE}.wem"
+     },
+     {
+      "Id": "442693485",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 7.wav",
+      "CachePath": "EA/{EA9C8914-19B8-8F38-7E90-D65A6B9E1A04}.wem"
+     },
+     {
+      "Id": "445279208",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 16.wav",
+      "CachePath": "1B/{1B4E69AF-BF36-420D-F546-55139425E706}.wem"
+     },
+     {
+      "Id": "458334224",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 5.wav",
+      "CachePath": "1C/{1C559F3D-FA3F-7896-B40F-92D1E4290B5A}.wem"
+     },
+     {
+      "Id": "459379487",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Spike\\Trap_Spike 1.wav",
+      "CachePath": "FE/{FE1F1DE7-4DEE-AD78-5158-68DA17FB50F7}.wem"
+     },
+     {
+      "Id": "466139768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 14.wav",
+      "CachePath": "19/{19DCDFDB-FF2B-A1BB-B8E9-8FECE9C36DDF}.wem"
+     },
+     {
+      "Id": "472487270",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle.wav",
+      "CachePath": "16/{160867BC-599B-0540-B4A0-D02256720EFA}.wem"
+     },
+     {
+      "Id": "473960840",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FIDELE_ATTACK_4.wav",
+      "CachePath": "F2/{F2211B79-9105-4747-3FEA-8E84280F5F35}.wem"
+     },
+     {
+      "Id": "475726858",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 3.wav",
+      "CachePath": "E7/{E7A67B2B-D263-1301-62ED-D1373428B7C6}.wem"
+     },
+     {
+      "Id": "481772735",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 2.wav",
+      "CachePath": "75/{75DFC6B6-E69B-673D-D608-4240AC7107EF}.wem"
+     },
+     {
+      "Id": "485661186",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 13.wav",
+      "CachePath": "2A/{2AE888E2-EF17-4B70-0BE6-7E1D4FD02C92}.wem"
+     },
+     {
+      "Id": "488103134",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Spike\\Trap_Spike 2.wav",
+      "CachePath": "82/{8264B588-1A6B-A1B1-BB9F-748E92905FBF}.wem"
+     },
+     {
+      "Id": "492429887",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Sand.wav",
+      "CachePath": "E7/{E738D13F-EDFB-1955-A7A8-048B50E4B01C}.wem"
+     },
+     {
+      "Id": "494666904",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 23.wav",
+      "CachePath": "B5/{B586E743-DD94-F7F3-8812-86BF31C6F60C}.wem"
+     },
+     {
+      "Id": "496150298",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 1.wav",
+      "CachePath": "A3/{A350908B-C671-4E5F-C491-A452B94F3AAD}.wem"
+     },
+     {
+      "Id": "500411705",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 1.wav",
+      "CachePath": "83/{833CE7FC-0943-6806-8AB9-E75E1C007D56}.wem"
+     },
+     {
+      "Id": "508491698",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 3.wav",
+      "CachePath": "4A/{4A210E0D-ED17-1DBC-1C43-B73AD007D1D0}.wem"
+     },
+     {
+      "Id": "518699605",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 2.wav",
+      "CachePath": "45/{45052067-2E6E-12A0-8F3B-356F54B34F06}.wem"
+     },
+     {
+      "Id": "519030112",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 12.wav",
+      "CachePath": "1D/{1D4CA381-B480-5EB0-3178-F0444F025F7D}.wem"
+     },
+     {
+      "Id": "519325014",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 12.wav",
+      "CachePath": "EE/{EE6E04B3-DDE7-1637-774B-6DD49EA04F15}.wem"
+     },
+     {
+      "Id": "520458130",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 1.wav",
+      "CachePath": "44/{446BA113-E4B5-8D76-C841-D7B5953FB0EF}.wem"
+     },
+     {
+      "Id": "523267442",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 8.wav",
+      "CachePath": "12/{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem"
+     },
+     {
+      "Id": "533567679",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 3.wav",
+      "CachePath": "17/{17A566D3-BBAB-6407-207B-929540842680}.wem"
+     },
+     {
+      "Id": "534467487",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 13.wav",
+      "CachePath": "0B/{0B961D41-DCF4-C02F-A413-3AB308739C83}.wem"
+     },
+     {
+      "Id": "540376024",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 9.wav",
+      "CachePath": "D1/{D16FD813-F64C-0BB2-8108-22F9D2126CDF}.wem"
+     },
+     {
+      "Id": "551340501",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 2.wav",
+      "CachePath": "35/{35A69B06-33CC-37A4-FAD6-494142B4E863}.wem"
+     },
+     {
+      "Id": "557907878",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 5.wav",
+      "CachePath": "A0/{A0518DCB-D803-907D-A3D1-3D691256CBA6}.wem"
+     },
+     {
+      "Id": "563800133",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 8.wav",
+      "CachePath": "4F/{4F7199DE-5A2C-2A33-46F6-1943E920CD93}.wem"
+     },
+     {
+      "Id": "567161896",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 7.wav",
+      "CachePath": "A8/{A8E20313-F380-553D-2C38-B6B3061853F8}.wem"
+     },
+     {
+      "Id": "567221489",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 10.wav",
+      "CachePath": "76/{765B5F61-0598-948C-7155-644E5A87C121}.wem"
+     },
+     {
+      "Id": "569646174",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Start\\Palanquin_Start 2.wav",
+      "CachePath": "D7/{D70CDF1D-C358-D558-25B4-74FA77823C01}.wem"
+     },
+     {
+      "Id": "569698990",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 4.wav",
+      "CachePath": "C9/{C9226DF3-1119-69CE-07C8-D3A90E8F4E2F}.wem"
+     },
+     {
+      "Id": "574721267",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 2.wav",
+      "CachePath": "B9/{B9E6CA7E-14CB-539D-97E8-3B8451ACC0BA}.wem"
+     },
+     {
+      "Id": "575181047",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_sand2.wav",
+      "CachePath": "BE/{BE9FD1C8-999E-C172-B746-5E4650D21F8C}.wem"
+     },
+     {
+      "Id": "586116203",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle2-01.wav",
+      "CachePath": "30/{302A0B8E-E810-737B-D656-22C135EECF42}.wem"
+     },
+     {
+      "Id": "589087457",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 13.wav",
+      "CachePath": "4F/{4F58A0F2-59E7-B58C-B858-CFE2D8937F1B}.wem"
+     },
+     {
+      "Id": "592561856",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 16.wav",
+      "CachePath": "1A/{1A432C82-0B7C-9C13-FE75-A93F71CAEAF1}.wem"
+     },
+     {
+      "Id": "595457668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle4.wav",
+      "CachePath": "5F/{5F8C6E73-8C7C-EAD0-8C97-22A29AC06970}.wem"
+     },
+     {
+      "Id": "596878634",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 3.wav",
+      "CachePath": "BD/{BD695707-2502-7441-C3AB-62E92373472D}.wem"
+     },
+     {
+      "Id": "614599972",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ZELOTH_CLAC-cm-01.wav",
+      "CachePath": "84/{84E5CA5A-9284-8E90-73EB-A5FCF0E538B8}.wem"
+     },
+     {
+      "Id": "614606467",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 7.wav",
+      "CachePath": "95/{95FC8603-4F24-8172-3DF7-364E2EA750F0}.wem"
+     },
+     {
+      "Id": "622017135",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 12.wav",
+      "CachePath": "75/{756682D3-8C8D-E0ED-0220-CBEC10BACFBA}.wem"
+     },
+     {
+      "Id": "622553627",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 4.wav",
+      "CachePath": "6F/{6FB4320A-1A73-F3BB-8E84-B9EA9607691B}.wem"
+     },
+     {
+      "Id": "624505986",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 14.wav",
+      "CachePath": "C4/{C46F6C4B-6191-52D2-E319-C1DB8A9E8B74}.wem"
+     },
+     {
+      "Id": "634737390",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 6.wav",
+      "CachePath": "0F/{0FBD674C-283A-3D8C-46FA-AC577F0F4B3C}.wem"
+     },
+     {
+      "Id": "642191154",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 4.wav",
+      "CachePath": "F9/{F9DDDEAA-49C7-C3C3-E874-35436392CDF1}.wem"
+     },
+     {
+      "Id": "652194251",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 7.wav",
+      "CachePath": "F1/{F1FA4EFB-DD86-7907-FB55-DC16E29D1A0D}.wem"
+     },
+     {
+      "Id": "657732204",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 3.wav",
+      "CachePath": "59/{5997532D-6CA9-9671-01B0-48DFB86C2758}.wem"
+     },
+     {
+      "Id": "658775640",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 1.wav",
+      "CachePath": "0F/{0FE7E5B2-924B-FA53-A20F-A57C1CB15003}.wem"
+     },
+     {
+      "Id": "661656056",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 5.wav",
+      "CachePath": "F5/{F5226315-4144-65F4-1439-DA622CCECB33}.wem"
+     },
+     {
+      "Id": "664726548",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 7.wav",
+      "CachePath": "6A/{6AB52A5A-620C-340C-A563-0ED717C00DF2}.wem"
+     },
+     {
+      "Id": "666566413",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 1.wav",
+      "CachePath": "9B/{9B6319D1-8256-F008-A933-6DB296905AE8}.wem"
+     },
+     {
+      "Id": "675358201",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 14.wav",
+      "CachePath": "E3/{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem"
+     },
+     {
+      "Id": "688001986",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DamagesHit_3.wav",
+      "CachePath": "7B/{7BF20F55-3F77-95D0-B7DB-78E307746E71}.wem"
+     },
+     {
+      "Id": "707154206",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Pressure\\Trap_Pressure 1.wav",
+      "CachePath": "6F/{6F5C58F0-EC60-0EE3-6F49-80FAF874B79B}.wem"
+     },
+     {
+      "Id": "707538977",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle1.wav",
+      "CachePath": "C8/{C8C8F57C-60A0-1CBF-D8EB-6EFDEC83944F}.wem"
+     },
+     {
+      "Id": "708513504",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 5.wav",
+      "CachePath": "AA/{AA9A013E-9CAA-AC6B-7C0D-DFE9390692D9}.wem"
+     },
+     {
+      "Id": "710575632",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 9.wav",
+      "CachePath": "7D/{7D913FE0-1D80-6454-5D18-091A951C0975}.wem"
+     },
+     {
+      "Id": "720572330",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 2.wav",
+      "CachePath": "D5/{D5E3EB26-5283-9D18-D289-CCBA297D02B4}.wem"
+     },
+     {
+      "Id": "720680225",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 7.wav",
+      "CachePath": "AB/{AB8AF5B6-D70F-D832-6413-C2C40178780A}.wem"
+     },
+     {
+      "Id": "724511625",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 2.wav",
+      "CachePath": "E8/{E83F458E-D3FF-FCCD-3A78-47FFEA401B5E}.wem"
+     },
+     {
+      "Id": "724646208",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 4.wav",
+      "CachePath": "7E/{7EE6B26F-F3D3-40C7-0DF1-90B67D9ABECB}.wem"
+     },
+     {
+      "Id": "730381189",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle2.wav",
+      "CachePath": "98/{98DE1C4A-F3C8-A077-C7A6-566EF3F4020A}.wem"
+     },
+     {
+      "Id": "730434085",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ZELOTH_THROAT-cm-01.wav",
+      "CachePath": "30/{303E8874-3213-6CCC-4F12-D24444B7E887}.wem"
+     },
+     {
+      "Id": "730665928",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 4.wav",
+      "CachePath": "B9/{B94E1192-365E-5963-D09F-8A4CA1CB3FA6}.wem"
+     },
+     {
+      "Id": "733316650",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 3.wav",
+      "CachePath": "C4/{C422F79E-C971-B86E-B4AF-E95D30316D0D}.wem"
+     },
+     {
+      "Id": "734951332",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 9.wav",
+      "CachePath": "85/{851F0CF9-5A85-ACF4-CF5D-6827E06C2934}.wem"
+     },
+     {
+      "Id": "736053400",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 22.wav",
+      "CachePath": "60/{6024A7CF-7B8D-CDD2-936A-D24FC16B320B}.wem"
+     },
+     {
+      "Id": "742875802",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_3.wav",
+      "CachePath": "7A/{7AED3A35-5AC8-99CD-61F3-A4A8493A1BE0}.wem"
+     },
+     {
+      "Id": "747783868",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 10.wav",
+      "CachePath": "9D/{9DA6F5BF-3BEB-520A-3CF9-CB5670BF3F93}.wem"
+     },
+     {
+      "Id": "750155606",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerDying\\PlayerDying 1.wav",
+      "CachePath": "6F/{6FB4BC3C-3F6E-4638-5E8E-C461BA5CCF6D}.wem"
+     },
+     {
+      "Id": "754407728",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 6.wav",
+      "CachePath": "5A/{5A6F579F-B28E-4C2D-1AE4-8F06A69D793E}.wem"
+     },
+     {
+      "Id": "761029887",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedBreath\\DownedBreath 4.wav",
+      "CachePath": "51/{51B5A4EC-8D5C-943D-3688-63A77C5A05D6}.wem"
+     },
+     {
+      "Id": "761762427",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 6.wav",
+      "CachePath": "B4/{B415DBC5-7254-B76D-70C9-C5761D760FBE}.wem"
+     },
+     {
+      "Id": "761825277",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DamagesHit_1.wav",
+      "CachePath": "CE/{CE5DBD70-20B6-2BF8-EFD9-C311292F67AC}.wem"
+     },
+     {
+      "Id": "763853628",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 6.wav",
+      "CachePath": "C9/{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem"
+     },
+     {
+      "Id": "766501929",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 5.wav",
+      "CachePath": "DE/{DE93439F-B5BD-BA38-5173-E75623028D60}.wem"
+     },
+     {
+      "Id": "769516079",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 14.wav",
+      "CachePath": "D0/{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem"
+     },
+     {
+      "Id": "782318759",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 3.wav",
+      "CachePath": "6E/{6EB2E4D3-495B-F879-3125-71DBF7D329D8}.wem"
+     },
+     {
+      "Id": "783285563",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 11.wav",
+      "CachePath": "0E/{0E4C1154-3167-E7B8-E6E3-CF04BBC3C751}.wem"
+     },
+     {
+      "Id": "791895633",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 12.wav",
+      "CachePath": "3A/{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem"
+     },
+     {
+      "Id": "793936365",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_1.wav",
+      "CachePath": "3F/{3F4EA5FB-FAF9-4B49-7A70-BAC6C941DBED}.wem"
+     },
+     {
+      "Id": "794803150",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 5.wav",
+      "CachePath": "F5/{F5D3204B-2F59-8999-8C7F-25E922C3EE2B}.wem"
+     },
+     {
+      "Id": "795321913",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 12.wav",
+      "CachePath": "EB/{EBB33D2A-7FF5-0333-BDC3-EE11E5C08C4B}.wem"
+     },
+     {
+      "Id": "797744101",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 2.wav",
+      "CachePath": "CB/{CB7ABB91-1CA6-8A22-B4F8-110255318765}.wem"
+     },
+     {
+      "Id": "798305378",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 16.wav",
+      "CachePath": "DF/{DFA5F475-79AD-3E36-78D3-38E18F36F160}.wem"
+     },
+     {
+      "Id": "802603666",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Arrow\\Trap_Arrow.wav",
+      "CachePath": "45/{4530C46D-526F-8549-13F5-BB5BEAAD0D26}.wem"
+     },
+     {
+      "Id": "804044647",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 9.wav",
+      "CachePath": "A7/{A73903C4-1C8C-C5D4-30BB-88404B0819D8}.wem"
+     },
+     {
+      "Id": "805764202",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 9.wav",
+      "CachePath": "05/{0557FEF2-CD1B-9750-D8AE-1190B92999D0}.wem"
+     },
+     {
+      "Id": "810591965",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 13.wav",
+      "CachePath": "BF/{BF34A723-ABA6-6D52-984F-FF76B548F453}.wem"
+     },
+     {
+      "Id": "814448940",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 5.wav",
+      "CachePath": "93/{93E20624-BCC1-EAF0-F051-04C3357ED3CD}.wem"
+     },
+     {
+      "Id": "819944367",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 2.wav",
+      "CachePath": "CD/{CD35EF46-EEAD-4FEE-9F83-E70BDC3D2CEE}.wem"
+     },
+     {
+      "Id": "838996729",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Start\\Palanquin_Start 3.wav",
+      "CachePath": "7F/{7F42E070-4243-45F5-0CAF-23A0B941C8F3}.wem"
+     },
+     {
+      "Id": "841146991",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Reanimate\\Reanimate 3.wav",
+      "CachePath": "87/{8734C5DB-DCC3-E440-2053-CE34163CD9D6}.wem"
+     },
+     {
+      "Id": "842510624",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 9.wav",
+      "CachePath": "94/{94D56722-A4B3-D107-E0AC-41DF81133EC5}.wem"
+     },
+     {
+      "Id": "845459241",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 1.wav",
+      "CachePath": "C4/{C44CC0D0-9B62-1F42-D8E2-EC36D8002917}.wem"
+     },
+     {
+      "Id": "849726008",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 4.wav",
+      "CachePath": "11/{118DAEDE-8343-884A-6A17-569E30B620D5}.wem"
+     },
+     {
+      "Id": "855499412",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 9.wav",
+      "CachePath": "34/{34DD00DB-8E1D-B9C7-F480-F04E8E7A9DCC}.wem"
+     },
+     {
+      "Id": "865151463",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 7.wav",
+      "CachePath": "AA/{AA9865EE-C7BA-4B45-EDA7-A378199574F4}.wem"
+     },
+     {
+      "Id": "875885490",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Roll\\Roll 4.wav",
+      "CachePath": "E6/{E6D34837-AB9B-AAF7-831B-69E424453EDB}.wem"
+     },
+     {
+      "Id": "877758046",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerHealing\\PlayerHealing 3.wav",
+      "CachePath": "A9/{A9C3E98F-8B25-686A-8D55-E707DE97F9DA}.wem"
+     },
+     {
+      "Id": "884258450",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Reanimate\\Reanimate 2.wav",
+      "CachePath": "A6/{A69BF396-3360-1379-6CF1-7E4C3E409866}.wem"
+     },
+     {
+      "Id": "891952933",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_5.wav",
+      "CachePath": "0E/{0E175B6E-9817-A82E-D308-92824F8D3833}.wem"
+     },
+     {
+      "Id": "892421631",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 16.wav",
+      "CachePath": "84/{849044DA-63D1-6ADE-E29D-C1D034F1CE1B}.wem"
+     },
+     {
+      "Id": "894539672",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 6.wav",
+      "CachePath": "54/{54F409E8-19DF-A8FB-33FB-036C1D8699E2}.wem"
+     },
+     {
+      "Id": "898240164",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Trap_Bone\\BoneMovement 6102_63_4.wav",
+      "CachePath": "1C/{1C773C77-FCB9-63B1-ADD1-C68D83F0B273}.wem"
+     },
+     {
+      "Id": "900053916",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Reanimate\\Reanimate 1.wav",
+      "CachePath": "2D/{2DC67A34-5408-9051-75D0-64EB2F8203AA}.wem"
+     },
+     {
+      "Id": "900624370",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 7.wav",
+      "CachePath": "E0/{E06CFAB0-BACF-23E5-9D4B-3D8C89A5AFE2}.wem"
+     },
+     {
+      "Id": "903624507",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 2.wav",
+      "CachePath": "54/{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem"
+     },
+     {
+      "Id": "909385748",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 5.wav",
+      "CachePath": "39/{39620D0B-61D8-37B8-24E2-385BEDB28836}.wem"
+     },
+     {
+      "Id": "912347765",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 8.wav",
+      "CachePath": "6E/{6ECEA6F0-8AA6-C981-925D-E60CB1BEE35F}.wem"
+     },
+     {
+      "Id": "916509704",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 19.wav",
+      "CachePath": "3E/{3E21E767-D6B4-FF6B-BD00-3FEEB8FD2173}.wem"
+     },
+     {
+      "Id": "925504207",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedFall\\DownedFall 1.wav",
+      "CachePath": "C5/{C53F64FE-A034-A938-27EA-C9188D2190C7}.wem"
+     },
+     {
+      "Id": "934441837",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 8.wav",
+      "CachePath": "E4/{E4FDF9B9-7768-1314-4313-D580F4C787A0}.wem"
+     },
+     {
+      "Id": "937623447",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 9.wav",
+      "CachePath": "BE/{BEDCD98D-95B0-1E63-3116-05B4C88D5B42}.wem"
+     },
+     {
+      "Id": "941637134",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 12.wav",
+      "CachePath": "03/{034A94C2-565D-757D-B9F1-A59FFCB6543C}.wem"
+     },
+     {
+      "Id": "943584154",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Calling\\Palanquin_Inventory 1.wav",
+      "CachePath": "70/{707F14BF-9FE8-2748-4EE3-50DCD672B69B}.wem"
+     },
+     {
+      "Id": "945375614",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_End\\Palanquin_End 1.wav",
+      "CachePath": "2D/{2D8D510B-69AD-2D79-4C46-E2A62392EB54}.wem"
+     },
+     {
+      "Id": "951763644",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 7.wav",
+      "CachePath": "30/{304CA159-3E5E-4901-AE1C-5F4505CEAC8E}.wem"
+     },
+     {
+      "Id": "954492362",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 12.wav",
+      "CachePath": "2E/{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem"
+     },
+     {
+      "Id": "963749924",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Calling\\Palanquin_Inventory 2.wav",
+      "CachePath": "12/{12B5A519-79AC-9FDA-92EE-02149CC2F28D}.wem"
+     },
+     {
+      "Id": "966675639",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 6.wav",
+      "CachePath": "1D/{1DD6BC81-2BC9-BE3E-3948-841BD4FBC1F5}.wem"
+     },
+     {
+      "Id": "968124644",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FIDELE_ATTACK_2.wav",
+      "CachePath": "FC/{FCF43D99-A192-1D4D-A882-5D40F8DDE115}.wem"
+     },
+     {
+      "Id": "970594138",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ZELOTH_MIX-cm.wav",
+      "CachePath": "C7/{C719D6CC-BB66-BA88-3FB4-36E008790EB8}.wem"
+     },
+     {
+      "Id": "971680020",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 16.wav",
+      "CachePath": "C0/{C0CBD309-C252-5083-3266-B8665C6DD666}.wem"
+     },
+     {
+      "Id": "973713113",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 13.wav",
+      "CachePath": "5B/{5B8A1C82-BB4E-FB3D-23F8-5CF20134DCF1}.wem"
+     },
+     {
+      "Id": "976191507",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 13.wav",
+      "CachePath": "C2/{C2F1979F-830F-1E20-0A81-94152D3DE671}.wem"
+     },
+     {
+      "Id": "977382893",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 8.wav",
+      "CachePath": "A6/{A62BC3CF-B96F-7272-11A8-1F4EA143EC59}.wem"
+     },
+     {
+      "Id": "978672313",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DamagesHit_2.wav",
+      "CachePath": "2F/{2F17A4E5-7C1A-A4CC-E671-2BCDCF857C92}.wem"
+     },
+     {
+      "Id": "982020036",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRun\\FootstepsWoodRun 6.wav",
+      "CachePath": "E9/{E9FF869E-834D-F701-8E9E-1E8AE980C43C}.wem"
+     },
+     {
+      "Id": "988341890",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 15.wav",
+      "CachePath": "42/{42D5063D-B97F-CBDF-1F60-916B47ECF1EC}.wem"
+     },
+     {
+      "Id": "989610776",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 8.wav",
+      "CachePath": "C5/{C515C012-7A11-B835-DAC2-651B7C302209}.wem"
+     },
+     {
+      "Id": "990459238",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 16.wav",
+      "CachePath": "C5/{C57B0878-45F3-914E-32CC-3E72978CE20D}.wem"
+     },
+     {
+      "Id": "990610795",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CrazyStatus\\CrazyStatus.wav",
+      "CachePath": "BF/{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem"
+     },
+     {
+      "Id": "991859914",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 6.wav",
+      "CachePath": "D7/{D7D43CCF-D785-DD78-88E1-06CBD4411AD9}.wem"
+     },
+     {
+      "Id": "997440708",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 10.wav",
+      "CachePath": "1B/{1BA9CFB1-B2A0-8B30-03C9-07626682B098}.wem"
+     },
+     {
+      "Id": "1008668970",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 11.wav",
+      "CachePath": "24/{2402A440-55B3-5775-DF78-15031A9CE181}.wem"
+     },
+     {
+      "Id": "1012460946",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 11.wav",
+      "CachePath": "B2/{B240F249-51AF-3BB5-66AA-D81D407BBCF9}.wem"
+     },
+     {
+      "Id": "1012652963",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 6.wav",
+      "CachePath": "3E/{3EB712A0-8142-2D81-1C19-B912BDF7D84E}.wem"
+     },
+     {
+      "Id": "1012933875",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 10.wav",
+      "CachePath": "85/{85CB437C-A715-C3F2-5197-40FAFE17B63C}.wem"
+     },
+     {
+      "Id": "1018101402",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerHealing\\PlayerHealing 4.wav",
+      "CachePath": "BA/{BAA3C923-21CE-285B-0F94-86CCE63CE440}.wem"
+     },
+     {
+      "Id": "1029570780",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Audio\\DSGNWhsh_WHOOSH HOLY-Beacon Of Truth_B00M_MALDS.wav",
+      "CachePath": "30/{30BF439F-FB3D-4D9E-79C2-E63C68CFC0C0}.wem"
+     },
+     {
+      "Id": "1030339949",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DownedHeartbeat\\DownedHeartbeat 8.wav",
+      "CachePath": "DD/{DD3053E1-097C-0146-7B25-0369090EC18F}.wem"
+     },
+     {
+      "Id": "1030869782",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 10.wav",
+      "CachePath": "35/{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem"
+     },
+     {
+      "Id": "1039319747",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 1.wav",
+      "CachePath": "BB/{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem"
+     },
+     {
+      "Id": "1042641416",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Empty\\Palanquin_Empty 5.wav",
+      "CachePath": "0E/{0ED1334B-1B6B-7483-7FFA-108B0DD96BB0}.wem"
+     },
+     {
+      "Id": "1046934722",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OutOfBreath\\OutOfBreath 2.wav",
+      "CachePath": "7A/{7AF13B2C-78A8-0B4E-1E36-FEA23C65DDB4}.wem"
+     },
+     {
+      "Id": "1047484363",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SandRun\\FootstepsSandRun 18.wav",
+      "CachePath": "7E/{7ED152B5-7B06-29B0-3E68-5A0F99C441E6}.wem"
+     },
+     {
+      "Id": "1049126410",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Palanquin_Calling\\Palanquin_Inventory 3.wav",
+      "CachePath": "97/{973A8795-B12C-F4A2-F847-D7A123F74441}.wem"
+     },
+     {
+      "Id": "1051819540",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 5.wav",
+      "CachePath": "8E/{8E370450-AADC-71E9-1A75-4F97C20A7365}.wem"
+     },
+     {
+      "Id": "1055218331",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StoneRun\\FootstepsStoneRun 10.wav",
+      "CachePath": "58/{58D6D272-8362-C9E4-2BF5-514E83DBCE45}.wem"
+     }
+    ],
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "1259256166",
+       "Name": "New_RoomVerb",
+       "ObjectPath": "\\Effects\\Default Work Unit\\New_RoomVerb",
+       "GUID": "{A9210A85-42FF-4728-94B7-635FC7769176}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      },
+      {
+       "Id": "1588715066",
+       "Name": "Echoes_Linear",
+       "ObjectPath": "\\Effects\\Factory Effects\\Delay\\Echoes_Linear",
+       "GUID": "{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}",
+       "LibName": "Wwise Delay",
+       "LibId": "6946819"
+      },
+      {
+       "Id": "1990128658",
+       "Name": "Room_Medium",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Medium",
+       "GUID": "{F5C06EC1-E4A4-4332-A7D3-A89E2986B74F}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      },
+      {
+       "Id": "3164629247",
+       "Name": "Holy",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Cathedrals\\Holy",
+       "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "1139538480",
+      "Name": "Play_AMB_Crackle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Crackle",
+      "GUID": "{19BE017F-434C-4A31-95FE-77BD532E5881}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.43",
+      "DurationMax": "5.3",
+      "MediaRefs": [
+       {
+        "Id": "52894827"
+       },
+       {
+        "Id": "59431872"
+       },
+       {
+        "Id": "122144981"
+       },
+       {
+        "Id": "264407934"
+       },
+       {
+        "Id": "586116203"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1588715066"
+        },
+        {
+         "Id": "1990128658"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "2634720353",
+      "Name": "Play_AMB_EerieWhistle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_EerieWhistle",
+      "GUID": "{247371C1-731F-4F07-B5AF-70AA64FB9C25}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "472487270"
+       },
+       {
+        "Id": "595457668"
+       },
+       {
+        "Id": "707538977"
+       },
+       {
+        "Id": "730381189"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3164629247"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "2959353627",
+      "Name": "Play_AMB_LoudWind",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_LoudWind",
+      "GUID": "{2CC23F9A-27E6-4046-A2E1-1D975CA721A4}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "354428242"
+       }
+      ]
+     },
+     {
+      "Id": "2582806196",
+      "Name": "Play_AMB_Sandfall",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Sandfall",
+      "GUID": "{80BA34DE-5150-47F8-9ECB-2FB0D563D3A4}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.139271",
+      "DurationMax": "5.6713543",
+      "MediaRefs": [
+       {
+        "Id": "274995480"
+       },
+       {
+        "Id": "492429887"
+       },
+       {
+        "Id": "575181047"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1259256166"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "4002417895",
+      "Name": "Play_CrazyStatus",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_CrazyStatus",
+      "GUID": "{8EFE2D02-E24D-4788-80B3-D994A760EDD9}",
+      "DurationType": "OneShot",
+      "DurationMin": "18.990833",
+      "DurationMax": "18.990833",
+      "MediaRefs": [
+       {
+        "Id": "990610795"
+       }
+      ]
+     },
+     {
+      "Id": "2252945843",
+      "Name": "Play_DownedBreath",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedBreath",
+      "GUID": "{490678ED-6B7F-4FDB-8A75-7B817113C191}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.32",
+      "DurationMax": "3.6095417",
+      "MediaRefs": [
+       {
+        "Id": "101298648"
+       },
+       {
+        "Id": "216827798"
+       },
+       {
+        "Id": "331545351"
+       },
+       {
+        "Id": "376331356"
+       },
+       {
+        "Id": "436998747"
+       },
+       {
+        "Id": "475726858"
+       },
+       {
+        "Id": "652194251"
+       },
+       {
+        "Id": "761029887"
+       }
+      ]
+     },
+     {
+      "Id": "3061483191",
+      "Name": "Play_DownedHeartbeat",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedHeartbeat",
+      "GUID": "{7D23A7D5-C14B-4A71-9A18-E693CC57E477}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9698333",
+      "DurationMax": "1.0664583",
+      "MediaRefs": [
+       {
+        "Id": "39757222"
+       },
+       {
+        "Id": "108070285"
+       },
+       {
+        "Id": "111688257"
+       },
+       {
+        "Id": "260955044"
+       },
+       {
+        "Id": "657732204"
+       },
+       {
+        "Id": "710575632"
+       },
+       {
+        "Id": "794803150"
+       },
+       {
+        "Id": "797744101"
+       },
+       {
+        "Id": "1030339949"
+       }
+      ]
+     },
+     {
+      "Id": "3459422151",
+      "Name": "Play_OutOfBreath",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_OutOfBreath",
+      "GUID": "{8FA3D2DA-3815-49B7-923B-FF7E075F5738}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7454583",
+      "DurationMax": "0.82145834",
+      "MediaRefs": [
+       {
+        "Id": "34068047"
+       },
+       {
+        "Id": "70981290"
+       },
+       {
+        "Id": "105445102"
+       },
+       {
+        "Id": "115861136"
+       },
+       {
+        "Id": "272892538"
+       },
+       {
+        "Id": "281151790"
+       },
+       {
+        "Id": "458334224"
+       },
+       {
+        "Id": "720680225"
+       },
+       {
+        "Id": "845459241"
+       },
+       {
+        "Id": "1012652963"
+       },
+       {
+        "Id": "1046934722"
+       }
+      ]
+     },
+     {
+      "Id": "816640623",
+      "Name": "Play_SandRun",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_SandRun",
+      "GUID": "{DFC7FA5B-FB30-4FB0-8247-427A0F263B59}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.2515",
+      "DurationMax": "0.46291667",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "803837735",
+         "GUID": "{9ECDEA0B-BC74-479A-A685-290FEBCC07C7}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48180023"
+         },
+         {
+          "Id": "64511599"
+         },
+         {
+          "Id": "282780422"
+         },
+         {
+          "Id": "364748855"
+         },
+         {
+          "Id": "391905191"
+         },
+         {
+          "Id": "519030112"
+         },
+         {
+          "Id": "763853628"
+         },
+         {
+          "Id": "769516079"
+         },
+         {
+          "Id": "855499412"
+         },
+         {
+          "Id": "892421631"
+         },
+         {
+          "Id": "900624370"
+         },
+         {
+          "Id": "903624507"
+         },
+         {
+          "Id": "909385748"
+         },
+         {
+          "Id": "976191507"
+         },
+         {
+          "Id": "989610776"
+         },
+         {
+          "Id": "1030869782"
+         },
+         {
+          "Id": "1039319747"
+         },
+         {
+          "Id": "1047484363"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "1031440768",
+         "GUID": "{1F60FF79-78FE-4114-80EB-95135A2E3C4F}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "31134778"
+         },
+         {
+          "Id": "105123598"
+         },
+         {
+          "Id": "188388410"
+         },
+         {
+          "Id": "278825995"
+         },
+         {
+          "Id": "303742668"
+         },
+         {
+          "Id": "385107083"
+         },
+         {
+          "Id": "399958177"
+         },
+         {
+          "Id": "408684288"
+         },
+         {
+          "Id": "420215414"
+         },
+         {
+          "Id": "485661186"
+         },
+         {
+          "Id": "519325014"
+         },
+         {
+          "Id": "520458130"
+         },
+         {
+          "Id": "567221489"
+         },
+         {
+          "Id": "761762427"
+         },
+         {
+          "Id": "805764202"
+         },
+         {
+          "Id": "971680020"
+         },
+         {
+          "Id": "1008668970"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "2058049674",
+         "GUID": "{6C416689-8BAA-4B32-B117-FF3C10CD8C3D}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "6845002"
+         },
+         {
+          "Id": "98324690"
+         },
+         {
+          "Id": "101177060"
+         },
+         {
+          "Id": "114397212"
+         },
+         {
+          "Id": "153202755"
+         },
+         {
+          "Id": "201842153"
+         },
+         {
+          "Id": "204860484"
+         },
+         {
+          "Id": "281091351"
+         },
+         {
+          "Id": "466139768"
+         },
+         {
+          "Id": "481772735"
+         },
+         {
+          "Id": "494666904"
+         },
+         {
+          "Id": "500411705"
+         },
+         {
+          "Id": "592561856"
+         },
+         {
+          "Id": "614606467"
+         },
+         {
+          "Id": "661656056"
+         },
+         {
+          "Id": "736053400"
+         },
+         {
+          "Id": "747783868"
+         },
+         {
+          "Id": "782318759"
+         },
+         {
+          "Id": "916509704"
+         },
+         {
+          "Id": "937623447"
+         },
+         {
+          "Id": "954492362"
+         },
+         {
+          "Id": "973713113"
+         },
+         {
+          "Id": "982020036"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "1216965916",
+         "GUID": "{517D6FE8-08D1-4D27-8443-EC414D37E7EC}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "185441988"
+         },
+         {
+          "Id": "195665557"
+         },
+         {
+          "Id": "215028229"
+         },
+         {
+          "Id": "403097929"
+         },
+         {
+          "Id": "403493255"
+         },
+         {
+          "Id": "414622692"
+         },
+         {
+          "Id": "589087457"
+         },
+         {
+          "Id": "675358201"
+         },
+         {
+          "Id": "720572330"
+         },
+         {
+          "Id": "733316650"
+         },
+         {
+          "Id": "791895633"
+         },
+         {
+          "Id": "814448940"
+         },
+         {
+          "Id": "865151463"
+         },
+         {
+          "Id": "977382893"
+         },
+         {
+          "Id": "990459238"
+         },
+         {
+          "Id": "1055218331"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "803837735",
+         "GUID": "{9ECDEA0B-BC74-479A-A685-290FEBCC07C7}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48180023"
+         },
+         {
+          "Id": "64511599"
+         },
+         {
+          "Id": "282780422"
+         },
+         {
+          "Id": "364748855"
+         },
+         {
+          "Id": "391905191"
+         },
+         {
+          "Id": "519030112"
+         },
+         {
+          "Id": "763853628"
+         },
+         {
+          "Id": "769516079"
+         },
+         {
+          "Id": "855499412"
+         },
+         {
+          "Id": "892421631"
+         },
+         {
+          "Id": "900624370"
+         },
+         {
+          "Id": "903624507"
+         },
+         {
+          "Id": "909385748"
+         },
+         {
+          "Id": "976191507"
+         },
+         {
+          "Id": "989610776"
+         },
+         {
+          "Id": "1030869782"
+         },
+         {
+          "Id": "1039319747"
+         },
+         {
+          "Id": "1047484363"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "1031440768",
+         "GUID": "{1F60FF79-78FE-4114-80EB-95135A2E3C4F}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "31134778"
+         },
+         {
+          "Id": "105123598"
+         },
+         {
+          "Id": "188388410"
+         },
+         {
+          "Id": "278825995"
+         },
+         {
+          "Id": "303742668"
+         },
+         {
+          "Id": "385107083"
+         },
+         {
+          "Id": "399958177"
+         },
+         {
+          "Id": "408684288"
+         },
+         {
+          "Id": "420215414"
+         },
+         {
+          "Id": "485661186"
+         },
+         {
+          "Id": "519325014"
+         },
+         {
+          "Id": "520458130"
+         },
+         {
+          "Id": "567221489"
+         },
+         {
+          "Id": "761762427"
+         },
+         {
+          "Id": "805764202"
+         },
+         {
+          "Id": "971680020"
+         },
+         {
+          "Id": "1008668970"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "2058049674",
+         "GUID": "{6C416689-8BAA-4B32-B117-FF3C10CD8C3D}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "6845002"
+         },
+         {
+          "Id": "98324690"
+         },
+         {
+          "Id": "101177060"
+         },
+         {
+          "Id": "114397212"
+         },
+         {
+          "Id": "153202755"
+         },
+         {
+          "Id": "201842153"
+         },
+         {
+          "Id": "204860484"
+         },
+         {
+          "Id": "281091351"
+         },
+         {
+          "Id": "466139768"
+         },
+         {
+          "Id": "481772735"
+         },
+         {
+          "Id": "494666904"
+         },
+         {
+          "Id": "500411705"
+         },
+         {
+          "Id": "592561856"
+         },
+         {
+          "Id": "614606467"
+         },
+         {
+          "Id": "661656056"
+         },
+         {
+          "Id": "736053400"
+         },
+         {
+          "Id": "747783868"
+         },
+         {
+          "Id": "782318759"
+         },
+         {
+          "Id": "916509704"
+         },
+         {
+          "Id": "937623447"
+         },
+         {
+          "Id": "954492362"
+         },
+         {
+          "Id": "973713113"
+         },
+         {
+          "Id": "982020036"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "3865314626",
+         "Id": "1216965916",
+         "GUID": "{517D6FE8-08D1-4D27-8443-EC414D37E7EC}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "185441988"
+         },
+         {
+          "Id": "195665557"
+         },
+         {
+          "Id": "215028229"
+         },
+         {
+          "Id": "403097929"
+         },
+         {
+          "Id": "403493255"
+         },
+         {
+          "Id": "414622692"
+         },
+         {
+          "Id": "589087457"
+         },
+         {
+          "Id": "675358201"
+         },
+         {
+          "Id": "720572330"
+         },
+         {
+          "Id": "733316650"
+         },
+         {
+          "Id": "791895633"
+         },
+         {
+          "Id": "814448940"
+         },
+         {
+          "Id": "865151463"
+         },
+         {
+          "Id": "977382893"
+         },
+         {
+          "Id": "990459238"
+         },
+         {
+          "Id": "1055218331"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "Id": "742274067",
+      "Name": "Play_SandWalk",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_SandWalk",
+      "GUID": "{1733DC8D-614A-48D9-B0E3-057A2F398D48}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.58608335",
+      "DurationMax": "0.66941667"
+     },
+     {
+      "Id": "3931500340",
+      "Name": "Play_StoneRun",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_StoneRun",
+      "GUID": "{D64A690B-9124-430F-9030-CBC62D0CF0B5}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.270375",
+      "DurationMax": "0.39191666",
+      "MediaRefs": [
+       {
+        "Id": "185441988"
+       },
+       {
+        "Id": "195665557"
+       },
+       {
+        "Id": "215028229"
+       },
+       {
+        "Id": "403097929"
+       },
+       {
+        "Id": "403493255"
+       },
+       {
+        "Id": "414622692"
+       },
+       {
+        "Id": "589087457"
+       },
+       {
+        "Id": "675358201"
+       },
+       {
+        "Id": "720572330"
+       },
+       {
+        "Id": "733316650"
+       },
+       {
+        "Id": "791895633"
+       },
+       {
+        "Id": "814448940"
+       },
+       {
+        "Id": "865151463"
+       },
+       {
+        "Id": "977382893"
+       },
+       {
+        "Id": "990459238"
+       },
+       {
+        "Id": "1055218331"
+       }
+      ]
+     },
+     {
+      "Id": "1653748802",
+      "Name": "Play_StoneWalk",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_StoneWalk",
+      "GUID": "{23119412-2FFD-4AF2-90E5-CD6D1D2CB955}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.64066666",
+      "DurationMax": "0.82254165"
+     },
+     {
+      "Id": "3882989320",
+      "Name": "Play_WoodRun",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRun",
+      "GUID": "{03312179-77EB-4776-8A94-4FC59248E924}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.26958334",
+      "DurationMax": "0.35525",
+      "MediaRefs": [
+       {
+        "Id": "6845002"
+       },
+       {
+        "Id": "98324690"
+       },
+       {
+        "Id": "101177060"
+       },
+       {
+        "Id": "114397212"
+       },
+       {
+        "Id": "153202755"
+       },
+       {
+        "Id": "201842153"
+       },
+       {
+        "Id": "204860484"
+       },
+       {
+        "Id": "281091351"
+       },
+       {
+        "Id": "466139768"
+       },
+       {
+        "Id": "481772735"
+       },
+       {
+        "Id": "494666904"
+       },
+       {
+        "Id": "500411705"
+       },
+       {
+        "Id": "592561856"
+       },
+       {
+        "Id": "614606467"
+       },
+       {
+        "Id": "661656056"
+       },
+       {
+        "Id": "736053400"
+       },
+       {
+        "Id": "747783868"
+       },
+       {
+        "Id": "782318759"
+       },
+       {
+        "Id": "916509704"
+       },
+       {
+        "Id": "937623447"
+       },
+       {
+        "Id": "954492362"
+       },
+       {
+        "Id": "973713113"
+       },
+       {
+        "Id": "982020036"
+       }
+      ]
+     },
+     {
+      "Id": "856797194",
+      "Name": "Play_WoodRunCrack",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRunCrack",
+      "GUID": "{04FB3B50-A801-408C-9E75-6ECFE28D48E5}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.26425",
+      "DurationMax": "0.46291667",
+      "MediaRefs": [
+       {
+        "Id": "31134778"
+       },
+       {
+        "Id": "105123598"
+       },
+       {
+        "Id": "188388410"
+       },
+       {
+        "Id": "278825995"
+       },
+       {
+        "Id": "303742668"
+       },
+       {
+        "Id": "385107083"
+       },
+       {
+        "Id": "399958177"
+       },
+       {
+        "Id": "408684288"
+       },
+       {
+        "Id": "420215414"
+       },
+       {
+        "Id": "485661186"
+       },
+       {
+        "Id": "519325014"
+       },
+       {
+        "Id": "520458130"
+       },
+       {
+        "Id": "567221489"
+       },
+       {
+        "Id": "761762427"
+       },
+       {
+        "Id": "805764202"
+       },
+       {
+        "Id": "971680020"
+       },
+       {
+        "Id": "1008668970"
+       }
+      ]
+     },
+     {
+      "Id": "1662667678",
+      "Name": "Play_WoodWalk",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodWalk",
+      "GUID": "{4816BB69-2BE9-4F58-B6C7-C9A5C27B7E46}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5994167",
+      "DurationMax": "0.7295833"
+     },
+     {
+      "Id": "2825354540",
+      "Name": "Play_WoodWalkCrack",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodWalkCrack",
+      "GUID": "{F79D9AF7-494F-42C4-A943-2F4D8076B7E9}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.50625",
+      "DurationMax": "0.8923333"
+     }
+    ],
+    "Busses": [
+     {
+      "Id": "2246998526",
+      "Name": "Main Audio Bus",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "3865314626",
+      "Name": "Material",
+      "ObjectPath": "\\Switches\\Default Work Unit\\Material",
+      "GUID": "{C2F8F198-F33F-48A6-BCFA-A4F225A5C42A}",
+      "Switches": [
+       {
+        "Id": "803837735",
+        "Name": "Sand",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Sand",
+        "GUID": "{9ECDEA0B-BC74-479A-A685-290FEBCC07C7}"
+       },
+       {
+        "Id": "1031440768",
+        "Name": "WoodCrack",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\WoodCrack",
+        "GUID": "{1F60FF79-78FE-4114-80EB-95135A2E3C4F}"
+       },
+       {
+        "Id": "1216965916",
+        "Name": "Stone",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Stone",
+        "GUID": "{517D6FE8-08D1-4D27-8443-EC414D37E7EC}"
+       },
+       {
+        "Id": "2058049674",
+        "Name": "Wood",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Material\\Wood",
+        "GUID": "{6C416689-8BAA-4B32-B117-FF3C10CD8C3D}"
+       }
+      ]
+     },
+     {
+      "Id": "3995124918",
+      "Name": "EnnemyMovement",
+      "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement",
+      "GUID": "{D783C88B-76A6-4BE3-8DA6-D8C446476F61}",
+      "Switches": [
+       {
+        "Id": "712161704",
+        "Name": "Run",
+        "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement\\Run",
+        "GUID": "{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\Switches\\Default Work Unit\\EnnemyMovement\\Walk",
+        "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{7CEA032A-01E8-F6DA-52A7-1032A9C2F37C}"
+ }
+}
