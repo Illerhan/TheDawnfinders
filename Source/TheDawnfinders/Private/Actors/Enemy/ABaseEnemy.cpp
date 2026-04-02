@@ -266,7 +266,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
 
 void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 {
-    HealthBarWidget->TakeDamage(Percent);
+    HealthBarWidget->TakeDamage(Percent, false);
 }
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
@@ -274,7 +274,7 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
 
     CurrentHealth -= Quantity;
-    HealthBarWidget->TakeDamage(CurrentHealth / EnemyData->Health);
+    HealthBarWidget->TakeDamage(CurrentHealth / EnemyData->Health, false);
 
     if (CurrentHealth <= 0) {
         Die();

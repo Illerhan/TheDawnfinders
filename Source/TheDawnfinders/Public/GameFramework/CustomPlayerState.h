@@ -97,6 +97,15 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentMaxHealth(float MaxHP);
 
+	UFUNCTION(BlueprintCallable)
+	void StartPoison();
+
+	UFUNCTION(BlueprintCallable)
+	void EndPoison();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_EndPoison();
+
 
 // === OTHERS ===
 public :
@@ -119,6 +128,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	float GetMaxHealth() const { return MaxHealth; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetIsPoisoned() const { return bIsPoisoned; }
 
 	UFUNCTION(BlueprintCallable)
 	float GetCurseRatio() const { return 1 - (CurrentMaxHealth / MaxHealth); }
@@ -185,6 +197,9 @@ protected :
 	UPROPERTY(ReplicatedUsing=OnRep_Dead)
 	bool bIsDead;
 		
+	UPROPERTY(Replicated)
+	bool bIsPoisoned;
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnRep_Dead();
 

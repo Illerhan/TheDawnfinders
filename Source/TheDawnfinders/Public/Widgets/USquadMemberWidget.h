@@ -17,4 +17,11 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ActualiseWidget(float currentHealth, float currentMaxHealth, float currentStamina, float maxStamina, float maxHealth, FInventorySlot CurrentItem);
+
+	UFUNCTION(BlueprintCallable)
+	void SetPoisoned(bool bPoisoned);
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsPoisoned;
 };

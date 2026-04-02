@@ -97,6 +97,7 @@ void USquadWidget::ActualiseSquadInfos()
                         CustomPS->GetMaxHealth(),
                         CustomPS->GetCurrentEquippedItem()
                     );
+                    SquadMemberWidgets[0]->SetPoisoned(CustomPS->GetIsPoisoned());
                 }
             }
             WidgetIndex = 1; // Commencer à 1 pour les autres joueurs
@@ -130,6 +131,7 @@ void USquadWidget::ActualiseSquadInfos()
                     CustomPS->GetMaxHealth(),
                     FInventorySlot()
                 );
+                SquadMemberWidgets[WidgetIndex]->SetPoisoned(CustomPS->GetIsPoisoned());
             }
             WidgetIndex++;
         }
