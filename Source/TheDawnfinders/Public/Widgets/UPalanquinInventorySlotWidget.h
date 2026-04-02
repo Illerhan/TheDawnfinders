@@ -31,6 +31,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void CancelSlotReveal();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void RevealSlotInstant();
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnSlotClicked OnSlotClicked;
 
