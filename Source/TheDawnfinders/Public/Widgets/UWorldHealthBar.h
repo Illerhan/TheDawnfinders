@@ -14,7 +14,7 @@ public :
 	void Setup(int Parts);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void TakeDamage(float NewPercent);
+	void TakeDamage(float NewPercent, bool bIsPoisoned);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void Heal(float NewPercent);

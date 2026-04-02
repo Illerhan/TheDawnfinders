@@ -75,5 +75,5 @@ void AMiningInteractible::ReceiveDamage_Implementation(float Quantity, AActor* O
 
 void AMiningInteractible::DamageFeedback_Implementation(float HealthProgress)
 {
-	HealthBarWidget->TakeDamage(HealthProgress);
+	HealthBarWidget->TakeDamage(HealthProgress, false);
 }

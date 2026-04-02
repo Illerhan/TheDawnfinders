@@ -62,6 +62,18 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 			TakeDamage(PoisonDmg * DeltaTime, EVFXType::Poison);
 		}
 	}
+	else {
+		if (OwnerController && OwnerController->IsLocalPlayerController() && bIsPoisoned)
+		{
+			if (OwnerController && OwnerController->IsLocalPlayerController()) {
+				if (!WorldHealthBar) {
+					WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+					WorldHealthBar->Setup(3);
+				}
+				WorldHealthBar->TakeDamage(CurrentHealth / CurrentMaxHealth, true);
+			}
+		}
+	}
 
 	ActualiseHurtPostProcess(DeltaTime);
 	ActualisePoisonPostProcess(DeltaTime);
@@ -138,14 +150,14 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 		}
+	}
 
-		if (OwnerController && OwnerController->IsLocalPlayerController()) {
-			if (!WorldHealthBar) {
-				WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
-				WorldHealthBar->Setup(3);
-			}
-			WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth);
+	if (OwnerController && OwnerController->IsLocalPlayerController()) {
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
 		}
+		WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth, bIsPoisoned);
 	}
 
 	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
@@ -342,12 +354,44 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 void UHealthComponent::StartPoisonEffects_Implementation()
 {
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
 
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->StartPoison();
 }
 
 void UHealthComponent::EndPoisonEffects_Implementation()
 {
+	if (OwnerController && OwnerController->IsLocalPlayerController()) {
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->TakeDamage((CurrentHealth) / CurrentMaxHealth, false);
+	}
 
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->EndPoison();
 }
 
 void UHealthComponent::ActualisePoisonPostProcess(float DeltaTime)
@@ -369,18 +413,18 @@ void UHealthComponent::ActualisePoisonPostProcess(float DeltaTime)
 
 void UHealthComponent::SetIsPoisoned_Implementation(bool isPoisoned)
 {
-	if (isPoisoned) {
-		StartPoisonEffects();
-	}
-	else {
-		EndPoisonEffects();
-	}
-
 	if (GetOwner()->HasAuthority())
 		bIsPoisoned = isPoisoned;
 	else
 	{
 		SetIsPoisoned_Implementation(isPoisoned);
+	}
+
+	if (isPoisoned) {
+		StartPoisonEffects();
+	}
+	else {
+		EndPoisonEffects();
 	}
 }
 

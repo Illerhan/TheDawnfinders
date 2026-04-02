@@ -7,3 +7,8 @@ void USquadMemberWidget::Initialise_Implementation(bool IsMainSlot)
 void USquadMemberWidget::ActualiseWidget_Implementation(float currentHealth, float maxHealth, float currentStamina, float maxStamina, float currentMaxHealth, FInventorySlot CurrentItem)
 {
 }
+
+void USquadMemberWidget::SetPoisoned(bool bPoisoned)
+{
+	bIsPoisoned = bPoisoned;
+}
