@@ -445,6 +445,7 @@ void UHealthComponent::Die()
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
+	Multicast_HideFallen();
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
 	
 	ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
