@@ -354,7 +354,19 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 
 void UHealthComponent::StartPoisonEffects_Implementation()
 {
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
 
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->StartPoison();
 }
 
 void UHealthComponent::EndPoisonEffects_Implementation()
@@ -366,6 +378,20 @@ void UHealthComponent::EndPoisonEffects_Implementation()
 		}
 		WorldHealthBar->TakeDamage((CurrentHealth) / CurrentMaxHealth, false);
 	}
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	APawn* PawnOwner = Cast<APawn>(Owner);
+	if (!PawnOwner) return;
+
+	APlayerController* PC = Cast<APlayerController>(PawnOwner->GetController());
+	if (!PC) return;
+
+	if (!PC->PlayerState) return;
+
+	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
+	PSCustom->EndPoison();
 }
 
 void UHealthComponent::ActualisePoisonPostProcess(float DeltaTime)
