@@ -58,6 +58,29 @@ void ACustomPlayerState::SetCurrentMaxHealth(float MaxHP)
 	CurrentMaxHealth = MaxHP;
 }
 
+void ACustomPlayerState::StartPoison()
+{
+	bIsPoisoned = true;
+
+	OnInfoChange.Broadcast();
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
+void ACustomPlayerState::EndPoison()
+{
+	bIsPoisoned = false;
+
+	Multicast_EndPoison();
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
+void ACustomPlayerState::Multicast_EndPoison_Implementation()
+{
+	bIsPoisoned = false;
+
+	OnInfoChangeLocal.ExecuteIfBound();
+}
+
 #pragma endregion
 
 
