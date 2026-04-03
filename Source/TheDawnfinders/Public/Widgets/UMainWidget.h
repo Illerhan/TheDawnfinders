@@ -2,10 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Widgets/USpectateWidget.h"
 #include "UMainWidget.generated.h"
 
 class UPalanquinHUDWidget;
-
 
 UCLASS()
 class THEDAWNFINDERS_API UMainWidget : public UUserWidget
@@ -24,6 +24,9 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UPalanquinHUDWidget* GetPalanquinHUDWidget();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UUSpectateWidget* GetSpectateWidget();
 
 
 protected :

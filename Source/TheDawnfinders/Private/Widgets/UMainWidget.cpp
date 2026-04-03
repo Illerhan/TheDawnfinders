@@ -30,3 +30,8 @@ bool UMainWidget::GetIsInContainer()
 {
 	return bIsInContainer;
 }
+
+UUSpectateWidget* UMainWidget::GetSpectateWidget_Implementation()
+{
+	return nullptr;
+}

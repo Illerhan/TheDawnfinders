@@ -102,8 +102,14 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Client_Die();
+
 	UFUNCTION(Server,Reliable,BlueprintCallable)
 	void Server_Revive();
+
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Client_Revive();
 
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_DisplayFallen();
@@ -222,7 +228,7 @@ protected :
 	float CurrentPoisonVolumeStrength;
 
 	UPROPERTY()
-	AController* OwnerController;
+	APlayerController* OwnerController;
 
 	UPROPERTY()
 	UWorldHealthBar* WorldHealthBar;

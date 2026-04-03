@@ -4,8 +4,11 @@
 #include "Components/UStaminaComponent.h"
 #include "GameFramework/CustomGameMode.h"
 #include "GameFramework/CustomPlayerController.h"
+#include "GameFramework/CustomHUD.h"
 #include "Widgets/UWorldPlayerWidget.h"
 #include "Widgets/UWorldHealthBar.h"
+#include "Widgets/UMainWidget.h"
+#include "Widgets/USpectateWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/PlayerStart.h"
@@ -489,6 +492,8 @@ void UHealthComponent::Die()
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 
+	Client_Die();
+
 	Multicast_HideFallen();
 	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
 	
@@ -497,6 +502,18 @@ void UHealthComponent::Die()
 	{
 		GM->AddDeadPlayer();
 		GM->CheckAllDead();
+	}
+}
+
+void UHealthComponent::Client_Die_Implementation()
+{
+	if (OwnerController && OwnerController->IsLocalController()) {
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(OwnerController->GetHUD());
+		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
+		SpectateWidget->DisplayWidget();
+
+		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
 	}
 }
 
@@ -535,7 +552,15 @@ void UHealthComponent::Server_Revive_Implementation()
 	ServerChangeHealth_Implementation(CurrentHealth);
 	bIsFallen = false;
 
+	if (OwnerController && OwnerController->IsLocalPlayerController() && bIsDead) {
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(OwnerController->GetHUD());
+		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
+		SpectateWidget->HideWidget();
+	}
+
 	Multicast_HideFallen();
+	Client_Revive();
 
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
@@ -553,6 +578,18 @@ void UHealthComponent::Server_Revive_Implementation()
 		}
 	}
 	
+}
+
+void UHealthComponent::Client_Revive_Implementation()
+{
+	if (OwnerController && OwnerController->IsLocalController()) {
+
+		ACustomHUD* HUD = Cast<ACustomHUD>(OwnerController->GetHUD());
+		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
+		SpectateWidget->HideWidget();
+
+		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
+	}
 }
 
 #pragma endregion
