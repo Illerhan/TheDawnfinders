@@ -513,6 +513,9 @@ void UHealthComponent::Client_Die_Implementation()
 		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
 		SpectateWidget->DisplayWidget();
 
+		AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OwnerController->GetPawn());
+		SpectateWidget->ActualiseInfos(Player->PlayerIndex + 1);
+
 		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
 	}
 }
