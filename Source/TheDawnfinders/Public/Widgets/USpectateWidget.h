@@ -18,5 +18,5 @@ public :
 	void HideWidget();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ActualiseInfos(int PlayerIndex);
+	void ActualiseInfos(int PlayerIndex, bool bGoLeft);
 };
