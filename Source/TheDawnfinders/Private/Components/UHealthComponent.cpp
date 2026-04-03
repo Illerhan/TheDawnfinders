@@ -514,7 +514,7 @@ void UHealthComponent::Client_Die_Implementation()
 		SpectateWidget->DisplayWidget();
 
 		AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OwnerController->GetPawn());
-		SpectateWidget->ActualiseInfos(Player->PlayerIndex + 1);
+		SpectateWidget->ActualiseInfos(Player->PlayerIndex + 1, false);
 
 		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
 	}
