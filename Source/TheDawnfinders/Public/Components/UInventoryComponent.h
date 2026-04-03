@@ -219,6 +219,9 @@ public :
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
 	int OverloadSlotBaseCount = 3;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Parameters")
+	bool bAutoSort = true;
+
 	UPROPERTY(BlueprintReadOnly)
 	int CurrentOverloadSlotCount;
 
