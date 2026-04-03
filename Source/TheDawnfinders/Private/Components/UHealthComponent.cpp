@@ -135,7 +135,7 @@ void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 
 void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
-	if (IsInvincible || bIsDead) return;
+	if (IsInvincible || bIsDead || bIsFallen) return;
 
 	if (VFXType == Blood)
 	{
