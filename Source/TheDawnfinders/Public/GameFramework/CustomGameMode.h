@@ -10,9 +10,17 @@ UCLASS()
 class THEDAWNFINDERS_API ACustomGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-
+	
 	virtual void HandleSeamlessTravelPlayer(AController*& C) override;
+	
 public:
+	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Travel")
+	void CallWidgetUpdate();
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "GameOver")
+	bool bNotifySeamlessTravel;
+	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Travel")
 	void OnPreSeamlessTravel(AController* PC, ACustomPlayerState* PS, int Players);
 	

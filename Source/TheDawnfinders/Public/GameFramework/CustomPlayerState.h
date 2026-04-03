@@ -203,7 +203,11 @@ protected :
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnRep_Dead();
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bInSession;
 	
+	UPROPERTY(BlueprintReadWrite)
+	int PlayerCount;
 	
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGoldChanged);

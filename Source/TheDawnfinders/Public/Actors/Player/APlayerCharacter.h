@@ -350,6 +350,9 @@ public :
 	UPROPERTY(ReplicatedUsing = OnRep_PlayerSpeed)
 	float PlayerSpeed = 400.0f;
 
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	int PlayerIndex;
+
 	UPROPERTY(BlueprintReadOnly)
 	FVector2D CurrentDir;
 

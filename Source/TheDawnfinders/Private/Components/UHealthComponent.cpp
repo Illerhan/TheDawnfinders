@@ -135,7 +135,7 @@ void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 
 void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 {
-	if (IsInvincible || bIsDead) return;
+	if (IsInvincible || bIsDead || bIsFallen) return;
 
 	if (VFXType == Blood)
 	{
@@ -512,6 +512,9 @@ void UHealthComponent::Client_Die_Implementation()
 		ACustomHUD* HUD = Cast<ACustomHUD>(OwnerController->GetHUD());
 		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
 		SpectateWidget->DisplayWidget();
+
+		AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OwnerController->GetPawn());
+		SpectateWidget->ActualiseInfos(Player->PlayerIndex + 1, false);
 
 		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
 	}

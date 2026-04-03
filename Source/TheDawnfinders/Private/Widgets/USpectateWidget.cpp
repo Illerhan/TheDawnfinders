@@ -9,6 +9,6 @@ void UUSpectateWidget::HideWidget_Implementation()
 {
 }
 
-void UUSpectateWidget::ActualiseInfos_Implementation(int PlayerIndex)
+void UUSpectateWidget::ActualiseInfos_Implementation(int PlayerIndex, bool bGoLeft)
 {
 }
