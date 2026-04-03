@@ -160,7 +160,6 @@ void AAPlayerCharacter::Tick(float DeltaTime)
     ActualiseRotation();
 
     if (!IsLocallyControlled()) return;
-
     if (bIsAutoMoving) AutoMoveCharacter();
 
     if (LoudnessTimer > 0) {
@@ -1021,7 +1020,7 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
 void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
 {
     if (bLoudNoise) {
-        LoudNoiseZone->SetSphereRadius(Range * NoiseModifier);
+        LoudNoiseZone->SetSphereRadius(Range);
 
         if (Range <= 0) {
             LoudNoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -1032,7 +1031,7 @@ void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Ra
     }
 
     else {
-        NoiseZone->SetSphereRadius(Range * NoiseModifier);
+        NoiseZone->SetSphereRadius(Range);
 
         if (Range <= 0) {
             NoiseZone->SetCollisionEnabled(ECollisionEnabled::NoCollision);
