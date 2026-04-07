@@ -4,11 +4,14 @@
 #include "GameFramework/GameStateBase.h"
 #include "GameFramework/GICustom.h"
 
-
 void ACustomGameMode::HandleSeamlessTravelPlayer(AController*& C)
 {
-
 	Super::HandleSeamlessTravelPlayer(C);
+	
+	if (bNotifySeamlessTravel)
+	{
+		CallWidgetUpdate();
+	}
 }
 
 void ACustomGameMode::StartLevelTransition(FString MapName, int32 TargetPanel)

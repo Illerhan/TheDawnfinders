@@ -209,6 +209,8 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 	{
 		NewPS->ShopItems = ShopItems;
 		NewPS->SavedGold = SavedGold;
+		NewPS->bInSession = bInSession;
+		NewPS->PlayerCount = PlayerCount;
 	}
 	
 	

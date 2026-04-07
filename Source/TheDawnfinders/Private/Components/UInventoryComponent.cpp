@@ -379,6 +379,13 @@ void UInventoryComponent::ServerThrow_Implementation()
 
 void UInventoryComponent::SortInventory()
 {
+	if (!bAutoSort) {
+		OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+		if (TreasureSlotCount > 0) OnTreasureInventoryChange.Broadcast(TreasureSlots);
+
+		return;
+	}
+
 	SortByCategories();
 	SortItems();
 
