@@ -116,7 +116,7 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MaxHealth,
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
-        PlayerConfig->CurseRatio,
+        PlayerConfig->FallenSpeed,
         PlayerConfig->PoisonDmg,
         PlayerConfig->FallenTime
         );
