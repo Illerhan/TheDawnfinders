@@ -19,6 +19,12 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void CloseContainerInventory();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void EnterSpectate();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ExitSpectate();
+
 	UFUNCTION(BlueprintCallable)
 	bool GetIsInContainer();
 
