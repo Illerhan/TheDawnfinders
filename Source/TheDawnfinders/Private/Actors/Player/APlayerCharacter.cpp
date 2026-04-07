@@ -297,12 +297,14 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
 
     case EPlayerState::Fallen :
         StopAutoLock();
+        ItemComponent->StopAim();
         break;
 
     case EPlayerState::Immobilized :
         break;
         
     case EPlayerState::Trapped :
+        ItemComponent->StopAim();
         break;
 
     case EPlayerState::Dead :
@@ -386,6 +388,7 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 {
     if (!GetController()) return;
     if (!GetController()->IsLocalController()) return;
+    if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
     HealthComponent->TakeDamage(quantity);
 }
@@ -454,7 +457,7 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
     if (bIsAutoMoving) return;
-    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized)
+    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead)
         return;
 
     if (CurrentState == EPlayerState::Blocking) {
@@ -667,7 +670,7 @@ void AAPlayerCharacter::ActualiseRotation()
 void AAPlayerCharacter::ForceRotation(FVector Input)
 {
     if (bIsAutoMoving) return;
-    if (CurrentState == EPlayerState::Immobilized) return;
+    if (CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
     if(CurrentForcedRotationRatio < 1)
         CurrentForcedRotationRatio += GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;

@@ -8,7 +8,7 @@ void USquadMemberWidget::ActualiseWidget_Implementation(float currentHealth, flo
 {
 }
 
-void USquadMemberWidget::SetPoisoned(bool bPoisoned)
+void USquadMemberWidget::SetPoisoned_Implementation(bool bPoisoned)
 {
 	bIsPoisoned = bPoisoned;
 }
