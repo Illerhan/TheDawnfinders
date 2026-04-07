@@ -56,9 +56,12 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 
 	// Nearest Interactible management
-	if (InteractiblesAtRange.Num() > 0 && !bIsInInteraction) 
+	PlayersAtRange = GetNearbyPlayers(150.f, true);
+
+	if ((InteractiblesAtRange.Num() > 0 || PlayersAtRange.Num() > 0) && !bIsInInteraction)
 	{
 		InteractiblesAtRange.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
+
 		AActor* Nearest = GetNearestInteractible();
 		if (!NearestInteractible || NearestInteractible != Nearest) 
 		{
@@ -120,7 +123,6 @@ AActor* UInteractionComponent::GetNearestInteractible()
 	float BestDist = FLT_MAX;
 	AActor* BestActor = nullptr;
 	
-
 	for (AActor* Inter : InteractiblesAtRange)
 	{
 		if (!IsValid(Inter)) continue;
@@ -133,6 +135,21 @@ AActor* UInteractionComponent::GetNearestInteractible()
 		{
 			BestDist = Dist;
 			BestActor = Inter;
+		}
+	}
+
+	for (AActor* Player : PlayersAtRange)
+	{
+		if (!IsValid(Player)) continue;
+		float Dist = FVector::DistSquared(
+			Player->GetActorLocation(),
+			PlayerCharacter->GetActorLocation()
+		);
+
+		if (Dist < BestDist)
+		{
+			BestDist = Dist;
+			BestActor = Player;
 		}
 	}
 
@@ -169,10 +186,9 @@ void UInteractionComponent::StartInteract()
 	}
 
 	// We check if there is a player nearby to revive 
-	TArray<AAPlayerCharacter*> Fallen = GetNearbyPlayers(150.f, true);
-	if (Fallen.Num() > 0)
+	if (PlayersAtRange.Num() > 0)
 	{
-		AAPlayerCharacter* AllyFound = Fallen[0];
+		AAPlayerCharacter* AllyFound = PlayersAtRange[0];
 		TryInteractAlly(AllyFound, PlayerCharacter);
 		return;
 	}
@@ -260,43 +276,6 @@ void UInteractionComponent::ServerInteract_Implementation(AActor* Interactible, 
 	bWasCrouched = (Player->CurrentState == EPlayerState::Sneaking);
 
 	IInteractible::Execute_Interact(Interactible, Player);
-}
-
-TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius, bool bOnlyDead) const
-{
-	TArray<AAPlayerCharacter*> Result;
-
-	if (!PlayerCharacter) return Result;
-
-	UWorld* World = GetWorld();
-	if (!World) return Result;
-
-	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
-	TArray<FOverlapResult> Overlaps;
-
-	bool Hit = World->OverlapMultiByChannel(
-		Overlaps,
-		PlayerCharacter->GetActorLocation(),
-		FQuat::Identity,
-		ECC_Pawn,
-		Sphere
-	);
-
-	if (!Hit) return Result;
-
-	for (const FOverlapResult& R : Overlaps)
-	{
-		AAPlayerCharacter* Other = Cast<AAPlayerCharacter>(R.GetActor());
-		if (!Other || Other == PlayerCharacter) continue;
-
-		if (bOnlyDead &&
-			Other->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
-			continue;
-
-		Result.Add(Other);
-	}
-
-	return Result;
 }
 
 void UInteractionComponent::OnRep_HelpState()
@@ -496,6 +475,42 @@ void UInteractionComponent::EndCarryHeavyItem()
 
 
 #pragma region Revive
+
+TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius, bool bOnlyFallen) const
+{
+	TArray<AAPlayerCharacter*> Result;
+
+	if (!PlayerCharacter) return Result;
+
+	UWorld* World = GetWorld();
+	if (!World) return Result;
+
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(Radius);
+	TArray<FOverlapResult> Overlaps;
+
+	bool Hit = World->OverlapMultiByChannel(
+		Overlaps,
+		PlayerCharacter->GetActorLocation(),
+		FQuat::Identity,
+		ECC_PhysicsBody,
+		Sphere
+	);
+
+	if (!Hit) return Result;
+
+	for (const FOverlapResult& R : Overlaps)
+	{
+		AAPlayerCharacter* Other = Cast<AAPlayerCharacter>(R.GetActor());
+		if (!Other || Other == PlayerCharacter) continue;
+		
+		if (bOnlyFallen && Other->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+			continue;
+
+		Result.Add(Other);
+	}
+
+	return Result;
+}
 
 void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlayerCharacter* Player)
 {
