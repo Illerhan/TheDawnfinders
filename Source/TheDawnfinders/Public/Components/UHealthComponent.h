@@ -30,7 +30,7 @@ public:
 // === MAIN FUNCTIONS ===
 public : 
 	UFUNCTION(BlueprintCallable)
-	void InitialiseComponent(float MaxHP, float MinMaxHP, float ReviveHP, float InjureSpeed, float CurseRate, float DmgPoison);
+	void InitialiseComponent(float MaxHP, float MinMaxHP, float ReviveHP,float FallenSpeed,float DmgPoison, float FallenTime);
 
 	UFUNCTION(BlueprintCallable)
 	void Heal(float quantity);

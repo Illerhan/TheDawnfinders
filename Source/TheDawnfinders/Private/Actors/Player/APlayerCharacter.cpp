@@ -116,7 +116,7 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MaxHealth,
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
-        PlayerConfig->CurseRatio,
+        PlayerConfig->FallenSpeed,
         PlayerConfig->PoisonDmg,
         PlayerConfig->FallenTime
         );
@@ -392,6 +392,21 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
     HealthComponent->TakeDamage(quantity);
+}
+
+#pragma endregion
+
+
+#pragma region Interactible Interface
+
+void AAPlayerCharacter::SelectInteractible_Implementation(AActor* Interactor)
+{
+
+}
+
+void AAPlayerCharacter::UnselectInteractible_Implementation(AActor* Interactor)
+{
+
 }
 
 #pragma endregion

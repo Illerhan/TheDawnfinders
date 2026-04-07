@@ -147,6 +147,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	TArray<AActor*> InteractiblesAtRange;
 
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AAPlayerCharacter*> PlayersAtRange;
+
 	UPROPERTY(EditAnywhere)
 	AAPlayerCharacter* PlayerCharacter;
 
