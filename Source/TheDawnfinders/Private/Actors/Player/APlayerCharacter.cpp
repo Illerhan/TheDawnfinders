@@ -297,12 +297,14 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
 
     case EPlayerState::Fallen :
         StopAutoLock();
+        ItemComponent->StopAim();
         break;
 
     case EPlayerState::Immobilized :
         break;
         
     case EPlayerState::Trapped :
+        ItemComponent->StopAim();
         break;
 
     case EPlayerState::Dead :
