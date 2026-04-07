@@ -32,7 +32,7 @@ enum class EInteractionUI : uint8
 };
 
 UCLASS()
-class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface, public IDamageable
+class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerInterface, public IDamageable, public IInteractible
 {
 	GENERATED_BODY()
 
@@ -180,6 +180,12 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
+
+// === INTERACTIBLE INTERFACE ===
+public :
+	void SelectInteractible_Implementation(AActor* Interactor);
+	void UnselectInteractible_Implementation(AActor* Interactor);
+
 	
 
 // === MOVEMENT METHODS ===
@@ -285,6 +291,8 @@ public :
 public:
 	UFUNCTION()
 	void OnRevive();
+	UFUNCTION(Client,Reliable)
+	void Client_ResetCamera();
 
 	UFUNCTION(Server, Reliable)
 	void Server_OnRevive();
