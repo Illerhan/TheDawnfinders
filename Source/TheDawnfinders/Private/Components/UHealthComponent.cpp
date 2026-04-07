@@ -189,6 +189,7 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 
 void UHealthComponent::Server_TakeDamage_Implementation(float quantity, AActor* Origin)
 {
+	if (IsInvincible || bIsDead || bIsFallen) return;
 	TakeDamage(quantity);
 }
 
