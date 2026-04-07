@@ -45,10 +45,7 @@ public:
 
 	// ---------- FALL DAMAGE -----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fall Damage")
-	float FallDamageMinYVelocity = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Fall Damage")
-	float FallDamageMaxYVelocity = 100.f;
+	float FallenTime = 25.f;
 
 
 	// ---------- STAMINA ----------
