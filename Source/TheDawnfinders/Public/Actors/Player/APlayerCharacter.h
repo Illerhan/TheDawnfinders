@@ -237,7 +237,10 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void Server_SetPushingState(ALitter* Obj, bool bCarrying);
-	
+
+	UFUNCTION()
+	void StopMovementForDuration(float Duration);
+
 
 // === DODGE ===
 public : 
@@ -383,8 +386,6 @@ public :
 	float UILoudness;
 	
 
-
-
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY()
@@ -449,4 +450,7 @@ protected :
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float NoiseModifier = 1.0f;
+
+	UPROPERTY()
+	float NoMovementTimer;
 };
