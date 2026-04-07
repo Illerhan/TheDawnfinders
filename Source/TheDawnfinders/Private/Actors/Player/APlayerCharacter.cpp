@@ -116,9 +116,9 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MaxHealth,
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
+        PlayerConfig->FallenTime,
         PlayerConfig->CurseRatio,
-        PlayerConfig->PoisonDmg,
-        PlayerConfig->FallenTime
+        PlayerConfig->PoisonDmg
         );
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
@@ -152,6 +152,10 @@ void AAPlayerCharacter::BeginPlay()
 void AAPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    if (NoMovementTimer > 0) {
+        NoMovementTimer -= DeltaTime;
+    }
 
     if (!IsLocallyControlled() && !bIsForcingRotation) return;
 
@@ -299,6 +303,8 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Fallen :
         StopAutoLock();
         ItemComponent->StopAim();
+
+        StopMovementForDuration(3.f);
         break;
 
     case EPlayerState::Immobilized :
@@ -332,6 +338,8 @@ void AAPlayerCharacter::Server_SetCurrentPlayerState_Implementation(EPlayerState
 void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerState NewState, bool bOverrideClient)
 {
     if (GetController() && !bOverrideClient) return;
+
+    StopMovementForDuration(3.f);
 
     CurrentState = NewState;
 }
@@ -476,6 +484,10 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead)
         return;
 
+    if (NoMovementTimer > 0) {
+        return;
+    }
+
     if (CurrentState == EPlayerState::Blocking) {
         AddMovementInput(FVector(0, 0, 0), 1.0f, false);
         return;
@@ -599,6 +611,12 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 {
     ManageRun(Input);
 }
+
+void AAPlayerCharacter::StopMovementForDuration(float Duration)
+{
+    NoMovementTimer = Duration;
+}
+
 
 void AAPlayerCharacter::ManageRun(bool Input)
 {

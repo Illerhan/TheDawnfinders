@@ -172,17 +172,12 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 		Server_TakeDamage(quantity, nullptr);
 	}
 	else {
-		ServerChangeHealth(CurrentHealth);
-	}
-
-	if (CurrentHealth <= 0.0f)
-	{
-		if (bIsFallen)
+		if (CurrentHealth <= 0.0f)
 		{
-			Die();
-			return;
+			Fallen();
 		}
-		Fallen();
+
+		ServerChangeHealth(CurrentHealth);
 	}
 }
 
