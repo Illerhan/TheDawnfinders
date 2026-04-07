@@ -1,0 +1,268 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "216773872",
+    "Type": "User",
+    "GUID": "{9B8CFEC1-8CE7-4794-90AC-CE9A7252EBBE}",
+    "Language": "SFX",
+    "Hash": "{C8D1C399-A50C-7C44-D8EA-1F1A2043121F}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\OLD_main",
+    "ShortName": "OLD_main",
+    "Path": "OLD_main.bnk",
+    "Media": [
+     {
+      "Id": "52894827",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle1-01.wav",
+      "CachePath": "48/{48C2A5B3-2DC7-1029-916D-14F9329E9C1C}.wem"
+     },
+     {
+      "Id": "59431872",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle3-01.wav",
+      "CachePath": "38/{38259D15-1358-36AB-CC38-8DBDD501E92A}.wem"
+     },
+     {
+      "Id": "122144981",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle6-01.wav",
+      "CachePath": "10/{10EFA247-1F9C-93F1-20BB-C5BD81BA5063}.wem"
+     },
+     {
+      "Id": "264407934",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle5-01.wav",
+      "CachePath": "41/{415CC335-B9CC-5716-9519-61245AF52D30}.wem"
+     },
+     {
+      "Id": "274995480",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Sand3.wav",
+      "CachePath": "C4/{C4D4886A-88DA-A704-D6F8-85F5DE80E270}.wem"
+     },
+     {
+      "Id": "354428242",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_LoudWind.wav",
+      "CachePath": "F7/{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem"
+     },
+     {
+      "Id": "472487270",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle.wav",
+      "CachePath": "16/{160867BC-599B-0540-B4A0-D02256720EFA}.wem"
+     },
+     {
+      "Id": "492429887",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Sand.wav",
+      "CachePath": "E7/{E738D13F-EDFB-1955-A7A8-048B50E4B01C}.wem"
+     },
+     {
+      "Id": "575181047",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_sand2.wav",
+      "CachePath": "BE/{BE9FD1C8-999E-C172-B746-5E4650D21F8C}.wem"
+     },
+     {
+      "Id": "586116203",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Crackle2-01.wav",
+      "CachePath": "30/{302A0B8E-E810-737B-D656-22C135EECF42}.wem"
+     },
+     {
+      "Id": "595457668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle4.wav",
+      "CachePath": "5F/{5F8C6E73-8C7C-EAD0-8C97-22A29AC06970}.wem"
+     },
+     {
+      "Id": "707538977",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle1.wav",
+      "CachePath": "C8/{C8C8F57C-60A0-1CBF-D8EB-6EFDEC83944F}.wem"
+     },
+     {
+      "Id": "730381189",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_EerieWhistle2.wav",
+      "CachePath": "98/{98DE1C4A-F3C8-A077-C7A6-566EF3F4020A}.wem"
+     }
+    ],
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "1259256166",
+       "Name": "New_RoomVerb",
+       "ObjectPath": "\\Effects\\Default Work Unit\\New_RoomVerb",
+       "GUID": "{A9210A85-42FF-4728-94B7-635FC7769176}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      },
+      {
+       "Id": "1588715066",
+       "Name": "Echoes_Linear",
+       "ObjectPath": "\\Effects\\Factory Effects\\Delay\\Echoes_Linear",
+       "GUID": "{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}",
+       "LibName": "Wwise Delay",
+       "LibId": "6946819"
+      },
+      {
+       "Id": "1990128658",
+       "Name": "Room_Medium",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Medium",
+       "GUID": "{F5C06EC1-E4A4-4332-A7D3-A89E2986B74F}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      },
+      {
+       "Id": "3164629247",
+       "Name": "Holy",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Cathedrals\\Holy",
+       "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "1139538480",
+      "Name": "Play_AMB_Crackle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Crackle",
+      "GUID": "{19BE017F-434C-4A31-95FE-77BD532E5881}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.43",
+      "DurationMax": "5.3",
+      "MediaRefs": [
+       {
+        "Id": "52894827"
+       },
+       {
+        "Id": "59431872"
+       },
+       {
+        "Id": "122144981"
+       },
+       {
+        "Id": "264407934"
+       },
+       {
+        "Id": "586116203"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1588715066"
+        },
+        {
+         "Id": "1990128658"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "2634720353",
+      "Name": "Play_AMB_EerieWhistle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_EerieWhistle",
+      "GUID": "{247371C1-731F-4F07-B5AF-70AA64FB9C25}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "472487270"
+       },
+       {
+        "Id": "595457668"
+       },
+       {
+        "Id": "707538977"
+       },
+       {
+        "Id": "730381189"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3164629247"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "2959353627",
+      "Name": "Play_AMB_LoudWind",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_LoudWind",
+      "GUID": "{2CC23F9A-27E6-4046-A2E1-1D975CA721A4}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "354428242"
+       }
+      ]
+     },
+     {
+      "Id": "2582806196",
+      "Name": "Play_AMB_Sandfall",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Sandfall",
+      "GUID": "{80BA34DE-5150-47F8-9ECB-2FB0D563D3A4}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.139271",
+      "DurationMax": "5.6713543",
+      "MediaRefs": [
+       {
+        "Id": "274995480"
+       },
+       {
+        "Id": "492429887"
+       },
+       {
+        "Id": "575181047"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1259256166"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{D0AE1945-EA30-1549-4417-37DBF7EEFBB0}"
+ }
+}
