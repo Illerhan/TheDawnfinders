@@ -285,6 +285,8 @@ public :
 public:
 	UFUNCTION()
 	void OnRevive();
+	UFUNCTION(Client,Reliable)
+	void Client_ResetCamera();
 
 	UFUNCTION(Server, Reliable)
 	void Server_OnRevive();
