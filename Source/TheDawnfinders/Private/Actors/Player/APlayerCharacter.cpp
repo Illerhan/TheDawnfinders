@@ -397,6 +397,21 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
 #pragma endregion
 
 
+#pragma region Interactible Interface
+
+void AAPlayerCharacter::SelectInteractible_Implementation(AActor* Interactor)
+{
+
+}
+
+void AAPlayerCharacter::UnselectInteractible_Implementation(AActor* Interactor)
+{
+
+}
+
+#pragma endregion
+
+
 #pragma region Movement / Run
 
 void AAPlayerCharacter::SetPlayerSpeed(float NewSpeed, bool bInstant)
