@@ -16,6 +16,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Components/DebugComponent.h"
 #include "Engine/OverlapResult.h"
+#include "GameFramework/CustomPlayerController.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Widgets/UMainWidget.h"
 #include "Widgets/UWorldPlayerWidget.h"
@@ -115,9 +116,9 @@ void AAPlayerCharacter::ApplyPlayerData()
         PlayerConfig->MaxHealth,
         PlayerConfig->MinMaxHP,
         PlayerConfig->MinReviveHP,
-        PlayerConfig->InjureDecreaseSpeed,
         PlayerConfig->CurseRatio,
-        PlayerConfig->PoisonDmg
+        PlayerConfig->PoisonDmg,
+        PlayerConfig->FallenTime
         );
     
     StaminaComponent->InitialiseComponent(PlayerConfig->MaxStamina,
@@ -1019,10 +1020,15 @@ void AAPlayerCharacter::Server_EndCarryHeavyItem_Implementation()
 void AAPlayerCharacter::OnRevive()
 {
     if (!HasAuthority()) Server_OnRevive(); 
-
     SetCurrentPlayerState_Implementation(EPlayerState::None, true);
-   
-    GetPlayerState()->GetPlayerController()->SetViewTargetWithBlend(this);
+    Client_ResetCamera();
+}
+
+void AAPlayerCharacter::Client_ResetCamera_Implementation()
+{
+    ACustomPlayerController* PC = Cast<ACustomPlayerController>(GetController());
+    if (!PC) return;
+    PC->SetViewTargetWithBlend(this);
 }
 
 void AAPlayerCharacter::Server_OnRevive_Implementation()

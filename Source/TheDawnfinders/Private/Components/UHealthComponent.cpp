@@ -90,16 +90,16 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 }
 
 
-void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float ReviveHP, float InjureSpeed, float CurseRate, float DmgPoison)
+void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float ReviveHP, float FallenTime, float CurseRate, float DmgPoison)
 {
 	CurrentHealth = MaxHP;
 	CurrentMaxHealth = MaxHP;
 	MaxHealth = MaxHP;
 	MinimumMaxHP = MinMaxHP;
 	MinReviveHP = ReviveHP;
-	InjureDecreaseSpeed = InjureSpeed;
 	CurseRatio = CurseRate;
 	PoisonDmg = DmgPoison;
+	FallenDuration = FallenTime;
 
 	// Gestion de la réplication de la santé
 	if (!GetOwner()->HasAuthority()) {
