@@ -26,6 +26,14 @@ void UMainWidget::CloseContainerInventory_Implementation()
 	if (Container) Container->CloseContainerInventory();
 }
 
+void UMainWidget::EnterSpectate_Implementation()
+{
+}
+
+void UMainWidget::ExitSpectate_Implementation()
+{
+}
+
 bool UMainWidget::GetIsInContainer()
 {
 	return bIsInContainer;
