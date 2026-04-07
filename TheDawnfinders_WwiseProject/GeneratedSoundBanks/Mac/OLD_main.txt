@@ -1,0 +1,27 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1139538480	Play_AMB_Crackle			\Default Work Unit\Ambiance\Play_AMB_Crackle	
+	2582806196	Play_AMB_Sandfall			\Default Work Unit\Ambiance\Play_AMB_Sandfall	
+	2634720353	Play_AMB_EerieWhistle			\Default Work Unit\Ambiance\Play_AMB_EerieWhistle	
+	2959353627	Play_AMB_LoudWind			\Default Work Unit\Ambiance\Play_AMB_LoudWind	
+
+Effect plug-ins	ID	Name	Type				Notes
+	1259256166	New_RoomVerb	Wwise RoomVerb			
+	1588715066	Echoes_Linear	Wwise Delay			
+	1990128658	Room_Medium	Wwise RoomVerb			
+	3164629247	Holy	Wwise RoomVerb			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	52894827	AMB_Crackle1-01	.cache\48\{48C2A5B3-2DC7-1029-916D-14F9329E9C1C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle1-01		793056
+	59431872	AMB_Crackle3-01	.cache\38\{38259D15-1358-36AB-CC38-8DBDD501E92A}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle3-01		466656
+	122144981	AMB_Crackle6-01	.cache\10\{10EFA247-1F9C-93F1-20BB-C5BD81BA5063}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle6-01		1017696
+	264407934	AMB_Crackle5-01	.cache\41\{415CC335-B9CC-5716-9519-61245AF52D30}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle5-01		558816
+	274995480	AMB_Sand3	.cache\C4\{C4D4886A-88DA-A704-D6F8-85F5DE80E270}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_Sand3		928452
+	354428242	AMB_LoudWind	.cache\F7\{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem		\Containers\Default Work Unit\Ambiance\AMB_LoudWind		1458272
+	472487270	AMB_EerieWhistle	.cache\16\{160867BC-599B-0540-B4A0-D02256720EFA}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle		4874336
+	492429887	AMB_Sand	.cache\E7\{E738D13F-EDFB-1955-A7A8-048B50E4B01C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_Sand		1088996
+	575181047	AMB_sand2	.cache\BE\{BE9FD1C8-999E-C172-B746-5E4650D21F8C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_sand2		794836
+	586116203	AMB_Crackle2-01	.cache\30\{302A0B8E-E810-737B-D656-22C135EECF42}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle2-01		656736
+	595457668	AMB_EerieWhistle4	.cache\5F\{5F8C6E73-8C7C-EAD0-8C97-22A29AC06970}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle4		4845664
+	707538977	AMB_EerieWhistle1	.cache\C8\{C8C8F57C-60A0-1CBF-D8EB-6EFDEC83944F}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle1		4903008
+	730381189	AMB_EerieWhistle2	.cache\98\{98DE1C4A-F3C8-A077-C7A6-566EF3F4020A}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle2		4214880
+
