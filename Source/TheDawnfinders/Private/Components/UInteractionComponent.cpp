@@ -503,8 +503,13 @@ TArray<AAPlayerCharacter*> UInteractionComponent::GetNearbyPlayers(float Radius,
 		AAPlayerCharacter* Other = Cast<AAPlayerCharacter>(R.GetActor());
 		if (!Other || Other == PlayerCharacter) continue;
 		
-		if (bOnlyFallen && Other->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen)
+		if (bOnlyFallen && Other->GetCurrentPlayerState_Implementation() != EPlayerState::Fallen && Other->GetCurrentPlayerState_Implementation() != EPlayerState::Dead)
 			continue;
+
+		if (bOnlyFallen && Other->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) {
+			if (!IsValid(PlayerCharacter->InventoryComponent->GetCurrentItem())) continue;
+			if (PlayerCharacter->InventoryComponent->GetCurrentItem()->ConsumableEffectType != EConsumableEffectType::Revive) continue;
+		}
 
 		Result.Add(Other);
 	}
