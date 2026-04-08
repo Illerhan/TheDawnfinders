@@ -221,7 +221,7 @@ protected:
 	UPROPERTY()
 	FTimerHandle EnableTimer;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	bool bCanBeUsed = true;
 
 	UPROPERTY(Replicated)
