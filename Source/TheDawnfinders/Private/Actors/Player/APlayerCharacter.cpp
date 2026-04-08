@@ -339,8 +339,6 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
 {
     if (GetController() && !bOverrideClient) return;
 
-    StopMovementForDuration(3.f);
-
     CurrentState = NewState;
 }
 
@@ -615,6 +613,8 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 void AAPlayerCharacter::StopMovementForDuration(float Duration)
 {
     NoMovementTimer = Duration;
+
+    UE_LOG(LogTemp, Display, TEXT("STOP MOVEMENT"));
 }
 
 
