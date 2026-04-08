@@ -175,6 +175,9 @@ public:
 	UFUNCTION(Client, Reliable)
 	void Client_OpenInteractionUI (EInteractionUI UIType, AActor* Context);
 
+	UFUNCTION(Client, Reliable)
+	void Client_CloseInteractionUI(EInteractionUI UIType, AActor* Context);
+
 	UFUNCTION(Server, Reliable)
 	void Server_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
 

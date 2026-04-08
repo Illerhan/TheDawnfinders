@@ -66,7 +66,13 @@ void AContainer::Multicast_SetupLoot_Implementation(const TArray<UItemData*>& It
 	}
 }
 
+bool AContainer::GetCanBeUsed_Implementation(AActor* Interactor)
+{
+	if (bHasInteractAnim && CurrentInteractActor && !DidInteractionAnim)
+		return false;
 
+	return Super::GetCanBeUsed_Implementation(Interactor);
+}
 
 void AContainer::Interact_Implementation(AActor* Interactor)
 {
@@ -104,7 +110,12 @@ void AContainer::Interact_Implementation(AActor* Interactor)
 
 void AContainer::StopInteract_Implementation(AActor* Interactor)
 {
+	Player = Cast<AAPlayerCharacter>(Interactor);
+	if (!Player) return;
 
+	bPlayerIsUsing = false;
+
+	CloseContainerInventory();
 }
 
 void AContainer::DoInteractionAnim_Implementation(AActor* Interactor)
@@ -122,7 +133,13 @@ void AContainer::Multicast_ChangeStaticMesh_Implementation()
 void AContainer::CloseContainerInventory()
 {
 	if (HasAuthority()) {
-		Server_CloseContainerInventory_Implementation();
+		bPlayerIsUsing = false;
+
+		if (InventoryComponent->GetIsEmpty()) {
+			DisableInterestPointVFX();
+		}
+
+		Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);
 	}
 	else {
 		Server_CloseContainerInventory();
@@ -136,6 +153,8 @@ void AContainer::Server_CloseContainerInventory_Implementation()
 	if (InventoryComponent->GetIsEmpty()) {
 		DisableInterestPointVFX();
 	}
+
+	Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);
 }
 
 void AContainer::DisableInterestPointVFX_Implementation()
