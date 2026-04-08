@@ -194,7 +194,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float InteractAnimDuration = 0;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool DidInteractionAnim = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

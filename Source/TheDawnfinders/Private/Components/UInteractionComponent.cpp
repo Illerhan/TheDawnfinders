@@ -388,6 +388,8 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 
 void UInteractionComponent::CancelInteraction()
 {
+	if (CurrentAnimInteractible) return;
+
 	AActor* Nearest = GetNearestInteractible();
 	//if (!Nearest) return;
 
