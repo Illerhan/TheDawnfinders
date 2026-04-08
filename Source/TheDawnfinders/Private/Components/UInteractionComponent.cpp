@@ -406,7 +406,7 @@ void UInteractionComponent::CancelInteraction()
 		NearestInteractible = nullptr;
 
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
-			IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 	}
 
 	else if (CurrentInteractible && bIsInInteraction) {
@@ -417,7 +417,7 @@ void UInteractionComponent::CancelInteraction()
 			IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
 			ClientStopInteract(CurrentInteractible, PlayerCharacter);
 
-			IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
+			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 		}
 
 		bIsInInteraction = false;

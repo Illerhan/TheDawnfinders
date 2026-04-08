@@ -459,7 +459,7 @@ void UHealthComponent::Fallen()
 	Multicast_DisplayFallen();
 	Multicast_ActualiseFallen(1);
 	
-	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Fallen, true);
+	IPlayerInterface::Execute_SetCurrentPlayerState(Owner, EPlayerState::Fallen, true);
 
 	FallenTimer = FallenDuration;
 
@@ -491,7 +491,7 @@ void UHealthComponent::Die()
 	Client_Die();
 
 	Multicast_HideFallen();
-	IPlayerInterface::Execute_RequestStateChange(Owner, EPlayerState::Dead, true);
+	IPlayerInterface::Execute_SetCurrentPlayerState(Owner, EPlayerState::Dead, true);
 	
 	ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
 	if (GM)
