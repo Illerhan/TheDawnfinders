@@ -374,6 +374,8 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	CurrentInteractible = nullptr;
 	bIsInInteraction = false;
 
+	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
+
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
 
@@ -414,13 +416,13 @@ void UInteractionComponent::CancelInteraction()
 		else {
 			IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
 			ClientStopInteract(CurrentInteractible, PlayerCharacter);
+
+			IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 		}
 
 		bIsInInteraction = false;
 		CurrentInteractible = nullptr;
 		NearestInteractible = nullptr;
-
-		IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
 	}
 }
 
