@@ -1156,4 +1156,25 @@ void AAPlayerCharacter::Client_OpenInteractionUI_Implementation(EInteractionUI U
     }
 }
 
+void AAPlayerCharacter::Client_CloseInteractionUI_Implementation(EInteractionUI UIType, AActor* Context)
+{
+    APlayerController* PC = Cast<APlayerController>(GetController());
+    if (!PC) return;
+
+    ACustomHUD* HUD = Cast<ACustomHUD>(PC->GetHUD());
+    if (!HUD || !HUD->MainWidget) return;
+
+    switch (UIType)
+    {
+    case EInteractionUI::LitterInventory:
+        HUD->MainWidget->CloseContainerInventory();
+        break;
+
+    case EInteractionUI::ContainerInventory:
+        HUD->MainWidget->CloseContainerInventory();
+        break;
+    }
+}
+
+
 #pragma endregion

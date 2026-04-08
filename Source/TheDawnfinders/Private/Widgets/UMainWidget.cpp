@@ -19,11 +19,11 @@ void UMainWidget::CloseContainerInventory_Implementation()
 {
 	bIsInContainer = false;
 
-	ALitter* Litter = Cast<ALitter>(CurrentContainer);
-	if(Litter) Litter->ClosePalanquinInventory();
+	//ALitter* Litter = Cast<ALitter>(CurrentContainer);
+	//if(Litter) Litter->ClosePalanquinInventory();
 
-	AContainer* Container = Cast<AContainer>(CurrentContainer);
-	if (Container) Container->CloseContainerInventory();
+	//AContainer* Container = Cast<AContainer>(CurrentContainer);
+	//if (Container) Container->CloseContainerInventory();
 }
 
 void UMainWidget::EnterSpectate_Implementation()

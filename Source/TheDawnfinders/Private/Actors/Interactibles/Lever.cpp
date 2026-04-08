@@ -25,6 +25,16 @@ void ALever::DoPlayerAutoMove_Implementation(AAPlayerCharacter* Player)
 
 }
 
+bool ALever::GetCanBeUsed_Implementation(AActor* Interactor)
+{
+    Super::GetCanBeUsed_Implementation(Interactor);
+
+    if(bHasInteractAnim && CurrentInteractActor)
+        return false;
+
+    return bCanBeUsed;
+}
+
 void ALever::Interact_Implementation(AActor* Interactor)
 {
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
