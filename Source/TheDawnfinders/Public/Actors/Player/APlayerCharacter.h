@@ -37,7 +37,7 @@ class THEDAWNFINDERS_API AAPlayerCharacter : public ACharacter, public IPlayerIn
 	GENERATED_BODY()
 
 public:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void ApplyPlayerData();
 
 	virtual void PossessedBy(AController* NewController) override;

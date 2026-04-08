@@ -51,6 +51,9 @@ void ACustomPlayerState::ActualiseHealth(float current, float max, float fixedMa
 void ACustomPlayerState::SetMaxHealth(float MaxHP)
 {
 	MaxHealth = MaxHP;
+
+	OnCurseInfoChange.Broadcast();
+	OnRep_StaminaChange();
 }
 
 void ACustomPlayerState::SetCurrentMaxHealth(float MaxHP)
