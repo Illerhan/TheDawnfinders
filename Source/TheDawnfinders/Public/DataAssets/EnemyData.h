@@ -44,12 +44,12 @@ public :
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
 	float SuspiciousStateDuration = 10.0f;
 
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
 	float AlertOthersDelayDuration = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
 	float EnterAggressiveWaitDuration = 1.5f;
-
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Hearing")
 	float NormalHearingRadius;
@@ -74,7 +74,22 @@ public :
 	float SuspiciousSpeed;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
-	float AggressiveSpeed;
+	float AggressiveBaseSpeed = 450;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	float AggressiveSlowedSpeed = 300;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	float AggressiveBaseRootMotionSpeed = 1.4f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	float AggressiveSlowedRootMotionSpeed = 0.9f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float MinFalloffDistance = 500.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Behavior Parameters")
+	float MaxFalloffDistance = 800.f;
 
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bagarre")
