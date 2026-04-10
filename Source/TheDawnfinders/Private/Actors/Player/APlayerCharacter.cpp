@@ -278,6 +278,10 @@ void AAPlayerCharacter::RequestStateChange_Implementation(EPlayerState NewState,
 {
     if (CurrentState == NewState) return;
 
+    if (HealthComponent->bIsFallen) {
+        return;
+    }
+
     switch (CurrentState) {
     case EPlayerState::Carrying :
         if (NewState == EPlayerState::Running || NewState == EPlayerState::Sneaking) return;
@@ -303,7 +307,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Fallen :
         StopAutoLock();
         ItemComponent->StopAim();
-
+        StopAutoMoveCharacter(true);
         StopMovementForDuration(3.f);
         break;
 
@@ -321,10 +325,10 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     UE_LOG(LogTemp, Display, TEXT("%s"), *UEnum::GetValueAsString(CurrentState));
 
     if (!HasAuthority()) {
-        Server_SetCurrentPlayerState(NewState, false);
+        Server_SetCurrentPlayerState(CurrentState, false);
     }
     else {
-        Multicast_SetCurrentPlayerState(NewState, bOverrideClient);
+        Multicast_SetCurrentPlayerState(CurrentState, bOverrideClient);
     }
 }
 
@@ -586,7 +590,7 @@ void AAPlayerCharacter::AutoMoveCharacter()
 void AAPlayerCharacter::StopAutoMoveCharacter(bool bCancel)
 {
     bIsAutoMoving = false;
-    SetCurrentPlayerState_Implementation(EPlayerState::Immobilized, false);
+    RequestStateChange_Implementation(EPlayerState::Immobilized, false);
 
     if (HasAuthority()) {
         Server_StopAutoMoveCharacter_Implementation(bCancel);

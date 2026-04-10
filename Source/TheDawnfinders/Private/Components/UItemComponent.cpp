@@ -750,7 +750,9 @@ void UItemComponent::StartAim()
 
 void UItemComponent::StopAim()
 {
-	if(!bIsReloading) IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::None, false);
+	if (!bIsAiming) return;
+
+	if(!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
 
