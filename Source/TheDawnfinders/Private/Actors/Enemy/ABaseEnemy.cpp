@@ -244,7 +244,7 @@ void ABaseEnemy::SetLockRotation(bool Locked)
 
 void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 {
-    GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveSpeed;
+    GetCharacterMovement()->MaxWalkSpeed = EnemyData->AggressiveBaseSpeed;
 
     bIsAttacking = false;
 
