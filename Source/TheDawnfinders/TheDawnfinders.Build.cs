@@ -19,7 +19,9 @@ public class TheDawnfinders : ModuleRules
             "UMG",
             "AdvancedSessions",
             "SlateIM",
-            "Niagara"
+            "Niagara",
+            "AkAudio", 
+            "WwiseSoundEngine"
         });
 		
 		if (Target.bBuildEditor)

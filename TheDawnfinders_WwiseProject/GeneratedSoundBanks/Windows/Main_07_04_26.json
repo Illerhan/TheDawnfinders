@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{6CB8CC7C-F1D3-E89E-0744-DC84B43F16E1}",
+    "Hash": "{B553D4CA-64C0-5F7D-4CEC-126D29A0D6F1}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_07_04_26",
     "ShortName": "Main_07_04_26",
     "Path": "Main_07_04_26.bnk",
@@ -2650,9 +2650,7 @@
       "Name": "Play_DownedHeartbeat",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedHeartbeat",
       "GUID": "{7D23A7D5-C14B-4A71-9A18-E693CC57E477}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.9698333",
-      "DurationMax": "1.0664583",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "39757222"
@@ -3736,6 +3734,6 @@
     ]
    }
   ],
-  "FileHash": "{1368F85F-F361-648D-5755-DD4DC1BD446D}"
+  "FileHash": "{731A10F4-B16F-7D7F-6994-CBDA7B229799}"
  }
 }

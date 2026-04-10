@@ -112,7 +112,7 @@ void FDebugWindow::DrawWindow(float DeltaTime)
 	}
 	if (SlateIM::Button(TEXT("Start")))
 	{
-		DebugComp->Server_TravelToMap("L_Dungeon_01?listen");
+		DebugComp->Server_TravelToMap("L_Dungeon_02?listen");
 	}
 	
 	SlateIM::Text(TEXT("=== TELEPORTATION ==="), FLinearColor::Green);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "Components/ActorComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "UHealthComponent.generated.h"
@@ -232,4 +233,16 @@ protected :
 
 	UPROPERTY()
 	UWorldHealthBar* WorldHealthBar;
+	
+	UPROPERTY()
+	int32 BreathSoundID;
+	
+	UPROPERTY()
+	int32 HeartBeatSoundID;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* FallenBreath;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HeartBeatFallen;
 };
