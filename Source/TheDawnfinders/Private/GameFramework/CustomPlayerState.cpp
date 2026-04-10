@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "GameFramework/CustomPlayerState.h"
+
+#include "../../../../Plugins/Wwise/Source/AkAudio/Classes/BlueprintNodes/PostEventAsync.h"
 #include "GameFramework/CustomHUD.h"
 #include "Widgets/UMainWidget.h"
 #include "Widgets/USquadWidget.h"
