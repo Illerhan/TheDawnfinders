@@ -210,6 +210,12 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	bool IsDisplayed;
 
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	FVector ChaseStartPosition;
+
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentChaseDistance;
+
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	float CurrentSpeed;
 
