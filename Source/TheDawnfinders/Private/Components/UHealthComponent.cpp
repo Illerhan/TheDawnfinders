@@ -1,4 +1,7 @@
 #include "Components/UHealthComponent.h"
+
+#include "AkGameplayStatics.h"
+#include "WwiseEventTracking.h"
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/CustomPlayerState.h"
 #include "Components/UStaminaComponent.h"
@@ -462,9 +465,8 @@ void UHealthComponent::Fallen()
 	IPlayerInterface::Execute_SetCurrentPlayerState(Owner, EPlayerState::Fallen, true);
 
 	FallenTimer = FallenDuration;
-
-	//CurrentMaxHealth = MaxHealth;
-	//Heal(MaxHealth);
+	BreathSoundID = UAkGameplayStatics::PostEvent(FallenBreath,Owner,0,FOnAkPostEventCallback(), false);
+	HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
@@ -498,6 +500,17 @@ void UHealthComponent::Die()
 	{
 		GM->AddDeadPlayer();
 		GM->CheckAllDead();
+	}
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(BreathSoundID);
+		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
+	}
+	if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(HeartBeatSoundID);
+		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
 	}
 }
 
