@@ -36,13 +36,16 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void Heal(float quantity);
 
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_Heal(float quantity);
+
 	UFUNCTION(BlueprintCallable)
 	void TakeDamage(float quantity, EVFXType DamageType = EVFXType::Blood);
 	
-	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_TakeDamage(float quantity, AActor* Origin);
 
-	UFUNCTION(Server, Unreliable, BlueprintCallable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void ServerChangeHealth(float newHealth);
 
 	UFUNCTION(BlueprintCallable)
@@ -50,7 +53,7 @@ public :
 
 	void RequestMaxHealthChange(float Amount);
 
-	UFUNCTION(Server,Unreliable,BlueprintCallable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void ChangeCurrentMaxHealth(float newValue);
 
 	UFUNCTION(BlueprintCallable)
