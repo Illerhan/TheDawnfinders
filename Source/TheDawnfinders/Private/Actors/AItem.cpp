@@ -41,10 +41,15 @@ void AItem::BeginPlay()
 		}
 
 		UDataTable* WeaponDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Data/DT_Weapons.DT_Weapons"));
-		if (!WeaponDataTable)
+		if (!WeaponDataTable) {
 			UE_LOG(LogTemp, Error, TEXT("Failed to load DataTable"));
+			return;
+		}
+
+		if (WeaponDataTable->FindRow<FWeaponInfos>(ItemData->WeaponDataTableRow, " ") == nullptr) return;
 
 		FWeaponInfos CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(ItemData->WeaponDataTableRow, " ");
+
 		ItemInfos = FItemInfos(ItemData, ItemData->Durability, CurrentWeaponData.MagazineSize);
 		Initialise(ItemInfos);
 	}

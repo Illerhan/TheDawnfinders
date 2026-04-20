@@ -4,8 +4,19 @@
 #include "Net/UnrealNetwork.h"
 
 
+ACarriable::ACarriable()
+{
+	SetRootComponent(StaticMesh);
+
+	InteractCollider->SetupAttachment(StaticMesh);
+	BoxCollider->SetupAttachment(StaticMesh);
+	InterestPointVFXComponent->SetupAttachment(StaticMesh);
+}
+
 void ACarriable::Interact_Implementation(AActor* Interactor)
 {
+	StaticMesh->SetSimulatePhysics(false);
+
 	IPlayerInterface::Execute_StartCarryHeavyItem(Interactor, this);
 
 	CarryActor = Interactor;
@@ -15,6 +26,8 @@ void ACarriable::Interact_Implementation(AActor* Interactor)
 
 void ACarriable::StopCarry()
 {
+	StaticMesh->SetSimulatePhysics(true);
+
 	CarryActor = nullptr;
 	bIsCarried = false;
 
@@ -42,10 +55,12 @@ void ACarriable::OnRep_IsCarried()
 	{
 		if (bIsCarried)
 		{
+			StaticMesh->SetSimulatePhysics(false);
 			InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
 		else
 		{
+			StaticMesh->SetSimulatePhysics(true);
 			InteractCollider->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		}
 	}
