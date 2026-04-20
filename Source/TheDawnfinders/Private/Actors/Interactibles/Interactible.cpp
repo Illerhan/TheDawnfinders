@@ -12,8 +12,8 @@ AInteractibleObjects::AInteractibleObjects()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	SetRootComponent(Root);
+	//Rooot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	//SetRootComponent(Rooot);
 
 	InteractCollider = CreateDefaultSubobject<UBoxComponent>(FName("InteractCollider"));
 	InteractCollider->SetupAttachment(RootComponent);

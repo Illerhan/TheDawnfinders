@@ -141,7 +141,7 @@ public :
 	UBoxComponent* BoxCollider;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
-	USceneComponent* Root;
+	USceneComponent* Rooot;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Collision")
 	UBoxComponent* InteractCollider;
