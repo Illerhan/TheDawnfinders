@@ -27,7 +27,7 @@
 						<Value Platform="Windows">256</Value>
 					</ValueList>
 				</Property>
-				<Property Name="LicenseKey" Type="string" Value="PHByb2plY3QgaWQ9IjIyMDUyIiBtYXNrPSJaQVFXNjM3MiIgZW5jPSIwIj48bGljZW5zZSBpZD0iMSIgbmFtZT0iV3dpc2UiIHR5cGU9IjMiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIwMjYtMDUtMDEiICAvPjxsaWNlbnNlIGlkPSIyMSIgbmFtZT0iTWFpbnRlbmFuY2UiIHR5cGU9IjMiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIwMjYtMDUtMDEiICAvPjxsaWNlbnNlIGlkPSI3MCIgbmFtZT0iSW5kaWUgTGljZW5zZSIgdHlwZT0iMyIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAyNi0wNS0wMSIgIC8+PC9wcm9qZWN0Pg==|D/DAvtx1Y8BjOHmfdRd5T+kQAoBHZ5rbHkCfeH9MU35PDxV2wsRE7UnogK1oMVnXBEG3LX9Lvct+x/1LQrKP1sZQBB7YyYwqUookEs75Ryb2vF3EQmS3wivDGaUF8Ila6WzPLwFTptHuDUXApASwhd3nZMcvHCapDrRHZ2dQ/HQD4KW3skGWMKUlKeaOzn4VtiOEeUmsq2F+hU6iXZ0knIJ8n2891tUdFXYd7WF9V8oONvfj94rEBG7ZcAsAJDpgQPhL+5fjjMcxWbaEgZ6By67lnmMn1zis75B9apMpnOv7/mLjoKWsGdNppLDekkNrPY8r5HpKt82H71QBndPJDg=="/>
+				<Property Name="LicenseKey" Type="string" Value="PHByb2plY3QgaWQ9IjIyMDUyIiBtYXNrPSJaQVFXNjM3MiIgZW5jPSIwIj48bGlj ZW5zZSBpZD0iMSIgbmFtZT0iV3dpc2UiIHR5cGU9IjMiIHBsYXRmb3Jtcz0iNCwx MCIgZXhwaXJlcz0iMjAyNi0wNS0wMSIgIC8+PGxpY2Vuc2UgaWQ9IjIxIiBuYW1l PSJNYWludGVuYW5jZSIgdHlwZT0iMyIgcGxhdGZvcm1zPSI0LDEwIiBleHBpcmVz PSIyMDI2LTA1LTAxIiAgLz48bGljZW5zZSBpZD0iNzAiIG5hbWU9IkluZGllIExp Y2Vuc2UiIHR5cGU9IjMiIHBsYXRmb3Jtcz0iNCwxMCIgZXhwaXJlcz0iMjAyNi0w NS0wMSIgIC8+PC9wcm9qZWN0Pg==|EE3o3qpvg/0kRQtjyrcIE28m9JbQCSLbO7A SgqADiNmN5Z7n5hbdXLUVvrDjHQBzJ5mEb8wu6FZrt8uVGVKD1/uAGKN/6HQkV0L VRwlvtuLlUQtprKP76efYHhwWfY69/X8OjqqR4/nOE8gMDHcJMxmNZhXYDUtbYsu AmTKhrfV8A9HCQtH0mJOyxwVCQe5Zpk4DHuRyWRPID6aSZuJwL+L2kG+bsNmWnxn 6DLUJj3SQHfb70AdQExihvPUzzSXKdr1JnOuycN/FL9SNBoo5BUeEas2TZYYSaKJ EaTcnUlamQVI4F3xzdxuvMqe86YwVxQM8lsFtfMlxSco5sW3Nyg== "/>
 				<Property Name="SoundBankHeaderFilePath" Type="string" Value="GeneratedSoundBanks"/>
 				<Property Name="SoundBankPaths" Type="string">
 					<ValueList>
@@ -146,6 +146,11 @@
 						<Property Name="OverrideWavLoop" Type="bool">
 							<ValueList>
 								<Value>False</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:FileIDForAudioSource" Type="string">
+							<ValueList>
+								<Value></Value>
 							</ValueList>
 						</Property>
 						<Property Name="TrimBegin" Type="Real64">
@@ -549,6 +554,76 @@
 						<Property Name="ReflectionsVolume" Type="Real64">
 							<ValueList>
 								<Value>0</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:ActiveChannels" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:FileID" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:FileName" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:HandleStartTime" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:HandleStopTime" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:LibraryID" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:LibraryLocation" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:PlaybackSpeed" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:ProcessList" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:RenderedFileBitRate" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:RenderedFilePath" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:RenderedFileSampleRate" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:SelectionStartTime" Type="string">
+							<ValueList>
+								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="Soundly:SelectionStopTime" Type="string">
+							<ValueList>
+								<Value></Value>
 							</ValueList>
 						</Property>
 						<Property Name="SpeakerPanning" Type="int16">
