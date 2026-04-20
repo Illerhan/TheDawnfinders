@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "PressurePlate.generated.h"
@@ -45,4 +46,11 @@ protected:
 
 	UPROPERTY()
 	int CurrentPlayerCount = 0;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* PlateSound;
+	
+	UPROPERTY()
+	int32 PlateSoundID;
+	
 };
