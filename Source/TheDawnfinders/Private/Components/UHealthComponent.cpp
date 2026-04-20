@@ -208,12 +208,20 @@ void UHealthComponent::Heal(float quantity)
 	// If client
 	if (!GetOwner()->HasAuthority())
 	{
-		ServerChangeHealth(CurrentHealth);
+		Server_Heal(CurrentHealth);
 		LocalChangeHealth();
 		return;
 	};
 
 	// If server
+	Server_Heal_Implementation(CurrentHealth);
+}
+
+void UHealthComponent::Server_Heal_Implementation(float quantity)
+{
+	CurrentHealth += quantity;
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
+
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
