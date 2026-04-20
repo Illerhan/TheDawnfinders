@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "MovableObjects.h"
 #include "Doors.generated.h"
 
@@ -72,6 +73,7 @@ public :
 	float AutoCloseDelay = 2.0f;
 
 	FTimerHandle AutoCloseTimer;
+
 
 protected : 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Doors")

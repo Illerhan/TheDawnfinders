@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/Activable.h"
@@ -84,4 +85,10 @@ public :
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int PlayerCount;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* MovableSound;
+	
+	UPROPERTY()
+	int32 MovableSoundID;
 };

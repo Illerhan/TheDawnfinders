@@ -2,6 +2,7 @@
 
 #include "Actors/MovableObjects/Doors.h"
 
+#include "AkGameplayStatics.h"
 #include "GameFramework/UDoorRegistry.h"
 #include "Net/UnrealNetwork.h"
 
@@ -89,7 +90,17 @@ void ADoors::StartOpening()
 {
     if (!HasAuthority()) return;
     if (!MoveCurve) return;
-
+    if (MovableSoundID)
+    {
+        FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+        if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+        {
+            AudioDevice->StopPlayingID(MovableSoundID);
+            MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
+        }  
+    }
+    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+   
     bCanMove = false;
 
     // On calcule la vitesse normale (positive)
@@ -100,6 +111,7 @@ void ADoors::StartOpening()
     }
 
     Timeline.SetPlayRate(ForwardRate);
+    
 
 
     // La porte était en train de se fermer, on inverse le mouvement immédiatement
@@ -211,6 +223,16 @@ void ADoors::StopOpening()
     // Si la timeline ne joue pas → on force la fermeture
     if (!Timeline.IsPlaying())
     {
+        if (MovableSoundID)
+        {
+            FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+            if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+            {
+                AudioDevice->StopPlayingID(MovableSoundID);
+                MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
+            }  
+        }
+        MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
         Timeline.ReverseFromEnd();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from end"));
         return;
@@ -229,7 +251,7 @@ void ADoors::StopOpening()
 void ADoors::OnTimelineFinished()
 {
     bool bOpened = Timeline.GetPlaybackPosition() >= 0.99f;
-
+    
     if (bOpened)
     {
         bIsFullyOpen = true;
@@ -237,7 +259,7 @@ void ADoors::OnTimelineFinished()
         CurrentTimelineProgress = 1.0f;
 
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully opened"));
-
+        
         if (bAutoCloseWhenFullyOpen && !bIsPermanentlyOpen)
         {
             GetWorldTimerManager().SetTimer(
@@ -260,7 +282,17 @@ void ADoors::OnTimelineFinished()
 }
 
 void ADoors::CloseDoor()
-{
+{    
+    if (MovableSoundID)
+    {
+        FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+        if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+        {
+            AudioDevice->StopPlayingID(MovableSoundID);
+            MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
+        }  
+    }
+    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
     if (!HasAuthority()) return;
     if (bIsPermanentlyOpen) return;
 
