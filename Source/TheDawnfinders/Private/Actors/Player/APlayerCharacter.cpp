@@ -1013,10 +1013,12 @@ void AAPlayerCharacter::OnMontageNotifyBegin(FName NotifyName, const FBranchingP
 
 void AAPlayerCharacter::StartCarryHeavyItem_Implementation(AActor* Interactible)
 {
-    InteractionComponent->StartCarryHeavyItem(Cast<ACarriable>(Interactible));
+    ACarriable* Carriable = Cast<ACarriable>(Interactible);
 
-    FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, true);
-    Interactible->AttachToComponent(CarriablePosRef, AttachRules);
+    InteractionComponent->StartCarryHeavyItem(Carriable);
+
+    FAttachmentTransformRules AttachRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepRelative, false);
+    Carriable->StaticMesh->AttachToComponent(CarriablePosRef, AttachRules);
 }
 
 void AAPlayerCharacter::EndCarryHeavyItem_Implementation(AActor* Interactible)
