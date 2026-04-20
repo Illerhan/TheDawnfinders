@@ -1,4 +1,6 @@
 ﻿#include "Actors/MovableObjects/MovableObjects.h"
+
+#include "AkGameplayStatics.h"
 #include "Actors/MovableObjects/Doors.h"
 #include "EntitySystem/MovieSceneEntitySystemRunner.h"
 
@@ -45,7 +47,7 @@ void AMovableObjects::Tick(float DeltaTime)
 
 void AMovableObjects::DoMainAction_Implementation()
 {
-
+	
 }
 
 void AMovableObjects::StopMainAction_Implementation()
@@ -101,6 +103,8 @@ void AMovableObjects::DoMovement_Implementation()
 		LastReverseTime = CurrentTime;
 		
 		UE_LOG(LogTemp, Warning, TEXT("[SERVER] DoMovement called"));
+		
+		
 	}
 }
 
@@ -150,6 +154,14 @@ void AMovableObjects::HandleProgress(float value)
 void AMovableObjects::OnTimeLineFinished()
 {
 	ADoors* Door = Cast<ADoors>(this);
+	
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(MovableSoundID);
+		MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
+	}    
+	
 	if (Door)
 	{
 		// CORRECTION : On vérifie où la Timeline s'est arrêtée
@@ -158,6 +170,7 @@ void AMovableObjects::OnTimeLineFinished()
 		{
 			Door->bIsFullyOpen = true;
 			UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door finished OPENING (Fully Open)"));
+			
 		}
 		// Si on est au début (ou presque), la porte est fermée
 		else

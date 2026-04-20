@@ -3,6 +3,8 @@
 
 #include "PressurePlate.h"
 
+#include "AkAudioDevice.h"
+#include "AkGameplayStatics.h"
 #include "Interfaces/Activable.h"
 
 
@@ -37,6 +39,16 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 	CurrentPlayerCount++;
 	if (CurrentPlayerCount > 1) return;
 
+	if (PlateSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && PlateSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(PlateSoundID);
+			PlateSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	PlateSoundID = UAkGameplayStatics::PostEvent(PlateSound,Owner,0,FOnAkPostEventCallback(), false);
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
