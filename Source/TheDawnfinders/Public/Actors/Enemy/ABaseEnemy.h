@@ -216,6 +216,9 @@ protected :
 	UPROPERTY(BlueprintReadWrite)
 	float CurrentChaseDistance;
 
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentChaseDistanceMinClamp;
+
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	float CurrentSpeed;
 
