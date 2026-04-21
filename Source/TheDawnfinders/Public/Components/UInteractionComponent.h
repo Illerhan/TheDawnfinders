@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "UInteractionComponent.generated.h"
 
+class UAkAudioEvent;
 class AAPlayerCharacter;
 class UQTEWidget;
 
@@ -61,6 +62,9 @@ public:
 	void ClientStopInteract(AActor* Interactible, AAPlayerCharacter* Player);
 
 	void StartExternalQTE(AActor* QTEActor);
+	
+	UFUNCTION(Client,Unreliable)
+	void PlayInteractSound();
 
 
 // === CARRY ===
@@ -195,4 +199,13 @@ private:
 
 	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
 	float HelpTimeRemaining = 0.f;
-};
+
+public:
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* InteractSound;
+	
+	UPROPERTY()
+	int32 InteractSoundID;
+	
+};	
