@@ -111,7 +111,7 @@ void AInteractibleObjects::HoldTimer(float DeltaTime)
 	if (InteractionTimer <= 0) {
 		IPlayerInterface::Execute_HideProgress(PlayerTemp);
 		
-		BP_OnInteractionFinished();
+		BP_OnInteractionFinished_Implementation();
 	}
 }
 
