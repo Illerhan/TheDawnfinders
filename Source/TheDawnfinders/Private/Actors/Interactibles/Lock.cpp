@@ -27,6 +27,8 @@ void ALock::Interact_Implementation(AActor* Interactor)
 
 	bIsInteracting = true;
 	InteractionTimer = 2.f;
+
+	bPlayerIsUsing = true;
 }
 
 
@@ -34,6 +36,8 @@ void ALock::StopInteract_Implementation(AActor* Interactor)
 {
 	bIsInteracting = false;
 	IPlayerInterface::Execute_HideProgress(Interactor);
+
+	bPlayerIsUsing = false;
 }
 
 void ALock::BP_OnInteractionFinished_Implementation()
@@ -44,7 +48,9 @@ void ALock::BP_OnInteractionFinished_Implementation()
 		LinkedObjects[i]->DoMovement();
 	}
 
-	Super::BP_OnInteractionFinished();
+	Super::BP_OnInteractionFinished_Implementation();
+
+	Cast<AAPlayerCharacter>(PlayerTemp)->InteractionComponent->StopInteract();
 
 	Destroy();
 }

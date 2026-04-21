@@ -60,6 +60,7 @@ public :
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
 	virtual EQTEType GetNeededQTE_Implementation() override;
 	virtual bool GetQTEDone_Implementation() override;
+	//virtual bool GetQTEDone_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
