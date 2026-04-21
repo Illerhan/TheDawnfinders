@@ -29,7 +29,7 @@ bool ALever::GetCanBeUsed_Implementation(AActor* Interactor)
 {
     Super::GetCanBeUsed_Implementation(Interactor);
 
-    if(bHasInteractAnim && CurrentInteractActor)
+    if(bHasInteractAnim && NeededPlayerCount <= CurrentInteractActorCount)
         return false;
 
     return bCanBeUsed;
@@ -40,14 +40,16 @@ void ALever::Interact_Implementation(AActor* Interactor)
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
 
     // We need to go to the lever first 
-    if (bHasInteractAnim && !CurrentInteractActor) {
-        CurrentInteractActor = Interactor;
+    if (bHasInteractAnim && CurrentInteractActorCount < NeededPlayerCount) {
+        CurrentInteractActors.Add(Interactor);
+        CurrentInteractActorCount++;
+
         AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
         DoPlayerAutoMove(Player);
         UE_LOG(LogTemp, Error, TEXT("Start Interact With lever"));
         return;
     }
-    else if (bHasInteractAnim && CurrentInteractActor != Interactor) {
+    else if (bHasInteractAnim && !CurrentInteractActors.Contains(Interactor)) {
         return;
     }
 
@@ -119,7 +121,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
             }
         }
 
-        CurrentInteractActor = nullptr;
+        CurrentInteractActors.Reset();
+        CurrentInteractActorCount = 0;
 
         Super::Interact_Implementation(Interactor);
     }
@@ -128,10 +131,12 @@ void ALever::Interact_Implementation(AActor* Interactor)
 void ALever::StartHoldInteraction(AActor* Player)
 {
     HoldPlayerCount++;
-    if (HoldPlayerCount < HoldPlayerCountNeeded) return;
+    if (HoldPlayerCount < NeededPlayerCount) return;
+
+    UE_LOG(LogTemp, Display, TEXT("Start lever hold"));
 
     // Starts Opening
-    if (HoldPlayerCount == HoldPlayerCountNeeded) {
+    if (HoldPlayerCount == NeededPlayerCount) {
         for (AMovableObjects* const Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
@@ -172,7 +177,7 @@ void ALever::StopHoldInteraction(AActor* Player)
     HoldPlayerCount--;
 
     // If some players still hold the lever (pause)
-    if (HoldPlayerCount > 0 && HoldPlayerCount < HoldPlayerCountNeeded) {
+    if (HoldPlayerCount > 0 && HoldPlayerCount < NeededPlayerCount) {
         for (AMovableObjects* Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
@@ -186,7 +191,7 @@ void ALever::StopHoldInteraction(AActor* Player)
     }
 
     // If enough players remains (change speed)
-    if (HoldPlayerCount >= HoldPlayerCountNeeded) {
+    if (HoldPlayerCount >= NeededPlayerCount) {
         for (AMovableObjects* Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
