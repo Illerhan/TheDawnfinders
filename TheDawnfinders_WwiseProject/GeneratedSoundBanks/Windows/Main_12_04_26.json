@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{63A1A954-8C8D-E517-E113-2261DF14D278}",
+    "Hash": "{93474891-C9AE-91FA-B59B-2C950E2B2C4E}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -48,6 +48,14 @@
       "CachePath": "C4/{C4668D9A-35F3-D624-BBFD-639959BCEAF0}.wem"
      },
      {
+      "Id": "25974615",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Whispers2.wav",
+      "CachePath": "28/{28BD4187-B5CA-8C8E-B3E1-713B24DE07B7}.wem"
+     },
+     {
       "Id": "29652185",
       "Language": "SFX",
       "Streaming": "false",
@@ -70,6 +78,22 @@
       "Location": "Memory",
       "ShortName": "OutOfBreath\\OutOfBreath 4.wav",
       "CachePath": "B5/{B58233F9-A523-CEB1-F420-FB796B8E1642}.wem"
+     },
+     {
+      "Id": "35075181",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB.wav",
+      "CachePath": "E7/{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem"
+     },
+     {
+      "Id": "37215428",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Whispers4.wav",
+      "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
      },
      {
       "Id": "39757222",
@@ -160,12 +184,28 @@
       "CachePath": "E9/{E983BC2C-95E9-0C80-F88E-BF5AAA5F51F2}.wem"
      },
      {
+      "Id": "70881524",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-07.wav",
+      "CachePath": "D4/{D4DC5CDB-0345-139B-0A37-21FA4312C532}.wem"
+     },
+     {
       "Id": "70981290",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "OutOfBreath\\OutOfBreath 9.wav",
       "CachePath": "D2/{D29DFE1F-ED45-D1ED-6778-16E5086D2B71}.wem"
+     },
+     {
+      "Id": "82812968",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-05.wav",
+      "CachePath": "EE/{EE92EA7E-74E8-FB28-6490-1A9DF7AD5756}.wem"
      },
      {
       "Id": "83414938",
@@ -262,6 +302,14 @@
       "Location": "Memory",
       "ShortName": "DownedHeartbeat\\DownedHeartbeat 6.wav",
       "CachePath": "D0/{D0712045-23DF-7ABB-91DA-1296BBFB1FB2}.wem"
+     },
+     {
+      "Id": "112612915",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-14.wav",
+      "CachePath": "96/{968E1DA2-387B-3324-6B7F-B2020CB38701}.wem"
      },
      {
       "Id": "114231804",
@@ -472,6 +520,14 @@
       "CachePath": "E8/{E856C60C-5E3F-D6F9-1CF5-2AFA83BBBCAA}.wem"
      },
      {
+      "Id": "222051633",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-05.wav",
+      "CachePath": "4F/{4F5A61D3-185B-CCDD-BA74-8D68009839BB}.wem"
+     },
+     {
       "Id": "227490105",
       "Language": "SFX",
       "Streaming": "false",
@@ -518,6 +574,14 @@
       "Location": "Memory",
       "ShortName": "ZELOTH_MAIN (2).wav",
       "CachePath": "CF/{CF26AFE9-0107-9392-B428-19001DD473A5}.wem"
+     },
+     {
+      "Id": "235116885",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-05.wav",
+      "CachePath": "08/{086E2547-7495-2501-09FF-FCB7C11F42D6}.wem"
      },
      {
       "Id": "245422922",
@@ -664,6 +728,14 @@
       "CachePath": "94/{94699130-538A-CCAB-2C3B-610534C6F169}.wem"
      },
      {
+      "Id": "280188920",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ASSET LIST DAWNFINDERS_004_02-01.wav",
+      "CachePath": "E7/{E7AFBCC3-95E6-45F3-8224-ACCE60F8F4AD}.wem"
+     },
+     {
       "Id": "281091351",
       "Language": "SFX",
       "Streaming": "false",
@@ -720,6 +792,14 @@
       "CachePath": "17/{176E7DB0-26F6-5442-D36C-96B5F745C1B3}.wem"
      },
      {
+      "Id": "293991378",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-03.wav",
+      "CachePath": "C9/{C9CEAB98-7FD5-4434-79E0-689DE3E26866}.wem"
+     },
+     {
       "Id": "294569269",
       "Language": "SFX",
       "Streaming": "false",
@@ -734,6 +814,22 @@
       "Location": "Memory",
       "ShortName": "WoodWalkCrack\\FootstepsWoodCrackWalk 13.wav",
       "CachePath": "20/{201C47D9-234A-F378-42BD-4B6B813F4893}.wem"
+     },
+     {
+      "Id": "301671005",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB4.wav",
+      "CachePath": "79/{79866936-B277-A828-3907-E456A14C705B}.wem"
+     },
+     {
+      "Id": "302753226",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-03.wav",
+      "CachePath": "B0/{B0F0B5FC-497A-E040-438E-9508E808CE2F}.wem"
      },
      {
       "Id": "303742668",
@@ -816,6 +912,22 @@
       "CachePath": "F7/{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem"
      },
      {
+      "Id": "358367435",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-01.wav",
+      "CachePath": "4D/{4D967AEF-182A-E051-D42A-39FD2690C2E9}.wem"
+     },
+     {
+      "Id": "362611617",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-09.wav",
+      "CachePath": "1B/{1B7B0067-8424-A9EE-4A64-BF2B343BDA9B}.wem"
+     },
+     {
       "Id": "364748855",
       "Language": "SFX",
       "Streaming": "false",
@@ -830,6 +942,14 @@
       "Location": "Memory",
       "ShortName": "PlayerHealing\\PlayerHealing 2.wav",
       "CachePath": "CA/{CA52A191-9079-0EBA-657F-B2F04FD62321}.wem"
+     },
+     {
+      "Id": "374653091",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB5.wav",
+      "CachePath": "2E/{2E002B28-9256-0F01-D3FB-F5CB36D029C9}.wem"
      },
      {
       "Id": "376331356",
@@ -920,6 +1040,14 @@
       "CachePath": "B4/{B4FDAEBD-B7F4-B42F-0A48-E7833392594C}.wem"
      },
      {
+      "Id": "404108249",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB6.wav",
+      "CachePath": "6A/{6A798ED0-7FAC-7DAC-4AD3-700A06A71C71}.wem"
+     },
+     {
       "Id": "408684288",
       "Language": "SFX",
       "Streaming": "false",
@@ -976,6 +1104,14 @@
       "CachePath": "A6/{A6E51F56-A712-9D76-FEF1-29EF2B3B31BB}.wem"
      },
      {
+      "Id": "422035676",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Whistpers1.wav",
+      "CachePath": "C2/{C2A1C820-3F2E-2DB5-8148-515E14DF88DB}.wem"
+     },
+     {
       "Id": "423956364",
       "Language": "SFX",
       "Streaming": "false",
@@ -1016,6 +1152,14 @@
       "CachePath": "D2/{D22CC55D-0BDE-B51F-5A10-AA6B9859CB40}.wem"
      },
      {
+      "Id": "438100117",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB2.wav",
+      "CachePath": "30/{30EF938B-8F96-CD8C-491D-213C65D61B54}.wem"
+     },
+     {
       "Id": "438106016",
       "Language": "SFX",
       "Streaming": "false",
@@ -1030,6 +1174,14 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 7.wav",
       "CachePath": "EA/{EA9C8914-19B8-8F38-7E90-D65A6B9E1A04}.wem"
+     },
+     {
+      "Id": "444785981",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB8.wav",
+      "CachePath": "68/{68EC7D32-176A-8F93-C82E-3E89EA03F9BF}.wem"
      },
      {
       "Id": "445279208",
@@ -1296,6 +1448,14 @@
       "CachePath": "A0/{A0518DCB-D803-907D-A3D1-3D691256CBA6}.wem"
      },
      {
+      "Id": "559741217",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Whispers3.wav",
+      "CachePath": "F4/{F49845C4-BDD8-49E3-DD83-9C24C5C95B06}.wem"
+     },
+     {
       "Id": "563800133",
       "Language": "SFX",
       "Streaming": "false",
@@ -1342,6 +1502,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 4.wav",
       "CachePath": "C9/{C9226DF3-1119-69CE-07C8-D3A90E8F4E2F}.wem"
+     },
+     {
+      "Id": "571042560",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-14.wav",
+      "CachePath": "F3/{F3367CC1-6D0C-3DE7-FEDD-DB70DDD4F4D5}.wem"
      },
      {
       "Id": "574721267",
@@ -1392,6 +1560,14 @@
       "CachePath": "1A/{1A432C82-0B7C-9C13-FE75-A93F71CAEAF1}.wem"
      },
      {
+      "Id": "592970605",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-11.wav",
+      "CachePath": "E8/{E8843953-8A75-0A89-C059-EDD2F3EE583E}.wem"
+     },
+     {
       "Id": "595457668",
       "Language": "SFX",
       "Streaming": "false",
@@ -1406,6 +1582,22 @@
       "Location": "Memory",
       "ShortName": "DownedFall\\DownedFall 3.wav",
       "CachePath": "BD/{BD695707-2502-7441-C3AB-62E92373472D}.wem"
+     },
+     {
+      "Id": "598258762",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-09.wav",
+      "CachePath": "30/{301A16D2-97E7-6021-B8A5-BC9FF6193B38}.wem"
+     },
+     {
+      "Id": "602489578",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-07.wav",
+      "CachePath": "F4/{F4C966DA-11D9-7AB0-DA00-E89B672AFB90}.wem"
      },
      {
       "Id": "606111130",
@@ -1464,6 +1656,14 @@
       "CachePath": "C4/{C46F6C4B-6191-52D2-E319-C1DB8A9E8B74}.wem"
      },
      {
+      "Id": "630154365",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-09.wav",
+      "CachePath": "71/{71E8FFAE-4E16-765A-E004-E6C55F717D47}.wem"
+     },
+     {
       "Id": "634737390",
       "Language": "SFX",
       "Streaming": "false",
@@ -1478,6 +1678,22 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 4.wav",
       "CachePath": "F9/{F9DDDEAA-49C7-C3C3-E874-35436392CDF1}.wem"
+     },
+     {
+      "Id": "644463197",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ASSET LIST DAWNFINDERS_005_03-01.wav",
+      "CachePath": "4A/{4AF6B211-8A28-D284-34FC-6160B15CB3A6}.wem"
+     },
+     {
+      "Id": "647776018",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB3.wav",
+      "CachePath": "36/{36EB80D0-1E46-A249-5AD8-DE4B75684CE3}.wem"
      },
      {
       "Id": "652194251",
@@ -1502,6 +1718,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 1.wav",
       "CachePath": "0F/{0FE7E5B2-924B-FA53-A20F-A57C1CB15003}.wem"
+     },
+     {
+      "Id": "661044718",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-11.wav",
+      "CachePath": "39/{39981ECA-BC17-FFFA-F0EF-3B038E705AA1}.wem"
      },
      {
       "Id": "661656056",
@@ -1598,6 +1822,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 5.wav",
       "CachePath": "AA/{AA9A013E-9CAA-AC6B-7C0D-DFE9390692D9}.wem"
+     },
+     {
+      "Id": "709591937",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-13.wav",
+      "CachePath": "72/{72B8880C-9240-58A8-E1B8-0A50694FE6D2}.wem"
      },
      {
       "Id": "710575632",
@@ -1712,6 +1944,14 @@
       "CachePath": "7A/{7AED3A35-5AC8-99CD-61F3-A4A8493A1BE0}.wem"
      },
      {
+      "Id": "743349270",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-13.wav",
+      "CachePath": "5F/{5F04E7A4-E267-F276-DFBA-36C93BD6A5D5}.wem"
+     },
+     {
       "Id": "747783868",
       "Language": "SFX",
       "Streaming": "false",
@@ -1742,6 +1982,14 @@
       "Location": "Memory",
       "ShortName": "DownedFall\\DownedFall 6.wav",
       "CachePath": "5A/{5A6F579F-B28E-4C2D-1AE4-8F06A69D793E}.wem"
+     },
+     {
+      "Id": "757900566",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-14.wav",
+      "CachePath": "4C/{4C04747A-6A98-37A9-3277-E9C5C8301CAB}.wem"
      },
      {
       "Id": "761029887",
@@ -1800,6 +2048,14 @@
       "CachePath": "6E/{6EB2E4D3-495B-F879-3125-71DBF7D329D8}.wem"
      },
      {
+      "Id": "782401836",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-13.wav",
+      "CachePath": "CE/{CED132C7-781B-2BFA-0C09-5A3DB74E707F}.wem"
+     },
+     {
       "Id": "783285563",
       "Language": "SFX",
       "Streaming": "false",
@@ -1814,6 +2070,14 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 12.wav",
       "CachePath": "3A/{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem"
+     },
+     {
+      "Id": "793535417",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GRAB7.wav",
+      "CachePath": "94/{9481A608-1AEB-1F9E-D5A0-84DA2C78804F}.wem"
      },
      {
       "Id": "793936365",
@@ -1960,6 +2224,14 @@
       "CachePath": "11/{118DAEDE-8343-884A-6A17-569E30B620D5}.wem"
      },
      {
+      "Id": "854938390",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-01.wav",
+      "CachePath": "30/{3030606F-2895-5206-D45C-A59C1224B728}.wem"
+     },
+     {
       "Id": "855499412",
       "Language": "SFX",
       "Streaming": "false",
@@ -1976,12 +2248,28 @@
       "CachePath": "AA/{AA9865EE-C7BA-4B45-EDA7-A378199574F4}.wem"
      },
      {
+      "Id": "865539257",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Raise.wav",
+      "CachePath": "16/{16D09689-F29A-549B-9CAE-147F998A24F5}.wem"
+     },
+     {
       "Id": "866395646",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "WoodWalkCrack\\FootstepsWoodCrackWalk 1.wav",
       "CachePath": "AC/{AC8657F8-E0DF-955D-47EC-328F00B1A2CA}.wem"
+     },
+     {
+      "Id": "875625137",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-01.wav",
+      "CachePath": "3A/{3AADC4F4-D8F2-4FF2-73D0-629BDDB98263}.wem"
      },
      {
       "Id": "875885490",
@@ -2056,6 +2344,14 @@
       "CachePath": "E0/{E06CFAB0-BACF-23E5-9D4B-3D8C89A5AFE2}.wem"
      },
      {
+      "Id": "901440669",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Basic Cloth_35-11.wav",
+      "CachePath": "35/{3598DB97-2D48-09B9-9A57-10E8F60FE5B9}.wem"
+     },
+     {
       "Id": "903624507",
       "Language": "SFX",
       "Streaming": "false",
@@ -2070,6 +2366,14 @@
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 5.wav",
       "CachePath": "39/{39620D0B-61D8-37B8-24E2-385BEDB28836}.wem"
+     },
+     {
+      "Id": "910031922",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-13.wav",
+      "CachePath": "37/{373C5437-147A-F2BF-894D-813283F1E0A2}.wem"
      },
      {
       "Id": "912347765",
@@ -2102,6 +2406,14 @@
       "Location": "Memory",
       "ShortName": "WoodWalkCrack\\FootstepsWoodCrackWalk 9.wav",
       "CachePath": "64/{6444D874-F220-3DD7-F783-622D8A361DF8}.wem"
+     },
+     {
+      "Id": "927531506",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01.wav",
+      "CachePath": "23/{233E9151-20FA-CFF4-198E-8B2A44CB4141}.wem"
      },
      {
       "Id": "928559674",
@@ -2192,6 +2504,14 @@
       "CachePath": "12/{12B5A519-79AC-9FDA-92EE-02149CC2F28D}.wem"
      },
      {
+      "Id": "964222622",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-14.wav",
+      "CachePath": "2D/{2D0FBD37-6B87-696F-FEF5-2FCA3307B917}.wem"
+     },
+     {
       "Id": "966675639",
       "Language": "SFX",
       "Streaming": "false",
@@ -2248,6 +2568,14 @@
       "CachePath": "C2/{C2F1979F-830F-1E20-0A81-94152D3DE671}.wem"
      },
      {
+      "Id": "976447741",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-09.wav",
+      "CachePath": "DE/{DEBD4CF6-4C7F-09FE-2662-4770C632FD9B}.wem"
+     },
+     {
       "Id": "977382893",
       "Language": "SFX",
       "Streaming": "false",
@@ -2270,6 +2598,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 6.wav",
       "CachePath": "E9/{E9FF869E-834D-F701-8E9E-1E8AE980C43C}.wem"
+     },
+     {
+      "Id": "985944095",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-11.wav",
+      "CachePath": "8A/{8A5D408D-2944-4998-6D41-B67D99EAFFAF}.wem"
      },
      {
       "Id": "987167948",
@@ -2312,6 +2648,14 @@
       "CachePath": "BF/{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem"
      },
      {
+      "Id": "991140081",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-01.wav",
+      "CachePath": "C4/{C4FBC4E7-77F4-2CAC-EC69-3381375E2E43}.wem"
+     },
+     {
       "Id": "991859914",
       "Language": "SFX",
       "Streaming": "false",
@@ -2326,6 +2670,14 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 10.wav",
       "CachePath": "1B/{1BA9CFB1-B2A0-8B30-03C9-07626682B098}.wem"
+     },
+     {
+      "Id": "1005848849",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Shot-03.wav",
+      "CachePath": "2C/{2C2DC184-D360-5CC2-9D94-6D3EC2DFDA0E}.wem"
      },
      {
       "Id": "1006815413",
@@ -2368,12 +2720,44 @@
       "CachePath": "85/{85CB437C-A715-C3F2-5197-40FAFE17B63C}.wem"
      },
      {
+      "Id": "1016179183",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-07.wav",
+      "CachePath": "98/{98C079D1-0BDF-6F1A-137F-047B29A4CAD9}.wem"
+     },
+     {
+      "Id": "1016928727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-07.wav",
+      "CachePath": "89/{89F9E38B-7C78-4C16-8606-2FE5C11F7684}.wem"
+     },
+     {
       "Id": "1018101402",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "PlayerHealing\\PlayerHealing 4.wav",
       "CachePath": "BA/{BAA3C923-21CE-285B-0F94-86CCE63CE440}.wem"
+     },
+     {
+      "Id": "1024559731",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Hit-03.wav",
+      "CachePath": "FD/{FDC8D235-CD07-4ADC-4A58-F77A5B1E98C3}.wem"
+     },
+     {
+      "Id": "1026434573",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gold_Grab-05.wav",
+      "CachePath": "ED/{ED06A902-4D26-97A6-563E-76282B9D8AC2}.wem"
      },
      {
       "Id": "1029570780",
@@ -2438,6 +2822,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Calling\\Palanquin_Inventory 3.wav",
       "CachePath": "97/{973A8795-B12C-F4A2-F847-D7A123F74441}.wem"
+     },
+     {
+      "Id": "1050105765",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SUB1.wav",
+      "CachePath": "99/{99C6697F-DEB5-5645-68E1-5635AA37243B}.wem"
      },
      {
       "Id": "1051819540",
@@ -2556,6 +2948,26 @@
         }
        ]
       }
+     },
+     {
+      "Id": "4186816568",
+      "Name": "Play_AMB_Hallucination",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Hallucination",
+      "GUID": "{1E71C3D5-B48A-4C84-BACA-A963DC3B5DFC}",
+      "DurationType": "OneShot",
+      "DurationMin": "22.4",
+      "DurationMax": "22.4",
+      "MediaRefs": [
+       {
+        "Id": "280188920"
+       },
+       {
+        "Id": "644463197"
+       },
+       {
+        "Id": "927531506"
+       }
+      ]
      },
      {
       "Id": "2959353627",
@@ -2902,6 +3314,32 @@
        },
        {
         "Id": "978672313"
+       }
+      ]
+     },
+     {
+      "Id": "749849859",
+      "Name": "Play_DamagesMadness",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DamagesMadness",
+      "GUID": "{CCF1E50A-BD71-4958-88A2-1D4D5AEBB490}",
+      "DurationType": "OneShot",
+      "DurationMin": "25.162666",
+      "DurationMax": "25.162666",
+      "MediaRefs": [
+       {
+        "Id": "25974615"
+       },
+       {
+        "Id": "37215428"
+       },
+       {
+        "Id": "422035676"
+       },
+       {
+        "Id": "559741217"
+       },
+       {
+        "Id": "1050105765"
        }
       ]
      },
@@ -3389,6 +3827,208 @@
        },
        {
         "Id": "819944367"
+       }
+      ]
+     },
+     {
+      "Id": "1864892471",
+      "Name": "Play_Player_Hit",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Hit",
+      "GUID": "{72F8C657-F4D5-43AE-BA92-FA8CCC4D96A1}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.87733334",
+      "DurationMax": "1.0406667",
+      "MediaRefs": [
+       {
+        "Id": "235116885"
+       },
+       {
+        "Id": "362611617"
+       },
+       {
+        "Id": "592970605"
+       },
+       {
+        "Id": "782401836"
+       },
+       {
+        "Id": "875625137"
+       },
+       {
+        "Id": "964222622"
+       },
+       {
+        "Id": "1016179183"
+       },
+       {
+        "Id": "1024559731"
+       }
+      ]
+     },
+     {
+      "Id": "305502530",
+      "Name": "Play_Player_Interact",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Interact",
+      "GUID": "{3C197960-F5E2-47A9-88DA-148106E989F3}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5226667",
+      "DurationMax": "0.728",
+      "MediaRefs": [
+       {
+        "Id": "35075181"
+       },
+       {
+        "Id": "70881524"
+       },
+       {
+        "Id": "82812968"
+       },
+       {
+        "Id": "112612915"
+       },
+       {
+        "Id": "293991378"
+       },
+       {
+        "Id": "301671005"
+       },
+       {
+        "Id": "374653091"
+       },
+       {
+        "Id": "404108249"
+       },
+       {
+        "Id": "438100117"
+       },
+       {
+        "Id": "444785981"
+       },
+       {
+        "Id": "630154365"
+       },
+       {
+        "Id": "647776018"
+       },
+       {
+        "Id": "709591937"
+       },
+       {
+        "Id": "793535417"
+       },
+       {
+        "Id": "854938390"
+       },
+       {
+        "Id": "901440669"
+       }
+      ]
+     },
+     {
+      "Id": "3881217501",
+      "Name": "Play_Player_PickGold",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_PickGold",
+      "GUID": "{05185D34-DB50-453E-BBF1-BCE8388272E8}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.48066667",
+      "DurationMax": "0.5646667",
+      "MediaRefs": [
+       {
+        "Id": "70881524"
+       },
+       {
+        "Id": "82812968"
+       },
+       {
+        "Id": "112612915"
+       },
+       {
+        "Id": "293991378"
+       },
+       {
+        "Id": "302753226"
+       },
+       {
+        "Id": "358367435"
+       },
+       {
+        "Id": "571042560"
+       },
+       {
+        "Id": "598258762"
+       },
+       {
+        "Id": "630154365"
+       },
+       {
+        "Id": "661044718"
+       },
+       {
+        "Id": "709591937"
+       },
+       {
+        "Id": "854938390"
+       },
+       {
+        "Id": "901440669"
+       },
+       {
+        "Id": "910031922"
+       },
+       {
+        "Id": "1016928727"
+       },
+       {
+        "Id": "1026434573"
+       }
+      ]
+     },
+     {
+      "Id": "1115403328",
+      "Name": "Play_Player_Raise",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Raise",
+      "GUID": "{FC75BE05-682A-4BB3-BB35-1BBCA01EAE66}",
+      "DurationType": "OneShot",
+      "DurationMin": "16.856",
+      "DurationMax": "16.856",
+      "MediaRefs": [
+       {
+        "Id": "865539257"
+       }
+      ]
+     },
+     {
+      "Id": "4135433440",
+      "Name": "Play_Player_Shot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Shot",
+      "GUID": "{E465FB9E-0902-40E8-8591-BB910E234E9C}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1433333",
+      "DurationMax": "1.30025",
+      "MediaRefs": [
+       {
+        "Id": "222051633"
+       },
+       {
+        "Id": "602489578"
+       },
+       {
+        "Id": "743349270"
+       },
+       {
+        "Id": "757900566"
+       },
+       {
+        "Id": "976447741"
+       },
+       {
+        "Id": "985944095"
+       },
+       {
+        "Id": "991140081"
+       },
+       {
+        "Id": "1005848849"
        }
       ]
      },
@@ -4571,6 +5211,6 @@
     ]
    }
   ],
-  "FileHash": "{5BACCBC9-B40B-F5C0-602C-CF5D3B091B87}"
+  "FileHash": "{9F36B035-9AB4-E7F6-6D3A-32D2656AB9F2}"
  }
 }
