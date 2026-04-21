@@ -2,6 +2,7 @@
 
 #include "Components/UItemComponent.h"
 
+#include "AkGameplayStatics.h"
 #include "FrameTypes.h"
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
@@ -207,6 +208,17 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+				
+				if (HealingSoundID)
+				{
+					FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+					if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+					{
+						AudioDevice->StopPlayingID(HealingSoundID);
+						HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+					}  
+				}
+				HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 				
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
@@ -818,7 +830,10 @@ void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction, bool bDo
 void UItemComponent::Shoot()
 {
 	if (bIsReloading) return;
-	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
+	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) {
+		Reload();
+		return;
+	}
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
@@ -835,6 +850,7 @@ void UItemComponent::Shoot()
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "", CurrentWeaponData.NoiseRange, 1, FVector(0, 0, 0), true);
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+	PlayShootSound();
 	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
@@ -864,6 +880,20 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
 	else
 		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+}
+
+void UItemComponent::PlayShootSound_Implementation()
+{
+	if (ShootSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && ShootSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(ShootSoundID);
+			ShootSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	ShootSoundID = UAkGameplayStatics::PostEvent(ShootSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 #pragma endregion

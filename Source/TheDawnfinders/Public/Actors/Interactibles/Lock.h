@@ -23,7 +23,6 @@ public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 
-	UFUNCTION()
 	virtual void BP_OnInteractionFinished_Implementation() override;
 
 
