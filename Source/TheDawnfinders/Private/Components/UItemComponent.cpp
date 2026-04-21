@@ -830,7 +830,10 @@ void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction, bool bDo
 void UItemComponent::Shoot()
 {
 	if (bIsReloading) return;
-	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
+	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) {
+		Reload();
+		return;
+	}
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();

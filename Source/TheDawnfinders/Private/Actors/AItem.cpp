@@ -32,7 +32,6 @@ void AItem::BeginPlay()
 	if (ItemData && ItemData->ItemMesh)
 	{
 		ItemMesh->SetVisibility(false);
-		//ItemMesh->SetStaticMesh(ItemData->ItemMesh);
 
 		if (!ItemData->bIsRangedWeapon) {
 			ItemInfos = FItemInfos(ItemData, ItemData->Durability);
