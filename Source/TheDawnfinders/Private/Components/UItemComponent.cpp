@@ -659,7 +659,6 @@ void UItemComponent::DoAttackCollision()
 	);
 
 	if (!bHit) return;
-
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
 		if (!Hit[i].GetActor()->ActorHasTag("Enemy") && !Hit[i].GetActor()->ActorHasTag("Destructible")) continue;
@@ -672,16 +671,14 @@ void UItemComponent::DoAttackCollision()
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
 			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-
+			Multi_PlayHitSound();
 			// Sneak Attack
 			float Multiplicator = 1;
 			if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
 				Multiplicator = CurrentWeaponData.SneakMultiplier;
 			}
-
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
-
 			else
 				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
 		}
@@ -690,7 +687,6 @@ void UItemComponent::DoAttackCollision()
 		else {
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToDestructible(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
-
 			else
 				Server_ApplyDamagesToDestructible_Implementation(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 		}
@@ -749,6 +745,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 
 #pragma region Use Ranged Weapon
+
+void UItemComponent::Multi_PlayHitSound_Implementation()
+{
+	UAkGameplayStatics::PostEvent(MeleeHitSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+}
 
 void UItemComponent::StartAim()
 {

@@ -49,6 +49,9 @@ public:
 	
 	TMap<EConsumableEffectType, FTimerHandle> ActiveEffectsTimers;
 	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UAkAudioEvent* MeleeHitSound;
+
 	void ApplyEffectLogic(EConsumableEffectType EffectType, bool bActivate);
 	
 	UFUNCTION()
@@ -101,6 +104,9 @@ public :
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_ApplyDamagesToDestructible(AActor* Target, UItemData* Data, float BaseDamages);
+	
+	UFUNCTION(NetMulticast, Unreliable)
+	void Multi_PlayHitSound();
 
 
 // === RANGED WEAPON ===

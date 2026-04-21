@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "AkAudioEvent.h"
 #include "Actors/Player/ANoise.h"
 #include "MuleAIController.generated.h"
 
@@ -22,6 +23,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Mule)
 	void CallMule(AActor* Actor);
 	
+	UFUNCTION(NetMulticast, Unreliable)
+	void Multi_PlaySound(FVector Position = FVector::ZeroVector);
+	
 	FTimerHandle TimerHandle_SpawnObject;
 	
 	UFUNCTION(BlueprintCallable, Category = Mule)
@@ -32,5 +36,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = Mule)
 	float SpawnDelay;
+	
+		
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* MuleTravelSound;
+	
+	UPROPERTY()
+	int32 MuleTravelSoundID;
 	
 };

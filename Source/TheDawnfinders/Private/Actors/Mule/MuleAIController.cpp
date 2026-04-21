@@ -1,5 +1,8 @@
 ﻿#include "MuleAIController.h"
+
+#include "AkGameplayStatics.h"
 #include "Actors/Mule/Mule.h"
+#include "EntitySystem/MovieSceneEntitySystemRunner.h"
 #include "Net/UnrealNetwork.h"
 
 AMuleAIController::AMuleAIController()
@@ -57,6 +60,13 @@ void AMuleAIController::CallMule(AActor* Actor)
 	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition);
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
 	
+	Multi_PlaySound();
+	
+	FTimerHandle TimerHandle_Travel;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor]()
+	{
+		Multi_PlaySound();
+	}, 0.5f, false);
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
 
@@ -66,9 +76,23 @@ void AMuleAIController::CallMule(AActor* Actor)
 	}
 }
 
+void AMuleAIController::Multi_PlaySound_Implementation(FVector Position)
+{
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && MuleTravelSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(MuleTravelSoundID, 300, AkCurveInterpolation_Log1);
+		MuleTravelSoundID = AK_INVALID_PLAYING_ID;
+	}
+	MuleTravelSoundID = UAkGameplayStatics::PostEvent(MuleTravelSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+}
+
 void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
 {
 	AMule* MyMule = Cast<AMule>(GetPawn());
 	if (!MyMule) return;
 	MyMule->SetActorLocation(SpawnPos);	
+	
+	Multi_PlaySound(SpawnPos);
 }
+
