@@ -77,6 +77,7 @@ public :
 
 // === POISON ===
 public :
+	UFUNCTION(BlueprintCallable)
 	bool IsPoisoned() const
 	{
 		return bIsPoisoned;

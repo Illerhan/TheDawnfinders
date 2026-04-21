@@ -467,7 +467,7 @@ void UInteractionComponent::EndCarryHeavyItem()
 	//if (!CarriedItem->bUsed) return;
 
 	CarriedItem->StopCarry();
-	CarriedItem->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	CarriedItem->StaticMesh->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 
 	bIsInInteraction = false;
 	CarriedItem = nullptr;

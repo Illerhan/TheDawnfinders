@@ -13,6 +13,7 @@ class THEDAWNFINDERS_API ACarriable : public AInteractibleObjects
 	GENERATED_BODY()
 	
 public :
+	ACarriable();
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
 	UFUNCTION(BlueprintCallable)
