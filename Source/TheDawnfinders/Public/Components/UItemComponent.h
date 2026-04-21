@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "Components/ActorComponent.h"
 #include "Actors/Enemy/ABaseEnemy.h"
 #include "CustomStructs.h"
@@ -136,6 +137,9 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void DoShootRaycast(FVector Direction);
+	
+	UFUNCTION(Client,Unreliable)
+	void PlayShootSound();
 
 
 // === THROW ===
@@ -283,4 +287,18 @@ protected :
 
 	UPROPERTY()
 	AAPlayerCharacter* Ally = nullptr;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HealingSound;
+	
+	UPROPERTY()
+	int32 HealingSoundID;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* ShootSound;
+	
+	UPROPERTY()
+	int32 ShootSoundID;
+	
+	
 };

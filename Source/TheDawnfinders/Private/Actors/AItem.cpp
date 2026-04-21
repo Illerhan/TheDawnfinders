@@ -32,7 +32,6 @@ void AItem::BeginPlay()
 	if (ItemData && ItemData->ItemMesh)
 	{
 		ItemMesh->SetVisibility(false);
-		//ItemMesh->SetStaticMesh(ItemData->ItemMesh);
 
 		if (!ItemData->bIsRangedWeapon) {
 			ItemInfos = FItemInfos(ItemData, ItemData->Durability);
@@ -87,6 +86,8 @@ void AItem::Interact_Implementation(AActor* Interactor)
 
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player->InventoryComponent->AddNewItem(ItemInfos)) return;
+	
+	Player->InteractionComponent->PlayInteractSound();
 
 	Destroy();
 }
