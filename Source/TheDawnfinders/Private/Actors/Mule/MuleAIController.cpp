@@ -84,7 +84,7 @@ void AMuleAIController::Multi_PlaySound_Implementation(FVector Position)
 		AudioDevice->StopPlayingID(MuleTravelSoundID, 300, AkCurveInterpolation_Log1);
 		MuleTravelSoundID = AK_INVALID_PLAYING_ID;
 	}
-	MuleTravelSoundID = UAkGameplayStatics::PostEventAtLocation(MuleTravelSound,Position,FRotator::ZeroRotator,GetWorld());
+	MuleTravelSoundID = UAkGameplayStatics::PostEvent(MuleTravelSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
