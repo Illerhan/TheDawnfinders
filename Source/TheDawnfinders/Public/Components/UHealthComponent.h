@@ -100,6 +100,9 @@ public :
 public : 
 	UFUNCTION()
 	void Fallen();
+	
+	UFUNCTION(Client,Unreliable)
+	void Client_HeartbeatSound();
 
 	UFUNCTION(BlueprintCallable)
 	void FallenLoseHP(float DeltaTime);
@@ -135,7 +138,12 @@ public :
 	void EndInvincibilityFrames();
 
 	FTimerHandle InvincibilityTimerHandle;
-
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* DieBreath;
+	
+	UPROPERTY()
+	int32 DieSoundID;
 
 
 	// === NETWORK ===

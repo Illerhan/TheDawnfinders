@@ -2,6 +2,7 @@
 
 #include "Components/UItemComponent.h"
 
+#include "AkGameplayStatics.h"
 #include "FrameTypes.h"
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
@@ -207,6 +208,17 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+				
+				if (HealingSoundID)
+				{
+					FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+					if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+					{
+						AudioDevice->StopPlayingID(HealingSoundID);
+						HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+					}  
+				}
+				HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 				
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
@@ -647,7 +659,6 @@ void UItemComponent::DoAttackCollision()
 	);
 
 	if (!bHit) return;
-
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
 		if (!Hit[i].GetActor()->ActorHasTag("Enemy") && !Hit[i].GetActor()->ActorHasTag("Destructible")) continue;
@@ -660,16 +671,14 @@ void UItemComponent::DoAttackCollision()
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
 			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-
+			Multi_PlayHitSound();
 			// Sneak Attack
 			float Multiplicator = 1;
 			if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
 				Multiplicator = CurrentWeaponData.SneakMultiplier;
 			}
-
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
-
 			else
 				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
 		}
@@ -678,7 +687,6 @@ void UItemComponent::DoAttackCollision()
 		else {
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToDestructible(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
-
 			else
 				Server_ApplyDamagesToDestructible_Implementation(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 		}
@@ -737,6 +745,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 
 #pragma region Use Ranged Weapon
+
+void UItemComponent::Multi_PlayHitSound_Implementation()
+{
+	UAkGameplayStatics::PostEvent(MeleeHitSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+}
 
 void UItemComponent::StartAim()
 {
@@ -838,6 +851,7 @@ void UItemComponent::Shoot()
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "", CurrentWeaponData.NoiseRange, 1, FVector(0, 0, 0), true);
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+	PlayShootSound();
 	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
@@ -867,6 +881,20 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
 	else
 		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+}
+
+void UItemComponent::PlayShootSound_Implementation()
+{
+	if (ShootSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && ShootSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(ShootSoundID);
+			ShootSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	ShootSoundID = UAkGameplayStatics::PostEvent(ShootSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 #pragma endregion

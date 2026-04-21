@@ -484,7 +484,12 @@ void UHealthComponent::Fallen()
 
 	FallenTimer = FallenDuration;
 	BreathSoundID = UAkGameplayStatics::PostEvent(FallenBreath,Owner,0,FOnAkPostEventCallback(), false);
-	HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen,Owner,0,FOnAkPostEventCallback(), false);
+	
+}
+
+void UHealthComponent::Client_HeartbeatSound_Implementation()
+{
+	HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
@@ -530,6 +535,7 @@ void UHealthComponent::Die()
 		AudioDevice->StopPlayingID(HeartBeatSoundID);
 		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
 	}
+	DieSoundID = UAkGameplayStatics::PostEvent(DieBreath,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void UHealthComponent::Client_Die_Implementation()
