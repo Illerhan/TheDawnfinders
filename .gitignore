@@ -76,4 +76,5 @@ Plugins/**/Intermediate/*
 DerivedDataCache/*
 
 # WWise soundbank
-.bnk
+*.bnk
+/Content/WwiseAudio/*
