@@ -152,12 +152,11 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 		// Visual effects + Invincibility Frames
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) != EPlayerState::Fallen) {
 			StartInvincibilityFrames_Implementation(0.2f);
-
+			
 			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 		}
 	}
-
 	if (OwnerController && OwnerController->IsLocalPlayerController()) {
 		if (!WorldHealthBar) {
 			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
@@ -222,10 +221,21 @@ void UHealthComponent::Server_Heal_Implementation(float quantity)
 	CurrentHealth += quantity;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
 
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+	
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
-// Called to actualise the player's infos for every other clients
+// Called to actualize the player's infos for every other clients
 void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 {
 	AActor* Owner = GetOwner();

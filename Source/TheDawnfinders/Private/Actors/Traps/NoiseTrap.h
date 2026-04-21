@@ -7,6 +7,8 @@
 #include "GameFramework/SoundManager.h"
 #include "NoiseTrap.generated.h"
 
+class UAkAudioEvent;
+
 UCLASS()
 class THEDAWNFINDERS_API ANoiseTrap : public ATrapBase
 {
@@ -21,4 +23,10 @@ public:
 
 	UPROPERTY()
 	ASoundManager* SoundManagerInstance;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* TrapSound;
+	
+	UPROPERTY()
+	int32 TrapSoundID;
 };
