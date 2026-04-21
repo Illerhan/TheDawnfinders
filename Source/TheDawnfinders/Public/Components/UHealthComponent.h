@@ -244,9 +244,15 @@ protected :
 	UPROPERTY()
 	int32 HeartBeatSoundID;
 	
+	UPROPERTY()
+	int32 HealingSoundID;
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* FallenBreath;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* HeartBeatFallen;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HealingSound;
 };
