@@ -86,6 +86,8 @@ void AItem::Interact_Implementation(AActor* Interactor)
 
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player->InventoryComponent->AddNewItem(ItemInfos)) return;
+	
+	Player->InteractionComponent->PlayInteractSound();
 
 	Destroy();
 }
