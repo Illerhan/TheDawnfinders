@@ -111,14 +111,6 @@ public :
 	
 	UPROPERTY()
 	int32 HitSoundID;
-	
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	UAkAudioEvent* IdleSound;
-	
-	UPROPERTY()
-	int32 IdleSoundID;
-
-
 
 // === MONTAGES ===
 public :
