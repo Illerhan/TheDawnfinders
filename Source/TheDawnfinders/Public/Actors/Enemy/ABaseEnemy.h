@@ -9,6 +9,7 @@
 #include "Interfaces/IDamageable.h"
 #include "Interfaces/IFadeable.h"
 #include "AIController.h"
+#include "AkAudioEvent.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "ABaseEnemy.generated.h"
 
@@ -102,6 +103,21 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideEnemy();
+	
+// === SOUNDS ===
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HitSound;
+	
+	UPROPERTY()
+	int32 HitSoundID;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* IdleSound;
+	
+	UPROPERTY()
+	int32 IdleSoundID;
+
 
 
 // === MONTAGES ===
