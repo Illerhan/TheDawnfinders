@@ -764,7 +764,6 @@ void UItemComponent::StartAim()
 void UItemComponent::StopAim()
 {
 	if (!bIsAiming) return;
-
 	if(!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
@@ -778,6 +777,7 @@ void UItemComponent::Reload()
 	if (CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
 	if (!(InventoryComponent->GetCurrentItem()->ItemType == EItemType::Equipment)) return;
 	if (!InventoryComponent->GetCurrentItem()->bIsRangedWeapon) return;
+	if (bIsReloading) return;
 
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
