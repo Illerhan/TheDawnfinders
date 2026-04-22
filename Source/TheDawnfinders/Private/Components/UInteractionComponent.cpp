@@ -414,7 +414,6 @@ void UInteractionComponent::CancelInteraction()
 {
 	if (CurrentAnimInteractible) {
 		if (Cast<AInteractibleObjects>(CurrentAnimInteractible)->GetAnimationIsActive()) {
-			UE_LOG(LogTemp, Display, TEXT("Cancel cancellé"));
 			return;
 		}
 	}
