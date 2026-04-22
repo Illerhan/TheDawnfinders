@@ -246,6 +246,8 @@ protected :
 	UPROPERTY()
 	UWorldHealthBar* WorldHealthBar;
 	
+// === Sounds ===
+	
 	UPROPERTY()
 	int32 BreathSoundID;
 	
@@ -255,6 +257,9 @@ protected :
 	UPROPERTY()
 	int32 HealingSoundID;
 	
+	UPROPERTY()
+	int32 DamageSoundID;
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* FallenBreath;
 	
@@ -263,4 +268,7 @@ protected :
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* HealingSound;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* DamageSound;
 };

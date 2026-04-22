@@ -121,7 +121,6 @@ void ABaseEnemy::StartAttack_Implementation(FEnemyActionData AttackData, AActor*
 
 void ABaseEnemy::EnterIdleState_Implementation()
 {
-   IdleSoundID = UAkGameplayStatics::PostEvent(IdleSound,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void ABaseEnemy::EnterListeningState_Implementation()
@@ -141,7 +140,6 @@ void ABaseEnemy::Multicast_HideEye_Implementation()
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
-    IdleSoundID = UAkGameplayStatics::PostEvent(IdleSound,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void ABaseEnemy::Multicast_EnterListening_Implementation()
