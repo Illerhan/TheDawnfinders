@@ -1,4 +1,7 @@
 #include "Actors/Enemy/ABaseEnemy.h"
+
+#include "AkGameplayStatics.h"
+#include "BlueprintNodes/PostEventAsync.h"
 #include "Components/WidgetComponent.h"
 #include "Components/UEnemyAttackComponent.h"
 #include "Widgets/UEnemyWidget.h"
@@ -223,6 +226,7 @@ void ABaseEnemy::DoAttackCollision()
 
     if (!bHit) return;
 
+    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
     TSet<AActor*> AlreadyHitActors;
     for (int i = 0; i < HitResults.Num(); i++) {
 

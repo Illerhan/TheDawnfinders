@@ -412,7 +412,12 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 
 void UInteractionComponent::CancelInteraction()
 {
-	if (CurrentAnimInteractible) return;
+	if (CurrentAnimInteractible) {
+		if (Cast<AInteractibleObjects>(CurrentAnimInteractible)->GetAnimationIsActive()) {
+			UE_LOG(LogTemp, Display, TEXT("Cancel cancellé"));
+			return;
+		}
+	}
 
 	AActor* Nearest = GetNearestInteractible();
 	//if (!Nearest) return;

@@ -135,6 +135,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	bool GetIsInInteractionStateOnInteract() { return bIsInInteractionStateOnInteract; }
 
+	UFUNCTION(BlueprintCallable)
+	bool GetAnimationIsActive() { return bAnimationIsActive; }
+
 
 // === COMPONENTS ===
 public :
@@ -224,6 +227,9 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	TArray<AActor*> CurrentInteractActors;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	bool bAnimationIsActive = false;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	int CurrentInteractActorCount;
