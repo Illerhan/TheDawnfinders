@@ -73,6 +73,9 @@ public :
 	float AutoCloseDelay = 2.0f;
 
 	FTimerHandle AutoCloseTimer;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Door Settings")
+	bool bStartsOpen = true;
 
 
 protected : 
