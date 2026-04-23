@@ -768,7 +768,7 @@ void UItemComponent::StartAim()
 void UItemComponent::StopAim()
 {
 	if (!bIsAiming) return;
-	if(!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
+	if (!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
 
@@ -805,6 +805,8 @@ void UItemComponent::CompleteReload()
 void UItemComponent::CancelReload()
 {
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
+	if (!bIsAiming) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsReloading = false;
 	TimerReload = 0;
