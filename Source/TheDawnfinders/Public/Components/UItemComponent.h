@@ -265,6 +265,9 @@ protected :
 	float AimCurrentAngle;
 
 	UPROPERTY(BlueprintReadWrite)
+	float ShootDelayTimer;
+
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsAiming;
 
 	UPROPERTY(BlueprintReadWrite)

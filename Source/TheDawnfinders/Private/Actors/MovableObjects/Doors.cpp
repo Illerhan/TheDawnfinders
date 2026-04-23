@@ -15,28 +15,29 @@ ADoors::ADoors()
 void ADoors::BeginPlay()
 {
     Super::BeginPlay();
-
-    // IMPORTANT: Fixer les positions de départ et fin pour les portes
-    // Ne JAMAIS les inverser comme le fait MovableObjects
-    StartPosition = GetActorLocation();
-    FinalPosition = StartPosition + EndPosition;
     
-    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door initialized - Start: %s, Final: %s"), 
-           *StartPosition.ToString(), *FinalPosition.ToString());
+    StartPosition = GetActorLocation(); // position fermée = position éditeur
+    FinalPosition = StartPosition + EndPosition;
 
     if (MoveCurve)
     {
         Timeline.AddInterpFloat(MoveCurve, TimelineProgress);
         Timeline.SetLooping(false);
-
         if (MoveCurve->FloatCurve.GetLastKey().Time > 0)
-        {
             Timeline.SetPlayRate(MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration);
-        }
 
         FOnTimelineEvent TimeLineFinishedCallback;
         TimeLineFinishedCallback.BindUFunction(this, FName("OnTimelineFinished"));
         Timeline.SetTimelineFinishedFunc(TimeLineFinishedCallback);
+    }
+
+    if (bStartsOpen)
+    {
+        // Téléporte directement à la position ouverte, sans timeline
+        SetActorLocation(FinalPosition);
+        bIsFullyOpen = true;
+        CurrentTimelineProgress = 1.0f;
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door starts OPEN - teleported to final position"));
     }
     
     if (bIsExtractionDoor)
@@ -47,6 +48,7 @@ void ADoors::BeginPlay()
             Registry->RegisterExtractionDoor(this);
         }
     }
+
 }
 
 
@@ -78,6 +80,8 @@ void ADoors::StopMainAction_Implementation()
     CurrentTriggerCount--;
 
     if (CurrentTriggerCount > 0) PauseOpening();
+    if (bStartsOpen)
+        StartOpening();
     else StopOpening();
 }
 
@@ -216,7 +220,15 @@ void ADoors::StopOpening()
     if (!HasAuthority()) return;
     if (!MoveCurve) return;
     if (bIsPermanentlyOpen) return;
+    
+    CurrentTriggerCount = 0;
 
+    if (CurrentTimelineProgress <= 0.01f && !Timeline.IsPlaying() && !bIsFullyOpen)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door already closed, skipping StopOpening"));
+        return;
+    }
+    
     float ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     Timeline.SetPlayRate(ForwardRate);
 
@@ -300,8 +312,24 @@ void ADoors::CloseDoor()
 
     float ForwardRate = MoveCurve->FloatCurve.GetLastKey().Time / MovementDuration;
     Timeline.SetPlayRate(ForwardRate);
+    
+    if (!bIsFullyOpen && CurrentTimelineProgress <= 0.01f)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door already closed"));
+        return;
+    }
+    
 
-    Timeline.ReverseFromEnd();
+    if (bIsFullyOpen)
+    {
+        Timeline.ReverseFromEnd();
+    }
+    else
+    {
+        // ← En cours de mouvement, reverse depuis la position actuelle
+        Timeline.SetPlaybackPosition(CurrentTimelineProgress, false);
+        Timeline.Reverse();
+    }
 
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] Auto closing door"));
 }

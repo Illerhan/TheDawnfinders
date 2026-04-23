@@ -10,8 +10,6 @@ AASpikeTrap::AASpikeTrap()
 
 void AASpikeTrap::DoTrapAction(AActor* OtherActor)
 {
-	//if (!TrappedActor) return;
-
 	Super::DoTrapAction();
 
 	DoSpikeAnim();

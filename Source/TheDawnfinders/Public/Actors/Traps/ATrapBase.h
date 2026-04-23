@@ -56,6 +56,9 @@ protected :
 	int Damages = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
+	int DamagesEnemies = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
 	float Cooldown = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")

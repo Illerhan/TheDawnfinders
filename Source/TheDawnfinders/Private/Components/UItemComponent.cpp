@@ -57,6 +57,10 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (ShootDelayTimer > 0) {
+		ShootDelayTimer -= DeltaTime;
+	}
+
 	if (!GetOwner()) return;
 
 	if (AttackInertiaTimer > 0) {
@@ -764,7 +768,7 @@ void UItemComponent::StartAim()
 void UItemComponent::StopAim()
 {
 	if (!bIsAiming) return;
-	if(!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
+	if (!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
 
@@ -802,6 +806,8 @@ void UItemComponent::CancelReload()
 {
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
+	if (!bIsAiming) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
+
 	bIsReloading = false;
 	TimerReload = 0;
 }
@@ -835,6 +841,9 @@ void UItemComponent::Shoot()
 		Reload();
 		return;
 	}
+	if (ShootDelayTimer > 0) return;
+
+	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
