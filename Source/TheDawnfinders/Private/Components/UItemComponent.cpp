@@ -877,10 +877,15 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
 
 	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
+	float Multiplicator = 1;
+	if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
+		Multiplicator = CurrentWeaponData.SneakMultiplier;
+	}
+
 	if (!GetOwner()->HasAuthority())
-		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
 	else
-		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
 }
 
 void UItemComponent::PlayShootSound_Implementation()

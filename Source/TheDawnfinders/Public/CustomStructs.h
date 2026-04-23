@@ -137,7 +137,7 @@ struct FWeaponInfos : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float PlayerSpeedModifier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float SneakMultiplier = 2.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
