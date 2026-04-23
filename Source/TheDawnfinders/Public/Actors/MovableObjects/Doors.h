@@ -31,7 +31,7 @@ public :
 	void CloseDoor();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
-	void StartOpening();
+	virtual void StartOpening();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
 	void AddOpeningPlayer();
@@ -43,7 +43,7 @@ public :
 	void PauseOpening();
 
 	UFUNCTION(BlueprintCallable, Category = "Doors")
-	void StopOpening();
+	virtual void StopOpening();
 	
 	UFUNCTION(BlueprintCallable, Category = "Door")
 	void OpenPermanently();
