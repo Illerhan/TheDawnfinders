@@ -205,6 +205,17 @@ void UHealthComponent::Heal(float quantity)
 		WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
 	}
 
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}
+	}
+	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
+
 	// If client
 	if (!GetOwner()->HasAuthority())
 	{
@@ -214,24 +225,13 @@ void UHealthComponent::Heal(float quantity)
 	};
 
 	// If server
-	Server_Heal_Implementation(CurrentHealth);
+	ServerChangeHealth_Implementation(CurrentHealth);
 }
 
 void UHealthComponent::Server_Heal_Implementation(float quantity)
 {
 	CurrentHealth += quantity;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
-
-	if (HealingSoundID)
-	{
-		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
-		{
-			AudioDevice->StopPlayingID(HealingSoundID);
-			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
-		}  
-	}
-	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 	
 	ServerChangeHealth_Implementation(CurrentHealth);
 }
