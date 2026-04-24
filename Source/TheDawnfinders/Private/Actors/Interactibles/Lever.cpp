@@ -1,6 +1,7 @@
 ﻿#include "Actors/Interactibles/Lever.h"
 #include "Net/UnrealNetwork.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Actors/MovableObjects/IncrementalDoor.h"
 
 
 ALever::ALever()
@@ -72,6 +73,16 @@ void ALever::Interact_Implementation(AActor* Interactor)
             ADoors* Door = Cast<ADoors>(Object);
             if (Door)
             {
+                AIncrementalDoor* IncDoor = Cast<AIncrementalDoor>(Door);
+        
+                if (IncDoor)
+                {
+                    // C'EST UNE PORTE INCRÉMENTALE : On force l'ouverture d'un palier, 
+                    // peu importe où elle se trouve !
+                    IncDoor->StartOpening();
+                    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Incremental step for door %s"), *IncDoor->GetName());
+                }
+                else
                 // Toggle door: si fermée -> ouvre, si ouverte -> ferme
                 if (Door->bIsFullyOpen || Door->GetTimelineProgress() > 0.5f)
                 {

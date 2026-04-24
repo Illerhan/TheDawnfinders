@@ -29,4 +29,7 @@ public:
 	
 	UPROPERTY()
 	int32 TrapSoundID;
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_PlaySound();
 };

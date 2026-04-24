@@ -9,102 +9,91 @@ AIncrementalDoor::AIncrementalDoor()
 void AIncrementalDoor::BeginPlay()
 {
     Super::BeginPlay();
+
     ActivationCount = 0;
-    TargetCurvePos  = 0.f;
     bMovingToStep   = false;
+    bIsFullyOpen    = false;
+    TargetCurvePos  = 0.f;
 }
 
 void AIncrementalDoor::Tick(float DeltaTime)
 {
-    // On bypass AMovableObjects::Tick qui ferait TickTimeline librement
-    // On gère nous-mêmes le tick de la timeline
-    AActor::Tick(DeltaTime);
+    Super::Tick(DeltaTime); // Toujours utiliser Super:: au lieu de AActor::
 
-    if (!Timeline.IsPlaying()) return;
-    if (!MoveCurve) return;
+    if (!MoveCurve || !Timeline.IsPlaying())
+        return;
 
-    if (bMovingToStep)
+    Timeline.TickTimeline(DeltaTime);
+
+    // 🎯 On vérifie si on a atteint ou dépassé la cible actuelle
+    if (Timeline.GetPlaybackPosition() >= TargetCurvePos)
     {
-        float CurrentPos   = Timeline.GetPlaybackPosition();
-        float PlayRate     = Timeline.GetPlayRate();
-        float Remaining    = TargetCurvePos - CurrentPos;
-        float TimeToTarget = (PlayRate > 0.f) ? (Remaining / PlayRate) : 0.f;
-
-        if (DeltaTime >= TimeToTarget)
-        {
-            // On avance exactement jusqu'au palier, pas un frame de plus
-            Timeline.TickTimeline(TimeToTarget);
-            Timeline.Stop();
-
-            // Snap précis + déplace l'acteur via le callback HandleProgress
-            Timeline.SetPlaybackPosition(TargetCurvePos, true);
-            CurrentTimelineProgress = TargetCurvePos;
-
-            bMovingToStep = false;
-            bCanMove      = true;
-
-            UE_LOG(LogTemp, Warning,
-                TEXT("[IncrementalDoor] '%s' palier %d/%d atteint"),
-                *GetName(), ActivationCount, NeededTriggerCount);
-
-            if (ActivationCount >= NeededTriggerCount)
-            {
-                bIsFullyOpen       = true;
-                bIsPermanentlyOpen = bIsExtractionDoor;
-            }
-        }
-        else
-        {
-            Timeline.TickTimeline(DeltaTime);
-        }
-    }
-    else
-    {
-        Timeline.TickTimeline(DeltaTime);
+        FinishStep();
     }
 }
 
 void AIncrementalDoor::StartOpening()
 {
-    // Appelé par le Lever directement
-    if (!HasAuthority())                       return;
-    if (bIsPermanentlyOpen)                    return;
-    if (bMovingToStep)                         return; // déjà en mouvement
-    if (ActivationCount >= NeededTriggerCount) return; // déjà pleine ouverte
-    if (!MoveCurve)                            return;
+    // Sécurités de base
+    if (!HasAuthority() || bIsPermanentlyOpen || bIsFullyOpen || !MoveCurve) 
+        return;
 
+    // 1. On incrémente le compte à chaque signal reçu
     ActivationCount++;
 
-    float CurveEnd      = MoveCurve->FloatCurve.GetLastKey().Time;
-    float PreviousRatio = (float)(ActivationCount - 1) / (float)NeededTriggerCount;
-    float TargetRatio   = (float)ActivationCount       / (float)NeededTriggerCount;
+    if (ActivationCount > NeededTriggerCount)
+    {
+        ActivationCount = NeededTriggerCount;
+    }
 
+    // 2. On calcule la nouvelle cible temporelle de la Timeline
+    const float CurveEnd = MoveCurve->FloatCurve.GetLastKey().Time;
+    float TargetRatio = (float)ActivationCount / NeededTriggerCount;
+    
     TargetCurvePos = TargetRatio * CurveEnd;
 
+    // 3. Vitesse de lecture
     float PlayRate = (MovementDuration > 0.f) ? (CurveEnd / MovementDuration) : 1.f;
     Timeline.SetPlayRate(PlayRate);
 
-    // Repart exactement depuis le palier précédent
-    Timeline.SetPlaybackPosition(PreviousRatio * CurveEnd, false);
+    // 4. On lance la lecture (si elle tournait déjà, Play() ne fait que continuer)
     Timeline.Play();
+    
+    bMovingToStep = true;
+    bCanMove      = false;
 
-    bIsMovingForward = true;
-    bMovingToStep    = true;
-    bCanMove         = false;
-
-    UE_LOG(LogTemp, Warning,
-        TEXT("[IncrementalDoor] '%s' levier → activation %d/%d (target curvePos=%.3f)"),
-        *GetName(), ActivationCount, NeededTriggerCount, TargetCurvePos);
+    UE_LOG(LogTemp, Warning, TEXT("[IncrementalDoor] '%s' Activation %d/%d - En route vers %.3f"), *GetName(), ActivationCount, NeededTriggerCount, TargetCurvePos);
 }
 
-void AIncrementalDoor::StopMainAction_Implementation()
+void AIncrementalDoor::FinishStep()
 {
-    // Les leviers ne referment pas la porte
+    // On snap exactement à la position cible et on met en pause
+    Timeline.SetPlaybackPosition(TargetCurvePos, false);
+    Timeline.Stop();
+
+    bMovingToStep = false;
+    bCanMove      = true;
+
+    UE_LOG(LogTemp, Warning, TEXT("[IncrementalDoor] '%s' Palier %d/%d atteint"), *GetName(), ActivationCount, NeededTriggerCount);
+
+    // Vérification finale si la porte a atteint son dernier palier
+    if (ActivationCount >= NeededTriggerCount)
+    {
+        bIsFullyOpen       = true;
+        bIsPermanentlyOpen = bIsExtractionDoor;
+
+        UE_LOG(LogTemp, Warning, TEXT("[IncrementalDoor] '%s' FULLY OPEN"), *GetName());
+    }
 }
+
+void AIncrementalDoor::StopMainAction_Implementation() 
+{
+    // Actuellement vide : la porte ne redescend pas si un joueur lâche une plaque.
+    // Si tu veux qu'elle redescende un jour, c'est ici qu'il faudra faire un ActivationCount-- 
+    // et appeler Timeline.Reverse() avec une logique similaire dans le Tick.
+}
+
 void AIncrementalDoor::StopOpening()
 {
-    // On ne ferme jamais la porte, les paliers sont permanents
-    UE_LOG(LogTemp, Warning,
-        TEXT("[IncrementalDoor] '%s' StopOpening ignoré — paliers permanents"),
-        *GetName());
+    UE_LOG(LogTemp, Warning, TEXT("[IncrementalDoor] '%s' StopOpening ignoré"), *GetName());
 }

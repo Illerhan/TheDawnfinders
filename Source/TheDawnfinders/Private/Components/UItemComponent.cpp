@@ -213,17 +213,7 @@ void UItemComponent::DoMainAction()
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
 				
-				if (HealingSoundID)
-				{
-					FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-					if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
-					{
-						AudioDevice->StopPlayingID(HealingSoundID);
-						HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
-					}  
-				}
-				HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
-				
+				Multi_PlayHealSound();
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
 				return;
@@ -242,6 +232,21 @@ void UItemComponent::DoMainAction()
 		}
 		return;
 	}
+}
+
+void UItemComponent::Multi_PlayHealSound_Implementation()
+{
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+				
 }
 
 void UItemComponent::ActualiseUseProgress(float DeltaTime)
