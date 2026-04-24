@@ -13,7 +13,8 @@
 UENUM(BlueprintType)
 enum class ETrapTriggerType : uint8 {
 	OnColliderEnter,
-	OnDuration
+	OnDuration,
+	OnActivation,
 };
 
 

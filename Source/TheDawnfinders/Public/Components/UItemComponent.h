@@ -65,6 +65,9 @@ public:
 public :
 	UFUNCTION(BlueprintCallable)
 	void DoMainAction();
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_PlayHealSound();
 
 	UFUNCTION(BlueprintCallable)
 	void StopMainAction();
