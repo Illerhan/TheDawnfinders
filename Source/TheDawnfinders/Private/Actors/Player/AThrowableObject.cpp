@@ -90,6 +90,10 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 		case EThrowableEffectType::PlayLoudSound :
 			Cast<ABasicEnemyAIController>(Cast<ABaseEnemy>(Hit.GetActor())->GetController())->AddAlertness(ItemData->ConsumableEffectPower, GetActorLocation());
 			break;
+
+		case EThrowableEffectType::StunEnemies:
+			Cast<ABaseEnemy>(Hit.GetActor())->StunEnemy(EffectDuration);
+			break;
 		}
 	}
 
