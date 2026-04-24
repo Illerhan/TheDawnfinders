@@ -90,4 +90,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentAddedSpeed = 1;
+	
+	UFUNCTION(NetMulticast,Unreliable, Category = "Doors")
+	void Multi_OpeningSound();
 };

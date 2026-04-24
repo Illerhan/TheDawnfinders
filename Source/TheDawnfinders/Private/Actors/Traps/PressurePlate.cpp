@@ -38,17 +38,8 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 {
 	CurrentPlayerCount++;
 	if (CurrentPlayerCount > 1) return;
-
-	if (PlateSoundID)
-	{
-		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-		if (AudioDevice && PlateSoundID != AK_INVALID_PLAYING_ID)
-		{
-			AudioDevice->StopPlayingID(PlateSoundID);
-			PlateSoundID = AK_INVALID_PLAYING_ID; // Reset
-		}  
-	}
-	PlateSoundID = UAkGameplayStatics::PostEvent(PlateSound,this,0,FOnAkPostEventCallback(), false);
+	bIsActive = true;
+	Multi_PlaySound();
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
@@ -59,6 +50,7 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 			
 		}
 	}
+	
 }
 
 void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
@@ -66,7 +58,7 @@ void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 {
 	CurrentPlayerCount--;
 	if (CurrentPlayerCount != 0) return;
-
+	bIsActive = false;
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
@@ -76,5 +68,20 @@ void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 			IActivable::Execute_StopMainAction(LinkedActor);
 		}
 	}
+}
+
+void APressurePlate::Multi_PlaySound_Implementation()
+{
+	if (PlateSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && PlateSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(PlateSoundID);
+			PlateSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	PlateSoundID = UAkGameplayStatics::PostEvent(PlateSound,this,0,FOnAkPostEventCallback(), false);
+	
 }
 

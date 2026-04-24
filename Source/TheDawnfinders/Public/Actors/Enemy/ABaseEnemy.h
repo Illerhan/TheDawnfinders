@@ -111,6 +111,9 @@ public :
 	
 	UPROPERTY()
 	int32 HitSoundID;
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_PlayHitSound();
 
 // === MONTAGES ===
 public :
