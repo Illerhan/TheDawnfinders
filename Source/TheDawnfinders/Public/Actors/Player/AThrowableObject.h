@@ -56,6 +56,9 @@ public :
 	float EffectRange;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	float EffectDuration;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	float NoiseRange;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)

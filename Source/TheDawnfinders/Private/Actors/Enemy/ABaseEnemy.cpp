@@ -56,6 +56,11 @@ void ABaseEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+    if (StunTimer > 0) {
+        StunTimer -= DeltaTime;
+        if (StunTimer <= 0) UnstunEnemy();
+    }
+
     if(HasAuthority())
         CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
 }
@@ -88,6 +93,19 @@ void ABaseEnemy::CheckEnableDistance()
         HideEnemy();
     }
 }
+
+
+void ABaseEnemy::StunEnemy_Implementation(float Duration)
+{
+    StunTimer = Duration;
+    bIsStuned = true;
+}
+
+void ABaseEnemy::UnstunEnemy_Implementation()
+{
+    bIsStuned = false;
+}
+
 
 void ABaseEnemy::ExitCrystal_Implementation()
 {

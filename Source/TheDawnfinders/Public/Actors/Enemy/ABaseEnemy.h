@@ -103,9 +103,15 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideEnemy();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StunEnemy(float Duration);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UnstunEnemy();
+
 	
 // === SOUNDS ===
-	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* HitSound;
 	
@@ -114,6 +120,7 @@ public :
 	
 	UFUNCTION(NetMulticast,Unreliable)
 	void Multi_PlayHitSound();
+
 
 // === MONTAGES ===
 public :
@@ -204,6 +211,11 @@ public :
 		return bRandomWaypointsOrder;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	bool GetIsStunned() {
+		return bIsStuned;
+	}
+
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -232,6 +244,12 @@ protected :
 
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	float CurrentSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StunTimer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsStuned;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsCrystallized;
