@@ -599,6 +599,7 @@ void UHealthComponent::Server_Revive_Implementation()
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
+		PC->StopMovementForDuration(1.f);
 		bIsDead = false;
 		ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
 		if (GM)

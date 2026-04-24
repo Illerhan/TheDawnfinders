@@ -344,6 +344,33 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
     if (GetController() && !bOverrideClient) return;
 
     CurrentState = NewState;
+
+    if (!GetController()) return;
+
+    switch (CurrentState)
+    {
+    case EPlayerState::None:
+        StopAutoLock();
+        break;
+
+    case EPlayerState::Carrying:
+        break;
+
+    case EPlayerState::Fallen:
+
+        StopMovementForDuration(3.f);
+        break;
+
+    case EPlayerState::Immobilized:
+        break;
+
+    case EPlayerState::Trapped:
+        ItemComponent->StopAim();
+        break;
+
+    case EPlayerState::Dead:
+        break;
+    }
 }
 
 
