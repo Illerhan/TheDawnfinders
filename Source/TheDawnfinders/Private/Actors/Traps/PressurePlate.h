@@ -29,6 +29,9 @@ public :
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
+	UFUNCTION(Netmulticast, Unreliable)
+	void Multi_PlaySound();
+
 	UPROPERTY(Blueprintable, EditAnywhere)
 	UBoxComponent* BoxCollider;
 

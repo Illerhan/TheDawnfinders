@@ -93,16 +93,7 @@ void ADoors::StartOpening()
 {
     if (!HasAuthority()) return;
     if (!MoveCurve) return;
-    if (MovableSoundID)
-    {
-        FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-        if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
-        {
-            AudioDevice->StopPlayingID(MovableSoundID);
-            MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
-        }  
-    }
-    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+    
    
     bCanMove = false;
 
@@ -115,7 +106,7 @@ void ADoors::StartOpening()
 
     Timeline.SetPlayRate(ForwardRate);
     
-
+    Multi_OpeningSound();
 
     // La porte était en train de se fermer, on inverse le mouvement immédiatement
     if (Timeline.IsReversing())
@@ -234,16 +225,7 @@ void ADoors::StopOpening()
     // Si la timeline ne joue pas → on force la fermeture
     if (!Timeline.IsPlaying())
     {
-        if (MovableSoundID)
-        {
-            FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-            if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
-            {
-                AudioDevice->StopPlayingID(MovableSoundID);
-                MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
-            }  
-        }
-        MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+        Multi_OpeningSound();
         Timeline.ReverseFromEnd();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from end"));
         return;
@@ -303,7 +285,7 @@ void ADoors::CloseDoor()
             MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
         }  
     }
-    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+    Multi_OpeningSound();
     if (!HasAuthority()) return;
     if (bIsPermanentlyOpen) return;
 
@@ -332,5 +314,19 @@ void ADoors::CloseDoor()
 
     UE_LOG(LogTemp, Warning, TEXT("[SERVER] Auto closing door"));
 }
+void ADoors::Multi_OpeningSound_Implementation()
+{
+    if (MovableSoundID)
+    {
+        FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+        if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+        {
+            AudioDevice->StopPlayingID(MovableSoundID);
+            MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
+        }  
+    }
+    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+}
+
 
 #pragma endregion

@@ -180,6 +180,11 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
 }
 
+void ABaseEnemy::Multi_PlayHitSound_Implementation()
+{
+    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+}
+
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
     BP_OnMontageNotifyBegin(NotifyName);
@@ -226,7 +231,7 @@ void ABaseEnemy::DoAttackCollision()
 
     if (!bHit) return;
 
-    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+    Multi_PlayHitSound();
     TSet<AActor*> AlreadyHitActors;
     for (int i = 0; i < HitResults.Num(); i++) {
 
