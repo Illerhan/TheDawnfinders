@@ -10,7 +10,10 @@
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
+#include "GameFramework/CustomHUD.h"
+#include "Widgets/UMainWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Interfaces/IPlayer.h"
 #include "TimerManager.h"
 #include "Engine/World.h"
@@ -288,6 +291,8 @@ void UItemComponent::UseConsumable()
 			PlayerCharacter->ServerPlayMontage(EquippedItem.CurrentInfos.ItemData->UseConsumableMontage, 1.0f);
 	}
 
+	float Amount = 0;
+
 	switch (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType)
 	{
 		case EConsumableEffectType::Heal:
@@ -340,7 +345,7 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::Refile:
 			if (!PlayerCharacter) return;
-			float Amount = EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower;
+			Amount = EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower;
 			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
 				ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
@@ -357,6 +362,16 @@ void UItemComponent::UseConsumable()
 				}
 			}
 			InventoryComponent->RemoveCurrentItem();
+			break;
+
+		case EConsumableEffectType::OpenMap :
+			if (!PlayerCharacter) return;
+			APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+			if (!PC) break;
+
+			AHUD* HUD = PC->GetHUD();
+			Cast<ACustomHUD>(HUD)->MainWidget->OpenMap(EquippedItem.CurrentInfos.ItemData->MapSprite);
+
 			break;
 	}
 }
@@ -379,6 +394,13 @@ void UItemComponent::StopMainAction()
 	}
 
 	bIsUsingItem = false;
+
+	if (!PlayerCharacter) return;
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (!PC) return;
+
+	AHUD* HUD = PC->GetHUD();
+	Cast<ACustomHUD>(HUD)->MainWidget->CloseMap();
 }
 
 #pragma endregion

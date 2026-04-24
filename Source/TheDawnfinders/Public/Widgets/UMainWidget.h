@@ -23,6 +23,12 @@ public :
 	void EnterSpectate();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OpenMap(UTexture2D* MapSprite);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void CloseMap();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ExitSpectate();
 
 	UFUNCTION(BlueprintCallable)

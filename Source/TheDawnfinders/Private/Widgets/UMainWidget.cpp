@@ -43,3 +43,14 @@ UUSpectateWidget* UMainWidget::GetSpectateWidget_Implementation()
 {
 	return nullptr;
 }
+
+
+void UMainWidget::OpenMap_Implementation(UTexture2D* MapSprite)
+{
+
+}
+
+void UMainWidget::CloseMap_Implementation()
+{
+
+}

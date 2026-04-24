@@ -40,6 +40,7 @@ enum class EConsumableEffectType : uint8 {
 	SoundProtect UMETA(DisplayName = "SoundProtect"),
 	Antidote UMETA(DisplayName = "Antidote"),
 	Poison UMETA(DisplayName="Poison"),
+	OpenMap UMETA(DisplayName = "OpenMap"),
 	None UMETA(DisplayName = "None")
 };
 
@@ -113,6 +114,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	UAnimMontage* UseConsumableMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
+	UTexture2D* MapSprite;
 
 
 // Weapon
