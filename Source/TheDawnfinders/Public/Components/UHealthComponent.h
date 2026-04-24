@@ -139,11 +139,19 @@ public :
 
 	FTimerHandle InvincibilityTimerHandle;
 	
+// === Sounds ===
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* DieBreath;
 	
 	UPROPERTY()
 	int32 DieSoundID;
+	
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Client_PlayHeal();
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_DieSound();
 
 
 	// === NETWORK ===

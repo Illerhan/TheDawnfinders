@@ -205,17 +205,8 @@ void UHealthComponent::Heal(float quantity)
 		WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
 	}
 
-	if (HealingSoundID)
-	{
-		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
-		{
-			AudioDevice->StopPlayingID(HealingSoundID);
-			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
-		}
-	}
-	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
-
+	Client_PlayHeal();
+	
 	// If client
 	if (!GetOwner()->HasAuthority())
 	{
@@ -536,7 +527,7 @@ void UHealthComponent::Die()
 		AudioDevice->StopPlayingID(HeartBeatSoundID);
 		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
 	}
-	DieSoundID = UAkGameplayStatics::PostEvent(DieBreath,Owner,0,FOnAkPostEventCallback(), false);
+	Multi_DieSound();
 }
 
 void UHealthComponent::Client_Die_Implementation()
@@ -663,6 +654,25 @@ void UHealthComponent::EndInvincibilityFrames_Implementation()
 
 
 #pragma region Network Functions
+
+void UHealthComponent::Client_PlayHeal_Implementation()
+{
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}
+	}
+	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
+}
+
+void UHealthComponent::Multi_DieSound_Implementation()
+{
+	DieSoundID = UAkGameplayStatics::PostEvent(DieBreath,GetOwner(),0,FOnAkPostEventCallback(), false);
+}
 
 void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
