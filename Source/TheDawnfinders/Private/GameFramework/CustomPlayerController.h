@@ -87,6 +87,9 @@ public:
 	
 	UPROPERTY()
 	int32 CallMuleSoundID;
+	
+	UFUNCTION(Netmulticast, Reliable, BlueprintCallable)
+	void Multi_PlayCallMule();
 
 	
 
