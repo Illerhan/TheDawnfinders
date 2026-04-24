@@ -23,6 +23,15 @@ void AThrowableObject::BeginPlay()
 void AThrowableObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (!HasAuthority()) return;
+
+	if (!bDestroyOnHit) {
+		DestroyTimer += DeltaTime;
+		if (DestroyTimer >= DestroyDuration) {
+			AActor::Destroy();
+		}
+	}
 }
 
 
