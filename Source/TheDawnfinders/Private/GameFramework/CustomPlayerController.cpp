@@ -74,8 +74,7 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 	}
 	NoiseActor->SetActorLocation(OwningPlayer->GetActorLocation());
 	
-	if (!CallMuleSoundID)
-		CallMuleSoundID = UAkGameplayStatics::PostEvent(CallMuleSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+	Multi_PlayCallMule();
 		
 	OwningPlayer->Execute_ShowProgress(OwningPlayer,HoldTimer);
 	if (HoldTimer <= 0.f)
@@ -145,4 +144,10 @@ void ACustomPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	HoldTimer= InputHoldDuration;
+}
+
+void ACustomPlayerController::Multi_PlayCallMule_Implementation()
+{
+	if (!CallMuleSoundID)
+		CallMuleSoundID = UAkGameplayStatics::PostEvent(CallMuleSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }

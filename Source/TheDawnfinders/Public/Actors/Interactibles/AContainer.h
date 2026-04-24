@@ -58,5 +58,8 @@ protected :
 	UPROPERTY()
 	bool bIsOpened;
 
+	UPROPERTY()
+	TArray<bool> bAlreadySpawnedIndexes;
+
 	FTimerHandle DelayStartHandle;
 };
