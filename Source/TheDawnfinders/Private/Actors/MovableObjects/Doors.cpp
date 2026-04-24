@@ -16,7 +16,7 @@ void ADoors::BeginPlay()
 {
     Super::BeginPlay();
     
-    StartPosition = GetActorLocation(); // position fermée = position éditeur
+    StartPosition = GetActorLocation();
     FinalPosition = StartPosition + EndPosition;
 
     if (MoveCurve)
@@ -33,7 +33,6 @@ void ADoors::BeginPlay()
 
     if (bStartsOpen)
     {
-        // Téléporte directement à la position ouverte, sans timeline
         SetActorLocation(FinalPosition);
         bIsFullyOpen = true;
         CurrentTimelineProgress = 1.0f;

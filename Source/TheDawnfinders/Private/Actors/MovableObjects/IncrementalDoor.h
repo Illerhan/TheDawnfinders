@@ -16,13 +16,14 @@
 
   public:
       AIncrementalDoor();
-
+      virtual void StartOpening() override;
   protected:
       virtual void BeginPlay() override;
       virtual void Tick(float DeltaTime) override;
 
       // Intercepte l'appel du Lever
-      virtual void StartOpening() override;
+
+      void FinishStep();
       virtual void StopOpening() override;
       virtual void StopMainAction_Implementation() override;
 
