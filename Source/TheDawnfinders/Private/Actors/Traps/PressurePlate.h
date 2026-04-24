@@ -36,8 +36,11 @@ public :
 	UPROPERTY(Blueprintable, EditAnywhere)
 	UBoxComponent* BoxCollider;
 	
-	UPROPERTY(Replicated,BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_IsActive,BlueprintReadWrite, EditAnywhere)
 	bool bIsActive;
+	
+	UFUNCTION(BlueprintCallable,Blueprintable,BlueprintImplementableEvent)
+	void OnRep_IsActive();
 
 
 // === Properties ====

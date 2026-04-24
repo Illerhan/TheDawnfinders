@@ -5,6 +5,7 @@
 
 #include "AkAudioDevice.h"
 #include "AkGameplayStatics.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Interfaces/Activable.h"
 #include "Net/UnrealNetwork.h"
 
@@ -42,9 +43,11 @@ void APressurePlate::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>&
 void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (!Cast<AAPlayerCharacter>(OtherActor)) return;
 	CurrentPlayerCount++;
 	if (CurrentPlayerCount > 1) return;
 	bIsActive = true;
+	OnRep_IsActive();
 	Multi_PlaySound();
 	for (auto LinkedActor : LinkedActors)
 	{
@@ -62,9 +65,11 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if (!Cast<AAPlayerCharacter>(OtherActor)) return;
 	CurrentPlayerCount--;
 	if (CurrentPlayerCount != 0) return;
 	bIsActive = false;
+	OnRep_IsActive();
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
