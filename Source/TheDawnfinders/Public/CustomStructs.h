@@ -304,8 +304,19 @@ struct FChestSpawnLoot {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* ItemData;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MinSpawnCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxSpawnCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bSpawnOnlyOnce = false;
+
+
 	FChestSpawnLoot()
-		: SpawnPercent(0.f), ItemData(nullptr)
+		: SpawnPercent(0.f), ItemData(nullptr), MinSpawnCount(1), MaxSpawnCount(1), bSpawnOnlyOnce(false)
 	{
 	}
 };

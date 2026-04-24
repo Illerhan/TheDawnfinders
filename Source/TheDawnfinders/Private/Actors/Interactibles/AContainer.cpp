@@ -29,6 +29,8 @@ void AContainer::SetupLoot()
 	FChestSpawn* SpawnData = LootDataTable->FindRow<FChestSpawn>(DataTableRowName, " ");
 	if (!SpawnData) return;
 
+	bAlreadySpawnedIndexes.Init(false, (SpawnData->SpawnableItems.Num()));
+
 	int ItemToSpawnCount = FMath::RandRange(SpawnData->MinItemCount, SpawnData->MaxItemCount);
 
 	for (int i = 0; i < ItemToSpawnCount; i++)
@@ -36,12 +38,19 @@ void AContainer::SetupLoot()
 		int PickedPercent = FMath::RandRange(0.f, 100.f);
 		int CurrentPercent = 0;
 		UItemData* SpawnedData = nullptr;
+		int SpawnedIndex = 0;
 
 		for (int j = 0; j < SpawnData->SpawnableItems.Num(); j++) {
 			CurrentPercent += SpawnData->SpawnableItems[j].SpawnPercent;
 
 			if (PickedPercent < CurrentPercent) {
+
+				if (bAlreadySpawnedIndexes[j] && SpawnData->SpawnableItems[j].bSpawnOnlyOnce) {
+					break;
+				}
+
 				SpawnedData = SpawnData->SpawnableItems[j].ItemData;
+				SpawnedIndex = j;
 				break;
 			}
 		}
@@ -51,7 +60,12 @@ void AContainer::SetupLoot()
 			continue;
 		}
 
-		ContainerLoot.Add(SpawnedData);
+		bAlreadySpawnedIndexes[SpawnedIndex] = true;
+
+		int IterationCount = FMath::RandRange(SpawnData->SpawnableItems[SpawnedIndex].MinSpawnCount, SpawnData->SpawnableItems[SpawnedIndex].MaxSpawnCount);
+		for (int j = 0; j < IterationCount; j++) {
+			ContainerLoot.Add(SpawnedData);
+		}
 	}
 
 	for (UItemData* Item : ContainerLoot) {
