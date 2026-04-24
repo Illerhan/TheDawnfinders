@@ -38,7 +38,7 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 {
 	CurrentPlayerCount++;
 	if (CurrentPlayerCount > 1) return;
-	
+	bIsActive = true;
 	Multi_PlaySound();
 	for (auto LinkedActor : LinkedActors)
 	{
@@ -58,7 +58,7 @@ void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 {
 	CurrentPlayerCount--;
 	if (CurrentPlayerCount != 0) return;
-
+	bIsActive = false;
 	for (auto LinkedActor : LinkedActors)
 	{
 		if (LinkedActor->Implements<UActivable>())
