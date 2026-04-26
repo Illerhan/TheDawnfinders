@@ -68,6 +68,9 @@ protected :
 	UPROPERTY(ReplicatedUsing = OnRep_Enabled, EditAnywhere, BlueprintReadWrite, Category = "Trap")
 	bool bEnable = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
+	bool bTargetOnlyEnemies = false;
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Duration Trap")
 	float TriggerWaitDuration = 2.0f;
 

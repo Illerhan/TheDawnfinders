@@ -70,6 +70,7 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	if (CurrentCooldown > 0.f) return;
 	if (!OtherActor || OtherActor == this) return;
 	if (TrapTriggerType != ETrapTriggerType::OnColliderEnter) return;
+	if (bTargetOnlyEnemies && OtherActor->ActorHasTag("Player")) return;
 
 	TrappedActor = OtherActor;
 
