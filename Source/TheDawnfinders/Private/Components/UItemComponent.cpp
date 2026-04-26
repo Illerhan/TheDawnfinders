@@ -7,6 +7,7 @@
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Player/AThrowableObject.h"
+#include "Actors/Traps/ATrapBase.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
@@ -364,6 +365,18 @@ void UItemComponent::UseConsumable()
 			InventoryComponent->RemoveCurrentItem();
 			break;
 
+		case EConsumableEffectType::PlaceTrap:
+		{
+			if (!PlayerCharacter) return;
+			FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
+			FRotator SpawnRot = PlayerCharacter->GetActorRotation();
+			FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
+			ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
+				SpawnLoc, SpawnRot, Params);
+			if (NewTrap) InventoryComponent->RemoveCurrentItem();
+			break;
+		}
+
 		case EConsumableEffectType::OpenMap :
 			if (!PlayerCharacter) return;
 			APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
@@ -371,7 +384,6 @@ void UItemComponent::UseConsumable()
 
 			AHUD* HUD = PC->GetHUD();
 			Cast<ACustomHUD>(HUD)->MainWidget->OpenMap(EquippedItem.CurrentInfos.ItemData->MapSprite);
-
 			break;
 	}
 }

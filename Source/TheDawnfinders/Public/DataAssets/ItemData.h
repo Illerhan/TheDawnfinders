@@ -8,6 +8,7 @@
 
 class AItem;
 class AThrowableObject;
+class ATrapBase;
 
 UENUM(BlueprintType)
 enum class EItemRarity : uint8 {
@@ -41,6 +42,7 @@ enum class EConsumableEffectType : uint8 {
 	Antidote UMETA(DisplayName = "Antidote"),
 	Poison UMETA(DisplayName="Poison"),
 	OpenMap UMETA(DisplayName = "OpenMap"),
+	PlaceTrap UMETA(DisplayName = "PlaceTrap"),
 	None UMETA(DisplayName = "None")
 };
 
@@ -111,6 +113,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	TSubclassOf<class AThrowableObject> ThrowedObjectClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
+	TSubclassOf<class ATrapBase> PlacedTrap;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	UAnimMontage* UseConsumableMontage;
