@@ -54,9 +54,12 @@ void ATrapBase::Tick(float DeltaTime)
 		TriggerTimer -= DeltaTime;
 	}
 	else if (TrapTriggerType == ETrapTriggerType::OnDuration) {
+		
+		if (!HasAuthority()) return;
+		
 		DoTrapAction(nullptr);
 		Multicast_PlayEffects();
-
+		Multicast_PlayTrapAnim();
 		TriggerTimer = TriggerWaitDuration;
 	}
 }
@@ -66,6 +69,8 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 							   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 							   bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (!HasAuthority()) return;
+	
 	if (!bEnable) return;
 	if (CurrentCooldown > 0.f) return;
 	if (!OtherActor || OtherActor == this) return;
@@ -78,9 +83,8 @@ void ATrapBase::OnTrapOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	if (OtherActor->Implements<UDamageable>())
 	{
 		DoTrapAction(OtherActor);
-
 		Multicast_PlayEffects();
-
+		Multicast_PlayTrapAnim();
 		CurrentCooldown = Cooldown;
 	}
 }
@@ -122,6 +126,10 @@ void ATrapBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 
 	DOREPLIFETIME(ATrapBase, bEnable);
 	DOREPLIFETIME(ATrapBase, TrappedActor);
+}
+
+void ATrapBase::Multicast_PlayTrapAnim_Implementation()
+{
 }
 
 void ATrapBase::OnRep_TrappedActor()

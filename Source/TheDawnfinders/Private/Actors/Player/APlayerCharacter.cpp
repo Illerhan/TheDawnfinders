@@ -308,7 +308,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         StopAutoLock();
         ItemComponent->StopAim();
         StopAutoMoveCharacter(true);
-        StopMovementForDuration(3.f);
+        StopMovementForDuration(4.5f);
         break;
 
     case EPlayerState::Immobilized :
@@ -358,7 +358,7 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
 
     case EPlayerState::Fallen:
 
-        StopMovementForDuration(3.f);
+        StopMovementForDuration(4.5f);
         break;
 
     case EPlayerState::Immobilized:
