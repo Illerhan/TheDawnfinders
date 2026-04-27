@@ -108,7 +108,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<SwitchContainer Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" ShortID="45232914">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -3843,9 +3849,13 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="DamagesHit" ID="{D8008B8A-BEF0-4D97-BAE0-9D390E04A3CC}" ShortID="513552124">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -3966,9 +3976,13 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="DownedFall" ID="{6D3BE560-2F8F-4E19-81B9-8BFA00ED953B}" ShortID="723053918">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -4157,9 +4171,13 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="PlayerDying" ID="{9B082705-8A69-457B-96E3-6FFA79B7C262}" ShortID="718813544">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -4304,9 +4322,13 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="PlayerHealing" ID="{D3397CD8-23DD-4A2C-98FB-0425935DC43D}" ShortID="1020496166">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -4407,9 +4429,13 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Reanimate" ID="{574A0C7A-4A9E-4E47-B38D-5039D5923DF1}" ShortID="1034815561">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -5031,7 +5057,13 @@
 						<Folder Name="Elements de LD" ID="{52AA47DA-4FE3-4604-9B9C-32208BF09303}" ShortID="594072380">
 							<ChildrenList>
 								<RandomSequenceContainer Name="Door_Open" ID="{43CB21D1-895B-4E94-B642-DF30D3FC689E}" ShortID="279135462">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -5112,9 +5144,13 @@
 									<ChildrenList>
 										<RandomSequenceContainer Name="Palanquin" ID="{61F2836D-AB19-47D1-9327-A2A97CE2413C}" ShortID="663606987">
 											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5405,7 +5441,13 @@
 											</ObjectLists>
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="Palanquin_Inventory" ID="{E52A3F27-2009-43C1-BF64-09055EE0FB4D}" ShortID="460352605">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5505,7 +5547,13 @@
 											</ChildrenList>
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="Palanquin_Calling" ID="{332B4B98-0251-42F9-AC07-2E293A2C22FE}" ShortID="80390290">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5605,7 +5653,13 @@
 											</ChildrenList>
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="Palanquin_Empty" ID="{691D4B19-A1CB-4A0C-9A26-FD2B67F0BE34}" ShortID="504039388">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5797,7 +5851,13 @@
 								<Folder Name="Trap" ID="{6C8F4774-F8EA-426D-81C4-999AC746BD52}" ShortID="561293419">
 									<ChildrenList>
 										<RandomSequenceContainer Name="Trap_Pressure" ID="{111150FC-F0AB-42B2-A374-CCBA034D3067}" ShortID="659539226">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5853,7 +5913,13 @@
 											</ChildrenList>
 										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="Trap_Bone" ID="{C3208349-D8DD-431A-B39F-748AC4A3C699}" ShortID="848955210">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -5997,7 +6063,13 @@
 											</ChildrenList>
 										</RandomSequenceContainer>
 										<Sound Name="Trap_Arrow" ID="{613039B3-A94B-493D-8228-2F049A71AFF4}" ShortID="34033633">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -6019,7 +6091,14 @@
 											</ActiveSourceList>
 										</Sound>
 										<RandomSequenceContainer Name="Trap_Spike" ID="{5C515A8E-EBB8-440E-BA36-C960D5D172D2}" ShortID="738766460">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.75"/>
+											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 												</Reference>
@@ -6469,7 +6548,13 @@
 									</ChildrenList>
 								</BlendContainer>
 								<RandomSequenceContainer Name="Player_Shot" ID="{C559492A-1776-4B26-AFB4-D2783D884793}" ShortID="485878927">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -6657,7 +6742,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Player_Hit" ID="{0DBAD81B-9325-4C26-8B9E-BCC0A252F0A9}" ShortID="937868279">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -6853,7 +6944,13 @@
 						<Folder Name="Zeloth" ID="{5E8E1F81-19D2-409D-8237-D3BA34F2C25A}" ShortID="275436581">
 							<ChildrenList>
 								<BlendContainer Name="Zeloth_Idle" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" ShortID="396443912">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -6965,7 +7062,13 @@
 									</ChildrenList>
 								</BlendContainer>
 								<SwitchContainer Name="EliteEnnemyMovement" ID="{6CB8C020-1CEA-4E42-96F6-F5A73FA82A6C}" ShortID="475180771">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -7568,7 +7671,13 @@
 						<Folder Name="Fidele" ID="{0F9F77DD-76C8-465B-A035-25033F930879}" ShortID="552668968">
 							<ChildrenList>
 								<SwitchContainer Name="BasicEnnemyMovement" ID="{EA3F52D2-F6B8-4AEA-83F8-D43B4F6F50F1}" ShortID="985132953">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -8365,7 +8474,13 @@
 									</GroupingInfo>
 								</SwitchContainer>
 								<RandomSequenceContainer Name="BasicEnnemyAttack" ID="{0F8A60D8-F82D-4D7D-B07A-2ECF5E5BFA48}" ShortID="1030442252">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -8465,7 +8580,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" ShortID="244524104">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>

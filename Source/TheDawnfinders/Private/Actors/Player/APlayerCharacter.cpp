@@ -97,6 +97,12 @@ AAPlayerCharacter::AAPlayerCharacter()
 
     FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
     FogOfWarLightOff->SetupAttachment(RootComponent);
+    
+    AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkAudioComponent"));
+    if (GetMesh())
+    {
+        AkComponent->SetupAttachment(GetMesh());
+    }
 
     // ---------- ROTATION PAR DÉFAUT ----------
     

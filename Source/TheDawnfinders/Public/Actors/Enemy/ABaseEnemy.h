@@ -44,6 +44,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UWidgetComponent* EnemyWidgetComponent;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UAkComponent* AkComponent;
 
 
 public :
