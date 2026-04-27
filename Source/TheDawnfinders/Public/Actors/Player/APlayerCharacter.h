@@ -345,6 +345,9 @@ protected:
 	UFUNCTION()
 	void HideThrowPreview();
 
+	UFUNCTION(Server, Unreliable)
+	void Server_SetMoveInputActive(bool bActive);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReachAutoMoveDestination();
 
@@ -375,6 +378,9 @@ public :
 
 	UPROPERTY(Replicated)
 	int32 ProtectionZoneAmount;
+
+	UPROPERTY(Replicated, BlueprintReadOnly)
+	bool bMoveInputActive;     // For root-motion animations triggers
 
 	UPROPERTY()
 	float TargetRotationRate = 360.f;

@@ -510,8 +510,11 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
     if (bIsAutoMoving) return;
-    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead)
+    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead) {
+        bMoveInputActive = false;
+        if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
+    }
 
     if (NoMovementTimer > 0) {
         return;
@@ -553,9 +556,13 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     if (CurrentPlayerInput.SquaredLength() > 0.05f) {
         PreviousPlayerInput = CurrentPlayerInput;
+        bMoveInputActive = true;
+        if (!HasAuthority()) Server_SetMoveInputActive(true);
     }
     else {
         AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+        bMoveInputActive = false;
+        if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
     }
 
@@ -1161,6 +1168,11 @@ void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Direction, fl
 void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+void AAPlayerCharacter::Server_SetMoveInputActive_Implementation(bool bActive)
+{
+    bMoveInputActive = bActive;
 }
 
 void AAPlayerCharacter::ReachAutoMoveDestination_Implementation()
