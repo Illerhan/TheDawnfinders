@@ -82,6 +82,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
 	USoundBase* Sound;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_PlayTrapAnim();
 
 
 // === TRAP PROPERTIES ===
