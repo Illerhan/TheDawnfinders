@@ -153,6 +153,11 @@ void ACustomPlayerState::ApplyContextualAmulet(EAmuletTriggerType Trigger)
 	}
 }
 
+void ACustomPlayerState::ChangeGold_Implementation(int NewGold)
+{
+
+}
+
 #pragma endregion
 
 

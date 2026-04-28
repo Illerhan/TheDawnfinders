@@ -156,6 +156,10 @@ public :
 	UPROPERTY(ReplicatedUsing=OnRep_Gold, BlueprintReadWrite)
 	int32 SavedGold = 300;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ChangeGold(int NewGold);
+
+
 // === PROTECTED PROPERTIES ===
 protected :
 	UPROPERTY(BlueprintReadOnly)
