@@ -313,6 +313,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Fallen :
         StopAutoLock();
         ItemComponent->StopAim();
+        ItemComponent->CancelReload();
         StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
         break;
