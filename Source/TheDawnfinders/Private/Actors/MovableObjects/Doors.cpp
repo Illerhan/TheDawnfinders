@@ -225,6 +225,8 @@ void ADoors::StopOpening()
     // Si la timeline ne joue pas → on force la fermeture
     if (!Timeline.IsPlaying())
     {
+        bIsMovingForward = false;
+
         Multi_OpeningSound();
         Timeline.ReverseFromEnd();
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door closing from end"));
