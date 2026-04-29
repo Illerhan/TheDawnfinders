@@ -139,6 +139,19 @@ void ACustomPlayerState::ActualiseEquippedItem(FInventorySlot Current)
 	OnInfoChangeLocal.ExecuteIfBound();
 }
 
+void ACustomPlayerState::SetIsReady(bool Ready)
+{
+	bIsReady = Ready;
+	if (!HasAuthority()) {
+		Server_SetIsReady(Ready);
+	}
+}
+
+void ACustomPlayerState::Server_SetIsReady_Implementation(bool Ready)
+{
+	bIsReady = Ready;
+}
+
 #pragma endregion
 
 
