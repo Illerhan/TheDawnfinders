@@ -145,11 +145,21 @@ void ACustomPlayerState::SetIsReady(bool Ready)
 	if (!HasAuthority()) {
 		Server_SetIsReady(Ready);
 	}
+	else {
+		VerifyCountdownLaunch();
+	}
+}
+
+void ACustomPlayerState::VerifyCountdownLaunch_Implementation()
+{
+
 }
 
 void ACustomPlayerState::Server_SetIsReady_Implementation(bool Ready)
 {
 	bIsReady = Ready;
+
+	VerifyCountdownLaunch();
 }
 
 #pragma endregion

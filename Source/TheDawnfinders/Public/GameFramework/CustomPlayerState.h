@@ -127,6 +127,9 @@ public :
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_SetIsReady(bool Ready);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void VerifyCountdownLaunch();
+
 	UPROPERTY(Replicated, BlueprintReadOnly)
 	bool bIsReady = false;
 
