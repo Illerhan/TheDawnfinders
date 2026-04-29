@@ -47,6 +47,9 @@ public :
 	UPROPERTY(BlueprintAssignable)
 	FOnShopItemsChange OnShopItemsChange;
 
+	UFUNCTION(BlueprintCallable)
+	void AddShopItem(FItemInfos Item);
+
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_AddShopItem(FItemInfos Item);
 	
