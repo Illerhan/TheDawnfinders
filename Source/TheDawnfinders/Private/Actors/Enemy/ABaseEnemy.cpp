@@ -1,5 +1,6 @@
 #include "Actors/Enemy/ABaseEnemy.h"
 
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "BlueprintNodes/PostEventAsync.h"
 #include "Components/WidgetComponent.h"
@@ -23,6 +24,13 @@ ABaseEnemy::ABaseEnemy()
 
     AttackCollisionPosRef = CreateDefaultSubobject<USceneComponent>("AttackCollisionPosRef");
     AttackCollisionPosRef->SetupAttachment(GetMesh());
+    AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkAudioComponent"));
+
+    // 2. Attachement au Skeletal Mesh du personnage
+    if (GetMesh())
+    {
+        AkComponent->SetupAttachment(GetMesh());
+    }
 }
 
 void ABaseEnemy::BeginPlay()

@@ -97,6 +97,12 @@ AAPlayerCharacter::AAPlayerCharacter()
 
     FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
     FogOfWarLightOff->SetupAttachment(RootComponent);
+    
+    AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkAudioComponent"));
+    if (GetMesh())
+    {
+        AkComponent->SetupAttachment(GetMesh());
+    }
 
     // ---------- ROTATION PAR DÉFAUT ----------
     
@@ -307,6 +313,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Fallen :
         StopAutoLock();
         ItemComponent->StopAim();
+        ItemComponent->CancelReload();
         StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
         break;

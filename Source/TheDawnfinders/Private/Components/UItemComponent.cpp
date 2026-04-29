@@ -843,6 +843,8 @@ void UItemComponent::CompleteReload()
 
 void UItemComponent::CancelReload()
 {
+	if (!bIsReloading) return;
+
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
 	if (!bIsAiming) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);

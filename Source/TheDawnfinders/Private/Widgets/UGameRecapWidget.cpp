@@ -5,10 +5,10 @@
 
 void UGameRecapWidget::DisplaySuccessRecap_Implementation()
 {
-
+	bIsDisplayed = true;
 }
 
 void UGameRecapWidget::DisplayFailRecap_Implementation()
 {
-
+	bIsDisplayed = true;
 }
