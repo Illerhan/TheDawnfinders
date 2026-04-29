@@ -82,6 +82,11 @@ void AItem::Multicast_Initialise_Implementation(FItemInfos Data)
 
 void AItem::Interact_Implementation(AActor* Interactor)
 {
+	if (!IsValid(ItemInfos.ItemData) || !IsValid(ItemData)) {
+		Destroy();
+		return;
+	}
+
 	Super::Interact_Implementation(Interactor);
 
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
