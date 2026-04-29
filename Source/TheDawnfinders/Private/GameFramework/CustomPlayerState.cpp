@@ -229,23 +229,10 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
 {
 	if (!ItemToSell) return;
-	int SellPrice = 0;
-	// Chercher dans ShopItems (pas dans l'inventaire pawn)
-	for (int32 i = ShopItems.Num() - 1; i >= 0; i--)
-	{
-		if (ShopItems[i].ItemData == ItemToSell)
-		{
-			SellPrice = ShopItems[i].ItemData->SellValue;
-			ShopItems.RemoveAt(i);
-			break;
-		}
-	}
-
-	
+	int SellPrice = ItemToSell->SellValue;
+		
 	SavedGold += SellPrice;
 
-	OnShopItemsChange.Broadcast();
-	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()
@@ -313,11 +300,7 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 			if (TotalRows >= 5) return;
 		}
 	}
-
-	ShopItems.Add(Item);
 	SavedGold-=Item.ItemData->ItemValue;
-	OnShopItemsChange.Broadcast();
-	OnRep_ShopItems();
 }
 
 #pragma endregion
