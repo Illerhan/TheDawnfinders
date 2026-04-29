@@ -567,7 +567,6 @@ void UItemComponent::DoLightAttack()
 
 	CurrentWeaponActionData = *WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
@@ -677,6 +676,8 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+
+	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
