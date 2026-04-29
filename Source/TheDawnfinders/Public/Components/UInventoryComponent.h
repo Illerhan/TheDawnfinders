@@ -194,10 +194,7 @@ public :
 
 	UFUNCTION(Server, Reliable,BlueprintCallable, Category = "Inventory")
 	void ServerConsumeItemDirectly(FItemInfos Item);
-	
-	UFUNCTION(BlueprintCallable)
-    void RestoreShopItems();
-	
+		
 	UFUNCTION(BlueprintCallable)
 	void UpdateValuable();
 	
