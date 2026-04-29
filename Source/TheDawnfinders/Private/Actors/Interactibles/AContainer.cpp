@@ -32,9 +32,14 @@ void AContainer::SetupLoot()
 	bAlreadySpawnedIndexes.Init(false, (SpawnData->SpawnableItems.Num()));
 
 	int ItemToSpawnCount = FMath::RandRange(SpawnData->MinItemCount, SpawnData->MaxItemCount);
+	int AnticrashCounter = 0;
 
 	for (int i = 0; i < ItemToSpawnCount; i++)
 	{
+		if (++AnticrashCounter > 200) {
+			break;
+		}
+
 		int PickedPercent = FMath::RandRange(0.f, 100.f);
 		int CurrentPercent = 0;
 		UItemData* SpawnedData = nullptr;
