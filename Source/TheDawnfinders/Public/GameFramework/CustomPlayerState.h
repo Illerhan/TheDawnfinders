@@ -121,6 +121,16 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void ActualiseEquippedItem(FInventorySlot Current);
 
+	UFUNCTION(BlueprintCallable)
+	void SetIsReady(bool Ready);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_SetIsReady(bool Ready);
+
+	UPROPERTY(Replicated, BlueprintReadOnly)
+	bool bIsReady = false;
+
+
 // === GETTERS ===
 public :
 	UFUNCTION(BlueprintCallable)
