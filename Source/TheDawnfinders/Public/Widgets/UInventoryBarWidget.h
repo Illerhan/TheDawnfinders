@@ -40,6 +40,9 @@ public :
 	void ShowWidgetFromPalanquin();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowWidgetFromLobby(UUserWidget* StashInventoryWidget);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideWidget();
 
 	UFUNCTION(BlueprintCallable)

@@ -41,6 +41,9 @@ public :
 	void PlayPalanquinAppearAnimation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayLobbyAppearAnimation(UUserWidget* StashWidget);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void PlayDisappearAnimation(float Delay);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
@@ -72,6 +75,9 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsInPalanquin = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsInLobby = false;
 
 	UPROPERTY(BlueprintReadWrite)
 	int SlotIndex;
