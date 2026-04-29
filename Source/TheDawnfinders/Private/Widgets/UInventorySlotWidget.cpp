@@ -40,6 +40,11 @@ void UInventorySlotWidget::PlayPalanquinAppearAnimation_Implementation()
 	bIsInPalanquin = true;
 }
 
+void UInventorySlotWidget::PlayLobbyAppearAnimation_Implementation(UUserWidget* StashWidget)
+{
+
+}
+
 void UInventorySlotWidget::PlayDisappearAnimation_Implementation(float Delay)
 {
 
