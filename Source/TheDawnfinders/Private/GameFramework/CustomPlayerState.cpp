@@ -229,23 +229,10 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
 {
 	if (!ItemToSell) return;
-	int SellPrice = 0;
-	// Chercher dans ShopItems (pas dans l'inventaire pawn)
-	for (int32 i = ShopItems.Num() - 1; i >= 0; i--)
-	{
-		if (ShopItems[i].ItemData == ItemToSell)
-		{
-			SellPrice = ShopItems[i].ItemData->SellValue;
-			ShopItems.RemoveAt(i);
-			break;
-		}
-	}
-
-	
+	int SellPrice = ItemToSell->SellValue;
+		
 	SavedGold += SellPrice;
 
-	OnShopItemsChange.Broadcast();
-	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()
@@ -268,53 +255,24 @@ void ACustomPlayerState::SaveInventoryBeforeTravel()
 	}
 }
 
+
+void ACustomPlayerState::AddShopItem(FItemInfos Item)
+{
+	SavedGold -= Item.ItemData->ItemValue;
+
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
+
+	if (!HasAuthority()) {
+		Server_AddShopItem(Item);
+	}
+}
+
 void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 {
 	if (!Item.ItemData) return;
-	
 	if (SavedGold < Item.ItemData->ItemValue) return;
-	
-	int32 TotalRows = 0;
-	TMap<UItemData*, int32> TypeCounts;
-    
-	for (FItemInfos& S : ShopItems)
-	{
-		if (!S.ItemData) continue;
-        
-		if (S.ItemData->MaxStackingCapacity <= 1)
-		{
-			TotalRows++;
-		}
-		else
-		{
-			// Stackable = 1 row par type
-			if (!TypeCounts.Contains(S.ItemData))
-				TotalRows++;
-			TypeCounts.FindOrAdd(S.ItemData)++;
-		}
-	}
-    
-	// Validation
-	if (Item.ItemData->MaxStackingCapacity <= 1)
-	{
-		// Crée toujours une nouvelle row
-		if (TotalRows >= 5) return;
-	}
-	else
-	{
-		if (TypeCounts.Contains(Item.ItemData))
-		{
-			// Row existante → vérifier max stack
-			if (TypeCounts[Item.ItemData] >= Item.ItemData->MaxStackingCapacity) return;
-		}
-		else
-		{
-			// Nouvelle row
-			if (TotalRows >= 5) return;
-		}
-	}
 
-	ShopItems.Add(Item);
 	SavedGold-=Item.ItemData->ItemValue;
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();

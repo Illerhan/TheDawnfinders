@@ -70,6 +70,9 @@ void UInventoryBarWidget::HideWidget_Implementation()
 
 }
 
+void UInventoryBarWidget::ShowWidgetFromLobby_Implementation(UUserWidget* StashInventoryWidget)
+{
+}
 
 void UInventoryBarWidget::TryBindToInventory()
 {

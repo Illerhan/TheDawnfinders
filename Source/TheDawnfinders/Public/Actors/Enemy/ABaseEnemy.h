@@ -251,7 +251,7 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float StunTimer;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsStuned;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
