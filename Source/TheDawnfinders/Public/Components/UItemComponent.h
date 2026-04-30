@@ -171,6 +171,9 @@ private :
 	UFUNCTION()
 	void ActualiseUseProgress(float DeltaTime);
 
+	UFUNCTION(Server, Reliable)
+	void Server_PlaceLandmine();
+
 	UFUNCTION()
 	void UseConsumable();
 

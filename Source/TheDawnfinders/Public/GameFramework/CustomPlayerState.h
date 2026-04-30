@@ -47,6 +47,9 @@ public :
 	UPROPERTY(BlueprintAssignable)
 	FOnShopItemsChange OnShopItemsChange;
 
+	UFUNCTION(BlueprintCallable)
+	void AddShopItem(FItemInfos Item);
+
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void Server_AddShopItem(FItemInfos Item);
 	
@@ -117,6 +120,19 @@ public :
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseEquippedItem(FInventorySlot Current);
+
+	UFUNCTION(BlueprintCallable)
+	void SetIsReady(bool Ready);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_SetIsReady(bool Ready);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void VerifyCountdownLaunch();
+
+	UPROPERTY(Replicated, BlueprintReadOnly)
+	bool bIsReady = false;
+
 
 // === GETTERS ===
 public :

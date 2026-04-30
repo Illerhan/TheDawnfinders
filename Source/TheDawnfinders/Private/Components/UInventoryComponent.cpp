@@ -125,7 +125,6 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 	VerifyCurrentOverloadCount();
 }
 
-
 void UInventoryComponent::UpdateValuable()
 	{
 	CurrentValue = 0;
@@ -590,29 +589,6 @@ FInventorySlot UInventoryComponent::GetCurrentSlot()
 	}
 
 	return FInventorySlot();
-}
-
-void UInventoryComponent::RestoreShopItems()
-{
-	if (!GetOwner() || !GetOwner()->HasAuthority()) return;
-
-	APawn* Pawn = Cast<APawn>(GetOwner());
-	if (!Pawn) return;
-
-	APlayerController* PC = Cast<APlayerController>(Pawn->GetController());
-	if (!PC) return;
-
-	ACustomPlayerState* PS = PC->GetPlayerState<ACustomPlayerState>();
-	if (!PS || PS->ShopItems.Num() == 0) return;
-
-	if (PS->SavedGold > 0)
-	{
-		Server_AddGold_Implementation(PS->SavedGold);
-		PS->SavedGold = 0;
-	}
-
-	bShopItemsRestored = false;
-	AddShopItems(PS->ShopItems);
 }
 
 UItemData* UInventoryComponent::GetCurrentItem()

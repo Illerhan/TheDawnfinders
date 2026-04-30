@@ -62,7 +62,7 @@ void ADoors::Tick(float DeltaTime)
 void ADoors::DoMainAction_Implementation()
 {
     CurrentTriggerCount++;
-    if (CurrentTriggerCount < NeededTriggerCount) return;
+    if (CurrentTriggerCount != NeededTriggerCount) return;
 
     StartOpening();
 }
@@ -79,7 +79,7 @@ void ADoors::StopMainAction_Implementation()
     CurrentTriggerCount--;
 
     if (CurrentTriggerCount > 0) PauseOpening();
-    if (bStartsOpen)
+    else if (bStartsOpen)
         StartOpening();
     else StopOpening();
 }

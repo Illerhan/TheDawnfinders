@@ -82,6 +82,9 @@ void ABaseEnemy::CheckEnableDistance()
 {
     float ClosestDistSq = TNumericLimits<float>::Max();
 
+    if (!GetWorld()) return;
+    if (!GetWorld()->GetPlayerControllerIterator()) return;
+
     // We go through all the players 
     for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
     {

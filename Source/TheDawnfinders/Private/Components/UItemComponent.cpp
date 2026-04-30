@@ -271,6 +271,16 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 	UseConsumable();
 }
 
+void UItemComponent::Server_PlaceLandmine_Implementation()
+{
+	FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
+	FRotator SpawnRot = PlayerCharacter->GetActorRotation();
+	FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
+	ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
+		SpawnLoc, SpawnRot, Params);
+	if (NewTrap) InventoryComponent->RemoveCurrentItem();
+}
+
 void UItemComponent::UseConsumable()
 {
 	bIsUsingItem = false;
@@ -368,17 +378,16 @@ void UItemComponent::UseConsumable()
 		case EConsumableEffectType::PlaceTrap:
 		{
 			if (!PlayerCharacter) return;
-			FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
-			FRotator SpawnRot = PlayerCharacter->GetActorRotation();
-			FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
-			ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
-				SpawnLoc, SpawnRot, Params);
-			if (NewTrap) InventoryComponent->RemoveCurrentItem();
+			if (PlayerCharacter->HasAuthority())
+				Server_PlaceLandmine_Implementation();
+			else
+				Server_PlaceLandmine();
 			break;
 		}
 
 		case EConsumableEffectType::OpenMap :
 			if (!PlayerCharacter) return;
+			bIsUsingItem = true;
 			APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 			if (!PC) break;
 
@@ -393,6 +402,7 @@ void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) return;
+	if (!bIsUsingItem) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -401,7 +411,7 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
+		IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
@@ -567,7 +577,6 @@ void UItemComponent::DoLightAttack()
 
 	CurrentWeaponActionData = *WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
@@ -677,6 +686,8 @@ void UItemComponent::DoAttackCollision()
 	if (!PlayerCharacter->GetController()->IsLocalController()) return;
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+
+	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
