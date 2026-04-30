@@ -271,6 +271,16 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 	UseConsumable();
 }
 
+void UItemComponent::Server_PlaceLandmine_Implementation()
+{
+	FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
+	FRotator SpawnRot = PlayerCharacter->GetActorRotation();
+	FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
+	ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
+		SpawnLoc, SpawnRot, Params);
+	if (NewTrap) InventoryComponent->RemoveCurrentItem();
+}
+
 void UItemComponent::UseConsumable()
 {
 	bIsUsingItem = false;
@@ -368,12 +378,10 @@ void UItemComponent::UseConsumable()
 		case EConsumableEffectType::PlaceTrap:
 		{
 			if (!PlayerCharacter) return;
-			FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
-			FRotator SpawnRot = PlayerCharacter->GetActorRotation();
-			FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
-			ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
-				SpawnLoc, SpawnRot, Params);
-			if (NewTrap) InventoryComponent->RemoveCurrentItem();
+			if (PlayerCharacter->HasAuthority())
+				Server_PlaceLandmine_Implementation();
+			else
+				Server_PlaceLandmine();
 			break;
 		}
 
