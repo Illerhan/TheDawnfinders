@@ -387,6 +387,7 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::OpenMap :
 			if (!PlayerCharacter) return;
+			bIsUsingItem = true;
 			APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 			if (!PC) break;
 
