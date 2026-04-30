@@ -567,6 +567,8 @@ void UHealthComponent::Multicast_ActualiseFallen_Implementation(float Percent)
 
 void UHealthComponent::Multicast_DisplayFallen_Implementation()
 {
+	bIsFallen = true;
+
 	if (!WorldHealthBar) {
 		WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
 		WorldHealthBar->Setup(3);
