@@ -393,6 +393,7 @@ void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) return;
+	if (!bIsUsingItem) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -401,7 +402,7 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
+		IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
