@@ -253,6 +253,8 @@ void AAPlayerCharacter::HideProgress_Implementation()
 
     if (!PlayerWidget->GetProgressBar()) return;
 
+    UE_LOG(LogTemp, Display, TEXT("STOOOOOP"));
+
     UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
     ProgressBar->Hide();
 }
@@ -365,7 +367,11 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
         break;
 
     case EPlayerState::Fallen:
-
+        StopAutoLock();
+        ItemComponent->StopAim();
+        ItemComponent->CancelReload();
+        ItemComponent->StopMainAction();
+        StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
         break;
 
