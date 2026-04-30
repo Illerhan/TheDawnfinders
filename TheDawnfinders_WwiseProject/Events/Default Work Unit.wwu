@@ -174,7 +174,7 @@
 										<Action Name="" ID="{F829E627-C3AB-42FA-B8E3-F84294436043}" ShortID="272275366">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PlayerDying" ID="{9B082705-8A69-457B-96E3-6FFA79B7C262}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="PlayerDying" ID="{6D3BE560-2F8F-4E19-81B9-8BFA00ED953B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -185,7 +185,7 @@
 										<Action Name="" ID="{E5330795-FE88-4D8E-B40D-3E5689D4DF2B}" ShortID="992410339">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DownedFall" ID="{6D3BE560-2F8F-4E19-81B9-8BFA00ED953B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="DownedFall" ID="{9B082705-8A69-457B-96E3-6FFA79B7C262}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
