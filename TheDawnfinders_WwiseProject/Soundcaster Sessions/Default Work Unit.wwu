@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{CD93B130-AE42-4B98-BEB0-115D494DA0F0}" SchemaVersion="133">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{CD93B130-AE42-4B98-BEB0-115D494DA0F0}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{CD93B130-AE42-4B98-BEB0-115D494DA0F0}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="Test stop" ID="{C56F56E8-3EFE-45E4-9B51-F82BF50822BE}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_PlayerHealing" ID="{9847524F-0D12-4234-A203-9F519678B99B}" WorkUnitID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_DamagesHit" ID="{45598661-4014-4A8F-8F12-54F5571E4B04}" WorkUnitID="{A1F0AECF-CC70-4C8A-9AE6-2C0AD5930241}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>
