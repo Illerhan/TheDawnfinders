@@ -13,7 +13,8 @@
 UENUM(BlueprintType)
 enum class ETrapTriggerType : uint8 {
 	OnColliderEnter,
-	OnDuration
+	OnDuration,
+	OnActivation,
 };
 
 
@@ -56,6 +57,9 @@ protected :
 	int Damages = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
+	int DamagesEnemies = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
 	float Cooldown = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
@@ -63,6 +67,9 @@ protected :
 
 	UPROPERTY(ReplicatedUsing = OnRep_Enabled, EditAnywhere, BlueprintReadWrite, Category = "Trap")
 	bool bEnable = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
+	bool bTargetOnlyEnemies = false;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Duration Trap")
 	float TriggerWaitDuration = 2.0f;
@@ -75,6 +82,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
 	USoundBase* Sound;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_PlayTrapAnim();
 
 
 // === TRAP PROPERTIES ===

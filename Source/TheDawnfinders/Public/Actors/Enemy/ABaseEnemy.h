@@ -9,6 +9,7 @@
 #include "Interfaces/IDamageable.h"
 #include "Interfaces/IFadeable.h"
 #include "AIController.h"
+#include "AkAudioEvent.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "ABaseEnemy.generated.h"
 
@@ -43,6 +44,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	UWidgetComponent* EnemyWidgetComponent;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UAkComponent* AkComponent;
 
 
 public :
@@ -102,6 +106,23 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void HideEnemy();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StunEnemy(float Duration);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UnstunEnemy();
+
+	
+// === SOUNDS ===
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HitSound;
+	
+	UPROPERTY()
+	int32 HitSoundID;
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_PlayHitSound();
 
 
 // === MONTAGES ===
@@ -193,6 +214,11 @@ public :
 		return bRandomWaypointsOrder;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	bool GetIsStunned() {
+		return bIsStuned;
+	}
+
 
 // === PROTECTED PROPERTIES ===
 protected :
@@ -221,6 +247,12 @@ protected :
 
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	float CurrentSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StunTimer;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	bool bIsStuned;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsCrystallized;

@@ -13,7 +13,9 @@ class UItemData;
 UENUM(BlueprintType)
 enum class EThrowableEffectType : uint8 {
 	Explodes UMETA(DisplayName = "Explodes"),
-	PlayLoudSound UMETA(DisplayName = "PlayLoudSound")
+	PlayLoudSound UMETA(DisplayName = "PlayLoudSound"),
+	StunEnemies UMETA(DisplayName = "StunEnemies"),
+	ShowEnemies UMETA(DisplayName = "ShowEnemies")
 };
 
 
@@ -54,6 +56,9 @@ public :
 	float EffectRange;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	float EffectDuration;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	float NoiseRange;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
@@ -65,6 +70,12 @@ public :
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<class ANoise> NoiseObject;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bDestroyOnHit = true;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float DestroyDuration = 15.f;
+
 
 protected :
 	UPROPERTY()
@@ -72,4 +83,7 @@ protected :
 
 	UPROPERTY(BlueprintReadOnly)
 	UItemData* ItemData;
+
+	UPROPERTY(BlueprintReadWrite)
+	float DestroyTimer = 0.f;
 };

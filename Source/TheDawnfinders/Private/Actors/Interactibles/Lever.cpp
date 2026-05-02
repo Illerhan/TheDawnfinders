@@ -1,6 +1,7 @@
 ﻿#include "Actors/Interactibles/Lever.h"
 #include "Net/UnrealNetwork.h"
 #include "Actors/Player/APlayerCharacter.h"
+#include "Actors/MovableObjects/IncrementalDoor.h"
 
 
 ALever::ALever()
@@ -29,7 +30,7 @@ bool ALever::GetCanBeUsed_Implementation(AActor* Interactor)
 {
     Super::GetCanBeUsed_Implementation(Interactor);
 
-    if(bHasInteractAnim && CurrentInteractActor)
+    if(bHasInteractAnim && NeededPlayerCount <= CurrentInteractActorCount)
         return false;
 
     return bCanBeUsed;
@@ -40,14 +41,16 @@ void ALever::Interact_Implementation(AActor* Interactor)
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
 
     // We need to go to the lever first 
-    if (bHasInteractAnim && !CurrentInteractActor) {
-        CurrentInteractActor = Interactor;
+    if (bHasInteractAnim && CurrentInteractActorCount < NeededPlayerCount) {
+        CurrentInteractActors.Add(Interactor);
+        CurrentInteractActorCount++;
+
         AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
         DoPlayerAutoMove(Player);
         UE_LOG(LogTemp, Error, TEXT("Start Interact With lever"));
         return;
     }
-    else if (bHasInteractAnim && CurrentInteractActor != Interactor) {
+    else if (bHasInteractAnim && !CurrentInteractActors.Contains(Interactor)) {
         return;
     }
 
@@ -70,6 +73,16 @@ void ALever::Interact_Implementation(AActor* Interactor)
             ADoors* Door = Cast<ADoors>(Object);
             if (Door)
             {
+                AIncrementalDoor* IncDoor = Cast<AIncrementalDoor>(Door);
+        
+                if (IncDoor)
+                {
+                    // C'EST UNE PORTE INCRÉMENTALE : On force l'ouverture d'un palier, 
+                    // peu importe où elle se trouve !
+                    IncDoor->StartOpening();
+                    UE_LOG(LogTemp, Warning, TEXT("[SERVER] Toggle: Incremental step for door %s"), *IncDoor->GetName());
+                }
+                else
                 // Toggle door: si fermée -> ouvre, si ouverte -> ferme
                 if (Door->bIsFullyOpen || Door->GetTimelineProgress() > 0.5f)
                 {
@@ -119,7 +132,8 @@ void ALever::Interact_Implementation(AActor* Interactor)
             }
         }
 
-        CurrentInteractActor = nullptr;
+        CurrentInteractActors.Reset();
+        CurrentInteractActorCount = 0;
 
         Super::Interact_Implementation(Interactor);
     }
@@ -128,10 +142,12 @@ void ALever::Interact_Implementation(AActor* Interactor)
 void ALever::StartHoldInteraction(AActor* Player)
 {
     HoldPlayerCount++;
-    if (HoldPlayerCount < HoldPlayerCountNeeded) return;
+    if (HoldPlayerCount < NeededPlayerCount) return;
+
+    UE_LOG(LogTemp, Display, TEXT("Start lever hold"));
 
     // Starts Opening
-    if (HoldPlayerCount == HoldPlayerCountNeeded) {
+    if (HoldPlayerCount == NeededPlayerCount) {
         for (AMovableObjects* const Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
@@ -172,7 +188,7 @@ void ALever::StopHoldInteraction(AActor* Player)
     HoldPlayerCount--;
 
     // If some players still hold the lever (pause)
-    if (HoldPlayerCount > 0 && HoldPlayerCount < HoldPlayerCountNeeded) {
+    if (HoldPlayerCount > 0 && HoldPlayerCount < NeededPlayerCount) {
         for (AMovableObjects* Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);
@@ -186,7 +202,7 @@ void ALever::StopHoldInteraction(AActor* Player)
     }
 
     // If enough players remains (change speed)
-    if (HoldPlayerCount >= HoldPlayerCountNeeded) {
+    if (HoldPlayerCount >= NeededPlayerCount) {
         for (AMovableObjects* Object : LinkedObjects)
         {
             ADoors* Door = Cast<ADoors>(Object);

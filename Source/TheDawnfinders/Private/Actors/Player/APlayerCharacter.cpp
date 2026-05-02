@@ -97,6 +97,12 @@ AAPlayerCharacter::AAPlayerCharacter()
 
     FogOfWarLightOff = CreateDefaultSubobject<USphereComponent>(FName("FogOfWarLightOff"));
     FogOfWarLightOff->SetupAttachment(RootComponent);
+    
+    AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkAudioComponent"));
+    if (GetMesh())
+    {
+        AkComponent->SetupAttachment(GetMesh());
+    }
 
     // ---------- ROTATION PAR DÉFAUT ----------
     
@@ -247,6 +253,8 @@ void AAPlayerCharacter::HideProgress_Implementation()
 
     if (!PlayerWidget->GetProgressBar()) return;
 
+    UE_LOG(LogTemp, Display, TEXT("STOOOOOP"));
+
     UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
     ProgressBar->Hide();
 }
@@ -307,8 +315,10 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
     case EPlayerState::Fallen :
         StopAutoLock();
         ItemComponent->StopAim();
+        ItemComponent->CancelReload();
+        ItemComponent->StopMainAction();
         StopAutoMoveCharacter(true);
-        StopMovementForDuration(3.f);
+        StopMovementForDuration(4.5f);
         break;
 
     case EPlayerState::Immobilized :
@@ -344,6 +354,37 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
     if (GetController() && !bOverrideClient) return;
 
     CurrentState = NewState;
+
+    if (!GetController()) return;
+
+    switch (CurrentState)
+    {
+    case EPlayerState::None:
+        StopAutoLock();
+        break;
+
+    case EPlayerState::Carrying:
+        break;
+
+    case EPlayerState::Fallen:
+        StopAutoLock();
+        ItemComponent->StopAim();
+        ItemComponent->CancelReload();
+        ItemComponent->StopMainAction();
+        StopAutoMoveCharacter(true);
+        StopMovementForDuration(4.5f);
+        break;
+
+    case EPlayerState::Immobilized:
+        break;
+
+    case EPlayerState::Trapped:
+        ItemComponent->StopAim();
+        break;
+
+    case EPlayerState::Dead:
+        break;
+    }
 }
 
 
@@ -483,8 +524,11 @@ void AAPlayerCharacter::OnRep_PlayerSpeed()
 void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 {
     if (bIsAutoMoving) return;
-    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead)
+    if (CurrentState == EPlayerState::Dodging || CurrentState == EPlayerState::Immobilized || CurrentState == EPlayerState::Dead) {
+        bMoveInputActive = false;
+        if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
+    }
 
     if (NoMovementTimer > 0) {
         return;
@@ -526,9 +570,13 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     if (CurrentPlayerInput.SquaredLength() > 0.05f) {
         PreviousPlayerInput = CurrentPlayerInput;
+        bMoveInputActive = true;
+        if (!HasAuthority()) Server_SetMoveInputActive(true);
     }
     else {
         AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+        bMoveInputActive = false;
+        if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
     }
 
@@ -1134,6 +1182,11 @@ void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Direction, fl
 void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+void AAPlayerCharacter::Server_SetMoveInputActive_Implementation(bool bActive)
+{
+    bMoveInputActive = bActive;
 }
 
 void AAPlayerCharacter::ReachAutoMoveDestination_Implementation()

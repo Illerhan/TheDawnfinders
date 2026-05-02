@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkAudioEvent.h"
 #include "Actors/Player/ANoise.h"
 #include "GameFramework/PlayerController.h"
 #include "CustomPlayerController.generated.h"
@@ -80,5 +81,16 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float HoldTimer;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* CallMuleSound;
+	
+	UPROPERTY()
+	int32 CallMuleSoundID;
+	
+	UFUNCTION(Netmulticast, Reliable, BlueprintCallable)
+	void Multi_PlayCallMule();
+
+	
 
 };

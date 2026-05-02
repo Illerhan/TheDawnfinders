@@ -137,7 +137,7 @@ struct FWeaponInfos : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float PlayerSpeedModifier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Range")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Main")
 	float SneakMultiplier = 2.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee")
@@ -304,8 +304,19 @@ struct FChestSpawnLoot {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UItemData* ItemData;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MinSpawnCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxSpawnCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bSpawnOnlyOnce = false;
+
+
 	FChestSpawnLoot()
-		: SpawnPercent(0.f), ItemData(nullptr)
+		: SpawnPercent(0.f), ItemData(nullptr), MinSpawnCount(1), MaxSpawnCount(1), bSpawnOnlyOnce(false)
 	{
 	}
 };

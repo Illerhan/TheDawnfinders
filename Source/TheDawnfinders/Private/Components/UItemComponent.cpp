@@ -2,14 +2,19 @@
 
 #include "Components/UItemComponent.h"
 
+#include "AkGameplayStatics.h"
 #include "FrameTypes.h"
 #include "Actors/Interactibles/Litter.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Player/AThrowableObject.h"
+#include "Actors/Traps/ATrapBase.h"
 #include "Components/UHealthComponent.h"
 #include "Components/UInventoryComponent.h"
 #include "Components/UStaminaComponent.h"
+#include "GameFramework/CustomHUD.h"
+#include "Widgets/UMainWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Interfaces/IPlayer.h"
 #include "TimerManager.h"
 #include "Engine/World.h"
@@ -55,6 +60,10 @@ void UItemComponent::BeginPlay()
 void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (ShootDelayTimer > 0) {
+		ShootDelayTimer -= DeltaTime;
+	}
 
 	if (!GetOwner()) return;
 
@@ -208,6 +217,7 @@ void UItemComponent::DoMainAction()
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
 				
+				Multi_PlayHealSound();
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
 				return;
@@ -228,6 +238,21 @@ void UItemComponent::DoMainAction()
 	}
 }
 
+void UItemComponent::Multi_PlayHealSound_Implementation()
+{
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+				
+}
+
 void UItemComponent::ActualiseUseProgress(float DeltaTime)
 {
 	if (!bIsUsingItem) return;
@@ -244,6 +269,16 @@ void UItemComponent::ActualiseUseProgress(float DeltaTime)
 	}
 
 	UseConsumable();
+}
+
+void UItemComponent::Server_PlaceLandmine_Implementation()
+{
+	FVector  SpawnLoc = PlayerCharacter->GetActorLocation() + PlayerCharacter->GetMesh()->GetRightVector() * 80.f + FVector(0, 0, -50.f);
+	FRotator SpawnRot = PlayerCharacter->GetActorRotation();
+	FActorSpawnParameters Params; Params.Owner = PlayerCharacter; Params.Instigator = PlayerCharacter;
+	ATrapBase* NewTrap = GetWorld()->SpawnActor<ATrapBase>(EquippedItem.CurrentInfos.ItemData->PlacedTrap,
+		SpawnLoc, SpawnRot, Params);
+	if (NewTrap) InventoryComponent->RemoveCurrentItem();
 }
 
 void UItemComponent::UseConsumable()
@@ -266,6 +301,8 @@ void UItemComponent::UseConsumable()
 		else
 			PlayerCharacter->ServerPlayMontage(EquippedItem.CurrentInfos.ItemData->UseConsumableMontage, 1.0f);
 	}
+
+	float Amount = 0;
 
 	switch (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType)
 	{
@@ -319,7 +356,7 @@ void UItemComponent::UseConsumable()
 
 		case EConsumableEffectType::Refile:
 			if (!PlayerCharacter) return;
-			float Amount = EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower;
+			Amount = EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower;
 			if (PlayerCharacter->InteractionComponent->GetNearestInteractible())
 			{
 				ALitter* Litter = Cast<ALitter>(PlayerCharacter->InteractionComponent->GetNearestInteractible());
@@ -337,6 +374,26 @@ void UItemComponent::UseConsumable()
 			}
 			InventoryComponent->RemoveCurrentItem();
 			break;
+
+		case EConsumableEffectType::PlaceTrap:
+		{
+			if (!PlayerCharacter) return;
+			if (PlayerCharacter->HasAuthority())
+				Server_PlaceLandmine_Implementation();
+			else
+				Server_PlaceLandmine();
+			break;
+		}
+
+		case EConsumableEffectType::OpenMap :
+			if (!PlayerCharacter) return;
+			bIsUsingItem = true;
+			APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+			if (!PC) break;
+
+			AHUD* HUD = PC->GetHUD();
+			Cast<ACustomHUD>(HUD)->MainWidget->OpenMap(EquippedItem.CurrentInfos.ItemData->MapSprite);
+			break;
 	}
 }
 
@@ -345,6 +402,7 @@ void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment) return;
+	if (!bIsUsingItem) return;
 
 	// Throw throwable on release
 	if (IsPreviewingThrow) {
@@ -353,11 +411,18 @@ void UItemComponent::StopMainAction()
 
 	if (GetOwner()->Implements<UPlayerInterface>())
 	{
-		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
+		IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
 	}
 
 	bIsUsingItem = false;
+
+	if (!PlayerCharacter) return;
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (!PC) return;
+
+	AHUD* HUD = PC->GetHUD();
+	Cast<ACustomHUD>(HUD)->MainWidget->CloseMap();
 }
 
 #pragma endregion
@@ -512,7 +577,6 @@ void UItemComponent::DoLightAttack()
 
 	CurrentWeaponActionData = *WeaponActionsDataTable->FindRow<FWeaponActionData>(WeaponTypeActions->LightComboActionNames[ComboIndex], " ");
 
-	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 	IPlayerInterface::Execute_PlayAttackMontage(GetOwner(), CurrentWeaponActionData.Animation, WeaponData->AnimsSpeedModifier);
 	IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
 
@@ -623,6 +687,8 @@ void UItemComponent::DoAttackCollision()
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
+	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
+
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
 	if (!WeaponData) return;
@@ -647,7 +713,6 @@ void UItemComponent::DoAttackCollision()
 	);
 
 	if (!bHit) return;
-
 	for (int i = 0; i < Hit.Num(); i++) {
 		if (!Hit[i].GetActor()) continue;
 		if (!Hit[i].GetActor()->ActorHasTag("Enemy") && !Hit[i].GetActor()->ActorHasTag("Destructible")) continue;
@@ -660,16 +725,14 @@ void UItemComponent::DoAttackCollision()
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
 			ABaseEnemy* Enemy = Cast<ABaseEnemy>(Hit[i].GetActor());
-
+			Multi_PlayHitSound();
 			// Sneak Attack
 			float Multiplicator = 1;
 			if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
 				Multiplicator = CurrentWeaponData.SneakMultiplier;
 			}
-
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
-
 			else
 				Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages * Multiplicator);
 		}
@@ -678,7 +741,6 @@ void UItemComponent::DoAttackCollision()
 		else {
 			if (!GetOwner()->HasAuthority())
 				Server_ApplyDamagesToDestructible(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
-
 			else
 				Server_ApplyDamagesToDestructible_Implementation(Hit[i].GetActor(), EquippedItem.CurrentInfos.ItemData, CurrentAttackDamages);
 		}
@@ -738,6 +800,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 #pragma region Use Ranged Weapon
 
+void UItemComponent::Multi_PlayHitSound_Implementation()
+{
+	UAkGameplayStatics::PostEvent(MeleeHitSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+}
+
 void UItemComponent::StartAim()
 {
 	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
@@ -751,8 +818,7 @@ void UItemComponent::StartAim()
 void UItemComponent::StopAim()
 {
 	if (!bIsAiming) return;
-
-	if(!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
+	if (!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
 
@@ -765,6 +831,7 @@ void UItemComponent::Reload()
 	if (CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
 	if (!(InventoryComponent->GetCurrentItem()->ItemType == EItemType::Equipment)) return;
 	if (!InventoryComponent->GetCurrentItem()->bIsRangedWeapon) return;
+	if (bIsReloading) return;
 
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
@@ -787,7 +854,11 @@ void UItemComponent::CompleteReload()
 
 void UItemComponent::CancelReload()
 {
+	if (!bIsReloading) return;
+
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
+	if (!bIsAiming) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsReloading = false;
 	TimerReload = 0;
@@ -818,7 +889,13 @@ void UItemComponent::DoShootFeedbacks_Implementation(FVector Direction, bool bDo
 void UItemComponent::Shoot()
 {
 	if (bIsReloading) return;
-	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) return;
+	if (EquippedItem.CurrentInfos.AmmoInMagazine <= 0) {
+		Reload();
+		return;
+	}
+	if (ShootDelayTimer > 0) return;
+
+	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
@@ -835,6 +912,7 @@ void UItemComponent::Shoot()
 	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "", CurrentWeaponData.NoiseRange, 1, FVector(0, 0, 0), true);
 
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+	PlayShootSound();
 	InventoryComponent->UseAmmo(1, EquippedItem.CurrentInfos.ItemData);
 }
 
@@ -860,10 +938,29 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 	if (!HitResult.GetActor()->ActorHasTag("Enemy")) return;
 
 	ABaseEnemy* Enemy = Cast<ABaseEnemy>(HitResult.GetActor());
+	float Multiplicator = 1;
+	if (Enemy->GetCurrentEnemyState() != EEnemyState::Aggressive) {
+		Multiplicator = CurrentWeaponData.SneakMultiplier;
+	}
+
 	if (!GetOwner()->HasAuthority())
-		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
 	else
-		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage);
+		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
+}
+
+void UItemComponent::PlayShootSound_Implementation()
+{
+	if (ShootSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && ShootSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(ShootSoundID);
+			ShootSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	ShootSoundID = UAkGameplayStatics::PostEvent(ShootSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 #pragma endregion

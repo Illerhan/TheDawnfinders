@@ -21,17 +21,14 @@ public:
 
 
 public :
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Interactibles")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Lever")
 	TArray<AMovableObjects*> LinkedObjects;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever|Toggleables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
 	TArray<AActor*> LinkedToggleables;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever")
 	bool bRequiresHold = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lever", meta = (min = 1, max = 4))
-	int HoldPlayerCountNeeded = 1;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoPlayerAutoMove(AAPlayerCharacter* Player);

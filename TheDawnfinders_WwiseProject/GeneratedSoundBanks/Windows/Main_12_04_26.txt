@@ -1,17 +1,21 @@
 Event	ID	Name			Wwise Object Path	Notes
+	305502530	Play_Player_Interact			\Default Work Unit\Actions\Play_Player_Interact	
 	450992344	Play_Trap_Bone			\Default Work Unit\Objets\Elements de LD\Trap\Play_Trap_Bone	
 	604091378	Play_Palanquin_Inventory			\Default Work Unit\Objets\Elements de LD\Palanquin\Play_Palanquin_Inventory	
 	742274067	Play_SandWalk			\Default Work Unit\Joueur\Deplacement\Play_SandWalk	
+	749849859	Play_DamagesMadness			\Default Work Unit\Joueur\Feedbakcs\Play_DamagesMadness	
 	816640623	Play_SandRun			\Default Work Unit\Joueur\Deplacement\Play_SandRun	
 	856797194	Play_WoodRunCrack			\Default Work Unit\Joueur\Deplacement\Play_WoodRunCrack	
 	1009763818	Play_DownedFall			\Default Work Unit\Joueur\Feedbakcs\Play_DownedFall	
 	1082440343	Play_DamagesHit			\Default Work Unit\Joueur\Feedbakcs\Play_DamagesHit	
+	1115403328	Play_Player_Raise			\Default Work Unit\Actions\Play_Player_Raise	
 	1139538480	Play_AMB_Crackle			\Default Work Unit\Ambiance\Play_AMB_Crackle	
 	1242331411	Play_Palanquin			\Default Work Unit\Objets\Elements de LD\Palanquin\Play_Palanquin	
 	1391774161	Play_Trap_Arrow			\Default Work Unit\Objets\Elements de LD\Trap\Play_Trap_Arrow	
 	1653748802	Play_StoneWalk			\Default Work Unit\Joueur\Deplacement\Play_StoneWalk	
 	1660008929	Play_Door_Open			\Default Work Unit\Objets\Elements de LD\Door_Open\Play_Door_Open	
 	1662667678	Play_WoodWalk			\Default Work Unit\Joueur\Deplacement\Play_WoodWalk	
+	1864892471	Play_Player_Hit			\Default Work Unit\Objets\Objets\Play_Player_Hit	
 	2252945843	Play_DownedBreath			\Default Work Unit\Joueur\Etats\Play_DownedBreath	
 	2375076216	Play_Trap_Spike			\Default Work Unit\Objets\Elements de LD\Trap\Play_Trap_Spike	
 	2440467357	Play_Palanquin_Empty			\Default Work Unit\Objets\Elements de LD\Palanquin\Play_Palanquin_Empty	
@@ -29,9 +33,12 @@ Event	ID	Name			Wwise Object Path	Notes
 	3710295231	Play_Zeloth_Idle			\Default Work Unit\Ennemis\Zelote\Play_Zeloth_Idle	
 	3737722769	Play_PlayerHealing			\Default Work Unit\Joueur\Feedbakcs\Play_PlayerHealing	
 	3780240352	Play_BasicEnnemyAttack			\Default Work Unit\Ennemis\Fidele\Play_BasicEnnemyAttack	
+	3881217501	Play_Player_PickGold			\Default Work Unit\Objets\Objets\Play_Player_PickGold	
 	3882989320	Play_WoodRun			\Default Work Unit\Joueur\Deplacement\Play_WoodRun	
 	3931500340	Play_StoneRun			\Default Work Unit\Joueur\Deplacement\Play_StoneRun	
 	4002417895	Play_CrazyStatus			\Default Work Unit\Joueur\Etats\Play_CrazyStatus	
+	4135433440	Play_Player_Shot			\Default Work Unit\Objets\Objets\Play_Player_Shot	
+	4186816568	Play_AMB_Hallucination			\Default Work Unit\Ambiance\Play_AMB_Hallucination	
 	4234463371	Play_Trap_Pressure			\Default Work Unit\Objets\Elements de LD\Trap\Play_Trap_Pressure	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
@@ -46,6 +53,16 @@ Switch	ID	Name	Switch Group			Notes
 	712161704	Run	EnnemyMovement			
 	2108779966	Walk	EnnemyMovement			
 
+State Group	ID	Name			Wwise Object Path	Notes
+	229157224	IsFriendly			\Default Work Unit\IsFriendly	
+	2655407367	Crouch			\Default Work Unit\Crouch	
+
+State	ID	Name	State Group			Notes
+	229157224	IsFriendly	IsFriendly			
+	748895195	None	IsFriendly			
+	748895195	None	Crouch			
+	2655407367	Crouch	Crouch			
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
 
@@ -56,97 +73,109 @@ Effect plug-ins	ID	Name	Type				Notes
 	3164629247	Holy	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	6845002	FootstepsWoodRun 21	.cache\BC\{BC83F5F1-E0AA-FEB3-B0B1-2EF6B1EE0CF7}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 21		58352
+	6845002	FootstepsWoodRun 21	.cache\BC\{BC83F5F1-E0AA-FEB3-B0B1-2EF6B1EE0CF7}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 21		58352
 	9463951	Palanquin_End 4	.cache\E0\{E097F2F3-4613-30E1-F645-C6977C1D4D50}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_End\Palanquin_End 4		686752
 	11586860	Palanquin_Start 1	.cache\53\{533FD854-14B0-90B3-2D44-94765E67ABE9}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 1		610400
 	19526635	FootstepsEliteEnnemyRun 7	.cache\C4\{C4668D9A-35F3-D624-BBFD-639959BCEAF0}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 7		47572
+	25974615	Whispers2	.cache\28\{28BD4187-B5CA-8C8E-B3E1-713B24DE07B7}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers2		4300896
 	29652185	Palanquin_Empty 8	.cache\EB\{EBE2A4B8-C154-9269-239A-DC907FE72B9B}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 8		270608
-	31134778	FootstepsWoodCrackRun 8	.cache\BE\{BE22A5AC-0092-3D39-CD76-AC97F068DD18}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 8		86256
+	31134778	FootstepsWoodCrackRun 8	.cache\BE\{BE22A5AC-0092-3D39-CD76-AC97F068DD18}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 8		86256
 	34068047	OutOfBreath 4	.cache\B5\{B58233F9-A523-CEB1-F420-FB796B8E1642}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 4		71816
+	35075181	GRAB	.cache\E7\{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB		100448
+	37215428	Whispers4	.cache\EE\{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers4		3731040
 	39757222	DownedHeartbeat 4	.cache\C0\{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 4		186320
-	48180023	FootstepsSandRun 11	.cache\74\{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 11		50976
+	48180023	FootstepsSandRun 11	.cache\74\{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 11		50976
 	49676772	Palanquin_Start 5	.cache\CC\{CCBFAFDB-FB57-9C3C-884D-048BBD5C47EB}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 5		854624
-	49968460	FootstepsSandWalk 12	.cache\ED\{EDDDF7B0-46FE-718A-0E81-1E77C0EBC183}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 12		112624
+	49968460	FootstepsSandWalk 12	.cache\ED\{EDDDF7B0-46FE-718A-0E81-1E77C0EBC183}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 12		112624
 	52894827	AMB_Crackle1-01	.cache\48\{48C2A5B3-2DC7-1029-916D-14F9329E9C1C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle1-01		793056
 	54177496	FootstepsEliteEnnemyRun 10	.cache\49\{4973CD95-AA79-0C3B-AB96-82D85AC43064}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 10		49672
-	55834786	FootstepsWoodCrackWalk 16	.cache\4E\{4EB872BF-BC56-0C53-7DB1-8BCD4769EFCD}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 16		149664
-	56965788	FootstepsStoneWalk 10	.cache\06\{06E16C66-BE2E-7CF7-5EE0-169F88D69E58}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 10		133144
+	55834786	FootstepsWoodCrackWalk 16	.cache\4E\{4EB872BF-BC56-0C53-7DB1-8BCD4769EFCD}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 16		149664
+	56965788	FootstepsStoneWalk 10	.cache\06\{06E16C66-BE2E-7CF7-5EE0-169F88D69E58}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 10		133144
 	59431872	AMB_Crackle3-01	.cache\38\{38259D15-1358-36AB-CC38-8DBDD501E92A}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle3-01		466656
-	64511599	FootstepsSandRun 4	.cache\8C\{8C987078-1EBE-A9F6-8FFC-F1C0EDDCD239}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 4		51504
-	68524104	FootstepsWoodCrackWalk 12	.cache\E9\{E983BC2C-95E9-0C80-F88E-BF5AAA5F51F2}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 12		150368
+	64511599	FootstepsSandRun 4	.cache\8C\{8C987078-1EBE-A9F6-8FFC-F1C0EDDCD239}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 4		51504
+	68524104	FootstepsWoodCrackWalk 12	.cache\E9\{E983BC2C-95E9-0C80-F88E-BF5AAA5F51F2}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 12		150368
+	70881524	KS_Basic Cloth_35-07	.cache\D4\{D4DC5CDB-0345-139B-0A37-21FA4312C532}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\BasicGrab\KS_Basic Cloth_35-07		106720
 	70981290	OutOfBreath 9	.cache\D2\{D29DFE1F-ED45-D1ED-6778-16E5086D2B71}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 9		73240
+	82812968	KS_Basic Cloth_35-05	.cache\EE\{EE92EA7E-74E8-FB28-6490-1A9DF7AD5756}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic\KS_Basic Cloth_35-05		108512
 	83414938	Palanquin_Travel	.cache\65\{65ACC4B8-FBFF-A75D-E099-7FF4F336B63E}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Travel		4412006
 	88711003	BoneMovement 6102_63_2	.cache\08\{0829947B-9B29-AF20-8B2B-53B55344F122}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_2		57440
 	96992672	FootstepsEliteEnnemyRun 11	.cache\6F\{6F0BF2F3-EDED-888E-CB22-09075E09222A}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 11		52064
-	98324690	FootstepsWoodRun 4	.cache\04\{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 4		58864
-	101177060	FootstepsWoodRun 17	.cache\DF\{DF3D9661-36F9-9FD7-0E91-C784B698DB6A}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 17		58080
+	98324690	FootstepsWoodRun 4	.cache\04\{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 4		58864
+	101177060	FootstepsWoodRun 17	.cache\DF\{DF3D9661-36F9-9FD7-0E91-C784B698DB6A}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 17		58080
 	101298648	DownedBreath 2	.cache\FC\{FC7A9746-03FD-BCEA-F558-85C9ECE473E5}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 2		346612
-	105123598	FootstepsWoodCrackRun 7	.cache\70\{70001196-890C-B06A-E4C9-41A15269BD49}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 7		76528
+	105123598	FootstepsWoodCrackRun 7	.cache\70\{70001196-890C-B06A-E4C9-41A15269BD49}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 7		76528
 	105445102	OutOfBreath 10	.cache\40\{40002CAE-C5D9-CFD5-F925-FED6328943B1}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 10		71660
-	105971071	FootstepsStoneWalk 8	.cache\C7\{C71A964E-CADE-A25F-0A31-EB24A53DF2C5}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 8		136976
+	105971071	FootstepsStoneWalk 8	.cache\C7\{C71A964E-CADE-A25F-0A31-EB24A53DF2C5}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 8		136976
 	108070285	DownedHeartbeat 1	.cache\9B\{9B9389DC-F3B8-CC52-DA84-F7B46C30D73D}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 1		204856
-	108419525	FootstepsStoneWalk 3	.cache\BB\{BB4D224D-8ECF-0AAF-E905-B897A8CEE86C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 3		140160
+	108419525	FootstepsStoneWalk 3	.cache\BB\{BB4D224D-8ECF-0AAF-E905-B897A8CEE86C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 3		140160
 	111688257	DownedHeartbeat 6	.cache\D0\{D0712045-23DF-7ABB-91DA-1296BBFB1FB2}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 6		198256
-	114231804	PlayerDying 3	.cache\8D\{8DBBF61F-1AF5-7D41-A956-3D2060C596AD}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 3		102412
-	114397212	FootstepsWoodRun 18	.cache\89\{8959135B-E3A7-56CC-40AC-0BEBE736EC35}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 18		53536
+	112612915	KS_Basic Cloth_35-14	.cache\96\{968E1DA2-387B-3324-6B7F-B2020CB38701}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic\KS_Basic Cloth_35-14		108512
+	114231804	PlayerDying 3	.cache\8D\{8DBBF61F-1AF5-7D41-A956-3D2060C596AD}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 3		102412
+	114397212	FootstepsWoodRun 18	.cache\89\{8959135B-E3A7-56CC-40AC-0BEBE736EC35}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 18		53536
 	115861136	OutOfBreath 3	.cache\49\{491B0846-5A3A-68F4-A69D-E58F6537447F}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 3		77072
 	119088602	FootstepsBasicEnnemyRun 1	.cache\8D\{8DC58D65-DF3D-3D14-B410-68C4D44A93BF}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 1		46352
 	122144981	AMB_Crackle6-01	.cache\10\{10EFA247-1F9C-93F1-20BB-C5BD81BA5063}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle6-01		1017696
-	153202755	FootstepsWoodRun 8	.cache\3B\{3B0C44E1-33EB-2093-C007-865018E78BF0}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 8		59552
-	158692249	FootstepsWoodCrackWalk 8	.cache\10\{1024137C-769A-0094-14F1-ED889DA61012}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 8		171424
-	165708073	PlayerDying 2	.cache\A2\{A2633BB8-6390-90F4-4EB4-29AFF617D6EE}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 2		136884
+	153202755	FootstepsWoodRun 8	.cache\3B\{3B0C44E1-33EB-2093-C007-865018E78BF0}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 8		59552
+	158692249	FootstepsWoodCrackWalk 8	.cache\10\{1024137C-769A-0094-14F1-ED889DA61012}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 8		171424
+	165708073	PlayerDying 2	.cache\A2\{A2633BB8-6390-90F4-4EB4-29AFF617D6EE}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 2		136884
 	166799515	FIDELE_ATTACK_1	.cache\4E\{4E97518C-AAD6-6187-6E4C-CC803664292C}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyAttack\FIDELE_ATTACK_1		435552
 	173846091	FootstepsBasicEnnemyRun 14	.cache\E7\{E7D2BA5C-F44D-1C14-2E24-9B5C967D01CF}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 14		48944
-	185441988	FootstepsStoneRun 6	.cache\19\{19DACCBB-24D0-4E44-27F1-C1EC3AF8C918}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 6		56784
-	188388410	FootstepsWoodCrackRun 3	.cache\7F\{7F8C4842-7266-6400-274B-81367BBC4C11}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 3		81040
+	185441988	FootstepsStoneRun 6	.cache\19\{19DACCBB-24D0-4E44-27F1-C1EC3AF8C918}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 6		56784
+	188388410	FootstepsWoodCrackRun 3	.cache\7F\{7F8C4842-7266-6400-274B-81367BBC4C11}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 3		81040
 	189422600	FootstepsEliteEnnemyWalk 5	.cache\E3\{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 5		99936
-	195665557	FootstepsStoneRun 11	.cache\96\{968BC5BB-E3EC-9090-E7B5-E9C72246B14B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 11		66032
-	197339564	FootstepsWoodWalk 5	.cache\38\{3893A19A-F930-4A47-2A7F-C52BD0DA8E3D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 5		123984
-	201842153	FootstepsWoodRun 20	.cache\C9\{C93EE898-D5E2-35D0-FB19-51D938832594}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 20		60512
+	195665557	FootstepsStoneRun 11	.cache\96\{968BC5BB-E3EC-9090-E7B5-E9C72246B14B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 11		66032
+	197339564	FootstepsWoodWalk 5	.cache\38\{3893A19A-F930-4A47-2A7F-C52BD0DA8E3D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 5		123984
+	201842153	FootstepsWoodRun 20	.cache\C9\{C93EE898-D5E2-35D0-FB19-51D938832594}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 20		60512
 	203374027	Trap_Pressure 2	.cache\C9\{C99862A6-61C6-86CE-6193-66FD56F45402}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Pressure\Trap_Pressure 2		184420
-	204264312	FootstepsSandWalk 6	.cache\50\{50CAA788-0AB8-651F-5FE5-9AF061448A6B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 6		120976
-	204860484	FootstepsWoodRun 11	.cache\CC\{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 11		58544
-	215028229	FootstepsStoneRun 15	.cache\09\{0952EDFE-A7CF-80B2-1415-DF2E25E61BB8}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 15		70720
-	215374433	FootstepsWoodWalk 3	.cache\42\{42DE3151-F803-AF7F-910C-7E66F54FBBA8}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 3		115184
-	215911120	Roll 1	.cache\59\{59022E95-0808-DB26-8E38-8CB184711BA3}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Roll\Roll 1		33632
+	204264312	FootstepsSandWalk 6	.cache\50\{50CAA788-0AB8-651F-5FE5-9AF061448A6B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 6		120976
+	204860484	FootstepsWoodRun 11	.cache\CC\{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 11		58544
+	215028229	FootstepsStoneRun 15	.cache\09\{0952EDFE-A7CF-80B2-1415-DF2E25E61BB8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 15		70720
+	215374433	FootstepsWoodWalk 3	.cache\42\{42DE3151-F803-AF7F-910C-7E66F54FBBA8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 3		115184
+	215911120	Roll 1	.cache\59\{59022E95-0808-DB26-8E38-8CB184711BA3}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 1		33632
 	216827798	DownedBreath 8	.cache\10\{10D15F3A-5259-AA48-F84C-0AA2943F5A1E}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 8		211296
 	220434834	BoneMovement 6102_63_6	.cache\18\{182164C1-3690-9266-7292-F1D56D1EE096}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_6		262240
-	221209930	FootstepsSandWalk 13	.cache\32\{323EF3B4-4582-07D0-2E8C-B026DD02B564}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 13		128272
+	221209930	FootstepsSandWalk 13	.cache\32\{323EF3B4-4582-07D0-2E8C-B026DD02B564}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 13		128272
 	221390978	Palanquin_Inventory 4	.cache\E8\{E856C60C-5E3F-D6F9-1CF5-2AFA83BBBCAA}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Calling\Palanquin_Inventory 4		1439840
+	222051633	Player_Shot-05	.cache\4F\{4F5A61D3-185B-CCDD-BA74-8D68009839BB}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-05		221408
 	227490105	FootstepsBasicEnnemyRun 12	.cache\D7\{D749F4F2-AA9C-795D-66FB-30A771C0ECA8}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 12		53168
 	227987791	Palanquin_Start 4	.cache\02\{025E4663-FEEC-1039-FBB8-55B5FC4E55B7}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 4		540768
 	228862855	FootstepsBasicEnnemyWalk 4	.cache\D3\{D342AE9D-2808-8BE9-5267-7CC50D35E7AB}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 4		106288
-	229123514	FootstepsWoodCrackWalk 10	.cache\E8\{E82DD419-57A9-5F0A-D434-C066696EB8E9}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 10		136448
-	231986240	DownedFall 4	.cache\A7\{A7CB0676-E956-16F7-E2A0-BA9809110B63}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 4		215136
+	229123514	FootstepsWoodCrackWalk 10	.cache\E8\{E82DD419-57A9-5F0A-D434-C066696EB8E9}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 10		136448
+	231986240	DownedFall 4	.cache\A7\{A7CB0676-E956-16F7-E2A0-BA9809110B63}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 4		215136
 	233443900	ZELOTH_MAIN (2)	.cache\CF\{CF26AFE9-0107-9392-B428-19001DD473A5}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\Zeloth_Idle\ZELOTH_MAIN (2)		914016
+	235116885	Player_Hit-05	.cache\08\{086E2547-7495-2501-09FF-FCB7C11F42D6}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-05		168544
 	245422922	FootstepsBasicEnnemyWalk 3	.cache\8F\{8F004CD9-33A7-8989-707C-96BC3C90F258}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 3		102752
 	249555483	FootstepsBasicEnnemyRun 10	.cache\36\{360B13BC-A75C-BB3D-E9DA-E581D46757DD}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 10		50816
-	251906612	FootstepsSandWalk 7	.cache\AA\{AA0F60AA-7F12-E91D-9132-7DF42993C223}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 7		123232
-	252330644	FootstepsWoodWalk 12	.cache\20\{2089B835-6D3B-730F-8B26-EB2BE7AFFFE7}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 12		130736
-	253659450	FootstepsWoodCrackWalk 6	.cache\C1\{C12CDEAB-8D4F-A053-8AC9-7861A94BF0E7}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 6		158288
+	251906612	FootstepsSandWalk 7	.cache\AA\{AA0F60AA-7F12-E91D-9132-7DF42993C223}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 7		123232
+	252330644	FootstepsWoodWalk 12	.cache\20\{2089B835-6D3B-730F-8B26-EB2BE7AFFFE7}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 12		130736
+	253659450	FootstepsWoodCrackWalk 6	.cache\C1\{C12CDEAB-8D4F-A053-8AC9-7861A94BF0E7}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 6		158288
 	254982589	FIDELE_ATTACK_3	.cache\81\{815496B5-7FBC-A160-3FDC-F56A715AA63D}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyAttack\FIDELE_ATTACK_3		437344
-	257398985	FootstepsWoodWalk 9	.cache\BA\{BA30E590-46A8-C387-1CC9-0B68E81D72EE}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 9		124672
+	257398985	FootstepsWoodWalk 9	.cache\BA\{BA30E590-46A8-C387-1CC9-0B68E81D72EE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 9		124672
 	260955044	DownedHeartbeat 7	.cache\E7\{E7ABB31B-60FC-4830-011C-5D7D2374E982}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 7		186304
 	264105844	DamagesHit	.cache\CB\{CBA2DAA9-5AAE-FC54-CE3B-19D416BCA947}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit		95220
 	264407934	AMB_Crackle5-01	.cache\41\{415CC335-B9CC-5716-9519-61245AF52D30}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle5-01		558816
 	268505134	Palanquin_End 3	.cache\4F\{4FB7388E-595A-2A18-5577-D9660461A963}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_End\Palanquin_End 3		465700
 	269450443	Palanquin_Empty 3	.cache\F1\{F1EC1FA8-8928-BAE1-820C-7A7E119F4E8A}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 3		267568
-	269455372	FootstepsWoodCrackWalk 4	.cache\E7\{E7C9B31A-1967-2E7C-CB49-753B71106B4D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 4		146048
+	269455372	FootstepsWoodCrackWalk 4	.cache\E7\{E7C9B31A-1967-2E7C-CB49-753B71106B4D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 4		146048
 	272892538	OutOfBreath 8	.cache\5E\{5EF29464-78D1-8F43-843D-80254C0EC616}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 8		74144
 	274995480	AMB_Sand3	.cache\C4\{C4D4886A-88DA-A704-D6F8-85F5DE80E270}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_Sand3		928452
 	275003731	Palanquin_Empty 2	.cache\F2\{F2B435A6-4E7F-466F-895B-E5AA4D045EF9}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 2		288840
-	278825995	FootstepsWoodCrackRun 4	.cache\A1\{A185CD04-8AD2-D611-3B56-40316516AF0D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 4		87392
+	278825995	FootstepsWoodCrackRun 4	.cache\A1\{A185CD04-8AD2-D611-3B56-40316516AF0D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 4		87392
 	279136364	FootstepsBasicEnnemyWalk 6	.cache\94\{94699130-538A-CCAB-2C3B-610534C6F169}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 6		69216
-	281091351	FootstepsWoodRun 15	.cache\0B\{0BDDDC9F-8C65-2D42-0D5D-56700493E21B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 15		55856
+	280188920	ASSET LIST DAWNFINDERS_004_02-01	.cache\E7\{E7AFBCC3-95E6-45F3-8224-ACCE60F8F4AD}.wem		\Containers\Default Work Unit\Ambiance\AMB_Hallucination\ASSET LIST DAWNFINDERS_004_02-01		4300896
+	281091351	FootstepsWoodRun 15	.cache\0B\{0BDDDC9F-8C65-2D42-0D5D-56700493E21B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 15		55856
 	281151790	OutOfBreath 11	.cache\FB\{FBEE2B6A-6D87-A52B-29B5-5FAC29397BC6}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 11		75116
-	282780422	FootstepsSandRun 15	.cache\3F\{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 15		48384
+	282780422	FootstepsSandRun 15	.cache\3F\{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 15		48384
 	287093398	FootstepsEliteEnnemyWalk 3	.cache\F9\{F9A84C13-F1F4-36C4-E245-12325C979E1E}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 3		99936
-	291662585	FootstepsWoodWalk 10	.cache\5A\{5A1B0E76-8106-7BC1-C7F5-0A6B88DD0192}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 10		136176
-	292026002	FootstepsWoodCrackWalk 14	.cache\76\{76886311-F39A-3592-625C-745C2B47C0FB}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 14		144704
-	292702579	FootstepsSandWalk 11	.cache\17\{176E7DB0-26F6-5442-D36C-96B5F745C1B3}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 11		116176
+	291662585	FootstepsWoodWalk 10	.cache\5A\{5A1B0E76-8106-7BC1-C7F5-0A6B88DD0192}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 10		136176
+	292026002	FootstepsWoodCrackWalk 14	.cache\76\{76886311-F39A-3592-625C-745C2B47C0FB}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 14		144704
+	292702579	FootstepsSandWalk 11	.cache\17\{176E7DB0-26F6-5442-D36C-96B5F745C1B3}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 11		116176
+	293991378	KS_Basic Cloth_35-03	.cache\C9\{C9CEAB98-7FD5-4434-79E0-689DE3E26866}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic\KS_Basic Cloth_35-03		97760
 	294569269	FootstepsBasicEnnemyRun 7	.cache\25\{25870F01-D86A-7B3E-9388-1DBEC05F9827}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 7		50752
-	298935059	FootstepsWoodCrackWalk 13	.cache\20\{201C47D9-234A-F378-42BD-4B6B813F4893}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 13		147328
-	303742668	FootstepsWoodCrackRun 15	.cache\8D\{8D9E17CE-5D25-20F4-50B5-43F2F8F9C2E4}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 15		76864
+	298935059	FootstepsWoodCrackWalk 13	.cache\20\{201C47D9-234A-F378-42BD-4B6B813F4893}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 13		147328
+	301671005	GRAB4	.cache\79\{79866936-B277-A828-3907-E456A14C705B}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB4		126432
+	302753226	Gold_Grab-03	.cache\B0\{B0F0B5FC-497A-E040-438E-9508E808CE2F}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-03		105824
+	303742668	FootstepsWoodCrackRun 15	.cache\8D\{8D9E17CE-5D25-20F4-50B5-43F2F8F9C2E4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 15		76864
 	315756396	Palanquin_End 2	.cache\EF\{EFE0455D-B59F-79CC-6E82-82FF398A0BC0}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_End\Palanquin_End 2		571492
 	319287659	FootstepsBasicEnnemyWalk 17	.cache\C3\{C322785B-4993-2B76-EC5D-299F745AF7B3}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 17		107024
 	327833139	FootstepsEliteEnnemyRun 3	.cache\35\{35C6D972-A010-44B2-2BAC-5992440B9487}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 3		45652
@@ -154,133 +183,153 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	337621557	Palanquin_Empty 1	.cache\A6\{A65C5C8A-B580-E71B-BC9D-E45E29DF1301}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 1		338016
 	350124382	FootstepsBasicEnnemyWalk 11	.cache\38\{38D24751-0FF6-A70D-50C1-ACA07C8403DB}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 11		105984
 	351180192	Door_Open2	.cache\9B\{9B02ADC2-F534-DCAC-008D-0834040724CA}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Door_Open\Door_Open2		670304
-	353854774	Roll 3	.cache\23\{230D7A28-7012-A3AA-572B-C185E6C804A6}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Roll\Roll 3		53856
+	353854774	Roll 3	.cache\23\{230D7A28-7012-A3AA-572B-C185E6C804A6}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 3		53856
 	354428242	AMB_LoudWind	.cache\F7\{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem		\Containers\Default Work Unit\Ambiance\AMB_LoudWind		1458272
-	364748855	FootstepsSandRun 17	.cache\D2\{D2972DC9-56F4-225D-3106-F75FA7E7C48B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 17		48480
+	358367435	Gold_Grab-01	.cache\4D\{4D967AEF-182A-E051-D42A-39FD2690C2E9}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-01		96864
+	362611617	Player_Hit-09	.cache\1B\{1B7B0067-8424-A9EE-4A64-BF2B343BDA9B}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-09		188256
+	364748855	FootstepsSandRun 17	.cache\D2\{D2972DC9-56F4-225D-3106-F75FA7E7C48B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 17		48480
 	371682056	PlayerHealing 2	.cache\CA\{CA52A191-9079-0EBA-657F-B2F04FD62321}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerHealing\PlayerHealing 2		613984
+	374653091	GRAB5	.cache\2E\{2E002B28-9256-0F01-D3FB-F5CB36D029C9}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB5		127328
 	376331356	DownedBreath 6	.cache\CB\{CB2CB22A-CFD7-A4A8-A0D3-B34E42152201}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 6		126816
-	385107083	FootstepsWoodCrackRun 5	.cache\7E\{7E89FEC0-8C8C-7B78-33E8-FE1E6AB754AE}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 5		84620
-	386978507	DownedFall 8	.cache\57\{5798CF92-659E-C62E-C536-5EDDBA43007E}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 8		165984
-	388675555	FootstepsWoodWalk 11	.cache\C3\{C362EA4A-D7AF-678D-829C-4C43633D9F6B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 11		127648
+	385107083	FootstepsWoodCrackRun 5	.cache\7E\{7E89FEC0-8C8C-7B78-33E8-FE1E6AB754AE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 5		84620
+	386978507	DownedFall 8	.cache\57\{5798CF92-659E-C62E-C536-5EDDBA43007E}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 8		165984
+	388675555	FootstepsWoodWalk 11	.cache\C3\{C362EA4A-D7AF-678D-829C-4C43633D9F6B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 11		127648
 	390993366	FootstepsEliteEnnemyWalk 1	.cache\2F\{2F79BDA5-5964-DDDE-7BFB-5CE728C4B5FB}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 1		99936
-	391905191	FootstepsSandRun 3	.cache\92\{922926FB-0402-C7D8-6976-0751FD68D503}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 3		52176
+	391905191	FootstepsSandRun 3	.cache\92\{922926FB-0402-C7D8-6976-0751FD68D503}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 3		52176
 	395987367	FootstepsEliteEnnemyWalk 2	.cache\F1\{F1B206AB-478D-6704-C193-042DD5F6F2BF}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 2		99936
-	399958177	FootstepsWoodCrackRun 17	.cache\94\{9494D08F-A240-71D4-878B-653ADCFF5FF0}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 17		65820
-	403097929	FootstepsStoneRun 1	.cache\DA\{DA8BD0DC-7559-9976-2BAD-D555B6A4FD40}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 1		63280
+	399958177	FootstepsWoodCrackRun 17	.cache\94\{9494D08F-A240-71D4-878B-653ADCFF5FF0}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 17		65820
+	403097929	FootstepsStoneRun 1	.cache\DA\{DA8BD0DC-7559-9976-2BAD-D555B6A4FD40}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 1		63280
 	403290721	FootstepsBasicEnnemyRun 15	.cache\95\{9540F65D-00B4-EA17-A23F-41ED55872A39}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 15		32576
-	403493255	FootstepsStoneRun 4	.cache\B4\{B4FDAEBD-B7F4-B42F-0A48-E7833392594C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 4		69200
-	408684288	FootstepsWoodCrackRun 2	.cache\41\{412A40F6-675C-777B-C10D-205763B6BF56}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 2		50832
+	403493255	FootstepsStoneRun 4	.cache\B4\{B4FDAEBD-B7F4-B42F-0A48-E7833392594C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 4		69200
+	404108249	GRAB6	.cache\6A\{6A798ED0-7FAC-7DAC-4AD3-700A06A71C71}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB6		128224
+	408684288	FootstepsWoodCrackRun 2	.cache\41\{412A40F6-675C-777B-C10D-205763B6BF56}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 2		50832
 	410635671	FootstepsBasicEnnemyRun 6	.cache\10\{10CC30D6-376B-D8E1-D1AE-9D3AE5754CF8}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 6		50544
-	413685733	FootstepsStoneWalk 4	.cache\37\{37411D71-FC45-8C7E-2BD0-184F42B77E43}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 4		142112
-	414622692	FootstepsStoneRun 9	.cache\A9\{A96794E2-1C89-E3DB-CDC5-8556CE7B2A4B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 9		73096
-	418296632	Roll 2	.cache\8B\{8B39CEDD-7177-AFB6-7AEF-794CA3E9AF4B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Roll\Roll 2		48224
-	420215414	FootstepsWoodCrackRun 14	.cache\49\{49A0D926-6791-FADA-2192-57C5AFC99891}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 14		79712
+	413685733	FootstepsStoneWalk 4	.cache\37\{37411D71-FC45-8C7E-2BD0-184F42B77E43}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 4		142112
+	414622692	FootstepsStoneRun 9	.cache\A9\{A96794E2-1C89-E3DB-CDC5-8556CE7B2A4B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 9		73096
+	418296632	Roll 2	.cache\8B\{8B39CEDD-7177-AFB6-7AEF-794CA3E9AF4B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 2		48224
+	420215414	FootstepsWoodCrackRun 14	.cache\49\{49A0D926-6791-FADA-2192-57C5AFC99891}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 14		79712
 	420583643	Door_Open3	.cache\A6\{A6E51F56-A712-9D76-FEF1-29EF2B3B31BB}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Door_Open\Door_Open3		1261664
-	423956364	FootstepsWoodWalk 6	.cache\5D\{5DA5EEE2-B677-FF53-02E1-22F1B12DD3A9}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 6		132464
+	422035676	Whistpers1	.cache\C2\{C2A1C820-3F2E-2DB5-8148-515E14DF88DB}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whistpers1		4501600
+	423956364	FootstepsWoodWalk 6	.cache\5D\{5DA5EEE2-B677-FF53-02E1-22F1B12DD3A9}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 6		132464
 	424882500	Door_Open1	.cache\D8\{D8AE9875-C677-D776-C773-3358DA4FA1FF}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Door_Open\Door_Open1		1017952
-	427103364	PlayerHealing 1	.cache\E2\{E20D3A7F-D2A9-094B-D876-D97595857A78}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerHealing\PlayerHealing 1		361056
-	433727521	FootstepsWoodCrackWalk 3	.cache\BB\{BB47BC98-EA8A-4E55-E034-ADF75F944DE3}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 3		97296
+	433727521	FootstepsWoodCrackWalk 3	.cache\BB\{BB47BC98-EA8A-4E55-E034-ADF75F944DE3}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 3		97296
 	436998747	DownedBreath 1	.cache\D2\{D22CC55D-0BDE-B51F-5A10-AA6B9859CB40}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 1		148940
-	438106016	DownedFall 5	.cache\65\{653A6A63-4C3E-AB85-DD62-50F3B35EAEBE}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 5		149600
+	438100117	GRAB2	.cache\30\{30EF938B-8F96-CD8C-491D-213C65D61B54}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB2		120160
+	438106016	DownedFall 5	.cache\65\{653A6A63-4C3E-AB85-DD62-50F3B35EAEBE}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 5		149600
 	442693485	FootstepsEliteEnnemyWalk 7	.cache\EA\{EA9C8914-19B8-8F38-7E90-D65A6B9E1A04}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 7		115296
+	444785981	GRAB8	.cache\68\{68EC7D32-176A-8F93-C82E-3E89EA03F9BF}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB8		139872
 	445279208	FootstepsBasicEnnemyRun 16	.cache\1B\{1B4E69AF-BF36-420D-F546-55139425E706}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 16		45564
-	456838804	FootstepsSandWalk 2	.cache\07\{07ECD636-2F2F-6DE3-E7FC-38F0E04C1082}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 2		123536
+	456838804	FootstepsSandWalk 2	.cache\07\{07ECD636-2F2F-6DE3-E7FC-38F0E04C1082}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 2		123536
 	458334224	OutOfBreath 5	.cache\1C\{1C559F3D-FA3F-7896-B40F-92D1E4290B5A}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 5		76600
 	459379487	Trap_Spike 1	.cache\FE\{FE1F1DE7-4DEE-AD78-5158-68DA17FB50F7}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Spike\Trap_Spike 1		76896
-	466139768	FootstepsWoodRun 14	.cache\19\{19DCDFDB-FF2B-A1BB-B8E9-8FECE9C36DDF}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 14		52800
-	470262468	FootstepsSandWalk 5	.cache\81\{81E141E6-D5DD-9782-AC03-C796C0DC4F02}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 5		121472
+	466139768	FootstepsWoodRun 14	.cache\19\{19DCDFDB-FF2B-A1BB-B8E9-8FECE9C36DDF}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 14		52800
+	470262468	FootstepsSandWalk 5	.cache\81\{81E141E6-D5DD-9782-AC03-C796C0DC4F02}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 5		121472
 	472487270	AMB_EerieWhistle	.cache\16\{160867BC-599B-0540-B4A0-D02256720EFA}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle		4874336
 	473960840	FIDELE_ATTACK_4	.cache\F2\{F2211B79-9105-4747-3FEA-8E84280F5F35}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyAttack\FIDELE_ATTACK_4		435552
 	475726858	DownedBreath 3	.cache\E7\{E7A67B2B-D263-1301-62ED-D1373428B7C6}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 3		184416
-	481772735	FootstepsWoodRun 2	.cache\75\{75DFC6B6-E69B-673D-D608-4240AC7107EF}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 2		65600
-	485661186	FootstepsWoodCrackRun 13	.cache\2A\{2AE888E2-EF17-4B70-0BE6-7E1D4FD02C92}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 13		74192
+	481772735	FootstepsWoodRun 2	.cache\75\{75DFC6B6-E69B-673D-D608-4240AC7107EF}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 2		65600
+	485661186	FootstepsWoodCrackRun 13	.cache\2A\{2AE888E2-EF17-4B70-0BE6-7E1D4FD02C92}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 13		74192
 	488103134	Trap_Spike 2	.cache\82\{8264B588-1A6B-A1B1-BB9F-748E92905FBF}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Spike\Trap_Spike 2		76896
-	490211119	FootstepsStoneWalk 2	.cache\44\{44F1B869-AE9D-0C2D-8660-3D014C97FA7F}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 2		141248
+	490211119	FootstepsStoneWalk 2	.cache\44\{44F1B869-AE9D-0C2D-8660-3D014C97FA7F}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 2		141248
 	492429887	AMB_Sand	.cache\E7\{E738D13F-EDFB-1955-A7A8-048B50E4B01C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_Sand		1088996
-	494666904	FootstepsWoodRun 23	.cache\B5\{B586E743-DD94-F7F3-8812-86BF31C6F60C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 23		51856
-	496024437	FootstepsSandWalk 10	.cache\01\{018405E5-C6FD-AB6C-5761-C84790FC1647}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 10		119440
+	494666904	FootstepsWoodRun 23	.cache\B5\{B586E743-DD94-F7F3-8812-86BF31C6F60C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 23		51856
+	496024437	FootstepsSandWalk 10	.cache\01\{018405E5-C6FD-AB6C-5761-C84790FC1647}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 10		119440
 	496150298	FootstepsEliteEnnemyRun 1	.cache\A3\{A350908B-C671-4E5F-C491-A452B94F3AAD}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 1		49844
-	500411705	FootstepsWoodRun 1	.cache\83\{833CE7FC-0943-6806-8AB9-E75E1C007D56}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 1		68304
-	508197002	FootstepsWoodCrackWalk 15	.cache\4A\{4A44EDE9-BCD9-06D5-099C-37598ACC9229}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 15		149600
+	500411705	FootstepsWoodRun 1	.cache\83\{833CE7FC-0943-6806-8AB9-E75E1C007D56}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 1		68304
+	508197002	FootstepsWoodCrackWalk 15	.cache\4A\{4A44EDE9-BCD9-06D5-099C-37598ACC9229}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 15		149600
 	508491698	FootstepsBasicEnnemyRun 3	.cache\4A\{4A210E0D-ED17-1DBC-1C43-B73AD007D1D0}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 3		48624
 	518699605	FootstepsBasicEnnemyWalk 2	.cache\45\{45052067-2E6E-12A0-8F3B-356F54B34F06}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 2		100032
-	519030112	FootstepsSandRun 12	.cache\1D\{1D4CA381-B480-5EB0-3178-F0444F025F7D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 12		54928
-	519325014	FootstepsWoodCrackRun 12	.cache\EE\{EE6E04B3-DDE7-1637-774B-6DD49EA04F15}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 12		74560
-	520458130	FootstepsWoodCrackRun 1	.cache\44\{446BA113-E4B5-8D76-C841-D7B5953FB0EF}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 1		84936
-	521453443	FootstepsWoodCrackWalk 7	.cache\FA\{FAADB29C-4690-1D05-884D-3CE9FB22F446}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 7		154608
+	519030112	FootstepsSandRun 12	.cache\1D\{1D4CA381-B480-5EB0-3178-F0444F025F7D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 12		54928
+	519325014	FootstepsWoodCrackRun 12	.cache\EE\{EE6E04B3-DDE7-1637-774B-6DD49EA04F15}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 12		74560
+	520458130	FootstepsWoodCrackRun 1	.cache\44\{446BA113-E4B5-8D76-C841-D7B5953FB0EF}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 1		84936
+	521453443	FootstepsWoodCrackWalk 7	.cache\FA\{FAADB29C-4690-1D05-884D-3CE9FB22F446}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 7		154608
 	523267442	FootstepsBasicEnnemyWalk 8	.cache\12\{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 8		105200
 	533567679	Palanquin_Inventory 3	.cache\17\{17A566D3-BBAB-6407-207B-929540842680}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Inventory\Palanquin_Inventory 3		322656
 	534467487	FootstepsBasicEnnemyWalk 13	.cache\0B\{0B961D41-DCF4-C02F-A413-3AB308739C83}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 13		112272
-	534702713	FootstepsWoodCrackWalk 5	.cache\6D\{6D2FAFAD-FE5B-D8CE-8F28-2357328FD371}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 5		150592
+	534702713	FootstepsWoodCrackWalk 5	.cache\6D\{6D2FAFAD-FE5B-D8CE-8F28-2357328FD371}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 5		150592
 	540376024	FootstepsEliteEnnemyWalk 9	.cache\D1\{D16FD813-F64C-0BB2-8108-22F9D2126CDF}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 9		99936
-	545000946	FootstepsStoneWalk 9	.cache\08\{08545B08-8EFD-FFE8-949B-D22A76FDF8EA}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 9		135664
+	545000946	FootstepsStoneWalk 9	.cache\08\{08545B08-8EFD-FFE8-949B-D22A76FDF8EA}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 9		135664
 	551340501	FootstepsEliteEnnemyRun 2	.cache\35\{35A69B06-33CC-37A4-FAD6-494142B4E863}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 2		45080
-	557907878	PlayerDying 5	.cache\A0\{A0518DCB-D803-907D-A3D1-3D691256CBA6}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 5		116596
+	557907878	PlayerDying 5	.cache\A0\{A0518DCB-D803-907D-A3D1-3D691256CBA6}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 5		116596
+	559741217	Whispers3	.cache\F4\{F49845C4-BDD8-49E3-DD83-9C24C5C95B06}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers3		4243552
 	563800133	FootstepsEliteEnnemyWalk 8	.cache\4F\{4F7199DE-5A2C-2A33-46F6-1943E920CD93}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 8		99936
-	566672699	FootstepsWoodCrackWalk 11	.cache\87\{87932221-4B3C-448A-54C3-5DAAF426FEDC}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 11		154736
-	567161896	DownedFall 7	.cache\A8\{A8E20313-F380-553D-2C38-B6B3061853F8}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 7		321632
-	567221489	FootstepsWoodCrackRun 10	.cache\76\{765B5F61-0598-948C-7155-644E5A87C121}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 10		66064
+	566672699	FootstepsWoodCrackWalk 11	.cache\87\{87932221-4B3C-448A-54C3-5DAAF426FEDC}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 11		154736
+	567161896	DownedFall 7	.cache\A8\{A8E20313-F380-553D-2C38-B6B3061853F8}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 7		321632
+	567221489	FootstepsWoodCrackRun 10	.cache\76\{765B5F61-0598-948C-7155-644E5A87C121}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 10		66064
 	569646174	Palanquin_Start 2	.cache\D7\{D70CDF1D-C358-D558-25B4-74FA77823C01}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 2		401504
 	569698990	Palanquin_Inventory 4	.cache\C9\{C9226DF3-1119-69CE-07C8-D3A90E8F4E2F}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Inventory\Palanquin_Inventory 4		418912
-	574721267	DownedFall 2	.cache\B9\{B9E6CA7E-14CB-539D-97E8-3B8451ACC0BA}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 2		194656
+	571042560	Gold_Grab-14	.cache\F3\{F3367CC1-6D0C-3DE7-FEDD-DB70DDD4F4D5}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-14		101344
+	574721267	DownedFall 2	.cache\B9\{B9E6CA7E-14CB-539D-97E8-3B8451ACC0BA}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 2		194656
 	575181047	AMB_sand2	.cache\BE\{BE9FD1C8-999E-C172-B746-5E4650D21F8C}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_sand2		794836
 	586116203	AMB_Crackle2-01	.cache\30\{302A0B8E-E810-737B-D656-22C135EECF42}.wem		\Containers\Default Work Unit\Ambiance\AMB_Crackle\AMB_Crackle2-01		656736
-	589087457	FootstepsStoneRun 13	.cache\4F\{4F58A0F2-59E7-B58C-B858-CFE2D8937F1B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 13		66544
-	591976609	FootstepsWoodCrackWalk 2	.cache\C6\{C6A46BD7-68E8-B16C-8A36-3FDB34A85B65}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 2		163040
-	592561856	FootstepsWoodRun 16	.cache\1A\{1A432C82-0B7C-9C13-FE75-A93F71CAEAF1}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 16		58192
+	589087457	FootstepsStoneRun 13	.cache\4F\{4F58A0F2-59E7-B58C-B858-CFE2D8937F1B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 13		66544
+	591976609	FootstepsWoodCrackWalk 2	.cache\C6\{C6A46BD7-68E8-B16C-8A36-3FDB34A85B65}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 2		163040
+	592561856	FootstepsWoodRun 16	.cache\1A\{1A432C82-0B7C-9C13-FE75-A93F71CAEAF1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 16		58192
+	592970605	Player_Hit-11	.cache\E8\{E8843953-8A75-0A89-C059-EDD2F3EE583E}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-11		195424
 	595457668	AMB_EerieWhistle4	.cache\5F\{5F8C6E73-8C7C-EAD0-8C97-22A29AC06970}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle4		4845664
-	596878634	DownedFall 3	.cache\BD\{BD695707-2502-7441-C3AB-62E92373472D}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 3		243808
-	606111130	FootstepsSandWalk 3	.cache\A7\{A750C6D5-FCD7-3401-EEE7-362A878C9DDE}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 3		128624
+	596878634	DownedFall 3	.cache\BD\{BD695707-2502-7441-C3AB-62E92373472D}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 3		243808
+	598258762	Gold_Grab-09	.cache\30\{301A16D2-97E7-6021-B8A5-BC9FF6193B38}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-09		99552
+	602489578	Player_Shot-07	.cache\F4\{F4C966DA-11D9-7AB0-DA00-E89B672AFB90}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-07		240672
+	606111130	FootstepsSandWalk 3	.cache\A7\{A750C6D5-FCD7-3401-EEE7-362A878C9DDE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 3		128624
 	614599972	ZELOTH_CLAC-cm-01	.cache\84\{84E5CA5A-9284-8E90-73EB-A5FCF0E538B8}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\Zeloth_Idle\ZELOTH_CLAC-cm-01		992864
-	614606467	FootstepsWoodRun 7	.cache\95\{95FC8603-4F24-8172-3DF7-364E2EA750F0}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 7		54896
+	614606467	FootstepsWoodRun 7	.cache\95\{95FC8603-4F24-8172-3DF7-364E2EA750F0}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 7		54896
 	622017135	FootstepsEliteEnnemyRun 12	.cache\75\{756682D3-8C8D-E0ED-0220-CBEC10BACFBA}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 12		51188
-	622533405	FootstepsStoneWalk 5	.cache\46\{46F90F6F-5B96-2046-B189-59EAACD0CF00}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 5		123104
-	622553627	PlayerDying 4	.cache\6F\{6FB4320A-1A73-F3BB-8E84-B9EA9607691B}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 4		118044
+	622533405	FootstepsStoneWalk 5	.cache\46\{46F90F6F-5B96-2046-B189-59EAACD0CF00}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 5		123104
+	622553627	PlayerDying 4	.cache\6F\{6FB4320A-1A73-F3BB-8E84-B9EA9607691B}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 4		118044
 	624505986	FootstepsBasicEnnemyWalk 14	.cache\C4\{C46F6C4B-6191-52D2-E319-C1DB8A9E8B74}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 14		107120
-	634737390	PlayerDying 6	.cache\0F\{0FBD674C-283A-3D8C-46FA-AC577F0F4B3C}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 6		138524
+	630154365	KS_Basic Cloth_35-09	.cache\71\{71E8FFAE-4E16-765A-E004-E6C55F717D47}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\BasicGrab\KS_Basic Cloth_35-09		98656
+	634737390	PlayerDying 6	.cache\0F\{0FBD674C-283A-3D8C-46FA-AC577F0F4B3C}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 6		138524
 	642191154	FootstepsEliteEnnemyRun 4	.cache\F9\{F9DDDEAA-49C7-C3C3-E874-35436392CDF1}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 4		51928
+	644463197	ASSET LIST DAWNFINDERS_005_03-01	.cache\4A\{4AF6B211-8A28-D284-34FC-6160B15CB3A6}.wem		\Containers\Default Work Unit\Ambiance\AMB_Hallucination\ASSET LIST DAWNFINDERS_005_03-01		4243552
+	647776018	GRAB3	.cache\36\{36EB80D0-1E46-A249-5AD8-DE4B75684CE3}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB3		125536
 	652194251	DownedBreath 7	.cache\F1\{F1FA4EFB-DD86-7907-FB55-DC16E29D1A0D}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 7		142176
 	657732204	DownedHeartbeat 3	.cache\59\{5997532D-6CA9-9671-01B0-48DFB86C2758}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 3		198240
 	658775640	FootstepsBasicEnnemyWalk 1	.cache\0F\{0FE7E5B2-924B-FA53-A20F-A57C1CB15003}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 1		100528
-	661656056	FootstepsWoodRun 5	.cache\F5\{F5226315-4144-65F4-1439-DA622CCECB33}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 5		53728
-	662899513	FootstepsSandWalk 9	.cache\48\{48F8F0BC-E4C8-3C28-373A-4772D3629475}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 9		115200
+	661044718	Gold_Grab-11	.cache\39\{39981ECA-BC17-FFFA-F0EF-3B038E705AA1}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-11		92384
+	661656056	FootstepsWoodRun 5	.cache\F5\{F5226315-4144-65F4-1439-DA622CCECB33}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 5		53728
+	662899513	FootstepsSandWalk 9	.cache\48\{48F8F0BC-E4C8-3C28-373A-4772D3629475}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 9		115200
 	664726548	Palanquin_Empty 7	.cache\6A\{6AB52A5A-620C-340C-A563-0ED717C00DF2}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 7		271984
 	666566413	Palanquin_Inventory 1	.cache\9B\{9B6319D1-8256-F008-A933-6DB296905AE8}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Inventory\Palanquin_Inventory 1		307296
-	675358201	FootstepsStoneRun 14	.cache\E3\{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 14		65488
+	675358201	FootstepsStoneRun 14	.cache\E3\{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 14		65488
 	688001986	DamagesHit_3	.cache\7B\{7BF20F55-3F77-95D0-B7DB-78E307746E71}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit_3		78444
-	691857645	FootstepsStoneWalk 7	.cache\A7\{A764E688-9C88-F908-768A-FA5895C0525D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 7		138080
-	698942852	FootstepsWoodWalk 13	.cache\B8\{B86EA2FC-B197-AB93-140E-C29BF678655E}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 13		129840
-	705361011	FootstepsWoodWalk 4	.cache\5A\{5A458B7D-CA73-8A32-5009-ACBC0032B2F9}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 4		140176
+	691857645	FootstepsStoneWalk 7	.cache\A7\{A764E688-9C88-F908-768A-FA5895C0525D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 7		138080
+	698942852	FootstepsWoodWalk 13	.cache\B8\{B86EA2FC-B197-AB93-140E-C29BF678655E}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 13		129840
+	705361011	FootstepsWoodWalk 4	.cache\5A\{5A458B7D-CA73-8A32-5009-ACBC0032B2F9}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 4		140176
 	707154206	Trap_Pressure 1	.cache\6F\{6F5C58F0-EC60-0EE3-6F49-80FAF874B79B}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Pressure\Trap_Pressure 1		169056
 	707538977	AMB_EerieWhistle1	.cache\C8\{C8C8F57C-60A0-1CBF-D8EB-6EFDEC83944F}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle1		4903008
 	708513504	FootstepsBasicEnnemyWalk 5	.cache\AA\{AA9A013E-9CAA-AC6B-7C0D-DFE9390692D9}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 5		62136
+	709591937	KS_Basic Cloth_35-13	.cache\72\{72B8880C-9240-58A8-E1B8-0A50694FE6D2}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic\KS_Basic Cloth_35-13		88800
 	710575632	DownedHeartbeat 9	.cache\7D\{7D913FE0-1D80-6454-5D18-091A951C0975}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 9		198240
-	711577273	FootstepsSandWalk 4	.cache\37\{3706C7B3-7919-4DC2-9947-551C33B03825}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 4		118624
-	718580457	FootstepsWoodWalk 2	.cache\93\{9353CED2-9DE0-FA77-B6F2-D6B8478B91C4}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 2		130112
-	720572330	FootstepsStoneRun 2	.cache\D5\{D5E3EB26-5283-9D18-D289-CCBA297D02B4}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 2		69056
+	711577273	FootstepsSandWalk 4	.cache\37\{3706C7B3-7919-4DC2-9947-551C33B03825}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 4		118624
+	718580457	FootstepsWoodWalk 2	.cache\93\{9353CED2-9DE0-FA77-B6F2-D6B8478B91C4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 2		130112
+	720572330	FootstepsStoneRun 2	.cache\D5\{D5E3EB26-5283-9D18-D289-CCBA297D02B4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 2		69056
 	720680225	OutOfBreath 7	.cache\AB\{AB8AF5B6-D70F-D832-6413-C2C40178780A}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 7		75952
 	724511625	FootstepsBasicEnnemyRun 2	.cache\E8\{E83F458E-D3FF-FCCD-3A78-47FFEA401B5E}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 2		45392
 	724646208	Palanquin_Empty 4	.cache\7E\{7EE6B26F-F3D3-40C7-0DF1-90B67D9ABECB}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 4		269680
 	730381189	AMB_EerieWhistle2	.cache\98\{98DE1C4A-F3C8-A077-C7A6-566EF3F4020A}.wem		\Containers\Default Work Unit\Ambiance\AMB_EerieWhistle\AMB_EerieWhistle2		4214880
 	730434085	ZELOTH_THROAT-cm-01	.cache\30\{303E8874-3213-6CCC-4F12-D24444B7E887}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\Zeloth_Idle\ZELOTH_THROAT-cm-01		996448
 	730665928	FootstepsBasicEnnemyRun 4	.cache\B9\{B94E1192-365E-5963-D09F-8A4CA1CB3FA6}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 4		34016
-	733316650	FootstepsStoneRun 3	.cache\C4\{C422F79E-C971-B86E-B4AF-E95D30316D0D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 3		69584
+	733316650	FootstepsStoneRun 3	.cache\C4\{C422F79E-C971-B86E-B4AF-E95D30316D0D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 3		69584
 	734951332	FootstepsBasicEnnemyRun 9	.cache\85\{851F0CF9-5A85-ACF4-CF5D-6827E06C2934}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 9		48128
-	736053400	FootstepsWoodRun 22	.cache\60\{6024A7CF-7B8D-CDD2-936A-D24FC16B320B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 22		58384
+	736053400	FootstepsWoodRun 22	.cache\60\{6024A7CF-7B8D-CDD2-936A-D24FC16B320B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 22		58384
 	742875802	BoneMovement 6102_63_3	.cache\7A\{7AED3A35-5AC8-99CD-61F3-A4A8493A1BE0}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_3		168032
-	747783868	FootstepsWoodRun 10	.cache\9D\{9DA6F5BF-3BEB-520A-3CF9-CB5670BF3F93}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 10		59328
-	750155606	PlayerDying 1	.cache\6F\{6FB4BC3C-3F6E-4638-5E8E-C461BA5CCF6D}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\PlayerDying 1		88416
-	752517201	FootstepsSandWalk 8	.cache\03\{03FFC417-7467-7C18-BB33-826001A84004}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 8		124080
-	754407728	DownedFall 6	.cache\5A\{5A6F579F-B28E-4C2D-1AE4-8F06A69D793E}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 6		276576
+	743349270	Player_Shot-13	.cache\5F\{5F04E7A4-E267-F276-DFBA-36C93BD6A5D5}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-13		249744
+	747783868	FootstepsWoodRun 10	.cache\9D\{9DA6F5BF-3BEB-520A-3CF9-CB5670BF3F93}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 10		59328
+	750155606	PlayerDying 1	.cache\6F\{6FB4BC3C-3F6E-4638-5E8E-C461BA5CCF6D}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\PlayerDying 1		88416
+	752517201	FootstepsSandWalk 8	.cache\03\{03FFC417-7467-7C18-BB33-826001A84004}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 8		124080
+	754407728	DownedFall 6	.cache\5A\{5A6F579F-B28E-4C2D-1AE4-8F06A69D793E}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 6		276576
+	757900566	Player_Shot-14	.cache\4C\{4C04747A-6A98-37A9-3277-E9C5C8301CAB}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-14		219616
 	761029887	DownedBreath 4	.cache\51\{51B5A4EC-8D5C-943D-3688-63A77C5A05D6}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 4		157536
-	761762427	FootstepsWoodCrackRun 6	.cache\B4\{B415DBC5-7254-B76D-70C9-C5761D760FBE}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 6		73700
+	761762427	FootstepsWoodCrackRun 6	.cache\B4\{B415DBC5-7254-B76D-70C9-C5761D760FBE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 6		73700
 	761825277	DamagesHit_1	.cache\CE\{CE5DBD70-20B6-2BF8-EFD9-C311292F67AC}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit_1		63768
-	763853628	FootstepsSandRun 6	.cache\C9\{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 6		52016
+	763853628	FootstepsSandRun 6	.cache\C9\{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 6		52016
 	766501929	FootstepsEliteEnnemyRun 5	.cache\DE\{DE93439F-B5BD-BA38-5173-E75623028D60}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 5		41516
-	769516079	FootstepsSandRun 14	.cache\D0\{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 14		54272
-	782318759	FootstepsWoodRun 3	.cache\6E\{6EB2E4D3-495B-F879-3125-71DBF7D329D8}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 3		59056
+	769516079	FootstepsSandRun 14	.cache\D0\{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 14		54272
+	782318759	FootstepsWoodRun 3	.cache\6E\{6EB2E4D3-495B-F879-3125-71DBF7D329D8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 3		59056
+	782401836	Player_Hit-13	.cache\CE\{CED132C7-781B-2BFA-0C09-5A3DB74E707F}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-13		199904
 	783285563	FootstepsBasicEnnemyRun 11	.cache\0E\{0E4C1154-3167-E7B8-E6E3-CF04BBC3C751}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 11		48320
-	791895633	FootstepsStoneRun 12	.cache\3A\{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 12		65008
+	791895633	FootstepsStoneRun 12	.cache\3A\{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 12		65008
+	793535417	GRAB7	.cache\94\{9481A608-1AEB-1F9E-D5A0-84DA2C78804F}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB7		136288
 	793936365	BoneMovement 6102_63_1	.cache\3F\{3F4EA5FB-FAF9-4B49-7A70-BAC6C941DBED}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_1		41056
 	794803150	DownedHeartbeat 5	.cache\F5\{F5D3204B-2F59-8999-8C7F-25E922C3EE2B}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 5		196416
 	795321913	FootstepsEliteEnnemyWalk 12	.cache\EB\{EBB33D2A-7FF5-0333-BDC3-EE11E5C08C4B}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 12		115296
@@ -288,77 +337,92 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	798305378	FootstepsBasicEnnemyWalk 16	.cache\DF\{DFA5F475-79AD-3E36-78D3-38E18F36F160}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 16		68744
 	802603666	Trap_Arrow	.cache\45\{4530C46D-526F-8549-13F5-BB5BEAAD0D26}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Arrow		122976
 	804044647	FootstepsBasicEnnemyWalk 9	.cache\A7\{A73903C4-1C8C-C5D4-30BB-88404B0819D8}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 9		110960
-	805764202	FootstepsWoodCrackRun 9	.cache\05\{0557FEF2-CD1B-9750-D8AE-1190B92999D0}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 9		85440
-	808932293	FootstepsWoodWalk 8	.cache\39\{399CFB30-910A-DF26-CE23-81D8140EB53C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 8		129200
+	805764202	FootstepsWoodCrackRun 9	.cache\05\{0557FEF2-CD1B-9750-D8AE-1190B92999D0}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 9		85440
+	808932293	FootstepsWoodWalk 8	.cache\39\{399CFB30-910A-DF26-CE23-81D8140EB53C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 8		129200
 	810591965	FootstepsBasicEnnemyRun 13	.cache\BF\{BF34A723-ABA6-6D52-984F-FF76B548F453}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 13		48192
-	814448940	FootstepsStoneRun 5	.cache\93\{93E20624-BCC1-EAF0-F051-04C3357ED3CD}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 5		63264
+	814448940	FootstepsStoneRun 5	.cache\93\{93E20624-BCC1-EAF0-F051-04C3357ED3CD}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 5		63264
 	819944367	Palanquin_Inventory 2	.cache\CD\{CD35EF46-EEAD-4FEE-9F83-E70BDC3D2CEE}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Inventory\Palanquin_Inventory 2		401504
 	838996729	Palanquin_Start 3	.cache\7F\{7F42E070-4243-45F5-0CAF-23A0B941C8F3}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 3		651360
 	841146991	Reanimate 3	.cache\87\{8734C5DB-DCC3-E440-2053-CE34163CD9D6}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\Reanimate\Reanimate 3		492640
 	842510624	FootstepsEliteEnnemyRun 9	.cache\94\{94D56722-A4B3-D107-E0AC-41DF81133EC5}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 9		44072
 	845459241	OutOfBreath 1	.cache\C4\{C44CC0D0-9B62-1F42-D8E2-EC36D8002917}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 1		78560
-	848565514	FootstepsStoneWalk 1	.cache\24\{2410675F-E980-F02D-DAD0-CA0014B6AF73}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 1		158024
+	848565514	FootstepsStoneWalk 1	.cache\24\{2410675F-E980-F02D-DAD0-CA0014B6AF73}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 1		158024
 	849726008	FootstepsEliteEnnemyWalk 4	.cache\11\{118DAEDE-8343-884A-6A17-569E30B620D5}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 4		107616
-	855499412	FootstepsSandRun 9	.cache\34\{34DD00DB-8E1D-B9C7-F480-F04E8E7A9DCC}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 9		52192
-	865151463	FootstepsStoneRun 7	.cache\AA\{AA9865EE-C7BA-4B45-EDA7-A378199574F4}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 7		73408
-	866395646	FootstepsWoodCrackWalk 1	.cache\AC\{AC8657F8-E0DF-955D-47EC-328F00B1A2CA}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 1		137696
-	875885490	Roll 4	.cache\E6\{E6D34837-AB9B-AAF7-831B-69E424453EDB}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Roll\Roll 4		53856
+	854938390	KS_Basic Cloth_35-01	.cache\30\{3030606F-2895-5206-D45C-A59C1224B728}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic\KS_Basic Cloth_35-01		103136
+	855499412	FootstepsSandRun 9	.cache\34\{34DD00DB-8E1D-B9C7-F480-F04E8E7A9DCC}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 9		52192
+	865151463	FootstepsStoneRun 7	.cache\AA\{AA9865EE-C7BA-4B45-EDA7-A378199574F4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 7		73408
+	865539257	Player_Raise	.cache\16\{16D09689-F29A-549B-9CAE-147F998A24F5}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Raise		3236448
+	866395646	FootstepsWoodCrackWalk 1	.cache\AC\{AC8657F8-E0DF-955D-47EC-328F00B1A2CA}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 1		137696
+	875625137	Player_Hit-01	.cache\3A\{3AADC4F4-D8F2-4FF2-73D0-629BDDB98263}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-01		169440
+	875885490	Roll 4	.cache\E6\{E6D34837-AB9B-AAF7-831B-69E424453EDB}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 4		53856
 	877758046	PlayerHealing 3	.cache\A9\{A9C3E98F-8B25-686A-8D55-E707DE97F9DA}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerHealing\PlayerHealing 3		276576
 	884258450	Reanimate 2	.cache\A6\{A69BF396-3360-1379-6CF1-7E4C3E409866}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\Reanimate\Reanimate 2		338016
 	891952933	BoneMovement 6102_63_5	.cache\0E\{0E175B6E-9817-A82E-D308-92824F8D3833}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_5		280672
-	892421631	FootstepsSandRun 16	.cache\84\{849044DA-63D1-6ADE-E29D-C1D034F1CE1B}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 16		58704
+	892421631	FootstepsSandRun 16	.cache\84\{849044DA-63D1-6ADE-E29D-C1D034F1CE1B}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 16		58704
 	894539672	FootstepsEliteEnnemyRun 6	.cache\54\{54F409E8-19DF-A8FB-33FB-036C1D8699E2}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 6		52404
 	898240164	BoneMovement 6102_63_4	.cache\1C\{1C773C77-FCB9-63B1-ADD1-C68D83F0B273}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Bone\BoneMovement 6102_63_4		356448
 	900053916	Reanimate 1	.cache\2D\{2DC67A34-5408-9051-75D0-64EB2F8203AA}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\Reanimate\Reanimate 1		407136
-	900624370	FootstepsSandRun 7	.cache\E0\{E06CFAB0-BACF-23E5-9D4B-3D8C89A5AFE2}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 7		54976
-	903624507	FootstepsSandRun 2	.cache\54\{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 2		54832
-	909385748	FootstepsSandRun 5	.cache\39\{39620D0B-61D8-37B8-24E2-385BEDB28836}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 5		52208
+	900624370	FootstepsSandRun 7	.cache\E0\{E06CFAB0-BACF-23E5-9D4B-3D8C89A5AFE2}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 7		54976
+	901440669	KS_Basic Cloth_35-11	.cache\35\{3598DB97-2D48-09B9-9A57-10E8F60FE5B9}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\BasicGrab\KS_Basic Cloth_35-11		92384
+	903624507	FootstepsSandRun 2	.cache\54\{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 2		54832
+	909385748	FootstepsSandRun 5	.cache\39\{39620D0B-61D8-37B8-24E2-385BEDB28836}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 5		52208
+	910031922	Gold_Grab-13	.cache\37\{373C5437-147A-F2BF-894D-813283F1E0A2}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-13		104928
 	912347765	FootstepsEliteEnnemyRun 8	.cache\6E\{6ECEA6F0-8AA6-C981-925D-E60CB1BEE35F}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 8		46164
-	916509704	FootstepsWoodRun 19	.cache\3E\{3E21E767-D6B4-FF6B-BD00-3FEEB8FD2173}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 19		54448
-	925504207	DownedFall 1	.cache\C5\{C53F64FE-A034-A938-27EA-C9188D2190C7}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DownedFall\DownedFall 1		225376
-	927203698	FootstepsWoodCrackWalk 9	.cache\64\{6444D874-F220-3DD7-F783-622D8A361DF8}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 9		155552
-	928559674	FootstepsWoodWalk 1	.cache\87\{8728F29D-3CFA-8823-E722-FAB54C573874}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 1		131048
-	933187620	FootstepsWoodWalk 14	.cache\69\{698F176B-BB2B-8A3E-754E-F5942BD38E3A}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 14		133616
+	916509704	FootstepsWoodRun 19	.cache\3E\{3E21E767-D6B4-FF6B-BD00-3FEEB8FD2173}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 19		54448
+	925504207	DownedFall 1	.cache\C5\{C53F64FE-A034-A938-27EA-C9188D2190C7}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 1		225376
+	927203698	FootstepsWoodCrackWalk 9	.cache\64\{6444D874-F220-3DD7-F783-622D8A361DF8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 9		155552
+	927531506	Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01	.cache\23\{233E9151-20FA-CFF4-198E-8B2A44CB4141}.wem		\Containers\Default Work Unit\Ambiance\AMB_Hallucination\Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01		3731040
+	928559674	FootstepsWoodWalk 1	.cache\87\{8728F29D-3CFA-8823-E722-FAB54C573874}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 1		131048
+	933187620	FootstepsWoodWalk 14	.cache\69\{698F176B-BB2B-8A3E-754E-F5942BD38E3A}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 14		133616
 	934441837	FootstepsBasicEnnemyRun 8	.cache\E4\{E4FDF9B9-7768-1314-4313-D580F4C787A0}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 8		49648
-	937623447	FootstepsWoodRun 9	.cache\BE\{BEDCD98D-95B0-1E63-3116-05B4C88D5B42}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 9		58688
+	937623447	FootstepsWoodRun 9	.cache\BE\{BEDCD98D-95B0-1E63-3116-05B4C88D5B42}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 9		58688
 	941637134	FootstepsBasicEnnemyWalk 12	.cache\03\{034A94C2-565D-757D-B9F1-A59FFCB6543C}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 12		108320
 	943584154	Palanquin_Inventory 1	.cache\70\{707F14BF-9FE8-2748-4EE3-50DCD672B69B}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Calling\Palanquin_Inventory 1		827488
 	945375614	Palanquin_End 1	.cache\2D\{2D8D510B-69AD-2D79-4C46-E2A62392EB54}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_End\Palanquin_End 1		433252
 	951763644	FootstepsBasicEnnemyWalk 7	.cache\30\{304CA159-3E5E-4901-AE1C-5F4505CEAC8E}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 7		112656
-	954492362	FootstepsWoodRun 12	.cache\2E\{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 12		57024
-	959804820	FootstepsSandWalk 1	.cache\D2\{D21A850B-9E15-19CF-BE9C-87AA111522CF}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\SandWalk\FootstepsSandWalk 1		127568
+	954492362	FootstepsWoodRun 12	.cache\2E\{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 12		57024
+	959804820	FootstepsSandWalk 1	.cache\D2\{D21A850B-9E15-19CF-BE9C-87AA111522CF}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalk\FootstepsSandWalk 1		127568
 	963749924	Palanquin_Inventory 2	.cache\12\{12B5A519-79AC-9FDA-92EE-02149CC2F28D}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Calling\Palanquin_Inventory 2		856160
+	964222622	Player_Hit-14	.cache\2D\{2D0FBD37-6B87-696F-FEF5-2FCA3307B917}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-14		178848
 	966675639	FootstepsEliteEnnemyWalk 6	.cache\1D\{1DD6BC81-2BC9-BE3E-3948-841BD4FBC1F5}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 6		122976
 	968124644	FIDELE_ATTACK_2	.cache\FC\{FCF43D99-A192-1D4D-A882-5D40F8DDE115}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyAttack\FIDELE_ATTACK_2		439136
 	970594138	ZELOTH_MIX-cm	.cache\C7\{C719D6CC-BB66-BA88-3FB4-36E008790EB8}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\Zeloth_Idle\ZELOTH_MIX-cm		1936144
-	971680020	FootstepsWoodCrackRun 16	.cache\C0\{C0CBD309-C252-5083-3266-B8665C6DD666}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 16		85664
-	973713113	FootstepsWoodRun 13	.cache\5B\{5B8A1C82-BB4E-FB3D-23F8-5CF20134DCF1}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 13		67056
-	976151325	FootstepsStoneWalk 6	.cache\88\{885FCBE0-7D6B-BBFE-F404-52C6A3E3FE62}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 6		125088
-	976191507	FootstepsSandRun 13	.cache\C2\{C2F1979F-830F-1E20-0A81-94152D3DE671}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 13		50752
-	977382893	FootstepsStoneRun 8	.cache\A6\{A62BC3CF-B96F-7272-11A8-1F4EA143EC59}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 8		52008
+	971680020	FootstepsWoodCrackRun 16	.cache\C0\{C0CBD309-C252-5083-3266-B8665C6DD666}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 16		85664
+	973713113	FootstepsWoodRun 13	.cache\5B\{5B8A1C82-BB4E-FB3D-23F8-5CF20134DCF1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 13		67056
+	976151325	FootstepsStoneWalk 6	.cache\88\{885FCBE0-7D6B-BBFE-F404-52C6A3E3FE62}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 6		125088
+	976191507	FootstepsSandRun 13	.cache\C2\{C2F1979F-830F-1E20-0A81-94152D3DE671}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 13		50752
+	976447741	Player_Shot-09	.cache\DE\{DEBD4CF6-4C7F-09FE-2662-4770C632FD9B}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-09		221088
+	977382893	FootstepsStoneRun 8	.cache\A6\{A62BC3CF-B96F-7272-11A8-1F4EA143EC59}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 8		52008
 	978672313	DamagesHit_2	.cache\2F\{2F17A4E5-7C1A-A4CC-E671-2BCDCF857C92}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit_2		122532
-	982020036	FootstepsWoodRun 6	.cache\E9\{E9FF869E-834D-F701-8E9E-1E8AE980C43C}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRun\FootstepsWoodRun 6		58752
-	987167948	FootstepsWoodWalk 7	.cache\11\{11119CBB-686A-0892-001B-F160D8F2BA48}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 7		123824
+	982020036	FootstepsWoodRun 6	.cache\E9\{E9FF869E-834D-F701-8E9E-1E8AE980C43C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 6		58752
+	985944095	Player_Shot-11	.cache\8A\{8A5D408D-2944-4998-6D41-B67D99EAFFAF}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-11		221168
+	987167948	FootstepsWoodWalk 7	.cache\11\{11119CBB-686A-0892-001B-F160D8F2BA48}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 7		123824
 	988341890	FootstepsBasicEnnemyWalk 15	.cache\42\{42D5063D-B97F-CBDF-1F60-916B47ECF1EC}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 15		109072
-	989610776	FootstepsSandRun 8	.cache\C5\{C515C012-7A11-B835-DAC2-651B7C302209}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 8		52160
-	990459238	FootstepsStoneRun 16	.cache\C5\{C57B0878-45F3-914E-32CC-3E72978CE20D}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 16		71328
+	989610776	FootstepsSandRun 8	.cache\C5\{C515C012-7A11-B835-DAC2-651B7C302209}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 8		52160
+	990459238	FootstepsStoneRun 16	.cache\C5\{C57B0878-45F3-914E-32CC-3E72978CE20D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 16		71328
 	990610795	CrazyStatus	.cache\BF\{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem		\Containers\Default Work Unit\Joueur\Etats\CrazyStatus		3646336
+	991140081	Player_Shot-01	.cache\C4\{C4FBC4E7-77F4-2CAC-EC69-3381375E2E43}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-01		240224
 	991859914	Palanquin_Empty 6	.cache\D7\{D7D43CCF-D785-DD78-88E1-06CBD4411AD9}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 6		273824
 	997440708	FootstepsEliteEnnemyWalk 10	.cache\1B\{1BA9CFB1-B2A0-8B30-03C9-07626682B098}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 10		99936
-	1006815413	FootstepsWoodCrackWalk 17	.cache\6F\{6F4F0C2A-648A-2E5C-8F8C-A444E3DBC2DB}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 17		150000
-	1008668970	FootstepsWoodCrackRun 11	.cache\24\{2402A440-55B3-5775-DF78-15031A9CE181}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 11		88976
+	1005848849	Player_Shot-03	.cache\2C\{2C2DC184-D360-5CC2-9D94-6D3EC2DFDA0E}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-03		220064
+	1006815413	FootstepsWoodCrackWalk 17	.cache\6F\{6F4F0C2A-648A-2E5C-8F8C-A444E3DBC2DB}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 17		150000
+	1008668970	FootstepsWoodCrackRun 11	.cache\24\{2402A440-55B3-5775-DF78-15031A9CE181}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 11		88976
 	1012460946	FootstepsEliteEnnemyWalk 11	.cache\B2\{B240F249-51AF-3BB5-66AA-D81D407BBCF9}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 11		122976
 	1012652963	OutOfBreath 6	.cache\3E\{3EB712A0-8142-2D81-1C19-B912BDF7D84E}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 6		74064
 	1012933875	FootstepsBasicEnnemyWalk 10	.cache\85\{85CB437C-A715-C3F2-5197-40FAFE17B63C}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 10		110016
-	1018101402	PlayerHealing 4	.cache\BA\{BAA3C923-21CE-285B-0F94-86CCE63CE440}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerHealing\PlayerHealing 4		567392
+	1016179183	Player_Hit-07	.cache\98\{98C079D1-0BDF-6F1A-137F-047B29A4CAD9}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-07		190048
+	1016928727	Gold_Grab-07	.cache\89\{89F9E38B-7C78-4C16-8606-2FE5C11F7684}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-07		94176
+	1024559731	Player_Hit-03	.cache\FD\{FDC8D235-CD07-4ADC-4A58-F77A5B1E98C3}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-03		182432
+	1026434573	Gold_Grab-05	.cache\ED\{ED06A902-4D26-97A6-563E-76282B9D8AC2}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-05		105824
 	1029570780	placeholder	.cache\30\{30BF439F-FB3D-4D9E-79C2-E63C68CFC0C0}.wem		\Containers\Soundly\placeholder		368024
 	1030339949	DownedHeartbeat 8	.cache\DD\{DD3053E1-097C-0146-7B25-0369090EC18F}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 8		196432
-	1030869782	FootstepsSandRun 10	.cache\35\{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 10		56000
-	1039319747	FootstepsSandRun 1	.cache\BB\{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 1		52128
+	1030869782	FootstepsSandRun 10	.cache\35\{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 10		56000
+	1039319747	FootstepsSandRun 1	.cache\BB\{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 1		52128
 	1042641416	Palanquin_Empty 5	.cache\0E\{0ED1334B-1B6B-7483-7FFA-108B0DD96BB0}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 5		273408
 	1046934722	OutOfBreath 2	.cache\7A\{7AF13B2C-78A8-0B4E-1E36-FEA23C65DDB4}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 2		78956
-	1047484363	FootstepsSandRun 18	.cache\7E\{7ED152B5-7B06-29B0-3E68-5A0F99C441E6}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\SandRun\FootstepsSandRun 18		52640
+	1047484363	FootstepsSandRun 18	.cache\7E\{7ED152B5-7B06-29B0-3E68-5A0F99C441E6}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 18		52640
 	1049126410	Palanquin_Inventory 3	.cache\97\{973A8795-B12C-F4A2-F847-D7A123F74441}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Calling\Palanquin_Inventory 3		725088
+	1050105765	SUB1	.cache\99\{99C6697F-DEB5-5645-68E1-5635AA37243B}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\SUB1		4831328
 	1051819540	FootstepsBasicEnnemyRun 5	.cache\8E\{8E370450-AADC-71E9-1A75-4F97C20A7365}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 5		27168
-	1055218331	FootstepsStoneRun 10	.cache\58\{58D6D272-8362-C9E4-2BF5-514E83DBCE45}.wem		\Containers\Default Work Unit\Joueur\Deplacement\Run\StoneRun\FootstepsStoneRun 10		75344
+	1055218331	FootstepsStoneRun 10	.cache\58\{58D6D272-8362-C9E4-2BF5-514E83DBCE45}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 10		75344
 

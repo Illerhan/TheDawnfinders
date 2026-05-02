@@ -3,6 +3,7 @@
 
 #include "NoiseTrap.h"
 
+#include "AkGameplayStatics.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/SoundManager.h"
 #include "Kismet/GameplayStatics.h"
@@ -39,11 +40,6 @@ void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 	
 	Super::DoTrapAction(OtherActor);
 	
-	//AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(OtherActor);
-	//if (!Player) return;
-	
-	//Player->Execute_PlaySoundOnServer(Player,"Distraction",1000,1,FVector::ZeroVector);
-
 	if (OtherActor->ActorHasTag("Player")) {
 		ANoise* NoiseObj = GetWorld()->SpawnActor<ANoise>(NoiseActor, GetActorLocation(), GetActorRotation());
 		NoiseObj->NoiseZone->SetSphereRadius(NoiseRange);
@@ -51,4 +47,18 @@ void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 
 		SoundManagerInstance->MultiPlaySound(Sound, GetActorLocation(), 100, 1000, true);
 	}
+}
+
+void ANoiseTrap::Multi_PlaySound_Implementation()
+{
+	if (TrapSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && TrapSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(TrapSoundID);
+			TrapSoundID = AK_INVALID_PLAYING_ID; // Reset
+		} 
+	}
+	TrapSoundID = UAkGameplayStatics::PostEvent(TrapSound,this,0,FOnAkPostEventCallback(), false);
 }

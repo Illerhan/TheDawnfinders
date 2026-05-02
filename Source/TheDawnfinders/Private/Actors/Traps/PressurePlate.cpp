@@ -5,7 +5,9 @@
 
 #include "AkAudioDevice.h"
 #include "AkGameplayStatics.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "Interfaces/Activable.h"
+#include "Net/UnrealNetwork.h"
 
 
 APressurePlate::APressurePlate()
@@ -31,14 +33,86 @@ void APressurePlate::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void APressurePlate::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);	
+	DOREPLIFETIME(APressurePlate, bIsActive);
+}
 
 
 void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (!Cast<AAPlayerCharacter>(OtherActor)) return;
+    
 	CurrentPlayerCount++;
-	if (CurrentPlayerCount > 1) return;
+    
+	// Si c'est le premier joueur qui marche dessus
+	if (CurrentPlayerCount == 1)
+	{
+		bool bShouldActivate = true;
 
+		if (ActivationMode == EPlateActivationMode::Toggle)
+		{
+			// Inverse l'état actuel
+			bIsActive = !bIsActive;
+			bShouldActivate = bIsActive;
+		}
+		else if (ActivationMode == EPlateActivationMode::Once)
+		{
+			if (bIsActive) return; // Déjà fait
+			bIsActive = true;
+		}
+		else // Mode Hold
+		{
+			bIsActive = true;
+		}
+
+		// Exécution de l'action
+		ExecutePlateAction(bShouldActivate);
+	}
+	
+}
+
+void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (!Cast<AAPlayerCharacter>(OtherActor)) return;
+    
+	CurrentPlayerCount--;
+
+	// On ne traite la sortie que si plus personne n'est sur la plaque
+	if (CurrentPlayerCount == 0 && ActivationMode == EPlateActivationMode::Hold)
+	{
+		bIsActive = false;
+		ExecutePlateAction(false);
+	}
+}
+
+void APressurePlate::ExecutePlateAction(bool bActivate)
+{
+	OnRep_IsActive(); // Pour le visuel/FX
+	Multi_PlaySound(); // Son spatialisé synchronisé
+
+	for (AActor* LinkedActor : LinkedActors)
+	{
+		if (LinkedActor && LinkedActor->Implements<UActivable>())
+		{
+			if (bActivate)
+			{
+				IActivable::Execute_DoMainAction(LinkedActor);
+			}
+			else
+			{
+				IActivable::Execute_StopMainAction(LinkedActor);
+			}
+		}
+	}
+}
+
+
+void APressurePlate::Multi_PlaySound_Implementation()
+{
 	if (PlateSoundID)
 	{
 		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
@@ -48,33 +122,7 @@ void APressurePlate::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor*
 			PlateSoundID = AK_INVALID_PLAYING_ID; // Reset
 		}  
 	}
-	PlateSoundID = UAkGameplayStatics::PostEvent(PlateSound,Owner,0,FOnAkPostEventCallback(), false);
-	for (auto LinkedActor : LinkedActors)
-	{
-		if (LinkedActor->Implements<UActivable>())
-		{
-			IActivable::Execute_SetPlayerCount(LinkedActor,1);
-			if (IActivable::Execute_GetPlayerCount(LinkedActor) >1) continue;
-			IActivable::Execute_DoMainAction(LinkedActor);
-			
-		}
-	}
-}
-
-void APressurePlate::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	CurrentPlayerCount--;
-	if (CurrentPlayerCount != 0) return;
-
-	for (auto LinkedActor : LinkedActors)
-	{
-		if (LinkedActor->Implements<UActivable>())
-		{
-			IActivable::Execute_SetPlayerCount(LinkedActor,-1);
-			if (IActivable::Execute_GetPlayerCount(LinkedActor) <= 0)
-			IActivable::Execute_StopMainAction(LinkedActor);
-		}
-	}
+	PlateSoundID = UAkGameplayStatics::PostEvent(PlateSound,this,0,FOnAkPostEventCallback(), false);
+	
 }
 

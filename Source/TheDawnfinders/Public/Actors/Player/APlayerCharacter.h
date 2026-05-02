@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkComponent.h"
 #include "Components/UPlayerLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/IPlayer.h"
@@ -114,6 +115,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Debug")
 	class UDebugComponent* DebugComponent;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UAkComponent* AkComponent;
 
 
 // === CURSE ===
@@ -345,6 +349,9 @@ protected:
 	UFUNCTION()
 	void HideThrowPreview();
 
+	UFUNCTION(Server, Unreliable)
+	void Server_SetMoveInputActive(bool bActive);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReachAutoMoveDestination();
 
@@ -375,6 +382,9 @@ public :
 
 	UPROPERTY(Replicated)
 	int32 ProtectionZoneAmount;
+
+	UPROPERTY(Replicated, BlueprintReadOnly)
+	bool bMoveInputActive;     // For root-motion animations triggers
 
 	UPROPERTY()
 	float TargetRotationRate = 360.f;

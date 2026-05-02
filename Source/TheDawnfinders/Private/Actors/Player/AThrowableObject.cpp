@@ -23,6 +23,15 @@ void AThrowableObject::BeginPlay()
 void AThrowableObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (!HasAuthority()) return;
+
+	if (!bDestroyOnHit) {
+		DestroyTimer += DeltaTime;
+		if (DestroyTimer >= DestroyDuration) {
+			AActor::Destroy();
+		}
+	}
 }
 
 
@@ -80,6 +89,10 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 
 		case EThrowableEffectType::PlayLoudSound :
 			Cast<ABasicEnemyAIController>(Cast<ABaseEnemy>(Hit.GetActor())->GetController())->AddAlertness(ItemData->ConsumableEffectPower, GetActorLocation());
+			break;
+
+		case EThrowableEffectType::StunEnemies:
+			Cast<ABaseEnemy>(Hit.GetActor())->StunEnemy(EffectDuration);
 			break;
 		}
 	}

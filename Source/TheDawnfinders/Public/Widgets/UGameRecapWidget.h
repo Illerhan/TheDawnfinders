@@ -20,4 +20,8 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisplayFailRecap();
+
+protected :
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsDisplayed;
 };

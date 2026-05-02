@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{ECBD5E98-9DE2-54B4-B4C7-CE97BDCDB1BE}",
+    "Hash": "{45842B0E-88D7-AC8E-1B30-9B5ACAB8928E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -40,6 +40,48 @@
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "229157224",
+      "Name": "IsFriendly",
+      "ObjectPath": "\\States\\Default Work Unit\\IsFriendly",
+      "GUID": "{2AF90670-3A34-4A56-BA72-567F2D2B562D}",
+      "States": [
+       {
+        "Id": "229157224",
+        "Name": "IsFriendly",
+        "ObjectPath": "\\States\\Default Work Unit\\IsFriendly\\IsFriendly",
+        "GUID": "{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\IsFriendly\\None",
+        "GUID": "{48F648E1-590F-480A-B3CE-F980EE93392C}"
+       }
+      ]
+     },
+     {
+      "Id": "2655407367",
+      "Name": "Crouch",
+      "ObjectPath": "\\States\\Default Work Unit\\Crouch",
+      "GUID": "{EAF953B0-5C9B-4EEA-B99E-42E767A21B06}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Crouch\\None",
+        "GUID": "{71AE17EE-3809-4559-A213-F01EB5E9500C}"
+       },
+       {
+        "Id": "2655407367",
+        "Name": "Crouch",
+        "ObjectPath": "\\States\\Default Work Unit\\Crouch\\Crouch",
+        "GUID": "{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"
+       }
+      ]
      }
     ],
     "SwitchGroups": [
@@ -98,6 +140,6 @@
     ]
    }
   ],
-  "FileHash": "{4F453D67-17B9-C8A0-477E-D8E8E101D56A}"
+  "FileHash": "{8EA5E415-89D5-1E68-8906-1A363D830A1F}"
  }
 }

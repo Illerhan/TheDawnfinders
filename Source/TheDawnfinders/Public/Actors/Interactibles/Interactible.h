@@ -60,6 +60,7 @@ public :
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
 	virtual EQTEType GetNeededQTE_Implementation() override;
 	virtual bool GetQTEDone_Implementation() override;
+	//virtual bool GetQTEDone_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void OnQTESuccess();
@@ -134,6 +135,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	bool GetIsInInteractionStateOnInteract() { return bIsInInteractionStateOnInteract; }
 
+	UFUNCTION(BlueprintCallable)
+	bool GetAnimationIsActive() { return bAnimationIsActive; }
+
 
 // === COMPONENTS ===
 public :
@@ -185,22 +189,22 @@ public :
 
 // === PROTECTED INFOS ===
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	float EnableDistance = 3500.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	bool bHasInteractAnim = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	float InteractAnimDuration = 0;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool DidInteractionAnim = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	UItemData* NeededInteractItem;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	EInteractItemConsuptionType InteractItemConsumptionType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Noise")
@@ -209,19 +213,31 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Noise")
 	float NoiseRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	bool bStopInteractOnRelease = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	bool bIsInInteractionStateOnInteract = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
+	int NeededPlayerCount = 1;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	AActor* CurrentInteractActor;
 
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	TArray<AActor*> CurrentInteractActors;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	bool bAnimationIsActive = false;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	int CurrentInteractActorCount;
+
 	UPROPERTY()
 	FTimerHandle EnableTimer;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	bool bCanBeUsed = true;
 
 	UPROPERTY(Replicated)

@@ -73,6 +73,11 @@ void ABasicEnemyAIController::EnableAIController_Implementation()
 
 }
 
+void ABasicEnemyAIController::EndStun_Implementation()
+{
+
+}
+
 UEnemyAttackComponent* ABasicEnemyAIController::GetEnemyAttackComponent()
 {
     return EnemyAttackComponent;

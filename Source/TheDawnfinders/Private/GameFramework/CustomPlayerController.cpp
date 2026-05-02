@@ -3,6 +3,7 @@
 
 #include "CustomPlayerController.h"
 
+#include "AkGameplayStatics.h"
 #include "Actors/Mule/DangerManager.h"
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
@@ -34,6 +35,7 @@ void ACustomPlayerController::Server_CallMule_Implementation(AActor* Actor)
 		if (Mule->CooldownTimer > 0.f) return;
 		MuleAIController->CallMule(Actor);
 		Mule->DangerManager->MuleCalled();
+		Mule->CooldownTimer = Mule->CallCooldown;
 	}
 }
 
@@ -52,7 +54,8 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 	if (!OwningPlayer) return;
 	
 	AMuleAIController* MuleAIController = Cast<AMuleAIController>(Mule->GetController());
-	if (MuleAIController) if (Mule->CooldownTimer > 0.f) return;
+	//if (MuleAIController) 
+	if (Mule->CallCharges <= 0)  return;
 	
 	HoldTimer -= DeltaTime;
 	
@@ -70,6 +73,8 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 		NoiseActor = Noise;
 	}
 	NoiseActor->SetActorLocation(OwningPlayer->GetActorLocation());
+	
+	Multi_PlayCallMule();
 		
 	OwningPlayer->Execute_ShowProgress(OwningPlayer,HoldTimer);
 	if (HoldTimer <= 0.f)
@@ -88,6 +93,12 @@ void ACustomPlayerController::Server_StopHoldMule_Implementation()
 	{
 		NoiseActor->Destroy();
 		NoiseActor = nullptr;
+	}
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && CallMuleSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(CallMuleSoundID);
+		CallMuleSoundID = AK_INVALID_PLAYING_ID; // Reset
 	}
 	
 	if (!OwningPlayer) return;
@@ -133,4 +144,10 @@ void ACustomPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	HoldTimer= InputHoldDuration;
+}
+
+void ACustomPlayerController::Multi_PlayCallMule_Implementation()
+{
+	if (!CallMuleSoundID)
+		CallMuleSoundID = UAkGameplayStatics::PostEvent(CallMuleSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }

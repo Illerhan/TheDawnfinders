@@ -1,4 +1,8 @@
 #include "Actors/Enemy/ABaseEnemy.h"
+
+#include "AkComponent.h"
+#include "AkGameplayStatics.h"
+#include "BlueprintNodes/PostEventAsync.h"
 #include "Components/WidgetComponent.h"
 #include "Components/UEnemyAttackComponent.h"
 #include "Widgets/UEnemyWidget.h"
@@ -20,6 +24,13 @@ ABaseEnemy::ABaseEnemy()
 
     AttackCollisionPosRef = CreateDefaultSubobject<USceneComponent>("AttackCollisionPosRef");
     AttackCollisionPosRef->SetupAttachment(GetMesh());
+    AkComponent = CreateDefaultSubobject<UAkComponent>(TEXT("AkAudioComponent"));
+
+    // 2. Attachement au Skeletal Mesh du personnage
+    if (GetMesh())
+    {
+        AkComponent->SetupAttachment(GetMesh());
+    }
 }
 
 void ABaseEnemy::BeginPlay()
@@ -53,6 +64,11 @@ void ABaseEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+    if (StunTimer > 0) {
+        StunTimer -= DeltaTime;
+        if (StunTimer <= 0) UnstunEnemy();
+    }
+
     if(HasAuthority())
         CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
 }
@@ -65,6 +81,9 @@ void ABaseEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 void ABaseEnemy::CheckEnableDistance()
 {
     float ClosestDistSq = TNumericLimits<float>::Max();
+
+    if (!GetWorld()) return;
+    if (!GetWorld()->GetPlayerControllerIterator()) return;
 
     // We go through all the players 
     for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
@@ -85,6 +104,19 @@ void ABaseEnemy::CheckEnableDistance()
         HideEnemy();
     }
 }
+
+
+void ABaseEnemy::StunEnemy_Implementation(float Duration)
+{
+    StunTimer = Duration;
+    bIsStuned = true;
+}
+
+void ABaseEnemy::UnstunEnemy_Implementation()
+{
+    bIsStuned = false;
+}
+
 
 void ABaseEnemy::ExitCrystal_Implementation()
 {
@@ -177,6 +209,11 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
     AnimInstance->OnPlayMontageNotifyBegin.AddDynamic(this, &ABaseEnemy::OnMontageNotifyBegin);
 }
 
+void ABaseEnemy::Multi_PlayHitSound_Implementation()
+{
+    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+}
+
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
     BP_OnMontageNotifyBegin(NotifyName);
@@ -223,6 +260,7 @@ void ABaseEnemy::DoAttackCollision()
 
     if (!bHit) return;
 
+    Multi_PlayHitSound();
     TSet<AActor*> AlreadyHitActors;
     for (int i = 0; i < HitResults.Num(); i++) {
 

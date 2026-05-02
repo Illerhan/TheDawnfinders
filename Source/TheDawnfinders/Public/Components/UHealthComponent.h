@@ -100,6 +100,9 @@ public :
 public : 
 	UFUNCTION()
 	void Fallen();
+	
+	UFUNCTION(Client,Unreliable)
+	void Client_HeartbeatSound();
 
 	UFUNCTION(BlueprintCallable)
 	void FallenLoseHP(float DeltaTime);
@@ -135,7 +138,20 @@ public :
 	void EndInvincibilityFrames();
 
 	FTimerHandle InvincibilityTimerHandle;
-
+	
+// === Sounds ===
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* DieBreath;
+	
+	UPROPERTY()
+	int32 DieSoundID;
+	
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void Client_PlayHeal();
+	
+	UFUNCTION(NetMulticast,Unreliable)
+	void Multi_DieSound();
 
 
 	// === NETWORK ===
@@ -238,15 +254,29 @@ protected :
 	UPROPERTY()
 	UWorldHealthBar* WorldHealthBar;
 	
+// === Sounds ===
+	
 	UPROPERTY()
 	int32 BreathSoundID;
 	
 	UPROPERTY()
 	int32 HeartBeatSoundID;
 	
+	UPROPERTY()
+	int32 HealingSoundID;
+	
+	UPROPERTY()
+	int32 DamageSoundID;
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* FallenBreath;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAkAudioEvent* HeartBeatFallen;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* HealingSound;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAkAudioEvent* DamageSound;
 };

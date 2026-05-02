@@ -12,8 +12,8 @@ AInteractibleObjects::AInteractibleObjects()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	//Rooot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	//SetRootComponent(Rooot);
+	Rooot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(Rooot);
 
 	InteractCollider = CreateDefaultSubobject<UBoxComponent>(FName("InteractCollider"));
 	InteractCollider->SetupAttachment(RootComponent);
@@ -111,7 +111,7 @@ void AInteractibleObjects::HoldTimer(float DeltaTime)
 	if (InteractionTimer <= 0) {
 		IPlayerInterface::Execute_HideProgress(PlayerTemp);
 		
-		BP_OnInteractionFinished();
+		BP_OnInteractionFinished_Implementation();
 	}
 }
 
@@ -124,6 +124,9 @@ void AInteractibleObjects::PlayNoise()
 void AInteractibleObjects::CheckEnableDistance()
 {
 	float ClosestDistSq = TNumericLimits<float>::Max();
+
+	if (!GetWorld()) return;
+	if (!GetWorld()->GetPlayerControllerIterator()) return;
 
 	// We go through all the players 
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)

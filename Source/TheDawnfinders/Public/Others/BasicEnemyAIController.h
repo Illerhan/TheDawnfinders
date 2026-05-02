@@ -44,6 +44,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void EnableAIController();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void EndStun();
+
 	UFUNCTION(BlueprintCallable)
 	UEnemyAttackComponent* GetEnemyAttackComponent();
 

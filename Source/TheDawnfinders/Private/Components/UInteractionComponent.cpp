@@ -1,4 +1,7 @@
 #include "Components/UInteractionComponent.h"
+
+#include "AkAudioDevice.h"
+#include "AkGameplayStatics.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Actors/Interactibles/Carriable.h"
 #include "Components/BoxComponent.h"
@@ -185,7 +188,9 @@ void UInteractionComponent::StartInteract()
 		return;
 	}
 
-	// We check if there is a player nearby to revive 
+	// We check if there is a player nearby to revive
+	
+	// -> Revive sound integration
 	if (PlayersAtRange.Num() > 0)
 	{
 		AAPlayerCharacter* AllyFound = PlayersAtRange[0];
@@ -211,6 +216,8 @@ void UInteractionComponent::StartInteract()
 	}
 
 	// If no player to revive was found, we interact with the nearest interactible
+	
+	// -> Interaction Sound generique integration
 	AActor* Nearest = GetNearestInteractible();
 	if (!Nearest) return;
 	if (!IInteractible::Execute_GetCanBeUsed(Nearest, GetOwner())) return;
@@ -240,6 +247,7 @@ void UInteractionComponent::StartInteract()
 	}
 	else  // No QTE 
 	{
+		
 		TryInteract(Nearest, PlayerCharacter);
 	}
 }
@@ -304,6 +312,20 @@ void UInteractionComponent::StartExternalQTE(AActor* QTEActor)
 	// Immobilise le joueur (cohérent avec StartInteract)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 		IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::Immobilized, true);
+}
+
+void UInteractionComponent::PlayInteractSound_Implementation()
+{
+	if (InteractSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && InteractSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(InteractSoundID);
+			InteractSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}  
+	}
+	InteractSoundID = UAkGameplayStatics::PostEvent(InteractSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 }
 
 #pragma endregion
@@ -390,7 +412,11 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 
 void UInteractionComponent::CancelInteraction()
 {
-	if (CurrentAnimInteractible) return;
+	if (CurrentAnimInteractible) {
+		if (Cast<AInteractibleObjects>(CurrentAnimInteractible)->GetAnimationIsActive()) {
+			return;
+		}
+	}
 
 	AActor* Nearest = GetNearestInteractible();
 	//if (!Nearest) return;

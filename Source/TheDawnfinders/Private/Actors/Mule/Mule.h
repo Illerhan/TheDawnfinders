@@ -36,7 +36,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Widgets")
 	UWidgetComponent* InteractibleWidgetComponent;
 	
-	// Constantes (configurables dans l'éditeur)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = Mule)
 	float ChargeCooldown = 15.f;
 
@@ -44,11 +43,11 @@ public:
 	float CallCooldown = 5.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = Mule)
-	int32 MaxCharges = 2;
+	int32 MaxCharges = 1;
 
 	// State (évolue en runtime)
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = Mule)
-	int32 CallCharges = 2;
+	int32 CallCharges = 1;
 
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = Mule)
 	float CooldownTimer = 0.f;
