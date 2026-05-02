@@ -6962,6 +6962,212 @@
 												<ActiveSource Name="ZELOTH_THROAT-cm-01" ID="{041FB24A-FA27-465C-833E-E10740AAA714}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="Audio 4_cm_02" ID="{1D8FBC13-5419-4701-9C21-1F221A432263}" ShortID="448727537">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 4_cm_02" ID="{23AB6377-EF0C-40F6-8ED0-256DF8F589FF}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 4.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="997463245"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 4_cm_02" ID="{23AB6377-EF0C-40F6-8ED0-256DF8F589FF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 5_cm_cm_01" ID="{728B6EF6-7519-4029-B6B3-99D15C77A266}" ShortID="763549571">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 5_cm_cm_01" ID="{1CDFBB9D-0049-44B1-B162-186EC038130F}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 5.cm.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="100764325"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 5_cm_cm_01" ID="{1CDFBB9D-0049-44B1-B162-186EC038130F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_cm_01" ID="{C589F2F4-1FD1-411D-9C6F-3549ADEFD325}" ShortID="504163214">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_cm_01" ID="{ECE66710-B0DF-48BC-8B0B-AB8F8690EC47}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="125951352"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_cm_01" ID="{ECE66710-B0DF-48BC-8B0B-AB8F8690EC47}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup1_cm_01" ID="{BE6EA21B-04AE-4F02-A0C4-CE6842102A86}" ShortID="1033695536">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup1_cm_01" ID="{3E17D6D5-412D-4965-BB94-0378D338B293}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup1.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="881481179"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup1_cm_01" ID="{3E17D6D5-412D-4965-BB94-0378D338B293}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup2_cm_02" ID="{54C9C903-A0C2-433E-AF07-DBE08D279FE7}" ShortID="268559958">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup2_cm_02" ID="{81C46C4E-0C9C-4821-9320-2C31F138AA93}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup2.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="494935842"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup2_cm_02" ID="{81C46C4E-0C9C-4821-9320-2C31F138AA93}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-01" ID="{26EB210E-BE28-41FB-9D8F-DCE588A6649A}" ShortID="323995939">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{2FDB8343-F134-417E-92C6-6D4640516741}">
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="938342197"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{2FDB8343-F134-417E-92C6-6D4640516741}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="BREATH" ID="{9153BFAE-1E15-4F88-809C-E7B3CD6109DF}" ShortID="458858104">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{18F4D282-EBAB-4957-AEAB-3C3E6C4741CB}" ShortID="321508244">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{C29443FC-C794-4843-8C8E-7EE523CD57A0}">
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="881330317"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{C29443FC-C794-4843-8C8E-7EE523CD57A0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{7CA72291-4D8B-4092-9CB8-331BD39DEA15}" ShortID="49035476">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{572B085C-3D60-4B2B-A9B5-ADB54EAEC2F6}">
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="533200097"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{572B085C-3D60-4B2B-A9B5-ADB54EAEC2F6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</BlendContainer>
 								<SwitchContainer Name="EliteEnnemyMovement" ID="{6CB8C020-1CEA-4E42-96F6-F5A73FA82A6C}" ShortID="475180771">
@@ -7563,6 +7769,461 @@
 										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
+								<RandomSequenceContainer Name="EliteEnemyDamage" ID="{8CA4DD63-1E9F-4F01-9F4C-B0A5F922D862}" ShortID="376885108">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{A6DAAA1D-FE10-4218-A56B-2C94A600DCF8}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0942AEA4-BE32-4FBE-AA0E-B618C1BA4274}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-10"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Zeloth_Damage1" ID="{47DE4DED-A8E7-461A-B2BA-DE4882F71C59}" ShortID="732878115">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage1" ID="{7E04268F-326B-4452-A12C-66CF2AC6E9E0}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="509189635"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage1" ID="{7E04268F-326B-4452-A12C-66CF2AC6E9E0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage2" ID="{057C2BAD-5E38-49BA-9CEE-1304A6F323C0}" ShortID="128103427">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage2" ID="{C2C75FDA-4AB9-4622-A915-48EABC1722C0}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="735165908"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage2" ID="{C2C75FDA-4AB9-4622-A915-48EABC1722C0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage3" ID="{DE0F05D3-5029-4A8D-8B79-161E4BE11EB8}" ShortID="802467346">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage3" ID="{F611EF79-AC71-4FAE-ADF9-79D67CCE352E}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="379426620"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage3" ID="{F611EF79-AC71-4FAE-ADF9-79D67CCE352E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage4" ID="{19CE955F-DAF7-4D70-B4AB-471331F3280E}" ShortID="403967920">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage4" ID="{D15B2C78-ED40-4A9E-B0BD-0EB2F62A4461}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="414287348"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage4" ID="{D15B2C78-ED40-4A9E-B0BD-0EB2F62A4461}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage5" ID="{ED8723F2-885B-40FD-A3C4-597009A0C266}" ShortID="791720634">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage5" ID="{8601F5AC-6D51-4A4C-BF1F-7E5B4168D5A2}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage5.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="131189783"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage5" ID="{8601F5AC-6D51-4A4C-BF1F-7E5B4168D5A2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage6" ID="{A77088CF-8356-488F-B0D9-DDC9C679D010}" ShortID="144004571">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage6" ID="{ACD7D645-275E-4182-8AA8-6A1D1A7F5100}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage6.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="940816114"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage6" ID="{ACD7D645-275E-4182-8AA8-6A1D1A7F5100}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Damage7" ID="{E258F8EE-33BF-4B33-8E66-617802213721}" ShortID="1035094901">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{B6033023-ECD3-4450-A24C-3AD138CF46AD}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Damage7" ID="{62796EB4-DA8E-475F-A620-00281F4B0237}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Damage7.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="386172729"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Damage7" ID="{62796EB4-DA8E-475F-A620-00281F4B0237}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<BlendContainer Name="EliteEnemyDeath" ID="{A0F5BAB0-3AA1-4348-A2EE-9E38995F5F87}" ShortID="345871748">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Audio 6_02-01" ID="{AE11BC2A-9620-4CCC-8DC8-F4CC8879F366}" ShortID="115035462">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 6_02-01" ID="{DCC8B673-EB1F-46C1-9766-C69EC59A8DA4}">
+													<Language>SFX</Language>
+													<AudioFile>Audio 6_02-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="179511228"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 6_02-01" ID="{DCC8B673-EB1F-46C1-9766-C69EC59A8DA4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 7_cm_01-01" ID="{954550B2-FABF-4212-8540-24FE12E55A5E}" ShortID="833280520">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 7_cm_01-01" ID="{66176AD1-BB8A-4410-9709-3C11683D5C3B}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.258222209082709"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 7.cm_01-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="977433235"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 7_cm_01-01" ID="{66176AD1-BB8A-4410-9709-3C11683D5C3B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="beast_attack-kHsFrqS_01-01" ID="{74AACF82-4E30-4ABA-A448-BBB21EA9C396}" ShortID="326452006">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="beast_attack-kHsFrqS_01-01" ID="{4AE089D0-571A-4B0E-9C6F-735E766F1F33}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.329455921933112"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>beast_attack-kHsFrqS_01-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1014746002"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="beast_attack-kHsFrqS_01-01" ID="{4AE089D0-571A-4B0E-9C6F-735E766F1F33}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{03625DC7-639B-4272-92DF-DD62D822A40E}" ShortID="601814693">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{CE08E762-08A2-4314-8DBA-3A8BA7D0F939}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.639690917570472"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="714180368"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{CE08E762-08A2-4314-8DBA-3A8BA7D0F939}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{DAD0418D-A377-4C78-8E70-ACC68D29E213}" ShortID="891997694">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+														<ObjectRef Name="EliteEnemyDeath" ID="{8867445F-8EE8-4E2D-BC5F-69646D5EB699}" WorkUnitID="{D77154B7-E486-49F6-8F95-A1D87525A291}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
+								</BlendContainer>
+								<RandomSequenceContainer Name="EliteEnemyAttack" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" ShortID="18010893">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{71566439-9F6A-44A5-832D-77FE0813CA80}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{24E7D1E7-1461-4A90-A68E-CCBFF756DC7E}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-10"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Zeloth_Attack1" ID="{E62CE7F2-D99A-49D3-802D-F60FEDB52A2D}" ShortID="164592557">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Attack1" ID="{536AB2A3-186C-4C56-B6FC-44AB39D180B6}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Attack1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="873849901"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Attack1" ID="{536AB2A3-186C-4C56-B6FC-44AB39D180B6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Attack2" ID="{1024FEF9-8BBB-4C28-B165-3F17A4E0AB3C}" ShortID="713281651">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Attack2" ID="{D6F49B04-B519-4FE3-93B5-39B0FA1BC2F2}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Attack2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="332510263"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Attack2" ID="{D6F49B04-B519-4FE3-93B5-39B0FA1BC2F2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Attack3" ID="{4A8D4081-6B97-4A8B-A624-B6BF93002E67}" ShortID="99113708">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Attack3" ID="{34F3519E-7018-4274-94CE-A14D1E092FA7}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Attack3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="592439048"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Attack3" ID="{34F3519E-7018-4274-94CE-A14D1E092FA7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Zeloth_Attack4" ID="{33FE14C6-A194-4A97-BECD-7BE2F279C741}" ShortID="437449233">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Zeloth_Attack4" ID="{52017CBA-7CB2-48AE-89F8-6EA3586E6389}">
+													<Language>SFX</Language>
+													<AudioFile>Zeloth_Attack4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="653504529"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Zeloth_Attack4" ID="{52017CBA-7CB2-48AE-89F8-6EA3586E6389}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Fidele" ID="{0F9F77DD-76C8-465B-A035-25033F930879}" ShortID="552668968">
@@ -8365,6 +9026,21 @@
 									</GroupingInfo>
 								</SwitchContainer>
 								<RandomSequenceContainer Name="BasicEnnemyAttack" ID="{0F8A60D8-F82D-4D7D-B07A-2ECF5E5BFA48}" ShortID="1030442252">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7D949415-EE1D-4E4D-87AA-83145E03E189}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -8474,6 +9150,229 @@
 										</Reference>
 									</ReferenceList>
 								</RandomSequenceContainer>
+								<BlendContainer Name="Idle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{C3A04D8E-FD53-4F87-928A-585461A438A0}" ShortID="323516202">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{5A8EAF46-F5D6-4A8F-9242-585C3408D49E}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{9674DB72-2766-414A-AA33-5C779E8D4764}">
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="742162032"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{9674DB72-2766-414A-AA33-5C779E8D4764}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{DDC96B6C-4FFA-42CA-B4A9-C07A99E4A5D8}" ShortID="1056229773">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{51D5B153-BB28-4466-8C1E-E617D17CC13D}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-7</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{64E94BE2-1ECC-4122-A501-2DDF38C668FC}">
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1052986331"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{64E94BE2-1ECC-4122-A501-2DDF38C668FC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{0C0055C9-B59E-4F60-81FA-A1EEEA38BBFF}" ShortID="1013122297">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{9D30A37D-9D63-41E5-89B5-907B78A845D1}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{B2F7FDFF-36FD-4FA3-A722-E966F0649009}">
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="971036727"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{B2F7FDFF-36FD-4FA3-A722-E966F0649009}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="KS_Zombie Dystopia_3-02" ID="{99B23971-5EB9-4304-9F21-5A8E58FF5876}" ShortID="694887929">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="KS_Zombie Dystopia_3-02" ID="{86E0D83A-653F-48E3-9C56-DDF9D62779CF}">
+													<Language>SFX</Language>
+													<AudioFile>KS_Zombie Dystopia_3-02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="886178823"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="KS_Zombie Dystopia_3-02" ID="{86E0D83A-653F-48E3-9C56-DDF9D62779CF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="KS_Zombie Dystopia_3-03" ID="{97FC6540-63B5-41FF-82D0-69FE58E39E81}" ShortID="150319587">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{DF1E603E-459C-4389-8A47-A3B5A40E480D}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="KS_Zombie Dystopia_3-03" ID="{64346C63-16E2-4938-894A-11577F1BF87E}">
+													<Language>SFX</Language>
+													<AudioFile>KS_Zombie Dystopia_3-03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="801827168"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="KS_Zombie Dystopia_3-03" ID="{64346C63-16E2-4938-894A-11577F1BF87E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-03" ID="{AD557211-4B47-4E54-A98E-E60F4ED3B19D}" ShortID="235344046">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{6305D9DA-ACBE-4C43-B188-31AA944350D7}">
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="95402580"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{6305D9DA-ACBE-4C43-B188-31AA944350D7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
