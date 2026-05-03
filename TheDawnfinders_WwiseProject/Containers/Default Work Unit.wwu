@@ -9331,7 +9331,7 @@
 										</Reference>
 									</ReferenceList>
 								</RandomSequenceContainer>
-								<BlendContainer Name="Idle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
+								<BlendContainer Name="BasicEnemyIdle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
