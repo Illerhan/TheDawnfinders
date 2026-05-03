@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{9DB5E0A9-1888-400C-AE35-4356B15118C5}" SchemaVersion="133">
 	<States>
-		<WorkUnit Name="Default Work Unit" ID="{9DB5E0A9-1888-400C-AE35-4356B15118C5}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{9DB5E0A9-1888-400C-AE35-4356B15118C5}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="Crouch" ID="{EAF953B0-5C9B-4EEA-B99E-42E767A21B06}">
+					<ChildrenList>
+						<State Name="None" ID="{71AE17EE-3809-4559-A213-F01EB5E9500C}"/>
+						<State Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
+							<EndState Name="None" ID="{71AE17EE-3809-4559-A213-F01EB5E9500C}"/>
+							<Time>0.2</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+						<Transition>
+							<StartState Name="None" ID="{71AE17EE-3809-4559-A213-F01EB5E9500C}"/>
+							<EndState Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
+							<Time>0.2</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+				<StateGroup Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}">
+					<ChildrenList>
+						<State Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+						<State Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+							<EndState Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+							<Time>0</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+						<Transition>
+							<StartState Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+							<EndState Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+							<Time>0</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</States>
 </WwiseDocument>

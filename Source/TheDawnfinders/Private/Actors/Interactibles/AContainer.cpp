@@ -1,6 +1,7 @@
 #include "Actors/Interactibles/AContainer.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "Widgets/UWorldInteractibleWidget.h"
+#include "Components/BoxComponent.h"
 #include "Components/UInventoryComponent.h"
 
 
@@ -154,11 +155,14 @@ void AContainer::CloseContainerInventory()
 	if (HasAuthority()) {
 		bPlayerIsUsing = false;
 
-		if (InventoryComponent->GetIsEmpty()) {
-			DisableInterestPointVFX();
-		}
-
 		Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);
+
+		if (InventoryComponent->GetIsEmpty()) {
+			InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			SetActorTickEnabled(false);
+
+			Multicast_DisableInterestPointVFX();
+		}
 	}
 	else {
 		Server_CloseContainerInventory();
@@ -170,14 +174,16 @@ void AContainer::Server_CloseContainerInventory_Implementation()
 	bPlayerIsUsing = false;
 
 	if (InventoryComponent->GetIsEmpty()) {
-		DisableInterestPointVFX();
+		Multicast_DisableInterestPointVFX();
 	}
 
 	Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);
 }
 
-void AContainer::DisableInterestPointVFX_Implementation()
+void AContainer::Multicast_DisableInterestPointVFX_Implementation()
 {
+	InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	SetActorTickEnabled(false);
 	InterestPointVFXComponent->Deactivate();
 }
 

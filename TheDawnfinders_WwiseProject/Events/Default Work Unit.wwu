@@ -174,7 +174,7 @@
 										<Action Name="" ID="{F829E627-C3AB-42FA-B8E3-F84294436043}" ShortID="272275366">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="PlayerDying" ID="{9B082705-8A69-457B-96E3-6FFA79B7C262}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="PlayerDying" ID="{6D3BE560-2F8F-4E19-81B9-8BFA00ED953B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -185,7 +185,7 @@
 										<Action Name="" ID="{E5330795-FE88-4D8E-B40D-3E5689D4DF2B}" ShortID="992410339">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="DownedFall" ID="{6D3BE560-2F8F-4E19-81B9-8BFA00ED953B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="DownedFall" ID="{9B082705-8A69-457B-96E3-6FFA79B7C262}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -459,6 +459,28 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_BasicEnemyIdle" ID="{7768EC0B-1A1B-4D3C-B52A-4C7E57F24E1A}">
+									<ChildrenList>
+										<Action Name="" ID="{5D3F144E-466B-4976-BD01-9DDA8A676EAA}" ShortID="997146832">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnemyIdle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_BasicEnnemyDamage" ID="{19C687C6-674D-4B92-AA82-DB12AEF39EAA}">
+									<ChildrenList>
+										<Action Name="" ID="{9291407C-63AD-4587-9553-9CACFA35FD69}" ShortID="927170490">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Zelote" ID="{E5068A34-6FF1-4BD2-9E4F-63E802603958}" ShortID="39062731">
@@ -474,9 +496,42 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_Zeloth_Idle" ID="{1C417AA4-9623-4CEF-9B9F-108CAE3CE3E0}">
+								<Event Name="Play_EliteEnemyAttack" ID="{0A2AB7AC-CAA7-4393-86CB-9AA86B809477}">
 									<ChildrenList>
-										<Action Name="" ID="{15F1D9AB-8387-4725-B9BA-FBD5CFD141EF}" ShortID="1012739282">
+										<Action Name="" ID="{301B4435-E992-4BBE-83BC-518A17895186}" ShortID="949449620">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyAttack" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemyDamage" ID="{5C155D14-FD6D-4922-8321-CE64DBBA3055}">
+									<ChildrenList>
+										<Action Name="" ID="{CA4FF709-BA01-4D83-8BA0-53B6C8BA615B}" ShortID="480465408">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyDamage" ID="{8CA4DD63-1E9F-4F01-9F4C-B0A5F922D862}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemyDeath" ID="{C463D2A0-2397-4037-9823-BD10BD0CCF08}">
+									<ChildrenList>
+										<Action Name="" ID="{C805F82F-850B-4811-BC91-BEF72F1E7237}" ShortID="459877909">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyDeath" ID="{A0F5BAB0-3AA1-4348-A2EE-9E38995F5F87}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Zeloth_Idle" ID="{A140CB47-6CC4-4206-8313-B2AE91D0B2CC}">
+									<ChildrenList>
+										<Action Name="" ID="{D573CFC4-F841-454A-9A18-7AA611B2AE97}" ShortID="219547562">
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="Zeloth_Idle" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>

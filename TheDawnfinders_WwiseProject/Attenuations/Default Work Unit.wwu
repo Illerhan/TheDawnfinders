@@ -5,7 +5,7 @@
 			<ChildrenList>
 				<Attenuation Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" ShortID="809595745">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="5000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="1000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -22,7 +22,7 @@
 											<SegmentShape>Log3</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>5000</XPos>
+											<XPos>1000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
