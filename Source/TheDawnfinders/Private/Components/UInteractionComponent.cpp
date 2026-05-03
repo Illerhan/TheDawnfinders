@@ -438,6 +438,8 @@ void UInteractionComponent::CancelInteraction()
 	else if (CurrentInteractible && bIsInInteraction) {
 		if (!GetOwner()->HasAuthority()) {
 			ServerStopInteract(CurrentInteractible, PlayerCharacter);
+
+			//Server_CancelInteraction();
 		}
 		else {
 			IInteractible::Execute_StopInteract(CurrentInteractible, PlayerCharacter);
