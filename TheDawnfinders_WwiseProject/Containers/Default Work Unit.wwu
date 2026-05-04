@@ -2028,7 +2028,7 @@
 										</RandomSequenceContainer>
 										<SwitchContainer Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" ShortID="45232914">
 											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -3776,7 +3776,7 @@
 										</SwitchContainer>
 										<SwitchContainer Name="Walk" ID="{21E82921-6313-441D-AFB6-F4E32C33F5C9}" ShortID="522960007">
 											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -6168,7 +6168,6 @@
 										<RandomSequenceContainer Name="Trap_Spike" ID="{5C515A8E-EBB8-440E-BA36-C960D5D172D2}" ShortID="738766460">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
-												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.75"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -7348,10 +7347,13 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Walk" ID="{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}" WorkUnitID="{54CFCB30-FDF3-4347-9714-3A93B48895D3}"/>
 										</Reference>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
@@ -8412,10 +8414,13 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="DefaultSwitchOrState">
+											<ObjectRef Name="Walk" ID="{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}" WorkUnitID="{54CFCB30-FDF3-4347-9714-3A93B48895D3}"/>
 										</Reference>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>

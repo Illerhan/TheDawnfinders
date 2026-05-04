@@ -44,7 +44,7 @@ void ANoiseTrap::DoTrapAction(AActor* OtherActor)
 		ANoise* NoiseObj = GetWorld()->SpawnActor<ANoise>(NoiseActor, GetActorLocation(), GetActorRotation());
 		NoiseObj->NoiseZone->SetSphereRadius(NoiseRange);
 		NoiseObj->NoiseOriginActor = OtherActor;
-
+		Multi_PlaySound();
 		SoundManagerInstance->MultiPlaySound(Sound, GetActorLocation(), 100, 1000, true);
 	}
 }
@@ -60,5 +60,5 @@ void ANoiseTrap::Multi_PlaySound_Implementation()
 			TrapSoundID = AK_INVALID_PLAYING_ID; // Reset
 		} 
 	}
-	TrapSoundID = UAkGameplayStatics::PostEvent(TrapSound,this,0,FOnAkPostEventCallback(), false);
+	TrapSoundID = UAkGameplayStatics::PostEventAtLocation(TrapSound,GetActorLocation(), GetActorRotation(),this);
 }

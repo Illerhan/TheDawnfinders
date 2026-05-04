@@ -91,4 +91,7 @@ public :
 	
 	UPROPERTY()
 	int32 MovableSoundID;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void Multi_StoppingSound();
 };

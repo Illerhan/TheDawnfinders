@@ -143,6 +143,17 @@ void AMovableObjects::DoReverseMovement()
 	}
 }
 
+void AMovableObjects::Multi_StoppingSound_Implementation()
+{
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
+	{
+		// Fade out rapide puis stop, plus propre qu'un stop brutal
+		AudioDevice->StopPlayingID(MovableSoundID, 200); 
+		MovableSoundID = AK_INVALID_PLAYING_ID;
+	}
+}
+
 void AMovableObjects::HandleProgress(float value)
 {
 	CurrentTimelineProgress = value;
@@ -155,12 +166,7 @@ void AMovableObjects::OnTimeLineFinished()
 {
 	ADoors* Door = Cast<ADoors>(this);
 	
-	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-	if (AudioDevice && MovableSoundID != AK_INVALID_PLAYING_ID)
-	{
-		AudioDevice->StopPlayingID(MovableSoundID);
-		MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
-	}    
+	Multi_StoppingSound();   
 	
 	if (Door)
 	{
@@ -212,3 +218,4 @@ float AMovableObjects::GetTimelineProgress() const
 {
 	return CurrentTimelineProgress;
 }
+
