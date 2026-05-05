@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{D4A7D531-D3D8-66C3-2373-3D121A38B959}",
+    "Hash": "{19A107D6-8895-78B4-6927-7621449D9C31}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -3264,7 +3264,7 @@
       "Name": "Play_BasicEnnemyAttack",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyAttack",
       "GUID": "{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "2.268",
       "DurationMax": "2.2866666",
@@ -3288,7 +3288,7 @@
       "Name": "Play_BasicEnnemyDamage",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyDamage",
       "GUID": "{19C687C6-674D-4B92-AA82-DB12AEF39EAA}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0"
@@ -3298,7 +3298,7 @@
       "Name": "Play_BasicEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyMovement",
       "GUID": "{7A700EAE-6822-45A5-83BE-3E233F0B7658}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.141",
       "DurationMax": "0.58625",
@@ -3308,7 +3308,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3427,7 +3428,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3562,7 +3564,7 @@
       "Name": "Play_DamagesHit",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DamagesHit",
       "GUID": "{45598661-4014-4A8F-8F12-54F5571E4B04}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.33138248",
       "DurationMax": "0.63769585",
@@ -3612,7 +3614,7 @@
       "Name": "Play_Door_Open",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Door_Open\\Play_Door_Open",
       "GUID": "{59886464-8070-4656-9022-3F409EBDB136}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "3.4906666",
       "DurationMax": "6.570667",
@@ -3668,7 +3670,7 @@
       "Name": "Play_DownedFall",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DownedFall",
       "GUID": "{3CEBC53F-0B31-4263-9FC1-9A1C88247837}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.92",
       "DurationMax": "1.4419583",
@@ -3819,7 +3821,7 @@
       "Name": "Play_EliteEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnnemyMovement",
       "GUID": "{5B3B3798-EA6C-4457-BFBC-BC5C2C8397C0}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.21572916",
       "DurationMax": "0.64",
@@ -3829,7 +3831,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3921,7 +3924,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -4059,7 +4063,7 @@
       "Name": "Play_Palanquin",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin",
       "GUID": "{1E496A64-4CBC-41A4-B229-85331E9AF8A7}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "Mixed",
       "DurationMin": "2.0906668",
       "DurationMax": "Infinite",
@@ -4101,7 +4105,7 @@
       "Name": "Play_Palanquin_Calling",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Calling",
       "GUID": "{E13A3AB4-13C7-4E84-AB3A-236E66FBADA2}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "3.776",
       "DurationMax": "7.498667",
@@ -4125,7 +4129,7 @@
       "Name": "Play_Palanquin_Empty",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Empty",
       "GUID": "{3AAA74F6-9777-420E-B7F7-AD3FCADE874F}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.3930833",
       "DurationMax": "1.76",
@@ -4161,7 +4165,7 @@
       "Name": "Play_Palanquin_Inventory",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Inventory",
       "GUID": "{51141BD2-9931-484B-B9B1-068B990E1478}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.6",
       "DurationMax": "2.1813333",
@@ -4185,7 +4189,7 @@
       "Name": "Play_Player_Hit",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Hit",
       "GUID": "{72F8C657-F4D5-43AE-BA92-FA8CCC4D96A1}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.87733334",
       "DurationMax": "1.0406667",
@@ -4353,7 +4357,7 @@
       "Name": "Play_Player_Shot",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Shot",
       "GUID": "{E465FB9E-0902-40E8-8591-BB910E234E9C}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.1433333",
       "DurationMax": "1.30025",
@@ -4389,7 +4393,7 @@
       "Name": "Play_PlayerDying",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PlayerDying",
       "GUID": "{A09AE17A-043E-484B-9250-F153AA03693E}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.7786667",
       "DurationMax": "1.6746666",
@@ -4425,7 +4429,7 @@
       "Name": "Play_PlayerHealing",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PlayerHealing",
       "GUID": "{9847524F-0D12-4234-A203-9F519678B99B}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -4441,7 +4445,7 @@
       "Name": "Play_Reanimate",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_Reanimate",
       "GUID": "{1F941602-69BE-4EAC-B85E-819BABAF8E49}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.76",
       "DurationMax": "2.5653334",
@@ -4462,7 +4466,7 @@
       "Name": "Play_SandRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_SandRun",
       "GUID": "{DFC7FA5B-FB30-4FB0-8247-427A0F263B59}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.2515",
       "DurationMax": "0.46291667",
@@ -5050,7 +5054,7 @@
       "Name": "Play_StoneRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_StoneRun",
       "GUID": "{D64A690B-9124-430F-9030-CBC62D0CF0B5}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.270375",
       "DurationMax": "0.39191666",
@@ -5151,7 +5155,7 @@
       "Name": "Play_Trap_Arrow",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Arrow",
       "GUID": "{A4C156ED-B4A6-4FDB-9599-B432254270C0}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.28",
       "DurationMax": "1.28",
@@ -5166,7 +5170,7 @@
       "Name": "Play_Trap_Bone",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Bone",
       "GUID": "{60DEC4B4-AB34-404E-B73F-E1189C903ADC}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.21333334",
       "DurationMax": "1.856",
@@ -5196,7 +5200,7 @@
       "Name": "Play_Trap_Pressure",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Pressure",
       "GUID": "{F3788B5F-91E9-4A0B-B02F-6FBB30DC22E6}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.88",
       "DurationMax": "0.96002084",
@@ -5214,7 +5218,7 @@
       "Name": "Play_Trap_Spike",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Spike",
       "GUID": "{7AF65B43-96F1-4FF6-8153-7840D75A9200}",
-      "MaxAttenuation": "750",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.4",
       "DurationMax": "0.4",
@@ -5232,7 +5236,7 @@
       "Name": "Play_WoodRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRun",
       "GUID": "{03312179-77EB-4776-8A94-4FC59248E924}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.26958334",
       "DurationMax": "0.35525",
@@ -5313,7 +5317,7 @@
       "Name": "Play_WoodRunCrack",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRunCrack",
       "GUID": "{04FB3B50-A801-408C-9E75-6ECFE28D48E5}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.26425",
       "DurationMax": "0.46291667",
@@ -5491,7 +5495,7 @@
       "Name": "Play_Zeloth_Idle",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_Zeloth_Idle",
       "GUID": "{A140CB47-6CC4-4206-8313-B2AE91D0B2CC}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -5597,6 +5601,6 @@
     ]
    }
   ],
-  "FileHash": "{202D5A13-B59B-D298-602B-8FF0E0233DDC}"
+  "FileHash": "{3A86B76C-22E4-2C9E-7B65-ED187D69CD7F}"
  }
 }

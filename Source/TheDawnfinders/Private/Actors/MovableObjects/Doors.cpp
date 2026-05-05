@@ -171,6 +171,7 @@ void ADoors::OpenPermanently()
     Timeline.PlayFromStart();
 }
 
+
 void ADoors::AddOpeningPlayer()
 {
     CurrentAddedSpeed += SpeedAddedPerAdditionalPlayer;
@@ -274,6 +275,8 @@ void ADoors::OnTimelineFinished()
 
         UE_LOG(LogTemp, Warning, TEXT("[SERVER] Door fully closed"));
     }
+    Multi_StoppingSound();
+    
 }
 
 void ADoors::CloseDoor()
