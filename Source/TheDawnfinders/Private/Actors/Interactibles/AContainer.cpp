@@ -157,11 +157,11 @@ void AContainer::CloseContainerInventory()
 
 		Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);
 
-		if (InventoryComponent->GetIsEmpty()) {
-			InteractCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			SetActorTickEnabled(false);
-
+		if (InventoryComponent->GetIsEmpty() && !bDestroyOnEmpty) {
 			Multicast_DisableInterestPointVFX();
+		}
+		else {
+			Destroy();
 		}
 	}
 	else {
@@ -173,8 +173,11 @@ void AContainer::Server_CloseContainerInventory_Implementation()
 {
 	bPlayerIsUsing = false;
 
-	if (InventoryComponent->GetIsEmpty()) {
+	if (InventoryComponent->GetIsEmpty() && !bDestroyOnEmpty) {
 		Multicast_DisableInterestPointVFX();
+	}
+	else {
+		Destroy();
 	}
 
 	Player->Client_CloseInteractionUI(EInteractionUI::ContainerInventory, this);

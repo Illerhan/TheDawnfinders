@@ -8,6 +8,7 @@
 #include "Widgets/UEnemyWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Actors/Interactibles/AContainer.h"
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -322,6 +323,36 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
 }
 
 void ABaseEnemy::Die() {
+
+    FVector StartLocation = GetActorLocation();
+    FVector EndLocation = StartLocation + (FVector::DownVector * 2000);
+
+    FHitResult HitResult;
+    FCollisionQueryParams CollisionParams;
+    CollisionParams.AddIgnoredActor(this);
+
+    bool bHit = GetWorld()->LineTraceSingleByChannel(
+        HitResult,
+        StartLocation,
+        EndLocation,
+        ECC_Visibility, 
+        CollisionParams
+    );
+
+    // DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, 2.0f, 0, 2.0f);
+
+    if (bHit)
+    {
+        FVector SpawnLocation = HitResult.ImpactPoint + FVector(0, 0, 60);
+        FRotator SpawnRotation = FRotator();
+
+        FActorSpawnParameters SpawnParams;
+        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+        AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
+        Container->SetupLoot();
+    }
+
     Destroy();
 }
 
