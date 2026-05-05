@@ -52,6 +52,9 @@ protected :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
 	UStaticMesh* OpenedMesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
+	bool bDestroyOnEmpty;
+
 	UPROPERTY()
 	AAPlayerCharacter* Player;
 
