@@ -97,10 +97,16 @@ public :
 	UTexture2D* FirstIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString FirstIconTitle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString FirstIconText;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	UTexture2D* SecondIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString SecondIconTitle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString SecondIconText;
@@ -109,10 +115,16 @@ public :
 	UTexture2D* ThirdIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString ThirdIconTitle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString ThirdIconText;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	UTexture2D* FourthIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FString FourthIconTitle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString FourthIconText;
