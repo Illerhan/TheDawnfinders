@@ -58,6 +58,9 @@ public :
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USceneComponent* AttackCollisionPosRef;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TSubclassOf<AActor> ContainerToSpawn;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int DangerLevel;
