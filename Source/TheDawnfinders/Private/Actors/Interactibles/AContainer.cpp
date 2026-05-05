@@ -160,7 +160,7 @@ void AContainer::CloseContainerInventory()
 		if (InventoryComponent->GetIsEmpty() && !bDestroyOnEmpty) {
 			Multicast_DisableInterestPointVFX();
 		}
-		else {
+		else if(InventoryComponent->GetIsEmpty()) {
 			Destroy();
 		}
 	}
@@ -176,7 +176,7 @@ void AContainer::Server_CloseContainerInventory_Implementation()
 	if (InventoryComponent->GetIsEmpty() && !bDestroyOnEmpty) {
 		Multicast_DisableInterestPointVFX();
 	}
-	else {
+	else if(InventoryComponent->GetIsEmpty()) {
 		Destroy();
 	}
 
