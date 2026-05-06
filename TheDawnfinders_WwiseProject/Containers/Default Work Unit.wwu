@@ -200,6 +200,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="DownedHeartbeat" ID="{C130BEE8-49BB-491E-BD61-7A729C6153E8}" ShortID="835713572">
 									<PropertyList>
+										<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>

@@ -293,6 +293,8 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
+    if (bIsDead) return;
+
     CurrentHealth -= Quantity;
 
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
@@ -310,6 +312,8 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
+    if (bIsDead) return;
+
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
 
     CurrentHealth -= Quantity;
@@ -350,10 +354,11 @@ void ABaseEnemy::Die() {
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
-        Container->SetupLoot();
     }
 
-    Destroy();
+    MulticastPlayMontage_Implementation(DeathMontage, 1);
+
+    bIsDead = true;
 }
 
 
