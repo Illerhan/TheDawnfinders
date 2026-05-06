@@ -300,7 +300,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
         Die();
     }
 
-    DoHitEffect();
+    //DoHitEffect();
 }
 
 void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
@@ -319,7 +319,7 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
         Die();
     }
 
-    DoHitEffect();
+    //DoHitEffect();
 }
 
 void ABaseEnemy::Die() {
@@ -350,10 +350,11 @@ void ABaseEnemy::Die() {
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
-        Container->SetupLoot();
     }
 
-    Destroy();
+    MulticastPlayMontage_Implementation(DeathMontage, 1);
+
+    bIsDead = true;
 }
 
 
