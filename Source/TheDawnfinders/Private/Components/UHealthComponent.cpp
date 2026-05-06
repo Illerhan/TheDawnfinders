@@ -475,14 +475,23 @@ void UHealthComponent::Fallen()
 	IPlayerInterface::Execute_SetCurrentPlayerState(Owner, EPlayerState::Fallen, true);
 
 	FallenTimer = FallenDuration;
-	BreathSoundID = UAkGameplayStatics::PostEvent(FallenBreath,Owner,0,FOnAkPostEventCallback(), false);
-	
+	Client_HeartbeatSound(); 
 }
 
 void UHealthComponent::Client_HeartbeatSound_Implementation()
 {
-	HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen,GetOwner(),0,FOnAkPostEventCallback(), false);
+	APlayerController* LocalPC = GEngine->GetFirstLocalPlayerController(GetWorld());
+    
+	// On vérifie que ce composant appartient bien à ce Controller
+	// (Pour éviter que le Host n'entende le son du Client)
+	if (LocalPC && OwnerController == LocalPC)
+	{
+		// On poste sur le LocalPC. 
+		// Le joueur B n'a pas accès au LocalPC du joueur A, donc le son ne peut pas exister chez lui.
+		HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen, LocalPC, 0, FOnAkPostEventCallback(), false);
+	}
 }
+
 
 void UHealthComponent::FallenLoseHP(float DeltaTime)
 {
@@ -525,7 +534,7 @@ void UHealthComponent::Die()
 	if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
 	{
 		AudioDevice->StopPlayingID(HeartBeatSoundID);
-		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
+		HeartBeatSoundID = AK_INVALID_PLAYING_ID; // Reset
 	}
 	Multi_DieSound();
 }
