@@ -55,6 +55,9 @@ public :
 	
 	UFUNCTION(BlueprintCallable)
 	void Client_AddShopItemLocally(FItemInfos Item);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_RepairItem(int Cos);
 	
 
 	UFUNCTION()
