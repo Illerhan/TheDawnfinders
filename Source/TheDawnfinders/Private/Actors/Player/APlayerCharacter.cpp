@@ -587,12 +587,18 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FinalVector = Rotation.RotateVector(FinalVector);
 
     if (CurrentState == EPlayerState::None) {
-        float DotProd = CurrentRotationInput.Dot(CurrentPlayerInput);
+        FVector NormRotInput = CurrentRotationInput;
+        NormRotInput.Normalize();
+
+        FVector NormMoveInput = FinalVector;
+        NormMoveInput.Normalize();
+
+        float DotProd = NormRotInput.Dot(NormMoveInput);
         DotProd = 1 - FMath::Clamp(DotProd, 0, 1);
 
         if (!bIsForcingRotation) DotProd = 0;
 
-        AddMovementInput(FinalVector, PlayerConfig->WalkSpeed / 1500.f * (1 - 0.5 * DotProd), true);
+        AddMovementInput(FinalVector, FMath::Clamp(PlayerConfig->WalkSpeed / 1500.f, 0, PlayerConfig->WalkSpeed / 1500.f * (1-(1-PlayerConfig->SideWalkModifier) * DotProd)), true);
     }
 
     else if(CurrentState == EPlayerState::Running)
@@ -736,7 +742,7 @@ void AAPlayerCharacter::ActualiseRotation()
     PreviousPlayerInput.Normalize();
 
     if (!bIsForcingRotation && CurrentForcedRotationRatio > 0) {
-        CurrentForcedRotationRatio -= GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed;
+        CurrentForcedRotationRatio -= GetWorld()->GetDeltaSeconds() * PlayerConfig->NormalToForcedSpeed * 10.f;
         CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
 
         //Server_StopForceRotation(CurrentForcedRotationRatio);
@@ -752,7 +758,7 @@ void AAPlayerCharacter::ActualiseRotation()
     ItemComponent->ActualisePreviewThrow(CurrentRotationInput);
 
     FRotator NewRotation = FQuat::Slerp(MovementRotation.Quaternion(), CurrentForcedRotation.Quaternion(), CurrentForcedRotationRatio).Rotator();
-    if (CurrentPlayerInput.SquaredLength() < 0.1f && CurrentForcedRotation != FRotator(0, 0, 0)) NewRotation = CurrentForcedRotation;
+    if (CurrentPlayerInput.SquaredLength() < 0.2f && CurrentForcedRotation != FRotator(0, 0, 0)) NewRotation = CurrentForcedRotation;
     else if (!bIsForcingRotation && CurrentForcedRotationRatio <= 0) CurrentForcedRotation = FRotator(0, 0, 0);
 
     SetActorRotation(NewRotation);
@@ -770,7 +776,7 @@ void AAPlayerCharacter::ForceRotation(FVector Input)
     CurrentForcedRotationRatio = FMath::Clamp(CurrentForcedRotationRatio, 0, 1);
     bIsForcingRotation = true;
 
-    if (CurrentDir.SquaredLength() < 0.5f && Input.Length() > 0.9f)
+    if (Input.Length() > 0.05f)
         PreviousPlayerInput = FVector(-Input.X, -Input.Y, 0);
 
     float Length = Input.Length();

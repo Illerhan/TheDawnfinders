@@ -31,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	float CarrySpeed = 250.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float SideWalkModifier = 0.35f;
+
 
 	// ---------- DODGE ----------
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodge")
