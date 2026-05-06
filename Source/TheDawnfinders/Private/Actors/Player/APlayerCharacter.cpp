@@ -586,8 +586,14 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     FRotator Rotation(0.0f, -45.0f, 0.0f);
     FinalVector = Rotation.RotateVector(FinalVector);
 
-    if(CurrentState == EPlayerState::None)
-        AddMovementInput(FinalVector, PlayerConfig->WalkSpeed / 1500.f, true);
+    if (CurrentState == EPlayerState::None) {
+        float DotProd = CurrentRotationInput.Dot(CurrentPlayerInput);
+        DotProd = 1 - FMath::Clamp(DotProd, 0, 1);
+
+        if (!bIsForcingRotation) DotProd = 0;
+
+        AddMovementInput(FinalVector, PlayerConfig->WalkSpeed / 1500.f * (1 - 0.5 * DotProd), true);
+    }
 
     else if(CurrentState == EPlayerState::Running)
         AddMovementInput(FinalVector, PlayerConfig->RunSpeed / 1500.f, true);
