@@ -356,7 +356,7 @@ void ABaseEnemy::Die() {
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
     }
 
-    MulticastPlayMontage_Implementation(DeathMontage, 1);
+    MulticastPlayMontage(DeathMontage, 1);
 
     bIsDead = true;
 }
