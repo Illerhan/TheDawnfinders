@@ -293,6 +293,8 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
+    if (bIsDead) return;
+
     CurrentHealth -= Quantity;
 
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
@@ -300,7 +302,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
         Die();
     }
 
-    //DoHitEffect();
+    DoHitEffect();
 }
 
 void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
@@ -310,6 +312,8 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
+    if (bIsDead) return;
+
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
 
     CurrentHealth -= Quantity;
@@ -319,7 +323,7 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
         Die();
     }
 
-    //DoHitEffect();
+    DoHitEffect();
 }
 
 void ABaseEnemy::Die() {
