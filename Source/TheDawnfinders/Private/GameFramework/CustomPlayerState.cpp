@@ -235,6 +235,11 @@ void ACustomPlayerState::Client_AddShopItemLocally(FItemInfos Item)
 	OnShopItemsChange.Broadcast();
 }
 
+void ACustomPlayerState::Server_RepairItem_Implementation(int Cost)
+{
+	SavedGold -= Cost;
+}
+
 void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 {
 	Super::CopyProperties(PlayerState);

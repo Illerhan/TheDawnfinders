@@ -67,7 +67,7 @@ protected :
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UCanvasPanel* CanvasPanel;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite)
 	FInventorySlot CurrentData;
 
 	UPROPERTY(BlueprintReadWrite)
