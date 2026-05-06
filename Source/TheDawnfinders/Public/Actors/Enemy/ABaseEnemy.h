@@ -63,6 +63,9 @@ public :
 	TSubclassOf<AActor> ContainerToSpawn;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UAnimMontage* DeathMontage;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int DangerLevel;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -153,6 +156,9 @@ public :
 
 	UPROPERTY(BlueprintReadOnly)
 	bool IsInvincible;
+
+	UPROPERTY(BlueprintReadOnly, Replicated)
+	bool bIsDead;
 
 	UFUNCTION(BlueprintCallable)
 	void Die();
