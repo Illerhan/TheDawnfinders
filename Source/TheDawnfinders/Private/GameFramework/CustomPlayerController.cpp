@@ -130,7 +130,7 @@ void ACustomPlayerController::Tick(float DeltaTime)
 		Mule->CallCharges,
 		ChargesPercent,
 		Mule->CooldownTimer,
-		Mule->InventoryComponent->CurrentValue
+		Mule->InventoryComponent->CurrentValue + Mule->InventoryComponent->Gold
 	);
 	
 	if (bIsHolding)
