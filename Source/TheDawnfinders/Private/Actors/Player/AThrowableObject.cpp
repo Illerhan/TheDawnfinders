@@ -65,7 +65,7 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 		FCollisionShape::MakeSphere(EffectRange)
 	);
 
-	DrawDebugSphere(
+	/*DrawDebugSphere(
 		GetWorld(),
 		GetActorLocation(),
 		EffectRange,     
@@ -73,7 +73,7 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 		bHit ? FColor::Red : FColor::Green, 
 		false,        
 		2.0f            
-	);
+	);*/
 
 	Client_DoCollisionEffect();
 
@@ -106,6 +106,8 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 	Noise->bIsLoud = bIsLoud;
 	Noise->NoiseOriginActor = OriginActor;
 
+	if (bPlayVFXOnHit || destroyDelay > 0) return; 
+
 	AActor::Destroy();
 }
 
@@ -122,7 +124,7 @@ void AThrowableObject::Client_DoCollisionEffect_Implementation()
 		FCollisionShape::MakeSphere(EffectRange)
 	);
 
-	DrawDebugSphere(
+	/*DrawDebugSphere(
 		GetWorld(),
 		GetActorLocation(),
 		EffectRange,
@@ -130,7 +132,9 @@ void AThrowableObject::Client_DoCollisionEffect_Implementation()
 		bHit ? FColor::Red : FColor::Green,
 		false,
 		2.0f
-	);
+	);*/
+
+	if (bPlayVFXOnHit || destroyDelay > 0) return;
 
 	AActor::Destroy();
 }
