@@ -26,19 +26,23 @@ void ALever::DoPlayerAutoMove_Implementation(AAPlayerCharacter* Player)
 
 }
 
+void ALever::ActualiseNeededPlayerCount_Implementation()
+{
+}
+
 bool ALever::GetCanBeUsed_Implementation(AActor* Interactor)
 {
-    Super::GetCanBeUsed_Implementation(Interactor);
-
     if(bHasInteractAnim && NeededPlayerCount <= CurrentInteractActorCount)
         return false;
 
-    return bCanBeUsed;
+    return Super::GetCanBeUsed_Implementation(Interactor);
 }
 
 void ALever::Interact_Implementation(AActor* Interactor)
 {
     if (!bCanBeUsed || (LinkedObjects.Num() == 0 && LinkedToggleables.Num() == 0)) return;
+
+    ActualiseNeededPlayerCount();
 
     // We need to go to the lever first 
     if (bHasInteractAnim && CurrentInteractActorCount < NeededPlayerCount) {
