@@ -41,7 +41,6 @@ void ACustomGameMode::StartLevelTransition(FString MapName, int32 TargetPanel)
 			}
 		}
 	}
-	FString TravelURL = MapName + TEXT("?listen");
 	GetWorld()->ServerTravel(MapName);
 }
 
