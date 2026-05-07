@@ -309,6 +309,15 @@ void UItemComponent::UseConsumable()
 		case EConsumableEffectType::Heal:
 			HealthComponent->Heal(EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
+			if (HealingSoundID)
+			{
+				FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+				if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+				{
+					AudioDevice->StopPlayingID(HealingSoundID);
+					HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+				}
+			}
 			break;
 
 		case EConsumableEffectType::Inhale:

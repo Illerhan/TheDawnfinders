@@ -678,7 +678,7 @@ void UHealthComponent::Client_PlayHeal_Implementation()
 			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
 		}
 	}
-	HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
+	//HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
 }
 
 void UHealthComponent::Multi_DieSound_Implementation()
