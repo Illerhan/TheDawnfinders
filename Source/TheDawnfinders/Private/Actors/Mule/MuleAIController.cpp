@@ -13,6 +13,8 @@ AMuleAIController::AMuleAIController()
 void AMuleAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	MyMule = Cast<AMule>(GetPawn());
 }
 
 void AMuleAIController::Tick(float DeltaTime)
@@ -21,21 +23,14 @@ void AMuleAIController::Tick(float DeltaTime)
     
 	if (!HasAuthority()) return;
 
-	AMule* MyMule = Cast<AMule>(GetPawn());
-	if (!MyMule) return;
-
-	// Décompte du cooldown entre les calls
 	MyMule->CooldownTimer -= DeltaTime;
 	MyMule->CooldownTimer = FMath::Clamp(MyMule->CooldownTimer, 0.f, MyMule->CallCooldown);
 
-	// On ne recharge QUE si on est à 0 charge
 	if (MyMule->CallCharges > 0) return;
 
-	// Décompte du timer de recharge
 	MyMule->ChargesTimer -= DeltaTime;
 	MyMule->ChargesTimer = FMath::Clamp(MyMule->ChargesTimer, 0.f, MyMule->ChargeCooldown);
 
-	// Timer écoulé → on redonne une charge
 	if (MyMule->ChargesTimer <= 0)
 	{
 		MyMule->CallCharges++;
@@ -47,15 +42,11 @@ void AMuleAIController::CallMule(AActor* Actor)
 {
 	if (!HasAuthority()) return;
 
-	AMule* MyMule = Cast<AMule>(GetPawn());
-	if (!MyMule) return;
-
 	if (MyMule->CooldownTimer > 0.f || MyMule->CallCharges <= 0) return;
 	
 	FVector CorrectedForward = Actor->GetActorForwardVector();
-    
 	FVector SpawnPosition = Actor->GetActorLocation() + (CorrectedForward * SpawnOffset);
-	    
+	
 	FTimerDelegate TimerDelegate;
 	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition);
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
@@ -67,6 +58,10 @@ void AMuleAIController::CallMule(AActor* Actor)
 	{
 		Multi_PlaySound();
 	}, 0.5f, false);
+
+	MyMule->SetActorLocation(SpawnPosition);
+	MyMule->PlayAppearVFX();
+
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
 
@@ -89,10 +84,9 @@ void AMuleAIController::Multi_PlaySound_Implementation(FVector Position)
 
 void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
 {
-	AMule* MyMule = Cast<AMule>(GetPawn());
-	if (!MyMule) return;
-	MyMule->SetActorLocation(SpawnPos);	
-	
+	MyMule->SetActorLocation(SpawnPos);
 	Multi_PlaySound(SpawnPos);
+
+	MyMule->DoAppearMovement();
 }
 

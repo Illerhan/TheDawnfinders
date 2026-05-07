@@ -24,6 +24,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayAppearVFX();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DoAppearMovement();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mule)
 	UBoxComponent* LootCollider;
 	
@@ -45,7 +51,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = Mule)
 	int32 MaxCharges = 1;
 
-	// State (évolue en runtime)
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = Mule)
 	int32 CallCharges = 1;
 
