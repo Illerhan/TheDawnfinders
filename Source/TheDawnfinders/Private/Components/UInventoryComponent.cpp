@@ -523,7 +523,9 @@ void UInventoryComponent::SortItems()
 void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
 {
 	Gold+= Amount;
+
 	OnRep_Gold();
+	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
 
