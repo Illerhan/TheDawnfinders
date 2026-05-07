@@ -33,6 +33,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoPlayerAutoMove(AAPlayerCharacter* Player);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ActualiseNeededPlayerCount();
+
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
 
 	virtual void Interact_Implementation(AActor* Interactor) override;

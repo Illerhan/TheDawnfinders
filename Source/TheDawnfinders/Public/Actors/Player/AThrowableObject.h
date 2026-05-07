@@ -74,6 +74,12 @@ public :
 	bool bDestroyOnHit = true;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bPlayVFXOnHit = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float destroyDelay = 0.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float DestroyDuration = 15.f;
 
 
