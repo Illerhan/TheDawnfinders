@@ -356,6 +356,10 @@ void ABaseEnemy::Die() {
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
     }
 
+    GetController()->StopMovement();
+    GetCharacterMovement()->MaxWalkSpeed = 0.0f;
+    SetLockRotation(true);
+
     MulticastPlayMontage(DeathMontage, 1);
 
     bIsDead = true;

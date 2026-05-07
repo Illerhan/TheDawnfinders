@@ -317,8 +317,10 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         ItemComponent->StopAim();
         ItemComponent->CancelReload();
         ItemComponent->StopMainAction();
+        InteractionComponent->CancelInteraction();
         StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
+        
         break;
 
     case EPlayerState::Immobilized :
@@ -371,6 +373,7 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
         ItemComponent->StopAim();
         ItemComponent->CancelReload();
         ItemComponent->StopMainAction();
+        InteractionComponent->CancelInteraction();
         StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
         break;

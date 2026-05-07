@@ -4,6 +4,7 @@
 #include "AIController.h"
 #include "AkAudioEvent.h"
 #include "Actors/Player/ANoise.h"
+#include "Actors/Mule/Mule.h"
 #include "MuleAIController.generated.h"
 
 UCLASS()
@@ -43,5 +44,9 @@ public:
 	
 	UPROPERTY()
 	int32 MuleTravelSoundID;
-	
+
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	AMule* MyMule;
 };

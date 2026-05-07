@@ -41,6 +41,14 @@ void AMule::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+void AMule::PlayAppearVFX_Implementation()
+{
+}
+
+void AMule::DoAppearMovement_Implementation()
+{
+}
+
 void AMule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
