@@ -76,7 +76,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 					WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
 					WorldHealthBar->Setup(3);
 				}
-				WorldHealthBar->TakeDamage(CurrentHealth / CurrentMaxHealth, true);
+				WorldHealthBar->TakeDamage(CurrentHealth / MaxHealth, true);
 			}
 		}
 	}
@@ -129,7 +129,7 @@ void UHealthComponent::ActualiseHurtPostProcess(float DeltaTime)
 		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, 0, DeltaTime * 1.f);
 	}
 	else {
-		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / CurrentMaxHealth)), DeltaTime * 1.f);
+		CurrentHurtVolumeStrength = FMath::Lerp(CurrentHurtVolumeStrength, FMath::Lerp(0, PostProcessMaxOpacity, 1 - ((CurrentHealth * 1.5f) / MaxHealth)), DeltaTime * 1.f);
 	}
 }
 
@@ -163,10 +163,10 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
 			WorldHealthBar->Setup(3);
 		}
-		WorldHealthBar->TakeDamage((CurrentHealth - quantity) / CurrentMaxHealth, bIsPoisoned);
+		WorldHealthBar->TakeDamage((CurrentHealth - quantity) / MaxHealth, bIsPoisoned);
 	}
 
-	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, CurrentMaxHealth);
+	CurrentHealth = FMath::Clamp(CurrentHealth - quantity, 0.0f, MaxHealth);
 
 	// If Client
 	if (!GetOwner()->HasAuthority()) 
@@ -202,7 +202,7 @@ void UHealthComponent::Heal(float quantity)
 			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
 			WorldHealthBar->Setup(3);
 		}
-		WorldHealthBar->Heal(CurrentHealth / CurrentMaxHealth);
+		WorldHealthBar->Heal(CurrentHealth / MaxHealth);
 	}
 
 	Client_PlayHeal();
@@ -274,13 +274,50 @@ void UHealthComponent::RequestMaxHealthChange(float Amount)
 	else
 	{
 		// Si on est le client, on demande poliment au serveur
-		ChangeCurrentMaxHealth_Implementation(Amount);
+		Server_ChangeCurrentMaxHealth_Implementation(Amount);
 	}
 }
 
-void UHealthComponent::ChangeCurrentMaxHealth_Implementation(float NewValue)
+float UHealthComponent::GetCurrentMaxHealth() 
 {
-	CurrentMaxHealth += NewValue;
+	return CurrentMaxHealth;
+}
+
+void UHealthComponent::ChangeCurrentMaxHealth(float reduction)
+{
+	CurrentHealth = CurrentHealth - ((CurrentHealth / CurrentMaxHealth) * reduction);
+	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
+	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
+
+	if (OwnerController && OwnerController->IsLocalPlayerController()) {
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->ActualiseCurse(CurrentMaxHealth / MaxHealth);
+	}
+
+
+	if (!GetOwner()->HasAuthority())
+	{
+		Server_ChangeCurrentMaxHealth(reduction);
+		LocalChangeHealth();
+		return;
+	}
+
+	ServerChangeHealth(CurrentHealth);
+}
+
+void UHealthComponent::Server_ChangeCurrentMaxHealth_Implementation(float reduction)
+{
+	CurrentHealth = CurrentHealth - ((CurrentHealth / CurrentMaxHealth) * reduction);
+	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
+	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
+
+	ServerChangeHealth(CurrentHealth);
+
+	/*CurrentHealth = CurrentHealth - ((CurrentHealth / CurrentMaxHealth) * reduction);
+	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
 	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
@@ -297,7 +334,7 @@ void UHealthComponent::ChangeCurrentMaxHealth_Implementation(float NewValue)
 	PSCustom->SetCurrentMaxHealth(CurrentMaxHealth);
 	CurseMaxHealth = PSCustom->GetCurrentMaxHealth();
 	LocalChangeHealth();
-	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("CurseMaxHealth = %f"), CurseMaxHealth);*/
 }
 
 #pragma endregion
@@ -388,7 +425,7 @@ void UHealthComponent::EndPoisonEffects_Implementation()
 			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
 			WorldHealthBar->Setup(3);
 		}
-		WorldHealthBar->TakeDamage((CurrentHealth) / CurrentMaxHealth, false);
+		WorldHealthBar->TakeDamage((CurrentHealth) / MaxHealth, false);
 	}
 
 	AActor* Owner = GetOwner();
@@ -588,8 +625,7 @@ void UHealthComponent::Multicast_DisplayFallen_Implementation()
 void UHealthComponent::Server_Revive_Implementation()
 {
 	if (!bIsFallen) return;
-	CurrentMaxHealth = CurseMaxHealth;
-	CurrentHealth = FMath::Clamp(MinReviveHP, MinReviveHP, CurseMaxHealth);
+	CurrentHealth = FMath::Clamp(MinReviveHP, MinReviveHP, CurrentMaxHealth);
 	ServerChangeHealth_Implementation(CurrentHealth);
 	bIsFallen = false;
 
