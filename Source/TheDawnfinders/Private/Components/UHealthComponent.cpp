@@ -107,10 +107,10 @@ void UHealthComponent::InitialiseComponent(float MaxHP, float MinMaxHP, float Re
 	// Gestion de la réplication de la santé
 	if (!GetOwner()->HasAuthority()) {
 		LocalChangeHealth();
-		ServerChangeHealth(CurrentHealth);
+		ServerChangeHealth(CurrentHealth, CurrentMaxHealth);
 	}
 	else {
-		ServerChangeHealth_Implementation(CurrentHealth);
+		ServerChangeHealth_Implementation(CurrentHealth, CurrentMaxHealth);
 	}
 }
 
@@ -180,7 +180,7 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			Fallen();
 		}
 
-		ServerChangeHealth(CurrentHealth);
+		ServerChangeHealth(CurrentHealth, CurrentMaxHealth);
 	}
 }
 
@@ -216,7 +216,7 @@ void UHealthComponent::Heal(float quantity)
 	};
 
 	// If server
-	ServerChangeHealth_Implementation(CurrentHealth);
+	ServerChangeHealth_Implementation(CurrentHealth, CurrentMaxHealth);
 }
 
 void UHealthComponent::Server_Heal_Implementation(float quantity)
@@ -224,11 +224,11 @@ void UHealthComponent::Server_Heal_Implementation(float quantity)
 	CurrentHealth += quantity;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, CurrentMaxHealth);
 	
-	ServerChangeHealth_Implementation(CurrentHealth);
+	ServerChangeHealth_Implementation(CurrentHealth, CurrentMaxHealth);
 }
 
 // Called to actualize the player's infos for every other clients
-void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
+void UHealthComponent::ServerChangeHealth_Implementation(float newHealth, float newCurrentMaxHealth)
 {
 	AActor* Owner = GetOwner();
 	if (!Owner) return;
@@ -242,7 +242,7 @@ void UHealthComponent::ServerChangeHealth_Implementation(float newHealth)
 	if (!PC->PlayerState) return;
 
 	ACustomPlayerState* PSCustom = Cast<ACustomPlayerState>(PC->PlayerState);
-	PSCustom->ActualiseHealth(newHealth, CurrentMaxHealth, MaxHealth);
+	PSCustom->ActualiseHealth(newHealth, newCurrentMaxHealth, MaxHealth);
 }
 
 
@@ -289,14 +289,6 @@ void UHealthComponent::ChangeCurrentMaxHealth(float reduction)
 	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
 	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
 
-	if (OwnerController && OwnerController->IsLocalPlayerController()) {
-		if (!WorldHealthBar) {
-			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
-			WorldHealthBar->Setup(3);
-		}
-		WorldHealthBar->ActualiseCurse(CurrentMaxHealth / MaxHealth);
-	}
-
 
 	if (!GetOwner()->HasAuthority())
 	{
@@ -305,7 +297,7 @@ void UHealthComponent::ChangeCurrentMaxHealth(float reduction)
 		return;
 	}
 
-	ServerChangeHealth(CurrentHealth);
+	ServerChangeHealth(CurrentHealth, CurrentMaxHealth);
 }
 
 void UHealthComponent::Server_ChangeCurrentMaxHealth_Implementation(float reduction)
@@ -314,7 +306,7 @@ void UHealthComponent::Server_ChangeCurrentMaxHealth_Implementation(float reduct
 	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
 	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
 
-	ServerChangeHealth(CurrentHealth);
+	ServerChangeHealth(CurrentHealth, CurrentMaxHealth);
 
 	/*CurrentHealth = CurrentHealth - ((CurrentHealth / CurrentMaxHealth) * reduction);
 	CurrentMaxHealth = CurrentMaxHealth - ((reduction * 0.01f) * MaxHealth);
@@ -393,7 +385,7 @@ void UHealthComponent::ApplyCurse(float DeltaTime)
 		CurrentHealth = CurrentMaxHealth;
 	}
 
-	ServerChangeHealth_Implementation(CurrentHealth);
+	ServerChangeHealth_Implementation(CurrentHealth, CurrentMaxHealth);
 }
 
 #pragma endregion
@@ -626,7 +618,7 @@ void UHealthComponent::Server_Revive_Implementation()
 {
 	if (!bIsFallen) return;
 	CurrentHealth = FMath::Clamp(MinReviveHP, MinReviveHP, CurrentMaxHealth);
-	ServerChangeHealth_Implementation(CurrentHealth);
+	ServerChangeHealth_Implementation(CurrentHealth, CurrentMaxHealth);
 	bIsFallen = false;
 
 	if (OwnerController && OwnerController->IsLocalPlayerController() && bIsDead) {
