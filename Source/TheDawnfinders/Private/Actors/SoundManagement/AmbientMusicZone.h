@@ -20,7 +20,7 @@ public:
 	USoundBase* MusicCalmSound;
 
 	UPROPERTY(EditAnywhere, Category = "Audio")
-	USoundBase* MusicCombatSound;
+	TArray<USoundBase*> MusicCombatSounds;
 
 	UPROPERTY(EditAnywhere, Category = "Audio")
 	int32 Priority = 0;

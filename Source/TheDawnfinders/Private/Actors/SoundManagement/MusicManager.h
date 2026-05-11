@@ -28,7 +28,9 @@ public:
 	void ExitZone(AAmbientMusicZone* Zone);
 
 	// Appelé par les ennemis
+	UFUNCTION(BlueprintCallable)
 	void OnEnemyAggro();
+	UFUNCTION(BlueprintCallable)
 	void OnEnemyCalm();
 
 	// Appelé par l'objectif d'extraction
@@ -49,5 +51,5 @@ private:
 
 	void EvaluateState();
 	void ApplyState(EMusicState NewState);
-	void StopCurrent();
+	void StopCurrent(EMusicState NewState);
 };
