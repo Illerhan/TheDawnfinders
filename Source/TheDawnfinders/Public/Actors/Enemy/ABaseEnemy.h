@@ -119,6 +119,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UnstunEnemy();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PushEnemy(float Strength, FVector Direction);
+
 	
 // === SOUNDS ===
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
