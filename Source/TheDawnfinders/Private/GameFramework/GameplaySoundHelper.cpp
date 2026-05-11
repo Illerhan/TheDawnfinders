@@ -28,12 +28,8 @@ void UGameplaySoundHelper::PlaySoundNetworked(UObject* WorldContextObject, USoun
 		Manager = World->SpawnActor<ASoundManager>(ASoundManager::StaticClass(), Location, FRotator::ZeroRotator, Params);
 	}
 
-	// 3. Appel de la fonction réseau
 	if (Manager)
 	{
-		// Note: Si le client n'est pas le "Owner", l'appel Server peut échouer.
-		// En UE5, il est souvent préférable que le SoundManager appartienne au serveur 
-		// et qu'on utilise un Multicast déclenché par le serveur.
 		Manager->ServerPlaySound(Sound, Location, Loudness, Range, bNeedNoise);
 	}
 }
