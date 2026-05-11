@@ -569,6 +569,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Player_Lever" ID="{60FC232E-6E32-44FA-AC7C-524F024FF2AF}">
+							<ChildrenList>
+								<Action Name="" ID="{1B3F3EB2-2391-4C46-B6A7-56D4D68D9921}" ShortID="815926193">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Player_Lever" ID="{62C45CBA-2272-47C5-B9AC-91993C71AC08}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
