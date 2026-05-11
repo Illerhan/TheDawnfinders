@@ -696,7 +696,7 @@ void UItemComponent::DoAttackCollision()
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
+	//IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
@@ -800,8 +800,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	if (CritPercent < WeaponData->CriticalChance) {
 		FinalDamage *= 3;
 	}
+	FVector PushDir = Enemy->GetActorLocation() - GetOwner()->GetActorLocation();
+	PushDir.Normalize();
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+	Enemy->PushEnemy(CurrentWeaponData.EnemiesPushStrength, PushDir);
 }
 
 #pragma endregion

@@ -35,6 +35,8 @@ bool UQTEMashButtonWidget::PressButton()
 {
 	DoQTEStep();
 
+	PressButtonFeedback();
+
 	CurrentProgress += AddedProgressPerClick;
 	if (CurrentProgress >= QuantityToReach) {
 		ExitQTE();
