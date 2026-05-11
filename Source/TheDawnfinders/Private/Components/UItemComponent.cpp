@@ -800,8 +800,11 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	if (CritPercent < WeaponData->CriticalChance) {
 		FinalDamage *= 3;
 	}
+	FVector PushDir = Enemy->GetActorLocation() - GetOwner()->GetActorLocation();
+	PushDir.Normalize();
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+	Enemy->PushEnemy(CurrentWeaponData.EnemiesPushStrength, PushDir);
 }
 
 #pragma endregion

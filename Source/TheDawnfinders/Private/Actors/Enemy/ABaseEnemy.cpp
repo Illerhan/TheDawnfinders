@@ -13,6 +13,7 @@
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/EnemyRegistry.h"
+#include "GameFramework/RootMotionSource.h"
 
 
 ABaseEnemy::ABaseEnemy()
@@ -405,4 +406,50 @@ void ABaseEnemy::FadeOut_Implementation()
 bool ABaseEnemy::GetIsDisplayed_Implementation()
 {
     return IsDisplayed;
+}
+
+void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
+{
+    /* UCharacterMovementComponent* CMC = GetCharacterMovement();
+    if (!CMC) return;
+
+    // Tout couper
+    if (AAIController* AIC = Cast<AAIController>(GetController()))
+        if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
+            PFC->SetActive(false); // empêche le re-dispatch de RequestedVelocity
+
+    CMC->StopMovementImmediately();
+    CMC->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);
+    //CMC->RemoveRootMotionSourceByName(FName("Knockback"));
+
+    // LOG pour vérifier ce qui est appliqué
+    UE_LOG(LogTemp, Warning, TEXT("Force appliquée : %s | HasAnimRM : %d"),
+        *(Direction * Strength).ToString(),
+        GetMesh()->GetAnimInstance()->RootMotionMode == ERootMotionMode::RootMotionFromEverything);
+
+    TSharedPtr<FRootMotionSource_ConstantForce> KnockbackSource =
+        MakeShared<FRootMotionSource_ConstantForce>();
+    KnockbackSource->InstanceName = FName("Knockback");
+    KnockbackSource->AccumulateMode = ERootMotionAccumulateMode::Override;
+    KnockbackSource->Priority = 999;
+    KnockbackSource->Force = Direction * Strength;
+    KnockbackSource->Duration = 0.3f;
+    KnockbackSource->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::SetVelocity;
+    KnockbackSource->FinishVelocityParams.SetVelocity = FVector::ZeroVector;
+
+    uint16 SourceID = CMC->ApplyRootMotionSource(KnockbackSource);
+
+    // LOG pour vérifier que la source est bien enregistrée
+    UE_LOG(LogTemp, Warning, TEXT("RootMotionSource ID : %d"), SourceID);
+    FTimerHandle TH;
+    GetWorldTimerManager().SetTimer(TH, [this]()
+        {
+            UCharacterMovementComponent* CMC = GetCharacterMovement();
+            if (CMC) CMC->RootMotionMode(ERootMotionMode::RootMotionFromEverything);
+
+
+            AAIController* AIC = Cast<AAIController>(GetController());
+            if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
+                PFC->SetActive(true);
+        }, 0.35f, false); */
 }
