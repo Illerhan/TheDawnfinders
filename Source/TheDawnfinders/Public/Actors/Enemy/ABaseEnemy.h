@@ -175,6 +175,9 @@ public :
 	UFUNCTION()
 	void EndInvincibilityFrames();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DoDeathDissolve();
+
 	FTimerHandle InvincibilityTimerHandle;
 
 	void ReceiveDamage_Implementation(float Quantity, AActor* Origin);
