@@ -360,6 +360,7 @@ void ABaseEnemy::Die() {
     GetController()->StopMovement();
     GetCharacterMovement()->MaxWalkSpeed = 0.0f;
     SetLockRotation(true);
+    DoDeathDissolve();
 
     MulticastPlayMontage(DeathMontage, 1);
 
@@ -385,6 +386,10 @@ void ABaseEnemy::StartInvincibilityFrames(float Duration)
 void ABaseEnemy::EndInvincibilityFrames()
 {
     IsInvincible = false;
+}
+
+void ABaseEnemy::DoDeathDissolve_Implementation()
+{
 }
 
 void ABaseEnemy::DoHitEffect_Implementation()
