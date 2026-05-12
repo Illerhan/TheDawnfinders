@@ -149,5 +149,5 @@ void ACustomPlayerController::BeginPlay()
 void ACustomPlayerController::Multi_PlayCallMule_Implementation()
 {
 	if (!CallMuleSoundID)
-		CallMuleSoundID = UAkGameplayStatics::PostEvent(CallMuleSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+		CallMuleSoundID = UAkGameplayStatics::PostEventAtLocation(CallMuleSound,GetOwner()->GetActorLocation(),GetOwner()->GetActorRotation(),GetWorld());
 }

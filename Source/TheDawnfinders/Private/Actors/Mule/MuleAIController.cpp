@@ -3,6 +3,7 @@
 #include "AkGameplayStatics.h"
 #include "Actors/Mule/Mule.h"
 #include "EntitySystem/MovieSceneEntitySystemRunner.h"
+#include "GameFramework/GameSession.h"
 #include "Net/UnrealNetwork.h"
 
 AMuleAIController::AMuleAIController()
@@ -15,6 +16,7 @@ void AMuleAIController::BeginPlay()
 	Super::BeginPlay();
 
 	MyMule = Cast<AMule>(GetPawn());
+	MyMule->SetOwner(GetWorld()->GetFirstPlayerController());
 }
 
 void AMuleAIController::Tick(float DeltaTime)
