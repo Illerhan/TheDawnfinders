@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{BA4B5E77-AF81-0135-4910-A213E8945CD8}",
+    "Hash": "{0EFA5046-A1FD-1B7F-9F95-D1393DE1F7A3}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -38,6 +38,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Start\\Palanquin_Start 1.wav",
       "CachePath": "53/{533FD854-14B0-90B3-2D44-94765E67ABE9}.wem"
+     },
+     {
+      "Id": "14744907",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-08.wav",
+      "CachePath": "AA/{AA7862DB-73F8-3BB9-EBBC-C165B45589F3}.wem"
      },
      {
       "Id": "19526635",
@@ -104,12 +112,28 @@
       "CachePath": "C0/{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem"
      },
      {
+      "Id": "47330493",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-04.wav",
+      "CachePath": "B0/{B094DA30-A9E4-F8F4-9C2F-62BEDE7D8A15}.wem"
+     },
+     {
       "Id": "48180023",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 11.wav",
       "CachePath": "74/{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem"
+     },
+     {
+      "Id": "48525552",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-12.wav",
+      "CachePath": "17/{175E24C3-F352-04BA-3027-8010F09827BC}.wem"
      },
      {
       "Id": "49676772",
@@ -214,6 +238,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Travel\\Palanquin_Travel.wav",
       "CachePath": "65/{65ACC4B8-FBFF-A75D-E099-7FF4F336B63E}.wem"
+     },
+     {
+      "Id": "87427668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-11.wav",
+      "CachePath": "F2/{F26A12E1-AA2E-1642-E6A8-F17F853673D4}.wem"
      },
      {
       "Id": "88711003",
@@ -384,6 +416,14 @@
       "CachePath": "A2/{A2D1FC3A-B12A-5764-E297-D3D2AB37D73E}.wem"
      },
      {
+      "Id": "137990748",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-03.wav",
+      "CachePath": "7C/{7C97718C-53E2-904C-208F-B3981DCED87A}.wem"
+     },
+     {
       "Id": "153202755",
       "Language": "SFX",
       "Streaming": "false",
@@ -422,6 +462,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 14.wav",
       "CachePath": "E7/{E7D2BA5C-F44D-1C14-2E24-9B5C967D01CF}.wem"
+     },
+     {
+      "Id": "175183491",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-08.wav",
+      "CachePath": "7B/{7B62ED21-B4EF-B9E4-1E2C-182FB60E6F5E}.wem"
      },
      {
       "Id": "179511228",
@@ -566,6 +614,14 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-05.wav",
       "CachePath": "4F/{4F5A61D3-185B-CCDD-BA74-8D68009839BB}.wem"
+     },
+     {
+      "Id": "224444272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-14.wav",
+      "CachePath": "1C/{1C5C007B-16AD-731A-62DD-42ADF616B7A5}.wem"
      },
      {
       "Id": "227490105",
@@ -728,6 +784,14 @@
       "CachePath": "E7/{E7C9B31A-1967-2E7C-CB49-753B71106B4D}.wem"
      },
      {
+      "Id": "272090056",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01.wav",
+      "CachePath": "8A/{8ABF681B-54F7-7CCA-BBAD-E5363A94B825}.wem"
+     },
+     {
       "Id": "272892538",
       "Language": "SFX",
       "Streaming": "false",
@@ -824,6 +888,14 @@
       "CachePath": "76/{76886311-F39A-3592-625C-745C2B47C0FB}.wem"
      },
      {
+      "Id": "292070805",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-07.wav",
+      "CachePath": "FC/{FC380BB3-9C4A-E178-7430-B26C355159FA}.wem"
+     },
+     {
       "Id": "292702579",
       "Language": "SFX",
       "Streaming": "false",
@@ -846,6 +918,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 7.wav",
       "CachePath": "25/{25870F01-D86A-7B3E-9388-1DBEC05F9827}.wem"
+     },
+     {
+      "Id": "297636677",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-10.wav",
+      "CachePath": "E4/{E4334002-5FCE-35FB-766A-1DB19D561C36}.wem"
      },
      {
       "Id": "298935059",
@@ -1136,6 +1216,14 @@
       "CachePath": "37/{37411D71-FC45-8C7E-2BD0-184F42B77E43}.wem"
      },
      {
+      "Id": "413985103",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-06.wav",
+      "CachePath": "E8/{E838AD24-A246-B49E-FD60-9860F26C09FD}.wem"
+     },
+     {
       "Id": "414287348",
       "Language": "SFX",
       "Streaming": "false",
@@ -1150,6 +1238,14 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 9.wav",
       "CachePath": "A9/{A96794E2-1C89-E3DB-CDC5-8556CE7B2A4B}.wem"
+     },
+     {
+      "Id": "416500249",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03.wav",
+      "CachePath": "32/{32E77858-5192-8A50-DF98-559B3726ABD0}.wem"
      },
      {
       "Id": "418296632",
@@ -1280,6 +1376,14 @@
       "CachePath": "FE/{FE1F1DE7-4DEE-AD78-5158-68DA17FB50F7}.wem"
      },
      {
+      "Id": "459524384",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-01.wav",
+      "CachePath": "6F/{6FBD92FF-7516-F854-53A7-EE9AB539CAA4}.wem"
+     },
+     {
       "Id": "466139768",
       "Language": "SFX",
       "Streaming": "false",
@@ -1400,6 +1504,14 @@
       "CachePath": "83/{833CE7FC-0943-6806-8AB9-E75E1C007D56}.wem"
      },
      {
+      "Id": "501785304",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05.wav",
+      "CachePath": "49/{497E86B4-16CF-A08A-4531-B206066ED0BF}.wem"
+     },
+     {
       "Id": "508197002",
       "Language": "SFX",
       "Streaming": "false",
@@ -1422,6 +1534,14 @@
       "Location": "Memory",
       "ShortName": "Zeloth_Damage1.wav",
       "CachePath": "97/{97CE4973-92A4-7CF3-EC4A-7C6930CA224A}.wem"
+     },
+     {
+      "Id": "514363049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-02.wav",
+      "CachePath": "9D/{9D5643E6-D2EB-B0D9-12B6-D32DF840CE37}.wem"
      },
      {
       "Id": "518699605",
@@ -1526,6 +1646,14 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 2.wav",
       "CachePath": "35/{35A69B06-33CC-37A4-FAD6-494142B4E863}.wem"
+     },
+     {
+      "Id": "554099311",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-04.wav",
+      "CachePath": "02/{0237D3E0-31EE-891A-B5F0-AC4D6A1AEE43}.wem"
      },
      {
       "Id": "557907878",
@@ -1768,6 +1896,14 @@
       "CachePath": "0F/{0FBD674C-283A-3D8C-46FA-AC577F0F4B3C}.wem"
      },
      {
+      "Id": "635601563",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-13.wav",
+      "CachePath": "F1/{F1A7ABAF-FC59-366C-9169-E5B50CAAF2F6}.wem"
+     },
+     {
       "Id": "642191154",
       "Language": "SFX",
       "Streaming": "false",
@@ -1928,6 +2064,14 @@
       "CachePath": "AA/{AA9A013E-9CAA-AC6B-7C0D-DFE9390692D9}.wem"
      },
      {
+      "Id": "709417727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-06.wav",
+      "CachePath": "58/{581500D0-6F4E-CBDF-0D2E-D8716B138B2C}.wem"
+     },
+     {
       "Id": "709591937",
       "Language": "SFX",
       "Streaming": "false",
@@ -1966,6 +2110,14 @@
       "Location": "Memory",
       "ShortName": "WoodWalk\\FootstepsWoodWalk 2.wav",
       "CachePath": "93/{9353CED2-9DE0-FA77-B6F2-D6B8478B91C4}.wem"
+     },
+     {
+      "Id": "720531683",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01.wav",
+      "CachePath": "C5/{C5915391-471C-DE41-70A3-17302054E07E}.wem"
      },
      {
       "Id": "720572330",
@@ -2086,6 +2238,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 10.wav",
       "CachePath": "9D/{9DA6F5BF-3BEB-520A-3CF9-CB5670BF3F93}.wem"
+     },
+     {
+      "Id": "749212117",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-10.wav",
+      "CachePath": "72/{728D3989-54FE-4F17-DE01-E5154E001939}.wem"
      },
      {
       "Id": "750155606",
@@ -2312,6 +2472,14 @@
       "CachePath": "CD/{CD35EF46-EEAD-4FEE-9F83-E70BDC3D2CEE}.wem"
      },
      {
+      "Id": "824635043",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-09.wav",
+      "CachePath": "EF/{EF3C9AA6-030F-5E5D-1CDC-8B3481348409}.wem"
+     },
+     {
       "Id": "838996729",
       "Language": "SFX",
       "Streaming": "false",
@@ -2504,6 +2672,14 @@
       "CachePath": "2D/{2DC67A34-5408-9051-75D0-64EB2F8203AA}.wem"
      },
      {
+      "Id": "900435312",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-13.wav",
+      "CachePath": "19/{197C41BF-1058-8F07-0D29-F14AA0831974}.wem"
+     },
+     {
       "Id": "900624370",
       "Language": "SFX",
       "Streaming": "false",
@@ -2670,6 +2846,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 12.wav",
       "CachePath": "2E/{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem"
+     },
+     {
+      "Id": "958557321",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-02.wav",
+      "CachePath": "1F/{1F14F9CE-A982-E2DA-8170-D3A825571C13}.wem"
      },
      {
       "Id": "959804820",
@@ -3056,12 +3240,28 @@
       "CachePath": "9D/{9D65CAE7-B7C9-3695-5226-D2472E11D328}.wem"
      },
      {
+      "Id": "1054362147",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06.wav",
+      "CachePath": "27/{27AF5CF0-E89B-A65F-9995-0F1BB00CAC66}.wem"
+     },
+     {
       "Id": "1055218331",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 10.wav",
       "CachePath": "58/{58D6D272-8362-C9E4-2BF5-514E83DBCE45}.wem"
+     },
+     {
+      "Id": "1069593655",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02.wav",
+      "CachePath": "85/{85CBBD52-2B16-20CC-C069-D0C47002946E}.wem"
      }
     ],
     "Plugins": {
@@ -3109,6 +3309,18 @@
      ]
     },
     "Events": [
+     {
+      "Id": "1274660444",
+      "Name": "Key_Lock",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Key_Lock",
+      "GUID": "{3760A833-6010-4321-9D33-8D3450FA9562}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "1069593655"
+       }
+      ]
+     },
      {
       "Id": "1139538480",
       "Name": "Play_AMB_Crackle",
@@ -3542,6 +3754,35 @@
           "Id": "1051819540"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "2257418509",
+      "Name": "Play_Close_Map",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Close_Map",
+      "GUID": "{57C52CBB-F5E9-4022-99C9-55922135CB89}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.68133336",
+      "DurationMax": "1.1293334",
+      "MediaRefs": [
+       {
+        "Id": "137990748"
+       },
+       {
+        "Id": "224444272"
+       },
+       {
+        "Id": "292070805"
+       },
+       {
+        "Id": "459524384"
+       },
+       {
+        "Id": "635601563"
+       },
+       {
+        "Id": "824635043"
        }
       ]
      },
@@ -4015,6 +4256,90 @@
       ]
      },
      {
+      "Id": "739133775",
+      "Name": "Play_Key_Lock_Negative_Feedback",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Play_Key_Lock_Negative_Feedback",
+      "GUID": "{26F0DBCA-888F-4281-911F-8B49E32A2124}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.057166666",
+      "DurationMax": "0.086333334",
+      "MediaRefs": [
+       {
+        "Id": "87427668"
+       },
+       {
+        "Id": "175183491"
+       },
+       {
+        "Id": "413985103"
+       },
+       {
+        "Id": "554099311"
+       },
+       {
+        "Id": "749212117"
+       },
+       {
+        "Id": "958557321"
+       }
+      ]
+     },
+     {
+      "Id": "3580144315",
+      "Name": "Play_Key_Lock_Positive_Feedback",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Play_Key_Lock_Positive_Feedback",
+      "GUID": "{2A80A909-996B-4FC6-B913-459F141C973B}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.392",
+      "DurationMax": "0.588",
+      "MediaRefs": [
+       {
+        "Id": "14744907"
+       },
+       {
+        "Id": "47330493"
+       },
+       {
+        "Id": "48525552"
+       },
+       {
+        "Id": "297636677"
+       },
+       {
+        "Id": "514363049"
+       },
+       {
+        "Id": "709417727"
+       },
+       {
+        "Id": "900435312"
+       }
+      ]
+     },
+     {
+      "Id": "2079076761",
+      "Name": "Play_Open_Map",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Open_Map",
+      "GUID": "{13A05205-CEBF-4764-9F51-AFC96527E8FA}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0826666",
+      "DurationMax": "1.568",
+      "MediaRefs": [
+       {
+        "Id": "416500249"
+       },
+       {
+        "Id": "501785304"
+       },
+       {
+        "Id": "720531683"
+       },
+       {
+        "Id": "1054362147"
+       }
+      ]
+     },
+     {
       "Id": "3459422151",
       "Name": "Play_OutOfBreath",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_OutOfBreath",
@@ -4278,6 +4603,15 @@
         "Id": "901440669"
        }
       ]
+     },
+     {
+      "Id": "368431676",
+      "Name": "Play_Player_Lever",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Lever",
+      "GUID": "{60FC232E-6E32-44FA-AC7C-524F024FF2AF}",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "3881217501",
@@ -5535,6 +5869,18 @@
         "Id": "997463245"
        }
       ]
+     },
+     {
+      "Id": "2400787128",
+      "Name": "Turn_Crank",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Turn_Crank\\Turn_Crank",
+      "GUID": "{C6712A36-8AFA-4924-97CF-C1268B8E3DD8}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "272090056"
+       }
+      ]
      }
     ],
     "Busses": [
@@ -5601,6 +5947,6 @@
     ]
    }
   ],
-  "FileHash": "{5C653F22-57CD-0C05-A403-B751B242E7B4}"
+  "FileHash": "{ACA2BD41-83DE-BDD6-2A14-0F8273CDB23F}"
  }
 }
