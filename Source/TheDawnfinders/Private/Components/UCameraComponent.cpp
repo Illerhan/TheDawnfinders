@@ -19,7 +19,6 @@ void UPlayerCameraComponent::BeginPlay()
 	}
 	else bIsInitialised = false;
 
-
 	Super::BeginPlay();
 }
 
