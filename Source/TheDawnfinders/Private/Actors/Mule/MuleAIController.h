@@ -24,9 +24,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Mule)
 	void CallMule(AActor* Actor);
 	
-	UFUNCTION(NetMulticast, Unreliable)
-	void Multi_PlaySound(FVector Position = FVector::ZeroVector);
-	
 	FTimerHandle TimerHandle_SpawnObject;
 	
 	UFUNCTION(BlueprintCallable, Category = Mule)
