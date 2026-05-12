@@ -392,6 +392,58 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Turn_Crank" ID="{878849E2-C26E-4995-9554-69FE66E57D8E}" ShortID="589820709">
+									<ChildrenList>
+										<Event Name="Turn_Crank" ID="{C6712A36-8AFA-4924-97CF-C1268B8E3DD8}">
+											<ChildrenList>
+												<Action Name="" ID="{CF3BB314-E004-43DF-B0E1-9C602713DFC6}" ShortID="58917527">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01" ID="{BD510415-108A-4190-8933-0D9020ED6B2B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Key_Lock" ID="{52A22D2A-CC5F-45CE-8144-A1300511463C}" ShortID="63083133">
+									<ChildrenList>
+										<Event Name="Play_Key_Lock_Positive_Feedback" ID="{2A80A909-996B-4FC6-B913-459F141C973B}">
+											<ChildrenList>
+												<Action Name="" ID="{23407126-1A1D-4262-9CFC-67BE30C1B0B2}" ShortID="545055799">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Key_Lock_Positive_Feedback" ID="{422BC58E-A4C3-4B17-B43A-861341237D44}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_Key_Lock_Negative_Feedback" ID="{26F0DBCA-888F-4281-911F-8B49E32A2124}">
+											<ChildrenList>
+												<Action Name="" ID="{2AC4A555-70E9-4EAC-83C0-8E0F457772B2}" ShortID="205173884">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Key_Lock_Negative_Feedback" ID="{DCF0158B-FF0E-4DBE-A9A6-ACD4FA6603E4}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Key_Lock" ID="{3760A833-6010-4321-9D33-8D3450FA9562}">
+											<ChildrenList>
+												<Action Name="" ID="{5EF26BD2-6052-4079-8564-86B67F0DE379}" ShortID="332333773">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02" ID="{115A7183-AA9D-4854-97A1-C7D077EA0128}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
@@ -544,7 +596,36 @@
 						</Folder>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="UI" ID="{F2239936-8B8E-489A-8195-56F9145207A6}" ShortID="138649347"/>
+				<Folder Name="UI" ID="{F2239936-8B8E-489A-8195-56F9145207A6}" ShortID="138649347">
+					<ChildrenList>
+						<Folder Name="Map" ID="{55B7CE96-DAEE-4D28-894A-E13A5BEAC1E8}" ShortID="618191728">
+							<ChildrenList>
+								<Event Name="Play_Close_Map" ID="{57C52CBB-F5E9-4022-99C9-55922135CB89}">
+									<ChildrenList>
+										<Action Name="" ID="{96C51BAD-DAD0-4E9F-9DF2-A2846E46AAAA}" ShortID="187577340">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Close_Map" ID="{5DBDC4F3-0491-4D4D-976A-B4671741EFC5}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Open_Map" ID="{13A05205-CEBF-4764-9F51-AFC96527E8FA}">
+									<ChildrenList>
+										<Action Name="" ID="{93B55DD2-8488-4E46-BBCE-7E842D97EBE4}" ShortID="557323368">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Open_Map" ID="{50243145-834B-4540-B027-7EE8CC326166}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
 				<Folder Name="Actions" ID="{42BC2EFF-7A51-4F93-B263-CCA4384A55EE}" ShortID="618588558">
 					<ChildrenList>
 						<Event Name="Play_Player_Interact" ID="{3C197960-F5E2-47A9-88DA-148106E989F3}">
