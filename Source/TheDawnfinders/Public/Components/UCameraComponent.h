@@ -33,7 +33,7 @@ public :
 	void UpdateDistance(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	void StartForcePosition(FVector NewPos, float Dist);
+	void StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride);
 
 	UFUNCTION(BlueprintCallable)
 	void StartAutomaticControl();
@@ -61,6 +61,12 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float CameraOffsetLerpSpeed;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ForcedDistanceLerpSpeed;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ForcedOffsetLerpSpeed;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enviro")
