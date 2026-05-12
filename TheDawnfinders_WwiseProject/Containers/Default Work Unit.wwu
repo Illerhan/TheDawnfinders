@@ -6240,6 +6240,378 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Turn_Crank" ID="{52A795C8-3FF9-4B3F-A990-594968FF8521}" ShortID="174842944">
+									<ChildrenList>
+										<Sound Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01" ID="{BD510415-108A-4190-8933-0D9020ED6B2B}" ShortID="918796622">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01" ID="{B642E406-618A-46DF-9128-91189E58B0EC}">
+													<Language>SFX</Language>
+													<AudioFile>Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="272090056"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01" ID="{B642E406-618A-46DF-9128-91189E58B0EC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Key_Lock" ID="{7ABD334E-666E-40E7-8BBD-4F62F6440FA0}" ShortID="547638317">
+									<ChildrenList>
+										<Sound Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02" ID="{115A7183-AA9D-4854-97A1-C7D077EA0128}" ShortID="248339063">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02" ID="{9639617E-7E8A-4220-A2F9-0074F2B515B6}">
+													<Language>SFX</Language>
+													<AudioFile>Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1069593655"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02" ID="{9639617E-7E8A-4220-A2F9-0074F2B515B6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Folder Name="Key_Lock_Feedback" ID="{01D2B410-04B7-4AF7-91B7-F53FEB6194F6}" ShortID="109553275">
+											<ChildrenList>
+												<RandomSequenceContainer Name="Key_Lock_Negative_Feedback" ID="{DCF0158B-FF0E-4DBE-A9A6-ACD4FA6603E4}" ShortID="716952863">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="KS_Foley_Padlock_1-02" ID="{8E5C9B95-C112-458B-B0CA-7972EF37E14E}" ShortID="293198771">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-02" ID="{70CCCD5F-8BD2-44FB-BCF2-A7A54153D57A}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="958557321"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-02" ID="{70CCCD5F-8BD2-44FB-BCF2-A7A54153D57A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Foley_Padlock_1-04" ID="{94E3E8C6-5EC5-4C67-8D16-D97ED8D250C5}" ShortID="813711015">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-04" ID="{F54A2874-01A9-4909-918E-D5F7712983E4}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="554099311"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-04" ID="{F54A2874-01A9-4909-918E-D5F7712983E4}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Foley_Padlock_1-06" ID="{56175117-ECF1-4189-9084-EFE99C95D912}" ShortID="1018355158">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-06" ID="{97EC4B29-BEF2-4295-9359-002908373F5A}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="413985103"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-06" ID="{97EC4B29-BEF2-4295-9359-002908373F5A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Foley_Padlock_1-08" ID="{00AD92AB-5CCC-4C0E-8CC0-7F452DEBC3FC}" ShortID="206359297">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-08" ID="{F88ED33C-0DCD-42DF-A56C-93BBC3891A34}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="175183491"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-08" ID="{F88ED33C-0DCD-42DF-A56C-93BBC3891A34}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Foley_Padlock_1-10" ID="{0D936CFA-C32B-471F-8829-F15CC7A63968}" ShortID="120586459">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-10" ID="{2D7E5040-88FF-471F-9CD2-B9697AF49027}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="749212117"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-10" ID="{2D7E5040-88FF-471F-9CD2-B9697AF49027}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Foley_Padlock_1-11" ID="{10F00999-7DDA-4D44-B292-096C09FD22F4}" ShortID="880673053">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Foley_Padlock_1-11" ID="{F666E836-7D86-4147-B9BE-6C8A1FA66644}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Foley_Padlock_1-11.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="87427668"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Foley_Padlock_1-11" ID="{F666E836-7D86-4147-B9BE-6C8A1FA66644}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Key_Lock_Positive_Feedback" ID="{422BC58E-A4C3-4B17-B43A-861341237D44}" ShortID="151522375">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="KS_Gun Foley_1-02" ID="{AA07EB93-382C-4A82-BE42-2356060F7DE4}" ShortID="807937806">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-02" ID="{64EFDD1A-A080-4668-BC0B-792C290D6ED8}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="514363049"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-02" ID="{64EFDD1A-A080-4668-BC0B-792C290D6ED8}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-04" ID="{8FFE5B23-9927-4D36-AAC8-C102A78D7F1A}" ShortID="645955885">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-04" ID="{E82F6ED5-216C-483B-A9CD-756D66B4028E}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="47330493"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-04" ID="{E82F6ED5-216C-483B-A9CD-756D66B4028E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-06" ID="{3F011C95-1D0D-4CF8-9FB2-4F367ADEED3A}" ShortID="85870877">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-06" ID="{10DF1452-42DD-4D41-9E14-571F6428633A}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="709417727"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-06" ID="{10DF1452-42DD-4D41-9E14-571F6428633A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-08" ID="{4C193943-19E5-41D1-967A-24DFFC37819E}" ShortID="631479901">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-08" ID="{974CA3EB-1194-4A42-81D5-48F635D939FD}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="14744907"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-08" ID="{974CA3EB-1194-4A42-81D5-48F635D939FD}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-10" ID="{17324B94-2FCD-4691-9795-8B4B68790AC4}" ShortID="131160147">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-10" ID="{F8F2A138-E5F7-4DD8-A268-9E6B40F705F0}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="297636677"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-10" ID="{F8F2A138-E5F7-4DD8-A268-9E6B40F705F0}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-12" ID="{04077598-7045-4E21-B4FF-1E9321F0CB87}" ShortID="719057239">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-12" ID="{A55A9AD2-3380-4D68-9829-B3E7C73F9025}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-12.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="48525552"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-12" ID="{A55A9AD2-3380-4D68-9829-B3E7C73F9025}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="KS_Gun Foley_1-13" ID="{8DC4E1B0-8B01-4029-B531-08401DA9F897}" ShortID="537554045">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="KS_Gun Foley_1-13" ID="{F2D20646-CEDD-4D43-995F-5B5285FFDA10}">
+																	<Language>SFX</Language>
+																	<AudioFile>KS_Gun Foley_1-13.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="900435312"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="KS_Gun Foley_1-13" ID="{F2D20646-CEDD-4D43-995F-5B5285FFDA10}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+											</ChildrenList>
+										</Folder>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">
@@ -9574,7 +9946,254 @@
 						</Folder>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="UI" ID="{4A4565C0-9048-47CE-99DA-47CBC3D1C3A1}" ShortID="237652625"/>
+				<Folder Name="UI" ID="{4A4565C0-9048-47CE-99DA-47CBC3D1C3A1}" ShortID="237652625">
+					<ChildrenList>
+						<RandomSequenceContainer Name="Open_Map" ID="{50243145-834B-4540-B027-7EE8CC326166}" ShortID="851345608">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01" ID="{3B56C8DD-6893-418C-8CD7-D1FF5987F0AD}" ShortID="543891577">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01" ID="{AE32344B-7C0B-4204-82F0-DF3CC0C537DB}">
+											<Language>SFX</Language>
+											<AudioFile>Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="720531683"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01" ID="{AE32344B-7C0B-4204-82F0-DF3CC0C537DB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03" ID="{3CA8BAC7-E4FD-4E39-BCAE-22ABFD87822B}" ShortID="181840645">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03" ID="{E21B9C31-DC44-4E40-A752-F143EC1FDA8C}">
+											<Language>SFX</Language>
+											<AudioFile>Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="416500249"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03" ID="{E21B9C31-DC44-4E40-A752-F143EC1FDA8C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05" ID="{0E91FA47-8C68-4169-84D6-45EB72B3802A}" ShortID="792486386">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05" ID="{DB8702F1-CD64-4733-B428-81D9CC5D7E97}">
+											<Language>SFX</Language>
+											<AudioFile>Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="501785304"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05" ID="{DB8702F1-CD64-4733-B428-81D9CC5D7E97}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06" ID="{929686D1-D6CC-4A05-92A4-1A26988AFA05}" ShortID="483492912">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06" ID="{F9BB286B-36CC-4A48-BCAD-404E9F687DB8}">
+											<Language>SFX</Language>
+											<AudioFile>Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1054362147"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06" ID="{F9BB286B-36CC-4A48-BCAD-404E9F687DB8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Close_Map" ID="{5DBDC4F3-0491-4D4D-976A-B4671741EFC5}" ShortID="403182401">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-01" ID="{10547631-A140-4261-A23C-C71F179D4E97}" ShortID="964354068">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-01" ID="{81918F2F-1585-4806-8546-DD5EF4779CC5}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="459524384"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-01" ID="{81918F2F-1585-4806-8546-DD5EF4779CC5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-03" ID="{F3DE65F8-2BD7-40AE-BBD4-98AF620353BB}" ShortID="565916919">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-03" ID="{D77630CC-BFD9-429D-9231-D94627D2067E}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="137990748"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-03" ID="{D77630CC-BFD9-429D-9231-D94627D2067E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-07" ID="{2CDDCDD1-27C7-4B8F-9136-C83FDC8F04E9}" ShortID="789424649">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-07" ID="{D1D67ED4-81CF-4338-86E3-F8A70ED3A538}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-07.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="292070805"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-07" ID="{D1D67ED4-81CF-4338-86E3-F8A70ED3A538}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-09" ID="{E9565E12-8DF5-4AE5-8AA3-DBDBEC8737E8}" ShortID="73259353">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-09" ID="{8FA389AF-255E-403F-852C-23F78F4AE779}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-09.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="824635043"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-09" ID="{8FA389AF-255E-403F-852C-23F78F4AE779}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-13" ID="{334C9D82-EF62-48FA-A04D-6AE88DA23BBA}" ShortID="124726352">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-13" ID="{132D14E0-DBA1-483C-B86F-7F846DBF6B1D}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-13.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="635601563"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-13" ID="{132D14E0-DBA1-483C-B86F-7F846DBF6B1D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-14" ID="{F39E985B-FDDC-4001-94A3-8244805E1A91}" ShortID="62378601">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-14" ID="{7B3CB575-C55C-4634-BDD4-5BACE089471F}">
+											<Language>SFX</Language>
+											<AudioFile>PAPRMisc_Multiple Paper Moving_B00M_ONE-14.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="224444272"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PAPRMisc_Multiple Paper Moving_B00M_ONE-14" ID="{7B3CB575-C55C-4634-BDD4-5BACE089471F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
 				<Folder Name="Ambiance" ID="{B01C6B88-1D1B-476B-9312-68D0DF5A3089}" ShortID="940732048">
 					<ChildrenList>
 						<RandomSequenceContainer Name="AMB_Crackle" ID="{8558CE58-5F8D-4336-A8AE-E1F552AACBA6}" ShortID="450947053">
