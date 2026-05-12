@@ -555,6 +555,8 @@ void UItemComponent::DoLightAttack()
 	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
 	if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) return;
 
+	CanCancelAttack = true;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
@@ -697,8 +699,9 @@ void UItemComponent::DoAttackCollision()
 	//IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
-
 	if (!WeaponData) return;
+
+	CanCancelAttack = false;
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
