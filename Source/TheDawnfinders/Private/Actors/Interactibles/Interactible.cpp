@@ -236,9 +236,9 @@ void AInteractibleObjects::BP_OnInteractionFinished_Implementation()
 	{
 		if (APawn* Pawn = PC->GetPawn())
 		{
-			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(Pawn))
+			if (AAPlayerCharacter* PlayerCharacter = Cast<AAPlayerCharacter>(PlayerTemp))
 			{
-				PlayerCharacter->InventoryComponent->RemoveCurrentItem();
+				PlayerCharacter->InventoryComponent->RemoveItem(NeededInteractItem, 1);
 			}
 		}
 	}
