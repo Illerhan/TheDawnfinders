@@ -237,6 +237,9 @@ protected :
 	UPROPERTY()
 	bool PressedHeavyAttackInput = false;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool CanCancelAttack = false;
+
 	UPROPERTY()
 	int ComboIndex = 0;
 
