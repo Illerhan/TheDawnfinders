@@ -889,6 +889,8 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
     bAutoLockIsActive = true;
 
+    CurrentAutoLockTarget = nullptr;
+
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
 
@@ -896,14 +898,15 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel1);
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
 
-    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(500.f));
+    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(300.f));
     if (!bHit) return;
 
-    float BestDist = 5000.f;
+    float BestDist = 300.f;
 
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
         if (!Actor || (!Actor->ActorHasTag("Enemy") && !Actor->ActorHasTag("Destructible"))) continue;
+        if (Actor->ActorHasTag("Enemy") && Cast<ABaseEnemy>(Actor)->bIsDead) continue;
 
         float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
         if (CurrentDist < BestDist) 
