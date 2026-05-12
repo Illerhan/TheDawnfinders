@@ -573,13 +573,9 @@ void UItemComponent::DoLightAttack()
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
-
-		if (++ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
-		{
-			ComboIndex = 0;
-		}
 	}
-	else
+
+	if (ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
 	{
 		ComboIndex = 0;
 	}
@@ -673,8 +669,10 @@ void UItemComponent::AttackAnimEnd()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None, false);
 
 	PlayerCharacter->SetPlayerAcceleration(4000);
-
 	PlayerCharacter->StopAutoLock();
+
+	ComboIndex++;
+	ResetComboCounterDelay(0.2f);
 
 	if (PressedAttackInput)
 	{
@@ -805,6 +803,13 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
 	Enemy->PushEnemy(CurrentWeaponData.EnemiesPushStrength, PushDir);
+}
+
+void UItemComponent::ResetComboCounterDelay_Implementation(float Delay)
+{
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment) return;
+
+	ComboIndex = 0;
 }
 
 #pragma endregion

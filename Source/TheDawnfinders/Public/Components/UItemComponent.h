@@ -111,6 +111,9 @@ public :
 	UFUNCTION(NetMulticast, Unreliable)
 	void Multi_PlayHitSound();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ResetComboCounterDelay(float Delay);
+
 
 // === RANGED WEAPON ===
 public :
