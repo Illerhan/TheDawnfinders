@@ -12,17 +12,20 @@ void UPlayerCameraComponent::BeginPlay()
 {
 	Player = Cast<AAPlayerCharacter>(GetOwner());
 
+	if (Player) {
+		bIsInitialised = true;
+
+		if(!Player->GetController()) bIsInitialised = false;
+	}
+	else bIsInitialised = false;
+
+
 	Super::BeginPlay();
 }
 
 void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	if (!bIsInitialised) return;
-
-	APawn* Pawn = Cast<APawn>(GetOwner());
-	if (!Pawn) return;
-	if (!Pawn->Controller) return;
-	if (!Pawn->Controller->IsLocalController()) return;
 
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
@@ -38,8 +41,9 @@ void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentTotalOffset);
 	}
 	else {
-		CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, ForcedDist, DeltaTime * CameraDistanceLerpSpeed);
-		CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, ForcedPosition - GetOwner()->GetActorLocation(), DeltaTime * CameraOffsetLerpSpeed);
+		CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, ForcedDist, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
+		CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, ForcedPosition - GetOwner()->GetActorLocation(), 
+			DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
 
 		SpringArmComponent->TargetArmLength = CurrentEnviroDist;
 		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentEnviroOffset);
@@ -94,10 +98,13 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 	CurrentTotalDist = CurrentEnviroDist + CurrentPlayerDist;
 }
 
-void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist)
+void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride)
 {
 	ForcedPosition = NewPos;
 	ForcedDist = Dist;
+
+	ForcedDistanceLerpSpeed = LerpDistSpeedOverride;
+	ForcedOffsetLerpSpeed = LerpOffsetSpeedOverride;
 
 	bIsOnForcedPosition = true;
 }
@@ -105,6 +112,9 @@ void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist)
 void UPlayerCameraComponent::StartAutomaticControl()
 {
 	bIsOnForcedPosition = false;
+
+	ForcedOffsetLerpSpeed = 0;
+	ForcedDistanceLerpSpeed = 0;
 }
 
 
