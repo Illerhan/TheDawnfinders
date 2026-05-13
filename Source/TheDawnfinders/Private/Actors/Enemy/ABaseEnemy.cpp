@@ -298,6 +298,11 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
 
     CurrentHealth -= Quantity;
 
+    if (!AIController->NearPlayers.Contains(Origin)) {
+        AIController->NearPlayers.Push(Origin);
+        AIController->PlayersAtRange.Push(Origin);
+    }
+
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
     if (CurrentHealth <= 0) {
         Die();
@@ -315,7 +320,10 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
 {
     if (bIsDead) return;
 
-    UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
+    if (!AIController->NearPlayers.Contains(Origin)) {
+        AIController->NearPlayers.Push(Origin);
+        AIController->PlayersAtRange.Push(Origin);
+    }
 
     CurrentHealth -= Quantity;
     HealthBarWidget->TakeDamage(CurrentHealth / EnemyData->Health, false);
