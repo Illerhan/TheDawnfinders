@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{5433A3D9-EE17-418D-A734-15E35FC207D8}",
+    "Hash": "{57E1EEAA-3C36-B9B7-77F2-D2EEA13FD916}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -589,7 +589,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "rollonev1.1-07.wav",
-      "CachePath": "DD/{DDD6EE5F-8240-3BAB-A1D3-DC9F0DE908FF}.wem"
+      "CachePath": "AD/{ADC39B84-61F6-2FA0-4F01-E661AF00A2AD}.wem"
      },
      {
       "Id": "215028229",
@@ -6071,6 +6071,6 @@
     ]
    }
   ],
-  "FileHash": "{34D69D09-E69E-EEF8-5C4C-088F14D28FF8}"
+  "FileHash": "{E627AAFA-5617-EAE6-511D-9DF084BF788F}"
  }
 }
