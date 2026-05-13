@@ -159,7 +159,7 @@
 										<Action Name="" ID="{BAF0E6EE-6A5C-4D66-8B22-E5F29CD5B2D1}" ShortID="1053595759">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BonesWalkOLD" ID="{99836FA1-249B-491F-9BF2-390440B694D9}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BonesWalk" ID="{C45EAE01-681F-4361-B2B5-FAA65E234FF0}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

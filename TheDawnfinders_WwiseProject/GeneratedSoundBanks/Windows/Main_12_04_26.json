@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{5AAEE51F-3101-48E4-906A-68DD9D23F71A}",
+    "Hash": "{DF6635F2-7251-CC23-F6C6-744554A9A29A}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -110,6 +110,14 @@
       "Location": "Memory",
       "ShortName": "Whispers4.wav",
       "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
+     },
+     {
+      "Id": "38165049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 3.wav",
+      "CachePath": "9C/{9CBAF77D-A52B-38CA-7557-2F3B4E365956}.wem"
      },
      {
       "Id": "39757222",
@@ -1368,6 +1376,14 @@
       "CachePath": "1B/{1B4E69AF-BF36-420D-F546-55139425E706}.wem"
      },
      {
+      "Id": "449139959",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 1.wav",
+      "CachePath": "25/{257BAAF3-B1CA-04AC-4F71-5C515FB73EAA}.wem"
+     },
+     {
       "Id": "456838804",
       "Language": "SFX",
       "Streaming": "false",
@@ -1606,6 +1622,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 8.wav",
       "CachePath": "12/{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem"
+     },
+     {
+      "Id": "524183346",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 4.wav",
+      "CachePath": "7D/{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem"
      },
      {
       "Id": "524728569",
@@ -2054,6 +2078,14 @@
       "Location": "Memory",
       "ShortName": "StoneWalk\\FootstepsStoneWalk 7.wav",
       "CachePath": "A7/{A764E688-9C88-F908-768A-FA5895C0525D}.wem"
+     },
+     {
+      "Id": "693285485",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 2.wav",
+      "CachePath": "A4/{A4E7CD03-D356-B86B-8935-48CE4AB3D27C}.wem"
      },
      {
       "Id": "698942852",
@@ -3794,10 +3826,145 @@
       "Name": "Play_BonesWalk",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_BonesWalk",
       "GUID": "{1FF1C13B-C137-460F-9621-18A3CB6497FD}",
-      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationMin": "0.6666667",
+      "DurationMax": "1.2666667",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "2108779966",
+         "GUID": "{25D7C510-1644-4777-8DE4-BA70074F99EB}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "712161704",
+         "GUID": "{751D432F-919D-4B6A-A71E-7027C898161C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "2655407367",
+         "GUID": "{60710B51-7497-4614-A804-783D970199A9}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "2108779966",
+         "GUID": "{25D7C510-1644-4777-8DE4-BA70074F99EB}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "712161704",
+         "GUID": "{751D432F-919D-4B6A-A71E-7027C898161C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1350496757",
+         "Id": "2655407367",
+         "GUID": "{60710B51-7497-4614-A804-783D970199A9}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38165049"
+         },
+         {
+          "Id": "449139959"
+         },
+         {
+          "Id": "524183346"
+         },
+         {
+          "Id": "693285485"
+         }
+        ]
+       }
+      ]
      },
      {
       "Id": "2257418509",
@@ -5880,6 +6047,6 @@
     ]
    }
   ],
-  "FileHash": "{3D6EEAC2-7F5D-C94B-1EC7-7D2BC3C250EB}"
+  "FileHash": "{48F843DC-7BA9-3739-7C36-337B73170FEF}"
  }
 }

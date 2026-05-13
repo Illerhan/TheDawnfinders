@@ -7514,6 +7514,26 @@
 														<ItemRef Name="BonesCrouch" ID="{7E2B5CD9-12A0-4FB0-814C-E75868BE3486}"/>
 													</GroupingBehavior>
 												</GroupingBehaviorList>
+												<GroupingList>
+													<Grouping>
+														<SwitchRef Name="Walk" ID="{25D7C510-1644-4777-8DE4-BA70074F99EB}"/>
+														<ItemList>
+															<ItemRef Name="BonesWalk" ID="{BB7301C7-C9A9-4EDC-80F6-4873472DC795}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Run" ID="{751D432F-919D-4B6A-A71E-7027C898161C}"/>
+														<ItemList>
+															<ItemRef Name="BonesRun" ID="{928648AA-E293-4BAA-8D68-4F650CE7272B}"/>
+														</ItemList>
+													</Grouping>
+													<Grouping>
+														<SwitchRef Name="Crouch" ID="{60710B51-7497-4614-A804-783D970199A9}"/>
+														<ItemList>
+															<ItemRef Name="BonesCrouch" ID="{7E2B5CD9-12A0-4FB0-814C-E75868BE3486}"/>
+														</ItemList>
+													</Grouping>
+												</GroupingList>
 											</GroupingInfo>
 										</SwitchContainer>
 									</ChildrenList>
