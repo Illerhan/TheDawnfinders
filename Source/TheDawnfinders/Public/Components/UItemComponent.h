@@ -111,6 +111,9 @@ public :
 	UFUNCTION(NetMulticast, Unreliable)
 	void Multi_PlayHitSound();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ResetComboCounterDelay(float Delay);
+
 
 // === RANGED WEAPON ===
 public :
@@ -233,6 +236,9 @@ protected :
 
 	UPROPERTY()
 	bool PressedHeavyAttackInput = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool CanCancelAttack = false;
 
 	UPROPERTY()
 	int ComboIndex = 0;

@@ -38,9 +38,17 @@ public :
 	UFUNCTION()
 	void OnRep_LanternChange();
 
+	virtual void OverrideWith(APlayerState* PlayerState) override;
 //  === SHOP ==
 	UPROPERTY(ReplicatedUsing = OnRep_ShopItems,Blueprintable,BlueprintReadWrite)
 	TArray<FItemInfos> ShopItems;
+	
+	UPROPERTY(Replicated,Blueprintable,BlueprintReadWrite)
+	TArray<FInventorySlot> InventoryItems;
+	
+	UPROPERTY(Replicated,Blueprintable,BlueprintReadWrite)
+	TArray<FInventorySlot> StashItems;
+	
 	
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShopItemsChange);
 	
@@ -55,6 +63,9 @@ public :
 	
 	UFUNCTION(BlueprintCallable)
 	void Client_AddShopItemLocally(FItemInfos Item);
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_RepairItem(int Cos);
 	
 
 	UFUNCTION()

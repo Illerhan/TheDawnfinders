@@ -46,15 +46,21 @@ public :
 	void Server_TakeDamage(float quantity, AActor* Origin);
 
 	UFUNCTION(Server, Reliable, BlueprintCallable)
-	void ServerChangeHealth(float newHealth);
+	void ServerChangeHealth(float newHealth, float newCurrentMaxHealth);
 
 	UFUNCTION(BlueprintCallable)
 	void LocalChangeHealth();
 
 	void RequestMaxHealthChange(float Amount);
 
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentMaxHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeCurrentMaxHealth(float reduction);
+
 	UFUNCTION(Server, Reliable, BlueprintCallable)
-	void ChangeCurrentMaxHealth(float newValue);
+	void Server_ChangeCurrentMaxHealth(float reduction);
 
 	UFUNCTION(BlueprintCallable)
 	void ActualiseHurtPostProcess(float DeltaTime);

@@ -8,10 +8,12 @@
 #include "Widgets/UEnemyWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Actors/Interactibles/AContainer.h"
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/EnemyRegistry.h"
+#include "GameFramework/RootMotionSource.h"
 
 
 ABaseEnemy::ABaseEnemy()
@@ -292,6 +294,8 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
+    if (bIsDead) return;
+
     CurrentHealth -= Quantity;
 
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
@@ -309,6 +313,8 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
+    if (bIsDead) return;
+
     UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
 
     CurrentHealth -= Quantity;
@@ -322,7 +328,43 @@ void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origi
 }
 
 void ABaseEnemy::Die() {
-    Destroy();
+
+    FVector StartLocation = GetActorLocation();
+    FVector EndLocation = StartLocation + (FVector::DownVector * 2000);
+
+    FHitResult HitResult;
+    FCollisionQueryParams CollisionParams;
+    CollisionParams.AddIgnoredActor(this);
+
+    bool bHit = GetWorld()->LineTraceSingleByChannel(
+        HitResult,
+        StartLocation,
+        EndLocation,
+        ECC_Visibility, 
+        CollisionParams
+    );
+
+    // DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, 2.0f, 0, 2.0f);
+
+    if (bHit)
+    {
+        FVector SpawnLocation = HitResult.ImpactPoint + FVector(0, 0, 60);
+        FRotator SpawnRotation = FRotator();
+
+        FActorSpawnParameters SpawnParams;
+        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+        AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
+    }
+
+    GetController()->StopMovement();
+    GetCharacterMovement()->MaxWalkSpeed = 0.0f;
+    SetLockRotation(true);
+    DoDeathDissolve();
+
+    MulticastPlayMontage(DeathMontage, 1);
+
+    bIsDead = true;
 }
 
 
@@ -346,6 +388,10 @@ void ABaseEnemy::EndInvincibilityFrames()
     IsInvincible = false;
 }
 
+void ABaseEnemy::DoDeathDissolve_Implementation()
+{
+}
+
 void ABaseEnemy::DoHitEffect_Implementation()
 {
 
@@ -365,4 +411,50 @@ void ABaseEnemy::FadeOut_Implementation()
 bool ABaseEnemy::GetIsDisplayed_Implementation()
 {
     return IsDisplayed;
+}
+
+void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
+{
+    /* UCharacterMovementComponent* CMC = GetCharacterMovement();
+    if (!CMC) return;
+
+    // Tout couper
+    if (AAIController* AIC = Cast<AAIController>(GetController()))
+        if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
+            PFC->SetActive(false); // empêche le re-dispatch de RequestedVelocity
+
+    CMC->StopMovementImmediately();
+    CMC->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);
+    //CMC->RemoveRootMotionSourceByName(FName("Knockback"));
+
+    // LOG pour vérifier ce qui est appliqué
+    UE_LOG(LogTemp, Warning, TEXT("Force appliquée : %s | HasAnimRM : %d"),
+        *(Direction * Strength).ToString(),
+        GetMesh()->GetAnimInstance()->RootMotionMode == ERootMotionMode::RootMotionFromEverything);
+
+    TSharedPtr<FRootMotionSource_ConstantForce> KnockbackSource =
+        MakeShared<FRootMotionSource_ConstantForce>();
+    KnockbackSource->InstanceName = FName("Knockback");
+    KnockbackSource->AccumulateMode = ERootMotionAccumulateMode::Override;
+    KnockbackSource->Priority = 999;
+    KnockbackSource->Force = Direction * Strength;
+    KnockbackSource->Duration = 0.3f;
+    KnockbackSource->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::SetVelocity;
+    KnockbackSource->FinishVelocityParams.SetVelocity = FVector::ZeroVector;
+
+    uint16 SourceID = CMC->ApplyRootMotionSource(KnockbackSource);
+
+    // LOG pour vérifier que la source est bien enregistrée
+    UE_LOG(LogTemp, Warning, TEXT("RootMotionSource ID : %d"), SourceID);
+    FTimerHandle TH;
+    GetWorldTimerManager().SetTimer(TH, [this]()
+        {
+            UCharacterMovementComponent* CMC = GetCharacterMovement();
+            if (CMC) CMC->RootMotionMode(ERootMotionMode::RootMotionFromEverything);
+
+
+            AAIController* AIC = Cast<AAIController>(GetController());
+            if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
+                PFC->SetActive(true);
+        }, 0.35f, false); */
 }

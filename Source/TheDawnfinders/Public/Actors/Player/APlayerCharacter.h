@@ -188,6 +188,7 @@ public:
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
 
+
 // === INTERACTIBLE INTERFACE ===
 public :
 	void SelectInteractible_Implementation(AActor* Interactor);

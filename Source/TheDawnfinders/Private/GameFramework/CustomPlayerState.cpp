@@ -214,6 +214,21 @@ void ACustomPlayerState::OnRep_LanternChange()
 	OnInfoChange.Broadcast();
 }
 
+void ACustomPlayerState::OverrideWith(APlayerState* PlayerState)
+{
+	Super::OverrideWith(PlayerState);
+	
+	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
+	{
+		ShopItems = NewPS->ShopItems;
+		SavedGold = NewPS->SavedGold;
+		bInSession=NewPS->bInSession;
+		PlayerCount = NewPS->PlayerCount;
+		InventoryItems = NewPS->InventoryItems;
+		StashItems = NewPS->StashItems;
+	}
+}
+
 void ACustomPlayerState::OnRep_ShopItems()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnRep_ShopItems: %d items, %d listeners"), 
@@ -235,6 +250,11 @@ void ACustomPlayerState::Client_AddShopItemLocally(FItemInfos Item)
 	OnShopItemsChange.Broadcast();
 }
 
+void ACustomPlayerState::Server_RepairItem_Implementation(int Cost)
+{
+	SavedGold -= Cost;
+}
+
 void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 {
 	Super::CopyProperties(PlayerState);
@@ -244,6 +264,8 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 		NewPS->SavedGold = SavedGold;
 		NewPS->bInSession = bInSession;
 		NewPS->PlayerCount = PlayerCount;
+		NewPS->StashItems = StashItems;
+		NewPS->InventoryItems = InventoryItems;
 	}
 	
 	

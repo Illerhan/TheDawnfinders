@@ -36,7 +36,7 @@ public :
 	void Multicast_ChangeStaticMesh();
 
 	UFUNCTION(NetMulticast, Reliable)
-	void DisableInterestPointVFX();
+	void Multicast_DisableInterestPointVFX();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DoPlayerAutoMove(AAPlayerCharacter* PlayerToMove);
@@ -51,6 +51,9 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
 	UStaticMesh* OpenedMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Container")
+	bool bDestroyOnEmpty;
 
 	UPROPERTY()
 	AAPlayerCharacter* Player;

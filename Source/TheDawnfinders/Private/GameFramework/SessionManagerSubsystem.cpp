@@ -16,13 +16,11 @@ void USessionManagerSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
         if (SessionInterface.IsValid())
         {
-            // Bind des callbacks de session standards
             SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &USessionManagerSubsystem::OnCreateSessionComplete);
             SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &USessionManagerSubsystem::OnSessionDestroyComplete);
             SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &USessionManagerSubsystem::OnFindSessionsComplete);
             SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &USessionManagerSubsystem::OnJoinSessionComplete);
             
-            // IMPORTANT: Callback pour les invitations Steam
             SessionInterface->OnSessionUserInviteAcceptedDelegates.AddUObject(this, &USessionManagerSubsystem::OnSessionUserInviteAccepted);
             SessionInterface->OnFindFriendSessionCompleteDelegates[0].AddUObject(this, &USessionManagerSubsystem::OnFindFriendSessionComplete);
             

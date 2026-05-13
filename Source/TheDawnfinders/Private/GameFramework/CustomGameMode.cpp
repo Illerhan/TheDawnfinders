@@ -1,6 +1,7 @@
 ﻿#include "GameFramework/CustomGameMode.h"
 
 #include "CustomPlayerController.h"
+#include "Actors/SoundManagement/MusicManager.h"
 #include "GameFramework/GameStateBase.h"
 #include "GameFramework/GICustom.h"
 
@@ -12,6 +13,13 @@ void ACustomGameMode::HandleSeamlessTravelPlayer(AController*& C)
 	{
 		CallWidgetUpdate();
 	}
+}
+
+void ACustomGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+	UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>();
+	if (MM) MM->ExtractionSound = ExtractionMusic;
 }
 
 void ACustomGameMode::StartLevelTransition(FString MapName, int32 TargetPanel)

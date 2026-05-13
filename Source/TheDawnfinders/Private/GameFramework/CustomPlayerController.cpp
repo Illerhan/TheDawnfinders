@@ -71,11 +71,10 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 		Noise->NoiseOriginActor = OwningPlayer;
 		Noise->SetIsConstant(true);
 		NoiseActor = Noise;
+		Multi_PlayCallMule();
 	}
 	NoiseActor->SetActorLocation(OwningPlayer->GetActorLocation());
-	
-	Multi_PlayCallMule();
-		
+
 	OwningPlayer->Execute_ShowProgress(OwningPlayer,HoldTimer);
 	if (HoldTimer <= 0.f)
 	{
@@ -130,7 +129,7 @@ void ACustomPlayerController::Tick(float DeltaTime)
 		Mule->CallCharges,
 		ChargesPercent,
 		Mule->CooldownTimer,
-		Mule->InventoryComponent->CurrentValue
+		Mule->InventoryComponent->CurrentValue + Mule->InventoryComponent->Gold
 	);
 	
 	if (bIsHolding)
@@ -148,6 +147,11 @@ void ACustomPlayerController::BeginPlay()
 
 void ACustomPlayerController::Multi_PlayCallMule_Implementation()
 {
-	if (!CallMuleSoundID)
-		CallMuleSoundID = UAkGameplayStatics::PostEvent(CallMuleSound,GetOwner(),0,FOnAkPostEventCallback(), false);
+	if (!IsLocalController()) return;
+    
+	if (CallMuleSoundID == AK_INVALID_PLAYING_ID)
+		CallMuleSoundID = UAkGameplayStatics::PostEvent(
+			CallMuleSound, GetOwner(), 0,
+			FOnAkPostEventCallback(), false
+		);
 }

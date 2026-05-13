@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{D90BD158-5999-35E3-1CE3-C4EBD2BCCC17}",
+    "Hash": "{0EFA5046-A1FD-1B7F-9F95-D1393DE1F7A3}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -38,6 +38,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Start\\Palanquin_Start 1.wav",
       "CachePath": "53/{533FD854-14B0-90B3-2D44-94765E67ABE9}.wem"
+     },
+     {
+      "Id": "14744907",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-08.wav",
+      "CachePath": "AA/{AA7862DB-73F8-3BB9-EBBC-C165B45589F3}.wem"
      },
      {
       "Id": "19526635",
@@ -104,12 +112,28 @@
       "CachePath": "C0/{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem"
      },
      {
+      "Id": "47330493",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-04.wav",
+      "CachePath": "B0/{B094DA30-A9E4-F8F4-9C2F-62BEDE7D8A15}.wem"
+     },
+     {
       "Id": "48180023",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 11.wav",
       "CachePath": "74/{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem"
+     },
+     {
+      "Id": "48525552",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-12.wav",
+      "CachePath": "17/{175E24C3-F352-04BA-3027-8010F09827BC}.wem"
      },
      {
       "Id": "49676772",
@@ -216,12 +240,28 @@
       "CachePath": "65/{65ACC4B8-FBFF-A75D-E099-7FF4F336B63E}.wem"
      },
      {
+      "Id": "87427668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-11.wav",
+      "CachePath": "F2/{F26A12E1-AA2E-1642-E6A8-F17F853673D4}.wem"
+     },
+     {
       "Id": "88711003",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Trap_Bone\\BoneMovement 6102_63_2.wav",
       "CachePath": "08/{0829947B-9B29-AF20-8B2B-53B55344F122}.wem"
+     },
+     {
+      "Id": "95402580",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Teeth Clack Steady-Neoverb_01-03.wav",
+      "CachePath": "49/{492A5908-AA7A-BA78-A7A0-43A8499A1D9D}.wem"
      },
      {
       "Id": "96992672",
@@ -238,6 +278,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 4.wav",
       "CachePath": "04/{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem"
+     },
+     {
+      "Id": "100764325",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 5.cm.cm_01.wav",
+      "CachePath": "49/{49BD5F15-C4BA-FAB7-3E6A-09CE8F794149}.wem"
      },
      {
       "Id": "101177060",
@@ -352,6 +400,30 @@
       "CachePath": "10/{10EFA247-1F9C-93F1-20BB-C5BD81BA5063}.wem"
      },
      {
+      "Id": "125951352",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.cm_01.wav",
+      "CachePath": "DB/{DBB5B5CF-8F64-11FF-9898-F460CDEC068B}.wem"
+     },
+     {
+      "Id": "131189783",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Damage5.wav",
+      "CachePath": "A2/{A2D1FC3A-B12A-5764-E297-D3D2AB37D73E}.wem"
+     },
+     {
+      "Id": "137990748",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-03.wav",
+      "CachePath": "7C/{7C97718C-53E2-904C-208F-B3981DCED87A}.wem"
+     },
+     {
       "Id": "153202755",
       "Language": "SFX",
       "Streaming": "false",
@@ -392,20 +464,28 @@
       "CachePath": "E7/{E7D2BA5C-F44D-1C14-2E24-9B5C967D01CF}.wem"
      },
      {
+      "Id": "175183491",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-08.wav",
+      "CachePath": "7B/{7B62ED21-B4EF-B9E4-1E2C-182FB60E6F5E}.wem"
+     },
+     {
+      "Id": "179511228",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 6_02-01.wav",
+      "CachePath": "05/{0580E73D-754C-956D-B6BF-EF38F925C26D}.wem"
+     },
+     {
       "Id": "185441988",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 6.wav",
       "CachePath": "19/{19DACCBB-24D0-4E44-27F1-C1EC3AF8C918}.wem"
-     },
-     {
-      "Id": "185520975",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Lockpick 1.wav",
-      "CachePath": "D2/{D2C757CD-756F-6961-EB3D-C734BFC3265B}.wem"
      },
      {
       "Id": "188388410",
@@ -534,6 +614,14 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-05.wav",
       "CachePath": "4F/{4F5A61D3-185B-CCDD-BA74-8D68009839BB}.wem"
+     },
+     {
+      "Id": "224444272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-14.wav",
+      "CachePath": "1C/{1C5C007B-16AD-731A-62DD-42ADF616B7A5}.wem"
      },
      {
       "Id": "227490105",
@@ -696,12 +784,12 @@
       "CachePath": "E7/{E7C9B31A-1967-2E7C-CB49-753B71106B4D}.wem"
      },
      {
-      "Id": "271959307",
+      "Id": "272090056",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_Mining 6.wav",
-      "CachePath": "78/{78D1F6A3-4F72-23E1-B75D-2F8EB50678DC}.wem"
+      "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01.wav",
+      "CachePath": "8A/{8ABF681B-54F7-7CCA-BBAD-E5363A94B825}.wem"
      },
      {
       "Id": "272892538",
@@ -800,20 +888,20 @@
       "CachePath": "76/{76886311-F39A-3592-625C-745C2B47C0FB}.wem"
      },
      {
+      "Id": "292070805",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-07.wav",
+      "CachePath": "FC/{FC380BB3-9C4A-E178-7430-B26C355159FA}.wem"
+     },
+     {
       "Id": "292702579",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandWalk\\FootstepsSandWalk 11.wav",
       "CachePath": "17/{176E7DB0-26F6-5442-D36C-96B5F745C1B3}.wem"
-     },
-     {
-      "Id": "293707658",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_LockpickSuccess 1.wav",
-      "CachePath": "FE/{FE6E1AED-7784-2C5F-5271-39F47728550B}.wem"
      },
      {
       "Id": "293991378",
@@ -832,20 +920,20 @@
       "CachePath": "25/{25870F01-D86A-7B3E-9388-1DBEC05F9827}.wem"
      },
      {
+      "Id": "297636677",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-10.wav",
+      "CachePath": "E4/{E4334002-5FCE-35FB-766A-1DB19D561C36}.wem"
+     },
+     {
       "Id": "298935059",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "WoodWalkCrack\\FootstepsWoodCrackWalk 13.wav",
       "CachePath": "20/{201C47D9-234A-F378-42BD-4B6B813F4893}.wem"
-     },
-     {
-      "Id": "299078393",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BandageStage 1.wav",
-      "CachePath": "31/{31A88A5F-C94B-C5DA-49F4-CB9CD4E870D5}.wem"
      },
      {
       "Id": "301671005",
@@ -904,6 +992,14 @@
       "CachePath": "CB/{CB29EDFD-8FF4-5B40-9922-0CB08CB814D6}.wem"
      },
      {
+      "Id": "332510263",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Attack2.wav",
+      "CachePath": "0E/{0EA8525E-E0D2-EABF-E1B8-31F8B9EC3825}.wem"
+     },
+     {
       "Id": "337621557",
       "Language": "SFX",
       "Streaming": "false",
@@ -926,14 +1022,6 @@
       "Location": "Memory",
       "ShortName": "Door_Open2.wav",
       "CachePath": "9B/{9B02ADC2-F534-DCAC-008D-0834040724CA}.wem"
-     },
-     {
-      "Id": "351847385",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_LockpickFailure 4.wav",
-      "CachePath": "CE/{CE42C18E-E974-F609-074D-53CBCF517771}.wem"
      },
      {
       "Id": "353854774",
@@ -976,6 +1064,14 @@
       "CachePath": "D2/{D2972DC9-56F4-225D-3106-F75FA7E7C48B}.wem"
      },
      {
+      "Id": "371682056",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PlayerHealing\\PlayerHealing 2.wav",
+      "CachePath": "CA/{CA52A191-9079-0EBA-657F-B2F04FD62321}.wem"
+     },
+     {
       "Id": "374653091",
       "Language": "SFX",
       "Streaming": "false",
@@ -992,12 +1088,12 @@
       "CachePath": "CB/{CB2CB22A-CFD7-A4A8-A0D3-B34E42152201}.wem"
      },
      {
-      "Id": "384725469",
+      "Id": "379426620",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_LockpickFailure 2.wav",
-      "CachePath": "A9/{A98EEC4F-00C6-27F4-47DE-2147822435F3}.wem"
+      "ShortName": "Zeloth_Damage3.wav",
+      "CachePath": "7D/{7DB8FAF6-8BCA-6AEF-FC0C-3D872FF2671E}.wem"
      },
      {
       "Id": "385107083",
@@ -1006,6 +1102,14 @@
       "Location": "Memory",
       "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 5.wav",
       "CachePath": "7E/{7E89FEC0-8C8C-7B78-33E8-FE1E6AB754AE}.wem"
+     },
+     {
+      "Id": "386172729",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Damage7.wav",
+      "CachePath": "A7/{A7420737-805A-ACF8-654F-E35CEC8BAB36}.wem"
      },
      {
       "Id": "386978507",
@@ -1046,14 +1150,6 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 2.wav",
       "CachePath": "F1/{F1B206AB-478D-6704-C193-042DD5F6F2BF}.wem"
-     },
-     {
-      "Id": "399410711",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Mining 1.wav",
-      "CachePath": "2A/{2A83B5FB-328D-DC7F-01D7-F764077D608C}.wem"
      },
      {
       "Id": "399958177",
@@ -1120,12 +1216,36 @@
       "CachePath": "37/{37411D71-FC45-8C7E-2BD0-184F42B77E43}.wem"
      },
      {
+      "Id": "413985103",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-06.wav",
+      "CachePath": "E8/{E838AD24-A246-B49E-FD60-9860F26C09FD}.wem"
+     },
+     {
+      "Id": "414287348",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Damage4.wav",
+      "CachePath": "40/{40D2ACC2-D697-3EB9-5181-0C71C05B7D26}.wem"
+     },
+     {
       "Id": "414622692",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 9.wav",
       "CachePath": "A9/{A96794E2-1C89-E3DB-CDC5-8556CE7B2A4B}.wem"
+     },
+     {
+      "Id": "416500249",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-03.wav",
+      "CachePath": "32/{32E77858-5192-8A50-DF98-559B3726ABD0}.wem"
      },
      {
       "Id": "418296632",
@@ -1232,14 +1352,6 @@
       "CachePath": "1B/{1B4E69AF-BF36-420D-F546-55139425E706}.wem"
      },
      {
-      "Id": "455549455",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Mining 2.wav",
-      "CachePath": "89/{89CE6A03-B0D8-EEAA-D693-5F3A6E4EB0F8}.wem"
-     },
-     {
       "Id": "456838804",
       "Language": "SFX",
       "Streaming": "false",
@@ -1262,6 +1374,14 @@
       "Location": "Memory",
       "ShortName": "Trap_Spike\\Trap_Spike 1.wav",
       "CachePath": "FE/{FE1F1DE7-4DEE-AD78-5158-68DA17FB50F7}.wem"
+     },
+     {
+      "Id": "459524384",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-01.wav",
+      "CachePath": "6F/{6FBD92FF-7516-F854-53A7-EE9AB539CAA4}.wem"
      },
      {
       "Id": "466139768",
@@ -1352,6 +1472,14 @@
       "CachePath": "B5/{B586E743-DD94-F7F3-8812-86BF31C6F60C}.wem"
      },
      {
+      "Id": "494935842",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.dup2.cm_02.wav",
+      "CachePath": "D3/{D3AF3A9B-4860-12D5-B219-0B4D79634B6A}.wem"
+     },
+     {
       "Id": "496024437",
       "Language": "SFX",
       "Streaming": "false",
@@ -1376,6 +1504,14 @@
       "CachePath": "83/{833CE7FC-0943-6806-8AB9-E75E1C007D56}.wem"
      },
      {
+      "Id": "501785304",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-05.wav",
+      "CachePath": "49/{497E86B4-16CF-A08A-4531-B206066ED0BF}.wem"
+     },
+     {
       "Id": "508197002",
       "Language": "SFX",
       "Streaming": "false",
@@ -1390,6 +1526,22 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 3.wav",
       "CachePath": "4A/{4A210E0D-ED17-1DBC-1C43-B73AD007D1D0}.wem"
+     },
+     {
+      "Id": "509189635",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Damage1.wav",
+      "CachePath": "97/{97CE4973-92A4-7CF3-EC4A-7C6930CA224A}.wem"
+     },
+     {
+      "Id": "514363049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-02.wav",
+      "CachePath": "9D/{9D5643E6-D2EB-B0D9-12B6-D32DF840CE37}.wem"
      },
      {
       "Id": "518699605",
@@ -1440,12 +1592,12 @@
       "CachePath": "12/{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem"
      },
      {
-      "Id": "525925205",
+      "Id": "533200097",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "BandageStage 3.wav",
-      "CachePath": "A5/{A5B78451-76F7-BFC0-22F4-A9F8628C7346}.wem"
+      "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav",
+      "CachePath": "B4/{B4F82F77-5EC3-6408-F34D-3DAF216B7632}.wem"
      },
      {
       "Id": "533567679",
@@ -1494,6 +1646,14 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 2.wav",
       "CachePath": "35/{35A69B06-33CC-37A4-FAD6-494142B4E863}.wem"
+     },
+     {
+      "Id": "554099311",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-04.wav",
+      "CachePath": "02/{0237D3E0-31EE-891A-B5F0-AC4D6A1AEE43}.wem"
      },
      {
       "Id": "557907878",
@@ -1606,6 +1766,14 @@
       "Location": "Memory",
       "ShortName": "WoodWalkCrack\\FootstepsWoodCrackWalk 2.wav",
       "CachePath": "C6/{C6A46BD7-68E8-B16C-8A36-3FDB34A85B65}.wem"
+     },
+     {
+      "Id": "592439048",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Attack3.wav",
+      "CachePath": "D2/{D233837B-E3A1-C47B-D135-1E5FF3022C01}.wem"
      },
      {
       "Id": "592561856",
@@ -1728,6 +1896,14 @@
       "CachePath": "0F/{0FBD674C-283A-3D8C-46FA-AC577F0F4B3C}.wem"
      },
      {
+      "Id": "635601563",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-13.wav",
+      "CachePath": "F1/{F1A7ABAF-FC59-366C-9169-E5B50CAAF2F6}.wem"
+     },
+     {
       "Id": "642191154",
       "Language": "SFX",
       "Streaming": "false",
@@ -1758,6 +1934,14 @@
       "Location": "Memory",
       "ShortName": "DownedBreath\\DownedBreath 7.wav",
       "CachePath": "F1/{F1FA4EFB-DD86-7907-FB55-DC16E29D1A0D}.wem"
+     },
+     {
+      "Id": "653504529",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Attack4.wav",
+      "CachePath": "79/{79C7B946-0ABF-BA00-FB66-4B09C0A61A47}.wem"
      },
      {
       "Id": "657732204",
@@ -1814,22 +1998,6 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Inventory\\Palanquin_Inventory 1.wav",
       "CachePath": "9B/{9B6319D1-8256-F008-A933-6DB296905AE8}.wem"
-     },
-     {
-      "Id": "670561692",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_LockpickFailure 3.wav",
-      "CachePath": "01/{010EE620-1567-5D2C-CB72-FB7537DE1FD3}.wem"
-     },
-     {
-      "Id": "670677848",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_DropItem 1.wav",
-      "CachePath": "57/{5701D495-1F62-D655-C569-2DBD5F9CA021}.wem"
      },
      {
       "Id": "675358201",
@@ -1896,6 +2064,14 @@
       "CachePath": "AA/{AA9A013E-9CAA-AC6B-7C0D-DFE9390692D9}.wem"
      },
      {
+      "Id": "709417727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-06.wav",
+      "CachePath": "58/{581500D0-6F4E-CBDF-0D2E-D8716B138B2C}.wem"
+     },
+     {
       "Id": "709591937",
       "Language": "SFX",
       "Streaming": "false",
@@ -1920,12 +2096,28 @@
       "CachePath": "37/{3706C7B3-7919-4DC2-9947-551C33B03825}.wem"
      },
      {
+      "Id": "714180368",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav",
+      "CachePath": "66/{6610083E-2ED3-D4B8-E9EF-A163821CAEEC}.wem"
+     },
+     {
       "Id": "718580457",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "WoodWalk\\FootstepsWoodWalk 2.wav",
       "CachePath": "93/{9353CED2-9DE0-FA77-B6F2-D6B8478B91C4}.wem"
+     },
+     {
+      "Id": "720531683",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-01.wav",
+      "CachePath": "C5/{C5915391-471C-DE41-70A3-17302054E07E}.wem"
      },
      {
       "Id": "720572330",
@@ -2000,12 +2192,12 @@
       "CachePath": "85/{851F0CF9-5A85-ACF4-CF5D-6827E06C2934}.wem"
      },
      {
-      "Id": "735204856",
+      "Id": "735165908",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_LockpickFailure 1.wav",
-      "CachePath": "F9/{F9800BDA-92AB-0AA9-DE36-C0923C797D32}.wem"
+      "ShortName": "Zeloth_Damage2.wav",
+      "CachePath": "59/{59BBB670-D3B6-D2F7-77DD-1CDA40575018}.wem"
      },
      {
       "Id": "736053400",
@@ -2014,6 +2206,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 22.wav",
       "CachePath": "60/{6024A7CF-7B8D-CDD2-936A-D24FC16B320B}.wem"
+     },
+     {
+      "Id": "742162032",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1.wav",
+      "CachePath": "BB/{BBE31932-2CFD-8C90-DEED-A05F02C4F0B6}.wem"
      },
      {
       "Id": "742875802",
@@ -2038,6 +2238,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 10.wav",
       "CachePath": "9D/{9DA6F5BF-3BEB-520A-3CF9-CB5670BF3F93}.wem"
+     },
+     {
+      "Id": "749212117",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-10.wav",
+      "CachePath": "72/{728D3989-54FE-4F17-DE01-E5154E001939}.wem"
      },
      {
       "Id": "750155606",
@@ -2070,14 +2278,6 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-14.wav",
       "CachePath": "4C/{4C04747A-6A98-37A9-3277-E9C5C8301CAB}.wem"
-     },
-     {
-      "Id": "759676142",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_DropItem 2.wav",
-      "CachePath": "BC/{BCE7F766-08EE-14F1-861A-1D5063170445}.wem"
      },
      {
       "Id": "761029887",
@@ -2120,14 +2320,6 @@
       "CachePath": "DE/{DE93439F-B5BD-BA38-5173-E75623028D60}.wem"
      },
      {
-      "Id": "768239917",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Mining 4.wav",
-      "CachePath": "ED/{ED89C709-476B-956F-6DAD-09282870258E}.wem"
-     },
-     {
       "Id": "769516079",
       "Language": "SFX",
       "Streaming": "false",
@@ -2158,14 +2350,6 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 11.wav",
       "CachePath": "0E/{0E4C1154-3167-E7B8-E6E3-CF04BBC3C751}.wem"
-     },
-     {
-      "Id": "788717451",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Lockpick 3.wav",
-      "CachePath": "EA/{EA576B78-D91D-C7FC-F2F0-DBB4D3EC5C79}.wem"
      },
      {
       "Id": "791895633",
@@ -2224,20 +2408,20 @@
       "CachePath": "DF/{DFA5F475-79AD-3E36-78D3-38E18F36F160}.wem"
      },
      {
+      "Id": "801827168",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Zombie Dystopia_3-03.wav",
+      "CachePath": "3F/{3FADD20D-8A3B-7661-427A-76424314EFE5}.wem"
+     },
+     {
       "Id": "802603666",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Trap_Arrow\\Trap_Arrow.wav",
       "CachePath": "45/{4530C46D-526F-8549-13F5-BB5BEAAD0D26}.wem"
-     },
-     {
-      "Id": "802637485",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Lockpick 2.wav",
-      "CachePath": "9E/{9ED93E22-B148-ECA8-E5B4-E753544D0DA5}.wem"
      },
      {
       "Id": "804044647",
@@ -2288,6 +2472,14 @@
       "CachePath": "CD/{CD35EF46-EEAD-4FEE-9F83-E70BDC3D2CEE}.wem"
      },
      {
+      "Id": "824635043",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-09.wav",
+      "CachePath": "EF/{EF3C9AA6-030F-5E5D-1CDC-8B3481348409}.wem"
+     },
+     {
       "Id": "838996729",
       "Language": "SFX",
       "Streaming": "false",
@@ -2310,14 +2502,6 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 9.wav",
       "CachePath": "94/{94D56722-A4B3-D107-E0AC-41DF81133EC5}.wem"
-     },
-     {
-      "Id": "845305088",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BandageStage 2.wav",
-      "CachePath": "C6/{C64D022D-16FD-E00A-E863-800F62196CAD}.wem"
      },
      {
       "Id": "845459241",
@@ -2384,6 +2568,14 @@
       "CachePath": "AC/{AC8657F8-E0DF-955D-47EC-328F00B1A2CA}.wem"
      },
      {
+      "Id": "873849901",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Attack1.wav",
+      "CachePath": "2A/{2A534D04-74DC-0558-E9CB-FAA5E876F6FB}.wem"
+     },
+     {
       "Id": "875625137",
       "Language": "SFX",
       "Streaming": "false",
@@ -2400,12 +2592,28 @@
       "CachePath": "E6/{E6D34837-AB9B-AAF7-831B-69E424453EDB}.wem"
      },
      {
-      "Id": "881162298",
+      "Id": "877758046",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_LockpickSuccess 3.wav",
-      "CachePath": "9C/{9C67D300-E2FE-027A-7ED6-C5A882BDCC79}.wem"
+      "ShortName": "PlayerHealing\\PlayerHealing 3.wav",
+      "CachePath": "A9/{A9C3E98F-8B25-686A-8D55-E707DE97F9DA}.wem"
+     },
+     {
+      "Id": "881330317",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01.wav",
+      "CachePath": "C9/{C967AABD-92DA-1CFC-2204-D5A9C3CB903A}.wem"
+     },
+     {
+      "Id": "881481179",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.dup1.cm_01.wav",
+      "CachePath": "9C/{9C2BBC67-E3BC-9054-4D3E-DD375C7CD0B2}.wem"
      },
      {
       "Id": "884258450",
@@ -2414,6 +2622,14 @@
       "Location": "Memory",
       "ShortName": "Reanimate\\Reanimate 2.wav",
       "CachePath": "A6/{A69BF396-3360-1379-6CF1-7E4C3E409866}.wem"
+     },
+     {
+      "Id": "886178823",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Zombie Dystopia_3-02.wav",
+      "CachePath": "DA/{DAD95589-421A-7029-7F03-31D6E1B9214D}.wem"
      },
      {
       "Id": "891952933",
@@ -2440,14 +2656,6 @@
       "CachePath": "54/{54F409E8-19DF-A8FB-33FB-036C1D8699E2}.wem"
      },
      {
-      "Id": "898033675",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_Mining 3.wav",
-      "CachePath": "37/{37B126B1-94D1-CBC8-1978-51B900F02342}.wem"
-     },
-     {
       "Id": "898240164",
       "Language": "SFX",
       "Streaming": "false",
@@ -2462,6 +2670,14 @@
       "Location": "Memory",
       "ShortName": "Reanimate\\Reanimate 1.wav",
       "CachePath": "2D/{2DC67A34-5408-9051-75D0-64EB2F8203AA}.wem"
+     },
+     {
+      "Id": "900435312",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Gun Foley_1-13.wav",
+      "CachePath": "19/{197C41BF-1058-8F07-0D29-F14AA0831974}.wem"
      },
      {
       "Id": "900624370",
@@ -2528,14 +2744,6 @@
       "CachePath": "C5/{C53F64FE-A034-A938-27EA-C9188D2190C7}.wem"
      },
      {
-      "Id": "926164588",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_DropItem 3.wav",
-      "CachePath": "22/{227B6055-470F-C186-6C67-A0126E9286AB}.wem"
-     },
-     {
       "Id": "927203698",
       "Language": "SFX",
       "Streaming": "false",
@@ -2584,6 +2792,22 @@
       "CachePath": "BE/{BEDCD98D-95B0-1E63-3116-05B4C88D5B42}.wem"
      },
      {
+      "Id": "938342197",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Teeth Clack Steady-Neoverb_01-01.wav",
+      "CachePath": "4C/{4C7AA88C-270C-1BF3-1E97-4045340EC0BA}.wem"
+     },
+     {
+      "Id": "940816114",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Zeloth_Damage6.wav",
+      "CachePath": "4F/{4FD58FD9-BF4F-4F53-841A-295078BD055A}.wem"
+     },
+     {
       "Id": "941637134",
       "Language": "SFX",
       "Streaming": "false",
@@ -2622,6 +2846,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 12.wav",
       "CachePath": "2E/{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem"
+     },
+     {
+      "Id": "958557321",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KS_Foley_Padlock_1-02.wav",
+      "CachePath": "1F/{1F14F9CE-A982-E2DA-8170-D3A825571C13}.wem"
      },
      {
       "Id": "959804820",
@@ -2672,20 +2904,20 @@
       "CachePath": "C7/{C719D6CC-BB66-BA88-3FB4-36E008790EB8}.wem"
      },
      {
+      "Id": "971036727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01.wav",
+      "CachePath": "25/{2557A1C9-CE8C-50B1-BD58-DE01DA9067F5}.wem"
+     },
+     {
       "Id": "971680020",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 16.wav",
       "CachePath": "C0/{C0CBD309-C252-5083-3266-B8665C6DD666}.wem"
-     },
-     {
-      "Id": "972651754",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_LockpickSuccess 2.wav",
-      "CachePath": "81/{8165821D-9C70-62C1-D9A6-104A4964A574}.wem"
      },
      {
       "Id": "973713113",
@@ -2726,6 +2958,14 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 8.wav",
       "CachePath": "A6/{A62BC3CF-B96F-7272-11A8-1F4EA143EC59}.wem"
+     },
+     {
+      "Id": "977433235",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 7.cm_01-01.wav",
+      "CachePath": "B6/{B6164B2D-838C-44E4-7685-742DB2DF8474}.wem"
      },
      {
       "Id": "978672313",
@@ -2816,6 +3056,14 @@
       "CachePath": "1B/{1BA9CFB1-B2A0-8B30-03C9-07626682B098}.wem"
      },
      {
+      "Id": "997463245",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 4.cm_02.wav",
+      "CachePath": "AD/{AD5354AD-DCAD-F3B8-BF71-2E793EFF0D37}.wem"
+     },
+     {
       "Id": "1005848849",
       "Language": "SFX",
       "Streaming": "false",
@@ -2862,6 +3110,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 10.wav",
       "CachePath": "85/{85CB437C-A715-C3F2-5197-40FAFE17B63C}.wem"
+     },
+     {
+      "Id": "1014746002",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "beast_attack-kHsFrqS_01-01.wav",
+      "CachePath": "C6/{C6A35B9C-D70C-4381-9515-78EBC62DC71F}.wem"
      },
      {
       "Id": "1016179183",
@@ -2928,14 +3184,6 @@
       "CachePath": "BB/{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem"
      },
      {
-      "Id": "1041004018",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Player_DropItem 4.wav",
-      "CachePath": "4A/{4A466EDE-458A-A4E3-8B14-BEAAEB1B6EF6}.wem"
-     },
-     {
       "Id": "1042641416",
       "Language": "SFX",
       "Streaming": "false",
@@ -2984,12 +3232,20 @@
       "CachePath": "8E/{8E370450-AADC-71E9-1A75-4F97C20A7365}.wem"
      },
      {
-      "Id": "1052466819",
+      "Id": "1052986331",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_Mining 5.wav",
-      "CachePath": "0F/{0FCE0663-EEEE-1265-2B40-E18E1F2B89FB}.wem"
+      "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2.wav",
+      "CachePath": "9D/{9D65CAE7-B7C9-3695-5226-D2472E11D328}.wem"
+     },
+     {
+      "Id": "1054362147",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06.wav",
+      "CachePath": "27/{27AF5CF0-E89B-A65F-9995-0F1BB00CAC66}.wem"
      },
      {
       "Id": "1055218331",
@@ -3000,12 +3256,12 @@
       "CachePath": "58/{58D6D272-8362-C9E4-2BF5-514E83DBCE45}.wem"
      },
      {
-      "Id": "1073600696",
+      "Id": "1069593655",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "Player_Lockpick 4.wav",
-      "CachePath": "0C/{0CF4F7CA-8F4C-80C4-8FBF-9A583872A203}.wem"
+      "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02.wav",
+      "CachePath": "85/{85CBBD52-2B16-20CC-C069-D0C47002946E}.wem"
      }
     ],
     "Plugins": {
@@ -3041,10 +3297,30 @@
        "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
        "LibName": "Wwise RoomVerb",
        "LibId": "7733251"
+      },
+      {
+       "Id": "3834162924",
+       "Name": "EliteEnemyDeath",
+       "ObjectPath": "\\Effects\\Default Work Unit\\EliteEnemyDeath",
+       "GUID": "{8867445F-8EE8-4E2D-BC5F-69646D5EB699}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
       }
      ]
     },
     "Events": [
+     {
+      "Id": "1274660444",
+      "Name": "Key_Lock",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Key_Lock",
+      "GUID": "{3760A833-6010-4321-9D33-8D3450FA9562}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "1069593655"
+       }
+      ]
+     },
      {
       "Id": "1139538480",
       "Name": "Play_AMB_Crackle",
@@ -3169,11 +3445,38 @@
       }
      },
      {
+      "Id": "245942734",
+      "Name": "Play_BasicEnemyIdle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnemyIdle",
+      "GUID": "{7768EC0B-1A1B-4D3C-B52A-4C7E57F24E1A}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "95402580"
+       },
+       {
+        "Id": "742162032"
+       },
+       {
+        "Id": "801827168"
+       },
+       {
+        "Id": "886178823"
+       },
+       {
+        "Id": "971036727"
+       },
+       {
+        "Id": "1052986331"
+       }
+      ]
+     },
+     {
       "Id": "3780240352",
       "Name": "Play_BasicEnnemyAttack",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyAttack",
       "GUID": "{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "2.268",
       "DurationMax": "2.2866666",
@@ -3193,11 +3496,21 @@
       ]
      },
      {
+      "Id": "1591116231",
+      "Name": "Play_BasicEnnemyDamage",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyDamage",
+      "GUID": "{19C687C6-674D-4B92-AA82-DB12AEF39EAA}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2650719123",
       "Name": "Play_BasicEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyMovement",
       "GUID": "{7A700EAE-6822-45A5-83BE-3E233F0B7658}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.141",
       "DurationMax": "0.58625",
@@ -3207,7 +3520,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3326,7 +3640,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3439,6 +3754,35 @@
           "Id": "1051819540"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "2257418509",
+      "Name": "Play_Close_Map",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Close_Map",
+      "GUID": "{57C52CBB-F5E9-4022-99C9-55922135CB89}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.68133336",
+      "DurationMax": "1.1293334",
+      "MediaRefs": [
+       {
+        "Id": "137990748"
+       },
+       {
+        "Id": "224444272"
+       },
+       {
+        "Id": "292070805"
+       },
+       {
+        "Id": "459524384"
+       },
+       {
+        "Id": "635601563"
+       },
+       {
+        "Id": "824635043"
        }
       ]
      },
@@ -3461,7 +3805,7 @@
       "Name": "Play_DamagesHit",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DamagesHit",
       "GUID": "{45598661-4014-4A8F-8F12-54F5571E4B04}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.33138248",
       "DurationMax": "0.63769585",
@@ -3470,19 +3814,10 @@
         "Id": "264105844"
        },
        {
-        "Id": "299078393"
-       },
-       {
-        "Id": "525925205"
-       },
-       {
         "Id": "688001986"
        },
        {
         "Id": "761825277"
-       },
-       {
-        "Id": "845305088"
        },
        {
         "Id": "978672313"
@@ -3520,7 +3855,7 @@
       "Name": "Play_Door_Open",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Door_Open\\Play_Door_Open",
       "GUID": "{59886464-8070-4656-9022-3F409EBDB136}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "3.4906666",
       "DurationMax": "6.570667",
@@ -3576,7 +3911,7 @@
       "Name": "Play_DownedFall",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DownedFall",
       "GUID": "{3CEBC53F-0B31-4263-9FC1-9A1C88247837}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.92",
       "DurationMax": "1.4419583",
@@ -3638,11 +3973,96 @@
       ]
      },
      {
+      "Id": "3632850017",
+      "Name": "Play_EliteEnemyAttack",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnemyAttack",
+      "GUID": "{0A2AB7AC-CAA7-4393-86CB-9AA86B809477}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.354166",
+      "DurationMax": "2.1373951",
+      "MediaRefs": [
+       {
+        "Id": "332510263"
+       },
+       {
+        "Id": "592439048"
+       },
+       {
+        "Id": "653504529"
+       },
+       {
+        "Id": "873849901"
+       }
+      ]
+     },
+     {
+      "Id": "3488024398",
+      "Name": "Play_EliteEnemyDamage",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnemyDamage",
+      "GUID": "{5C155D14-FD6D-4922-8321-CE64DBBA3055}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3117983",
+      "DurationMax": "2.1373951",
+      "MediaRefs": [
+       {
+        "Id": "131189783"
+       },
+       {
+        "Id": "379426620"
+       },
+       {
+        "Id": "386172729"
+       },
+       {
+        "Id": "414287348"
+       },
+       {
+        "Id": "509189635"
+       },
+       {
+        "Id": "735165908"
+       },
+       {
+        "Id": "940816114"
+       }
+      ]
+     },
+     {
+      "Id": "3290179333",
+      "Name": "Play_EliteEnemyDeath",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnemyDeath",
+      "GUID": "{C463D2A0-2397-4037-9823-BD10BD0CCF08}",
+      "DurationType": "OneShot",
+      "DurationMin": "5.021333",
+      "DurationMax": "5.021333",
+      "MediaRefs": [
+       {
+        "Id": "179511228"
+       },
+       {
+        "Id": "714180368"
+       },
+       {
+        "Id": "977433235"
+       },
+       {
+        "Id": "1014746002"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3834162924"
+        }
+       ]
+      }
+     },
+     {
       "Id": "3538185196",
       "Name": "Play_EliteEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnnemyMovement",
       "GUID": "{5B3B3798-EA6C-4457-BFBC-BC5C2C8397C0}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.21572916",
       "DurationMax": "0.64",
@@ -3652,7 +4072,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3744,7 +4165,8 @@
          "GroupType": "Switch",
          "GroupId": "3995124918",
          "Id": "2108779966",
-         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}"
+         "GUID": "{3BB1A2E2-3834-4A52-B9C1-C346E27F504E}",
+         "Default": "true"
         },
         "MediaRefs": [
          {
@@ -3830,6 +4252,90 @@
           "Id": "912347765"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "739133775",
+      "Name": "Play_Key_Lock_Negative_Feedback",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Play_Key_Lock_Negative_Feedback",
+      "GUID": "{26F0DBCA-888F-4281-911F-8B49E32A2124}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.057166666",
+      "DurationMax": "0.086333334",
+      "MediaRefs": [
+       {
+        "Id": "87427668"
+       },
+       {
+        "Id": "175183491"
+       },
+       {
+        "Id": "413985103"
+       },
+       {
+        "Id": "554099311"
+       },
+       {
+        "Id": "749212117"
+       },
+       {
+        "Id": "958557321"
+       }
+      ]
+     },
+     {
+      "Id": "3580144315",
+      "Name": "Play_Key_Lock_Positive_Feedback",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Play_Key_Lock_Positive_Feedback",
+      "GUID": "{2A80A909-996B-4FC6-B913-459F141C973B}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.392",
+      "DurationMax": "0.588",
+      "MediaRefs": [
+       {
+        "Id": "14744907"
+       },
+       {
+        "Id": "47330493"
+       },
+       {
+        "Id": "48525552"
+       },
+       {
+        "Id": "297636677"
+       },
+       {
+        "Id": "514363049"
+       },
+       {
+        "Id": "709417727"
+       },
+       {
+        "Id": "900435312"
+       }
+      ]
+     },
+     {
+      "Id": "2079076761",
+      "Name": "Play_Open_Map",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Open_Map",
+      "GUID": "{13A05205-CEBF-4764-9F51-AFC96527E8FA}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0826666",
+      "DurationMax": "1.568",
+      "MediaRefs": [
+       {
+        "Id": "416500249"
+       },
+       {
+        "Id": "501785304"
+       },
+       {
+        "Id": "720531683"
+       },
+       {
+        "Id": "1054362147"
        }
       ]
      },
@@ -3882,7 +4388,7 @@
       "Name": "Play_Palanquin",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin",
       "GUID": "{1E496A64-4CBC-41A4-B229-85331E9AF8A7}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "Mixed",
       "DurationMin": "2.0906668",
       "DurationMax": "Infinite",
@@ -3924,7 +4430,7 @@
       "Name": "Play_Palanquin_Calling",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Calling",
       "GUID": "{E13A3AB4-13C7-4E84-AB3A-236E66FBADA2}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "3.776",
       "DurationMax": "7.498667",
@@ -3948,7 +4454,7 @@
       "Name": "Play_Palanquin_Empty",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Empty",
       "GUID": "{3AAA74F6-9777-420E-B7F7-AD3FCADE874F}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.3930833",
       "DurationMax": "1.76",
@@ -3984,7 +4490,7 @@
       "Name": "Play_Palanquin_Inventory",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin_Inventory",
       "GUID": "{51141BD2-9931-484B-B9B1-068B990E1478}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.6",
       "DurationMax": "2.1813333",
@@ -4004,34 +4510,11 @@
       ]
      },
      {
-      "Id": "3537301466",
-      "Name": "Play_Player_DropItem",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_DropItem",
-      "GUID": "{F9D0AE5D-8485-4939-895C-C8280F3209A5}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.4",
-      "DurationMax": "1.3",
-      "MediaRefs": [
-       {
-        "Id": "670677848"
-       },
-       {
-        "Id": "759676142"
-       },
-       {
-        "Id": "926164588"
-       },
-       {
-        "Id": "1041004018"
-       }
-      ]
-     },
-     {
       "Id": "1864892471",
       "Name": "Play_Player_Hit",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Hit",
       "GUID": "{72F8C657-F4D5-43AE-BA92-FA8CCC4D96A1}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.87733334",
       "DurationMax": "1.0406667",
@@ -4065,7 +4548,7 @@
      {
       "Id": "305502530",
       "Name": "Play_Player_Interact",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_Interact",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Interact",
       "GUID": "{3C197960-F5E2-47A9-88DA-148106E989F3}",
       "DurationType": "OneShot",
       "DurationMin": "0.5226667",
@@ -4122,99 +4605,13 @@
       ]
      },
      {
-      "Id": "3518540830",
-      "Name": "Play_Player_Lockpick",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_Lockpick",
-      "GUID": "{6E469CD5-E977-4D16-A155-84B2C18FA92A}",
+      "Id": "368431676",
+      "Name": "Play_Player_Lever",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Lever",
+      "GUID": "{60FC232E-6E32-44FA-AC7C-524F024FF2AF}",
       "DurationType": "OneShot",
-      "DurationMin": "1.1950417",
-      "DurationMax": "1.9512084",
-      "MediaRefs": [
-       {
-        "Id": "185520975"
-       },
-       {
-        "Id": "788717451"
-       },
-       {
-        "Id": "802637485"
-       },
-       {
-        "Id": "1073600696"
-       }
-      ]
-     },
-     {
-      "Id": "2607142680",
-      "Name": "Play_Player_LockpickFailure",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_LockpickFailure",
-      "GUID": "{D791AD9C-7015-45CE-B27F-AAF7A14DD0EB}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.33333334",
-      "DurationMax": "0.73333335",
-      "MediaRefs": [
-       {
-        "Id": "351847385"
-       },
-       {
-        "Id": "384725469"
-       },
-       {
-        "Id": "670561692"
-       },
-       {
-        "Id": "735204856"
-       }
-      ]
-     },
-     {
-      "Id": "1575159871",
-      "Name": "Play_Player_LockpickSuccess",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_LockpickSuccess",
-      "GUID": "{2DED7AE8-4101-4DBB-8109-9824061BE330}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.19066666",
-      "DurationMax": "0.56666666",
-      "MediaRefs": [
-       {
-        "Id": "293707658"
-       },
-       {
-        "Id": "881162298"
-       },
-       {
-        "Id": "972651754"
-       }
-      ]
-     },
-     {
-      "Id": "869285300",
-      "Name": "Play_Player_Mining",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_Mining",
-      "GUID": "{577282EA-C9C6-4F9E-A863-C41D41923605}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.6",
-      "DurationMax": "0.74675",
-      "MediaRefs": [
-       {
-        "Id": "271959307"
-       },
-       {
-        "Id": "399410711"
-       },
-       {
-        "Id": "455549455"
-       },
-       {
-        "Id": "768239917"
-       },
-       {
-        "Id": "898033675"
-       },
-       {
-        "Id": "1052466819"
-       }
-      ]
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "3881217501",
@@ -4278,7 +4675,7 @@
      {
       "Id": "1115403328",
       "Name": "Play_Player_Raise",
-      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_Raise",
+      "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Raise",
       "GUID": "{FC75BE05-682A-4BB3-BB35-1BBCA01EAE66}",
       "DurationType": "OneShot",
       "DurationMin": "16.856",
@@ -4294,7 +4691,7 @@
       "Name": "Play_Player_Shot",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Shot",
       "GUID": "{E465FB9E-0902-40E8-8591-BB910E234E9C}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.1433333",
       "DurationMax": "1.30025",
@@ -4330,7 +4727,7 @@
       "Name": "Play_PlayerDying",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PlayerDying",
       "GUID": "{A09AE17A-043E-484B-9250-F153AA03693E}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.7786667",
       "DurationMax": "1.6746666",
@@ -4366,18 +4763,14 @@
       "Name": "Play_PlayerHealing",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PlayerHealing",
       "GUID": "{9847524F-0D12-4234-A203-9F519678B99B}",
-      "DurationType": "OneShot",
-      "DurationMin": "6.5",
-      "DurationMax": "6.5",
+      "MaxAttenuation": "5000",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "299078393"
+        "Id": "371682056"
        },
        {
-        "Id": "525925205"
-       },
-       {
-        "Id": "845305088"
+        "Id": "877758046"
        }
       ]
      },
@@ -4386,7 +4779,7 @@
       "Name": "Play_Reanimate",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_Reanimate",
       "GUID": "{1F941602-69BE-4EAC-B85E-819BABAF8E49}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.76",
       "DurationMax": "2.5653334",
@@ -4407,7 +4800,7 @@
       "Name": "Play_SandRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_SandRun",
       "GUID": "{DFC7FA5B-FB30-4FB0-8247-427A0F263B59}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.2515",
       "DurationMax": "0.46291667",
@@ -4995,7 +5388,7 @@
       "Name": "Play_StoneRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_StoneRun",
       "GUID": "{D64A690B-9124-430F-9030-CBC62D0CF0B5}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.270375",
       "DurationMax": "0.39191666",
@@ -5096,7 +5489,7 @@
       "Name": "Play_Trap_Arrow",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Arrow",
       "GUID": "{A4C156ED-B4A6-4FDB-9599-B432254270C0}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.28",
       "DurationMax": "1.28",
@@ -5111,7 +5504,7 @@
       "Name": "Play_Trap_Bone",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Bone",
       "GUID": "{60DEC4B4-AB34-404E-B73F-E1189C903ADC}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.21333334",
       "DurationMax": "1.856",
@@ -5141,7 +5534,7 @@
       "Name": "Play_Trap_Pressure",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Pressure",
       "GUID": "{F3788B5F-91E9-4A0B-B02F-6FBB30DC22E6}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.88",
       "DurationMax": "0.96002084",
@@ -5159,7 +5552,7 @@
       "Name": "Play_Trap_Spike",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Spike",
       "GUID": "{7AF65B43-96F1-4FF6-8153-7840D75A9200}",
-      "MaxAttenuation": "750",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.4",
       "DurationMax": "0.4",
@@ -5177,7 +5570,7 @@
       "Name": "Play_WoodRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRun",
       "GUID": "{03312179-77EB-4776-8A94-4FC59248E924}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.26958334",
       "DurationMax": "0.35525",
@@ -5258,7 +5651,7 @@
       "Name": "Play_WoodRunCrack",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRunCrack",
       "GUID": "{04FB3B50-A801-408C-9E75-6ECFE28D48E5}",
-      "MaxAttenuation": "1000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.26425",
       "DurationMax": "0.46291667",
@@ -5435,12 +5828,24 @@
       "Id": "3710295231",
       "Name": "Play_Zeloth_Idle",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_Zeloth_Idle",
-      "GUID": "{1C417AA4-9623-4CEF-9B9F-108CAE3CE3E0}",
-      "MaxAttenuation": "1000",
+      "GUID": "{A140CB47-6CC4-4206-8313-B2AE91D0B2CC}",
+      "MaxAttenuation": "5000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
+        "Id": "100764325"
+       },
+       {
+        "Id": "125951352"
+       },
+       {
         "Id": "233443900"
+       },
+       {
+        "Id": "494935842"
+       },
+       {
+        "Id": "533200097"
        },
        {
         "Id": "614599972"
@@ -5449,7 +5854,31 @@
         "Id": "730434085"
        },
        {
+        "Id": "881330317"
+       },
+       {
+        "Id": "881481179"
+       },
+       {
+        "Id": "938342197"
+       },
+       {
         "Id": "970594138"
+       },
+       {
+        "Id": "997463245"
+       }
+      ]
+     },
+     {
+      "Id": "2400787128",
+      "Name": "Turn_Crank",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Turn_Crank\\Turn_Crank",
+      "GUID": "{C6712A36-8AFA-4924-97CF-C1268B8E3DD8}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "272090056"
        }
       ]
      }
@@ -5518,6 +5947,6 @@
     ]
    }
   ],
-  "FileHash": "{AE172B26-0F15-1296-B1E8-CB4A04A1838F}"
+  "FileHash": "{ACA2BD41-83DE-BDD6-2A14-0F8273CDB23F}"
  }
 }

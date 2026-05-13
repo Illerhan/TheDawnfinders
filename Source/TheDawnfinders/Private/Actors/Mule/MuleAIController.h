@@ -4,6 +4,7 @@
 #include "AIController.h"
 #include "AkAudioEvent.h"
 #include "Actors/Player/ANoise.h"
+#include "Actors/Mule/Mule.h"
 #include "MuleAIController.generated.h"
 
 UCLASS()
@@ -23,9 +24,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Mule)
 	void CallMule(AActor* Actor);
 	
-	UFUNCTION(NetMulticast, Unreliable)
-	void Multi_PlaySound(FVector Position = FVector::ZeroVector);
-	
 	FTimerHandle TimerHandle_SpawnObject;
 	
 	UFUNCTION(BlueprintCallable, Category = Mule)
@@ -43,5 +41,9 @@ public:
 	
 	UPROPERTY()
 	int32 MuleTravelSoundID;
-	
+
+
+protected :
+	UPROPERTY(BlueprintReadWrite)
+	AMule* MyMule;
 };

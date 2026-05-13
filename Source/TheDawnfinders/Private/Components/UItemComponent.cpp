@@ -309,6 +309,15 @@ void UItemComponent::UseConsumable()
 		case EConsumableEffectType::Heal:
 			HealthComponent->Heal(EquippedItem.CurrentInfos.ItemData->ConsumableEffectPower);
 			InventoryComponent->RemoveCurrentItem();
+			if (HealingSoundID)
+			{
+				FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+				if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+				{
+					AudioDevice->StopPlayingID(HealingSoundID);
+					HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+				}
+			}
 			break;
 
 		case EConsumableEffectType::Inhale:
@@ -546,6 +555,8 @@ void UItemComponent::DoLightAttack()
 	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
 	if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) return;
 
+	CanCancelAttack = true;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
@@ -564,13 +575,9 @@ void UItemComponent::DoLightAttack()
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
-
-		if (++ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
-		{
-			ComboIndex = 0;
-		}
 	}
-	else
+
+	if (ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
 	{
 		ComboIndex = 0;
 	}
@@ -664,8 +671,10 @@ void UItemComponent::AttackAnimEnd()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None, false);
 
 	PlayerCharacter->SetPlayerAcceleration(4000);
-
 	PlayerCharacter->StopAutoLock();
+
+	ComboIndex++;
+	ResetComboCounterDelay(0.2f);
 
 	if (PressedAttackInput)
 	{
@@ -687,11 +696,12 @@ void UItemComponent::DoAttackCollision()
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
 
-	IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
+	//IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
-
 	if (!WeaponData) return;
+
+	CanCancelAttack = false;
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
@@ -791,8 +801,18 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	if (CritPercent < WeaponData->CriticalChance) {
 		FinalDamage *= 3;
 	}
+	FVector PushDir = Enemy->GetActorLocation() - GetOwner()->GetActorLocation();
+	PushDir.Normalize();
 
 	Enemy->ReceiveDamage_Implementation(FinalDamage, GetOwner());
+	Enemy->PushEnemy(CurrentWeaponData.EnemiesPushStrength, PushDir);
+}
+
+void UItemComponent::ResetComboCounterDelay_Implementation(float Delay)
+{
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment) return;
+
+	ComboIndex = 0;
 }
 
 #pragma endregion

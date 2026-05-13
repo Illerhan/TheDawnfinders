@@ -12,6 +12,7 @@ class THEDAWNFINDERS_API ACustomGameMode : public AGameModeBase
 	GENERATED_BODY()
 	
 	virtual void HandleSeamlessTravelPlayer(AController*& C) override;
+	virtual void BeginPlay() override;
 	
 public:
 	
@@ -38,5 +39,8 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "GameOver")
 	int DeadPlayerCount;
+	
+	UPROPERTY(EditAnywhere, Category = "Audio")
+	USoundBase* ExtractionMusic;
 	
 };

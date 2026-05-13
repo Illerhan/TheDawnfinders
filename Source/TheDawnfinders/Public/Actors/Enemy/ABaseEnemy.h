@@ -58,7 +58,13 @@ public :
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	USceneComponent* AttackCollisionPosRef;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TSubclassOf<AActor> ContainerToSpawn;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UAnimMontage* DeathMontage;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int DangerLevel;
 
@@ -113,6 +119,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UnstunEnemy();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PushEnemy(float Strength, FVector Direction);
+
 	
 // === SOUNDS ===
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
@@ -151,6 +160,9 @@ public :
 	UPROPERTY(BlueprintReadOnly)
 	bool IsInvincible;
 
+	UPROPERTY(BlueprintReadOnly, Replicated)
+	bool bIsDead;
+
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
@@ -162,6 +174,9 @@ public :
 
 	UFUNCTION()
 	void EndInvincibilityFrames();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DoDeathDissolve();
 
 	FTimerHandle InvincibilityTimerHandle;
 
