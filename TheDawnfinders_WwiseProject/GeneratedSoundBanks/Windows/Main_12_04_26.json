@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{0EFA5046-A1FD-1B7F-9F95-D1393DE1F7A3}",
+    "Hash": "{5433A3D9-EE17-418D-A734-15E35FC207D8}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -96,12 +96,28 @@
       "CachePath": "E7/{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem"
      },
      {
+      "Id": "35276193",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "rollonev1.1-05.wav",
+      "CachePath": "49/{49D559BC-5A16-39C1-9AB9-812C41096C09}.wem"
+     },
+     {
       "Id": "37215428",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers4.wav",
       "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
+     },
+     {
+      "Id": "38165049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 3.wav",
+      "CachePath": "9C/{9CBAF77D-A52B-38CA-7557-2F3B4E365956}.wem"
      },
      {
       "Id": "39757222",
@@ -448,6 +464,14 @@
       "CachePath": "A2/{A2633BB8-6390-90F4-4EB4-29AFF617D6EE}.wem"
      },
      {
+      "Id": "166637616",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LeverUse 3.wav",
+      "CachePath": "3E/{3E0E184B-C499-C8BF-D23E-C943CAEC035B}.wem"
+     },
+     {
       "Id": "166799515",
       "Language": "SFX",
       "Streaming": "false",
@@ -486,6 +510,14 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 6.wav",
       "CachePath": "19/{19DACCBB-24D0-4E44-27F1-C1EC3AF8C918}.wem"
+     },
+     {
+      "Id": "187566473",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LeverUse 2.wav",
+      "CachePath": "99/{99BDEC11-85E4-7C95-DB3F-5A74379701F6}.wem"
      },
      {
       "Id": "188388410",
@@ -552,6 +584,14 @@
       "CachePath": "CC/{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem"
      },
      {
+      "Id": "210031997",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "rollonev1.1-07.wav",
+      "CachePath": "DD/{DDD6EE5F-8240-3BAB-A1D3-DC9F0DE908FF}.wem"
+     },
+     {
       "Id": "215028229",
       "Language": "SFX",
       "Streaming": "false",
@@ -566,14 +606,6 @@
       "Location": "Memory",
       "ShortName": "WoodWalk\\FootstepsWoodWalk 3.wav",
       "CachePath": "42/{42DE3151-F803-AF7F-910C-7E66F54FBBA8}.wem"
-     },
-     {
-      "Id": "215911120",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Roll\\Roll 1.wav",
-      "CachePath": "59/{59022E95-0808-DB26-8E38-8CB184711BA3}.wem"
      },
      {
       "Id": "216827798",
@@ -1024,14 +1056,6 @@
       "CachePath": "9B/{9B02ADC2-F534-DCAC-008D-0834040724CA}.wem"
      },
      {
-      "Id": "353854774",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Roll\\Roll 3.wav",
-      "CachePath": "23/{230D7A28-7012-A3AA-572B-C185E6C804A6}.wem"
-     },
-     {
       "Id": "354428242",
       "Language": "SFX",
       "Streaming": "false",
@@ -1152,6 +1176,14 @@
       "CachePath": "F1/{F1B206AB-478D-6704-C193-042DD5F6F2BF}.wem"
      },
      {
+      "Id": "398590232",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LeverUse 4.wav",
+      "CachePath": "8F/{8F8263B0-AF03-3B1C-0D0E-555DDD580FF6}.wem"
+     },
+     {
       "Id": "399958177",
       "Language": "SFX",
       "Streaming": "false",
@@ -1248,14 +1280,6 @@
       "CachePath": "32/{32E77858-5192-8A50-DF98-559B3726ABD0}.wem"
      },
      {
-      "Id": "418296632",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Roll\\Roll 2.wav",
-      "CachePath": "8B/{8B39CEDD-7177-AFB6-7AEF-794CA3E9AF4B}.wem"
-     },
-     {
       "Id": "420215414",
       "Language": "SFX",
       "Streaming": "false",
@@ -1350,6 +1374,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 16.wav",
       "CachePath": "1B/{1B4E69AF-BF36-420D-F546-55139425E706}.wem"
+     },
+     {
+      "Id": "449139959",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 1.wav",
+      "CachePath": "25/{257BAAF3-B1CA-04AC-4F71-5C515FB73EAA}.wem"
      },
      {
       "Id": "456838804",
@@ -1590,6 +1622,22 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 8.wav",
       "CachePath": "12/{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem"
+     },
+     {
+      "Id": "524183346",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 4.wav",
+      "CachePath": "7D/{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem"
+     },
+     {
+      "Id": "524728569",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "rollonev1.1-08.wav",
+      "CachePath": "A8/{A800914F-2827-842F-E657-43D8F5BDBBE4}.wem"
      },
      {
       "Id": "533200097",
@@ -1992,6 +2040,14 @@
       "CachePath": "6A/{6AB52A5A-620C-340C-A563-0ED717C00DF2}.wem"
      },
      {
+      "Id": "666040045",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "rollonev1.1-06.wav",
+      "CachePath": "8F/{8F1574CC-041D-BE7E-0372-16790156BF93}.wem"
+     },
+     {
       "Id": "666566413",
       "Language": "SFX",
       "Streaming": "false",
@@ -2022,6 +2078,14 @@
       "Location": "Memory",
       "ShortName": "StoneWalk\\FootstepsStoneWalk 7.wav",
       "CachePath": "A7/{A764E688-9C88-F908-768A-FA5895C0525D}.wem"
+     },
+     {
+      "Id": "693285485",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BonesWalk 2.wav",
+      "CachePath": "A4/{A4E7CD03-D356-B86B-8935-48CE4AB3D27C}.wem"
      },
      {
       "Id": "698942852",
@@ -2584,14 +2648,6 @@
       "CachePath": "3A/{3AADC4F4-D8F2-4FF2-73D0-629BDDB98263}.wem"
      },
      {
-      "Id": "875885490",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Roll\\Roll 4.wav",
-      "CachePath": "E6/{E6D34837-AB9B-AAF7-831B-69E424453EDB}.wem"
-     },
-     {
       "Id": "877758046",
       "Language": "SFX",
       "Streaming": "false",
@@ -2758,6 +2814,14 @@
       "Location": "Memory",
       "ShortName": "Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01.wav",
       "CachePath": "23/{233E9151-20FA-CFF4-198E-8B2A44CB4141}.wem"
+     },
+     {
+      "Id": "928341138",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LeverUse 1.wav",
+      "CachePath": "63/{6364524A-B2C5-CA84-7172-6419823A9BD9}.wem"
      },
      {
       "Id": "928559674",
@@ -3758,6 +3822,29 @@
       ]
      },
      {
+      "Id": "3105819388",
+      "Name": "Play_BonesWalk",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_BonesWalk",
+      "GUID": "{1FF1C13B-C137-460F-9621-18A3CB6497FD}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6666667",
+      "DurationMax": "1.2666667",
+      "MediaRefs": [
+       {
+        "Id": "38165049"
+       },
+       {
+        "Id": "449139959"
+       },
+       {
+        "Id": "524183346"
+       },
+       {
+        "Id": "693285485"
+       }
+      ]
+     },
+     {
       "Id": "2257418509",
       "Name": "Play_Close_Map",
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Close_Map",
@@ -4317,6 +4404,29 @@
       ]
      },
      {
+      "Id": "3011759086",
+      "Name": "Play_Lever_Use",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Lever_Use",
+      "GUID": "{576A6CF1-7620-47E0-88DA-E793AE4D3573}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "166637616"
+       },
+       {
+        "Id": "187566473"
+       },
+       {
+        "Id": "398590232"
+       },
+       {
+        "Id": "928341138"
+       }
+      ]
+     },
+     {
       "Id": "2079076761",
       "Name": "Play_Open_Map",
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Map\\Play_Open_Map",
@@ -4610,8 +4720,22 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Lever",
       "GUID": "{60FC232E-6E32-44FA-AC7C-524F024FF2AF}",
       "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationMin": "0.6",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "166637616"
+       },
+       {
+        "Id": "187566473"
+       },
+       {
+        "Id": "398590232"
+       },
+       {
+        "Id": "928341138"
+       }
+      ]
      },
      {
       "Id": "3881217501",
@@ -5947,6 +6071,6 @@
     ]
    }
   ],
-  "FileHash": "{ACA2BD41-83DE-BDD6-2A14-0F8273CDB23F}"
+  "FileHash": "{34D69D09-E69E-EEF8-5C4C-088F14D28FF8}"
  }
 }
