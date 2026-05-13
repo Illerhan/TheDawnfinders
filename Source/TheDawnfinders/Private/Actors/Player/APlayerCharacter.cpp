@@ -331,6 +331,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         break;
 
     case EPlayerState::Dead :
+        InterruptMontage();
         break;
     }
 
@@ -574,11 +575,21 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     if (CurrentPlayerInput.SquaredLength() > 0.05f) {
         PreviousPlayerInput = CurrentPlayerInput;
+
+        if (!bMoveInputActive && CurrentState == EPlayerState::Fallen) {
+            PlayMontageLoop(CrawlMontage, 1);
+        }
+
         bMoveInputActive = true;
         if (!HasAuthority()) Server_SetMoveInputActive(true);
     }
     else {
         AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+
+        if (bMoveInputActive && CurrentState == EPlayerState::Fallen) {
+            InterruptMontage();
+        }
+
         bMoveInputActive = false;
         if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
@@ -1026,6 +1037,69 @@ void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed)
     else MulticastPlayMontage(Montage, Speed); 
 }
 
+
+void AAPlayerCharacter::PlayMontageLoop(UAnimMontage* Montage, float Speed)
+{
+    if (!HasAuthority()) ServerPlayMontageLoop(Montage, Speed);
+    else MulticastPlayMontageLoop(Montage, Speed);
+}
+
+void AAPlayerCharacter::ServerPlayMontageLoop_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (Montage) MulticastPlayMontageLoop(Montage, Speed);
+}
+
+void AAPlayerCharacter::MulticastPlayMontageLoop_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (!Montage || !GetMesh()) return;
+
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+
+    AnimInstance->StopAllMontages(0.1f);
+    AnimInstance->Montage_Play(Montage, Speed);
+
+    FOnMontageEnded EndDelegate;
+    EndDelegate.BindUObject(this, &AAPlayerCharacter::OnLoopMontageEnded);
+
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
+}
+
+void AAPlayerCharacter::InterruptMontage()
+{
+    if (HasAuthority()) Multicast_InterruptMontage();
+    else Server_InterruptMontage();
+}
+
+void AAPlayerCharacter::Server_InterruptMontage_Implementation()
+{
+    Multicast_InterruptMontage();
+}
+
+void AAPlayerCharacter::Multicast_InterruptMontage_Implementation()
+{
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+    AnimInstance->StopAllMontages(0.1f);
+}
+
+void AAPlayerCharacter::OnLoopMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+    if (bInterrupted) return;
+
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+
+    AnimInstance->StopAllMontages(0.1f);
+    AnimInstance->Montage_Play(Montage, 1);
+
+    FOnMontageEnded EndDelegate;
+    EndDelegate.BindUObject(this, &AAPlayerCharacter::OnLoopMontageEnded);
+
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
+}
+
+
 void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) 
 { 
     if (Montage) MulticastPlayMontage(Montage, Speed); 
@@ -1054,7 +1128,6 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
     if (!Montage) return;
     if (CurrentState == EPlayerState::UsingEquipment) 
     { 
-
         if (!InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData || !InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon) {
             SetCurrentPlayerState_Implementation(EPlayerState::None);
             ItemComponent->AttackAnimEnd();
