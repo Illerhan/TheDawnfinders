@@ -10,15 +10,6 @@ UPlayerCameraComponent::UPlayerCameraComponent()
 
 void UPlayerCameraComponent::BeginPlay()
 {
-	Player = Cast<AAPlayerCharacter>(GetOwner());
-
-	if (Player) {
-		bIsInitialised = true;
-
-		if(!Player->GetController()) bIsInitialised = false;
-	}
-	else bIsInitialised = false;
-
 	Super::BeginPlay();
 }
 
@@ -33,19 +24,27 @@ void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		ActualiseEnviroInfos();
 		ActualisePlayerInfos(DeltaTime);
 
+		ForcedPositionOffsetProgress = FMath::Lerp(ForcedPositionOffsetProgress, 0, DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
+		ForcedPositionDistanceProgress = FMath::Lerp(ForcedPositionDistanceProgress, 0, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
+
+		ForcedPositionOffsetProgress = FMath::Clamp(ForcedPositionOffsetProgress, 0, 1);
+		ForcedPositionDistanceProgress = FMath::Clamp(ForcedPositionDistanceProgress, 0, 1);
+
 		UpdateOffset(DeltaTime);
 		UpdateDistance(DeltaTime);
 
-		SpringArmComponent->TargetArmLength = CurrentTotalDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentTotalOffset);
+		SpringArmComponent->TargetArmLength = FMath::Lerp(CurrentTotalDist, ForcedDist, ForcedPositionDistanceProgress);
+		SpringArmComponent->SetWorldLocation(FMath::Lerp(GetOwner()->GetActorLocation() + CurrentTotalOffset, ForcedPosition, ForcedPositionOffsetProgress));
 	}
 	else {
-		CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, ForcedDist, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
-		CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, ForcedPosition - GetOwner()->GetActorLocation(), 
-			DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
+		ForcedPositionOffsetProgress = FMath::Lerp(ForcedPositionOffsetProgress, 1, DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
+		ForcedPositionDistanceProgress = FMath::Lerp(ForcedPositionDistanceProgress, 1, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
 
-		SpringArmComponent->TargetArmLength = CurrentEnviroDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentEnviroOffset);
+		ForcedPositionOffsetProgress = FMath::Clamp(ForcedPositionOffsetProgress, 0, 1);
+		ForcedPositionDistanceProgress = FMath::Clamp(ForcedPositionDistanceProgress, 0, 1);
+
+		SpringArmComponent->TargetArmLength = FMath::Lerp(StartForcedDist, ForcedDist, ForcedPositionDistanceProgress);
+		SpringArmComponent->SetWorldLocation(FMath::Lerp(StartForcedOffset, ForcedPosition, ForcedPositionOffsetProgress));
 	}
 }
 
@@ -55,6 +54,13 @@ void UPlayerCameraComponent::InitialiseComponent(USpringArmComponent* SpringArm)
 {
 	bIsInitialised = true;
 	SpringArmComponent = SpringArm;
+
+	Player = Cast<AAPlayerCharacter>(GetOwner());
+
+	if (Player) {
+		if (!Player->GetController()) bIsInitialised = false;
+	}
+	else bIsInitialised = false;
 }
 
 void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
@@ -102,6 +108,9 @@ void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist, floa
 	ForcedPosition = NewPos;
 	ForcedDist = Dist;
 
+	StartForcedDist = CurrentTotalDist;
+	StartForcedOffset = CurrentTotalOffset + GetOwner()->GetActorLocation();
+
 	ForcedDistanceLerpSpeed = LerpDistSpeedOverride;
 	ForcedOffsetLerpSpeed = LerpOffsetSpeedOverride;
 
@@ -112,8 +121,8 @@ void UPlayerCameraComponent::StartAutomaticControl()
 {
 	bIsOnForcedPosition = false;
 
-	ForcedOffsetLerpSpeed = 0;
-	ForcedDistanceLerpSpeed = 0;
+	ForcedOffsetLerpSpeed *= 1.5f;
+	ForcedDistanceLerpSpeed *= 1.5f;
 }
 
 
