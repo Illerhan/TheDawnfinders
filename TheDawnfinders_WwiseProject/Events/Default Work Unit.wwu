@@ -137,7 +137,7 @@
 										<Action Name="" ID="{9665E57A-CCB4-444C-BC2D-F2550ED6C826}" ShortID="454759520">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="SandWalk" ID="{C8732030-8291-4F80-B0AB-3EED71A8651F}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="SandWalkOLD" ID="{C8732030-8291-4F80-B0AB-3EED71A8651F}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -159,7 +159,7 @@
 										<Action Name="" ID="{BAF0E6EE-6A5C-4D66-8B22-E5F29CD5B2D1}" ShortID="1053595759">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BonesWalk" ID="{99836FA1-249B-491F-9BF2-390440B694D9}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BonesWalkOLD" ID="{99836FA1-249B-491F-9BF2-390440B694D9}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

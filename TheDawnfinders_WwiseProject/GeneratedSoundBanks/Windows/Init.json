@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{45842B0E-88D7-AC8E-1B30-9B5ACAB8928E}",
+    "Hash": "{C598C0D7-B80B-BA3F-1557-00995DA16E36}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -64,6 +64,26 @@
       ]
      },
      {
+      "Id": "2108779966",
+      "Name": "Walk",
+      "ObjectPath": "\\States\\Default Work Unit\\Walk",
+      "GUID": "{E7A59603-EEB1-422A-8A95-6C1C09F167BB}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Walk\\None",
+        "GUID": "{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\States\\Default Work Unit\\Walk\\Walk",
+        "GUID": "{EA7CC6B1-69F7-4BBD-BC53-13526B3CD190}"
+       }
+      ]
+     },
+     {
       "Id": "2655407367",
       "Name": "Crouch",
       "ObjectPath": "\\States\\Default Work Unit\\Crouch",
@@ -85,6 +105,32 @@
      }
     ],
     "SwitchGroups": [
+     {
+      "Id": "1350496757",
+      "Name": "PlayerMovement",
+      "ObjectPath": "\\Switches\\Default Work Unit\\PlayerMovement",
+      "GUID": "{EBDF7AE3-8F7F-4843-898E-FA419D2F49FB}",
+      "Switches": [
+       {
+        "Id": "712161704",
+        "Name": "Run",
+        "ObjectPath": "\\Switches\\Default Work Unit\\PlayerMovement\\Run",
+        "GUID": "{751D432F-919D-4B6A-A71E-7027C898161C}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\Switches\\Default Work Unit\\PlayerMovement\\Walk",
+        "GUID": "{25D7C510-1644-4777-8DE4-BA70074F99EB}"
+       },
+       {
+        "Id": "2655407367",
+        "Name": "Crouch",
+        "ObjectPath": "\\Switches\\Default Work Unit\\PlayerMovement\\Crouch",
+        "GUID": "{60710B51-7497-4614-A804-783D970199A9}"
+       }
+      ]
+     },
      {
       "Id": "3865314626",
       "Name": "Material",
@@ -140,6 +186,6 @@
     ]
    }
   ],
-  "FileHash": "{8EA5E415-89D5-1E68-8906-1A363D830A1F}"
+  "FileHash": "{33D98EC3-1BD5-7E8B-2850-F5B6C67121D4}"
  }
 }
