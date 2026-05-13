@@ -53,13 +53,14 @@ public :
 	UPROPERTY(BlueprintReadWrite)
 	int CurrentWaypointIndex;
 
-
-protected :
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> PlayersAtRange;
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> NearPlayers;
+
+
+protected :
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float AlertnessWaitDuration;
