@@ -534,6 +534,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     }
 
     if (NoMovementTimer > 0) {
+        bMoveInputActive = false;
         return;
     }
 
