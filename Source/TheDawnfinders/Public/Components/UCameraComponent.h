@@ -150,10 +150,22 @@ protected :
 	float CurrentPlayerDist = 0;
 
 	UPROPERTY()
-	float bIsOnForcedPosition = false;
+	bool bIsOnForcedPosition = false;
 
 	UPROPERTY()
 	bool bIsInitialised;
+
+	UPROPERTY()
+	float ForcedPositionOffsetProgress;
+
+	UPROPERTY()
+	float ForcedPositionDistanceProgress;
+
+	UPROPERTY()
+	float StartForcedDist;
+
+	UPROPERTY()
+	FVector StartForcedOffset;
 
 	UPROPERTY()
 	USpringArmComponent* SpringArmComponent;
