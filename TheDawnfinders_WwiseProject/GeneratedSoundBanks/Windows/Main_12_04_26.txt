@@ -96,10 +96,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	35075181	GRAB	.cache\E7\{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB		100448
 	35276193	Roll 5	.cache\49\{49D559BC-5A16-39C1-9AB9-812C41096C09}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 5		83296
 	37215428	Whispers4	.cache\EE\{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers4		3731040
-	38165049	BonesWalk 3	.cache\9C\{9CBAF77D-A52B-38CA-7557-2F3B4E365956}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\BonesWalk\BonesWalk 3		243296
 	39757222	DownedHeartbeat 4	.cache\C0\{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 4		186320
 	47330493	KS_Gun Foley_1-04	.cache\B0\{B094DA30-A9E4-F8F4-9C2F-62BEDE7D8A15}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Key_Lock\Key_Lock_Feedback\Key_Lock_Positive_Feedback\KS_Gun Foley_1-04		78944
-	48180023	FootstepsSandRun 11	.cache\74\{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 11		50976
+	48180023	FootstepsSandRun 11	.cache\74\{74B574EB-B903-F885-F35C-0233F5CC6E44}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 11		50976
 	48525552	KS_Gun Foley_1-12	.cache\17\{175E24C3-F352-04BA-3027-8010F09827BC}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Key_Lock\Key_Lock_Feedback\Key_Lock_Positive_Feedback\KS_Gun Foley_1-12		112992
 	49676772	Palanquin_Start 5	.cache\CC\{CCBFAFDB-FB57-9C3C-884D-048BBD5C47EB}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin\Palanquin_Start\Palanquin_Start 5		854624
 	49968460	FootstepsSandWalk 12	.cache\ED\{EDDDF7B0-46FE-718A-0E81-1E77C0EBC183}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalkOLD\FootstepsSandWalk 12		112624
@@ -254,7 +253,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	442693485	FootstepsEliteEnnemyWalk 7	.cache\EA\{EA9C8914-19B8-8F38-7E90-D65A6B9E1A04}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyWalk\FootstepsEliteEnnemyWalk 7		115296
 	444785981	GRAB8	.cache\68\{68EC7D32-176A-8F93-C82E-3E89EA03F9BF}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB8		139872
 	445279208	FootstepsBasicEnnemyRun 16	.cache\1B\{1B4E69AF-BF36-420D-F546-55139425E706}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 16		45564
-	449139959	BonesWalk 1	.cache\25\{257BAAF3-B1CA-04AC-4F71-5C515FB73EAA}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\BonesWalk\BonesWalk 1		166496
 	456838804	FootstepsSandWalk 2	.cache\07\{07ECD636-2F2F-6DE3-E7FC-38F0E04C1082}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalkOLD\FootstepsSandWalk 2		123536
 	458334224	OutOfBreath 5	.cache\1C\{1C559F3D-FA3F-7896-B40F-92D1E4290B5A}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 5		76600
 	459379487	Trap_Spike 1	.cache\FE\{FE1F1DE7-4DEE-AD78-5158-68DA17FB50F7}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Spike\Trap_Spike 1		76896
@@ -280,12 +278,11 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	509189635	Zeloth_Damage1	.cache\97\{97CE4973-92A4-7CF3-EC4A-7C6930CA224A}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnemyDamage\Zeloth_Damage1		345696
 	514363049	KS_Gun Foley_1-02	.cache\9D\{9D5643E6-D2EB-B0D9-12B6-D32DF840CE37}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Key_Lock\Key_Lock_Feedback\Key_Lock_Positive_Feedback\KS_Gun Foley_1-02		89696
 	518699605	FootstepsBasicEnnemyWalk 2	.cache\45\{45052067-2E6E-12A0-8F3B-356F54B34F06}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 2		100032
-	519030112	FootstepsSandRun 12	.cache\1D\{1D4CA381-B480-5EB0-3178-F0444F025F7D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 12		54928
+	519030112	FootstepsSandRun 12	.cache\1D\{1D4CA381-B480-5EB0-3178-F0444F025F7D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 12		54928
 	519325014	FootstepsWoodCrackRun 12	.cache\EE\{EE6E04B3-DDE7-1637-774B-6DD49EA04F15}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 12		74560
 	520458130	FootstepsWoodCrackRun 1	.cache\44\{446BA113-E4B5-8D76-C841-D7B5953FB0EF}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 1		84936
 	521453443	FootstepsWoodCrackWalk 7	.cache\FA\{FAADB29C-4690-1D05-884D-3CE9FB22F446}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 7		154608
 	523267442	FootstepsBasicEnnemyWalk 8	.cache\12\{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 8		105200
-	524183346	BonesWalk 4	.cache\7D\{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\BonesWalk\BonesWalk 4		128096
 	524728569	Roll 8	.cache\A8\{A800914F-2827-842F-E657-43D8F5BDBBE4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Roll 8		84672
 	533200097	Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01	.cache\B4\{B4F82F77-5EC3-6408-F34D-3DAF216B7632}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\Zeloth_Idle\BREATH\Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01		964192
 	533567679	Palanquin_Inventory 3	.cache\17\{17A566D3-BBAB-6407-207B-929540842680}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Inventory\Palanquin_Inventory 3		322656
@@ -342,7 +339,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	675358201	FootstepsStoneRun 14	.cache\E3\{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 14		65488
 	688001986	DamagesHit_3	.cache\7B\{7BF20F55-3F77-95D0-B7DB-78E307746E71}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit_3		78444
 	691857645	FootstepsStoneWalk 7	.cache\A7\{A764E688-9C88-F908-768A-FA5895C0525D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\StoneWalk\FootstepsStoneWalk 7		138080
-	693285485	BonesWalk 2	.cache\A4\{A4E7CD03-D356-B86B-8935-48CE4AB3D27C}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\BonesWalk\BonesWalk 2		198496
 	698942852	FootstepsWoodWalk 13	.cache\B8\{B86EA2FC-B197-AB93-140E-C29BF678655E}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 13		129840
 	705361011	FootstepsWoodWalk 4	.cache\5A\{5A458B7D-CA73-8A32-5009-ACBC0032B2F9}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 4		140176
 	707154206	Trap_Pressure 1	.cache\6F\{6F5C58F0-EC60-0EE3-6F49-80FAF874B79B}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Trap\Trap_Pressure\Trap_Pressure 1		169056
@@ -378,9 +374,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	761029887	DownedBreath 4	.cache\51\{51B5A4EC-8D5C-943D-3688-63A77C5A05D6}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedBreath\DownedBreath 4		157536
 	761762427	FootstepsWoodCrackRun 6	.cache\B4\{B415DBC5-7254-B76D-70C9-C5761D760FBE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 6		73700
 	761825277	DamagesHit_1	.cache\CE\{CE5DBD70-20B6-2BF8-EFD9-C311292F67AC}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesHit\DamagesHit_1		63768
-	763853628	FootstepsSandRun 6	.cache\C9\{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 6		52016
+	763853628	FootstepsSandRun 6	.cache\C9\{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 6		52016
 	766501929	FootstepsEliteEnnemyRun 5	.cache\DE\{DE93439F-B5BD-BA38-5173-E75623028D60}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 5		41516
-	769516079	FootstepsSandRun 14	.cache\D0\{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 14		54272
+	769516079	FootstepsSandRun 14	.cache\D0\{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 14		54272
 	782318759	FootstepsWoodRun 3	.cache\6E\{6EB2E4D3-495B-F879-3125-71DBF7D329D8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 3		59056
 	782401836	Player_Hit-13	.cache\CE\{CED132C7-781B-2BFA-0C09-5A3DB74E707F}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Hit\Player_Hit-13		199904
 	783285563	FootstepsBasicEnnemyRun 11	.cache\0E\{0E4C1154-3167-E7B8-E6E3-CF04BBC3C751}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyRun\FootstepsBasicEnnemyRun 11		48320
@@ -426,7 +422,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	900435312	KS_Gun Foley_1-13	.cache\19\{197C41BF-1058-8F07-0D29-F14AA0831974}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Key_Lock\Key_Lock_Feedback\Key_Lock_Positive_Feedback\KS_Gun Foley_1-13		75360
 	900624370	FootstepsSandRun 7	.cache\E0\{E06CFAB0-BACF-23E5-9D4B-3D8C89A5AFE2}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 7		54976
 	901440669	KS_Basic Cloth_35-11	.cache\35\{3598DB97-2D48-09B9-9A57-10E8F60FE5B9}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\BasicGrab\KS_Basic Cloth_35-11		92384
-	903624507	FootstepsSandRun 2	.cache\54\{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 2		54832
+	903624507	FootstepsSandRun 2	.cache\54\{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 2		54832
 	909385748	FootstepsSandRun 5	.cache\39\{39620D0B-61D8-37B8-24E2-385BEDB28836}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 5		52208
 	910031922	Gold_Grab-13	.cache\37\{373C5437-147A-F2BF-894D-813283F1E0A2}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-13		104928
 	912347765	FootstepsEliteEnnemyRun 8	.cache\6E\{6ECEA6F0-8AA6-C981-925D-E60CB1BEE35F}.wem		\Containers\Default Work Unit\Ennemis\Zeloth\EliteEnnemyMovement\EliteEnnemyRun\FootstepsEliteEnnemyRun 8		46164
@@ -466,7 +462,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	985944095	Player_Shot-11	.cache\8A\{8A5D408D-2944-4998-6D41-B67D99EAFFAF}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-11		221168
 	987167948	FootstepsWoodWalk 7	.cache\11\{11119CBB-686A-0892-001B-F160D8F2BA48}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 7		123824
 	988341890	FootstepsBasicEnnemyWalk 15	.cache\42\{42D5063D-B97F-CBDF-1F60-916B47ECF1EC}.wem		\Containers\Default Work Unit\Ennemis\Fidele\BasicEnnemyMovement\BasicEnnemyWalk\FootstepsBasicEnnemyWalk 15		109072
-	989610776	FootstepsSandRun 8	.cache\C5\{C515C012-7A11-B835-DAC2-651B7C302209}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 8		52160
+	989610776	FootstepsSandRun 8	.cache\C5\{C515C012-7A11-B835-DAC2-651B7C302209}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 8		52160
 	990459238	FootstepsStoneRun 16	.cache\C5\{C57B0878-45F3-914E-32CC-3E72978CE20D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\StoneRun\FootstepsStoneRun 16		71328
 	990610795	CrazyStatus	.cache\BF\{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem		\Containers\Default Work Unit\Joueur\Etats\CrazyStatus		3646336
 	991140081	Player_Shot-01	.cache\C4\{C4FBC4E7-77F4-2CAC-EC69-3381375E2E43}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-01		240224
@@ -486,8 +482,8 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	1026434573	Gold_Grab-05	.cache\ED\{ED06A902-4D26-97A6-563E-76282B9D8AC2}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-05		105824
 	1029570780	placeholder	.cache\30\{30BF439F-FB3D-4D9E-79C2-E63C68CFC0C0}.wem		\Containers\Soundly\placeholder		368024
 	1030339949	DownedHeartbeat 8	.cache\DD\{DD3053E1-097C-0146-7B25-0369090EC18F}.wem		\Containers\Default Work Unit\Joueur\Etats\DownedHeartbeat\DownedHeartbeat 8		196432
-	1030869782	FootstepsSandRun 10	.cache\35\{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 10		56000
-	1039319747	FootstepsSandRun 1	.cache\BB\{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 1		52128
+	1030869782	FootstepsSandRun 10	.cache\35\{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 10		56000
+	1039319747	FootstepsSandRun 1	.cache\BB\{BBDB6A95-D4D9-022C-200A-765F09ED34F1}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandCrouch\FootstepsSandRun 1		52128
 	1042641416	Palanquin_Empty 5	.cache\0E\{0ED1334B-1B6B-7483-7FFA-108B0DD96BB0}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 5		273408
 	1046934722	OutOfBreath 2	.cache\7A\{7AF13B2C-78A8-0B4E-1E36-FEA23C65DDB4}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 2		78956
 	1047484363	FootstepsSandRun 18	.cache\7E\{7ED152B5-7B06-29B0-3E68-5A0F99C441E6}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandRun\FootstepsSandRun 18		52640

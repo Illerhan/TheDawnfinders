@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{57DE6A76-D9C8-09C4-4D3C-D45C7114EB4C}",
+    "Hash": "{5AAEE51F-3101-48E4-906A-68DD9D23F71A}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -110,14 +110,6 @@
       "Location": "Memory",
       "ShortName": "Whispers4.wav",
       "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
-     },
-     {
-      "Id": "38165049",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BonesWalk 3.wav",
-      "CachePath": "9C/{9CBAF77D-A52B-38CA-7557-2F3B4E365956}.wem"
      },
      {
       "Id": "39757222",
@@ -1376,14 +1368,6 @@
       "CachePath": "1B/{1B4E69AF-BF36-420D-F546-55139425E706}.wem"
      },
      {
-      "Id": "449139959",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BonesWalk 1.wav",
-      "CachePath": "25/{257BAAF3-B1CA-04AC-4F71-5C515FB73EAA}.wem"
-     },
-     {
       "Id": "456838804",
       "Language": "SFX",
       "Streaming": "false",
@@ -1622,14 +1606,6 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyWalk\\FootstepsBasicEnnemyWalk 8.wav",
       "CachePath": "12/{1264D06F-DF9B-76F1-7A53-0FE1DBDCF571}.wem"
-     },
-     {
-      "Id": "524183346",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BonesWalk 4.wav",
-      "CachePath": "7D/{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem"
      },
      {
       "Id": "524728569",
@@ -2078,14 +2054,6 @@
       "Location": "Memory",
       "ShortName": "StoneWalk\\FootstepsStoneWalk 7.wav",
       "CachePath": "A7/{A764E688-9C88-F908-768A-FA5895C0525D}.wem"
-     },
-     {
-      "Id": "693285485",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BonesWalk 2.wav",
-      "CachePath": "A4/{A4E7CD03-D356-B86B-8935-48CE4AB3D27C}.wem"
      },
      {
       "Id": "698942852",
@@ -3826,23 +3794,10 @@
       "Name": "Play_BonesWalk",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_BonesWalk",
       "GUID": "{1FF1C13B-C137-460F-9621-18A3CB6497FD}",
+      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "0.6666667",
-      "DurationMax": "1.2666667",
-      "MediaRefs": [
-       {
-        "Id": "38165049"
-       },
-       {
-        "Id": "449139959"
-       },
-       {
-        "Id": "524183346"
-       },
-       {
-        "Id": "693285485"
-       }
-      ]
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "2257418509",
@@ -4927,7 +4882,7 @@
       "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.2515",
-      "DurationMax": "0.39191666",
+      "DurationMax": "0.30525",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -5067,52 +5022,58 @@
         },
         "MediaRefs": [
          {
-          "Id": "185441988"
+          "Id": "48180023"
          },
          {
-          "Id": "195665557"
+          "Id": "64511599"
          },
          {
-          "Id": "215028229"
+          "Id": "282780422"
          },
          {
-          "Id": "403097929"
+          "Id": "364748855"
          },
          {
-          "Id": "403493255"
+          "Id": "391905191"
          },
          {
-          "Id": "414622692"
+          "Id": "519030112"
          },
          {
-          "Id": "589087457"
+          "Id": "763853628"
          },
          {
-          "Id": "675358201"
+          "Id": "769516079"
          },
          {
-          "Id": "720572330"
+          "Id": "855499412"
          },
          {
-          "Id": "733316650"
+          "Id": "892421631"
          },
          {
-          "Id": "791895633"
+          "Id": "900624370"
          },
          {
-          "Id": "814448940"
+          "Id": "903624507"
          },
          {
-          "Id": "865151463"
+          "Id": "909385748"
          },
          {
-          "Id": "977382893"
+          "Id": "976191507"
          },
          {
-          "Id": "990459238"
+          "Id": "989610776"
          },
          {
-          "Id": "1055218331"
+          "Id": "1030869782"
+         },
+         {
+          "Id": "1039319747"
+         },
+         {
+          "Id": "1047484363"
          }
         ]
        },
@@ -5254,52 +5215,58 @@
         },
         "MediaRefs": [
          {
-          "Id": "185441988"
+          "Id": "48180023"
          },
          {
-          "Id": "195665557"
+          "Id": "64511599"
          },
          {
-          "Id": "215028229"
+          "Id": "282780422"
          },
          {
-          "Id": "403097929"
+          "Id": "364748855"
          },
          {
-          "Id": "403493255"
+          "Id": "391905191"
          },
          {
-          "Id": "414622692"
+          "Id": "519030112"
          },
          {
-          "Id": "589087457"
+          "Id": "763853628"
          },
          {
-          "Id": "675358201"
+          "Id": "769516079"
          },
          {
-          "Id": "720572330"
+          "Id": "855499412"
          },
          {
-          "Id": "733316650"
+          "Id": "892421631"
          },
          {
-          "Id": "791895633"
+          "Id": "900624370"
          },
          {
-          "Id": "814448940"
+          "Id": "903624507"
          },
          {
-          "Id": "865151463"
+          "Id": "909385748"
          },
          {
-          "Id": "977382893"
+          "Id": "976191507"
          },
          {
-          "Id": "990459238"
+          "Id": "989610776"
          },
          {
-          "Id": "1055218331"
+          "Id": "1030869782"
+         },
+         {
+          "Id": "1039319747"
+         },
+         {
+          "Id": "1047484363"
          }
         ]
        }
@@ -5913,6 +5880,6 @@
     ]
    }
   ],
-  "FileHash": "{8B0E41D4-721F-CAE6-0DF2-1F49A6FC294C}"
+  "FileHash": "{3D6EEAC2-7F5D-C94B-1EC7-7D2BC3C250EB}"
  }
 }
