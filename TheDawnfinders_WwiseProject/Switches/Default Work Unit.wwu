@@ -17,6 +17,13 @@
 						<Switch Name="Run" ID="{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"/>
 					</ChildrenList>
 				</SwitchGroup>
+				<SwitchGroup Name="PlayerMovement" ID="{EBDF7AE3-8F7F-4843-898E-FA419D2F49FB}">
+					<ChildrenList>
+						<Switch Name="Crouch" ID="{60710B51-7497-4614-A804-783D970199A9}"/>
+						<Switch Name="Walk" ID="{25D7C510-1644-4777-8DE4-BA70074F99EB}"/>
+						<Switch Name="Run" ID="{751D432F-919D-4B6A-A71E-7027C898161C}"/>
+					</ChildrenList>
+				</SwitchGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</Switches>

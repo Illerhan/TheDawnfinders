@@ -43,6 +43,12 @@
 						</Transition>
 					</TransitionList>
 				</StateGroup>
+				<StateGroup Name="Walk" ID="{E7A59603-EEB1-422A-8A95-6C1C09F167BB}">
+					<ChildrenList>
+						<State Name="None" ID="{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"/>
+						<State Name="Walk" ID="{EA7CC6B1-69F7-4BBD-BC53-13526B3CD190}"/>
+					</ChildrenList>
+				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</States>
