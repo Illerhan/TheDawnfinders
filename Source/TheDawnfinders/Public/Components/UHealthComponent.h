@@ -156,8 +156,8 @@ public :
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void Client_PlayHeal();
 	
-	UFUNCTION(NetMulticast,Unreliable)
-	void Multi_DieSound();
+	UFUNCTION(Client,Unreliable)
+	void Client_DieSound();
 
 
 	// === NETWORK ===
@@ -261,6 +261,9 @@ protected :
 	UWorldHealthBar* WorldHealthBar;
 	
 // === Sounds ===
+	
+	UPROPERTY()
+	int32 DyingSoundID;
 	
 	UPROPERTY()
 	int32 BreathSoundID;

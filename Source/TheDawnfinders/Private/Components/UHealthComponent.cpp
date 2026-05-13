@@ -502,7 +502,7 @@ void UHealthComponent::Fallen()
 	Multicast_ActualiseFallen(1);
 	
 	IPlayerInterface::Execute_SetCurrentPlayerState(Owner, EPlayerState::Fallen, true);
-
+	//DieSoundID = UAkGameplayStatics::PostEvent(FallenBreath,GetOwner(),0, FOnAkPostEventCallback(), false);
 	FallenTimer = FallenDuration;
 	Client_HeartbeatSound(); 
 }
@@ -510,14 +510,11 @@ void UHealthComponent::Fallen()
 void UHealthComponent::Client_HeartbeatSound_Implementation()
 {
 	APlayerController* LocalPC = GEngine->GetFirstLocalPlayerController(GetWorld());
-    
-	// On vérifie que ce composant appartient bien à ce Controller
-	// (Pour éviter que le Host n'entende le son du Client)
+
 	if (LocalPC && OwnerController == LocalPC)
 	{
-		// On poste sur le LocalPC. 
-		// Le joueur B n'a pas accès au LocalPC du joueur A, donc le son ne peut pas exister chez lui.
-		HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen, LocalPC, 0, FOnAkPostEventCallback(), false);
+		DyingSoundID = UAkGameplayStatics::PostEvent(FallenBreath, GetOwner(), 0, FOnAkPostEventCallback(), false);
+		HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen, GetOwner(), 0, FOnAkPostEventCallback(), false);
 	}
 }
 
@@ -558,14 +555,14 @@ void UHealthComponent::Die()
 	if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
 	{
 		AudioDevice->StopPlayingID(BreathSoundID);
-		BreathSoundID = AK_INVALID_PLAYING_ID; // Reset
+		BreathSoundID = AK_INVALID_PLAYING_ID;
 	}
 	if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
 	{
 		AudioDevice->StopPlayingID(HeartBeatSoundID);
-		HeartBeatSoundID = AK_INVALID_PLAYING_ID; // Reset
+		HeartBeatSoundID = AK_INVALID_PLAYING_ID;
 	}
-	Multi_DieSound();
+	Client_DieSound();
 }
 
 void UHealthComponent::Client_Die_Implementation()
@@ -706,12 +703,21 @@ void UHealthComponent::Client_PlayHeal_Implementation()
 			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
 		}
 	}
-	//HealingSoundID = UAkGameplayStatics::PostEvent(HealingSound, GetOwner(), 0, FOnAkPostEventCallback(), false);
 }
 
-void UHealthComponent::Multi_DieSound_Implementation()
+void UHealthComponent::Client_DieSound_Implementation()
 {
 	DieSoundID = UAkGameplayStatics::PostEvent(DieBreath,GetOwner(),0,FOnAkPostEventCallback(), false);
+	if (HeartBeatSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HeartBeatSoundID);
+			HeartBeatSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}
+	}
+	
 }
 
 void UHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
