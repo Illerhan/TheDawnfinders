@@ -118,19 +118,12 @@ void ACustomPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!IsLocalController() || !MuleWidget || !Mule) return;
+	if (!IsLocalController() || !Mule) return;
 	float ChargesPercent = 0.f;
 	if (Mule->ChargeCooldown > 0.f)
 	{
 		ChargesPercent = Mule->ChargesTimer / Mule->ChargeCooldown;
 	}
-
-	MuleWidget->UpdateMuleWidget(
-		Mule->CallCharges,
-		ChargesPercent,
-		Mule->CooldownTimer,
-		Mule->InventoryComponent->CurrentValue + Mule->InventoryComponent->Gold
-	);
 	
 	if (bIsHolding)
 	{
