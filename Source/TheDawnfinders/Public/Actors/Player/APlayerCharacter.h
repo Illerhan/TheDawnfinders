@@ -320,6 +320,27 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void PlayMontage(UAnimMontage* Montage, float Speed);
 
+	UFUNCTION(Server, Reliable)
+	void ServerPlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(BlueprintCallable)
+	void InterruptMontage();
+
+	UFUNCTION(Server, Reliable)
+	void Server_InterruptMontage();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_InterruptMontage();
+
+	UFUNCTION()
+	void OnLoopMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 
@@ -404,6 +425,9 @@ public :
 protected :
 	UPROPERTY()
 	UWorldPlayerWidget* PlayerWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* CrawlMontage;
 
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;
