@@ -16,7 +16,7 @@ void UMusicManager::EnterZone(AAmbientMusicZone* Zone)
     if (CurrentZone == Zone) return;
 
     CurrentZone = Zone;
-    bZoneChanged = true; // ← signal que la zone a changé
+    bZoneChanged = true;
     EvaluateState();
 }
 

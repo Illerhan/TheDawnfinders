@@ -1,10 +1,13 @@
 State Group	ID	Name			Wwise Object Path	Notes
 	229157224	IsFriendly			\Default Work Unit\IsFriendly	
+	2108779966	Walk			\Default Work Unit\Walk	
 	2655407367	Crouch			\Default Work Unit\Crouch	
 
 State	ID	Name	State Group			Notes
 	229157224	IsFriendly	IsFriendly			
 	748895195	None	IsFriendly			
+	748895195	None	Walk			
+	2108779966	Walk	Walk			
 	748895195	None	Crouch			
 	2655407367	Crouch	Crouch			
 
