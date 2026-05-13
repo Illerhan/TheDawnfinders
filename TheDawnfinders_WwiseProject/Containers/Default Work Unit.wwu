@@ -4724,7 +4724,7 @@
 														<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
 														<CustomState Name="" ID="{5CD0B12F-B7AC-4039-8F36-7C14F39DC271}" ShortID="189426911">
 															<PropertyList>
-																<Property Name="Volume" Type="Real64" Value="-25"/>
+																<Property Name="Volume" Type="Real64" Value="-10"/>
 															</PropertyList>
 														</CustomState>
 													</CustomState>
@@ -7500,6 +7500,28 @@
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
+													<StateInfo>
+														<StateGroupList>
+															<StateGroupInfo>
+																<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+																<StateGroupInfo Name="" ID="{43848C53-F12B-4FB4-AA03-F1BA9C73A2C1}" ShortID="395654527"/>
+															</StateGroupInfo>
+														</StateGroupList>
+														<CustomStateList>
+															<CustomState>
+																<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+																<CustomState Name="" ID="{4D41F521-26CD-45D7-9DA1-78F771C49DDE}" ShortID="953946834">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64" Value="-10"/>
+																	</PropertyList>
+																</CustomState>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+																<CustomState Name="" ID="{C9CF0425-64DF-435E-B54D-FDFDD8425AC7}" ShortID="1022819766"/>
+															</CustomState>
+														</CustomStateList>
+													</StateInfo>
 												</RandomSequenceContainer>
 											</ChildrenList>
 											<GroupingInfo>
