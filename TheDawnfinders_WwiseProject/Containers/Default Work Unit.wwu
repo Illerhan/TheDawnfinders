@@ -1938,6 +1938,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<Sound Name="Roll 1" ID="{18B37444-AEC0-4A97-ADFE-16D50CA3A78E}" ShortID="427231990">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1960,6 +1967,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 2" ID="{56028521-F1A2-4609-B2BE-71CE69EDB201}" ShortID="652819088">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1982,6 +1996,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 3" ID="{67F4A7D2-8999-4F0F-B666-D12EF90BE68B}" ShortID="486350209">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2004,6 +2025,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 4" ID="{278978BC-F978-4E23-B552-318EF1592B7C}" ShortID="831555613">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2023,6 +2051,98 @@
 													</ChildrenList>
 													<ActiveSourceList>
 														<ActiveSource Name="Roll 4" ID="{B66114ED-485F-4E8E-92DC-65023A97560E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Roll 5" ID="{917D5050-F3C8-4069-8326-25B8756D14DD}" ShortID="440109074">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rollonev1_1-05" ID="{70357C2D-23AD-4CEE-BACB-2784D5DC78F6}">
+															<Language>SFX</Language>
+															<AudioFile>rollonev1.1-05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="35276193"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rollonev1_1-05" ID="{70357C2D-23AD-4CEE-BACB-2784D5DC78F6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Roll 6" ID="{7368F19E-9D37-45A1-B15D-2FC2A422671A}" ShortID="604761777">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rollonev1_1-06" ID="{BFEEC988-4822-45BC-AD35-26A73170A030}">
+															<Language>SFX</Language>
+															<AudioFile>rollonev1.1-06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="666040045"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rollonev1_1-06" ID="{BFEEC988-4822-45BC-AD35-26A73170A030}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Roll 7" ID="{A0990E0B-9754-4275-9569-BBD451421D54}" ShortID="779163883">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rollonev1_1-07" ID="{E6BD16C0-3E68-495E-AB11-BD4B24E3E3F4}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.366229166666667"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>rollonev1.1-07.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="210031997"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rollonev1_1-07" ID="{E6BD16C0-3E68-495E-AB11-BD4B24E3E3F4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Roll 8" ID="{5CD6F01E-E3B2-45C4-B66F-5199F6CF5CE2}" ShortID="827494944">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rollonev1_1-08" ID="{7478ADDB-751F-4FEF-BD94-842BF4DF0E38}">
+															<Language>SFX</Language>
+															<AudioFile>rollonev1.1-08.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="524728569"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rollonev1_1-08" ID="{7478ADDB-751F-4FEF-BD94-842BF4DF0E38}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -5122,9 +5242,109 @@
 												</GroupingList>
 											</GroupingInfo>
 										</SwitchContainer>
+										<RandomSequenceContainer Name="BonesWalk" ID="{99836FA1-249B-491F-9BF2-390440B694D9}" ShortID="142158715">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="BonesWalk 1" ID="{C8384A4E-7908-45E5-8AF5-7462F1C61352}" ShortID="506016372">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BonesWalk 1" ID="{A4A83980-315A-4671-84CD-241073791C50}">
+															<Language>SFX</Language>
+															<AudioFile>BonesWalk 1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="449139959"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BonesWalk 1" ID="{A4A83980-315A-4671-84CD-241073791C50}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BonesWalk 2" ID="{74A73A29-9016-4114-8614-51C64CADDA7F}" ShortID="214860018">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BonesWalk 2" ID="{0458135C-7413-4B95-8E9B-96982DB04F6E}">
+															<Language>SFX</Language>
+															<AudioFile>BonesWalk 2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="693285485"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BonesWalk 2" ID="{0458135C-7413-4B95-8E9B-96982DB04F6E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BonesWalk 3" ID="{A16037F6-F603-46EC-87EF-EFC4C2B64FEB}" ShortID="543837913">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BonesWalk 3" ID="{1CC93460-C53D-4099-8441-7D45B4783585}">
+															<Language>SFX</Language>
+															<AudioFile>BonesWalk 3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="38165049"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BonesWalk 3" ID="{1CC93460-C53D-4099-8441-7D45B4783585}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BonesWalk 4" ID="{FEA7B8AB-6D01-4BEF-8F12-D300D972DBC4}" ShortID="998209927">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BonesWalk 4" ID="{5109B2E7-F0B4-40DF-BC6E-B42C3391C82A}">
+															<Language>SFX</Language>
+															<AudioFile>BonesWalk 4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="524183346"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BonesWalk 4" ID="{5109B2E7-F0B4-40DF-BC6E-B42C3391C82A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
-								<RandomSequenceContainer Name="Player_Lever" ID="{62C45CBA-2272-47C5-B9AC-91993C71AC08}" ShortID="121334790">
+								<RandomSequenceContainer Name="Lever_Use" ID="{62C45CBA-2272-47C5-B9AC-91993C71AC08}" ShortID="121334790">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -5133,6 +5353,96 @@
 											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="LeverUse 1" ID="{181BEC47-209C-49C6-84D9-D67EF439D3F6}" ShortID="848324532">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="LeverUse 1" ID="{F7DCB406-F45B-482E-8BEC-272890E08A2F}">
+													<Language>SFX</Language>
+													<AudioFile>LeverUse 1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="928341138"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="LeverUse 1" ID="{F7DCB406-F45B-482E-8BEC-272890E08A2F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="LeverUse 2" ID="{47B1D6A8-FB19-45DD-97AD-25513889B85A}" ShortID="44086319">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="LeverUse 2" ID="{0BBED6C9-74EA-4589-ABFC-BF29D6D48195}">
+													<Language>SFX</Language>
+													<AudioFile>LeverUse 2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="187566473"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="LeverUse 2" ID="{0BBED6C9-74EA-4589-ABFC-BF29D6D48195}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="LeverUse 3" ID="{3157BD7A-8F98-484E-8174-9F9689CA454E}" ShortID="477411448">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="LeverUse 3" ID="{B2DD6222-8B03-4DA1-BD7F-B0F5D96BDD0D}">
+													<Language>SFX</Language>
+													<AudioFile>LeverUse 3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="166637616"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="LeverUse 3" ID="{B2DD6222-8B03-4DA1-BD7F-B0F5D96BDD0D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="LeverUse 4" ID="{EFB466CF-CD5C-4DC1-A271-0AF04D2FF5E8}" ShortID="561055401">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="LeverUse 4" ID="{B30E21A1-B2D0-442A-8E3A-62ED34461765}">
+													<Language>SFX</Language>
+													<AudioFile>LeverUse 4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="398590232"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="LeverUse 4" ID="{B30E21A1-B2D0-442A-8E3A-62ED34461765}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
