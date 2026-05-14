@@ -1529,9 +1529,14 @@
 								</BlendContainer>
 								<RandomSequenceContainer Name="PlayerPickaxe" ID="{EDF8A43F-685F-437A-ACD6-FE9C638BFFFE}" ShortID="135912541">
 									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-15</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1567,6 +1572,28 @@
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{224AB227-D5DB-45D6-8772-EC3DA6D0E440}" ShortID="249312126"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{27440C03-227D-4B22-9D06-3E4493443E47}" ShortID="812333432">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64" Value="-10"/>
+													</PropertyList>
+												</CustomState>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{5F7FDC21-B13A-4F04-990B-70C11357AB67}" ShortID="961039592"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
