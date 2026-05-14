@@ -237,7 +237,21 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
-						<Folder Name="Actions" ID="{68901D95-CD16-4BB7-BA38-CA1811FAF341}" ShortID="310585558"/>
+						<Folder Name="Actions" ID="{68901D95-CD16-4BB7-BA38-CA1811FAF341}" ShortID="310585558">
+							<ChildrenList>
+								<Event Name="Play_Roll" ID="{845C9240-8148-4EE9-A109-F848C42D0D03}">
+									<ChildrenList>
+										<Action Name="" ID="{7EF459C8-57D7-40B9-93CD-8E2B7EC516DA}" ShortID="883976199">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Roll" ID="{B0F38656-DF7D-4FF1-880A-F96910D7FDA6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 						<Folder Name="Etats" ID="{77E6FEA5-9734-4CC5-B039-704790C7EF7F}" ShortID="702691761">
 							<ChildrenList>
 								<Event Name="Play_DownedBreath" ID="{490678ED-6B7F-4FDB-8A75-7B817113C191}">
@@ -466,6 +480,65 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Folder Name="Braseros" ID="{6B6F8A40-9651-47DE-AC38-F514AB78DD3A}" ShortID="1066949273">
+									<ChildrenList>
+										<Event Name="Play_FireOn" ID="{F00EDF90-B4EE-43F7-A36D-8BA23B83AB8E}">
+											<PropertyList>
+												<Property Name="InstanceLimit" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{B56AB0ED-DF9E-4D17-B549-EB5A39935FD8}" ShortID="1002263052">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="FlameOn" ID="{623D5708-1566-4913-A51D-241C0F2952A3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_FireLoop" ID="{C12EE427-486F-4DB1-8434-E00B63E88F07}">
+											<ChildrenList>
+												<Action Name="" ID="{268A0360-B4C0-4E90-864B-96B166CA5439}" ShortID="440206950">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="FlameLoop" ID="{EB3C8662-7486-4549-8973-1E78B78EB3D3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_FireOff" ID="{B2E5925C-EFD2-4CC1-8480-5F502C4948FF}">
+											<ChildrenList>
+												<Action Name="" ID="{A79C495A-ADBF-4CD5-BC00-4F4ED874C94F}" ShortID="641506125">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="FlameOff" ID="{69B18B9E-9C4B-41C3-B71C-5994F8ECC89E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Flags" ID="{645F2DF8-6CD1-458B-BED1-C7C4FB273294}" ShortID="457413870">
+									<ChildrenList>
+										<Event Name="Play_FlagMovement" ID="{93205F18-9051-4790-B639-F7F63BA1417A}">
+											<ChildrenList>
+												<Action Name="" ID="{2DD96C1F-361C-4A22-B416-7EF8FAFC7A14}" ShortID="426138990">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="FlagMovement" ID="{B35CF9F2-7E10-4840-8B8E-F571770A9B8E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
