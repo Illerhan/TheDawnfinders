@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{B561A345-E002-4E93-7384-1C9C448A0466}",
+    "Hash": "{34F762DE-6148-2CD5-C23F-BEAA92C7D47F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -94,14 +94,6 @@
       "Location": "Memory",
       "ShortName": "GRAB.wav",
       "CachePath": "E7/{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem"
-     },
-     {
-      "Id": "35276193",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "rollonev1.1-05.wav",
-      "CachePath": "49/{49D559BC-5A16-39C1-9AB9-812C41096C09}.wem"
      },
      {
       "Id": "37215428",
@@ -254,6 +246,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Travel\\Palanquin_Travel.wav",
       "CachePath": "65/{65ACC4B8-FBFF-A75D-E099-7FF4F336B63E}.wem"
+     },
+     {
+      "Id": "87138754",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FlameOff.wav",
+      "CachePath": "AF/{AF4780B4-0EA1-726B-AF8B-5260E1105770}.wem"
      },
      {
       "Id": "87427668",
@@ -582,14 +582,6 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 11.wav",
       "CachePath": "CC/{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem"
-     },
-     {
-      "Id": "210031997",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "rollonev1.1-07.wav",
-      "CachePath": "AD/{ADC39B84-61F6-2FA0-4F01-E661AF00A2AD}.wem"
      },
      {
       "Id": "215028229",
@@ -1320,6 +1312,14 @@
       "CachePath": "D8/{D8AE9875-C677-D776-C773-3358DA4FA1FF}.wem"
      },
      {
+      "Id": "429962083",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dodge_02.wav",
+      "CachePath": "15/{151B3966-4279-3530-74D4-E689287BB9E4}.wem"
+     },
+     {
       "Id": "433727521",
       "Language": "SFX",
       "Streaming": "false",
@@ -1350,6 +1350,30 @@
       "Location": "Memory",
       "ShortName": "DownedFall\\DownedFall 5.wav",
       "CachePath": "65/{653A6A63-4C3E-AB85-DD62-50F3B35EAEBE}.wem"
+     },
+     {
+      "Id": "438766142",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dodge_01.wav",
+      "CachePath": "75/{75F998F0-A3D3-0877-6801-1DE473C07D9F}.wem"
+     },
+     {
+      "Id": "439295761",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FlameLoop.wav",
+      "CachePath": "87/{8727051C-89EE-76CD-0FB3-BEF549A360DA}.wem"
+     },
+     {
+      "Id": "441052588",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FlameOn.wav",
+      "CachePath": "CC/{CC69FF85-B64C-5557-CEED-88D32C5D71EA}.wem"
      },
      {
       "Id": "442693485",
@@ -1630,14 +1654,6 @@
       "Location": "Memory",
       "ShortName": "BonesWalk 4.wav",
       "CachePath": "7D/{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem"
-     },
-     {
-      "Id": "524728569",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "rollonev1.1-08.wav",
-      "CachePath": "A8/{A800914F-2827-842F-E657-43D8F5BDBBE4}.wem"
      },
      {
       "Id": "533200097",
@@ -2038,14 +2054,6 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Empty\\Palanquin_Empty 7.wav",
       "CachePath": "6A/{6AB52A5A-620C-340C-A563-0ED717C00DF2}.wem"
-     },
-     {
-      "Id": "666040045",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "rollonev1.1-06.wav",
-      "CachePath": "8F/{8F1574CC-041D-BE7E-0372-16790156BF93}.wem"
      },
      {
       "Id": "666566413",
@@ -2960,6 +2968,14 @@
       "CachePath": "FC/{FCF43D99-A192-1D4D-A882-5D40F8DDE115}.wem"
      },
      {
+      "Id": "970556434",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Flag.wav",
+      "CachePath": "EB/{EB12772C-00AE-58BA-FAFC-8D1227CE7609}.wem"
+     },
+     {
       "Id": "970594138",
       "Language": "SFX",
       "Streaming": "false",
@@ -3126,6 +3142,14 @@
       "Location": "Memory",
       "ShortName": "Audio 4.cm_02.wav",
       "CachePath": "AD/{AD5354AD-DCAD-F3B8-BF71-2E793EFF0D37}.wem"
+     },
+     {
+      "Id": "997730831",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Dodge_03.wav",
+      "CachePath": "85/{851B9EE6-5B73-7B13-0AA6-6FFBE22FC4C3}.wem"
      },
      {
       "Id": "1005848849",
@@ -4465,6 +4489,60 @@
       ]
      },
      {
+      "Id": "170675880",
+      "Name": "Play_FireLoop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireLoop",
+      "GUID": "{C12EE427-486F-4DB1-8434-E00B63E88F07}",
+      "MaxAttenuation": "5000",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "439295761"
+       }
+      ]
+     },
+     {
+      "Id": "3127045213",
+      "Name": "Play_FireOff",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireOff",
+      "GUID": "{B2E5925C-EFD2-4CC1-8480-5F502C4948FF}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.493694",
+      "DurationMax": "2.493694",
+      "MediaRefs": [
+       {
+        "Id": "87138754"
+       }
+      ]
+     },
+     {
+      "Id": "1268298673",
+      "Name": "Play_FireOn",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireOn",
+      "GUID": "{F00EDF90-B4EE-43F7-A36D-8BA23B83AB8E}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.8684797",
+      "DurationMax": "1.8684797",
+      "MediaRefs": [
+       {
+        "Id": "441052588"
+       }
+      ]
+     },
+     {
+      "Id": "1009772479",
+      "Name": "Play_FlagMovement",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Flags\\Play_FlagMovement",
+      "GUID": "{93205F18-9051-4790-B639-F7F63BA1417A}",
+      "MaxAttenuation": "5000",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "970556434"
+       }
+      ]
+     },
+     {
       "Id": "739133775",
       "Name": "Play_Key_Lock_Negative_Feedback",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Play_Key_Lock_Negative_Feedback",
@@ -5038,6 +5116,26 @@
        },
        {
         "Id": "900053916"
+       }
+      ]
+     },
+     {
+      "Id": "2719919427",
+      "Name": "Play_Roll",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Roll",
+      "GUID": "{845C9240-8148-4EE9-A109-F848C42D0D03}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.79073846",
+      "DurationMax": "0.95950186",
+      "MediaRefs": [
+       {
+        "Id": "429962083"
+       },
+       {
+        "Id": "438766142"
+       },
+       {
+        "Id": "997730831"
        }
       ]
      },
@@ -6047,6 +6145,6 @@
     ]
    }
   ],
-  "FileHash": "{6EE722AC-7CA2-C5BC-5CFC-380907A05092}"
+  "FileHash": "{DF0EFCAF-32F1-91E9-8EE4-D151D5C979F7}"
  }
 }

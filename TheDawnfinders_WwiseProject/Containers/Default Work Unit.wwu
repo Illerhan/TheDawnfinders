@@ -1944,6 +1944,23 @@
 								<Folder Name="Deplacement" ID="{82337E9A-CA4A-480E-90FA-F74B7D681B7D}" ShortID="1039099529">
 									<ChildrenList>
 										<RandomSequenceContainer Name="Roll" ID="{B0F38656-DF7D-4FF1-880A-F96910D7FDA6}" ShortID="634721250">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>50</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-50</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2070,6 +2087,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 5" ID="{917D5050-F3C8-4069-8326-25B8756D14DD}" ShortID="440109074">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2092,6 +2116,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 6" ID="{7368F19E-9D37-45A1-B15D-2FC2A422671A}" ShortID="604761777">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2114,6 +2145,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 7" ID="{A0990E0B-9754-4275-9569-BBD451421D54}" ShortID="779163883">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2140,6 +2178,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="Roll 8" ID="{5CD6F01E-E3B2-45C4-B66F-5199F6CF5CE2}" ShortID="827494944">
+													<PropertyList>
+														<Property Name="Inclusion" Type="bool">
+															<ValueList>
+																<Value>False</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -2161,7 +2206,103 @@
 														<ActiveSource Name="rollonev1_1-08" ID="{7478ADDB-751F-4FEF-BD94-842BF4DF0E38}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
+												<Sound Name="Dodge_01" ID="{25CDE7FA-03C7-4A9D-9D65-CC89A5A2BD8C}" ShortID="513438118">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Dodge_01" ID="{39E66CA2-40D3-4C40-BD19-C48A9F29D6F1}">
+															<PropertyList>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Dodge_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="438766142"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Dodge_01" ID="{39E66CA2-40D3-4C40-BD19-C48A9F29D6F1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Dodge_02" ID="{23FB8D8A-5A01-44A1-942F-15DC713208EB}" ShortID="661663495">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Dodge_02" ID="{FE354CF4-196B-49D0-9D01-562259A7AC96}">
+															<Language>SFX</Language>
+															<AudioFile>Dodge_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="429962083"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Dodge_02" ID="{FE354CF4-196B-49D0-9D01-562259A7AC96}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Dodge_03" ID="{8E2D6F25-3FA8-4B64-9EDD-554E67E8F377}" ShortID="92943080">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Dodge_03" ID="{23C0124C-EBFE-461B-93FC-E437808F03AA}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.813728030931553"/>
+																<Property Name="FadeOutShape" Type="int16" Value="3"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Dodge_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="997730831"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Dodge_03" ID="{23C0124C-EBFE-461B-93FC-E437808F03AA}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
+											<StateInfo>
+												<StateGroupList>
+													<StateGroupInfo>
+														<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+														<StateGroupInfo Name="" ID="{ADF678EC-519C-4619-8E4B-88ADD1BEAF58}" ShortID="626443478"/>
+													</StateGroupInfo>
+												</StateGroupList>
+												<CustomStateList>
+													<CustomState>
+														<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+														<CustomState Name="" ID="{3B8E0FCB-9A90-424E-9829-9EF3FD26568A}" ShortID="81870052">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64" Value="-10"/>
+															</PropertyList>
+														</CustomState>
+													</CustomState>
+													<CustomState>
+														<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+														<CustomState Name="" ID="{78DF9BAA-40E8-4B5B-A0B4-E0CF6BE81427}" ShortID="1031534867"/>
+													</CustomState>
+												</CustomStateList>
+											</StateInfo>
 										</RandomSequenceContainer>
 										<SwitchContainer Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" ShortID="45232914">
 											<PropertyList>
@@ -2190,7 +2331,7 @@
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-5</Value>
+																<Value>-15</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -2605,7 +2746,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-10</Value>
+																<Value>-12</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -3884,7 +4025,7 @@
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-10</Value>
+																<Value>-18</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -4300,7 +4441,7 @@
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-15</Value>
+																<Value>-25</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -9138,6 +9279,198 @@
 										</Folder>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Braseros" ID="{AAD44508-FCC9-4877-B189-0A4BB1B51D90}" ShortID="431346552">
+									<ChildrenList>
+										<RandomSequenceContainer Name="FlameOn" ID="{623D5708-1566-4913-A51D-241C0F2952A3}" ShortID="135481279">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="FlameOn" ID="{0EBFBFFC-5283-4B94-8CE3-D5483EBE5A72}" ShortID="132645433">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="FlameOn" ID="{EC616118-7CA6-4068-83A3-A213CE6DF881}">
+															<PropertyList>
+																<Property Name="TrimBegin" Type="Real64" Value="0.040182359595048"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>FlameOn.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="441052588"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="FlameOn" ID="{EC616118-7CA6-4068-83A3-A213CE6DF881}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="FlameOff" ID="{69B18B9E-9C4B-41C3-B71C-5994F8ECC89E}" ShortID="288748849">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="FlameOff" ID="{BA5946D1-38E7-4D3D-A202-A49D3747C23B}" ShortID="1014792026">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="FlameOff" ID="{7031C6C4-DF34-41EE-BDAD-9081A3861415}">
+															<PropertyList>
+																<Property Name="LoopEnd" Type="Real64" Value="2.87498866213152"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.381317307321649"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>FlameOff.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="87138754"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="FlameOff" ID="{7031C6C4-DF34-41EE-BDAD-9081A3861415}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="FlameLoop" ID="{EB3C8662-7486-4549-8973-1E78B78EB3D3}" ShortID="290788566">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="FlameLoop" ID="{B3FB9642-2E5C-4D5E-837F-C8A9F627D4ED}" ShortID="670597803">
+													<PropertyList>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="FlameLoop" ID="{8506E8C8-BB77-4930-8E2C-22A21C8F7269}">
+															<PropertyList>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>FlameLoop.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="439295761"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="FlameLoop" ID="{8506E8C8-BB77-4930-8E2C-22A21C8F7269}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Flags" ID="{934F26EC-1B0A-4162-8612-88F3B8AF74CA}" ShortID="811707132">
+									<ChildrenList>
+										<RandomSequenceContainer Name="FlagMovement" ID="{B35CF9F2-7E10-4840-8B8E-F571770A9B8E}" ShortID="903222260">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Flag" ID="{DF1BC4E3-36C6-4DB3-9B65-369260547A7B}" ShortID="79170417">
+													<PropertyList>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Flag" ID="{91EB8469-4C29-4901-BF2F-22A7AF25716F}">
+															<Language>SFX</Language>
+															<AudioFile>Flag.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="970556434"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Flag" ID="{91EB8469-4C29-4901-BF2F-22A7AF25716F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">
@@ -9723,6 +10056,28 @@
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{2E084189-0C72-4D3D-BE79-44AFD4FCE7D4}" ShortID="1041500916"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{85C23C57-5A43-41E7-B876-1885DFAFFD3B}" ShortID="535554560">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64" Value="-10"/>
+													</PropertyList>
+												</CustomState>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{DC63D5FB-093A-44EE-8584-C73BF7F04C70}" ShortID="198241719"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Player_Hit" ID="{0DBAD81B-9325-4C26-8B9E-BCC0A252F0A9}" ShortID="937868279">
 									<PropertyList>
@@ -9917,6 +10272,28 @@
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{BFBB7622-2970-4D37-8F44-007D5602B3D2}" ShortID="750666372"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{55FF0D39-2357-4C39-BB94-8E5C6138B979}" ShortID="309344339">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64" Value="-15"/>
+													</PropertyList>
+												</CustomState>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{51B66EBD-6885-4D79-BE15-067E8BB60FAC}" ShortID="608296484"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
@@ -13100,6 +13477,11 @@
 						<Sound Name="AMB_LoudWind" ID="{D23B8019-7A46-41DE-A179-73923F68E7BB}" ShortID="164293913">
 							<PropertyList>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-25</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
