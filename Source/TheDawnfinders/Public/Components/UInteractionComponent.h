@@ -129,7 +129,14 @@ public :
 	AActor* GetCurrentInteractible() 
 	{
 		if (!bIsInInteraction) return nullptr;
-		return CurrentInteractible;
+
+		if(CurrentInteractible)
+			return CurrentInteractible;
+
+		if (InteractingQTEActor)
+			return InteractingQTEActor;
+
+		return (AActor*)CurrentHelpedTarget;
 	}
 
 	UFUNCTION(BlueprintCallable)

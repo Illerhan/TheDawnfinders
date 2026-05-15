@@ -144,6 +144,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
 	bool ContextualUse;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Consumable")
+	bool ImmobiliseOnUse;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Consumable")
 	TSubclassOf<class AZiplineInteractible> ZiplineClass;
 

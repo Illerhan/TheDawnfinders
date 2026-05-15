@@ -235,6 +235,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_PickaxeSwing" ID="{FD87EFEA-039C-4C7C-8575-83334D9C93F2}">
+									<ChildrenList>
+										<Action Name="" ID="{203557B5-D4DC-4A22-B48F-B602DF247EE4}" ShortID="426764607">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="PlayerPickaxe" ID="{EDF8A43F-685F-437A-ACD6-FE9C638BFFFE}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Actions" ID="{68901D95-CD16-4BB7-BA38-CA1811FAF341}" ShortID="310585558">
@@ -539,6 +550,36 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Vivianite" ID="{9DC3FA6A-7ED5-4B85-80FE-C9220036478E}" ShortID="789985508">
+									<ChildrenList>
+										<Event Name="Play_VivianiteMining" ID="{64333224-A773-4AF6-AE33-D79671DDCC6E}">
+											<ChildrenList>
+												<Action Name="" ID="{92730723-7122-4546-82BC-B5FAE126809D}" ShortID="18098610">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Vivianite" ID="{124E2F7B-6FCB-4271-B526-4D3D0EB0454E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Chest" ID="{A7807E87-143A-491E-9D7A-C3687C124821}" ShortID="721804457">
+									<ChildrenList>
+										<Event Name="Play_OpenChest" ID="{2E422635-D660-49BC-BF7A-4C889E9BEFB7}">
+											<ChildrenList>
+												<Action Name="" ID="{D8695300-4B2C-47B1-A356-EC2CB6E612F3}" ShortID="725337447">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="OpenChest" ID="{F7719357-02CF-44EB-80D4-4CDD6DE93F7B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
@@ -712,6 +753,21 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="Open_Map" ID="{50243145-834B-4540-B027-7EE8CC326166}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Inventory" ID="{35AD77F9-EA95-46DB-B4F2-02F732AAA5CB}" ShortID="871268122">
+							<ChildrenList>
+								<Event Name="Play_OpenInventory" ID="{2E2A6C9B-EA95-4A97-9BF3-35854D8A3A58}">
+									<ChildrenList>
+										<Action Name="" ID="{A63260E0-253F-44E0-B896-78A34E9029D3}" ShortID="783214887">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Open_Inventory" ID="{71B58C05-E6EE-4740-BFB5-642DDABA48BE}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

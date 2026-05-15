@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{34F762DE-6148-2CD5-C23F-BEAA92C7D47F}",
+    "Hash": "{C9032418-39FB-77DE-3B2B-26B9058B14D0}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -253,7 +253,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FlameOff.wav",
-      "CachePath": "AF/{AF4780B4-0EA1-726B-AF8B-5260E1105770}.wem"
+      "CachePath": "E6/{E69BC9E7-9B93-259B-0F49-702D64B1F3EE}.wem"
      },
      {
       "Id": "87427668",
@@ -342,6 +342,14 @@
       "Location": "Memory",
       "ShortName": "StoneWalk\\FootstepsStoneWalk 8.wav",
       "CachePath": "C7/{C71A964E-CADE-A25F-0A31-EB24A53DF2C5}.wem"
+     },
+     {
+      "Id": "106243305",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Swing.wav",
+      "CachePath": "B5/{B5D41683-33A9-7664-E127-CF5FB8F7F940}.wem"
      },
      {
       "Id": "108070285",
@@ -984,6 +992,14 @@
       "CachePath": "8D/{8D9E17CE-5D25-20F4-50B5-43F2F8F9C2E4}.wem"
      },
      {
+      "Id": "308513209",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Vivianite_02.wav",
+      "CachePath": "28/{284B57FF-E301-4805-0A86-1D52E7A12914}.wem"
+     },
+     {
       "Id": "315756396",
       "Language": "SFX",
       "Streaming": "false",
@@ -1230,6 +1246,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 6.wav",
       "CachePath": "10/{10CC30D6-376B-D8E1-D1AE-9D3AE5754CF8}.wem"
+     },
+     {
+      "Id": "411141765",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Vivianite_01.wav",
+      "CachePath": "FA/{FA776D84-12C5-3BBD-5DC1-2CBB8DCFF006}.wem"
      },
      {
       "Id": "413685733",
@@ -2432,6 +2456,14 @@
       "CachePath": "3A/{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem"
      },
      {
+      "Id": "792600095",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenChest.wav",
+      "CachePath": "F6/{F6087D68-EAC5-12EC-B44B-94E8F47A3191}.wem"
+     },
+     {
       "Id": "793535417",
       "Language": "SFX",
       "Streaming": "false",
@@ -3080,6 +3112,14 @@
       "CachePath": "11/{11119CBB-686A-0892-001B-F160D8F2BA48}.wem"
      },
      {
+      "Id": "987473768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenInventory.wav",
+      "CachePath": "0A/{0AD8C3CE-73DF-1F1A-D821-C7828429AEA6}.wem"
+     },
+     {
       "Id": "988341890",
       "Language": "SFX",
       "Streaming": "false",
@@ -3149,7 +3189,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Dodge_03.wav",
-      "CachePath": "85/{851B9EE6-5B73-7B13-0AA6-6FFBE22FC4C3}.wem"
+      "CachePath": "34/{34F8457B-EF08-7810-F32F-BA5575209BE5}.wem"
+     },
+     {
+      "Id": "1004722242",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Vivianite_03.wav",
+      "CachePath": "1B/{1B01C60D-0A4E-33BF-3875-1B4FE83E3ED2}.wem"
      },
      {
       "Id": "1005848849",
@@ -4650,6 +4698,34 @@
       ]
      },
      {
+      "Id": "3416405661",
+      "Name": "Play_OpenChest",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\Play_OpenChest",
+      "GUID": "{2E422635-D660-49BC-BF7A-4C889E9BEFB7}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.4908383",
+      "DurationMax": "3.4908383",
+      "MediaRefs": [
+       {
+        "Id": "792600095"
+       }
+      ]
+     },
+     {
+      "Id": "1432112630",
+      "Name": "Play_OpenInventory",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Inventory\\Play_OpenInventory",
+      "GUID": "{2E2A6C9B-EA95-4A97-9BF3-35854D8A3A58}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.61537415",
+      "DurationMax": "0.61537415",
+      "MediaRefs": [
+       {
+        "Id": "987473768"
+       }
+      ]
+     },
+     {
       "Id": "3459422151",
       "Name": "Play_OutOfBreath",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_OutOfBreath",
@@ -4816,6 +4892,20 @@
        },
        {
         "Id": "819944367"
+       }
+      ]
+     },
+     {
+      "Id": "2240738551",
+      "Name": "Play_PickaxeSwing",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PickaxeSwing",
+      "GUID": "{FD87EFEA-039C-4C7C-8575-83334D9C93F2}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.70469654",
+      "DurationMax": "0.70469654",
+      "MediaRefs": [
+       {
+        "Id": "106243305"
        }
       ]
      },
@@ -5770,6 +5860,26 @@
       ]
      },
      {
+      "Id": "3297631861",
+      "Name": "Play_VivianiteMining",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Vivianite\\Play_VivianiteMining",
+      "GUID": "{64333224-A773-4AF6-AE33-D79671DDCC6E}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.019229",
+      "DurationMax": "1.019229",
+      "MediaRefs": [
+       {
+        "Id": "308513209"
+       },
+       {
+        "Id": "411141765"
+       },
+       {
+        "Id": "1004722242"
+       }
+      ]
+     },
+     {
       "Id": "3882989320",
       "Name": "Play_WoodRun",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_WoodRun",
@@ -6145,6 +6255,6 @@
     ]
    }
   ],
-  "FileHash": "{DF0EFCAF-32F1-91E9-8EE4-D151D5C979F7}"
+  "FileHash": "{FFF726FE-913F-9070-26BF-325D2573E3F8}"
  }
 }

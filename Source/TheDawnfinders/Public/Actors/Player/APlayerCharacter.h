@@ -249,6 +249,9 @@ public:
 	UFUNCTION()
 	void StopMovementForDuration(float Duration);
 
+	UFUNCTION()
+	void RestartMovement();
+
 
 // === DODGE ===
 public : 
@@ -362,8 +365,8 @@ public :
 
 // === OTHERS ===
 protected:
-	UFUNCTION(Server, Reliable)
-	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector, bool bLoudNoise = false);
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_PlayNoise(FName SoundTag, float Range, FVector Location = FVector::ZeroVector, bool bLoudNoise = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisplayThrowPreview(FVector Direction, float Strength);
@@ -410,6 +413,9 @@ public :
 
 	UPROPERTY()
 	float TargetRotationRate = 360.f;
+
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentNoise;
 
 	UPROPERTY(Replicated)
 	ALitter* CurrentPushedObject = nullptr;
