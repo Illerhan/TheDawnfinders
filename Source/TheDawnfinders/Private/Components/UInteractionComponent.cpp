@@ -193,7 +193,10 @@ void UInteractionComponent::StartInteract()
 	// -> Revive sound integration
 	if (PlayersAtRange.Num() > 0)
 	{
+		bIsInInteraction = true;
 		AAPlayerCharacter* AllyFound = PlayersAtRange[0];
+
+		CurrentHelpedTarget = AllyFound;
 		TryInteractAlly(AllyFound, PlayerCharacter);
 		return;
 	}
@@ -553,6 +556,8 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
 
+	PlayerCharacter->StopMovementForDuration(HelpDuration);
+
 	if (AllyParam)
 		ServerStartHelp(AllyParam);
 }
@@ -568,6 +573,7 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 
 	CurrentHelpedTarget = AllyParam;
 
+	bIsInInteraction = true;
 	bIsHelping = true;
 	HelpTimeRemaining = HelpDuration;
 
@@ -579,7 +585,10 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 void UInteractionComponent::ServerCancelHelp_Implementation()
 {
 	bIsHelping = false;
+	bIsInInteraction = false;
 	CurrentHelpedTarget = nullptr;
+
+	PlayerCharacter->RestartMovement();
 
 	Client_HideHelpProgress();
 }
