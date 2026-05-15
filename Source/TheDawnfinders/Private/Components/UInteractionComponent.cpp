@@ -584,6 +584,8 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 
 void UInteractionComponent::ServerCancelHelp_Implementation()
 {
+	if (!bIsHelping) return;
+
 	bIsHelping = false;
 	bIsInInteraction = false;
 	CurrentHelpedTarget = nullptr;

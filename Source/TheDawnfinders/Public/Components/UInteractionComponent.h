@@ -133,6 +133,9 @@ public :
 		if(CurrentInteractible)
 			return CurrentInteractible;
 
+		if (InteractingQTEActor)
+			return InteractingQTEActor;
+
 		return (AActor*)CurrentHelpedTarget;
 	}
 
