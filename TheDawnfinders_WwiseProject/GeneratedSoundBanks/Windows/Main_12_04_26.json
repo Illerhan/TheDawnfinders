@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{32F25320-8831-FEAF-5ED3-217A964B78A7}",
+    "Hash": "{C9032418-39FB-77DE-3B2B-26B9058B14D0}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -296,14 +296,6 @@
       "CachePath": "04/{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem"
      },
      {
-      "Id": "99039877",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "LegendaryGold.wav",
-      "CachePath": "0A/{0A281E84-5634-49A3-500D-3FB9CD5B1C38}.wem"
-     },
-     {
       "Id": "100764325",
       "Language": "SFX",
       "Streaming": "false",
@@ -550,14 +542,6 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 5.wav",
       "CachePath": "E3/{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem"
-     },
-     {
-      "Id": "192665435",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "OpenInventory_03.wav",
-      "CachePath": "88/{889EA3D3-CC56-489C-08CF-154B55F6E690}.wem"
      },
      {
       "Id": "195665557",
@@ -2110,14 +2094,6 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 14.wav",
       "CachePath": "E3/{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem"
-     },
-     {
-      "Id": "679730392",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "OpenInventory_02.wav",
-      "CachePath": "F3/{F3A35161-A039-401D-E4A7-29361C679BAE}.wem"
      },
      {
       "Id": "688001986",
@@ -4676,20 +4652,6 @@
       ]
      },
      {
-      "Id": "1407182095",
-      "Name": "Play_LegendaryLoot",
-      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\Play_LegendaryLoot",
-      "GUID": "{AF3C4B6E-256C-46A0-A291-98A5C60C5F88}",
-      "DurationType": "OneShot",
-      "DurationMin": "3.210806",
-      "DurationMax": "3.210806",
-      "MediaRefs": [
-       {
-        "Id": "99039877"
-       }
-      ]
-     },
-     {
       "Id": "3011759086",
       "Name": "Play_Lever_Use",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Lever_Use",
@@ -4756,14 +4718,8 @@
       "GUID": "{2E2A6C9B-EA95-4A97-9BF3-35854D8A3A58}",
       "DurationType": "OneShot",
       "DurationMin": "0.61537415",
-      "DurationMax": "0.8894331",
+      "DurationMax": "0.61537415",
       "MediaRefs": [
-       {
-        "Id": "192665435"
-       },
-       {
-        "Id": "679730392"
-       },
        {
         "Id": "987473768"
        }
@@ -6299,6 +6255,6 @@
     ]
    }
   ],
-  "FileHash": "{A7844521-DE26-DD62-FC27-9DDB03AC3E96}"
+  "FileHash": "{FFF726FE-913F-9070-26BF-325D2573E3F8}"
  }
 }
