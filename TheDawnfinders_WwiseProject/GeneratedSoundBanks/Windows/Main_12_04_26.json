@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{E4879AB0-0956-5385-B372-01E5542B520F}",
+    "Hash": "{32F25320-8831-FEAF-5ED3-217A964B78A7}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -294,6 +294,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 4.wav",
       "CachePath": "04/{04CA9309-8692-3C8F-4D87-F5ED316AAB66}.wem"
+     },
+     {
+      "Id": "99039877",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LegendaryGold.wav",
+      "CachePath": "0A/{0A281E84-5634-49A3-500D-3FB9CD5B1C38}.wem"
      },
      {
       "Id": "100764325",
@@ -4668,6 +4676,20 @@
       ]
      },
      {
+      "Id": "1407182095",
+      "Name": "Play_LegendaryLoot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\Play_LegendaryLoot",
+      "GUID": "{AF3C4B6E-256C-46A0-A291-98A5C60C5F88}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.210806",
+      "DurationMax": "3.210806",
+      "MediaRefs": [
+       {
+        "Id": "99039877"
+       }
+      ]
+     },
+     {
       "Id": "3011759086",
       "Name": "Play_Lever_Use",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Lever_Use",
@@ -6277,6 +6299,6 @@
     ]
    }
   ],
-  "FileHash": "{F92681C3-8758-986A-90EA-91287EEFF54A}"
+  "FileHash": "{A7844521-DE26-DD62-FC27-9DDB03AC3E96}"
  }
 }
