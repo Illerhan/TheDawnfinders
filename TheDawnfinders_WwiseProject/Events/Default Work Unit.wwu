@@ -565,6 +565,21 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Chest" ID="{A7807E87-143A-491E-9D7A-C3687C124821}" ShortID="721804457">
+									<ChildrenList>
+										<Event Name="OpenChest" ID="{2E422635-D660-49BC-BF7A-4C889E9BEFB7}">
+											<ChildrenList>
+												<Action Name="" ID="{D8695300-4B2C-47B1-A356-EC2CB6E612F3}" ShortID="725337447">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="OpenChest" ID="{F7719357-02CF-44EB-80D4-4CDD6DE93F7B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">

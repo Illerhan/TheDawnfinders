@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{D12A5A6C-105D-DB05-49E5-CE1E0B8A105D}",
+    "Hash": "{88916D3D-BAF0-BA47-C63B-FD72A2C5B192}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -253,7 +253,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FlameOff.wav",
-      "CachePath": "AF/{AF4780B4-0EA1-726B-AF8B-5260E1105770}.wem"
+      "CachePath": "E6/{E69BC9E7-9B93-259B-0F49-702D64B1F3EE}.wem"
      },
      {
       "Id": "87427668",
@@ -2456,6 +2456,14 @@
       "CachePath": "3A/{3A76B1D4-44AA-0779-E7E7-1F60BAA4359C}.wem"
      },
      {
+      "Id": "792600095",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenChest.wav",
+      "CachePath": "F6/{F6087D68-EAC5-12EC-B44B-94E8F47A3191}.wem"
+     },
+     {
       "Id": "793535417",
       "Language": "SFX",
       "Streaming": "false",
@@ -3173,7 +3181,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Dodge_03.wav",
-      "CachePath": "85/{851B9EE6-5B73-7B13-0AA6-6FFBE22FC4C3}.wem"
+      "CachePath": "34/{34F8457B-EF08-7810-F32F-BA5575209BE5}.wem"
      },
      {
       "Id": "1004722242",
@@ -3438,6 +3446,20 @@
       "MediaRefs": [
        {
         "Id": "1069593655"
+       }
+      ]
+     },
+     {
+      "Id": "4187372360",
+      "Name": "OpenChest",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\OpenChest",
+      "GUID": "{2E422635-D660-49BC-BF7A-4C889E9BEFB7}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.4908383",
+      "DurationMax": "3.4908383",
+      "MediaRefs": [
+       {
+        "Id": "792600095"
        }
       ]
      },
@@ -6211,6 +6233,6 @@
     ]
    }
   ],
-  "FileHash": "{9C21ABE4-2F3F-5DD5-4FFD-762C495BAD90}"
+  "FileHash": "{695723BD-B760-3443-4FD7-979F2441DA23}"
  }
 }
