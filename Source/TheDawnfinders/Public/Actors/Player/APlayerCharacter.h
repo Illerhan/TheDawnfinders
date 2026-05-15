@@ -249,6 +249,9 @@ public:
 	UFUNCTION()
 	void StopMovementForDuration(float Duration);
 
+	UFUNCTION()
+	void RestartMovement();
+
 
 // === DODGE ===
 public : 
