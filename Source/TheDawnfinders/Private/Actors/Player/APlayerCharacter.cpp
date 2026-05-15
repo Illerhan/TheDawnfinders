@@ -694,8 +694,12 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 void AAPlayerCharacter::StopMovementForDuration(float Duration)
 {
     NoMovementTimer = Duration;
+    PlaySoundOnServer_Implementation("", 0, 0);
+}
 
-    UE_LOG(LogTemp, Display, TEXT("STOP MOVEMENT"));
+void AAPlayerCharacter::RestartMovement()
+{
+    NoMovementTimer = 0;
 }
 
 

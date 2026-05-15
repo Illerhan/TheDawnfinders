@@ -216,6 +216,10 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+
+				if (EquippedItem.CurrentInfos.ItemData->ImmobiliseOnUse) {
+					PlayerCharacter->StopMovementForDuration(EquippedItem.CurrentInfos.ItemData->NeededHoldDuration);
+				}
 				
 				Multi_PlayHealSound();
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
@@ -422,6 +426,10 @@ void UItemComponent::StopMainAction()
 	{
 		IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
+
+		if (EquippedItem.CurrentInfos.ItemData->ImmobiliseOnUse) {
+			PlayerCharacter->RestartMovement();
+		}
 	}
 
 	bIsUsingItem = false;
