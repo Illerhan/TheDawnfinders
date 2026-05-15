@@ -423,11 +423,13 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
 
+    CurrentNoise = Range;
+
     if(!HasAuthority())
-        Server_PlaySound(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise(SoundTag, Range, Loc, bLoudNoise);
     
     else
-        Server_PlaySound_Implementation(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise_Implementation(SoundTag, Range, Loc, bLoudNoise);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
@@ -1205,7 +1207,7 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
     return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
 }
 
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
+void AAPlayerCharacter::Server_PlayNoise_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
 {
     if (bLoudNoise) {
         LoudNoiseZone->SetSphereRadius(Range);
