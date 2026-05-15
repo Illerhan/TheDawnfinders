@@ -46,6 +46,13 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 
 	if (!PlayerCharacter->IsLocallyControlled()) return;
+	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen || PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) {
+		if (IsValid(NearestInteractible)) {
+			IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
+		}
+		NearestInteractible = nullptr;
+		return;
+	}
 
 	// If the current interacting object is destroyed
 	if (bIsDoingQTE) {
