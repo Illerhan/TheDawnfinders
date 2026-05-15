@@ -374,6 +374,9 @@ protected:
 	UFUNCTION()
 	void HideThrowPreview();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayVibrations(bool bStrong, bool bLong);
+
 	UFUNCTION(Server, Unreliable)
 	void Server_SetMoveInputActive(bool bActive);
 

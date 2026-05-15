@@ -22,6 +22,15 @@ enum class EPlayerState : uint8
 	Sneaking UMETA(DisplayName = "Sneaking")
 };
 
+UENUM(BlueprintType)
+enum class EVibrationType : uint8
+{
+	Medium UMETA(DisplayName = "Medium"),
+	Strong UMETA(DisplayName = "Strong"),
+	StrongLong UMETA(DisplayName = "StrongLong")
+};
+
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMontageEnd);
 
 class UItemData;
@@ -62,6 +71,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
 	UWorldPlayerWidget* GetPlayerWidget();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Main")
+	void PlayVibration(EVibrationType VibrationType);
+
 
 
 public :

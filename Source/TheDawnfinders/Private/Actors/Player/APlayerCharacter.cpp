@@ -1282,6 +1282,10 @@ void AAPlayerCharacter::HideThrowPreview()
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
 }
 
+void AAPlayerCharacter::PlayVibrations_Implementation(bool bStrong, bool bLong)
+{
+}
+
 void AAPlayerCharacter::Server_SetMoveInputActive_Implementation(bool bActive)
 {
     bMoveInputActive = bActive;
