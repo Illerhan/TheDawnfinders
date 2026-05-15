@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{E4879AB0-0956-5385-B372-01E5542B520F}",
+    "Hash": "{C9032418-39FB-77DE-3B2B-26B9058B14D0}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -542,14 +542,6 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 5.wav",
       "CachePath": "E3/{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem"
-     },
-     {
-      "Id": "192665435",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "OpenInventory_03.wav",
-      "CachePath": "88/{889EA3D3-CC56-489C-08CF-154B55F6E690}.wem"
      },
      {
       "Id": "195665557",
@@ -2102,14 +2094,6 @@
       "Location": "Memory",
       "ShortName": "StoneRun\\FootstepsStoneRun 14.wav",
       "CachePath": "E3/{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem"
-     },
-     {
-      "Id": "679730392",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "OpenInventory_02.wav",
-      "CachePath": "F3/{F3A35161-A039-401D-E4A7-29361C679BAE}.wem"
      },
      {
       "Id": "688001986",
@@ -4734,14 +4718,8 @@
       "GUID": "{2E2A6C9B-EA95-4A97-9BF3-35854D8A3A58}",
       "DurationType": "OneShot",
       "DurationMin": "0.61537415",
-      "DurationMax": "0.8894331",
+      "DurationMax": "0.61537415",
       "MediaRefs": [
-       {
-        "Id": "192665435"
-       },
-       {
-        "Id": "679730392"
-       },
        {
         "Id": "987473768"
        }
@@ -6277,6 +6255,6 @@
     ]
    }
   ],
-  "FileHash": "{F92681C3-8758-986A-90EA-91287EEFF54A}"
+  "FileHash": "{FFF726FE-913F-9070-26BF-325D2573E3F8}"
  }
 }

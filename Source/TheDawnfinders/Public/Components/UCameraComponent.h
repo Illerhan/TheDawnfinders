@@ -33,7 +33,7 @@ public :
 	void UpdateDistance(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	void StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride);
+	void StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride, bool bOnlySize);
 
 	UFUNCTION(BlueprintCallable)
 	void StartAutomaticControl();
@@ -151,6 +151,9 @@ protected :
 
 	UPROPERTY()
 	bool bIsOnForcedPosition = false;
+
+	UPROPERTY()
+	bool bIsOnForcedSize = false;
 
 	UPROPERTY()
 	bool bIsInitialised;
