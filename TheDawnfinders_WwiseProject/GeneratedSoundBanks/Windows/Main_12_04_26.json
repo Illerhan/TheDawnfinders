@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{88916D3D-BAF0-BA47-C63B-FD72A2C5B192}",
+    "Hash": "{E4879AB0-0956-5385-B372-01E5542B520F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -542,6 +542,14 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 5.wav",
       "CachePath": "E3/{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem"
+     },
+     {
+      "Id": "192665435",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenInventory_03.wav",
+      "CachePath": "88/{889EA3D3-CC56-489C-08CF-154B55F6E690}.wem"
      },
      {
       "Id": "195665557",
@@ -2096,6 +2104,14 @@
       "CachePath": "E3/{E3668F61-F1DC-43A1-0D44-EF0DD3E6C142}.wem"
      },
      {
+      "Id": "679730392",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenInventory_02.wav",
+      "CachePath": "F3/{F3A35161-A039-401D-E4A7-29361C679BAE}.wem"
+     },
+     {
       "Id": "688001986",
       "Language": "SFX",
       "Streaming": "false",
@@ -3112,6 +3128,14 @@
       "CachePath": "11/{11119CBB-686A-0892-001B-F160D8F2BA48}.wem"
      },
      {
+      "Id": "987473768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OpenInventory.wav",
+      "CachePath": "0A/{0AD8C3CE-73DF-1F1A-D821-C7828429AEA6}.wem"
+     },
+     {
       "Id": "988341890",
       "Language": "SFX",
       "Streaming": "false",
@@ -3446,20 +3470,6 @@
       "MediaRefs": [
        {
         "Id": "1069593655"
-       }
-      ]
-     },
-     {
-      "Id": "4187372360",
-      "Name": "OpenChest",
-      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\OpenChest",
-      "GUID": "{2E422635-D660-49BC-BF7A-4C889E9BEFB7}",
-      "DurationType": "OneShot",
-      "DurationMin": "3.4908383",
-      "DurationMax": "3.4908383",
-      "MediaRefs": [
-       {
-        "Id": "792600095"
        }
       ]
      },
@@ -4700,6 +4710,40 @@
        },
        {
         "Id": "1054362147"
+       }
+      ]
+     },
+     {
+      "Id": "3416405661",
+      "Name": "Play_OpenChest",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\Play_OpenChest",
+      "GUID": "{2E422635-D660-49BC-BF7A-4C889E9BEFB7}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.4908383",
+      "DurationMax": "3.4908383",
+      "MediaRefs": [
+       {
+        "Id": "792600095"
+       }
+      ]
+     },
+     {
+      "Id": "1432112630",
+      "Name": "Play_OpenInventory",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Inventory\\Play_OpenInventory",
+      "GUID": "{2E2A6C9B-EA95-4A97-9BF3-35854D8A3A58}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.61537415",
+      "DurationMax": "0.8894331",
+      "MediaRefs": [
+       {
+        "Id": "192665435"
+       },
+       {
+        "Id": "679730392"
+       },
+       {
+        "Id": "987473768"
        }
       ]
      },
@@ -6233,6 +6277,6 @@
     ]
    }
   ],
-  "FileHash": "{695723BD-B760-3443-4FD7-979F2441DA23}"
+  "FileHash": "{F92681C3-8758-986A-90EA-91287EEFF54A}"
  }
 }
