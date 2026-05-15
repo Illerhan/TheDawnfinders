@@ -608,7 +608,8 @@
 											<ChildrenList>
 												<Action Name="" ID="{CF7ECC14-AB93-4843-BC6F-17757735EFA1}" ShortID="930724693">
 													<PropertyList>
-														<Property Name="FadeTime" Type="Real64" Value="2"/>
+														<Property Name="FadeInCurve" Type="int16" Value="1"/>
+														<Property Name="FadeTime" Type="Real64" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
@@ -623,11 +624,23 @@
 												<Action Name="" ID="{B5AA6B0D-3BEE-4DA4-9BEC-2CA33A06F62C}" ShortID="156274200">
 													<PropertyList>
 														<Property Name="ActionType" Type="int16" Value="2"/>
-														<Property Name="FadeTime" Type="Real64" Value="2"/>
+														<Property Name="FadeOutCurve" Type="int16" Value="1"/>
+														<Property Name="FadeTime" Type="Real64" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
 															<ObjectRef Name="PoisonGaz" ID="{CB0CA69B-D1D9-4EFA-B794-73C6A2FF534A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_PoisonOpen" ID="{0968E4C6-3A73-4428-B0CC-A051DED7742B}">
+											<ChildrenList>
+												<Action Name="" ID="{C393E6DD-88E8-466B-8AFE-8329FD7A4327}" ShortID="906932448">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="PoisonOpen" ID="{D096A1BE-B01E-43A7-90C7-2C14681680A2}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
