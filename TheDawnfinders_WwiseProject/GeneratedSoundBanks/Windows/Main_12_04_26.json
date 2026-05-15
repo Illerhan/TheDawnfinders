@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{BFF6F468-B094-838A-BF94-072DCDAE834D}",
+    "Hash": "{02EDBF56-0ACB-86D2-97B3-C711190DEE39}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -845,7 +845,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01.wav",
-      "CachePath": "8A/{8ABF681B-54F7-7CCA-BBAD-E5363A94B825}.wem"
+      "CachePath": "E9/{E90E976F-BBAA-30EA-1430-6CB5CE8C5EE0}.wem"
      },
      {
       "Id": "272892538",
@@ -1976,6 +1976,14 @@
       "CachePath": "75/{756682D3-8C8D-E0ED-0220-CBEC10BACFBA}.wem"
      },
      {
+      "Id": "622100660",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PoisonGaz.wav",
+      "CachePath": "8B/{8BE32459-2816-8379-470D-28F823DBBF2F}.wem"
+     },
+     {
       "Id": "622533405",
       "Language": "SFX",
       "Streaming": "false",
@@ -2006,6 +2014,14 @@
       "Location": "Memory",
       "ShortName": "KS_Basic Cloth_35-09.wav",
       "CachePath": "71/{71E8FFAE-4E16-765A-E004-E6C55F717D47}.wem"
+     },
+     {
+      "Id": "634065184",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open3.wav",
+      "CachePath": "8E/{8E27377C-C60C-27BE-1EFA-BC269F34D5BC}.wem"
      },
      {
       "Id": "634737390",
@@ -2278,6 +2294,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 2.wav",
       "CachePath": "E8/{E83F458E-D3FF-FCCD-3A78-47FFEA401B5E}.wem"
+     },
+     {
+      "Id": "724580210",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open1.wav",
+      "CachePath": "75/{756BFDF0-D6A5-3DD9-9A90-838FD618116B}.wem"
      },
      {
       "Id": "724646208",
@@ -3152,6 +3176,14 @@
       "CachePath": "8A/{8A5D408D-2944-4998-6D41-B67D99EAFFAF}.wem"
      },
      {
+      "Id": "986010486",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Door_Open2.wav",
+      "CachePath": "4E/{4E011FD4-9829-0DE4-ED04-F48CF306326D}.wem"
+     },
+     {
       "Id": "987167948",
       "Language": "SFX",
       "Streaming": "false",
@@ -3445,7 +3477,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02.wav",
-      "CachePath": "85/{85CBBD52-2B16-20CC-C069-D0C47002946E}.wem"
+      "CachePath": "8A/{8A7CF13A-815E-C850-FDE3-4AF07FBD26DF}.wem"
      }
     ],
     "Plugins": {
@@ -3498,7 +3530,9 @@
       "Name": "Key_Lock",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Key_Lock\\Key_Lock",
       "GUID": "{3760A833-6010-4321-9D33-8D3450FA9562}",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "6.356884",
+      "DurationMax": "6.356884",
       "MediaRefs": [
        {
         "Id": "1069593655"
@@ -5257,6 +5291,40 @@
       ]
      },
      {
+      "Id": "4265875548",
+      "Name": "Play_PoisonGaz",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\PoisonStatues\\Play_PoisonGaz",
+      "GUID": "{F9AF2343-E99D-4F2D-B354-5883B49B6BAE}",
+      "MaxAttenuation": "5000",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "622100660"
+       }
+      ]
+     },
+     {
+      "Id": "188892210",
+      "Name": "Play_PoisonOpen",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\PoisonStatues\\Play_PoisonOpen",
+      "GUID": "{0968E4C6-3A73-4428-B0CC-A051DED7742B}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "1.4991494",
+      "DurationMax": "1.5066947",
+      "MediaRefs": [
+       {
+        "Id": "634065184"
+       },
+       {
+        "Id": "724580210"
+       },
+       {
+        "Id": "986010486"
+       }
+      ]
+     },
+     {
       "Id": "3681837842",
       "Name": "Play_Reanimate",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_Reanimate",
@@ -6273,11 +6341,28 @@
       ]
      },
      {
+      "Id": "2256731510",
+      "Name": "Stop_PoisonGaz",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\PoisonStatues\\Stop_PoisonGaz",
+      "GUID": "{9CEB1353-FA4A-4B3C-9E46-3119A2848F8E}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "MediaRefs": [
+       {
+        "Id": "622100660"
+       }
+      ]
+     },
+     {
       "Id": "2400787128",
       "Name": "Turn_Crank",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Turn_Crank\\Turn_Crank",
       "GUID": "{C6712A36-8AFA-4924-97CF-C1268B8E3DD8}",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "12.006871",
+      "DurationMax": "12.006871",
       "MediaRefs": [
        {
         "Id": "272090056"
@@ -6343,6 +6428,6 @@
     ]
    }
   ],
-  "FileHash": "{80B9BE37-EDB4-63EB-9C34-2A5884235509}"
+  "FileHash": "{BBA9D66B-2A2E-59EA-505A-A7C77781A0CE}"
  }
 }

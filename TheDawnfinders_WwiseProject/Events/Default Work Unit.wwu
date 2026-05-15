@@ -578,6 +578,61 @@
 												</Action>
 											</ChildrenList>
 										</Event>
+										<Event Name="Play_LegendaryLoot" ID="{AF3C4B6E-256C-46A0-A291-98A5C60C5F88}">
+											<ChildrenList>
+												<Action Name="" ID="{444A110B-0153-4BB1-83F5-B2559FF7D5E1}" ShortID="321148779">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="LegendaryLoot" ID="{C84CC326-E521-407E-A1C5-A4AA82D9F239}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_SearchInContainer" ID="{39BCF5BF-781C-48C7-96D9-BEEB7DB62E31}">
+											<ChildrenList>
+												<Action Name="" ID="{E309AE90-81C4-4CAF-96AE-0F0AF104138E}" ShortID="103590044">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SearchInContainer" ID="{F66B2939-39F7-471B-BDB4-53B381FA8E9B}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="PoisonStatues" ID="{165C6654-7123-4E7F-B953-9D9917753013}" ShortID="744034104">
+									<ChildrenList>
+										<Event Name="Play_PoisonGaz" ID="{F9AF2343-E99D-4F2D-B354-5883B49B6BAE}">
+											<ChildrenList>
+												<Action Name="" ID="{CF7ECC14-AB93-4843-BC6F-17757735EFA1}" ShortID="930724693">
+													<PropertyList>
+														<Property Name="FadeTime" Type="Real64" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="PoisonGaz" ID="{CB0CA69B-D1D9-4EFA-B794-73C6A2FF534A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Stop_PoisonGaz" ID="{9CEB1353-FA4A-4B3C-9E46-3119A2848F8E}">
+											<ChildrenList>
+												<Action Name="" ID="{B5AA6B0D-3BEE-4DA4-9BEC-2CA33A06F62C}" ShortID="156274200">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+														<Property Name="FadeTime" Type="Real64" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="PoisonGaz" ID="{CB0CA69B-D1D9-4EFA-B794-73C6A2FF534A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
