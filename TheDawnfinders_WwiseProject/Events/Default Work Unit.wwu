@@ -115,7 +115,7 @@
 										<Action Name="" ID="{F6E477B1-A6AB-406F-AE28-F217C7ABD7A0}" ShortID="357448591">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="StoneRun" ID="{05533ED3-4C5C-4A02-A9AD-A37A59294787}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -685,6 +685,32 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Folder Name="Grenades" ID="{73DC3902-5F1A-4B8E-B5CB-F3085D8FF3DE}" ShortID="344031129">
+									<ChildrenList>
+										<Event Name="Play_DynamiteFuse" ID="{CE498D06-09C2-40D1-82E3-F8DB169945CE}">
+											<ChildrenList>
+												<Action Name="" ID="{6EC56AEE-0F60-4691-843C-6D6FFB711A3D}" ShortID="545633821">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="DynamiteFuse" ID="{38D04CAC-102C-4B31-9D25-7D0A82BB2212}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_Explosion" ID="{8616F3E1-18A7-492E-8402-3129C4FF11EB}">
+											<ChildrenList>
+												<Action Name="" ID="{B1AF1866-B69D-4BE1-8D0D-BE7FCCBF9E9A}" ShortID="314482287">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Explosion" ID="{49A76C58-EBDE-4A3A-BD42-2F0E22B2F98E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
