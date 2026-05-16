@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{02EDBF56-0ACB-86D2-97B3-C711190DEE39}",
+    "Hash": "{162745C7-6B57-3D21-FB09-42322D266706}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -504,6 +504,14 @@
       "CachePath": "4E/{4E97518C-AAD6-6187-6E4C-CC803664292C}.wem"
      },
      {
+      "Id": "167257925",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Explosion_01.wav",
+      "CachePath": "A5/{A5F9D2EE-5344-A98C-A698-3AE6AE33C3ED}.wem"
+     },
+     {
       "Id": "173846091",
       "Language": "SFX",
       "Streaming": "false",
@@ -672,6 +680,14 @@
       "CachePath": "4F/{4F5A61D3-185B-CCDD-BA74-8D68009839BB}.wem"
      },
      {
+      "Id": "222822273",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DynamiteFuse_04.wav",
+      "CachePath": "0A/{0AF9D491-5CFF-50A8-6DFB-B1D6F2A3D353}.wem"
+     },
+     {
       "Id": "224444272",
       "Language": "SFX",
       "Streaming": "false",
@@ -750,6 +766,14 @@
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 10.wav",
       "CachePath": "36/{360B13BC-A75C-BB3D-E9DA-E581D46757DD}.wem"
+     },
+     {
+      "Id": "249614893",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DynamiteFuse_01.wav",
+      "CachePath": "DB/{DB58793D-90AE-505C-72FB-81F14F7234A4}.wem"
      },
      {
       "Id": "251906612",
@@ -845,7 +869,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01.wav",
-      "CachePath": "E9/{E90E976F-BBAA-30EA-1430-6CB5CE8C5EE0}.wem"
+      "CachePath": "DA/{DAF44EBB-EC51-E9CD-8528-FB831B9B39B9}.wem"
      },
      {
       "Id": "272892538",
@@ -1216,6 +1240,14 @@
       "CachePath": "8F/{8F8263B0-AF03-3B1C-0D0E-555DDD580FF6}.wem"
      },
      {
+      "Id": "399353755",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Explosion_02.wav",
+      "CachePath": "9D/{9DF284C6-A87A-2F1B-1ED9-79A99D5EB67B}.wem"
+     },
+     {
       "Id": "399958177",
       "Language": "SFX",
       "Streaming": "false",
@@ -1454,6 +1486,14 @@
       "Location": "Memory",
       "ShortName": "BonesWalk 1.wav",
       "CachePath": "25/{257BAAF3-B1CA-04AC-4F71-5C515FB73EAA}.wem"
+     },
+     {
+      "Id": "450663081",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DynamiteFuse_02.wav",
+      "CachePath": "A0/{A0377B70-33B6-5980-C741-44379B1298B6}.wem"
      },
      {
       "Id": "456838804",
@@ -2021,7 +2061,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Door_Open3.wav",
-      "CachePath": "8E/{8E27377C-C60C-27BE-1EFA-BC269F34D5BC}.wem"
+      "CachePath": "BC/{BC312C0A-0F24-63F3-518D-2B11BB9C6AEA}.wem"
      },
      {
       "Id": "634737390",
@@ -2150,6 +2190,14 @@
       "Location": "Memory",
       "ShortName": "OpenInventory_02.wav",
       "CachePath": "F3/{F3A35161-A039-401D-E4A7-29361C679BAE}.wem"
+     },
+     {
+      "Id": "685710106",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DynamiteFuse_03.wav",
+      "CachePath": "7C/{7CEA7FF7-89A3-3E06-E9E8-5A988A832D27}.wem"
      },
      {
       "Id": "688001986",
@@ -2301,7 +2349,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Door_Open1.wav",
-      "CachePath": "75/{756BFDF0-D6A5-3DD9-9A90-838FD618116B}.wem"
+      "CachePath": "1A/{1AEA86F0-D7B5-49E8-D2AA-93E57A8F8FFC}.wem"
      },
      {
       "Id": "724646208",
@@ -3181,7 +3229,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Door_Open2.wav",
-      "CachePath": "4E/{4E011FD4-9829-0DE4-ED04-F48CF306326D}.wem"
+      "CachePath": "A2/{A25309CC-31B0-F7B3-31D0-C9E145BA7D91}.wem"
      },
      {
       "Id": "987167948",
@@ -3392,6 +3440,14 @@
       "CachePath": "35/{35FC67DB-0F0C-1260-310C-AA327A9FBA96}.wem"
      },
      {
+      "Id": "1033141158",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Explosion_03.wav",
+      "CachePath": "B5/{B5A5E531-1CC8-DA01-447C-2C6F4BCD0814}.wem"
+     },
+     {
       "Id": "1039319747",
       "Language": "SFX",
       "Streaming": "false",
@@ -3477,7 +3533,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_02.wav",
-      "CachePath": "8A/{8A7CF13A-815E-C850-FDE3-4AF07FBD26DF}.wem"
+      "CachePath": "D6/{D655FE81-9737-9F1A-9D65-6E6F7CBDEED6}.wem"
      }
     ],
     "Plugins": {
@@ -4336,6 +4392,30 @@
       ]
      },
      {
+      "Id": "3267233472",
+      "Name": "Play_DynamiteFuse",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Grenades\\Play_DynamiteFuse",
+      "GUID": "{CE498D06-09C2-40D1-82E3-F8DB169945CE}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.538458",
+      "DurationMax": "2.538458",
+      "MediaRefs": [
+       {
+        "Id": "222822273"
+       },
+       {
+        "Id": "249614893"
+       },
+       {
+        "Id": "450663081"
+       },
+       {
+        "Id": "685710106"
+       }
+      ]
+     },
+     {
       "Id": "3632850017",
       "Name": "Play_EliteEnemyAttack",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnemyAttack",
@@ -4615,6 +4695,27 @@
           "Id": "912347765"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "4030404899",
+      "Name": "Play_Explosion",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Grenades\\Play_Explosion",
+      "GUID": "{8616F3E1-18A7-492E-8402-3129C4FF11EB}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.461542",
+      "DurationMax": "3.8317235",
+      "MediaRefs": [
+       {
+        "Id": "167257925"
+       },
+       {
+        "Id": "399353755"
+       },
+       {
+        "Id": "1033141158"
        }
       ]
      },
@@ -6428,6 +6529,6 @@
     ]
    }
   ],
-  "FileHash": "{BBA9D66B-2A2E-59EA-505A-A7C77781A0CE}"
+  "FileHash": "{4BAA7941-0E33-26E3-2F6D-CA68295586FE}"
  }
 }
