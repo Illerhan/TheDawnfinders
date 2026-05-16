@@ -739,6 +739,7 @@ void UItemComponent::DoAttackCollision()
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, CurrentWeaponActionData.CameraShakeIntensity);
+		IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::Strong, 0);
 
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
@@ -924,6 +925,7 @@ void UItemComponent::Shoot()
 	if (ShootDelayTimer > 0) return;
 
 	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
+	IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::StrongLong, 0);
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
