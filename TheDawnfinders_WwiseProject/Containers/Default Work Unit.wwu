@@ -7328,6 +7328,282 @@
 														</CustomStateList>
 													</StateInfo>
 												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}" ShortID="427060157">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="FS_Stone_01" ID="{472D6E5A-B3D4-44D3-9075-A1573F2D664A}" ShortID="574369168">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="12299481"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_02" ID="{41D07A8C-91F3-4180-A668-697AC4729813}" ShortID="834077025">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="538302046"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_03" ID="{E3F9175B-FC6C-421A-8685-1A0D2CED7367}" ShortID="910404561">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_03.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="635933243"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_04" ID="{DE463423-4CA1-4DC5-9A66-1DE75764FFAB}" ShortID="946276748">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="964135219"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_05" ID="{6DE0249D-366B-4BC9-A306-F16DBDAE22AB}" ShortID="570325662">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_05.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="558331924"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_06" ID="{F18391B5-D654-4580-B76D-35581FEF541D}" ShortID="1042353615">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="960121538"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_07" ID="{4441EAAA-7D87-4B0A-AF1F-E7231B5D1DDE}" ShortID="1007319246">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_07.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="637563687"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_08" ID="{1400E5FB-0721-47B4-A589-393EACDF49B6}" ShortID="272917275">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="767708800"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_09" ID="{2E63A723-9EC3-48BB-98B3-D22264EFF416}" ShortID="613067041">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_09.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176152214"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_10" ID="{14577E05-6943-48D7-9C60-5F5F5F08E836}" ShortID="754153917">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="358961742"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_11" ID="{BAB6BBBC-D4A6-4A46-B4DD-F91E93BBE228}" ShortID="107820587">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_11.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="677192898"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_12" ID="{3D8BA404-AAB4-4B80-89DA-22B34F10FBCA}" ShortID="415900672">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_12.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="985985263"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
 											</ChildrenList>
 											<PositioningInfo>
 												<Panner Name="" ID="{6EC91A6D-3B4A-4B57-A8EE-30DE65701D27}"/>
@@ -7376,6 +7652,9 @@
 													</GroupingBehavior>
 													<GroupingBehavior>
 														<ItemRef Name="WoodWalk" ID="{FDC5D6DC-5B82-40AE-95DB-B8BAA0770D8D}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}"/>
 													</GroupingBehavior>
 												</GroupingBehaviorList>
 											</GroupingInfo>
