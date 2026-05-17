@@ -752,9 +752,19 @@
 								<Event Name="Play_BasicEnnemyMovement" ID="{7A700EAE-6822-45A5-83BE-3E233F0B7658}">
 									<ChildrenList>
 										<Action Name="" ID="{5A136806-77D5-4C21-861B-B70D7E6904E1}" ShortID="865077812">
+											<PropertyList>
+												<Property Name="Probability" Type="Real64" Value="75"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="BasicEnnemyMovement" ID="{EA3F52D2-F6B8-4AEA-83F8-D43B4F6F50F1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{0A48B9CE-54F8-4631-B693-26DE84455BA9}" ShortID="619501552">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnnemyChain" ID="{CC6F7557-3541-406E-93DB-903626BFA740}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -803,6 +813,29 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="BasicEnnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_BasicEnemySecondaryScream" ID="{425EF8A8-1133-4E6C-A829-88BC6EE9DACA}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>0.5</Value>
+											</ValueList>
+										</Property>
+										<Property Name="InstanceLimit" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{D60354A8-DE8B-4624-80C5-71A918DF7CA7}" ShortID="60896024">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnnemySecondaryScream" ID="{CD0C9F8F-6762-42E2-A3BB-B09369F01F0A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

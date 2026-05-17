@@ -13798,96 +13798,6 @@
 											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
 										</Reference>
 									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="FIDELE_ATTACK_1" ID="{13984DC1-5C3B-46DB-B6DC-E308B077FB2D}" ShortID="751680797">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="FIDELE_ATTACK_1" ID="{51667001-A6D8-4A7F-9496-604BB2D82C26}">
-													<Language>SFX</Language>
-													<AudioFile>FIDELE_ATTACK_1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="166799515"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="FIDELE_ATTACK_1" ID="{51667001-A6D8-4A7F-9496-604BB2D82C26}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="FIDELE_ATTACK_2" ID="{D68D3CD0-8E2E-4A90-889F-F916B9B1AA0D}" ShortID="499237431">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="FIDELE_ATTACK_2" ID="{72369390-24B7-4DA6-9BBC-0ADD6F030902}">
-													<Language>SFX</Language>
-													<AudioFile>FIDELE_ATTACK_2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="968124644"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="FIDELE_ATTACK_2" ID="{72369390-24B7-4DA6-9BBC-0ADD6F030902}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="FIDELE_ATTACK_3" ID="{424C9932-C678-473C-90E0-366B403B7BC1}" ShortID="302402311">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="FIDELE_ATTACK_3" ID="{67A2EE24-8EE7-4DCA-81D9-48FDD4D3AEDA}">
-													<Language>SFX</Language>
-													<AudioFile>FIDELE_ATTACK_3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="254982589"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="FIDELE_ATTACK_3" ID="{67A2EE24-8EE7-4DCA-81D9-48FDD4D3AEDA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="FIDELE_ATTACK_4" ID="{6080234C-8476-4ECC-A673-E7D71C1BAF09}" ShortID="389975575">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="FIDELE_ATTACK_4" ID="{4CE0BA62-5265-495D-98E5-694514F19E72}">
-													<Language>SFX</Language>
-													<AudioFile>FIDELE_ATTACK_4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="473960840"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="FIDELE_ATTACK_4" ID="{4CE0BA62-5265-495D-98E5-694514F19E72}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" ShortID="244524104">
 									<PropertyList>
@@ -14475,6 +14385,409 @@
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="BasicEnnemySecondaryScream" ID="{CD0C9F8F-6762-42E2-A3BB-B09369F01F0A}" ShortID="804158554">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="FIDELE_ATTACK_2" ID="{D68D3CD0-8E2E-4A90-889F-F916B9B1AA0D}" ShortID="499237431">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FIDELE_ATTACK_2" ID="{72369390-24B7-4DA6-9BBC-0ADD6F030902}">
+													<Language>SFX</Language>
+													<AudioFile>FIDELE_ATTACK_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="968124644"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FIDELE_ATTACK_2" ID="{72369390-24B7-4DA6-9BBC-0ADD6F030902}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FIDELE_ATTACK_4" ID="{6080234C-8476-4ECC-A673-E7D71C1BAF09}" ShortID="389975575">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FIDELE_ATTACK_4" ID="{4CE0BA62-5265-495D-98E5-694514F19E72}">
+													<Language>SFX</Language>
+													<AudioFile>FIDELE_ATTACK_4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="473960840"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FIDELE_ATTACK_4" ID="{4CE0BA62-5265-495D-98E5-694514F19E72}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FIDELE_ATTACK_1" ID="{13984DC1-5C3B-46DB-B6DC-E308B077FB2D}" ShortID="751680797">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FIDELE_ATTACK_1" ID="{51667001-A6D8-4A7F-9496-604BB2D82C26}">
+													<Language>SFX</Language>
+													<AudioFile>FIDELE_ATTACK_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="166799515"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FIDELE_ATTACK_1" ID="{51667001-A6D8-4A7F-9496-604BB2D82C26}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FIDELE_ATTACK_3" ID="{424C9932-C678-473C-90E0-366B403B7BC1}" ShortID="302402311">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FIDELE_ATTACK_3" ID="{67A2EE24-8EE7-4DCA-81D9-48FDD4D3AEDA}">
+													<Language>SFX</Language>
+													<AudioFile>FIDELE_ATTACK_3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="254982589"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FIDELE_ATTACK_3" ID="{67A2EE24-8EE7-4DCA-81D9-48FDD4D3AEDA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="BasicEnnemyChain" ID="{CC6F7557-3541-406E-93DB-903626BFA740}" ShortID="688822132">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-20</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SF_FollowerChain_01" ID="{20801FBC-C060-4F5B-88E9-BCD9C9D2DE29}" ShortID="426570517">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_01" ID="{376C0A39-ACDC-458A-A3DC-892ADD783979}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="852910227"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_01" ID="{376C0A39-ACDC-458A-A3DC-892ADD783979}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_02" ID="{3D8B43DB-FB50-4346-A5FC-D229E011EA68}" ShortID="1284993">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_02" ID="{6D9B6385-CB18-4087-8A4D-59A7952C2B96}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="826190042"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_02" ID="{6D9B6385-CB18-4087-8A4D-59A7952C2B96}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_03" ID="{EA0C1964-02DB-4699-9874-FCF66E74614A}" ShortID="495357937">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_03" ID="{EA9390EB-0875-4E41-ADFA-1C39C46BFDB8}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="10621815"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_03" ID="{EA9390EB-0875-4E41-ADFA-1C39C46BFDB8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_04" ID="{6FFE7910-A63D-411E-B119-B0D65D9CADD7}" ShortID="1016241256">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_04" ID="{08DA1090-E22F-479F-BEFB-4934EA62F9FF}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="929182392"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_04" ID="{08DA1090-E22F-479F-BEFB-4934EA62F9FF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_05" ID="{5C816470-98E2-4CA3-85B1-EB73FB5E5619}" ShortID="473362648">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_05" ID="{FED3CAB0-A8F0-4E27-8DAB-7DC3887D99E8}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="136892222"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_05" ID="{FED3CAB0-A8F0-4E27-8DAB-7DC3887D99E8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_06" ID="{9533FEED-FCF3-450A-AB33-43F8CCCDCDC7}" ShortID="471185265">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_06" ID="{DD1542DE-6D77-4DC3-BBC6-03200FE14644}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="852155796"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_06" ID="{DD1542DE-6D77-4DC3-BBC6-03200FE14644}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_07" ID="{7BDE76B8-F5D0-415C-B5F4-590B9BFC5DEB}" ShortID="902663583">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_07" ID="{238F6B60-2183-4E7E-88C1-145CA76183D8}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_07.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1018491526"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_07" ID="{238F6B60-2183-4E7E-88C1-145CA76183D8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_08" ID="{42B8190C-D0EF-44C2-8666-0BA1A4479974}" ShortID="1023803492">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_08" ID="{1E205342-B9DF-41C2-8B1F-344E1AEFD488}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_08.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="99490746"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_08" ID="{1E205342-B9DF-41C2-8B1F-344E1AEFD488}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_09" ID="{5250353C-E1F4-492D-BDDE-2A1BD5513C65}" ShortID="302751767">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_09" ID="{49CA91DB-8E04-46DB-96A0-4A2D935B81B3}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_09.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="882707068"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_09" ID="{49CA91DB-8E04-46DB-96A0-4A2D935B81B3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_10" ID="{D2C2FE99-8DF7-402F-A92B-A0528C401F36}" ShortID="419965168">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_10" ID="{3B3EF27A-8971-4915-A9AE-52AF8625739A}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_10.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="195810138"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_10" ID="{3B3EF27A-8971-4915-A9AE-52AF8625739A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SF_FollowerChain_11" ID="{9A552E6C-41AD-4C3B-BD23-9E15BF920341}" ShortID="140770534">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SF_FollowerChain_11" ID="{F7A8A9BE-8431-48B9-8098-014A1C9B9D5A}">
+													<Language>SFX</Language>
+													<AudioFile>SF_FollowerChain_11.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="650472069"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SF_FollowerChain_11" ID="{F7A8A9BE-8431-48B9-8098-014A1C9B9D5A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{D3D5E98C-1176-4B89-A07E-C7D9DBF6171F}" ShortID="528431485">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Matrix Reverb" CompanyID="0" PluginID="115" PluginType="3">
+														<ObjectRef Name="Small_Tiled_Room1" ID="{41EEE722-3009-4B3F-8820-F414623783E3}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
