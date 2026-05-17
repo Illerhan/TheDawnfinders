@@ -6581,16 +6581,16 @@
 															</CustomState>
 															<CustomState>
 																<StateRef Name="Walk" ID="{EA7CC6B1-69F7-4BBD-BC53-13526B3CD190}"/>
-																<CustomState Name="" ID="{DE28C027-ADAC-4D01-8133-5C4057306FF2}" ShortID="337298178"/>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="None" ID="{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"/>
-																<CustomState Name="" ID="{C2334CBA-8463-4DCC-A007-6AD433054BED}" ShortID="706630426">
+																<CustomState Name="" ID="{DE28C027-ADAC-4D01-8133-5C4057306FF2}" ShortID="337298178">
 																	<PropertyList>
 																		<Property Name="Lowpass" Type="int16" Value="24"/>
 																		<Property Name="Volume" Type="Real64" Value="-75"/>
 																	</PropertyList>
 																</CustomState>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="None" ID="{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"/>
+																<CustomState Name="" ID="{C2334CBA-8463-4DCC-A007-6AD433054BED}" ShortID="706630426"/>
 															</CustomState>
 															<CustomState>
 																<StateRef Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
@@ -7603,6 +7603,62 @@
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
+													<StateInfo>
+														<StateGroupList>
+															<StateGroupInfo>
+																<StateGroupRef Name="Walk" ID="{E7A59603-EEB1-422A-8A95-6C1C09F167BB}"/>
+																<StateGroupInfo Name="" ID="{9E25E55F-1D84-4DAD-98ED-9F51E8FAFA34}" ShortID="73418681"/>
+															</StateGroupInfo>
+															<StateGroupInfo>
+																<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+																<StateGroupInfo Name="" ID="{789D0EA5-6ACD-41E3-B085-EEABFFBEECD8}" ShortID="77431990"/>
+															</StateGroupInfo>
+															<StateGroupInfo>
+																<StateGroupRef Name="Crouch" ID="{EAF953B0-5C9B-4EEA-B99E-42E767A21B06}"/>
+																<StateGroupInfo Name="" ID="{50767FAF-5B44-470D-B5F2-BC12FE1E07DE}" ShortID="109166141"/>
+															</StateGroupInfo>
+														</StateGroupList>
+														<CustomStateList>
+															<CustomState>
+																<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+																<CustomState Name="" ID="{EFF4190B-7F46-472C-85EB-FC31E7D2ED63}" ShortID="165081620">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64" Value="-50"/>
+																	</PropertyList>
+																</CustomState>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="None" ID="{71AE17EE-3809-4559-A213-F01EB5E9500C}"/>
+																<CustomState Name="" ID="{0FE56ADA-71D7-4119-9256-21199F323233}" ShortID="587619862"/>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+																<CustomState Name="" ID="{AC9ACCF7-BD68-40AA-9450-9B923E9B3518}" ShortID="203518057"/>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="Walk" ID="{EA7CC6B1-69F7-4BBD-BC53-13526B3CD190}"/>
+																<CustomState Name="" ID="{048815E3-775E-4D25-9CA6-4A0F8B0B6E20}" ShortID="927850913">
+																	<PropertyList>
+																		<Property Name="Lowpass" Type="int16" Value="24"/>
+																		<Property Name="Volume" Type="Real64" Value="-75"/>
+																	</PropertyList>
+																</CustomState>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="None" ID="{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"/>
+																<CustomState Name="" ID="{429337BC-9ED1-469C-91EC-1AB5F86A5669}" ShortID="148042341"/>
+															</CustomState>
+															<CustomState>
+																<StateRef Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
+																<CustomState Name="" ID="{2E8B2EF1-1988-4E74-B3B6-662D9FE00E96}" ShortID="352196872">
+																	<PropertyList>
+																		<Property Name="Lowpass" Type="int16" Value="48"/>
+																		<Property Name="Volume" Type="Real64" Value="-150"/>
+																	</PropertyList>
+																</CustomState>
+															</CustomState>
+														</CustomStateList>
+													</StateInfo>
 												</RandomSequenceContainer>
 											</ChildrenList>
 											<PositioningInfo>
