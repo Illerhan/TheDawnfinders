@@ -71,7 +71,7 @@
 										<Action Name="" ID="{85786A63-A7B6-429C-872E-E064A1DE00EC}" ShortID="751077931">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="StoneWalk" ID="{16341439-DFC1-4298-A150-ED35A699C5C7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -115,7 +115,7 @@
 										<Action Name="" ID="{F6E477B1-A6AB-406F-AE28-F217C7ABD7A0}" ShortID="357448591">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="Run" ID="{1E892632-816C-45D2-B809-5DC528A25E7E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -617,6 +617,16 @@
 														</Reference>
 													</ReferenceList>
 												</Action>
+												<Action Name="" ID="{795C7A2A-3F63-4422-8D9A-F85EC98F427C}" ShortID="15293252">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SmallPoisonGaz" ID="{77097EF0-DEAE-4C18-B108-D0E3CA42B627}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
 											</ChildrenList>
 										</Event>
 										<Event Name="Stop_PoisonGaz" ID="{9CEB1353-FA4A-4B3C-9E46-3119A2848F8E}">
@@ -624,12 +634,21 @@
 												<Action Name="" ID="{B5AA6B0D-3BEE-4DA4-9BEC-2CA33A06F62C}" ShortID="156274200">
 													<PropertyList>
 														<Property Name="ActionType" Type="int16" Value="2"/>
-														<Property Name="FadeOutCurve" Type="int16" Value="1"/>
-														<Property Name="FadeTime" Type="Real64" Value="1"/>
+														<Property Name="FadeTime" Type="Real64" Value="2"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Target">
 															<ObjectRef Name="PoisonGaz" ID="{CB0CA69B-D1D9-4EFA-B794-73C6A2FF534A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{B2C19A2A-18A2-4B2E-A25C-EAADC2BD4264}" ShortID="403851384">
+													<PropertyList>
+														<Property Name="FadeTime" Type="Real64" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="SmallPoisonGaz" ID="{77097EF0-DEAE-4C18-B108-D0E3CA42B627}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
@@ -744,9 +763,12 @@
 								<Event Name="Play_BasicEnemyIdle" ID="{7768EC0B-1A1B-4D3C-B52A-4C7E57F24E1A}">
 									<ChildrenList>
 										<Action Name="" ID="{5D3F144E-466B-4976-BD01-9DDA8A676EAA}" ShortID="997146832">
+											<PropertyList>
+												<Property Name="Probability" Type="Real64" Value="50"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnemyIdle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyIdle" ID="{1DACCD4F-0442-4C3A-AC70-BE1CDE25EB57}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -758,6 +780,29 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="BasicEnnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_BasicEnemyScream" ID="{5BC52A8E-6864-4850-B5DF-D7F6C3236D21}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+										<Property Name="InstanceLimit" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{1F0E84CE-3C48-4415-9733-D7B83025255C}" ShortID="564037653">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
