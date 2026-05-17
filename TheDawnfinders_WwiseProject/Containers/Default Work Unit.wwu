@@ -2810,377 +2810,6 @@
 														</Sound>
 													</ChildrenList>
 												</RandomSequenceContainer>
-												<RandomSequenceContainer Name="StoneRun" ID="{05533ED3-4C5C-4A02-A9AD-A37A59294787}" ShortID="929300607">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-12</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<Sound Name="FootstepsStoneRun 3" ID="{83E9C479-77FF-4EB3-ADC1-2D5D9ACF8D05}" ShortID="864364320">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 3" ID="{0AADEE3D-8823-4CCF-B155-C4FE9777E5B9}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 3.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="733316650"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 3" ID="{0AADEE3D-8823-4CCF-B155-C4FE9777E5B9}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 2" ID="{A55BB9C5-95A2-4E2E-8DE7-26A7AE2C90C3}" ShortID="948623392">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 2" ID="{A69052CD-D3FF-4B04-9811-00428D890D8A}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 2.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="720572330"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 2" ID="{A69052CD-D3FF-4B04-9811-00428D890D8A}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 1" ID="{3DDC484A-4492-480F-8509-CB162C080947}" ShortID="173931018">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 1" ID="{012D4131-34C7-49DF-917C-CCFA19620F4A}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 1.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="403097929"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 1" ID="{012D4131-34C7-49DF-917C-CCFA19620F4A}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 6" ID="{87D3F470-E022-4B18-9D1A-591C16984FB9}" ShortID="98705201">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 6" ID="{71D94856-5528-4727-A6AF-3C04DB983295}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 6.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="185441988"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 6" ID="{71D94856-5528-4727-A6AF-3C04DB983295}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 7" ID="{D73ACCE8-CE86-4637-B512-734335596E40}" ShortID="818545126">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 7" ID="{9D1BBCA1-CADB-4630-8340-48253142E29D}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 7.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="865151463"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 7" ID="{9D1BBCA1-CADB-4630-8340-48253142E29D}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 9" ID="{EB09772A-5946-4F01-9584-3CE43A73210A}" ShortID="267872316">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 9" ID="{0019C14D-F628-4EA7-966C-E0D5DFBB0AF0}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 9.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="414622692"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 9" ID="{0019C14D-F628-4EA7-966C-E0D5DFBB0AF0}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 10" ID="{AB004505-FA52-49B0-8F77-67CB65375DA4}" ShortID="438755798">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 10" ID="{3F67E09D-A9B5-43DC-8D6B-EB5F6F074615}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 10.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="1055218331"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 10" ID="{3F67E09D-A9B5-43DC-8D6B-EB5F6F074615}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 11" ID="{1762995E-7AF3-4CD8-AE4F-753832AC1DAB}" ShortID="592651040">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 11" ID="{F811E8FF-4667-4838-B1E3-88A27D907279}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 11.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="195665557"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 11" ID="{F811E8FF-4667-4838-B1E3-88A27D907279}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 12" ID="{2765767A-0BF8-4A53-9132-7F078F804879}" ShortID="578129983">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 12" ID="{A2B69B57-D88C-4C35-8945-727D8A991343}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 12.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="791895633"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 12" ID="{A2B69B57-D88C-4C35-8945-727D8A991343}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 5" ID="{BF0928FA-878E-4000-9661-139A9012D7E1}" ShortID="109059220">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 5" ID="{C8D9EF53-060F-455C-A7B3-4A9A13B99F85}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 5.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="814448940"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 5" ID="{C8D9EF53-060F-455C-A7B3-4A9A13B99F85}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 13" ID="{D3792555-0BB1-4193-9A62-E8DE81F8C88F}" ShortID="286500107">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 13" ID="{4E4154A7-A91A-4247-AD66-AB371006F4D2}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 13.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="589087457"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 13" ID="{4E4154A7-A91A-4247-AD66-AB371006F4D2}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 14" ID="{14A3ACDC-3A3A-4A1D-9FA7-14561155749D}" ShortID="289944993">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 14" ID="{A71C6FF8-3BB2-4C5F-B38E-43721FC93963}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 14.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="675358201"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 14" ID="{A71C6FF8-3BB2-4C5F-B38E-43721FC93963}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 15" ID="{026471C2-BC37-4600-9359-4FA879EEF392}" ShortID="908156623">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 15" ID="{6354729C-B18D-43E1-AB12-910430DFD070}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 15.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="215028229"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 15" ID="{6354729C-B18D-43E1-AB12-910430DFD070}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 4" ID="{406D065F-2D19-467F-B321-6E52DB1BA8B8}" ShortID="585808560">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 4" ID="{827CCFF5-AA75-4561-94D1-A8B3E3B5FA46}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 4.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="403493255"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 4" ID="{827CCFF5-AA75-4561-94D1-A8B3E3B5FA46}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 16" ID="{6F7FAD0D-4E3C-4D83-991B-3AC53CAD0317}" ShortID="659863364">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 16" ID="{AE5C6807-60CD-49CF-80B9-E8CE701872D3}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 16.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="990459238"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 16" ID="{AE5C6807-60CD-49CF-80B9-E8CE701872D3}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="FootstepsStoneRun 8" ID="{A9CA3206-08AC-482F-9CBE-378414A0B417}" ShortID="627704090">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="FootstepsStoneRun 8" ID="{34608E88-2F0B-4A5E-964E-7E322765BAA2}">
-																	<Language>SFX</Language>
-																	<AudioFile>StoneRun\FootstepsStoneRun 8.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="977382893"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="FootstepsStoneRun 8" ID="{34608E88-2F0B-4A5E-964E-7E322765BAA2}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-													</ChildrenList>
-												</RandomSequenceContainer>
 												<RandomSequenceContainer Name="WoodRun" ID="{F80B14E6-3995-4DD9-8702-F08FCF1E1BFF}" ShortID="450060512">
 													<PropertyList>
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -4920,6 +4549,870 @@
 														</Sound>
 													</ChildrenList>
 												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}" ShortID="427060157">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="FS_Stone_01" ID="{472D6E5A-B3D4-44D3-9075-A1573F2D664A}" ShortID="574369168">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="12299481"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_02" ID="{41D07A8C-91F3-4180-A668-697AC4729813}" ShortID="834077025">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="538302046"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_03" ID="{E3F9175B-FC6C-421A-8685-1A0D2CED7367}" ShortID="910404561">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_03.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="635933243"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_04" ID="{DE463423-4CA1-4DC5-9A66-1DE75764FFAB}" ShortID="946276748">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="964135219"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_05" ID="{6DE0249D-366B-4BC9-A306-F16DBDAE22AB}" ShortID="570325662">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_05.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="558331924"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_06" ID="{F18391B5-D654-4580-B76D-35581FEF541D}" ShortID="1042353615">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="960121538"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_07" ID="{4441EAAA-7D87-4B0A-AF1F-E7231B5D1DDE}" ShortID="1007319246">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_07.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="637563687"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_08" ID="{1400E5FB-0721-47B4-A589-393EACDF49B6}" ShortID="272917275">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="767708800"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_09" ID="{2E63A723-9EC3-48BB-98B3-D22264EFF416}" ShortID="613067041">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_09.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176152214"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_10" ID="{14577E05-6943-48D7-9C60-5F5F5F08E836}" ShortID="754153917">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="358961742"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_11" ID="{BAB6BBBC-D4A6-4A46-B4DD-F91E93BBE228}" ShortID="107820587">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_11.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="677192898"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_12" ID="{3D8BA404-AAB4-4B80-89DA-22B34F10FBCA}" ShortID="415900672">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_12.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="985985263"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<PositioningInfo>
+														<Panner Name="" ID="{1C3AA9AD-20A5-4010-BF43-12201F167CDA}"/>
+													</PositioningInfo>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="StoneWalk" ID="{3DFDA58A-59D0-40DB-B44A-C04EC3E5E583}" ShortID="504885901">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-8</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="FS_Stone_01" ID="{B6FC72EC-F0EB-46AC-9A37-3295049094DA}" ShortID="861328756">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_01" ID="{A1AB158B-0212-45C1-8A2E-AD2259870383}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="12299481"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_01" ID="{A1AB158B-0212-45C1-8A2E-AD2259870383}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_02" ID="{D89F07F3-214C-4791-BB4F-ABFBC89964A8}" ShortID="172581399">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_02" ID="{D1089F53-E004-413E-A504-041F1DA28EA6}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="538302046"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_02" ID="{D1089F53-E004-413E-A504-041F1DA28EA6}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_03" ID="{F7F0B82B-DEFF-4AB6-9E75-851358AE0D41}" ShortID="131464330">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_03" ID="{A7E4DDEC-7F9F-4474-859B-CA09771357C1}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_03.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="635933243"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_03" ID="{A7E4DDEC-7F9F-4474-859B-CA09771357C1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_04" ID="{29403980-D656-4B8A-9054-B7758F8B1082}" ShortID="152516484">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_04" ID="{BD7C994D-2E56-4D4A-8CA0-9ED69793156E}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="964135219"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_04" ID="{BD7C994D-2E56-4D4A-8CA0-9ED69793156E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_05" ID="{EE301BA0-88DF-4583-90D9-BD0267D25BEE}" ShortID="586507017">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_05" ID="{9D82B21B-923F-4880-8BD2-3F70E902ABAA}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_05.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="558331924"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_05" ID="{9D82B21B-923F-4880-8BD2-3F70E902ABAA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_06" ID="{BE101183-F59D-4E62-B8FB-B6FF71D342AD}" ShortID="335536990">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_06" ID="{03606079-5F6C-4D4D-8E74-72A43DF36958}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="960121538"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_06" ID="{03606079-5F6C-4D4D-8E74-72A43DF36958}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_07" ID="{BB680CE7-E473-4B13-B486-C0E0EFE0FFBC}" ShortID="736316743">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_07" ID="{591C22C4-AD7F-44F4-806B-7CB1E4B949FB}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_07.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="637563687"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_07" ID="{591C22C4-AD7F-44F4-806B-7CB1E4B949FB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_08" ID="{6FB29FFA-ACAD-40A7-9575-01E6F729ECF1}" ShortID="923104532">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_08" ID="{06EED828-134E-4032-B1B2-93A827D0DF2E}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="767708800"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_08" ID="{06EED828-134E-4032-B1B2-93A827D0DF2E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_09" ID="{306613E6-C8B8-415F-AA64-B398A9B84A70}" ShortID="808150392">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_09" ID="{4D82EF28-4497-46C8-A79B-9C8DEFCA570D}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_09.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176152214"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_09" ID="{4D82EF28-4497-46C8-A79B-9C8DEFCA570D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_10" ID="{AFCB3AD8-44D6-4598-8E26-1DE3B4748825}" ShortID="446686025">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_10" ID="{48778662-A068-4574-8A57-7263147A09A0}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="358961742"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_10" ID="{48778662-A068-4574-8A57-7263147A09A0}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_11" ID="{966D071A-70B0-4F6E-9F44-C6D149AAA1DB}" ShortID="400378402">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_11" ID="{86F5E3FC-19C1-43C8-A70A-DB4C247612E4}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_11.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="677192898"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_11" ID="{86F5E3FC-19C1-43C8-A70A-DB4C247612E4}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_12" ID="{3B9CD139-5784-474E-9333-CCC33DC011EA}" ShortID="330676089">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_12" ID="{134887DC-8DD4-4B7E-B548-BBF467EB0CAF}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_12.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="985985263"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_12" ID="{134887DC-8DD4-4B7E-B548-BBF467EB0CAF}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<PositioningInfo>
+														<Panner Name="" ID="{5C90D96D-047C-4B7A-A4FA-3F38F3292F73}"/>
+													</PositioningInfo>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="StoneCrouch" ID="{DB544154-B3A6-4020-8941-76420C787647}" ShortID="700969238">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-15</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="FS_Stone_01" ID="{0FBD2E28-F102-4EBD-8187-50FE0C166906}" ShortID="485209324">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_01" ID="{39335150-6BCC-4D06-A894-E7A466C5F62C}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="12299481"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_01" ID="{39335150-6BCC-4D06-A894-E7A466C5F62C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_02" ID="{A594327F-32A7-4AD9-9D1E-BB076A9DFE49}" ShortID="185369694">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_02" ID="{C6A8DFA3-E159-449D-A7D2-54EBEB4B29A1}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_02.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="538302046"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_02" ID="{C6A8DFA3-E159-449D-A7D2-54EBEB4B29A1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_03" ID="{72AC555D-4A5F-477A-92D0-FBA53EAA2130}" ShortID="98526101">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_03" ID="{2FF28473-8440-4032-AE5C-56F058938DBF}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_03.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="635933243"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_03" ID="{2FF28473-8440-4032-AE5C-56F058938DBF}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_04" ID="{58D2EAB8-8BA2-4A5F-9F00-5E52E7CA8F2F}" ShortID="825430435">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_04" ID="{F825F0D4-294F-48F3-BF42-A871E79FF462}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_04.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="964135219"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_04" ID="{F825F0D4-294F-48F3-BF42-A871E79FF462}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_05" ID="{7E765179-4381-467E-8FA8-14197EC32114}" ShortID="33432234">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_05" ID="{31B6E956-10CA-4A3F-8839-CE09BB2D3978}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_05.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="558331924"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_05" ID="{31B6E956-10CA-4A3F-8839-CE09BB2D3978}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_06" ID="{096A8734-7804-44A8-8231-31D0B738536B}" ShortID="330534313">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_06" ID="{F00BE677-83C3-4F9C-934E-F913B2E7B1F7}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_06.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="960121538"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_06" ID="{F00BE677-83C3-4F9C-934E-F913B2E7B1F7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_07" ID="{B08991AD-6BC7-4620-A771-E5FC6894C0D4}" ShortID="554485904">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_07" ID="{6F8B5225-EEA9-4E7C-8BF5-AE2CF93AA21A}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_07.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="637563687"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_07" ID="{6F8B5225-EEA9-4E7C-8BF5-AE2CF93AA21A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_08" ID="{E967F55A-8FC4-4E81-BDF7-E3EE33C0B1DE}" ShortID="858589354">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_08" ID="{1F7F0AC4-FDB3-4350-8588-C08EF1C31BC7}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_08.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="767708800"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_08" ID="{1F7F0AC4-FDB3-4350-8588-C08EF1C31BC7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_09" ID="{B5EB0869-E5AB-42D6-B58D-BE0B7A37E780}" ShortID="114433244">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_09" ID="{F3E392F3-6F3F-4728-86FD-0CA874B51D47}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_09.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176152214"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_09" ID="{F3E392F3-6F3F-4728-86FD-0CA874B51D47}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_10" ID="{1F156DD6-2E28-433D-B3E0-6B6FD011FCE0}" ShortID="1055528035">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_10" ID="{4403A61C-948E-4DB1-8060-E1838B565559}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_10.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="358961742"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_10" ID="{4403A61C-948E-4DB1-8060-E1838B565559}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_11" ID="{94E7490A-168E-41F6-A3AA-1A1E5AF59D45}" ShortID="275862941">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_11" ID="{8DBAD200-AD4D-48DD-BB9A-8E8E4723C646}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_11.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="677192898"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_11" ID="{8DBAD200-AD4D-48DD-BB9A-8E8E4723C646}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FS_Stone_12" ID="{0B186118-767C-4BD1-9493-D0CC3811B3C4}" ShortID="46978546">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FS_Stone_12" ID="{4DDA6EEE-E864-41DD-BE15-6A8132B65A5D}">
+																	<Language>SFX</Language>
+																	<AudioFile>FS_Stone_12.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="985985263"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FS_Stone_12" ID="{4DDA6EEE-E864-41DD-BE15-6A8132B65A5D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+													<PositioningInfo>
+														<Panner Name="" ID="{227E2E7D-A83A-43CF-B33C-BC464D11E66D}"/>
+													</PositioningInfo>
+												</RandomSequenceContainer>
 											</ChildrenList>
 											<StateInfo>
 												<StateGroupList>
@@ -4946,6 +5439,9 @@
 											<GroupingInfo>
 												<GroupingBehaviorList>
 													<GroupingBehavior>
+														<ItemRef Name="StoneCrouch" ID="{DB544154-B3A6-4020-8941-76420C787647}"/>
+													</GroupingBehavior>
+													<GroupingBehavior>
 														<ItemRef Name="WoodRunCrack" ID="{D6246266-2ABA-4505-BD43-883A7729B0D9}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
@@ -4955,7 +5451,7 @@
 														<ItemRef Name="SandWalk" ID="{AA638972-EA52-47CB-9742-A2BFE8C961A5}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
-														<ItemRef Name="StoneRun" ID="{05533ED3-4C5C-4A02-A9AD-A37A59294787}"/>
+														<ItemRef Name="StoneWalk" ID="{3DFDA58A-59D0-40DB-B44A-C04EC3E5E583}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
 														<ItemRef Name="WoodRun" ID="{F80B14E6-3995-4DD9-8702-F08FCF1E1BFF}"/>
@@ -4963,23 +5459,29 @@
 													<GroupingBehavior>
 														<ItemRef Name="SandRun" ID="{F6AD94F2-3BE0-4758-BD63-2D106EBCE18B}"/>
 													</GroupingBehavior>
+													<GroupingBehavior>
+														<ItemRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}"/>
+													</GroupingBehavior>
 												</GroupingBehaviorList>
 												<GroupingList>
 													<Grouping>
 														<SwitchRef Name="Walk" ID="{25D7C510-1644-4777-8DE4-BA70074F99EB}"/>
 														<ItemList>
+															<ItemRef Name="StoneWalk" ID="{3DFDA58A-59D0-40DB-B44A-C04EC3E5E583}"/>
 															<ItemRef Name="SandWalk" ID="{AA638972-EA52-47CB-9742-A2BFE8C961A5}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
 														<SwitchRef Name="Run" ID="{751D432F-919D-4B6A-A71E-7027C898161C}"/>
 														<ItemList>
+															<ItemRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}"/>
 															<ItemRef Name="SandRun" ID="{F6AD94F2-3BE0-4758-BD63-2D106EBCE18B}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
 														<SwitchRef Name="Crouch" ID="{60710B51-7497-4614-A804-783D970199A9}"/>
 														<ItemList>
+															<ItemRef Name="StoneCrouch" ID="{DB544154-B3A6-4020-8941-76420C787647}"/>
 															<ItemRef Name="SandCrouch" ID="{814A706D-A254-44B0-8DCB-928D654D9F7B}"/>
 														</ItemList>
 													</Grouping>
@@ -7328,8 +7830,19 @@
 														</CustomStateList>
 													</StateInfo>
 												</RandomSequenceContainer>
-												<RandomSequenceContainer Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}" ShortID="427060157">
+												<RandomSequenceContainer Name="StoneRunOLD" ID="{05533ED3-4C5C-4A02-A9AD-A37A59294787}" ShortID="929300607">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-12</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 														</Reference>
@@ -7338,7 +7851,7 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<Sound Name="FS_Stone_01" ID="{472D6E5A-B3D4-44D3-9075-A1573F2D664A}" ShortID="574369168">
+														<Sound Name="FootstepsStoneRun 3" ID="{83E9C479-77FF-4EB3-ADC1-2D5D9ACF8D05}" ShortID="864364320">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7348,19 +7861,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}">
+																<AudioFileSource Name="FootstepsStoneRun 3" ID="{0AADEE3D-8823-4CCF-B155-C4FE9777E5B9}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_01.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 3.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="12299481"/>
+																		<MediaID ID="733316650"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_01" ID="{23AA45A5-B993-4840-A7CF-BCDA469F559E}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 3" ID="{0AADEE3D-8823-4CCF-B155-C4FE9777E5B9}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_02" ID="{41D07A8C-91F3-4180-A668-697AC4729813}" ShortID="834077025">
+														<Sound Name="FootstepsStoneRun 2" ID="{A55BB9C5-95A2-4E2E-8DE7-26A7AE2C90C3}" ShortID="948623392">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7370,19 +7883,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}">
+																<AudioFileSource Name="FootstepsStoneRun 2" ID="{A69052CD-D3FF-4B04-9811-00428D890D8A}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_02.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 2.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="538302046"/>
+																		<MediaID ID="720572330"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_02" ID="{7392F3F7-EB01-4798-BC5D-635CEF43D37B}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 2" ID="{A69052CD-D3FF-4B04-9811-00428D890D8A}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_03" ID="{E3F9175B-FC6C-421A-8685-1A0D2CED7367}" ShortID="910404561">
+														<Sound Name="FootstepsStoneRun 1" ID="{3DDC484A-4492-480F-8509-CB162C080947}" ShortID="173931018">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7392,19 +7905,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}">
+																<AudioFileSource Name="FootstepsStoneRun 1" ID="{012D4131-34C7-49DF-917C-CCFA19620F4A}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_03.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 1.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="635933243"/>
+																		<MediaID ID="403097929"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_03" ID="{90B23B07-0D6B-4DD6-BAC0-720A54814BAA}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 1" ID="{012D4131-34C7-49DF-917C-CCFA19620F4A}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_04" ID="{DE463423-4CA1-4DC5-9A66-1DE75764FFAB}" ShortID="946276748">
+														<Sound Name="FootstepsStoneRun 6" ID="{87D3F470-E022-4B18-9D1A-591C16984FB9}" ShortID="98705201">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7414,19 +7927,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}">
+																<AudioFileSource Name="FootstepsStoneRun 6" ID="{71D94856-5528-4727-A6AF-3C04DB983295}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_04.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 6.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="964135219"/>
+																		<MediaID ID="185441988"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_04" ID="{6E2A6024-1DA2-4B99-A23A-CBDAB74AEDFB}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 6" ID="{71D94856-5528-4727-A6AF-3C04DB983295}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_05" ID="{6DE0249D-366B-4BC9-A306-F16DBDAE22AB}" ShortID="570325662">
+														<Sound Name="FootstepsStoneRun 7" ID="{D73ACCE8-CE86-4637-B512-734335596E40}" ShortID="818545126">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7436,19 +7949,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}">
+																<AudioFileSource Name="FootstepsStoneRun 7" ID="{9D1BBCA1-CADB-4630-8340-48253142E29D}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_05.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 7.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="558331924"/>
+																		<MediaID ID="865151463"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_05" ID="{54FCF836-990C-4CC4-992D-C9563C157B9F}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 7" ID="{9D1BBCA1-CADB-4630-8340-48253142E29D}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_06" ID="{F18391B5-D654-4580-B76D-35581FEF541D}" ShortID="1042353615">
+														<Sound Name="FootstepsStoneRun 9" ID="{EB09772A-5946-4F01-9584-3CE43A73210A}" ShortID="267872316">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7458,19 +7971,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}">
+																<AudioFileSource Name="FootstepsStoneRun 9" ID="{0019C14D-F628-4EA7-966C-E0D5DFBB0AF0}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_06.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 9.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="960121538"/>
+																		<MediaID ID="414622692"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_06" ID="{0C44F142-7A97-42C7-9225-37EB0E7B420C}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 9" ID="{0019C14D-F628-4EA7-966C-E0D5DFBB0AF0}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_07" ID="{4441EAAA-7D87-4B0A-AF1F-E7231B5D1DDE}" ShortID="1007319246">
+														<Sound Name="FootstepsStoneRun 10" ID="{AB004505-FA52-49B0-8F77-67CB65375DA4}" ShortID="438755798">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7480,19 +7993,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}">
+																<AudioFileSource Name="FootstepsStoneRun 10" ID="{3F67E09D-A9B5-43DC-8D6B-EB5F6F074615}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_07.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 10.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="637563687"/>
+																		<MediaID ID="1055218331"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_07" ID="{18BED6E7-02EB-4102-B8D8-314DA76BFDC1}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 10" ID="{3F67E09D-A9B5-43DC-8D6B-EB5F6F074615}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_08" ID="{1400E5FB-0721-47B4-A589-393EACDF49B6}" ShortID="272917275">
+														<Sound Name="FootstepsStoneRun 11" ID="{1762995E-7AF3-4CD8-AE4F-753832AC1DAB}" ShortID="592651040">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7502,19 +8015,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}">
+																<AudioFileSource Name="FootstepsStoneRun 11" ID="{F811E8FF-4667-4838-B1E3-88A27D907279}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_08.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 11.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="767708800"/>
+																		<MediaID ID="195665557"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_08" ID="{76628DE0-0913-4BC5-8D27-CE1842B9DC1C}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 11" ID="{F811E8FF-4667-4838-B1E3-88A27D907279}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_09" ID="{2E63A723-9EC3-48BB-98B3-D22264EFF416}" ShortID="613067041">
+														<Sound Name="FootstepsStoneRun 12" ID="{2765767A-0BF8-4A53-9132-7F078F804879}" ShortID="578129983">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7524,19 +8037,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}">
+																<AudioFileSource Name="FootstepsStoneRun 12" ID="{A2B69B57-D88C-4C35-8945-727D8A991343}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_09.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 12.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="176152214"/>
+																		<MediaID ID="791895633"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_09" ID="{42FB9C76-4C93-442D-8EF9-60AB82BB586B}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 12" ID="{A2B69B57-D88C-4C35-8945-727D8A991343}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_10" ID="{14577E05-6943-48D7-9C60-5F5F5F08E836}" ShortID="754153917">
+														<Sound Name="FootstepsStoneRun 5" ID="{BF0928FA-878E-4000-9661-139A9012D7E1}" ShortID="109059220">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7546,19 +8059,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}">
+																<AudioFileSource Name="FootstepsStoneRun 5" ID="{C8D9EF53-060F-455C-A7B3-4A9A13B99F85}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_10.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 5.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="358961742"/>
+																		<MediaID ID="814448940"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_10" ID="{BCD507F9-F790-4940-BEFE-8C2A664777DC}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 5" ID="{C8D9EF53-060F-455C-A7B3-4A9A13B99F85}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_11" ID="{BAB6BBBC-D4A6-4A46-B4DD-F91E93BBE228}" ShortID="107820587">
+														<Sound Name="FootstepsStoneRun 13" ID="{D3792555-0BB1-4193-9A62-E8DE81F8C88F}" ShortID="286500107">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7568,19 +8081,19 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}">
+																<AudioFileSource Name="FootstepsStoneRun 13" ID="{4E4154A7-A91A-4247-AD66-AB371006F4D2}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_11.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 13.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="677192898"/>
+																		<MediaID ID="589087457"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_11" ID="{012E323B-F691-41B4-8ADA-1C7CA0A2A5F7}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 13" ID="{4E4154A7-A91A-4247-AD66-AB371006F4D2}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="FS_Stone_12" ID="{3D8BA404-AAB4-4B80-89DA-22B34F10FBCA}" ShortID="415900672">
+														<Sound Name="FootstepsStoneRun 14" ID="{14A3ACDC-3A3A-4A1D-9FA7-14561155749D}" ShortID="289944993">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -7590,75 +8103,107 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}">
+																<AudioFileSource Name="FootstepsStoneRun 14" ID="{A71C6FF8-3BB2-4C5F-B38E-43721FC93963}">
 																	<Language>SFX</Language>
-																	<AudioFile>FS_Stone_12.wav</AudioFile>
+																	<AudioFile>StoneRun\FootstepsStoneRun 14.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="985985263"/>
+																		<MediaID ID="675358201"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="FS_Stone_12" ID="{9AF74B40-F654-4A77-93D2-0273D4363BFA}" Platform="Linked"/>
+																<ActiveSource Name="FootstepsStoneRun 14" ID="{A71C6FF8-3BB2-4C5F-B38E-43721FC93963}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FootstepsStoneRun 15" ID="{026471C2-BC37-4600-9359-4FA879EEF392}" ShortID="908156623">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FootstepsStoneRun 15" ID="{6354729C-B18D-43E1-AB12-910430DFD070}">
+																	<Language>SFX</Language>
+																	<AudioFile>StoneRun\FootstepsStoneRun 15.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="215028229"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FootstepsStoneRun 15" ID="{6354729C-B18D-43E1-AB12-910430DFD070}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FootstepsStoneRun 4" ID="{406D065F-2D19-467F-B321-6E52DB1BA8B8}" ShortID="585808560">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FootstepsStoneRun 4" ID="{827CCFF5-AA75-4561-94D1-A8B3E3B5FA46}">
+																	<Language>SFX</Language>
+																	<AudioFile>StoneRun\FootstepsStoneRun 4.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="403493255"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FootstepsStoneRun 4" ID="{827CCFF5-AA75-4561-94D1-A8B3E3B5FA46}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FootstepsStoneRun 16" ID="{6F7FAD0D-4E3C-4D83-991B-3AC53CAD0317}" ShortID="659863364">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FootstepsStoneRun 16" ID="{AE5C6807-60CD-49CF-80B9-E8CE701872D3}">
+																	<Language>SFX</Language>
+																	<AudioFile>StoneRun\FootstepsStoneRun 16.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="990459238"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FootstepsStoneRun 16" ID="{AE5C6807-60CD-49CF-80B9-E8CE701872D3}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="FootstepsStoneRun 8" ID="{A9CA3206-08AC-482F-9CBE-378414A0B417}" ShortID="627704090">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="FootstepsStoneRun 8" ID="{34608E88-2F0B-4A5E-964E-7E322765BAA2}">
+																	<Language>SFX</Language>
+																	<AudioFile>StoneRun\FootstepsStoneRun 8.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="977382893"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="FootstepsStoneRun 8" ID="{34608E88-2F0B-4A5E-964E-7E322765BAA2}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
-													<StateInfo>
-														<StateGroupList>
-															<StateGroupInfo>
-																<StateGroupRef Name="Walk" ID="{E7A59603-EEB1-422A-8A95-6C1C09F167BB}"/>
-																<StateGroupInfo Name="" ID="{9E25E55F-1D84-4DAD-98ED-9F51E8FAFA34}" ShortID="73418681"/>
-															</StateGroupInfo>
-															<StateGroupInfo>
-																<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
-																<StateGroupInfo Name="" ID="{789D0EA5-6ACD-41E3-B085-EEABFFBEECD8}" ShortID="77431990"/>
-															</StateGroupInfo>
-															<StateGroupInfo>
-																<StateGroupRef Name="Crouch" ID="{EAF953B0-5C9B-4EEA-B99E-42E767A21B06}"/>
-																<StateGroupInfo Name="" ID="{50767FAF-5B44-470D-B5F2-BC12FE1E07DE}" ShortID="109166141"/>
-															</StateGroupInfo>
-														</StateGroupList>
-														<CustomStateList>
-															<CustomState>
-																<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
-																<CustomState Name="" ID="{EFF4190B-7F46-472C-85EB-FC31E7D2ED63}" ShortID="165081620">
-																	<PropertyList>
-																		<Property Name="Volume" Type="Real64" Value="-50"/>
-																	</PropertyList>
-																</CustomState>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="None" ID="{71AE17EE-3809-4559-A213-F01EB5E9500C}"/>
-																<CustomState Name="" ID="{0FE56ADA-71D7-4119-9256-21199F323233}" ShortID="587619862"/>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
-																<CustomState Name="" ID="{AC9ACCF7-BD68-40AA-9450-9B923E9B3518}" ShortID="203518057"/>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="Walk" ID="{EA7CC6B1-69F7-4BBD-BC53-13526B3CD190}"/>
-																<CustomState Name="" ID="{048815E3-775E-4D25-9CA6-4A0F8B0B6E20}" ShortID="927850913">
-																	<PropertyList>
-																		<Property Name="Lowpass" Type="int16" Value="24"/>
-																		<Property Name="Volume" Type="Real64" Value="-75"/>
-																	</PropertyList>
-																</CustomState>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="None" ID="{6B0194DF-91B1-4BF1-9232-E1FBF90BC22F}"/>
-																<CustomState Name="" ID="{429337BC-9ED1-469C-91EC-1AB5F86A5669}" ShortID="148042341"/>
-															</CustomState>
-															<CustomState>
-																<StateRef Name="Crouch" ID="{CFC0B4A1-99F9-4DC5-A9C9-22EAE401D5B7}"/>
-																<CustomState Name="" ID="{2E8B2EF1-1988-4E74-B3B6-662D9FE00E96}" ShortID="352196872">
-																	<PropertyList>
-																		<Property Name="Lowpass" Type="int16" Value="48"/>
-																		<Property Name="Volume" Type="Real64" Value="-150"/>
-																	</PropertyList>
-																</CustomState>
-															</CustomState>
-														</CustomStateList>
-													</StateInfo>
 												</RandomSequenceContainer>
 											</ChildrenList>
 											<PositioningInfo>
@@ -7707,10 +8252,10 @@
 														<ItemRef Name="SandWalk" ID="{997FB3B4-8B23-4FFE-BD6D-9384CB988D5E}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
-														<ItemRef Name="WoodWalk" ID="{FDC5D6DC-5B82-40AE-95DB-B8BAA0770D8D}"/>
+														<ItemRef Name="StoneRunOLD" ID="{05533ED3-4C5C-4A02-A9AD-A37A59294787}"/>
 													</GroupingBehavior>
 													<GroupingBehavior>
-														<ItemRef Name="StoneRun" ID="{15021EFB-756F-4A4F-A89A-5911A45F0AB3}"/>
+														<ItemRef Name="WoodWalk" ID="{FDC5D6DC-5B82-40AE-95DB-B8BAA0770D8D}"/>
 													</GroupingBehavior>
 												</GroupingBehaviorList>
 											</GroupingInfo>
@@ -10316,6 +10861,53 @@
 												</Sound>
 											</ChildrenList>
 										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="SmallPoisonGaz" ID="{77097EF0-DEAE-4C18-B108-D0E3CA42B627}" ShortID="931782067">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-15</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="PoisonGaz" ID="{4D5DB8F0-DD6E-4737-B1AC-B472BF94954C}" ShortID="926214071">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="PoisonGaz" ID="{E298783C-2B44-4F5D-BC2B-8567160014A5}">
+															<Language>SFX</Language>
+															<AudioFile>PoisonGaz.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="622100660"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="PoisonGaz" ID="{E298783C-2B44-4F5D-BC2B-8567160014A5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
@@ -12785,378 +13377,25 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<RandomSequenceContainer Name="BasicEnnemyRun" ID="{86E30E8E-22B6-41C6-8623-D291B5B6DC6E}" ShortID="929775338">
-											<PropertyList>
-												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="FootstepsBasicEnnemyRun 1" ID="{C0D4828C-5682-4A97-9934-77AE8ADC5153}" ShortID="480577804">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 1" ID="{819FDB6D-5625-43B9-A0C0-50518F1E54A2}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="119088602"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 1" ID="{819FDB6D-5625-43B9-A0C0-50518F1E54A2}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 10" ID="{474920EA-D5E8-4881-9E2F-87CBA40CC7B7}" ShortID="767186746">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 10" ID="{9C0CEA98-259A-4753-8AC9-5D166A1BC817}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 10.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="249555483"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 10" ID="{9C0CEA98-259A-4753-8AC9-5D166A1BC817}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 11" ID="{04D4484C-9193-436D-A29B-E7A8DB61A142}" ShortID="756023241">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 11" ID="{58501F88-F4CF-45F6-A190-35BD188BD476}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 11.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="783285563"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 11" ID="{58501F88-F4CF-45F6-A190-35BD188BD476}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 12" ID="{A422E53F-89F6-404F-9AEF-9F16AB5AF6ED}" ShortID="1065293326">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 12" ID="{3D37B388-6A0A-4FBC-8E57-7001CC534F81}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 12.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="227490105"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 12" ID="{3D37B388-6A0A-4FBC-8E57-7001CC534F81}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 13" ID="{0496C41B-0F06-468B-B117-FEF92DC0BCCA}" ShortID="180243348">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 13" ID="{33DB6D02-B21D-4768-BCBA-7DDB12E6494B}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 13.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="810591965"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 13" ID="{33DB6D02-B21D-4768-BCBA-7DDB12E6494B}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 14" ID="{40E9BD7D-55FD-40CB-BBE7-54697BAF6F20}" ShortID="214348519">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 14" ID="{8FE4D844-5D77-4F1B-BF93-9BE1ED824436}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 14.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="173846091"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 14" ID="{8FE4D844-5D77-4F1B-BF93-9BE1ED824436}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 15" ID="{795853D0-088F-4D58-A4AE-F4E068630A22}" ShortID="933513241">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 15" ID="{F9FF1105-7E2A-4998-9713-8F1A2CF76874}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 15.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="403290721"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 15" ID="{F9FF1105-7E2A-4998-9713-8F1A2CF76874}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 16" ID="{531D1C7C-417A-4F30-90F5-73791881D60B}" ShortID="185424819">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 16" ID="{AE1A8D83-D581-4DEE-9BCA-C8B764BF8E0A}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 16.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="445279208"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 16" ID="{AE1A8D83-D581-4DEE-9BCA-C8B764BF8E0A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 2" ID="{948F57EC-9F4C-4287-B18D-124A97D0E3A1}" ShortID="779446885">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 2" ID="{93468BC7-A306-4BC8-BEC2-2BD5B056639B}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="724511625"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 2" ID="{93468BC7-A306-4BC8-BEC2-2BD5B056639B}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 3" ID="{ED54135E-E002-42C5-8F66-B462A442B3B9}" ShortID="660253704">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 3" ID="{4FA5C1E2-7751-4E38-B46A-E01D8B088925}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 3.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="508491698"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 3" ID="{4FA5C1E2-7751-4E38-B46A-E01D8B088925}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 4" ID="{D5BA06FA-230F-4BF6-A8A5-9B74A928465F}" ShortID="746611799">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 4" ID="{103A6B4C-3312-4B2B-B1F6-72D6B9D29B4C}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 4.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="730665928"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 4" ID="{103A6B4C-3312-4B2B-B1F6-72D6B9D29B4C}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 5" ID="{474363BC-558F-4612-9B63-A08B34F61FD2}" ShortID="221387059">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 5" ID="{E3C62548-D707-4B81-86A9-E3D4AB055A66}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 5.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1051819540"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 5" ID="{E3C62548-D707-4B81-86A9-E3D4AB055A66}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 6" ID="{D872AA95-363F-47CF-BBF9-9AE2F4B0C5C5}" ShortID="577083846">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 6" ID="{46717E81-DEB9-4174-9B1D-B6C8EB74C0C1}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 6.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="410635671"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 6" ID="{46717E81-DEB9-4174-9B1D-B6C8EB74C0C1}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 7" ID="{C6B1582B-AEDF-47F4-BA18-1F0EC6478A08}" ShortID="177319848">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 7" ID="{DB5AB5DE-C24B-4D6C-BC86-58EFB855AD3C}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 7.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="294569269"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 7" ID="{DB5AB5DE-C24B-4D6C-BC86-58EFB855AD3C}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 8" ID="{5F49230B-7EEC-4390-90FB-942E66834DFE}" ShortID="944449409">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 8" ID="{B010913C-6729-44DC-9152-C0895DAFCC4D}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 8.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="934441837"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 8" ID="{B010913C-6729-44DC-9152-C0895DAFCC4D}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyRun 9" ID="{7681F429-A0C1-4A91-86C4-15D495AEAF4A}" ShortID="400619929">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyRun 9" ID="{5E9AAD0A-629C-4DE9-BE3E-519A3229B293}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyRun\FootstepsBasicEnnemyRun 9.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="734951332"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyRun 9" ID="{5E9AAD0A-629C-4DE9-BE3E-519A3229B293}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="BasicEnnemyWalk" ID="{601AEC65-869F-455B-8ABB-CDB9A2B9F52C}" ShortID="977259115">
 											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>15</Value>
+													</ValueList>
+												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
 												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -13167,7 +13406,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="FootstepsBasicEnnemyWalk 1" ID="{7CDE7B6B-7DBA-43F6-828A-702E1CD4B002}" ShortID="448014023">
+												<Sound Name="FS_Follower_01" ID="{5E6B7ABB-F702-43C5-867C-8414DBEE1877}" ShortID="896555302">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13177,19 +13416,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 1" ID="{23859261-55F1-4DD2-8ADB-BF0C41808161}">
+														<AudioFileSource Name="FS_Follower_01" ID="{99EEA4A7-D6DA-496C-B26A-4B8EC94FFE8A}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 1.wav</AudioFile>
+															<AudioFile>FS_Follower_01.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="658775640"/>
+																<MediaID ID="459294438"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 1" ID="{23859261-55F1-4DD2-8ADB-BF0C41808161}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_01" ID="{99EEA4A7-D6DA-496C-B26A-4B8EC94FFE8A}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 10" ID="{F6B66F90-A16E-4E48-B2DB-B785710E2B90}" ShortID="422137848">
+												<Sound Name="FS_Follower_02" ID="{95B37152-F293-44C1-A0A0-C0DD315C2118}" ShortID="599699057">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13199,19 +13438,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 10" ID="{A64600F8-D546-4F19-B40E-B72C43DF0B85}">
+														<AudioFileSource Name="FS_Follower_02" ID="{ED2B3AFD-ACC9-4FED-8B1E-8E15D1AF4CBC}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 10.wav</AudioFile>
+															<AudioFile>FS_Follower_02.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="1012933875"/>
+																<MediaID ID="662914293"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 10" ID="{A64600F8-D546-4F19-B40E-B72C43DF0B85}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_02" ID="{ED2B3AFD-ACC9-4FED-8B1E-8E15D1AF4CBC}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 11" ID="{0CC1E855-DB8D-4240-ABCA-B6851DE8B036}" ShortID="411921254">
+												<Sound Name="FS_Follower_03" ID="{0B98FE96-1692-425A-9ED5-9C86C439E97B}" ShortID="277187324">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13221,19 +13460,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 11" ID="{5A2D9649-5B01-4DDA-BD48-F49A371F65A5}">
+														<AudioFileSource Name="FS_Follower_03" ID="{0AFC506D-59E2-4FAE-81ED-570C9872129E}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 11.wav</AudioFile>
+															<AudioFile>FS_Follower_03.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="350124382"/>
+																<MediaID ID="541130675"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 11" ID="{5A2D9649-5B01-4DDA-BD48-F49A371F65A5}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_03" ID="{0AFC506D-59E2-4FAE-81ED-570C9872129E}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 12" ID="{319E3A42-0B19-4187-B1A6-8036ED1F53FB}" ShortID="852956748">
+												<Sound Name="FS_Follower_04" ID="{A02BEE0B-EDF2-4C94-8AF3-8F73213AE729}" ShortID="120595003">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13243,19 +13482,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 12" ID="{AD1E31FD-4AAA-4F42-AD7A-3B372F8BBC5E}">
+														<AudioFileSource Name="FS_Follower_04" ID="{53F68FD6-CA30-4D4C-B760-5BE21D384368}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 12.wav</AudioFile>
+															<AudioFile>FS_Follower_04.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="941637134"/>
+																<MediaID ID="18456633"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 12" ID="{AD1E31FD-4AAA-4F42-AD7A-3B372F8BBC5E}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_04" ID="{53F68FD6-CA30-4D4C-B760-5BE21D384368}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 13" ID="{07DE4D1A-0288-4DF8-B351-BC61DC5B0221}" ShortID="750678053">
+												<Sound Name="FS_Follower_05" ID="{B886160B-447B-4137-8110-B8D902CA6FD8}" ShortID="186357734">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13265,19 +13504,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 13" ID="{287F6AC9-C61D-43EE-B2BB-997D56849A90}">
+														<AudioFileSource Name="FS_Follower_05" ID="{AB9491E9-156F-4AEE-85AC-A838C0DCAD51}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 13.wav</AudioFile>
+															<AudioFile>FS_Follower_05.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="534467487"/>
+																<MediaID ID="616655438"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 13" ID="{287F6AC9-C61D-43EE-B2BB-997D56849A90}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_05" ID="{AB9491E9-156F-4AEE-85AC-A838C0DCAD51}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 14" ID="{B214D04E-F56D-470E-95DF-DE1659BA3F0B}" ShortID="1069022135">
+												<Sound Name="FS_Follower_06" ID="{6FF23A15-D427-439C-8613-043D03F87B36}" ShortID="882982499">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13287,19 +13526,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 14" ID="{20497CCC-2ECE-4689-A63B-03B339DBC896}">
+														<AudioFileSource Name="FS_Follower_06" ID="{E029D030-ADD1-4E6A-87F3-50A14B5ED121}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 14.wav</AudioFile>
+															<AudioFile>FS_Follower_06.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="624505986"/>
+																<MediaID ID="813716119"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 14" ID="{20497CCC-2ECE-4689-A63B-03B339DBC896}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_06" ID="{E029D030-ADD1-4E6A-87F3-50A14B5ED121}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 15" ID="{6AB9B018-9E3D-4896-9AA8-C233045FD3BF}" ShortID="64194300">
+												<Sound Name="FS_Follower_07" ID="{83C532D2-094C-4E2A-8366-034FAEDE9F12}" ShortID="923295504">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13309,19 +13548,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 15" ID="{175C192B-5887-49D1-B072-E9F9FE790BC7}">
+														<AudioFileSource Name="FS_Follower_07" ID="{F3CEB3BE-A952-4552-AB5C-5C24F17F6FA6}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 15.wav</AudioFile>
+															<AudioFile>FS_Follower_07.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="988341890"/>
+																<MediaID ID="503138922"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 15" ID="{175C192B-5887-49D1-B072-E9F9FE790BC7}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_07" ID="{F3CEB3BE-A952-4552-AB5C-5C24F17F6FA6}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 16" ID="{086A8947-E4BA-4789-82F9-F61430C1214A}" ShortID="1012929269">
+												<Sound Name="FS_Follower_08" ID="{CD585B84-5D5D-481C-A084-441105BAEA76}" ShortID="95564123">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13331,19 +13570,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 16" ID="{8D58607F-442F-489A-BCC1-DF0C938BD5EA}">
+														<AudioFileSource Name="FS_Follower_08" ID="{B1857E2C-7928-4B5B-B614-3F835E908632}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 16.wav</AudioFile>
+															<AudioFile>FS_Follower_08.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="798305378"/>
+																<MediaID ID="581263122"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 16" ID="{8D58607F-442F-489A-BCC1-DF0C938BD5EA}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_08" ID="{B1857E2C-7928-4B5B-B614-3F835E908632}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 17" ID="{E57D6B74-6B91-40F8-AD8C-4422F49950BB}" ShortID="132217076">
+												<Sound Name="FS_Follower_09" ID="{34803B6B-22A2-42BD-AF1B-AC3C17C37487}" ShortID="1073341665">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13353,19 +13592,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 17" ID="{AC510846-D559-463D-81C4-0ACDF0BE8C31}">
+														<AudioFileSource Name="FS_Follower_09" ID="{33E9EF1F-92D9-46A6-B44F-60621502737D}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 17.wav</AudioFile>
+															<AudioFile>FS_Follower_09.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="319287659"/>
+																<MediaID ID="841206076"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 17" ID="{AC510846-D559-463D-81C4-0ACDF0BE8C31}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_09" ID="{33E9EF1F-92D9-46A6-B44F-60621502737D}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 2" ID="{C9AA0125-4531-4914-8EC1-7188E280402C}" ShortID="707174157">
+												<Sound Name="FS_Follower_10" ID="{698A9441-2529-425C-B06F-675A4B0479BB}" ShortID="181480366">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13375,19 +13614,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 2" ID="{BE1580DA-3FB5-44D1-9FB5-5E6DE2A83E50}">
+														<AudioFileSource Name="FS_Follower_10" ID="{7177F29D-8EDE-4F47-A251-109310B17B35}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 2.wav</AudioFile>
+															<AudioFile>FS_Follower_10.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="518699605"/>
+																<MediaID ID="185216176"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 2" ID="{BE1580DA-3FB5-44D1-9FB5-5E6DE2A83E50}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_10" ID="{7177F29D-8EDE-4F47-A251-109310B17B35}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 3" ID="{70776857-9BA0-4FFE-9223-844792E95962}" ShortID="1062767310">
+												<Sound Name="FS_Follower_11" ID="{5DEDC2C6-9AEE-4BC4-A5BD-1557BA49212A}" ShortID="1059807171">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13397,19 +13636,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 3" ID="{EDCD3F25-D04C-4A45-9539-7C9BB1C984CF}">
+														<AudioFileSource Name="FS_Follower_11" ID="{CE974E39-968B-48BC-A48C-5EA0E2BD1E64}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 3.wav</AudioFile>
+															<AudioFile>FS_Follower_11.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="245422922"/>
+																<MediaID ID="46649787"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 3" ID="{EDCD3F25-D04C-4A45-9539-7C9BB1C984CF}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_11" ID="{CE974E39-968B-48BC-A48C-5EA0E2BD1E64}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 4" ID="{1268B86F-AAED-46AC-95C3-EC35B1D1973F}" ShortID="434012661">
+												<Sound Name="FS_Follower_12" ID="{B6BBF2BB-4E5A-4D63-9AC4-129AA3C69130}" ShortID="344275537">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13419,19 +13658,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 4" ID="{2577FDFC-E95D-4A36-9A73-0DA9DEECAFED}">
+														<AudioFileSource Name="FS_Follower_12" ID="{4E65B2DB-D9D5-4FD4-B354-8AD3E841AB52}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 4.wav</AudioFile>
+															<AudioFile>FS_Follower_12.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="228862855"/>
+																<MediaID ID="539006043"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 4" ID="{2577FDFC-E95D-4A36-9A73-0DA9DEECAFED}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_12" ID="{4E65B2DB-D9D5-4FD4-B354-8AD3E841AB52}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 5" ID="{FE696FC9-F9A0-4738-B793-6D9A747C2B56}" ShortID="541182050">
+												<Sound Name="FS_Follower_13" ID="{6D70C27D-3336-4A7C-8140-36F61F27C69D}" ShortID="355276788">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13441,19 +13680,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 5" ID="{ACF9D179-4E85-4F4C-AA46-3C85922DA9AB}">
+														<AudioFileSource Name="FS_Follower_13" ID="{E827CE84-0A56-484D-8D35-594EDDB7812D}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 5.wav</AudioFile>
+															<AudioFile>FS_Follower_13.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="708513504"/>
+																<MediaID ID="938299691"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 5" ID="{ACF9D179-4E85-4F4C-AA46-3C85922DA9AB}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_13" ID="{E827CE84-0A56-484D-8D35-594EDDB7812D}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 6" ID="{EE315EFB-AFC3-4372-BA11-37A949E31A45}" ShortID="194029618">
+												<Sound Name="FS_Follower_14" ID="{43D86E21-E635-499C-9596-3A0BF555846D}" ShortID="1056436172">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13463,19 +13702,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 6" ID="{0363291F-1A63-482C-A84E-666EFD5BC727}">
+														<AudioFileSource Name="FS_Follower_14" ID="{AC699A56-4E6D-468F-BA88-B983C60EE265}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 6.wav</AudioFile>
+															<AudioFile>FS_Follower_14.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="279136364"/>
+																<MediaID ID="981871743"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 6" ID="{0363291F-1A63-482C-A84E-666EFD5BC727}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_14" ID="{AC699A56-4E6D-468F-BA88-B983C60EE265}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 7" ID="{1406EEF7-02BB-4E72-96E8-4E0024CE0F17}" ShortID="361504092">
+												<Sound Name="FS_Follower_15" ID="{E7ABA85A-62A9-4AC5-8C22-5C25CA3E652B}" ShortID="504909120">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13485,19 +13724,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 7" ID="{90602FAD-0E53-49B4-A6AD-406741C64C8A}">
+														<AudioFileSource Name="FS_Follower_15" ID="{58A8CCED-D890-4EC3-901F-8E1E23A0E5AE}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 7.wav</AudioFile>
+															<AudioFile>FS_Follower_15.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="951763644"/>
+																<MediaID ID="931734252"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 7" ID="{90602FAD-0E53-49B4-A6AD-406741C64C8A}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_15" ID="{58A8CCED-D890-4EC3-901F-8E1E23A0E5AE}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 8" ID="{7B40BFF8-0C2B-44F3-9F5C-EC4E7E765A5F}" ShortID="809940228">
+												<Sound Name="FS_Follower_16" ID="{2E004B70-1D3D-4FCC-A2C1-7264C48082DD}" ShortID="745308167">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13507,38 +13746,16 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 8" ID="{6406F77F-1932-4AC6-BAC3-23B4D2D1FD2F}">
+														<AudioFileSource Name="FS_Follower_16" ID="{C299B4D3-4FBA-46E5-8ED5-7C50D8314781}">
 															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 8.wav</AudioFile>
+															<AudioFile>FS_Follower_16.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="523267442"/>
+																<MediaID ID="832841224"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 8" ID="{6406F77F-1932-4AC6-BAC3-23B4D2D1FD2F}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsBasicEnnemyWalk 9" ID="{C2FE0E9B-281D-4274-A0E6-A3DF54624074}" ShortID="810821948">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsBasicEnnemyWalk 9" ID="{761EBCB8-2B1F-4C1F-A9D7-083D73D1DE09}">
-															<Language>SFX</Language>
-															<AudioFile>BasicEnnemyWalk\FootstepsBasicEnnemyWalk 9.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="804044647"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsBasicEnnemyWalk 9" ID="{761EBCB8-2B1F-4C1F-A9D7-083D73D1DE09}" Platform="Linked"/>
+														<ActiveSource Name="FS_Follower_16" ID="{C299B4D3-4FBA-46E5-8ED5-7C50D8314781}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -13548,9 +13765,6 @@
 										<GroupingBehaviorList>
 											<GroupingBehavior>
 												<ItemRef Name="BasicEnnemyWalk" ID="{601AEC65-869F-455B-8ABB-CDB9A2B9F52C}"/>
-											</GroupingBehavior>
-											<GroupingBehavior>
-												<ItemRef Name="BasicEnnemyRun" ID="{86E30E8E-22B6-41C6-8623-D291B5B6DC6E}"/>
 											</GroupingBehavior>
 										</GroupingBehaviorList>
 										<GroupingList>
@@ -13563,7 +13777,7 @@
 											<Grouping>
 												<SwitchRef Name="Run" ID="{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"/>
 												<ItemList>
-													<ItemRef Name="BasicEnnemyRun" ID="{86E30E8E-22B6-41C6-8623-D291B5B6DC6E}"/>
+													<ItemRef Name="BasicEnnemyWalk" ID="{601AEC65-869F-455B-8ABB-CDB9A2B9F52C}"/>
 												</ItemList>
 											</Grouping>
 										</GroupingList>
@@ -13691,7 +13905,7 @@
 										</Reference>
 									</ReferenceList>
 								</RandomSequenceContainer>
-								<BlendContainer Name="BasicEnemyIdle" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
+								<BlendContainer Name="BasicEnemyIdleOLD" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -13914,6 +14128,354 @@
 										</Sound>
 									</ChildrenList>
 								</BlendContainer>
+								<RandomSequenceContainer Name="BasicEnemyIdle" ID="{1DACCD4F-0442-4C3A-AC70-BE1CDE25EB57}" ShortID="1034209613">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{C38F37FF-2E85-4683-8F5F-F34A5273104B}" ShortID="778581639">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{122AB938-1CDA-4744-BC00-BB2A037DA4A8}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{7EC096D3-795E-4ED6-8BF3-4AA69D25DD84}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="4.35608227744564"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="4.35608227744564"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="227417322"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1" ID="{7EC096D3-795E-4ED6-8BF3-4AA69D25DD84}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{F0EB7711-352D-47E2-B83B-D821D53A1B92}" ShortID="969154502">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{1C5518E6-1660-482F-AE61-98F844D96DFA}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-7</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{CE200EC6-8C23-4A73-BDD8-5214640FCCB2}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="4.21618271650068"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="4.21618271650068"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="973261857"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2" ID="{CE200EC6-8C23-4A73-BDD8-5214640FCCB2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{45EFC0D4-1AFD-4FC1-9029-CD2D23D66BAF}" ShortID="667033565">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{6E012F37-9EF4-4813-A0F7-05D420FE88E4}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{2798702C-F92D-4C73-9B9B-81BB00C69551}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.83654585376081"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.72131160411308"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="2.83044125697255"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.12291745562241"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="122687196"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01" ID="{2798702C-F92D-4C73-9B9B-81BB00C69551}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="KS_Zombie Dystopia_3-02" ID="{C0C07348-E392-437C-BA2C-7143EA744DC4}" ShortID="929109544">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="KS_Zombie Dystopia_3-02" ID="{967390D6-19C6-49EF-AEC7-1A0578D036DB}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.989179980140555"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="3.30642567435871"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="6.74107838318008"/>
+														<Property Name="TrimEnd" Type="Real64" Value="10.3497535569502"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>KS_Zombie Dystopia_3-02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="640098324"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="KS_Zombie Dystopia_3-02" ID="{967390D6-19C6-49EF-AEC7-1A0578D036DB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="KS_Zombie Dystopia_3-03" ID="{2DBD337A-8594-4803-BD31-20F63A32F1C3}" ShortID="619268822">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{3E6D5FF9-5178-4C3A-B976-6E3388CC83E0}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="KS_Zombie Dystopia_3-03" ID="{0C9B5BCD-342C-4D3F-8F78-8C3D1D748F7A}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.83975895979988"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.08430763205504"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>KS_Zombie Dystopia_3-03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="797369373"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="KS_Zombie Dystopia_3-03" ID="{0C9B5BCD-342C-4D3F-8F78-8C3D1D748F7A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-03" ID="{C3DA9DF1-4514-4C5D-BDE1-8AC3F9C6556B}" ShortID="209825947">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{4CCD8935-8AEC-4E2B-A421-85EE2CF862E4}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.962720435087675"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.04184814208118"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="1.43748667704872"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.67943843114699"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="78131397"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{4CCD8935-8AEC-4E2B-A421-85EE2CF862E4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-03_01" ID="{166619D0-1FD4-4DCE-A84E-A491C96732EC}" ShortID="469912504">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{C2C3DA16-7F23-4B01-BA71-D729ECF37990}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.197819267483768"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.42658301446756"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="4.82679012660396"/>
+														<Property Name="TrimEnd" Type="Real64" Value="7.63582378082237"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="773821258"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-03" ID="{C2C3DA16-7F23-4B01-BA71-D729ECF37990}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="BasicEnnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" ShortID="475537957">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="FollowerScream" ID="{BF591323-ED2A-4C2E-B350-6EB41F779BC1}" ShortID="136974083">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-170</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerScream" ID="{C1BB0DA1-5F86-4851-A61C-E132414F3828}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.491983224588162"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerScream.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="792658188"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerScream" ID="{C1BB0DA1-5F86-4851-A61C-E132414F3828}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
