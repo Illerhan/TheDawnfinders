@@ -53,4 +53,6 @@ private:
 	void EvaluateState();
 	void ApplyState(EMusicState NewState);
 	void StopCurrent(EMusicState NewState);
+	UFUNCTION(BlueprintCallable)
+	void ResetState();
 };
