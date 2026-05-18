@@ -330,7 +330,7 @@ void ADoors::Multi_OpeningSound_Implementation()
             MovableSoundID = AK_INVALID_PLAYING_ID; // Reset
         }  
     }
-    MovableSoundID = UAkGameplayStatics::PostEvent(MovableSound,Owner,0,FOnAkPostEventCallback(), false);
+    MovableSoundID = UAkGameplayStatics::PostEventAtLocation(MovableSound,GetActorLocation(),GetActorRotation(),this);
 }
 
 
