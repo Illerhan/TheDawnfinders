@@ -130,9 +130,9 @@
 						</Effect>
 						<Effect Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
 							<PropertyList>
-								<Property Name="DelayTime" Type="Real32" Value="0.6"/>
-								<Property Name="Feedback" Type="Real32" Value="28"/>
-								<Property Name="WetDryMix" Type="Real32" Value="34"/>
+								<Property Name="DelayTime" Type="Real32" Value="0.4"/>
+								<Property Name="Feedback" Type="Real32" Value="10"/>
+								<Property Name="WetDryMix" Type="Real32" Value="10"/>
 							</PropertyList>
 						</Effect>
 						<Effect Name="One_Tap_Half_Second" ID="{B8FE0D3B-7AAB-4344-89FE-177602B7BF19}" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3"/>

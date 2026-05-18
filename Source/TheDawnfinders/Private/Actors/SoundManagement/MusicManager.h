@@ -34,6 +34,7 @@ public:
 	void OnEnemyCalm();
 
 	// Appelé par l'objectif d'extraction
+	UFUNCTION(BlueprintCallable)
 	void TriggerExtraction();
 	
 	UPROPERTY(EditAnywhere, Category = "Audio")

@@ -9,6 +9,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Actors/Interactibles/AContainer.h"
+#include "Actors/SoundManagement/MusicManager.h"
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -33,6 +34,13 @@ ABaseEnemy::ABaseEnemy()
     {
         AkComponent->SetupAttachment(GetMesh());
     }
+}
+
+UMusicManager* GetMusicManager(UObject* WorldContext)
+{
+    UGameInstance* GI = UGameplayStatics::GetGameInstance(WorldContext);
+    if (!GI) return nullptr;
+    return GI->GetSubsystem<UMusicManager>();
 }
 
 void ABaseEnemy::BeginPlay()
@@ -373,6 +381,10 @@ void ABaseEnemy::Die() {
     MulticastPlayMontage(DeathMontage, 1);
 
     bIsDead = true;
+    if (UMusicManager* MM = GetMusicManager(this))
+    {
+        MM->OnEnemyCalm();
+    }
 }
 
 
@@ -429,14 +441,14 @@ void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
     // Tout couper
     if (AAIController* AIC = Cast<AAIController>(GetController()))
         if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
-            PFC->SetActive(false); // empêche le re-dispatch de RequestedVelocity
+            PFC->SetActive(false); // empï¿½che le re-dispatch de RequestedVelocity
 
     CMC->StopMovementImmediately();
     CMC->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);
     //CMC->RemoveRootMotionSourceByName(FName("Knockback"));
 
-    // LOG pour vérifier ce qui est appliqué
-    UE_LOG(LogTemp, Warning, TEXT("Force appliquée : %s | HasAnimRM : %d"),
+    // LOG pour vï¿½rifier ce qui est appliquï¿½
+    UE_LOG(LogTemp, Warning, TEXT("Force appliquï¿½e : %s | HasAnimRM : %d"),
         *(Direction * Strength).ToString(),
         GetMesh()->GetAnimInstance()->RootMotionMode == ERootMotionMode::RootMotionFromEverything);
 
@@ -452,7 +464,7 @@ void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
 
     uint16 SourceID = CMC->ApplyRootMotionSource(KnockbackSource);
 
-    // LOG pour vérifier que la source est bien enregistrée
+    // LOG pour vï¿½rifier que la source est bien enregistrï¿½e
     UE_LOG(LogTemp, Warning, TEXT("RootMotionSource ID : %d"), SourceID);
     FTimerHandle TH;
     GetWorldTimerManager().SetTimer(TH, [this]()
