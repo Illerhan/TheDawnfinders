@@ -192,7 +192,7 @@ private:
 	UPROPERTY(Replicated)
 	AActor* NearestInteractible;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 
 	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
