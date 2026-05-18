@@ -78,6 +78,9 @@ protected :
 	bool bIsTriggered;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bHeardLoud;
+
+	UPROPERTY(BlueprintReadWrite)
 	ABaseEnemy* PossessedPawn;
 
 	UPROPERTY(BlueprintReadWrite)
