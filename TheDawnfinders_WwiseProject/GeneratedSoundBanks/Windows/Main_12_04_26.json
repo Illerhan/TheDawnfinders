@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{D18DFFA0-4BA9-6A95-D00F-9FE71F6A8922}",
+    "Hash": "{48351C0D-D740-8153-D27F-8A1488DF2089}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -38,6 +38,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_End\\Palanquin_End 4.wav",
       "CachePath": "E0/{E097F2F3-4613-30E1-F645-C6977C1D4D50}.wem"
+     },
+     {
+      "Id": "10621815",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_03.wav",
+      "CachePath": "1C/{1CACF674-266D-5E66-AA34-3BE1A049CFA2}.wem"
      },
      {
       "Id": "11586860",
@@ -336,6 +344,14 @@
       "CachePath": "0A/{0A281E84-5634-49A3-500D-3FB9CD5B1C38}.wem"
      },
      {
+      "Id": "99490746",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_08.wav",
+      "CachePath": "E6/{E6F38E52-68B4-3CB2-2326-D5DD569438DC}.wem"
+     },
+     {
       "Id": "100764325",
       "Language": "SFX",
       "Streaming": "false",
@@ -464,6 +480,14 @@
       "CachePath": "A2/{A2D1FC3A-B12A-5764-E297-D3D2AB37D73E}.wem"
      },
      {
+      "Id": "136892222",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_05.wav",
+      "CachePath": "99/{9948FCB8-CAC6-91F7-A05F-E61E29FB864A}.wem"
+     },
+     {
       "Id": "137990748",
       "Language": "SFX",
       "Streaming": "false",
@@ -582,6 +606,14 @@
       "Location": "Memory",
       "ShortName": "OpenInventory_03.wav",
       "CachePath": "88/{889EA3D3-CC56-489C-08CF-154B55F6E690}.wem"
+     },
+     {
+      "Id": "195810138",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_10.wav",
+      "CachePath": "84/{8419E34F-D1E5-EA02-E271-758F04BFD106}.wem"
      },
      {
       "Id": "197339564",
@@ -2008,6 +2040,14 @@
       "CachePath": "36/{36EB80D0-1E46-A249-5AD8-DE4B75684CE3}.wem"
      },
      {
+      "Id": "650472069",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_11.wav",
+      "CachePath": "3A/{3A41C7E7-0C7B-3AA6-2725-6F58381ED250}.wem"
+     },
+     {
       "Id": "652194251",
       "Language": "SFX",
       "Streaming": "false",
@@ -2544,6 +2584,14 @@
       "CachePath": "EF/{EF3C9AA6-030F-5E5D-1CDC-8B3481348409}.wem"
      },
      {
+      "Id": "826190042",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_02.wav",
+      "CachePath": "26/{266FEF86-516A-DAC4-7D23-DBF87B084D92}.wem"
+     },
+     {
       "Id": "832841224",
       "Language": "SFX",
       "Streaming": "false",
@@ -2598,6 +2646,22 @@
       "Location": "Memory",
       "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 4.wav",
       "CachePath": "11/{118DAEDE-8343-884A-6A17-569E30B620D5}.wem"
+     },
+     {
+      "Id": "852155796",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_06.wav",
+      "CachePath": "F9/{F97AC643-37C1-0934-9FC0-4D389CE451FC}.wem"
+     },
+     {
+      "Id": "852910227",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_01.wav",
+      "CachePath": "02/{0274F1E7-DB06-56B9-3363-0297834ADF33}.wem"
      },
      {
       "Id": "854938390",
@@ -2670,6 +2734,14 @@
       "Location": "Memory",
       "ShortName": "Audio 8.dup1.cm_01.wav",
       "CachePath": "9C/{9C2BBC67-E3BC-9054-4D3E-DD375C7CD0B2}.wem"
+     },
+     {
+      "Id": "882707068",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_09.wav",
+      "CachePath": "E2/{E2A5C773-CEDA-A805-8B93-229E26C0E810}.wem"
      },
      {
       "Id": "884258450",
@@ -2830,6 +2902,14 @@
       "Location": "Memory",
       "ShortName": "WoodWalk\\FootstepsWoodWalk 1.wav",
       "CachePath": "87/{8728F29D-3CFA-8823-E722-FAB54C573874}.wem"
+     },
+     {
+      "Id": "929182392",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_04.wav",
+      "CachePath": "FA/{FA2C911F-4616-801A-DF1B-122A2345D8BF}.wem"
      },
      {
       "Id": "931734252",
@@ -3232,6 +3312,14 @@
       "CachePath": "89/{89F9E38B-7C78-4C16-8606-2FE5C11F7684}.wem"
      },
      {
+      "Id": "1018491526",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SF_FollowerChain_07.wav",
+      "CachePath": "89/{89BD5834-D925-D235-9A5D-296AC586D265}.wem"
+     },
+     {
       "Id": "1024559731",
       "Language": "SFX",
       "Streaming": "false",
@@ -3354,6 +3442,14 @@
     ],
     "Plugins": {
      "ShareSets": [
+      {
+       "Id": "992902880",
+       "Name": "Small_Tiled_Room1",
+       "ObjectPath": "\\Effects\\Factory Effects\\Matrix Reverb\\Small_Tiled_Room1",
+       "GUID": "{41EEE722-3009-4B3F-8820-F414623783E3}",
+       "LibName": "Wwise Matrix Reverb",
+       "LibId": "7536643"
+      },
       {
        "Id": "1259256166",
        "Name": "New_RoomVerb",
@@ -3590,11 +3686,10 @@
       ]
      },
      {
-      "Id": "3780240352",
-      "Name": "Play_BasicEnnemyAttack",
-      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyAttack",
-      "GUID": "{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}",
-      "MaxAttenuation": "5000",
+      "Id": "2195438541",
+      "Name": "Play_BasicEnemySecondaryScream",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnemySecondaryScream",
+      "GUID": "{425EF8A8-1133-4E6C-A829-88BC6EE9DACA}",
       "DurationType": "OneShot",
       "DurationMin": "2.268",
       "DurationMax": "2.2866666",
@@ -3614,6 +3709,16 @@
       ]
      },
      {
+      "Id": "3780240352",
+      "Name": "Play_BasicEnnemyAttack",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyAttack",
+      "GUID": "{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "1591116231",
       "Name": "Play_BasicEnnemyDamage",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyDamage",
@@ -3628,10 +3733,51 @@
       "Name": "Play_BasicEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyMovement",
       "GUID": "{7A700EAE-6822-45A5-83BE-3E233F0B7658}",
-      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
-      "DurationMin": "0.5560826",
-      "DurationMax": "0.6818181",
+      "DurationMin": "0.65385485",
+      "DurationMax": "0.9903855",
+      "MediaRefs": [
+       {
+        "Id": "10621815"
+       },
+       {
+        "Id": "99490746"
+       },
+       {
+        "Id": "136892222"
+       },
+       {
+        "Id": "195810138"
+       },
+       {
+        "Id": "650472069"
+       },
+       {
+        "Id": "826190042"
+       },
+       {
+        "Id": "852155796"
+       },
+       {
+        "Id": "852910227"
+       },
+       {
+        "Id": "882707068"
+       },
+       {
+        "Id": "929182392"
+       },
+       {
+        "Id": "1018491526"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "992902880"
+        }
+       ]
+      },
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -7715,6 +7861,6 @@
     ]
    }
   ],
-  "FileHash": "{29F001B6-D546-4C05-2881-DD1C4CE77E76}"
+  "FileHash": "{67580CA3-AE94-E445-2E69-832D0BCC0344}"
  }
 }
