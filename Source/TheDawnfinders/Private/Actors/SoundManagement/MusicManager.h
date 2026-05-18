@@ -34,6 +34,7 @@ public:
 	void OnEnemyCalm();
 
 	// Appelé par l'objectif d'extraction
+	UFUNCTION(BlueprintCallable)
 	void TriggerExtraction();
 	
 	UPROPERTY(EditAnywhere, Category = "Audio")
@@ -52,4 +53,6 @@ private:
 	void EvaluateState();
 	void ApplyState(EMusicState NewState);
 	void StopCurrent(EMusicState NewState);
+	UFUNCTION(BlueprintCallable)
+	void ResetState();
 };

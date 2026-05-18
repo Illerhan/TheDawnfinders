@@ -78,17 +78,21 @@ void UMusicManager::ApplyState(EMusicState NewState)
     switch (NewState)
     {
     case EMusicState::ZoneCalm:   SoundToPlay = CurrentZone->MusicCalmSound;   break;
-    case EMusicState::ZoneCombat: SoundToPlay = CurrentZone->MusicCombatSounds[FMath::RandRange(0, CurrentZone->MusicCombatSounds.Num()-1)]; break;
+    case EMusicState::ZoneCombat: 
+        if(CurrentZone->MusicCombatSounds.IsEmpty() )return; 
+        SoundToPlay = CurrentZone->MusicCombatSounds[FMath::RandRange(0, CurrentZone->MusicCombatSounds.Num()-1)]; break;
     case EMusicState::Extraction: SoundToPlay = ExtractionSound; break;
     default: return;
     }
-
+    
+    if (!SoundToPlay) return;
+    
     if (NewState == EMusicState::ZoneCalm && !bZoneChanged) {
         newTimer = FMath::FRandRange(0.f, SoundToPlay->GetDuration());
         fadeDuration = 3.f;
     }
 
-    if (!SoundToPlay) return;
+    
 
     CurrentMusicComponent = UGameplayStatics::CreateSound2D(
         GetGameInstance(),
@@ -123,4 +127,16 @@ void UMusicManager::StopCurrent(EMusicState NewState)
         CurrentMusicComponent->FadeOut(fadeDuration, 0.f); // Fade out 1.5s
         CurrentMusicComponent = nullptr;
     }
+}
+
+void UMusicManager::ResetState()
+{
+    if (CurrentMusicComponent && CurrentMusicComponent->IsPlaying())
+        CurrentMusicComponent->FadeOut(1.f, 0.f);
+
+    CurrentMusicComponent = nullptr;
+    CurrentZone           = nullptr;
+    CurrentState          = EMusicState::None;
+    AggroCount            = 0;
+    bZoneChanged          = false;
 }

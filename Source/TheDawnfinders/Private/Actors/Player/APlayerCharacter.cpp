@@ -449,9 +449,7 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
     if(quantity > 0)
-        IPlayerInterface::Execute_PlayVibration(this, EVibrationType::MediumLong, 0);
-
-    HealthComponent->TakeDamage(quantity);
+        HealthComponent->TakeDamage(quantity);
 }
 
 #pragma endregion
