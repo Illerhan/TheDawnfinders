@@ -82,13 +82,15 @@ void UMusicManager::ApplyState(EMusicState NewState)
     case EMusicState::Extraction: SoundToPlay = ExtractionSound; break;
     default: return;
     }
-
+    
+    if (!SoundToPlay) return;
+    
     if (NewState == EMusicState::ZoneCalm && !bZoneChanged) {
         newTimer = FMath::FRandRange(0.f, SoundToPlay->GetDuration());
         fadeDuration = 3.f;
     }
 
-    if (!SoundToPlay) return;
+    
 
     CurrentMusicComponent = UGameplayStatics::CreateSound2D(
         GetGameInstance(),
