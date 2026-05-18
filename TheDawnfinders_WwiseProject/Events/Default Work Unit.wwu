@@ -894,7 +894,7 @@
 										<Action Name="" ID="{D573CFC4-F841-454A-9A18-7AA611B2AE97}" ShortID="219547562">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="Zeloth_IdleOLD" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="EliteEnemyIdle" ID="{9240ED66-0C39-4BEF-800B-0B9EA46FC58A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
