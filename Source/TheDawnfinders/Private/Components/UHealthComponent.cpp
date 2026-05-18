@@ -631,6 +631,8 @@ void UHealthComponent::Server_Revive_Implementation()
 	Multicast_HideFallen();
 	Client_Revive();
 
+	Cast<AAPlayerCharacter>(GetOwner())->StopMovementForDuration(2.25f);
+
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 	
@@ -658,11 +660,19 @@ void UHealthComponent::Client_Revive_Implementation()
 		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
 		SpectateWidget->HideWidget();
 
-		HUD->MainWidget->ExitSpectate();
+		Cast<AAPlayerCharacter>(GetOwner())->StopMovementForDuration(2.1f);
 
-		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
+		HUD->MainWidget->ExitSpectate();
 	}
 }
+
+
+void UHealthComponent::Revive()
+{
+	bIsDead = false;
+	bIsFallen = false;
+}
+
 
 #pragma endregion
 
