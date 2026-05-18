@@ -125,6 +125,9 @@ public :
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void Client_Revive();
 
+	UFUNCTION(BlueprintCallable)
+	void Revive();
+
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void Multicast_DisplayFallen();
 

@@ -151,6 +151,8 @@ AActor* UInteractionComponent::GetNearestInteractible()
 	for (AActor* Player : PlayersAtRange)
 	{
 		if (!IsValid(Player)) continue;
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(Player) != EPlayerState::Fallen) continue;
+
 		float Dist = FVector::DistSquared(
 			Player->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
@@ -615,6 +617,9 @@ void UInteractionComponent::Client_HideHelpProgress_Implementation()
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
 		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
+		if (!CurrentHelpedTarget) return;
+		IInteractible::Execute_UnselectInteractible(CurrentHelpedTarget, GetOwner());
 	}
 }
 
@@ -623,10 +628,17 @@ void UInteractionComponent::CompleteHelp()
 {
 	if (!CurrentHelpedTarget) return;
 
+	IInteractible::Execute_UnselectInteractible(CurrentHelpedTarget, GetOwner());
 	Client_HideHelpProgress();
 
 	CurrentHelpedTarget->HealthComponent->Server_Revive();
+	CurrentHelpedTarget->HealthComponent->Revive();
+
+	bIsHelping = false;
+	bIsInInteraction = false;
+
 	CurrentHelpedTarget = nullptr;
+	NearestInteractible = nullptr;
 }
 
 #pragma endregion
