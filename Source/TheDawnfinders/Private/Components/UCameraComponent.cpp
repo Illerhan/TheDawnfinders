@@ -84,9 +84,18 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	if(EnemiesAtRange.Num() != 0)
 		NewOffset /= EnemiesAtRange.Num();
 
+	FVector AveragePos;
+	for (int i = 0; i < NearbyWallsLocations.Num(); i++)
+	{
+		AveragePos += NearbyWallsLocations[i];
+	}
+	AveragePos /= NearbyWallsLocations.Num();
+	NewOffset -= (GetOwner()->GetActorLocation() - AveragePos) * EnviroOffsetMaxImpact;
+
 	CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
 	CurrentTotalOffset = CurrentEnviroOffset + CurrentPlayerOffset;
 }
+
 
 void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 {
@@ -102,14 +111,20 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 	for (int i = 0; i < NearbyWallsLocations.Num(); i++) 
 	{
 		Distance = (GetOwner()->GetActorLocation() - NearbyWallsLocations[i]).Length();
-		AverageDist += Distance;
+
+		if(Distance < 800)
+			AverageDist += Distance;
+
+		else
+			AverageDist += Distance;
 	}
 	AverageDist /= NearbyWallsLocations.Num();
-	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f));
+	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / EnviroRaycastsMaxRange));
 
 	CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
 	CurrentTotalDist = CurrentEnviroDist + CurrentPlayerDist;
 }
+
 
 void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride, bool bOnlySize)
 {
@@ -188,12 +203,12 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 void UPlayerCameraComponent::ActualiseEnviroInfos()
 {
 	NearbyWallsLocations.Reset();
-	FVector BasePos = GetOwner()->GetActorLocation();
+	FVector BasePos = GetOwner()->GetActorLocation() + FVector(0, 0, 200.f);
 
-	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 20)
+	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 5)
 	{
 		FVector Dir = FVector(FMath::Cos(CurrentAngle), FMath::Sin(CurrentAngle), 0);
-		FVector EndPos = BasePos + Dir * 2000.f;
+		FVector EndPos = BasePos + Dir * EnviroRaycastsMaxRange;
 
 		FHitResult HitResult;
 		FCollisionQueryParams Params;
@@ -206,12 +221,26 @@ void UPlayerCameraComponent::ActualiseEnviroInfos()
 			ECC_WorldStatic
 		);
 
+		FColor LineColor = bHit ? FColor::Green : FColor::Red;
+		if (bHit) EndPos = HitResult.ImpactPoint;
+
+		/*DrawDebugLine(
+			GetWorld(),
+			BasePos,      // Début
+			EndPos,       // Fin
+			LineColor,    // Couleur
+			false,        // Persistent (reste-t-il indéfiniment ?)
+			0.05f,         // Durée de vie (en secondes)
+			0,            // Priorité de profondeur
+			2.0f          // Épaisseur de la ligne
+		);*/
+
 		if (!bHit) {
-			NearbyWallsLocations.Add(EndPos);
+			NearbyWallsLocations.Add(EndPos - FVector(0, 0, 200.f));
 			continue;
 		}
 
-		NearbyWallsLocations.Add(HitResult.ImpactPoint);
+		NearbyWallsLocations.Add(HitResult.ImpactPoint - FVector(0, 0, 200.f));
 	}
 }
 
