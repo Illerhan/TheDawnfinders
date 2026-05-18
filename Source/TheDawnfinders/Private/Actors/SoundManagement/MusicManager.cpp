@@ -78,7 +78,9 @@ void UMusicManager::ApplyState(EMusicState NewState)
     switch (NewState)
     {
     case EMusicState::ZoneCalm:   SoundToPlay = CurrentZone->MusicCalmSound;   break;
-    case EMusicState::ZoneCombat: SoundToPlay = CurrentZone->MusicCombatSounds[FMath::RandRange(0, CurrentZone->MusicCombatSounds.Num()-1)]; break;
+    case EMusicState::ZoneCombat: 
+        if(CurrentZone->MusicCombatSounds.IsEmpty() )return; 
+        SoundToPlay = CurrentZone->MusicCombatSounds[FMath::RandRange(0, CurrentZone->MusicCombatSounds.Num()-1)]; break;
     case EMusicState::Extraction: SoundToPlay = ExtractionSound; break;
     default: return;
     }
