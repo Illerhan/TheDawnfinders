@@ -156,6 +156,9 @@ void UHealthComponent::TakeDamage(float quantity, EVFXType VFXType)
 			IPlayerInterface::Execute_DoCameraShake(GetOwner(), 1.f);
 			IPlayerInterface::Execute_DoDamagePostProcess(GetOwner(), 1.f);
 		}
+
+		IPlayerInterface::Execute_PlayVibration(GetOwner(), EVibrationType::MediumLong, 0);
+
 		DamageSoundID = UAkGameplayStatics::PostEvent(DamageSound,GetOwner(),0,FOnAkPostEventCallback(), false);
 	}
 	if (OwnerController && OwnerController->IsLocalPlayerController()) {
