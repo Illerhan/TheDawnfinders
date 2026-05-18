@@ -128,3 +128,15 @@ void UMusicManager::StopCurrent(EMusicState NewState)
         CurrentMusicComponent = nullptr;
     }
 }
+
+void UMusicManager::ResetState()
+{
+    if (CurrentMusicComponent && CurrentMusicComponent->IsPlaying())
+        CurrentMusicComponent->FadeOut(1.f, 0.f);
+
+    CurrentMusicComponent = nullptr;
+    CurrentZone           = nullptr;
+    CurrentState          = EMusicState::None;
+    AggroCount            = 0;
+    bZoneChanged          = false;
+}
