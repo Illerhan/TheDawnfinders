@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{2F86461C-36F2-6B89-D5CE-4174CD7A77F7}",
+    "Hash": "{9820B171-27AB-5F24-097A-222999873465}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -648,6 +648,14 @@
       "CachePath": "42/{42DE3151-F803-AF7F-910C-7E66F54FBBA8}.wem"
      },
      {
+      "Id": "216750169",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.cm_01.wav",
+      "CachePath": "A6/{A6A39273-7FBF-0F90-B0FB-056798A4989C}.wem"
+     },
+     {
       "Id": "216827798",
       "Language": "SFX",
       "Streaming": "false",
@@ -968,6 +976,14 @@
       "CachePath": "C9/{C9CEAB98-7FD5-4434-79E0-689DE3E26866}.wem"
      },
      {
+      "Id": "295919872",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.dup1.cm_01.wav",
+      "CachePath": "6B/{6B4EDDB5-C382-4608-7A61-64792D66868B}.wem"
+     },
+     {
       "Id": "297636677",
       "Language": "SFX",
       "Streaming": "false",
@@ -1062,6 +1078,14 @@
       "Location": "Memory",
       "ShortName": "AMB_LoudWind.wav",
       "CachePath": "F7/{F77C3299-6DCF-1190-19CC-DA90AD0E08AB}.wem"
+     },
+     {
+      "Id": "355841576",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 8.dup2.cm_02.wav",
+      "CachePath": "61/{614FA7AB-A4FA-CE5B-36A7-B8408B826089}.wem"
      },
      {
       "Id": "358367435",
@@ -1568,6 +1592,14 @@
       "CachePath": "97/{97CE4973-92A4-7CF3-EC4A-7C6930CA224A}.wem"
      },
      {
+      "Id": "510163991",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 5.cm.cm_01.wav",
+      "CachePath": "50/{5050D40D-3879-4C10-FADD-3F8CCDB75A4C}.wem"
+     },
+     {
       "Id": "514363049",
       "Language": "SFX",
       "Streaming": "false",
@@ -2006,6 +2038,14 @@
       "Location": "Memory",
       "ShortName": "Zeloth_Attack4.wav",
       "CachePath": "79/{79C7B946-0ABF-BA00-FB66-4B09C0A61A47}.wem"
+     },
+     {
+      "Id": "654276465",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav",
+      "CachePath": "C8/{C8C68CB0-B771-49DC-5060-9A2E6BAAE174}.wem"
      },
      {
       "Id": "657732204",
@@ -2600,6 +2640,14 @@
       "CachePath": "34/{34DD00DB-8E1D-B9C7-F480-F04E8E7A9DCC}.wem"
      },
      {
+      "Id": "859634306",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Teeth Clack Steady-Neoverb_01-01.wav",
+      "CachePath": "FA/{FAD2BDFA-9FA3-3FE9-068C-7893276E4AB5}.wem"
+     },
+     {
       "Id": "865539257",
       "Language": "SFX",
       "Streaming": "false",
@@ -2886,6 +2934,14 @@
       "Location": "Memory",
       "ShortName": "FS_Zealot_06.wav",
       "CachePath": "81/{8116BC5B-7A8F-8049-33FB-F9E82A4F7639}.wem"
+     },
+     {
+      "Id": "951492412",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01.wav",
+      "CachePath": "C7/{C79AFA9A-FB11-3327-A401-9EA177CC9325}.wem"
      },
      {
       "Id": "954492362",
@@ -3326,6 +3382,14 @@
       "Location": "Memory",
       "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06.wav",
       "CachePath": "27/{27AF5CF0-E89B-A65F-9995-0F1BB00CAC66}.wem"
+     },
+     {
+      "Id": "1056063868",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Audio 4.cm_02.wav",
+      "CachePath": "A7/{A7FAE40E-7C03-E1D8-AAD7-A6BFEAF9A7B8}.wem"
      },
      {
       "Id": "1058253044",
@@ -7637,44 +7701,33 @@
       "Name": "Play_Zeloth_Idle",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_Zeloth_Idle",
       "GUID": "{A140CB47-6CC4-4206-8313-B2AE91D0B2CC}",
-      "MaxAttenuation": "5000",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "1.6290374",
+      "DurationMax": "6.4838443",
       "MediaRefs": [
        {
-        "Id": "100764325"
+        "Id": "216750169"
        },
        {
-        "Id": "125951352"
+        "Id": "295919872"
        },
        {
-        "Id": "233443900"
+        "Id": "355841576"
        },
        {
-        "Id": "494935842"
+        "Id": "510163991"
        },
        {
-        "Id": "533200097"
+        "Id": "654276465"
        },
        {
-        "Id": "614599972"
+        "Id": "859634306"
        },
        {
-        "Id": "730434085"
+        "Id": "951492412"
        },
        {
-        "Id": "881330317"
-       },
-       {
-        "Id": "881481179"
-       },
-       {
-        "Id": "938342197"
-       },
-       {
-        "Id": "970594138"
-       },
-       {
-        "Id": "997463245"
+        "Id": "1056063868"
        }
       ]
      },
@@ -7764,6 +7817,6 @@
     ]
    }
   ],
-  "FileHash": "{9D0B381F-925D-D7CD-0C07-5EF58F20245F}"
+  "FileHash": "{F5F2D626-F28E-AC2E-E068-99BDC14FDEC6}"
  }
 }
