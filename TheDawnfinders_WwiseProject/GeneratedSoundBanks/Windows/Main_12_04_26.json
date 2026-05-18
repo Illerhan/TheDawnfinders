@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{48351C0D-D740-8153-D27F-8A1488DF2089}",
+    "Hash": "{2F86461C-36F2-6B89-D5CE-4174CD7A77F7}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -64,6 +64,14 @@
       "CachePath": "31/{311069CD-312C-9CFE-4044-C9DF0EBC1F22}.wem"
      },
      {
+      "Id": "12845299",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_04.wav",
+      "CachePath": "72/{7201BF75-9273-95B4-6F20-A92781B6E7F0}.wem"
+     },
+     {
       "Id": "14744907",
       "Language": "SFX",
       "Streaming": "false",
@@ -78,14 +86,6 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_04.wav",
       "CachePath": "0A/{0AF16ABB-2DF0-BF5D-CACD-0ECB8DB32C29}.wem"
-     },
-     {
-      "Id": "19526635",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 7.wav",
-      "CachePath": "C4/{C4668D9A-35F3-D624-BBFD-639959BCEAF0}.wem"
      },
      {
       "Id": "25974615",
@@ -152,6 +152,14 @@
       "CachePath": "C0/{C070EEF4-9288-8C93-1AD4-2E89524E5A53}.wem"
      },
      {
+      "Id": "40712896",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_08.wav",
+      "CachePath": "9F/{9F480AB1-AF4F-720C-9C1E-2E6F2902AED5}.wem"
+     },
+     {
       "Id": "46649787",
       "Language": "SFX",
       "Streaming": "false",
@@ -208,14 +216,6 @@
       "CachePath": "48/{48C2A5B3-2DC7-1029-916D-14F9329E9C1C}.wem"
      },
      {
-      "Id": "54177496",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 10.wav",
-      "CachePath": "49/{4973CD95-AA79-0C3B-AB96-82D85AC43064}.wem"
-     },
-     {
       "Id": "55834786",
       "Language": "SFX",
       "Streaming": "false",
@@ -269,7 +269,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Teeth Clack Steady-Neoverb_01-03.wav",
-      "CachePath": "4C/{4C3954C7-49D4-8DF8-8672-AF0F220AED8C}.wem"
+      "CachePath": "2E/{2E4DE354-FCA7-7F16-87EF-943AB49ACBFC}.wem"
      },
      {
       "Id": "82812968",
@@ -318,14 +318,6 @@
       "Location": "Memory",
       "ShortName": "Teeth Clack Steady-Neoverb_01-03.wav",
       "CachePath": "49/{492A5908-AA7A-BA78-A7A0-43A8499A1D9D}.wem"
-     },
-     {
-      "Id": "96992672",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 11.wav",
-      "CachePath": "6F/{6F0BF2F3-EDED-888E-CB22-09075E09222A}.wem"
      },
      {
       "Id": "98324690",
@@ -461,7 +453,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID-01.wav",
-      "CachePath": "55/{558058A5-43F3-3E5A-BF2A-0E12393E32AC}.wem"
+      "CachePath": "21/{21CDD7EB-586A-E3D3-66D5-9B2741F478DC}.wem"
      },
      {
       "Id": "125951352",
@@ -592,14 +584,6 @@
       "CachePath": "7F/{7F8C4842-7266-6400-274B-81367BBC4C11}.wem"
      },
      {
-      "Id": "189422600",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 5.wav",
-      "CachePath": "E3/{E305B784-10E8-5D72-E4F1-F01F715B6320}.wem"
-     },
-     {
       "Id": "192665435",
       "Language": "SFX",
       "Streaming": "false",
@@ -725,7 +709,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 1.wav",
-      "CachePath": "9C/{9C5D77AF-E8AB-51FC-7EE0-B88292563D3C}.wem"
+      "CachePath": "96/{96680CB2-AF45-2480-3F96-3D1DDD18B4B7}.wem"
      },
      {
       "Id": "227987791",
@@ -814,6 +798,14 @@
       "Location": "Memory",
       "ShortName": "WoodWalk\\FootstepsWoodWalk 9.wav",
       "CachePath": "BA/{BA30E590-46A8-C387-1CC9-0B68E81D72EE}.wem"
+     },
+     {
+      "Id": "258317428",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_01.wav",
+      "CachePath": "47/{476CB07C-702E-CCA5-EBEB-0355274DEE35}.wem"
      },
      {
       "Id": "260955044",
@@ -936,14 +928,6 @@
       "CachePath": "3F/{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem"
      },
      {
-      "Id": "287093398",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 3.wav",
-      "CachePath": "F9/{F9A84C13-F1F4-36C4-E245-12325C979E1E}.wem"
-     },
-     {
       "Id": "291662585",
       "Language": "SFX",
       "Streaming": "false",
@@ -1040,14 +1024,6 @@
       "CachePath": "EF/{EFE0455D-B59F-79CC-6E82-82FF398A0BC0}.wem"
      },
      {
-      "Id": "327833139",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 3.wav",
-      "CachePath": "35/{35C6D972-A010-44B2-2BAC-5992440B9487}.wem"
-     },
-     {
       "Id": "331545351",
       "Language": "SFX",
       "Streaming": "false",
@@ -1102,6 +1078,14 @@
       "Location": "Memory",
       "ShortName": "FS_Stone_10.wav",
       "CachePath": "85/{8570942E-4CBA-CFA7-2060-75B9B69A0F7C}.wem"
+     },
+     {
+      "Id": "362232864",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_10.wav",
+      "CachePath": "42/{4217E3A4-AD21-A412-951B-685D41F2998B}.wem"
      },
      {
       "Id": "362611617",
@@ -1184,28 +1168,12 @@
       "CachePath": "C3/{C362EA4A-D7AF-678D-829C-4C43633D9F6B}.wem"
      },
      {
-      "Id": "390993366",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 1.wav",
-      "CachePath": "2F/{2F79BDA5-5964-DDDE-7BFB-5CE728C4B5FB}.wem"
-     },
-     {
       "Id": "391905191",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 3.wav",
       "CachePath": "92/{922926FB-0402-C7D8-6976-0751FD68D503}.wem"
-     },
-     {
-      "Id": "395987367",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 2.wav",
-      "CachePath": "F1/{F1B206AB-478D-6704-C193-042DD5F6F2BF}.wem"
      },
      {
       "Id": "398590232",
@@ -1296,6 +1264,14 @@
       "CachePath": "A6/{A6E51F56-A712-9D76-FEF1-29EF2B3B31BB}.wem"
      },
      {
+      "Id": "421841405",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_07.wav",
+      "CachePath": "76/{76B46FB7-500A-F387-DE34-C9BA2CDB94D5}.wem"
+     },
+     {
       "Id": "422035676",
       "Language": "SFX",
       "Streaming": "false",
@@ -1382,14 +1358,6 @@
       "Location": "Memory",
       "ShortName": "FlameOn.wav",
       "CachePath": "CC/{CC69FF85-B64C-5557-CEED-88D32C5D71EA}.wem"
-     },
-     {
-      "Id": "442693485",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 7.wav",
-      "CachePath": "EA/{EA9C8914-19B8-8F38-7E90-D65A6B9E1A04}.wem"
      },
      {
       "Id": "444785981",
@@ -1552,14 +1520,6 @@
       "CachePath": "01/{018405E5-C6FD-AB6C-5761-C84790FC1647}.wem"
      },
      {
-      "Id": "496150298",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 1.wav",
-      "CachePath": "A3/{A350908B-C671-4E5F-C491-A452B94F3AAD}.wem"
-     },
-     {
       "Id": "500411705",
       "Language": "SFX",
       "Streaming": "false",
@@ -1582,6 +1542,14 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_07.wav",
       "CachePath": "D5/{D5C33D9B-E3D8-5DD3-3795-404E10BB5F78}.wem"
+     },
+     {
+      "Id": "504698049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_12.wav",
+      "CachePath": "5E/{5ECB4C78-B627-04C4-6B07-E1FD8CDDBCFB}.wem"
      },
      {
       "Id": "508197002",
@@ -1648,6 +1616,14 @@
       "CachePath": "7D/{7D1770C6-0B97-B0E4-29ED-9A45F3436093}.wem"
      },
      {
+      "Id": "524425943",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_03.wav",
+      "CachePath": "5A/{5ABD354E-5AFD-B140-6297-E7E8C19EF1FC}.wem"
+     },
+     {
       "Id": "533200097",
       "Language": "SFX",
       "Streaming": "false",
@@ -1688,14 +1664,6 @@
       "CachePath": "0A/{0A44AED6-6A53-C9E9-4D9D-4A1F2B2CF1F7}.wem"
      },
      {
-      "Id": "540376024",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 9.wav",
-      "CachePath": "D1/{D16FD813-F64C-0BB2-8108-22F9D2126CDF}.wem"
-     },
-     {
       "Id": "541130675",
       "Language": "SFX",
       "Streaming": "false",
@@ -1704,20 +1672,20 @@
       "CachePath": "33/{33219944-37BD-BD2F-F73C-DCC939B815C5}.wem"
      },
      {
-      "Id": "551340501",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 2.wav",
-      "CachePath": "35/{35A69B06-33CC-37A4-FAD6-494142B4E863}.wem"
-     },
-     {
       "Id": "554099311",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "KS_Foley_Padlock_1-04.wav",
       "CachePath": "02/{0237D3E0-31EE-891A-B5F0-AC4D6A1AEE43}.wem"
+     },
+     {
+      "Id": "557591272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_11.wav",
+      "CachePath": "5D/{5DA71C79-B2EB-7816-E84C-291F5168E54B}.wem"
      },
      {
       "Id": "557907878",
@@ -1742,14 +1710,6 @@
       "Location": "Memory",
       "ShortName": "Whispers3.wav",
       "CachePath": "F4/{F49845C4-BDD8-49E3-DD83-9C24C5C95B06}.wem"
-     },
-     {
-      "Id": "563800133",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 8.wav",
-      "CachePath": "4F/{4F7199DE-5A2C-2A33-46F6-1943E920CD93}.wem"
      },
      {
       "Id": "566672699",
@@ -1936,14 +1896,6 @@
       "CachePath": "50/{506444A0-298D-8080-AD7E-722C61225442}.wem"
      },
      {
-      "Id": "622017135",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 12.wav",
-      "CachePath": "75/{756682D3-8C8D-E0ED-0220-CBEC10BACFBA}.wem"
-     },
-     {
       "Id": "622100660",
       "Language": "SFX",
       "Streaming": "false",
@@ -2013,15 +1965,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "KS_Zombie Dystopia_3-02.wav",
-      "CachePath": "F2/{F2E20E86-3A8B-82E9-33C5-E1A842D50BAC}.wem"
-     },
-     {
-      "Id": "642191154",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 4.wav",
-      "CachePath": "F9/{F9DDDEAA-49C7-C3C3-E874-35436392CDF1}.wem"
+      "CachePath": "C9/{C9703072-50CC-B2C3-9033-16E5358B8E57}.wem"
      },
      {
       "Id": "644463197",
@@ -2408,14 +2352,6 @@
       "CachePath": "C9/{C99412D9-3B21-CFFE-24FA-7B953913C5D1}.wem"
      },
      {
-      "Id": "766501929",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 5.wav",
-      "CachePath": "DE/{DE93439F-B5BD-BA38-5173-E75623028D60}.wem"
-     },
-     {
       "Id": "767708800",
       "Language": "SFX",
       "Streaming": "false",
@@ -2437,7 +2373,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Teeth Clack Steady-Neoverb_01-03.wav",
-      "CachePath": "98/{98340121-F671-ECB3-0C2B-9366BF8D7648}.wem"
+      "CachePath": "8A/{8ACA0F31-F1D2-15C2-D45F-E0C69463FA92}.wem"
      },
      {
       "Id": "782318759",
@@ -2469,7 +2405,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerScream.wav",
-      "CachePath": "C4/{C49380F7-F81C-EDFD-4FE9-1F07CC95863B}.wem"
+      "CachePath": "07/{074F3D5F-B174-CF91-C435-E0DA239694E8}.wem"
      },
      {
       "Id": "793535417",
@@ -2496,14 +2432,6 @@
       "CachePath": "F5/{F5D3204B-2F59-8999-8C7F-25E922C3EE2B}.wem"
      },
      {
-      "Id": "795321913",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 12.wav",
-      "CachePath": "EB/{EBB33D2A-7FF5-0333-BDC3-EE11E5C08C4B}.wem"
-     },
-     {
       "Id": "797158678",
       "Language": "SFX",
       "Streaming": "false",
@@ -2517,7 +2445,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "KS_Zombie Dystopia_3-03.wav",
-      "CachePath": "4E/{4EC5BA00-15C5-D4E7-908F-C4A6BA1C59B3}.wem"
+      "CachePath": "DF/{DFEBF342-F58B-6361-846F-BDAD713B7557}.wem"
      },
      {
       "Id": "797744101",
@@ -2600,6 +2528,14 @@
       "CachePath": "67/{677662F9-E4A5-A844-5F87-A0A6728BCFD0}.wem"
      },
      {
+      "Id": "834409291",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_05.wav",
+      "CachePath": "EF/{EFD5E271-942D-E5AE-0867-AF2D9AB0358A}.wem"
+     },
+     {
       "Id": "838996729",
       "Language": "SFX",
       "Streaming": "false",
@@ -2624,28 +2560,12 @@
       "CachePath": "AF/{AF650145-58ED-5DDD-C362-B561081EB3FF}.wem"
      },
      {
-      "Id": "842510624",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 9.wav",
-      "CachePath": "94/{94D56722-A4B3-D107-E0AC-41DF81133EC5}.wem"
-     },
-     {
       "Id": "845459241",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "OutOfBreath\\OutOfBreath 1.wav",
       "CachePath": "C4/{C44CC0D0-9B62-1F42-D8E2-EC36D8002917}.wem"
-     },
-     {
-      "Id": "849726008",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 4.wav",
-      "CachePath": "11/{118DAEDE-8343-884A-6A17-569E30B620D5}.wem"
      },
      {
       "Id": "852155796",
@@ -2776,14 +2696,6 @@
       "CachePath": "84/{849044DA-63D1-6ADE-E29D-C1D034F1CE1B}.wem"
      },
      {
-      "Id": "894539672",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 6.wav",
-      "CachePath": "54/{54F409E8-19DF-A8FB-33FB-036C1D8699E2}.wem"
-     },
-     {
       "Id": "898240164",
       "Language": "SFX",
       "Streaming": "false",
@@ -2846,14 +2758,6 @@
       "Location": "Memory",
       "ShortName": "Gold_Grab-13.wav",
       "CachePath": "37/{373C5437-147A-F2BF-894D-813283F1E0A2}.wem"
-     },
-     {
-      "Id": "912347765",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyRun\\FootstepsEliteEnnemyRun 8.wav",
-      "CachePath": "6E/{6ECEA6F0-8AA6-C981-925D-E60CB1BEE35F}.wem"
      },
      {
       "Id": "916509704",
@@ -2976,6 +2880,14 @@
       "CachePath": "2D/{2D8D510B-69AD-2D79-4C46-E2A62392EB54}.wem"
      },
      {
+      "Id": "948527135",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_06.wav",
+      "CachePath": "81/{8116BC5B-7A8F-8049-33FB-F9E82A4F7639}.wem"
+     },
+     {
       "Id": "954492362",
       "Language": "SFX",
       "Streaming": "false",
@@ -3032,12 +2944,12 @@
       "CachePath": "2D/{2D0FBD37-6B87-696F-FEF5-2FCA3307B917}.wem"
      },
      {
-      "Id": "966675639",
+      "Id": "967157273",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 6.wav",
-      "CachePath": "1D/{1DD6BC81-2BC9-BE3E-3948-841BD4FBC1F5}.wem"
+      "ShortName": "FS_Zealot_02.wav",
+      "CachePath": "4D/{4DFFA1F2-90A4-B7F2-807B-A9BE496B5F9F}.wem"
      },
      {
       "Id": "968124644",
@@ -3085,7 +2997,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "breath_large_06_01_long_hard - BREATH - HISS - LARGE - LONG - SOFT - MID 2.wav",
-      "CachePath": "BB/{BBEFA79B-28D9-BDAC-A8AF-FB6F26DF5B43}.wem"
+      "CachePath": "B8/{B8082FD5-D99D-47A0-E505-0ED87DABD202}.wem"
      },
      {
       "Id": "973713113",
@@ -3216,14 +3128,6 @@
       "CachePath": "D7/{D7D43CCF-D785-DD78-88E1-06CBD4411AD9}.wem"
      },
      {
-      "Id": "997440708",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 10.wav",
-      "CachePath": "1B/{1BA9CFB1-B2A0-8B30-03C9-07626682B098}.wem"
-     },
-     {
       "Id": "997463245",
       "Language": "SFX",
       "Streaming": "false",
@@ -3270,14 +3174,6 @@
       "Location": "Memory",
       "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 11.wav",
       "CachePath": "24/{2402A440-55B3-5775-DF78-15031A9CE181}.wem"
-     },
-     {
-      "Id": "1012460946",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "EliteEnnemyWalk\\FootstepsEliteEnnemyWalk 11.wav",
-      "CachePath": "B2/{B240F249-51AF-3BB5-66AA-D81D407BBCF9}.wem"
      },
      {
       "Id": "1012652963",
@@ -3432,6 +3328,14 @@
       "CachePath": "27/{27AF5CF0-E89B-A65F-9995-0F1BB00CAC66}.wem"
      },
      {
+      "Id": "1058253044",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FS_Zealot_09.wav",
+      "CachePath": "F9/{F95D302D-D44A-5CD2-F908-6667760D9A27}.wem"
+     },
+     {
       "Id": "1069593655",
       "Language": "SFX",
       "Streaming": "false",
@@ -3481,14 +3385,6 @@
        "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
        "LibName": "Wwise RoomVerb",
        "LibId": "7733251"
-      },
-      {
-       "Id": "3546444380",
-       "Name": "Big_Garage1",
-       "ObjectPath": "\\Effects\\Factory Effects\\Matrix Reverb\\Big_Garage1",
-       "GUID": "{172402A8-22F4-40FC-BE1D-5269594CB633}",
-       "LibName": "Wwise Matrix Reverb",
-       "LibId": "7536643"
       },
       {
        "Id": "3834162924",
@@ -4489,10 +4385,10 @@
       "Name": "Play_EliteEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnnemyMovement",
       "GUID": "{5B3B3798-EA6C-4457-BFBC-BC5C2C8397C0}",
-      "MaxAttenuation": "5000",
+      "MaxAttenuation": "2500",
       "DurationType": "OneShot",
-      "DurationMin": "0.21572916",
-      "DurationMax": "0.64",
+      "DurationMin": "0.5687284",
+      "DurationMax": "0.78334904",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -4504,40 +4400,40 @@
         },
         "MediaRefs": [
          {
-          "Id": "189422600"
+          "Id": "12845299"
          },
          {
-          "Id": "287093398"
+          "Id": "40712896"
          },
          {
-          "Id": "390993366"
+          "Id": "258317428"
          },
          {
-          "Id": "395987367"
+          "Id": "362232864"
          },
          {
-          "Id": "442693485"
+          "Id": "421841405"
          },
          {
-          "Id": "540376024"
+          "Id": "504698049"
          },
          {
-          "Id": "563800133"
+          "Id": "524425943"
          },
          {
-          "Id": "795321913"
+          "Id": "557591272"
          },
          {
-          "Id": "849726008"
+          "Id": "834409291"
          },
          {
-          "Id": "966675639"
+          "Id": "948527135"
          },
          {
-          "Id": "997440708"
+          "Id": "967157273"
          },
          {
-          "Id": "1012460946"
+          "Id": "1058253044"
          }
         ]
        },
@@ -4550,40 +4446,40 @@
         },
         "MediaRefs": [
          {
-          "Id": "19526635"
+          "Id": "12845299"
          },
          {
-          "Id": "54177496"
+          "Id": "40712896"
          },
          {
-          "Id": "96992672"
+          "Id": "258317428"
          },
          {
-          "Id": "327833139"
+          "Id": "362232864"
          },
          {
-          "Id": "496150298"
+          "Id": "421841405"
          },
          {
-          "Id": "551340501"
+          "Id": "504698049"
          },
          {
-          "Id": "622017135"
+          "Id": "524425943"
          },
          {
-          "Id": "642191154"
+          "Id": "557591272"
          },
          {
-          "Id": "766501929"
+          "Id": "834409291"
          },
          {
-          "Id": "842510624"
+          "Id": "948527135"
          },
          {
-          "Id": "894539672"
+          "Id": "967157273"
          },
          {
-          "Id": "912347765"
+          "Id": "1058253044"
          }
         ]
        },
@@ -4597,40 +4493,40 @@
         },
         "MediaRefs": [
          {
-          "Id": "189422600"
+          "Id": "12845299"
          },
          {
-          "Id": "287093398"
+          "Id": "40712896"
          },
          {
-          "Id": "390993366"
+          "Id": "258317428"
          },
          {
-          "Id": "395987367"
+          "Id": "362232864"
          },
          {
-          "Id": "442693485"
+          "Id": "421841405"
          },
          {
-          "Id": "540376024"
+          "Id": "504698049"
          },
          {
-          "Id": "563800133"
+          "Id": "524425943"
          },
          {
-          "Id": "795321913"
+          "Id": "557591272"
          },
          {
-          "Id": "849726008"
+          "Id": "834409291"
          },
          {
-          "Id": "966675639"
+          "Id": "948527135"
          },
          {
-          "Id": "997440708"
+          "Id": "967157273"
          },
          {
-          "Id": "1012460946"
+          "Id": "1058253044"
          }
         ]
        },
@@ -4643,40 +4539,40 @@
         },
         "MediaRefs": [
          {
-          "Id": "19526635"
+          "Id": "12845299"
          },
          {
-          "Id": "54177496"
+          "Id": "40712896"
          },
          {
-          "Id": "96992672"
+          "Id": "258317428"
          },
          {
-          "Id": "327833139"
+          "Id": "362232864"
          },
          {
-          "Id": "496150298"
+          "Id": "421841405"
          },
          {
-          "Id": "551340501"
+          "Id": "504698049"
          },
          {
-          "Id": "622017135"
+          "Id": "524425943"
          },
          {
-          "Id": "642191154"
+          "Id": "557591272"
          },
          {
-          "Id": "766501929"
+          "Id": "834409291"
          },
          {
-          "Id": "842510624"
+          "Id": "948527135"
          },
          {
-          "Id": "894539672"
+          "Id": "967157273"
          },
          {
-          "Id": "912347765"
+          "Id": "1058253044"
          }
         ]
        }
@@ -4705,7 +4601,7 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "3546444380"
+         "Id": "1588715066"
         }
        ]
       }
@@ -5110,8 +5006,8 @@
       "GUID": "{72F8C657-F4D5-43AE-BA92-FA8CCC4D96A1}",
       "MaxAttenuation": "5000",
       "DurationType": "OneShot",
-      "DurationMin": "0.87733334",
-      "DurationMax": "1.0406667",
+      "DurationMin": "1.0195013",
+      "DurationMax": "1.2093022",
       "MediaRefs": [
        {
         "Id": "235116885"
@@ -5328,7 +5224,14 @@
        {
         "Id": "1005848849"
        }
-      ]
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1588715066"
+        }
+       ]
+      }
      },
      {
       "Id": "3459798784",
@@ -7861,6 +7764,6 @@
     ]
    }
   ],
-  "FileHash": "{67580CA3-AE94-E445-2E69-832D0BCC0344}"
+  "FileHash": "{9D0B381F-925D-D7CD-0C07-5EF58F20245F}"
  }
 }

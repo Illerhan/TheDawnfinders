@@ -27,6 +27,12 @@
 											<SegmentShape>Log3</SegmentShape>
 										</Point>
 										<Point>
+											<XPos>100</XPos>
+											<YPos>0</YPos>
+											<Flags>0</Flags>
+											<SegmentShape>Log3</SegmentShape>
+										</Point>
+										<Point>
 											<XPos>5000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
@@ -108,7 +114,7 @@
 				</Attenuation>
 				<Attenuation Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" ShortID="563410169">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="5000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="2500"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -122,16 +128,16 @@
 											<XPos>0</XPos>
 											<YPos>0</YPos>
 											<Flags>5</Flags>
-											<SegmentShape>Exp3</SegmentShape>
+											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>3002.87356</XPos>
-											<YPos>-1.18034</YPos>
+											<XPos>1704.947</XPos>
+											<YPos>-2.16702</YPos>
 											<Flags>0</Flags>
-											<SegmentShape>Log3</SegmentShape>
+											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>5000</XPos>
+											<XPos>2500</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
