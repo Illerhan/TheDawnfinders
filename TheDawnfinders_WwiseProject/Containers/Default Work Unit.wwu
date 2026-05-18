@@ -5414,6 +5414,9 @@
 													</PositioningInfo>
 												</RandomSequenceContainer>
 											</ChildrenList>
+											<PositioningInfo>
+												<Position Name="" ID="{55A2B6D1-5FCB-4B47-AD3E-C8ECF4885A78}"/>
+											</PositioningInfo>
 											<StateInfo>
 												<StateGroupList>
 													<StateGroupInfo>
@@ -9800,6 +9803,11 @@
 										<RandomSequenceContainer Name="Trap_Spike" ID="{5C515A8E-EBB8-440E-BA36-C960D5D172D2}" ShortID="738766460">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -11524,10 +11532,43 @@
 											</CustomState>
 										</CustomStateList>
 									</StateInfo>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{721885C1-5D3D-4AB7-9FF8-CA3B4BE3CD06}" ShortID="404679480">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+														<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+												<StateInfo>
+													<CustomStateList>
+														<CustomState>
+															<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+															<CustomState Name="" ID="{C4742455-16C9-4D27-9AAA-F53434AD3AC7}" ShortID="351158506"/>
+														</CustomState>
+														<CustomState>
+															<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+															<CustomState Name="" ID="{E9F927E0-EB85-46FD-92E0-7AD33C2B69C3}" ShortID="112951825"/>
+														</CustomState>
+													</CustomStateList>
+												</StateInfo>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Player_Hit" ID="{0DBAD81B-9325-4C26-8B9E-BCC0A252F0A9}" ShortID="937868279">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>10</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-260</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -11934,10 +11975,10 @@
 											</ChildrenList>
 											<ObjectLists>
 												<ObjectList Name="Effects">
-													<EffectSlot Name="" ID="{DDE3BCD3-5AA8-49B6-A3E5-1BF32BD78402}" ShortID="875642278">
+													<EffectSlot Name="" ID="{206AD907-39B5-4910-8D72-B814C2E87011}" ShortID="995585956">
 														<ReferenceList>
-															<Reference Name="Effect" PluginName="Wwise Matrix Reverb" CompanyID="0" PluginID="115" PluginType="3">
-																<ObjectRef Name="Big_Garage1" ID="{172402A8-22F4-40FC-BE1D-5269594CB633}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+															<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+																<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
 															</Reference>
 														</ReferenceList>
 													</EffectSlot>
@@ -11964,7 +12005,7 @@
 					<ChildrenList>
 						<Folder Name="Zeloth" ID="{5E8E1F81-19D2-409D-8237-D3BA34F2C25A}" ShortID="275436581">
 							<ChildrenList>
-								<BlendContainer Name="Zeloth_Idle" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" ShortID="396443912">
+								<BlendContainer Name="Zeloth_IdleOLD" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" ShortID="396443912">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 									</PropertyList>
@@ -12310,289 +12351,19 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<RandomSequenceContainer Name="EliteEnnemyRun" ID="{A458FF4D-AACA-45AD-905D-D199B2CC02FE}" ShortID="543948369">
-											<PropertyList>
-												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="FootstepsEliteEnnemyRun 1" ID="{72A99FD6-E225-4F20-9AF1-F72DF237EE9A}" ShortID="856845012">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 1" ID="{76326182-7A30-47B2-BCD0-F184BC505ECE}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="496150298"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 1" ID="{76326182-7A30-47B2-BCD0-F184BC505ECE}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 10" ID="{02024B09-B4E6-4967-9925-476F00F69062}" ShortID="349234673">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 10" ID="{974C0DD4-6442-4B64-873B-354D52E4B719}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 10.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="54177496"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 10" ID="{974C0DD4-6442-4B64-873B-354D52E4B719}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 11" ID="{F0E701BB-2272-474D-A7F5-38F17A254615}" ShortID="823994308">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 11" ID="{6017F7F8-AA32-497A-AB53-C199190E672E}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 11.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="96992672"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 11" ID="{6017F7F8-AA32-497A-AB53-C199190E672E}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 12" ID="{A46988CC-0748-4EEF-AB0F-D19FB3E7686C}" ShortID="47751579">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 12" ID="{78E27F2E-6C07-4396-A3E5-B2C1DB43FA92}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 12.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="622017135"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 12" ID="{78E27F2E-6C07-4396-A3E5-B2C1DB43FA92}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 2" ID="{A6996B41-F0B4-4F1C-8F31-6F5667C32091}" ShortID="616312076">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 2" ID="{AC1C1876-9343-44D4-BA4B-158615615AB3}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="551340501"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 2" ID="{AC1C1876-9343-44D4-BA4B-158615615AB3}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 3" ID="{FCC1C571-D349-4F34-87E7-50224804D46B}" ShortID="1598527">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 3" ID="{CEF01DBF-B176-4958-9567-CBD6A30388B9}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 3.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="327833139"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 3" ID="{CEF01DBF-B176-4958-9567-CBD6A30388B9}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 4" ID="{18EFB077-70B0-4471-BF24-287E1C608E2A}" ShortID="767085815">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 4" ID="{56F28119-CEC1-45FE-B174-2DFAACA68C52}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 4.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="642191154"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 4" ID="{56F28119-CEC1-45FE-B174-2DFAACA68C52}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 5" ID="{80B5143D-D084-4489-83AA-D55882B8AF89}" ShortID="760034970">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 5" ID="{B0BDAD74-EC3A-4914-81C7-2640F0BD50E1}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 5.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="766501929"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 5" ID="{B0BDAD74-EC3A-4914-81C7-2640F0BD50E1}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 6" ID="{47DA4BD4-7FAA-4EC3-BFEC-88EE395EF2FD}" ShortID="419947959">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 6" ID="{AEA396EF-5670-4B84-AA2E-6373C91484E2}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 6.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="894539672"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 6" ID="{AEA396EF-5670-4B84-AA2E-6373C91484E2}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 7" ID="{DD54A19F-1E41-4E83-892D-52A8D9F8B496}" ShortID="365624603">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 7" ID="{92BC0FEA-638F-4291-8CA4-C6BF64CB33DE}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 7.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="19526635"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 7" ID="{92BC0FEA-638F-4291-8CA4-C6BF64CB33DE}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 8" ID="{0114FE87-BE6D-4782-B0A8-7FB59B429CFE}" ShortID="139428153">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 8" ID="{185BC43B-9051-4811-8C4C-EA8C9B840F0A}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 8.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="912347765"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 8" ID="{185BC43B-9051-4811-8C4C-EA8C9B840F0A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="FootstepsEliteEnnemyRun 9" ID="{1B3C11E8-40AC-4CAD-91CE-A4F21F8AD370}" ShortID="424954324">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyRun 9" ID="{11492C0D-320D-4A58-9E87-DAED051028E9}">
-															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyRun\FootstepsEliteEnnemyRun 9.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="842510624"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyRun 9" ID="{11492C0D-320D-4A58-9E87-DAED051028E9}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
 										<RandomSequenceContainer Name="EliteEnnemyWalk" ID="{AA41D5D2-9ADD-4E7C-B338-638CE433FA43}" ShortID="693560371">
 											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>25</Value>
+													</ValueList>
+												</Property>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-190</Value>
+													</ValueList>
+												</Property>
 												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 											</PropertyList>
 											<ReferenceList>
@@ -12604,7 +12375,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="FootstepsEliteEnnemyWalk 10" ID="{87CA3663-1E34-467D-8C75-1BE91A76CA0C}" ShortID="692304399">
+												<Sound Name="FS_Zealot_01" ID="{235377C5-99BC-417A-B523-1162650C77E0}" ShortID="990474276">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12614,19 +12385,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 10" ID="{342B0A22-FF5F-43A1-A8F4-713843FAA27E}">
+														<AudioFileSource Name="FS_Zealot_01" ID="{15B94179-5E46-4B06-9D8A-414C8730D821}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 10.wav</AudioFile>
+															<AudioFile>FS_Zealot_01.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="997440708"/>
+																<MediaID ID="258317428"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 10" ID="{342B0A22-FF5F-43A1-A8F4-713843FAA27E}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_01" ID="{15B94179-5E46-4B06-9D8A-414C8730D821}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 12" ID="{F2D2DDFC-3D8D-415E-AD3F-860BBE018869}" ShortID="1043274218">
+												<Sound Name="FS_Zealot_02" ID="{D29271D0-4E3A-4120-B4D4-48B5AEC74A0E}" ShortID="934869478">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12636,19 +12407,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 12" ID="{0E90A05A-A8D1-4297-9E9C-36F0A35BBBCC}">
+														<AudioFileSource Name="FS_Zealot_02" ID="{39231430-FBF1-46EA-AAA7-A3D6BFC56AE6}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 12.wav</AudioFile>
+															<AudioFile>FS_Zealot_02.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="795321913"/>
+																<MediaID ID="967157273"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 12" ID="{0E90A05A-A8D1-4297-9E9C-36F0A35BBBCC}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_02" ID="{39231430-FBF1-46EA-AAA7-A3D6BFC56AE6}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 2" ID="{46A939D4-FA0E-41C5-9053-EDD637DD136C}" ShortID="878924111">
+												<Sound Name="FS_Zealot_03" ID="{B74BCBA6-CEC9-421E-A6D7-6F6C54C3BE7E}" ShortID="571024774">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12658,19 +12429,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 2" ID="{FA08A5B3-EB2E-4DEF-9B3D-86DBD2C51EFB}">
+														<AudioFileSource Name="FS_Zealot_03" ID="{CEF546EC-4D6F-42FD-A2CE-C615033C94C8}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 2.wav</AudioFile>
+															<AudioFile>FS_Zealot_03.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="395987367"/>
+																<MediaID ID="524425943"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 2" ID="{FA08A5B3-EB2E-4DEF-9B3D-86DBD2C51EFB}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_03" ID="{CEF546EC-4D6F-42FD-A2CE-C615033C94C8}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 4" ID="{B89CB28B-E0BC-453F-9439-57241133A102}" ShortID="213566657">
+												<Sound Name="FS_Zealot_04" ID="{7E3A5D17-AE9F-4EBF-BDDB-07D87F6E34CE}" ShortID="60245528">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12680,19 +12451,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 4" ID="{AACC60F5-1EC6-4923-A5F7-8E6D11D0A3E9}">
+														<AudioFileSource Name="FS_Zealot_04" ID="{CAC7B66D-73E5-4987-84D7-FB3BBE5ECD8D}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 4.wav</AudioFile>
+															<AudioFile>FS_Zealot_04.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="849726008"/>
+																<MediaID ID="12845299"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 4" ID="{AACC60F5-1EC6-4923-A5F7-8E6D11D0A3E9}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_04" ID="{CAC7B66D-73E5-4987-84D7-FB3BBE5ECD8D}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 6" ID="{314FB2F8-1692-4A09-B079-52BB1DCC67C4}" ShortID="812354327">
+												<Sound Name="FS_Zealot_05" ID="{43A2B547-9400-46D4-83DF-B2371725EA0E}" ShortID="34198908">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12702,19 +12473,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 6" ID="{081F91CF-6960-44ED-A143-668D77B181A5}">
+														<AudioFileSource Name="FS_Zealot_05" ID="{039C1F89-FECC-48ED-9A1A-95506E10DD18}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 6.wav</AudioFile>
+															<AudioFile>FS_Zealot_05.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="966675639"/>
+																<MediaID ID="834409291"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 6" ID="{081F91CF-6960-44ED-A143-668D77B181A5}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_05" ID="{039C1F89-FECC-48ED-9A1A-95506E10DD18}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 8" ID="{1FC4BF83-0295-465C-BBC9-47230CDFCB18}" ShortID="932604007">
+												<Sound Name="FS_Zealot_06" ID="{43841DE2-13E3-40AA-97FD-05645631AB36}" ShortID="425688437">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12724,19 +12495,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 8" ID="{FE6CA26A-B71D-4EFA-89E2-F84532B6D776}">
+														<AudioFileSource Name="FS_Zealot_06" ID="{A7E0E901-37B2-42BE-8833-3CC792D58C7C}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 8.wav</AudioFile>
+															<AudioFile>FS_Zealot_06.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="563800133"/>
+																<MediaID ID="948527135"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 8" ID="{FE6CA26A-B71D-4EFA-89E2-F84532B6D776}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_06" ID="{A7E0E901-37B2-42BE-8833-3CC792D58C7C}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 1" ID="{CBD6FA4A-D5F4-435B-AA14-2B6E9C845726}" ShortID="692019591">
+												<Sound Name="FS_Zealot_07" ID="{6DEFE207-7D43-44EA-9B8B-9627A1D1FCF6}" ShortID="537733657">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12746,19 +12517,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 1" ID="{5AC20877-274B-4429-AE78-9782C32A0696}">
+														<AudioFileSource Name="FS_Zealot_07" ID="{83A88FE9-0A64-4DDC-92FD-D7C7BDB5B443}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 1.wav</AudioFile>
+															<AudioFile>FS_Zealot_07.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="390993366"/>
+																<MediaID ID="421841405"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 1" ID="{5AC20877-274B-4429-AE78-9782C32A0696}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_07" ID="{83A88FE9-0A64-4DDC-92FD-D7C7BDB5B443}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 11" ID="{111E2B3D-AA9B-4992-99BB-1268AD9F7447}" ShortID="898781669">
+												<Sound Name="FS_Zealot_08" ID="{8FA1A6E0-8531-4177-8E34-8B1178A81496}" ShortID="731891800">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12768,19 +12539,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 11" ID="{9623AA7C-48EA-407A-A3D9-FEB32091C7D4}">
+														<AudioFileSource Name="FS_Zealot_08" ID="{962DA1D2-80D6-4B68-A523-B1ABF76FDE75}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 11.wav</AudioFile>
+															<AudioFile>FS_Zealot_08.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="1012460946"/>
+																<MediaID ID="40712896"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 11" ID="{9623AA7C-48EA-407A-A3D9-FEB32091C7D4}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_08" ID="{962DA1D2-80D6-4B68-A523-B1ABF76FDE75}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 3" ID="{CC083C82-9D6F-4B3C-926A-4C6DC25FF9C7}" ShortID="636676219">
+												<Sound Name="FS_Zealot_09" ID="{5E9DAB56-63E1-45AF-82B4-51789325CE34}" ShortID="507173026">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12790,19 +12561,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 3" ID="{A69D8408-81D1-4EAA-935C-B1A7DDA34B3F}">
+														<AudioFileSource Name="FS_Zealot_09" ID="{006AC2C4-7BB0-4AA6-9E55-18BD8E2F8A9A}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 3.wav</AudioFile>
+															<AudioFile>FS_Zealot_09.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="287093398"/>
+																<MediaID ID="1058253044"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 3" ID="{A69D8408-81D1-4EAA-935C-B1A7DDA34B3F}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_09" ID="{006AC2C4-7BB0-4AA6-9E55-18BD8E2F8A9A}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 5" ID="{E6A7BFD9-377F-4AF3-B0D4-756A5E03CCED}" ShortID="677312185">
+												<Sound Name="FS_Zealot_10" ID="{C70C838D-BB5D-429A-AF55-8DF2A362579F}" ShortID="881380698">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12812,19 +12583,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 5" ID="{8B9EFF28-E901-47BD-8204-8F45F12A03AA}">
+														<AudioFileSource Name="FS_Zealot_10" ID="{8EF29955-84D7-4C8B-90DE-03CD7BCD3F2C}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 5.wav</AudioFile>
+															<AudioFile>FS_Zealot_10.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="189422600"/>
+																<MediaID ID="362232864"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 5" ID="{8B9EFF28-E901-47BD-8204-8F45F12A03AA}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_10" ID="{8EF29955-84D7-4C8B-90DE-03CD7BCD3F2C}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 7" ID="{081A9241-F837-4939-B4DC-A9B59BEC0F5E}" ShortID="662865570">
+												<Sound Name="FS_Zealot_11" ID="{D1656C12-3441-476F-A7F4-4C6361760D39}" ShortID="622215152">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12834,19 +12605,19 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 7" ID="{E888AB0E-84E0-4B27-9B25-741D1DC340B3}">
+														<AudioFileSource Name="FS_Zealot_11" ID="{CC1B5684-6FF0-4686-A50C-FE0FB846E1E0}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 7.wav</AudioFile>
+															<AudioFile>FS_Zealot_11.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="442693485"/>
+																<MediaID ID="557591272"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 7" ID="{E888AB0E-84E0-4B27-9B25-741D1DC340B3}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_11" ID="{CC1B5684-6FF0-4686-A50C-FE0FB846E1E0}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="FootstepsEliteEnnemyWalk 9" ID="{4DB0216E-06FD-48FF-8864-FEA9FB1C169E}" ShortID="904308506">
+												<Sound Name="FS_Zealot_12" ID="{57BCDE94-DE86-4F4D-8493-2E3D8B126C23}" ShortID="593948912">
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -12856,16 +12627,16 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="FootstepsEliteEnnemyWalk 9" ID="{6B9CDFD2-9F82-45DA-9325-F937ACB4E4E8}">
+														<AudioFileSource Name="FS_Zealot_12" ID="{5DBDD64E-86A1-4E08-89FC-DE5749A5FE84}">
 															<Language>SFX</Language>
-															<AudioFile>EliteEnnemyWalk\FootstepsEliteEnnemyWalk 9.wav</AudioFile>
+															<AudioFile>FS_Zealot_12.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="540376024"/>
+																<MediaID ID="504698049"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="FootstepsEliteEnnemyWalk 9" ID="{6B9CDFD2-9F82-45DA-9325-F937ACB4E4E8}" Platform="Linked"/>
+														<ActiveSource Name="FS_Zealot_12" ID="{5DBDD64E-86A1-4E08-89FC-DE5749A5FE84}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
@@ -12873,9 +12644,6 @@
 									</ChildrenList>
 									<GroupingInfo>
 										<GroupingBehaviorList>
-											<GroupingBehavior>
-												<ItemRef Name="EliteEnnemyRun" ID="{A458FF4D-AACA-45AD-905D-D199B2CC02FE}"/>
-											</GroupingBehavior>
 											<GroupingBehavior>
 												<ItemRef Name="EliteEnnemyWalk" ID="{AA41D5D2-9ADD-4E7C-B338-638CE433FA43}"/>
 											</GroupingBehavior>
@@ -12890,7 +12658,7 @@
 											<Grouping>
 												<SwitchRef Name="Run" ID="{E0AF9AFA-C843-43ED-88DA-09DDBC236811}"/>
 												<ItemList>
-													<ItemRef Name="EliteEnnemyRun" ID="{A458FF4D-AACA-45AD-905D-D199B2CC02FE}"/>
+													<ItemRef Name="EliteEnnemyWalk" ID="{AA41D5D2-9ADD-4E7C-B338-638CE433FA43}"/>
 												</ItemList>
 											</Grouping>
 										</GroupingList>
@@ -13347,6 +13115,297 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="Zeloth_Attack4" ID="{52017CBA-7CB2-48AE-89F8-6EA3586E6389}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemyIdle" ID="{9240ED66-0C39-4BEF-800B-0B9EA46FC58A}" ShortID="701316458">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="BREATH" ID="{D0F763D5-BDDE-409F-9873-4E231C37DDE0}" ShortID="865292910">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{FC951895-3841-47A0-9884-5ADC1CDE4BF8}" ShortID="274333441">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{14762BAC-2DF8-4964-A12A-0E3C40AA77BC}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.125174130966414"/>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.833880607761555"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.11368158413996"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="951492412"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{14762BAC-2DF8-4964-A12A-0E3C40AA77BC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{C8A7773B-5424-4AA0-8DC1-EE0BE7C2C94C}" ShortID="157555626">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{62D5D2A3-62E9-4C98-BBEC-17777830D205}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="2.74620889193976"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="3.3671841177205"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="654276465"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{62D5D2A3-62E9-4C98-BBEC-17777830D205}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="Audio 4_cm_02" ID="{F2CFAD85-A19B-4925-BB81-9EF13DDAB349}" ShortID="243042371">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 4_cm_02" ID="{A0B7EF87-53B7-479D-B48C-463EA13205D5}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="2.33353238624296"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="3.50029857936444"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="6.78519416922954"/>
+														<Property Name="TrimEnd" Type="Real64" Value="12.7267262837207"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 4.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1056063868"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 4_cm_02" ID="{A0B7EF87-53B7-479D-B48C-463EA13205D5}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 5_cm_cm_01" ID="{8E3E46AD-DF78-4156-8A1A-BD72C0402DFA}" ShortID="281175815">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 5_cm_cm_01" ID="{75D5816A-20FE-4364-8D5C-2979210C1A5E}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.18250971918167"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.10701731781461"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="2.55852102877489"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.51455445429646"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 5.cm.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="510163991"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 5_cm_cm_01" ID="{75D5816A-20FE-4364-8D5C-2979210C1A5E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_cm_01" ID="{2DEFD5D2-2E4A-4F30-9F9A-B73F87946525}" ShortID="124646164">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_cm_01" ID="{E305BC51-A9A7-4ED9-B881-08E07AE47C82}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.50479605050483"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.94738312418273"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="2.21293536838946"/>
+														<Property Name="TrimEnd" Type="Real64" Value="5.42169123039436"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="216750169"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_cm_01" ID="{E305BC51-A9A7-4ED9-B881-08E07AE47C82}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup1_cm_01" ID="{2AF4D3FE-D584-4867-95A2-9E0A54DE35BA}" ShortID="626567760">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup1_cm_01" ID="{FAA2E6BA-D129-4CBC-A2BE-AF92E30371CE}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.10248756815376"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.49938309268911"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.926089557249155"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.41771134937886"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup1.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="295919872"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup1_cm_01" ID="{FAA2E6BA-D129-4CBC-A2BE-AF92E30371CE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup2_cm_02" ID="{CD91EB5A-C6EC-4E74-82F8-F7096B6AA51A}" ShortID="253794061">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup2_cm_02" ID="{96688795-1B58-4123-B808-FD9AB8AC05BD}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.31940304851735"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="4.14089572150062"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="3.53194046833876"/>
+														<Property Name="TrimEnd" Type="Real64" Value="9.72298462662361"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup2.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="355841576"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup2_cm_02" ID="{96688795-1B58-4123-B808-FD9AB8AC05BD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-01" ID="{A835A234-2D63-40A1-BA6E-FAB259DDEC97}" ShortID="642996464">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{065DDF9D-4010-47B7-A665-52E7363F40B1}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.20485571757563"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.80505471748075"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="7.6621293289575"/>
+														<Property Name="TrimEnd" Type="Real64" Value="10.7307462906068"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="859634306"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{065DDF9D-4010-47B7-A665-52E7363F40B1}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
