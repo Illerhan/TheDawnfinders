@@ -5414,6 +5414,9 @@
 													</PositioningInfo>
 												</RandomSequenceContainer>
 											</ChildrenList>
+											<PositioningInfo>
+												<Position Name="" ID="{55A2B6D1-5FCB-4B47-AD3E-C8ECF4885A78}"/>
+											</PositioningInfo>
 											<StateInfo>
 												<StateGroupList>
 													<StateGroupInfo>
@@ -11556,6 +11559,16 @@
 								<RandomSequenceContainer Name="Player_Hit" ID="{0DBAD81B-9325-4C26-8B9E-BCC0A252F0A9}" ShortID="937868279">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>10</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-260</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -11992,7 +12005,7 @@
 					<ChildrenList>
 						<Folder Name="Zeloth" ID="{5E8E1F81-19D2-409D-8237-D3BA34F2C25A}" ShortID="275436581">
 							<ChildrenList>
-								<BlendContainer Name="Zeloth_Idle" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" ShortID="396443912">
+								<BlendContainer Name="Zeloth_IdleOLD" ID="{4362EA0D-5118-40EE-BFAC-E2FD5F4E9151}" ShortID="396443912">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 									</PropertyList>
@@ -13102,6 +13115,297 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="Zeloth_Attack4" ID="{52017CBA-7CB2-48AE-89F8-6EA3586E6389}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemyIdle" ID="{9240ED66-0C39-4BEF-800B-0B9EA46FC58A}" ShortID="701316458">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="BREATH" ID="{D0F763D5-BDDE-409F-9873-4E231C37DDE0}" ShortID="865292910">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{FC951895-3841-47A0-9884-5ADC1CDE4BF8}" ShortID="274333441">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{14762BAC-2DF8-4964-A12A-0E3C40AA77BC}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.125174130966414"/>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.833880607761555"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="1.11368158413996"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="951492412"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000 1-01" ID="{14762BAC-2DF8-4964-A12A-0E3C40AA77BC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{C8A7773B-5424-4AA0-8DC1-EE0BE7C2C94C}" ShortID="157555626">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{62D5D2A3-62E9-4C98-BBEC-17777830D205}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="2.74620889193976"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="3.3671841177205"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="654276465"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{62D5D2A3-62E9-4C98-BBEC-17777830D205}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="Audio 4_cm_02" ID="{F2CFAD85-A19B-4925-BB81-9EF13DDAB349}" ShortID="243042371">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 4_cm_02" ID="{A0B7EF87-53B7-479D-B48C-463EA13205D5}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="2.33353238624296"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="3.50029857936444"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="6.78519416922954"/>
+														<Property Name="TrimEnd" Type="Real64" Value="12.7267262837207"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 4.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1056063868"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 4_cm_02" ID="{A0B7EF87-53B7-479D-B48C-463EA13205D5}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 5_cm_cm_01" ID="{8E3E46AD-DF78-4156-8A1A-BD72C0402DFA}" ShortID="281175815">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 5_cm_cm_01" ID="{75D5816A-20FE-4364-8D5C-2979210C1A5E}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.18250971918167"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.10701731781461"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="2.55852102877489"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.51455445429646"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 5.cm.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="510163991"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 5_cm_cm_01" ID="{75D5816A-20FE-4364-8D5C-2979210C1A5E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_cm_01" ID="{2DEFD5D2-2E4A-4F30-9F9A-B73F87946525}" ShortID="124646164">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_cm_01" ID="{E305BC51-A9A7-4ED9-B881-08E07AE47C82}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.50479605050483"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.94738312418273"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="2.21293536838946"/>
+														<Property Name="TrimEnd" Type="Real64" Value="5.42169123039436"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="216750169"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_cm_01" ID="{E305BC51-A9A7-4ED9-B881-08E07AE47C82}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup1_cm_01" ID="{2AF4D3FE-D584-4867-95A2-9E0A54DE35BA}" ShortID="626567760">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup1_cm_01" ID="{FAA2E6BA-D129-4CBC-A2BE-AF92E30371CE}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.10248756815376"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.49938309268911"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.926089557249155"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.41771134937886"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup1.cm_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="295919872"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup1_cm_01" ID="{FAA2E6BA-D129-4CBC-A2BE-AF92E30371CE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Audio 8_dup2_cm_02" ID="{CD91EB5A-C6EC-4E74-82F8-F7096B6AA51A}" ShortID="253794061">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Audio 8_dup2_cm_02" ID="{96688795-1B58-4123-B808-FD9AB8AC05BD}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.31940304851735"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="4.14089572150062"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="3.53194046833876"/>
+														<Property Name="TrimEnd" Type="Real64" Value="9.72298462662361"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Audio 8.dup2.cm_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="355841576"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Audio 8_dup2_cm_02" ID="{96688795-1B58-4123-B808-FD9AB8AC05BD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Teeth Clack Steady-Neoverb_01-01" ID="{A835A234-2D63-40A1-BA6E-FAB259DDEC97}" ShortID="642996464">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{065DDF9D-4010-47B7-A665-52E7363F40B1}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.20485571757563"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.80505471748075"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="7.6621293289575"/>
+														<Property Name="TrimEnd" Type="Real64" Value="10.7307462906068"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Teeth Clack Steady-Neoverb_01-01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="859634306"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Teeth Clack Steady-Neoverb_01-01" ID="{065DDF9D-4010-47B7-A665-52E7363F40B1}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
