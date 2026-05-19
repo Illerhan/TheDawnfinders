@@ -6,6 +6,7 @@
 #include "UMainWidget.generated.h"
 
 class UPalanquinHUDWidget;
+class UWorldDetailsWidget;
 
 UCLASS()
 class THEDAWNFINDERS_API UMainWidget : public UUserWidget
@@ -39,6 +40,9 @@ public :
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UUSpectateWidget* GetSpectateWidget();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UWorldDetailsWidget* GetDetailsWidget();
 
 
 protected :

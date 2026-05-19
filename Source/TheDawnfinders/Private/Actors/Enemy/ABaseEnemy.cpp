@@ -317,7 +317,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
     }
 
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
-    if (CurrentHealth <= 0) {
+    if (CurrentHealth <= 0 && !bIsDead) {
         Die();
     }
 

@@ -16,7 +16,7 @@ void AContainer::BeginPlay()
 
 	if (!HasAuthority()) return;
 
-	GetWorldTimerManager().SetTimer(DelayStartHandle, this, &AContainer::SetupLoot, 0.5f, false);
+	GetWorldTimerManager().SetTimer(DelayStartHandle, this, &AContainer::SetupLoot, 0.25f, false);
 }
 
 void AContainer::SetupLoot()
