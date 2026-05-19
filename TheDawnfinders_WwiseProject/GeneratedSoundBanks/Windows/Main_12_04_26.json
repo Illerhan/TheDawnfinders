@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{BC9E1983-549C-9D6E-247C-96BC098F06E2}",
+    "Hash": "{C55DD66A-FC99-0BA8-A283-F0122268FA2C}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1117,7 +1117,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_01.wav",
-      "CachePath": "8C/{8C6F9311-A35A-8D1E-0A58-03D39AD5DACE}.wem"
+      "CachePath": "E8/{E8734C3F-04FE-12D3-C71B-EA1674A003E7}.wem"
      },
      {
       "Id": "351180192",
@@ -1205,7 +1205,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_01.wav",
-      "CachePath": "ED/{ED90BAEA-0141-F657-4B47-8DC1BE94F021}.wem"
+      "CachePath": "47/{470EED5C-68A0-2CE8-D632-25F52B1585CD}.wem"
      },
      {
       "Id": "371682056",
@@ -1541,7 +1541,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_03.wav",
-      "CachePath": "C1/{C1EB0974-D56A-0D41-FE45-3644263A2F66}.wem"
+      "CachePath": "69/{691DC688-2D22-E15F-C49D-AC3CEDD98B7F}.wem"
      },
      {
       "Id": "466139768",
@@ -1597,7 +1597,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_04.wav",
-      "CachePath": "ED/{EDB2281C-9586-3E86-1C2C-BB93993583AC}.wem"
+      "CachePath": "66/{66A542D0-F502-8120-3262-26AADC50406F}.wem"
      },
      {
       "Id": "481772735",
@@ -1749,7 +1749,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_02.wav",
-      "CachePath": "30/{302B7A66-F45D-D3A6-DAE8-5E1A3F5316D0}.wem"
+      "CachePath": "F2/{F22F9CE1-CDB0-76CF-E7DA-01C9CA9F495B}.wem"
      },
      {
       "Id": "521453443",
@@ -1781,7 +1781,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_03.wav",
-      "CachePath": "3E/{3E62136B-B85A-76BC-C08D-5FA7B881F208}.wem"
+      "CachePath": "FA/{FAA20300-619B-CA7C-DF89-62D81AC3A8B2}.wem"
      },
      {
       "Id": "533200097",
@@ -1949,7 +1949,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Reload_04.wav",
-      "CachePath": "76/{76D5A18F-D264-3077-A69E-84BDCA5C7F48}.wem"
+      "CachePath": "FE/{FEA4FE5E-BB37-1205-CF97-EDD029D32B5F}.wem"
      },
      {
       "Id": "575181047",
@@ -5067,7 +5067,7 @@
       "Name": "Play_FireLoop",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireLoop",
       "GUID": "{C12EE427-486F-4DB1-8434-E00B63E88F07}",
-      "MaxAttenuation": "5000",
+      "MaxAttenuation": "2500",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -8232,6 +8232,6 @@
     ]
    }
   ],
-  "FileHash": "{766E2361-21E9-6436-E6C9-6B19A62921B9}"
+  "FileHash": "{EB628C9C-D8F8-CF92-2443-EFD1740EEA5B}"
  }
 }
