@@ -660,6 +660,7 @@ void UHealthComponent::Client_Revive_Implementation()
 		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
 		SpectateWidget->HideWidget();
 
+		Cast<AAPlayerCharacter>(GetOwner())->InterruptMontage();
 		Cast<AAPlayerCharacter>(GetOwner())->StopMovementForDuration(2.1f);
 
 		HUD->MainWidget->ExitSpectate();

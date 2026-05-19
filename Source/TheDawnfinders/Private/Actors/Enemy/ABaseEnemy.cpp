@@ -221,7 +221,7 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
 
 void ABaseEnemy::Multi_PlayHitSound_Implementation()
 {
-    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+    //HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
@@ -302,7 +302,7 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
     CurrentHealth -= Quantity;
 
@@ -311,8 +311,13 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
         AIController->PlayersAtRange.Push(Origin);
     }
 
+    if (!HasAuthority()) {
+        Server_TakeDamages(Quantity, Origin);
+        return;
+    }
+
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
-    if (CurrentHealth <= 0) {
+    if (CurrentHealth <= 0 && !bIsDead) {
         Die();
     }
 
@@ -326,9 +331,9 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
-    if (!AIController->NearPlayers.Contains(Origin)) {
+    if (Origin && !AIController->NearPlayers.Contains(Origin)) {
         AIController->NearPlayers.Push(Origin);
         AIController->PlayersAtRange.Push(Origin);
     }
@@ -373,8 +378,8 @@ void ABaseEnemy::Die() {
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
     }
 
-    GetController()->StopMovement();
-    GetCharacterMovement()->MaxWalkSpeed = 0.0f;
+    if (GetController()) GetController()->StopMovement();
+    if (GetCharacterMovement()) GetCharacterMovement()->MaxWalkSpeed = 0.0f;
     SetLockRotation(true);
     DoDeathDissolve();
 
@@ -420,12 +425,12 @@ void ABaseEnemy::DoHitEffect_Implementation()
 
 void ABaseEnemy::FadeIn_Implementation()
 {
-    IsDisplayed = true;
+    //IsDisplayed = true;
 }
 
 void ABaseEnemy::FadeOut_Implementation()
 {
-    IsDisplayed = false;
+    //IsDisplayed = false;
 }
 
 bool ABaseEnemy::GetIsDisplayed_Implementation()

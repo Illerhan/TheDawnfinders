@@ -1135,14 +1135,9 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
     if (!Montage) return;
     if (CurrentState == EPlayerState::UsingEquipment) 
     { 
-        if (!InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData || !InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon) {
+        if (InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData && !InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon) {
             SetCurrentPlayerState_Implementation(EPlayerState::None);
             ItemComponent->AttackAnimEnd();
-        }
-        else if (InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData &&
-            InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon && !ItemComponent->GetIsAiming()) {
-            //SetCurrentPlayerState_Implementation(EPlayerState::None);
-            //ItemComponent->AttackAnimEnd();
         }
     }
     BP_OnMontageEnded(Montage, bInterrupted);

@@ -426,6 +426,9 @@ public :
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bHoldAttackInput = false;
+
 	UPROPERTY(BlueprintReadOnly)
 	float UILoudness;
 	
@@ -482,7 +485,7 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	FVector CurrentRotationInput;
-
+	
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	FVector CurrentOffsetRotationInput;
 
@@ -498,6 +501,6 @@ protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float NoiseModifier = 1.0f;
 
-	UPROPERTY()
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	float NoMovementTimer;
 };

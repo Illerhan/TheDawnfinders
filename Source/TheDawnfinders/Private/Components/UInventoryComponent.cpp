@@ -36,7 +36,6 @@ void UInventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	DOREPLIFETIME(UInventoryComponent, InventorySlots);
 	DOREPLIFETIME(UInventoryComponent, TreasureSlots);
 	DOREPLIFETIME(UInventoryComponent, CurrentSlotIndex);
-	DOREPLIFETIME(UInventoryComponent, Gold);
 }
 
 
@@ -522,9 +521,8 @@ void UInventoryComponent::SortItems()
 
 void UInventoryComponent::Server_AddGold_Implementation(int32 Amount)
 {
-	Gold+= Amount;
+	Gold += Amount;
 
-	OnRep_Gold();
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
@@ -688,7 +686,6 @@ void UInventoryComponent::ServerConsumeItemDirectly_Implementation(FItemInfos It
 		case EItemType::Currency:
 			// Ajouter l'or directement
 			Gold += Item.ItemData->ItemValue;
-			OnRep_Gold();
 			break;
 	
 		default:
@@ -701,11 +698,6 @@ void UInventoryComponent::Server_AddKnowledge_Implementation(int32 Amount)
 {
 	Knowledge += Amount;
 	OnRep_Knowledge();
-}
-
-void UInventoryComponent::OnRep_Gold()
-{
-	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
 }
 
 void UInventoryComponent::OnRep_Knowledge()

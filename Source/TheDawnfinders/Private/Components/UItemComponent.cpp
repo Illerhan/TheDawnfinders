@@ -684,7 +684,7 @@ void UItemComponent::AttackAnimEnd()
 	ComboIndex++;
 	ResetComboCounterDelay(0.2f);
 
-	if (PressedAttackInput)
+	if (PressedAttackInput || PlayerCharacter->bHoldAttackInput)
 	{
 		DoLightAttack();
 	}
@@ -783,7 +783,7 @@ void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Ta
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
-	if (!Enemy || Enemy->IsInvincible) return;
+	if (!Enemy || Enemy->IsInvincible || Enemy->bIsDead) return;
 
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
@@ -926,6 +926,7 @@ void UItemComponent::Shoot()
 
 	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
 	IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::StrongLong, 0);
+	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1);
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
