@@ -425,12 +425,12 @@ void ABaseEnemy::DoHitEffect_Implementation()
 
 void ABaseEnemy::FadeIn_Implementation()
 {
-    IsDisplayed = true;
+    //IsDisplayed = true;
 }
 
 void ABaseEnemy::FadeOut_Implementation()
 {
-    IsDisplayed = false;
+    //IsDisplayed = false;
 }
 
 bool ABaseEnemy::GetIsDisplayed_Implementation()
