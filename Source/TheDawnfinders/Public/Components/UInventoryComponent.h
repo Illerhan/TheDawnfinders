@@ -243,7 +243,7 @@ public :
 
 // === OTHER RESSOURCES ===
 
-	UPROPERTY(ReplicatedUsing = OnRep_Gold, EditAnywhere,BlueprintReadWrite, Category = "Inventory Ressources")
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Inventory Ressources")
 	int Gold;
 	
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Inventory Ressources")
@@ -257,9 +257,6 @@ public :
 
 	UFUNCTION(Server,Reliable,BlueprintCallable,Category = "Inventory")
 	void Server_AddKnowledge(int32 Amount);
-	
-	UFUNCTION()
-	void OnRep_Gold();
 
 	UFUNCTION()
 	void OnRep_Knowledge();

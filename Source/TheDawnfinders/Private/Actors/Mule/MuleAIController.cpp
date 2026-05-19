@@ -61,8 +61,8 @@ void AMuleAIController::CallMule(AActor* Actor)
 		MyMule->Multicast_PlayTravelSound(SpawnPosition);
 	}, 5.f, false);
 
-	MyMule->SetActorLocation(SpawnPosition);
 	MyMule->PlayAppearVFX();
+	MyMule->SetActorLocation(SpawnPosition);
 
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
