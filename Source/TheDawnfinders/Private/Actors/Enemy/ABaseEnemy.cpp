@@ -221,7 +221,7 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
 
 void ABaseEnemy::Multi_PlayHitSound_Implementation()
 {
-    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+    //HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)

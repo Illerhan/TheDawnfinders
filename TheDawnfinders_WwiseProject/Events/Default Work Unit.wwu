@@ -730,6 +730,39 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Event Name="Play_GunReload" ID="{1F73DD82-1C1C-41A8-9CE6-964A6123548A}">
+									<ChildrenList>
+										<Action Name="" ID="{7511E2FE-879C-4354-95CF-026ED91799E5}" ShortID="1022591361">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_Reload" ID="{FAE7BA04-DAA1-4E5E-B014-EA500E6E029F}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_BulletReload" ID="{3AB6CC14-BE07-4787-9729-0A493C2711ED}">
+									<ChildrenList>
+										<Action Name="" ID="{A7FE5275-BB69-45AD-8E3D-D394CEB547EE}" ShortID="202239786">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BulletReload" ID="{171E7E88-82E6-49F3-9354-CBD8B5AC23DC}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EndOfReload" ID="{6AC55730-9997-4B43-80B6-26E8F9307D5B}">
+									<ChildrenList>
+										<Action Name="" ID="{0E97D055-A155-4D5D-B6E7-5CA55F266B95}" ShortID="935152962">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_EndReload" ID="{F6467023-656B-4ED6-A367-399706E4533D}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -739,11 +772,33 @@
 						<Folder Name="Fidele" ID="{E7F71B35-8B9E-4E70-B249-6986182628C9}" ShortID="46726563">
 							<ChildrenList>
 								<Event Name="Play_BasicEnnemyAttack" ID="{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>0.25</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ChildrenList>
 										<Action Name="" ID="{2D169D29-12BC-4739-85E8-6316D22DC3B8}" ShortID="176028070">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.5"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemyAttack" ID="{0F8A60D8-F82D-4D7D-B07A-2ECF5E5BFA48}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyAttack" ID="{0F8A60D8-F82D-4D7D-B07A-2ECF5E5BFA48}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{0929F598-711A-4216-A636-14E8D69DEF77}" ShortID="974253400">
+											<PropertyList>
+												<Property Name="FadeInCurve" Type="int16" Value="1"/>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+												<Property Name="Probability" Type="Real64" Value="30"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnemyGrunt" ID="{C57E4904-9326-4719-887F-820DA4FDD837}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -757,14 +812,14 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemyMovement" ID="{EA3F52D2-F6B8-4AEA-83F8-D43B4F6F50F1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyMovement" ID="{EA3F52D2-F6B8-4AEA-83F8-D43B4F6F50F1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{0A48B9CE-54F8-4631-B693-26DE84455BA9}" ShortID="619501552">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemyChain" ID="{CC6F7557-3541-406E-93DB-903626BFA740}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyChain" ID="{CC6F7557-3541-406E-93DB-903626BFA740}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -789,7 +844,7 @@
 										<Action Name="" ID="{9291407C-63AD-4587-9553-9CACFA35FD69}" ShortID="927170490">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyDamage" ID="{5AB44A29-5481-4F3B-8E1E-BCA2FF32FF22}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -812,7 +867,7 @@
 										<Action Name="" ID="{1F0E84CE-3C48-4415-9733-D7B83025255C}" ShortID="564037653">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -835,7 +890,7 @@
 										<Action Name="" ID="{D60354A8-DE8B-4624-80C5-71A918DF7CA7}" ShortID="60896024">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="BasicEnnemySecondaryScream" ID="{CD0C9F8F-6762-42E2-A3BB-B09369F01F0A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="BasicEnemySecondaryScream" ID="{CD0C9F8F-6762-42E2-A3BB-B09369F01F0A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -856,12 +911,23 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_EliteEnemyAttack" ID="{0A2AB7AC-CAA7-4393-86CB-9AA86B809477}">
+								<Event Name="Play_EliteEnemyAttackSwoosh" ID="{0A2AB7AC-CAA7-4393-86CB-9AA86B809477}">
 									<ChildrenList>
 										<Action Name="" ID="{301B4435-E992-4BBE-83BC-518A17895186}" ShortID="949449620">
+											<PropertyList>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+												<Property Name="Probability" Type="Real64" Value="30"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="EliteEnemyAttack" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+													<ObjectRef Name="EliteEnemyGrunt" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{29F4174B-F75C-40F6-ADD1-E12AE1CE249F}" ShortID="721957117">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyAttack_01" ID="{827C7110-C2E3-4C53-81A6-367CDFA16354}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -895,6 +961,28 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="EliteEnemyIdle" ID="{9240ED66-0C39-4BEF-800B-0B9EA46FC58A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemyAttackStab" ID="{6B53DD43-6AA1-48E6-B2DB-AE02C57BD8D7}">
+									<ChildrenList>
+										<Action Name="" ID="{0206E0CB-8DBE-44F7-848B-13ACD78B1DEE}" ShortID="559120964">
+											<PropertyList>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+												<Property Name="Probability" Type="Real64" Value="30"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyGrunt" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{E7B09DE5-7FE1-4D34-BCEE-4DAEF847C527}" ShortID="435394145">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyAttack_02" ID="{1EA2907F-07D9-416D-901C-AB056B4DDAC9}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
