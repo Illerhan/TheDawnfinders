@@ -926,6 +926,7 @@ void UItemComponent::Shoot()
 
 	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
 	IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::StrongLong, 0);
+	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1);
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
