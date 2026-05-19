@@ -426,6 +426,9 @@ public :
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bHoldAttackInput = false;
+
 	UPROPERTY(BlueprintReadOnly)
 	float UILoudness;
 	
