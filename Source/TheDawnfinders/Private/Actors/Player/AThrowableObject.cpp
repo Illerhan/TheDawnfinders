@@ -84,7 +84,7 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 
 		switch (EffectType) {
 		case EThrowableEffectType::Explodes :
-			IDamageable::Execute_ReceiveDamage(Hit.GetActor(), ItemData->ConsumableEffectPower, this);
+			IDamageable::Execute_ReceiveDamage(Hit.GetActor(), ItemData->ConsumableEffectPower, NULL);
 			break;
 
 		case EThrowableEffectType::PlayLoudSound :

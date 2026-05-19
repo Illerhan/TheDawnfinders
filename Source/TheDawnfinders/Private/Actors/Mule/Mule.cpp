@@ -21,7 +21,6 @@ AMule::AMule()
 	InteractibleWidgetComponent->SetupAttachment(RootComponent);
 }
 
-// Called when the game starts or when spawned
 void AMule::BeginPlay()
 {
 	InteractibleWidget = Cast<UWorldInteractibleWidget>(InteractibleWidgetComponent->GetWidget());
@@ -30,17 +29,16 @@ void AMule::BeginPlay()
 	
 }
 
-// Called every frame
 void AMule::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
 void AMule::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+
 
 void AMule::Multicast_PlayTravelSound_Implementation(FVector Position)
 {
