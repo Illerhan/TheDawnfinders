@@ -10476,6 +10476,7 @@
 										<RandomSequenceContainer Name="FlameLoop" ID="{EB3C8662-7486-4549-8973-1E78B78EB3D3}" ShortID="290788566">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.5"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
