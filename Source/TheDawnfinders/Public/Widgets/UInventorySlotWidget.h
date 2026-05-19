@@ -31,6 +31,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ActualiseSlotCounter(FInventorySlot Data);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ActualiseTextOrientations(float Angle);
+
 
 // === OTHERS ===
 public :
