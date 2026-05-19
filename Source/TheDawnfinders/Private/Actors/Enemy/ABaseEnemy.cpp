@@ -306,7 +306,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
 
     CurrentHealth -= Quantity;
 
-    if (!AIController->NearPlayers.Contains(Origin)) {
+    if (Origin && !AIController->NearPlayers.Contains(Origin)) {
         AIController->NearPlayers.Push(Origin);
         AIController->PlayersAtRange.Push(Origin);
     }
