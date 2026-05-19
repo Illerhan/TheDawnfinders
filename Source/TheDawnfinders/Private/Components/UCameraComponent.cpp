@@ -76,6 +76,8 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	FVector NewOffset = FVector(0, 0, 0);
 
 	for (int i = 0; i < EnemiesAtRange.Num(); i++) {
+		if (!IFadeable::Execute_GetIsDisplayed(EnemiesAtRange[i])) continue;
+
 		FVector Offset = GetOwner()->GetActorLocation() - EnemiesAtRange[i]->GetActorLocation();
 		Offset.Normalize();
 		NewOffset -= Offset * FMath::Lerp(0, EnemiesOffsetMaxImpact, 1 - (Offset.Length() / EnemiesMaxRange));

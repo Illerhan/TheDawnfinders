@@ -56,3 +56,8 @@ void UInventorySlotWidget::SetupNavigation_Implementation(UWidget* TowardWidget)
 }
 
 #pragma endregion
+
+void UInventorySlotWidget::ActualiseTextOrientations_Implementation(float Angle)
+{
+
+}
