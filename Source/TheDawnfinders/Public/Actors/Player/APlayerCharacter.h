@@ -501,6 +501,6 @@ protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float NoiseModifier = 1.0f;
 
-	UPROPERTY()
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	float NoMovementTimer;
 };
