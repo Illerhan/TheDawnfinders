@@ -39,6 +39,11 @@ bool UMainWidget::GetIsInContainer()
 	return bIsInContainer;
 }
 
+UWorldDetailsWidget* UMainWidget::GetDetailsWidget_Implementation()
+{
+	return nullptr;
+}
+
 UUSpectateWidget* UMainWidget::GetSpectateWidget_Implementation()
 {
 	return nullptr;

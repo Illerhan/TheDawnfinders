@@ -72,11 +72,6 @@ void AItem::Multicast_Initialise_Implementation(FItemInfos Data)
 	ItemData = Data.ItemData;
 	ItemInfos = Data;
 
-	ItemMesh->SetStaticMesh(ItemData->ItemMesh);
-	ItemMesh->SetSimulatePhysics(false);
-	ItemMesh->SetEnableGravity(false);
-	ItemMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-
 	bShouldLevitate = true;
 }
 

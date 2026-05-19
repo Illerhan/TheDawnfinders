@@ -302,7 +302,7 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
     CurrentHealth -= Quantity;
 
@@ -317,7 +317,7 @@ void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin)
     }
 
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
-    if (CurrentHealth <= 0) {
+    if (CurrentHealth <= 0 && !bIsDead) {
         Die();
     }
 
@@ -331,7 +331,7 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
     if (Origin && !AIController->NearPlayers.Contains(Origin)) {
         AIController->NearPlayers.Push(Origin);
