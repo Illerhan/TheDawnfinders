@@ -47,6 +47,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void EndStun();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	bool GetCanReachPlayer();
+
 	UFUNCTION(BlueprintCallable)
 	UEnemyAttackComponent* GetEnemyAttackComponent();
 
