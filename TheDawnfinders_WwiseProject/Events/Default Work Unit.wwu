@@ -1074,6 +1074,17 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="Play_Trap_Statue" ID="{2C089776-2DB0-4A4C-9813-5CDDF43FB958}">
+					<ChildrenList>
+						<Action Name="" ID="{D397F3DA-2207-43EF-B293-6A15FC4BDC7B}" ShortID="207558903">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Trap_Statue" ID="{7C0BD34C-3E11-4BBD-BFD2-4EB01203B5CE}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
