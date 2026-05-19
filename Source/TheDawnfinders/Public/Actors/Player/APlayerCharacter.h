@@ -485,7 +485,7 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	FVector CurrentRotationInput;
-
+	
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	FVector CurrentOffsetRotationInput;
 
