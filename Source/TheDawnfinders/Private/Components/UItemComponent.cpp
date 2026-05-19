@@ -684,7 +684,7 @@ void UItemComponent::AttackAnimEnd()
 	ComboIndex++;
 	ResetComboCounterDelay(0.2f);
 
-	if (PressedAttackInput)
+	if (PressedAttackInput || PlayerCharacter->bHoldAttackInput)
 	{
 		DoLightAttack();
 	}
