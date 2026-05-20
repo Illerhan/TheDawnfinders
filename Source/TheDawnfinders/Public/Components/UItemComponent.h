@@ -156,6 +156,12 @@ public :
 	UFUNCTION(Client,Unreliable)
 	void PlayShootSound();
 
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_ActualiseInfos(bool Aim, bool Reload);
+
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+	void Multicast_ActualiseInfos(bool Aim, bool Reload);
+
 
 // === THROW ===
 public :
