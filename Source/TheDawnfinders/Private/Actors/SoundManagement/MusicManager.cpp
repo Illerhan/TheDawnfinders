@@ -8,6 +8,8 @@
 #include "AkGameplayStatics.h"
 #include "AmbientMusicZone.h"
 #include "Components/AudioComponent.h"
+#include "GameFramework/CustomGameState.h"
+#include "GameFramework/GICustom.h"
 #include "Kismet/GameplayStatics.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 
@@ -41,7 +43,17 @@ void UMusicManager::OnEnemyCalm()
 
 void UMusicManager::TriggerExtraction()
 {
-    // L'extraction ne peut pas être annulée
+    if (!ExtractionSound) 
+    {
+        if (AGameStateBase* GS = GetWorld()->GetGameState()) 
+        {
+            // Cast vers ton GameState spécifique
+            if (ACustomGameState* MyGS = Cast<ACustomGameState>(GS)) 
+            {
+                ExtractionSound = MyGS->ExtractionSoundAsset;
+            }
+        }
+    }
     ApplyState(EMusicState::Extraction);
 }
 

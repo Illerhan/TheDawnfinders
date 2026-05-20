@@ -179,6 +179,9 @@ void ABaseEnemy::Multicast_HideEye_Implementation()
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
+   if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
+        MM->OnEnemyCalm();
+ 
 }
 
 void ABaseEnemy::Multicast_EnterListening_Implementation()
@@ -198,6 +201,9 @@ void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
 void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 {
     EnemyWidget->PlayAggressiveAnim();
+    
+    if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
+        MM->OnEnemyAggro();
 }
 
 #pragma endregion

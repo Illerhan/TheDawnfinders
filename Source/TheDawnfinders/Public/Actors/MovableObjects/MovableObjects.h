@@ -55,7 +55,7 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadwrite)
 	UStaticMesh* MovableMesh;
 
-	UPROPERTY(EditAnywhere, Category = "Timeline")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Timeline")
 	UCurveFloat* MoveCurve;
 
 	FTimeline Timeline;

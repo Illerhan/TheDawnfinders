@@ -785,8 +785,19 @@ void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Ta
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) {
+			FinalDamage *= Data->UsedDurabilityMultiplier;
+			UseWeaponWithNoDurability(false);
+		}
+		else {
+			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+			if (EquippedItem.CurrentInfos.Durability <= 0)
+				UseWeaponWithNoDurability(true);
+		}
+	}
 
 	FinalDamage *= WeaponData->MineDamageMultiplier;
 
@@ -802,8 +813,16 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 
 	// Durability
 	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
-		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+		if (EquippedItem.CurrentInfos.Durability <= 0) {
+			FinalDamage *= Data->UsedDurabilityMultiplier;
+			UseWeaponWithNoDurability(false);
+		}
+		else {
+			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+			if (EquippedItem.CurrentInfos.Durability <= 0)
+				UseWeaponWithNoDurability(true);
+		}
 	}
 
 	// Enemy Resistances
@@ -834,6 +853,10 @@ void UItemComponent::ResetComboCounterDelay_Implementation(float Delay)
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment) return;
 
 	ComboIndex = 0;
+}
+
+void UItemComponent::UseWeaponWithNoDurability_Implementation(bool bJustBroke)
+{
 }
 
 #pragma endregion
