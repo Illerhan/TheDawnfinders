@@ -27,4 +27,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UWorldHealthBar* GetHealthBar();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void BreakWeapon();
 };

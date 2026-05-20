@@ -16,4 +16,5 @@ public :
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 RequestedPanel = 1;
+
 };

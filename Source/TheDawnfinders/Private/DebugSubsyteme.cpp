@@ -23,3 +23,10 @@ void UDebugSubsyteme::Deinitialize()
 	Super::Deinitialize();
 }
 
+void UDebugSubsyteme::ToggleDebugWindow()
+{
+	if (DebugWindow.IsValid())
+	{
+		DebugWindow->ToggleWidget();
+	}
+}

@@ -39,8 +39,6 @@ void AAmbientMusicZone::OnPlayerEnter(UPrimitiveComponent* OverlappedComp, AActo
 
 	MM->EnterZone(this);
 
-	// Désactive pour éviter les déclenchements multiples
-	ZoneTrigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void AAmbientMusicZone::OnPlayerExit(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

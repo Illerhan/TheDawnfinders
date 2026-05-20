@@ -23,6 +23,8 @@ class UMusicManager : public UGameInstanceSubsystem
 	GENERATED_BODY()
 
 public:
+
+
 	// Appelé par la zone quand le joueur entre/sort
 	void EnterZone(AAmbientMusicZone* Zone);
 	void ExitZone(AAmbientMusicZone* Zone);

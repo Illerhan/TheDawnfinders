@@ -114,6 +114,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ResetComboCounterDelay(float Delay);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UseWeaponWithNoDurability(bool bJustBroke);
+
 
 // === RANGED WEAPON ===
 public :
