@@ -394,6 +394,8 @@ void UInteractionComponent::StopInteract()
 			ServerStopInteract_Implementation(CurrentInteractible, PlayerCharacter);
 		}
 
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
 		NearestInteractible = nullptr;
 		CurrentInteractible = nullptr;
 		bIsInInteraction = false;
@@ -409,6 +411,7 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	bIsInInteraction = false;
 
 	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
@@ -420,6 +423,8 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 	NearestInteractible = nullptr;
 	CurrentInteractible = nullptr;
 	bIsInInteraction = false;
+
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 }
 
 void UInteractionComponent::CancelInteraction()
@@ -431,7 +436,7 @@ void UInteractionComponent::CancelInteraction()
 	}
 
 	AActor* Nearest = GetNearestInteractible();
-	//if (!Nearest) return;
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
 	if (bIsDoingQTE && CurrentQTEWidget)
 	{
