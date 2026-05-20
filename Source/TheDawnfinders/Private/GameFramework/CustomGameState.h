@@ -29,4 +29,8 @@ public :
 
 	virtual void AddPlayerState(APlayerState* Player) override;
 	virtual void RemovePlayerState(APlayerState* Player) override;
+		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* ExtractionSoundAsset;
+	
 };
