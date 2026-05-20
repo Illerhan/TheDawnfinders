@@ -4,12 +4,26 @@
 #include "CustomPlayerController.h"
 
 #include "AkGameplayStatics.h"
+#include "DebugSubsyteme.h"
 #include "Actors/Mule/DangerManager.h"
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/GICustom.h"
 #include "Widgets/Mule/MuleWidget.h"
+
+
+void ACustomPlayerController::ToggleDebugWindow() const
+{
+	if (UGameInstance* GI = GetGameInstance())
+	{
+		if (UDebugSubsyteme* DebugSubsystem =
+			GI->GetSubsystem<UDebugSubsyteme>())
+		{
+			DebugSubsystem->ToggleDebugWindow();
+		}
+	}
+}
 
 void ACustomPlayerController::Server_RequestSwitchPanel_Implementation(int32 PanelIndex)
 {
