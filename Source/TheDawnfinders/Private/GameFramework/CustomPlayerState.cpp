@@ -254,6 +254,9 @@ void ACustomPlayerState::Client_AddShopItemLocally(FItemInfos Item)
 void ACustomPlayerState::Server_RepairItem_Implementation(int Cost)
 {
 	SavedGold -= Cost;
+
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
@@ -280,6 +283,8 @@ void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSel
 		
 	SavedGold += SellPrice;
 
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()
