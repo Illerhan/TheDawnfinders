@@ -73,6 +73,8 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	ActualiseUseProgress(DeltaTime);
 
+	if (!PlayerCharacter->IsLocallyControlled()) return;
+
 	if (bIsAiming && !bIsReloading) {
 		ActualiseAim(DeltaTime);
 	}
@@ -875,8 +877,13 @@ void UItemComponent::StartAim()
 
 	CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
+	if (bIsAiming) return;
+
 	bIsAiming = true;
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 }
 
 void UItemComponent::StopAim()
@@ -885,6 +892,9 @@ void UItemComponent::StopAim()
 	if (!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 
 	HideAimLines();
 }
@@ -900,6 +910,9 @@ void UItemComponent::Reload()
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
 
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
+
 	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
 
 	HideAimLines();
@@ -909,6 +922,9 @@ void UItemComponent::CompleteReload()
 {
 	bIsReloading = false;
 	InventoryComponent->ReloadGun(EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.NeededAmmo, CurrentWeaponData.MagazineSize);
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
@@ -926,6 +942,9 @@ void UItemComponent::CancelReload()
 
 	bIsReloading = false;
 	TimerReload = 0;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 }
 
 void UItemComponent::ActualiseAim(float DeltaTime)
@@ -1013,6 +1032,22 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
 	else
 		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
+}
+
+void UItemComponent::Server_ActualiseInfos_Implementation(bool Aim, bool Reload)
+{
+	bIsAiming = Aim;
+	bIsReloading = Reload;
+
+	Multicast_ActualiseInfos(Aim, Reload);
+}
+
+void UItemComponent::Multicast_ActualiseInfos_Implementation(bool Aim, bool Reload)
+{
+	if (PlayerCharacter->IsLocallyControlled()) return;
+
+	bIsAiming = Aim;
+	bIsReloading = Reload;
 }
 
 void UItemComponent::PlayShootSound_Implementation()
