@@ -220,6 +220,7 @@ void ACustomPlayerState::OverrideWith(APlayerState* PlayerState)
 	
 	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
 	{
+		bIsWoman = NewPS->bIsWoman;
 		ShopItems = NewPS->ShopItems;
 		SavedGold = NewPS->SavedGold;
 		bInSession=NewPS->bInSession;
@@ -260,6 +261,7 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 	Super::CopyProperties(PlayerState);
 	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
 	{
+		NewPS->bIsWoman = bIsWoman;
 		NewPS->ShopItems = ShopItems;
 		NewPS->SavedGold = SavedGold;
 		NewPS->bInSession = bInSession;
