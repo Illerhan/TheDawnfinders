@@ -10192,6 +10192,160 @@
 								</Sound>
 							</ChildrenList>
 						</RandomSequenceContainer>
+						<Sound Name="UI_BACK" ID="{1DDC57E5-F926-407B-A610-3657AFE6B040}" ShortID="920660480">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="BACK" ID="{B811501D-C54D-4CB1-AEB9-123B3891D114}">
+									<Language>SFX</Language>
+									<AudioFile>BACK.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="120819109"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="BACK" ID="{B811501D-C54D-4CB1-AEB9-123B3891D114}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="UI_Roll_Over" ID="{19A8986B-784C-4F9F-A08E-2961C2A4C445}" ShortID="546772415">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="ROLL OVER" ID="{7CE4F17F-7F4C-4D5E-8B32-DF533C385451}">
+									<Language>SFX</Language>
+									<AudioFile>ROLL OVER.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="60819062"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="ROLL OVER" ID="{7CE4F17F-7F4C-4D5E-8B32-DF533C385451}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="TUTO BUBBLE" ID="{6AA0EC8C-DD11-4268-9DF8-1C84B6000305}" ShortID="833610253">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="TUTO BUBBLE" ID="{01B840B8-2FBA-4548-9C7B-B7104D9B71E4}">
+									<Language>SFX</Language>
+									<AudioFile>TUTO BUBBLE.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="117948093"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="TUTO BUBBLE" ID="{01B840B8-2FBA-4548-9C7B-B7104D9B71E4}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="TEXT BUBBLE" ID="{B91376EB-7C39-48FF-912C-2365F0A7BF1A}" ShortID="145207679">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="TEXT BUBBLE" ID="{48AB63B8-1EFA-4972-B556-213712564EFC}">
+									<Language>SFX</Language>
+									<AudioFile>TEXT BUBBLE.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="311628467"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="TEXT BUBBLE" ID="{48AB63B8-1EFA-4972-B556-213712564EFC}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="UI_Confirm" ID="{813F9DA0-8F6F-4D03-91E8-2B4C22EC9830}" ShortID="337440668">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CONFIRM" ID="{9F1CE452-4CBA-48E0-B482-196D7B86DF65}">
+									<Language>SFX</Language>
+									<AudioFile>CONFIRM.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="856822682"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CONFIRM" ID="{9F1CE452-4CBA-48E0-B482-196D7B86DF65}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="UI_Transition" ID="{5AAE01E4-14D8-4E6B-B135-5810379C7E8B}" ShortID="818816100">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="UI_New_Zone" ID="{C6A32BEE-33A8-4B80-99FF-F673E1B5C107}">
+									<Language>SFX</Language>
+									<AudioFile>UI_New_Zone.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="410557312"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="UI_New_Zone" ID="{C6A32BEE-33A8-4B80-99FF-F673E1B5C107}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="UI_New_Zone" ID="{101663D5-A3E8-4A24-BBBD-3FF3AA5617C4}" ShortID="493444677">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="UI_New_Zone_1" ID="{77BCF89A-71FE-4112-9DB0-DD7A55615832}">
+									<Language>SFX</Language>
+									<AudioFile>UI_New_Zone_1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="121798709"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="UI_New_Zone_1" ID="{77BCF89A-71FE-4112-9DB0-DD7A55615832}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambiance" ID="{B01C6B88-1D1B-476B-9312-68D0DF5A3089}" ShortID="940732048">

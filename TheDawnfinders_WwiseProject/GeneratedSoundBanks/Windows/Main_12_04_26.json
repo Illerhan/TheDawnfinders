@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{0EFA5046-A1FD-1B7F-9F95-D1393DE1F7A3}",
+    "Hash": "{F93892B3-6705-BCFB-2F23-35C5AB42E277}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -190,6 +190,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Crackle3-01.wav",
       "CachePath": "38/{38259D15-1358-36AB-CC38-8DBDD501E92A}.wem"
+     },
+     {
+      "Id": "60819062",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ROLL OVER.wav",
+      "CachePath": "85/{85C6DD40-7126-E3D2-84BD-429D1B4FB58F}.wem"
      },
      {
       "Id": "64511599",
@@ -384,12 +392,36 @@
       "CachePath": "49/{491B0846-5A3A-68F4-A69D-E58F6537447F}.wem"
      },
      {
+      "Id": "117948093",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "TUTO BUBBLE.wav",
+      "CachePath": "40/{40126274-5BE8-E5CB-FDF3-BCFB0F5C9213}.wem"
+     },
+     {
       "Id": "119088602",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BasicEnnemyRun\\FootstepsBasicEnnemyRun 1.wav",
       "CachePath": "8D/{8DC58D65-DF3D-3D14-B410-68C4D44A93BF}.wem"
+     },
+     {
+      "Id": "120819109",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BACK.wav",
+      "CachePath": "BB/{BBE8FF7F-451D-0900-F923-7A8D6382E003}.wem"
+     },
+     {
+      "Id": "121798709",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone_1.wav",
+      "CachePath": "D6/{D693F61A-5981-3AEC-2A17-5FD2DD77C57D}.wem"
      },
      {
       "Id": "122144981",
@@ -960,6 +992,14 @@
       "CachePath": "8D/{8D9E17CE-5D25-20F4-50B5-43F2F8F9C2E4}.wem"
      },
      {
+      "Id": "311628467",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "TEXT BUBBLE.wav",
+      "CachePath": "7D/{7D481258-ECB3-2646-4A4E-CD57FCE5F2FC}.wem"
+     },
+     {
       "Id": "315756396",
       "Language": "SFX",
       "Streaming": "false",
@@ -1198,6 +1238,14 @@
       "Location": "Memory",
       "ShortName": "WoodRunCrack\\FootstepsWoodCrackRun 2.wav",
       "CachePath": "41/{412A40F6-675C-777B-C10D-205763B6BF56}.wem"
+     },
+     {
+      "Id": "410557312",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone.wav",
+      "CachePath": "A9/{A97A49AF-9702-C171-FA6F-C50DEC7AE341}.wem"
      },
      {
       "Id": "410635671",
@@ -2542,6 +2590,14 @@
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 9.wav",
       "CachePath": "34/{34DD00DB-8E1D-B9C7-F480-F04E8E7A9DCC}.wem"
+     },
+     {
+      "Id": "856822682",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CONFIRM.wav",
+      "CachePath": "0D/{0D841101-7F67-ECE5-14DD-EC348614445B}.wem"
      },
      {
       "Id": "865151463",
@@ -5485,6 +5541,20 @@
       ]
      },
      {
+      "Id": "2961639160",
+      "Name": "Play_TEXT_BUBBLE",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_TEXT_BUBBLE",
+      "GUID": "{6A189267-42DC-42E8-AEF9-6973472A3BF0}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.8373334",
+      "DurationMax": "2.8373334",
+      "MediaRefs": [
+       {
+        "Id": "311628467"
+       }
+      ]
+     },
+     {
       "Id": "1391774161",
       "Name": "Play_Trap_Arrow",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Trap\\Play_Trap_Arrow",
@@ -5562,6 +5632,90 @@
        },
        {
         "Id": "488103134"
+       }
+      ]
+     },
+     {
+      "Id": "2457017141",
+      "Name": "Play_TUTO_BUBBLE",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_TUTO_BUBBLE",
+      "GUID": "{88ADA127-9FCE-4191-A9EB-7657DF80A694}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.528",
+      "DurationMax": "3.528",
+      "MediaRefs": [
+       {
+        "Id": "117948093"
+       }
+      ]
+     },
+     {
+      "Id": "1386224142",
+      "Name": "Play_UI_BACK",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_BACK",
+      "GUID": "{74A9E79F-4259-409A-AA51-A12BEA4A33EC}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.75133336",
+      "DurationMax": "0.75133336",
+      "MediaRefs": [
+       {
+        "Id": "120819109"
+       }
+      ]
+     },
+     {
+      "Id": "3022734157",
+      "Name": "Play_UI_Confirm",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Confirm",
+      "GUID": "{E4A729E4-6ED7-4EFC-B6AC-025C591F1D1B}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9216667",
+      "DurationMax": "0.9216667",
+      "MediaRefs": [
+       {
+        "Id": "856822682"
+       }
+      ]
+     },
+     {
+      "Id": "250732692",
+      "Name": "Play_UI_New_Zone",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_New_Zone",
+      "GUID": "{82CBB58A-3BA7-4C3E-80A4-BE5AA0505F1F}",
+      "DurationType": "OneShot",
+      "DurationMin": "7.88",
+      "DurationMax": "7.88",
+      "MediaRefs": [
+       {
+        "Id": "121798709"
+       }
+      ]
+     },
+     {
+      "Id": "1847440691",
+      "Name": "Play_UI_Roll_Over",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Roll_Over",
+      "GUID": "{F14BACA6-3FE4-4AB4-BE28-24DBB34598B5}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.8236667",
+      "DurationMax": "0.8236667",
+      "MediaRefs": [
+       {
+        "Id": "60819062"
+       }
+      ]
+     },
+     {
+      "Id": "1132697454",
+      "Name": "Play_UI_Transition",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Transition",
+      "GUID": "{256DB73A-0FF0-4A90-A508-E9FD2EDDB385}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.68",
+      "DurationMax": "3.68",
+      "MediaRefs": [
+       {
+        "Id": "410557312"
        }
       ]
      },
@@ -5947,6 +6101,6 @@
     ]
    }
   ],
-  "FileHash": "{ACA2BD41-83DE-BDD6-2A14-0F8273CDB23F}"
+  "FileHash": "{5D551E7D-D0FF-73B0-E2C6-5A9D52B641C7}"
  }
 }
