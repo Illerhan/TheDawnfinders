@@ -41,7 +41,9 @@ public:
 	
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void Server_StopHoldMule();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleDebugWindow() const;
 	UFUNCTION(BlueprintCallable)
 	void RespawnToCheckpoint();
 	

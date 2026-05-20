@@ -20,4 +20,6 @@ class THEDAWNFINDERS_API UDebugSubsyteme : public UGameInstanceSubsystem
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	
 	virtual void Deinitialize() override;
+	
+	void ToggleDebugWindow();
 };
