@@ -201,6 +201,12 @@ void UItemComponent::DoMainAction()
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Consumable)
 	{
+		if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Heal &&
+			HealthComponent->CurrentHealth >= HealthComponent->GetCurrentMaxHealth())
+		{
+			return;
+		}
+
 		if (EquippedItem.CurrentInfos.ItemData->NeededHoldDuration != 0)
 		{
 			if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Revive)
@@ -296,6 +302,12 @@ void UItemComponent::UseConsumable()
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+
+	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Heal && 
+		HealthComponent->CurrentHealth >= HealthComponent->GetCurrentMaxHealth()) 
+	{
+		return;
+	}
 
 	if (EquippedItem.CurrentInfos.ItemData->UseConsumableMontage)
 	{

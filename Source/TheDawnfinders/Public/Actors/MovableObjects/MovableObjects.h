@@ -9,6 +9,8 @@
 #include "Interfaces/Activable.h"
 #include "MovableObjects.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMovableMovementFinished);
+
 UCLASS()
 class THEDAWNFINDERS_API AMovableObjects : public AActor, public IActivable
 {
@@ -55,13 +57,17 @@ public :
 	UPROPERTY(EditAnywhere, BlueprintReadwrite)
 	UStaticMesh* MovableMesh;
 
-	UPROPERTY(EditAnywhere, Category = "Timeline")
+	UPROPERTY(EditAnywhere,Category = "Timeline")
 	UCurveFloat* MoveCurve;
-
+	
 	FTimeline Timeline;
 
 	FOnTimelineFloat TimelineProgress;
+	
 	FOnTimelineEvent TimelineFinished;
+	
+	UPROPERTY(BlueprintAssignable, Category = "MovableObjects|Events")
+	FOnMovableMovementFinished OnMovementFinished;
 
 	FVector StartPosition;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Transform",
@@ -77,6 +83,7 @@ public :
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsMovingForward;
 
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float CurrentTimelineProgress;
 	float LastReverseTime;
 	float ReverseCooldown;
