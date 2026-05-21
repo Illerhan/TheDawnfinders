@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{21CDB3D2-5545-9E34-C103-9F49285F5178}",
+    "Hash": "{406B0265-555B-14BB-4178-FB1C744E898F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -334,6 +334,14 @@
       "Location": "Memory",
       "ShortName": "Trap_Bone\\BoneMovement 6102_63_2.wav",
       "CachePath": "08/{0829947B-9B29-AF20-8B2B-53B55344F122}.wem"
+     },
+     {
+      "Id": "92003858",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Confirm.wav",
+      "CachePath": "BB/{BBE8FF7F-451D-0900-F923-7A8D6382E003}.wem"
      },
      {
       "Id": "92240631",
@@ -686,6 +694,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 11.wav",
       "CachePath": "CC/{CC0CE62B-670F-9EF0-8428-69B3619A552D}.wem"
+     },
+     {
+      "Id": "206468000",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone_1.wav",
+      "CachePath": "D6/{D693F61A-5981-3AEC-2A17-5FD2DD77C57D}.wem"
      },
      {
       "Id": "212425953",
@@ -1664,6 +1680,14 @@
       "CachePath": "55/{551343DE-F333-CA05-3821-4B88FFE99CAF}.wem"
      },
      {
+      "Id": "492083971",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone.wav",
+      "CachePath": "A9/{A97A49AF-9702-C171-FA6F-C50DEC7AE341}.wem"
+     },
+     {
       "Id": "492429887",
       "Language": "SFX",
       "Streaming": "false",
@@ -2248,6 +2272,14 @@
       "CachePath": "F1/{F1FA4EFB-DD86-7907-FB55-DC16E29D1A0D}.wem"
      },
      {
+      "Id": "652612267",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Text_Bubble.wav",
+      "CachePath": "7D/{7D481258-ECB3-2646-4A4E-CD57FCE5F2FC}.wem"
+     },
+     {
       "Id": "653504529",
       "Language": "SFX",
       "Streaming": "false",
@@ -2680,6 +2712,14 @@
       "CachePath": "D0/{D076C25D-8BE5-2AA6-FC11-D5EEADBB8B17}.wem"
      },
      {
+      "Id": "773648963",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Back.wav",
+      "CachePath": "0D/{0D841101-7F67-ECE5-14DD-EC348614445B}.wem"
+     },
+     {
       "Id": "773821258",
       "Language": "SFX",
       "Streaming": "false",
@@ -2854,6 +2894,14 @@
       "Location": "Memory",
       "ShortName": "SF_FollowerChain_02.wav",
       "CachePath": "26/{266FEF86-516A-DAC4-7D23-DBF87B084D92}.wem"
+     },
+     {
+      "Id": "829933492",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Roll_Over.wav",
+      "CachePath": "85/{85C6DD40-7126-E3D2-84BD-429D1B4FB58F}.wem"
      },
      {
       "Id": "832841224",
@@ -3398,6 +3446,14 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-09.wav",
       "CachePath": "DE/{DEBD4CF6-4C7F-09FE-2662-4770C632FD9B}.wem"
+     },
+     {
+      "Id": "976818616",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Tutorial_Bubble.wav",
+      "CachePath": "40/{40126274-5BE8-E5CB-FDF3-BCFB0F5C9213}.wem"
      },
      {
       "Id": "977433235",
@@ -7937,6 +7993,104 @@
       ]
      },
      {
+      "Id": "1386224142",
+      "Name": "Play_UI_Back",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Back",
+      "GUID": "{11D9B2AC-EE51-46C2-87B3-9E650561FAA7}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9216667",
+      "DurationMax": "0.9216667",
+      "MediaRefs": [
+       {
+        "Id": "773648963"
+       }
+      ]
+     },
+     {
+      "Id": "3022734157",
+      "Name": "Play_UI_Confirm",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Confirm",
+      "GUID": "{011D3970-C1C2-417E-A546-A91CE8543A5C}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.75133336",
+      "DurationMax": "0.75133336",
+      "MediaRefs": [
+       {
+        "Id": "92003858"
+       }
+      ]
+     },
+     {
+      "Id": "2104164593",
+      "Name": "Play_UI_NewZone",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_NewZone",
+      "GUID": "{2734FF1A-B6F1-4F14-9DA5-7E8E6E96BF32}",
+      "DurationType": "OneShot",
+      "DurationMin": "7.88",
+      "DurationMax": "7.88",
+      "MediaRefs": [
+       {
+        "Id": "206468000"
+       }
+      ]
+     },
+     {
+      "Id": "1847440691",
+      "Name": "Play_UI_Roll_Over",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Roll_Over",
+      "GUID": "{DD4F9A72-F3C2-413E-B809-F44632A14A4D}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.8236667",
+      "DurationMax": "0.8236667",
+      "MediaRefs": [
+       {
+        "Id": "829933492"
+       }
+      ]
+     },
+     {
+      "Id": "2210829115",
+      "Name": "Play_UI_Screen_Transition",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Screen_Transition",
+      "GUID": "{D1A3646A-0FD7-494B-A24B-A4A744569D05}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.68",
+      "DurationMax": "3.68",
+      "MediaRefs": [
+       {
+        "Id": "492083971"
+       }
+      ]
+     },
+     {
+      "Id": "2355043",
+      "Name": "Play_UI_Text_Bubble",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Text_Bubble",
+      "GUID": "{344B34DC-8C14-4CB6-994C-D8719F5381D5}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.8373334",
+      "DurationMax": "2.8373334",
+      "MediaRefs": [
+       {
+        "Id": "652612267"
+       }
+      ]
+     },
+     {
+      "Id": "349953906",
+      "Name": "Play_UI_Tutorial_Bubble",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Tutorial_Bubble",
+      "GUID": "{72ADBCB1-4B9E-40A3-AEC0-0B5F9126F8CA}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.528",
+      "DurationMax": "3.528",
+      "MediaRefs": [
+       {
+        "Id": "976818616"
+       }
+      ]
+     },
+     {
       "Id": "3297631861",
       "Name": "Play_VivianiteMining",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Vivianite\\Play_VivianiteMining",
@@ -8336,6 +8490,6 @@
     ]
    }
   ],
-  "FileHash": "{A3099C8B-E962-793C-B9A7-FAFABBF35B0D}"
+  "FileHash": "{F976683A-C848-4AB2-0EED-B36EEFF24079}"
  }
 }
