@@ -100,4 +100,3 @@ void AItem::Interact_Implementation(AActor* Interactor)
 void AItem::DestroyWithDelay_Implementation()
 {
 }
-

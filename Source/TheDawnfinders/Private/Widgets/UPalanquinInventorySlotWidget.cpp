@@ -26,3 +26,8 @@ void UPalanquinInventorySlotWidget::RevealSlotInstant_Implementation()
 {
 
 }
+
+void UPalanquinInventorySlotWidget::PlayAppearAnimation_Implementation(float Delay)
+{
+
+}
