@@ -8699,6 +8699,113 @@
 												</GroupingList>
 											</GroupingInfo>
 										</SwitchContainer>
+										<RandomSequenceContainer Name="Crawl" ID="{BD93E599-3EFC-4E67-872B-F90C16008E40}" ShortID="654960643">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="Crawl_01" ID="{5102CC99-A232-4B2C-A7E0-2C59D4A09A10}" ShortID="998742778">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Crawl_01" ID="{2934EA50-5680-4956-B6A5-01F0AB18A618}">
+															<Language>SFX</Language>
+															<AudioFile>Crawl_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="861486296"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Crawl_01" ID="{2934EA50-5680-4956-B6A5-01F0AB18A618}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Crawl_02" ID="{D9D912D4-32AD-4D1C-BC16-DBE2BC85C4B8}" ShortID="230235304">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Crawl_02" ID="{21A258BF-58DE-4C47-AFE5-3DCB9A4733F6}">
+															<Language>SFX</Language>
+															<AudioFile>Crawl_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="283024977"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Crawl_02" ID="{21A258BF-58DE-4C47-AFE5-3DCB9A4733F6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Crawl_03" ID="{67C0AF28-102C-47BE-8216-E5431D73624A}" ShortID="393622791">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Crawl_03" ID="{30E5CF55-6EB4-4F23-95E5-39093D4E8395}">
+															<Language>SFX</Language>
+															<AudioFile>Crawl_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="145738260"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Crawl_03" ID="{30E5CF55-6EB4-4F23-95E5-39093D4E8395}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="Crawl_04" ID="{1CD2DF7A-9E4C-44B7-BBD5-4FA56E17A48C}" ShortID="147587717">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Crawl_04" ID="{8F868FB4-F31A-4A9D-9962-10471D6437FF}">
+															<Language>SFX</Language>
+															<AudioFile>Crawl_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="929973476"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Crawl_04" ID="{8F868FB4-F31A-4A9D-9962-10471D6437FF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
@@ -16583,7 +16690,7 @@
 								<Property Name="BlendBehavior" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -16598,7 +16705,6 @@
 							<ChildrenList>
 								<Sound Name="AMB_EerieWhistle1" ID="{2B69A97D-F4A5-48D9-960F-BEE3F12F1BAB}" ShortID="598583198">
 									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>4</Value>
@@ -16615,6 +16721,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="AMB_EerieWhistle1" ID="{DCB7A6F4-CAE1-4C73-9DF2-237AD80082F7}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="1.71510443046911"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="3.18519394229978"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="8.33050723370712"/>
+												<Property Name="TrimEnd" Type="Real64" Value="13.2852540680778"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>AMB_EerieWhistle1.wav</AudioFile>
 											<MediaIDList>
@@ -16628,7 +16741,6 @@
 								</Sound>
 								<Sound Name="AMB_EerieWhistle2" ID="{09FA73F9-98CB-4DFC-A504-DEAB2823B62F}" ShortID="200001565">
 									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="OverrideEffect" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
@@ -16646,6 +16758,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="AMB_EerieWhistle2" ID="{1D5D4F15-600E-4C2D-9493-0BDBA724B9AE}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="1.1467462511205"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.61480594545539"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="8.86973120764629"/>
+												<Property Name="TrimEnd" Type="Real64" Value="12.7078210368858"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>AMB_EerieWhistle2.wav</AudioFile>
 											<MediaIDList>
@@ -16669,9 +16788,6 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="AMB_EerieWhistle" ID="{014E8739-0DB2-41A7-964B-6D7ADF646CD0}" ShortID="232672290">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16682,6 +16798,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="AMB_EerieWhistle" ID="{0426CA7A-1D85-4B92-8E19-072AF6F3A76E}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.48716419032896"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.62388004950962"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="2.70646713912953"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>AMB_EerieWhistle.wav</AudioFile>
 											<MediaIDList>
@@ -16704,6 +16826,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="AMB_EerieWhistle4" ID="{4CBE54DC-CDFD-4BC6-8054-6FD138CA2360}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.968597013558915"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="2.66364178728702"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="3.25556222006573"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>AMB_EerieWhistle4.wav</AudioFile>
 											<MediaIDList>
@@ -16748,6 +16876,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<BlendContainer Name="AMB_Hallucination" ID="{B485A05D-6D59-4A2E-9ECF-9A3A509E006E}" ShortID="924194466">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16768,6 +16903,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="ASSET LIST DAWNFINDERS_004_02-01" ID="{7BFB12D4-5681-4847-9DEA-02ED9E3C94B7}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.692537301638996"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="2.36417906421588"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="3.96417941843777"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>ASSET LIST DAWNFINDERS_004_02-01.wav</AudioFile>
 											<MediaIDList>
@@ -16790,6 +16931,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="ASSET LIST DAWNFINDERS_005_03-01" ID="{DB286329-456D-4EF3-A648-797A8ADB990E}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="2.33265674648"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="3.6521393505495"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="7.56346278404122"/>
+												<Property Name="TrimEnd" Type="Real64" Value="12.6057710219046"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>ASSET LIST DAWNFINDERS_005_03-01.wav</AudioFile>
 											<MediaIDList>
@@ -16812,6 +16960,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01" ID="{CA7A901F-A434-4B89-A06D-D00E2C19A610}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.994388019098148"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="2.94173122316536"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="4.41259762820506"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01.wav</AudioFile>
 											<MediaIDList>

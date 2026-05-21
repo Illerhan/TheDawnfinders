@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{406B0265-555B-14BB-4178-FB1C744E898F}",
+    "Hash": "{B4D22813-45BF-77B7-8627-5BE37F0EAA67}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -536,6 +536,14 @@
       "CachePath": "7C/{7C97718C-53E2-904C-208F-B3981DCED87A}.wem"
      },
      {
+      "Id": "145738260",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Crawl_03.wav",
+      "CachePath": "C7/{C7AEAE03-43F5-24E8-C369-68880A992BAD}.wem"
+     },
+     {
       "Id": "146682334",
       "Language": "SFX",
       "Streaming": "false",
@@ -989,7 +997,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ASSET LIST DAWNFINDERS_004_02-01.wav",
-      "CachePath": "E7/{E7AFBCC3-95E6-45F3-8224-ACCE60F8F4AD}.wem"
+      "CachePath": "B7/{B75E27E2-9846-F697-F515-D49B9B8CD859}.wem"
      },
      {
       "Id": "281091351",
@@ -1014,6 +1022,14 @@
       "Location": "Memory",
       "ShortName": "SandRun\\FootstepsSandRun 15.wav",
       "CachePath": "3F/{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem"
+     },
+     {
+      "Id": "283024977",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Crawl_02.wav",
+      "CachePath": "0B/{0B2A1574-0CA2-84DD-015C-F2BA40431647}.wem"
      },
      {
       "Id": "291662585",
@@ -1613,7 +1629,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle.wav",
-      "CachePath": "16/{160867BC-599B-0540-B4A0-D02256720EFA}.wem"
+      "CachePath": "2D/{2DBC7A68-9E63-C093-FA0A-CBEF5A8CC0C1}.wem"
      },
      {
       "Id": "473960840",
@@ -2093,7 +2109,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle4.wav",
-      "CachePath": "5F/{5F8C6E73-8C7C-EAD0-8C97-22A29AC06970}.wem"
+      "CachePath": "EB/{EBC295FA-2B08-6884-E541-CB927C0DE0E7}.wem"
      },
      {
       "Id": "596054051",
@@ -2237,7 +2253,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ASSET LIST DAWNFINDERS_005_03-01.wav",
-      "CachePath": "4A/{4AF6B211-8A28-D284-34FC-6160B15CB3A6}.wem"
+      "CachePath": "03/{03E2832E-913E-62D2-F56D-9952451A87D4}.wem"
      },
      {
       "Id": "645018631",
@@ -2437,7 +2453,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle1.wav",
-      "CachePath": "C8/{C8C8F57C-60A0-1CBF-D8EB-6EFDEC83944F}.wem"
+      "CachePath": "5B/{5B86737C-8BF5-0A2A-0017-9EC66D560FCA}.wem"
      },
      {
       "Id": "709417727",
@@ -2541,7 +2557,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle2.wav",
-      "CachePath": "98/{98DE1C4A-F3C8-A077-C7A6-566EF3F4020A}.wem"
+      "CachePath": "08/{08BE0BBB-7B36-7258-C318-780A3FCD5474}.wem"
      },
      {
       "Id": "730434085",
@@ -3016,6 +3032,14 @@
       "CachePath": "3F/{3F14F7A2-8002-45F5-96A3-CF1FDA525E74}.wem"
      },
      {
+      "Id": "861486296",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Crawl_01.wav",
+      "CachePath": "7E/{7E3CC090-74DF-21DC-07C5-2F116A30D84C}.wem"
+     },
+     {
       "Id": "865539257",
       "Language": "SFX",
       "Streaming": "false",
@@ -3213,7 +3237,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01.wav",
-      "CachePath": "23/{233E9151-20FA-CFF4-198E-8B2A44CB4141}.wem"
+      "CachePath": "37/{37C30FFD-F650-0728-A00D-952C9E341482}.wem"
      },
      {
       "Id": "928559674",
@@ -3230,6 +3254,14 @@
       "Location": "Memory",
       "ShortName": "SF_FollowerChain_04.wav",
       "CachePath": "FA/{FA2C911F-4616-801A-DF1B-122A2345D8BF}.wem"
+     },
+     {
+      "Id": "929973476",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Crawl_04.wav",
+      "CachePath": "0E/{0E0A9CBD-62D5-5B51-28D4-FEEB0E9C3F42}.wem"
      },
      {
       "Id": "931734252",
@@ -3929,8 +3961,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Ambiance\\Play_AMB_Hallucination",
       "GUID": "{1E71C3D5-B48A-4C84-BACA-A963DC3B5DFC}",
       "DurationType": "OneShot",
-      "DurationMin": "22.4",
-      "DurationMax": "22.4",
+      "DurationMin": "5.0423083",
+      "DurationMax": "5.0423083",
       "MediaRefs": [
        {
         "Id": "280188920"
@@ -4620,6 +4652,29 @@
        },
        {
         "Id": "824635043"
+       }
+      ]
+     },
+     {
+      "Id": "370706003",
+      "Name": "Play_Crawl",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_Crawl",
+      "GUID": "{B3482ABD-15C1-486A-8945-972D0F03749D}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0817233",
+      "DurationMax": "1.3894331",
+      "MediaRefs": [
+       {
+        "Id": "145738260"
+       },
+       {
+        "Id": "283024977"
+       },
+       {
+        "Id": "861486296"
+       },
+       {
+        "Id": "929973476"
        }
       ]
      },
@@ -8490,6 +8545,6 @@
     ]
    }
   ],
-  "FileHash": "{F976683A-C848-4AB2-0EED-B36EEFF24079}"
+  "FileHash": "{3852E063-2C47-22FD-D493-439A1064B4F6}"
  }
 }
