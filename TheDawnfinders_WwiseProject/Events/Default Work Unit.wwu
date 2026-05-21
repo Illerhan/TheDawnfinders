@@ -272,6 +272,28 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Player_ThrowItem" ID="{8D92AA63-87AA-4777-B3D6-82DC6342392D}">
+									<ChildrenList>
+										<Action Name="" ID="{68662FDC-C60C-417D-A6B7-C7017A4B5D4D}" ShortID="859476436">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_ThrowItem" ID="{E875EBC1-54D0-4169-8FF2-6AB746F0B2ED}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Player_Grabitem" ID="{74A5A97E-2DEE-4BC8-8200-3E461C42D47A}">
+									<ChildrenList>
+										<Action Name="" ID="{609E1E1F-DD29-4B1E-9486-59A733F67B8C}" ShortID="121705175">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_Grabitem" ID="{09A7B2A4-4713-4DE7-81F7-DD25CD4F1502}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Etats" ID="{77E6FEA5-9734-4CC5-B039-704790C7EF7F}" ShortID="702691761">

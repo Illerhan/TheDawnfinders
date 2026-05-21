@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{BBC36603-C66F-B4CB-4AF2-825D1088D829}",
+    "Hash": "{958E5919-8A55-CCA4-3381-5C3BE08D8EA9}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -30,6 +30,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 21.wav",
       "CachePath": "BC/{BC83F5F1-E0AA-FEB3-B0B1-2EF6B1EE0CF7}.wem"
+     },
+     {
+      "Id": "8086823",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_GrabItem 3.wav",
+      "CachePath": "77/{779277AF-149C-1276-8030-AA56D9059E9D}.wem"
      },
      {
       "Id": "9463951",
@@ -54,6 +62,14 @@
       "Location": "Memory",
       "ShortName": "Palanquin_Start\\Palanquin_Start 1.wav",
       "CachePath": "53/{533FD854-14B0-90B3-2D44-94765E67ABE9}.wem"
+     },
+     {
+      "Id": "11728974",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Throwitem 1.wav",
+      "CachePath": "39/{39DE6F5C-160C-0B7D-F02B-AF72A3B25B94}.wem"
      },
      {
       "Id": "12299481",
@@ -93,7 +109,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers2.wav",
-      "CachePath": "9B/{9B4CFFA3-6192-993B-1C38-4D2582223FF9}.wem"
+      "CachePath": "28/{28BD4187-B5CA-8C8E-B3E1-713B24DE07B7}.wem"
      },
      {
       "Id": "29652185",
@@ -133,7 +149,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers4.wav",
-      "CachePath": "42/{42BF33EE-ECB6-3B7B-6641-3B718BC1BA4C}.wem"
+      "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
      },
      {
       "Id": "38165049",
@@ -552,6 +568,14 @@
       "CachePath": "4E/{4EE78E8A-5450-A3A0-CE21-BC3100F54CCA}.wem"
      },
      {
+      "Id": "148822612",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Throwitem 3.wav",
+      "CachePath": "B7/{B734A2CC-C83B-5022-787B-E1F636B44CBB}.wem"
+     },
+     {
       "Id": "153202755",
       "Language": "SFX",
       "Streaming": "false",
@@ -709,7 +733,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone_1.wav",
-      "CachePath": "78/{7816C41E-8119-DEF5-6DAF-A036E9E375BB}.wem"
+      "CachePath": "D6/{D693F61A-5981-3AEC-2A17-5FD2DD77C57D}.wem"
      },
      {
       "Id": "212425953",
@@ -992,12 +1016,20 @@
       "CachePath": "A1/{A185CD04-8AD2-D611-3B56-40316516AF0D}.wem"
      },
      {
+      "Id": "280120099",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Throwitem 2.wav",
+      "CachePath": "5F/{5FEC14DA-6FFB-62A5-F4D8-D876C4169ECB}.wem"
+     },
+     {
       "Id": "280188920",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ASSET LIST DAWNFINDERS_004_02-01.wav",
-      "CachePath": "B7/{B75E27E2-9846-F697-F515-D49B9B8CD859}.wem"
+      "CachePath": "4F/{4F8EB6BE-FA1A-758B-D226-14EC07299924}.wem"
      },
      {
       "Id": "281091351",
@@ -1445,7 +1477,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whistpers1.wav",
-      "CachePath": "73/{735CD31C-1F48-4E1B-FF5A-C507723CF9F7}.wem"
+      "CachePath": "C2/{C2A1C820-3F2E-2DB5-8148-515E14DF88DB}.wem"
      },
      {
       "Id": "423956364",
@@ -1629,7 +1661,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle.wav",
-      "CachePath": "2D/{2DBC7A68-9E63-C093-FA0A-CBEF5A8CC0C1}.wem"
+      "CachePath": "A4/{A47F80CF-9266-BEFE-942D-D46E57ADB789}.wem"
      },
      {
       "Id": "473960840",
@@ -1957,7 +1989,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers3.wav",
-      "CachePath": "B2/{B2B26FD0-6D2E-252B-A67C-3452B81CEE17}.wem"
+      "CachePath": "F4/{F49845C4-BDD8-49E3-DD83-9C24C5C95B06}.wem"
      },
      {
       "Id": "566672699",
@@ -2109,7 +2141,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle4.wav",
-      "CachePath": "EB/{EBC295FA-2B08-6884-E541-CB927C0DE0E7}.wem"
+      "CachePath": "08/{08C3C719-C6A9-F2D8-4D1B-97135C48ADF3}.wem"
      },
      {
       "Id": "596054051",
@@ -2253,7 +2285,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ASSET LIST DAWNFINDERS_005_03-01.wav",
-      "CachePath": "03/{03E2832E-913E-62D2-F56D-9952451A87D4}.wem"
+      "CachePath": "71/{719FBADE-4667-65E7-0BE3-C59CD9677B02}.wem"
      },
      {
       "Id": "645018631",
@@ -2432,6 +2464,14 @@
       "CachePath": "B8/{B86EA2FC-B197-AB93-140E-C29BF678655E}.wem"
      },
      {
+      "Id": "699248942",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_GrabItem 2.wav",
+      "CachePath": "69/{69345B42-7413-8505-FD64-E808CE9FB2F0}.wem"
+     },
+     {
       "Id": "705361011",
       "Language": "SFX",
       "Streaming": "false",
@@ -2453,7 +2493,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle1.wav",
-      "CachePath": "5B/{5B86737C-8BF5-0A2A-0017-9EC66D560FCA}.wem"
+      "CachePath": "F1/{F1F03529-4F90-B2A5-D660-CA3A67B9A1D8}.wem"
      },
      {
       "Id": "709417727",
@@ -2557,7 +2597,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_EerieWhistle2.wav",
-      "CachePath": "08/{08BE0BBB-7B36-7258-C318-780A3FCD5474}.wem"
+      "CachePath": "18/{18F34D36-7F9C-7AED-1449-7F57734282CA}.wem"
      },
      {
       "Id": "730434085",
@@ -2742,6 +2782,14 @@
       "Location": "Memory",
       "ShortName": "Teeth Clack Steady-Neoverb_01-03.wav",
       "CachePath": "8A/{8ACA0F31-F1D2-15C2-D45F-E0C69463FA92}.wem"
+     },
+     {
+      "Id": "776504519",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_GrabItem 1.wav",
+      "CachePath": "DB/{DB98AAE5-BAE7-38D8-22BE-91C6727387DD}.wem"
      },
      {
       "Id": "782318759",
@@ -3192,6 +3240,14 @@
       "CachePath": "54/{54795D02-51F3-016E-F93B-2CBF5E3C46C1}.wem"
      },
      {
+      "Id": "908425758",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_Throwitem 4.wav",
+      "CachePath": "95/{95825569-FF03-FC3E-902F-F158941042C2}.wem"
+     },
+     {
       "Id": "909385748",
       "Language": "SFX",
       "Streaming": "false",
@@ -3237,7 +3293,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01.wav",
-      "CachePath": "37/{37C30FFD-F650-0728-A00D-952C9E341482}.wem"
+      "CachePath": "94/{948AA6C1-CCDA-2DB8-EDF4-A9434127C5F8}.wem"
      },
      {
       "Id": "928559674",
@@ -3350,6 +3406,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 12.wav",
       "CachePath": "2E/{2ED59444-E14A-7714-5878-339F6ADF6BA6}.wem"
+     },
+     {
+      "Id": "957472195",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Player_GrabItem 4.wav",
+      "CachePath": "D0/{D0F9F1F2-E026-5B2F-1244-E027A51EFF13}.wem"
      },
      {
       "Id": "958557321",
@@ -3573,7 +3637,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "CrazyStatus\\CrazyStatus.wav",
-      "CachePath": "B3/{B3B17627-61B9-2932-2014-86F4EF8935FF}.wem"
+      "CachePath": "BF/{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem"
      },
      {
       "Id": "991140081",
@@ -3773,7 +3837,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SUB1.wav",
-      "CachePath": "5B/{5BB0953C-107C-4E64-ABB2-CE091F0B060D}.wem"
+      "CachePath": "99/{99C6697F-DEB5-5645-68E1-5635AA37243B}.wem"
      },
      {
       "Id": "1052986331",
@@ -4684,26 +4748,11 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_CrazyStatus",
       "GUID": "{8EFE2D02-E24D-4788-80B3-D994A760EDD9}",
       "DurationType": "OneShot",
-      "DurationMin": "7.0051475",
-      "DurationMax": "7.0051475",
+      "DurationMin": "18.990833",
+      "DurationMax": "18.990833",
       "MediaRefs": [
        {
-        "Id": "25974615"
-       },
-       {
-        "Id": "37215428"
-       },
-       {
-        "Id": "422035676"
-       },
-       {
-        "Id": "559741217"
-       },
-       {
         "Id": "990610795"
-       },
-       {
-        "Id": "1050105765"
        }
       ]
      },
@@ -4737,8 +4786,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DamagesMadness",
       "GUID": "{CCF1E50A-BD71-4958-88A2-1D4D5AEBB490}",
       "DurationType": "OneShot",
-      "DurationMin": "6.3987265",
-      "DurationMax": "6.3987265",
+      "DurationMin": "25.162666",
+      "DurationMax": "25.162666",
       "MediaRefs": [
        {
         "Id": "25974615"
@@ -5689,6 +5738,29 @@
       ]
      },
      {
+      "Id": "1759732491",
+      "Name": "Play_Player_Grabitem",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_Grabitem",
+      "GUID": "{74A5A97E-2DEE-4BC8-8200-3E461C42D47A}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7",
+      "DurationMax": "0.9",
+      "MediaRefs": [
+       {
+        "Id": "8086823"
+       },
+       {
+        "Id": "699248942"
+       },
+       {
+        "Id": "776504519"
+       },
+       {
+        "Id": "957472195"
+       }
+      ]
+     },
+     {
       "Id": "1864892471",
       "Name": "Play_Player_Hit",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_Hit",
@@ -5923,61 +5995,46 @@
       }
      },
      {
+      "Id": "3575087421",
+      "Name": "Play_Player_ThrowItem",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Actions\\Play_Player_ThrowItem",
+      "GUID": "{8D92AA63-87AA-4777-B3D6-82DC6342392D}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4",
+      "DurationMax": "0.6",
+      "MediaRefs": [
+       {
+        "Id": "11728974"
+       },
+       {
+        "Id": "148822612"
+       },
+       {
+        "Id": "280120099"
+       },
+       {
+        "Id": "908425758"
+       }
+      ]
+     },
+     {
       "Id": "3459798784",
       "Name": "Play_PlayerDying",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PlayerDying",
       "GUID": "{A09AE17A-043E-484B-9250-F153AA03693E}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
-      "DurationMin": "1.32",
-      "DurationMax": "3.6095417",
+      "DurationMin": "0.7786667",
+      "DurationMax": "1.6746666",
       "MediaRefs": [
        {
-        "Id": "34068047"
-       },
-       {
-        "Id": "70981290"
-       },
-       {
-        "Id": "101298648"
-       },
-       {
-        "Id": "105445102"
-       },
-       {
-        "Id": "115861136"
-       },
-       {
-        "Id": "216827798"
-       },
-       {
         "Id": "231986240"
-       },
-       {
-        "Id": "272892538"
-       },
-       {
-        "Id": "281151790"
-       },
-       {
-        "Id": "331545351"
-       },
-       {
-        "Id": "376331356"
        },
        {
         "Id": "386978507"
        },
        {
-        "Id": "436998747"
-       },
-       {
         "Id": "438106016"
-       },
-       {
-        "Id": "458334224"
-       },
-       {
-        "Id": "475726858"
        },
        {
         "Id": "567161896"
@@ -5989,28 +6046,10 @@
         "Id": "596878634"
        },
        {
-        "Id": "652194251"
-       },
-       {
-        "Id": "720680225"
-       },
-       {
         "Id": "754407728"
        },
        {
-        "Id": "761029887"
-       },
-       {
-        "Id": "845459241"
-       },
-       {
         "Id": "925504207"
-       },
-       {
-        "Id": "1012652963"
-       },
-       {
-        "Id": "1046934722"
        }
       ]
      },
@@ -8152,8 +8191,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_NewZone",
       "GUID": "{2734FF1A-B6F1-4F14-9DA5-7E8E6E96BF32}",
       "DurationType": "OneShot",
-      "DurationMin": "6.5946693",
-      "DurationMax": "6.5946693",
+      "DurationMin": "7.88",
+      "DurationMax": "7.88",
       "MediaRefs": [
        {
         "Id": "206468000"
@@ -8616,6 +8655,6 @@
     ]
    }
   ],
-  "FileHash": "{FD1E7A7E-4755-92C4-49A8-A9B47BB98969}"
+  "FileHash": "{7992F2C4-6743-3AEB-0138-4F84250900CF}"
  }
 }
