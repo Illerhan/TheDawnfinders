@@ -8883,6 +8883,13 @@
 									</ChildrenList>
 								</Folder>
 								<RandomSequenceContainer Name="Player_ThrowItem" ID="{E875EBC1-54D0-4169-8FF2-6AB746F0B2ED}" ShortID="535391043">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-20</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
