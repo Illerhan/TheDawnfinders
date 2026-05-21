@@ -679,6 +679,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="CrazyStatus" ID="{BC201B9F-7EE8-43F8-8D51-55C420E8C596}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="1.88288645551149"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="3.30011281987497"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="6.03333509400455"/>
+												<Property Name="TrimEnd" Type="Real64" Value="13.0384826030067"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>CrazyStatus\CrazyStatus.wav</AudioFile>
 											<MediaIDList>
@@ -1411,6 +1418,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<BlendContainer Name="DamagesMadness" ID="{4CF4481B-DFAD-4032-9A96-69FC8742ACBC}" ShortID="298567007">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1431,6 +1445,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="SUB1" ID="{29E09857-5B29-49BC-9651-DD0346CFCC5C}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.04620894084353"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="3.29958204419882"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="4.23848784979609"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>SUB1.wav</AudioFile>
 													<MediaIDList>
@@ -1443,6 +1463,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Whispers2" ID="{B40C9976-9570-48DC-A02A-884A44021037}" ShortID="688147498">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1453,6 +1480,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Whispers2" ID="{537C84AE-68E5-42BE-A157-C499205AD184}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.692537301638996"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.00597011509226"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.79701524218008"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Whispers2.wav</AudioFile>
 													<MediaIDList>
@@ -1465,6 +1498,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Whispers3" ID="{5BB854D7-FA12-49C5-A547-732A738C59B3}" ShortID="1036259212">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1475,6 +1515,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Whispers3" ID="{6ADB69CB-0088-4C10-8C40-D26A265DD557}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.3194826040695"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="3.58145278247435"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.29110427385776"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Whispers3.wav</AudioFile>
 													<MediaIDList>
@@ -1482,6 +1528,9 @@
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
+											<PositioningInfo>
+												<Panner Name="" ID="{98BD89BD-112B-47A3-BF79-D78A1CD3D9DF}"/>
+											</PositioningInfo>
 											<ActiveSourceList>
 												<ActiveSource Name="Whispers3" ID="{6ADB69CB-0088-4C10-8C40-D26A265DD557}" Platform="Linked"/>
 											</ActiveSourceList>
@@ -1497,6 +1546,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Whispers4" ID="{E5718ACF-5632-42F1-945D-C73826D8DD13}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.704358180194521"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.90591036993812"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.58394094562327"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Whispers4.wav</AudioFile>
 													<MediaIDList>
@@ -1509,6 +1564,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Whistpers1" ID="{73628C40-5D8A-4CB7-A6BE-119BC22C6DC9}" ShortID="412067513">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -1519,6 +1581,18 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Whistpers1" ID="{538C05CB-3F54-49CE-96FA-70A28BF982DB}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.824835826084812"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="4.57408958101578"/>
+														<Property Name="FadeOutShape" Type="int16" Value="4"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="6.39872626091389"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Whistpers1.wav</AudioFile>
 													<MediaIDList>

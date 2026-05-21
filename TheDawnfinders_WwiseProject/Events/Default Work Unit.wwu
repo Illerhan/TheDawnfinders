@@ -329,6 +329,13 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{4796660A-E8EE-4352-B4FD-7F2C012B124F}" ShortID="593697781">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DamagesMadness" ID="{4CF4481B-DFAD-4032-9A96-69FC8742ACBC}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_OutOfBreath" ID="{8FA3D2DA-3815-49B7-923B-FF7E075F5738}">
