@@ -165,6 +165,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Crawl" ID="{B3482ABD-15C1-486A-8945-972D0F03749D}">
+									<ChildrenList>
+										<Action Name="" ID="{62C681F8-4FE7-49B6-B82D-2C4CC7FAA795}" ShortID="539293851">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Crawl" ID="{BD93E599-3EFC-4E67-872B-F90C16008E40}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Feedbakcs" ID="{E7F89F8F-5474-47D9-B261-E0B34D39EFC9}" ShortID="537661421">
@@ -256,6 +267,28 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="Roll" ID="{B0F38656-DF7D-4FF1-880A-F96910D7FDA6}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Player_ThrowItem" ID="{8D92AA63-87AA-4777-B3D6-82DC6342392D}">
+									<ChildrenList>
+										<Action Name="" ID="{68662FDC-C60C-417D-A6B7-C7017A4B5D4D}" ShortID="859476436">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_ThrowItem" ID="{E875EBC1-54D0-4169-8FF2-6AB746F0B2ED}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Player_Grabitem" ID="{74A5A97E-2DEE-4BC8-8200-3E461C42D47A}">
+									<ChildrenList>
+										<Action Name="" ID="{609E1E1F-DD29-4B1E-9486-59A733F67B8C}" ShortID="121705175">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Player_Grabitem" ID="{09A7B2A4-4713-4DE7-81F7-DD25CD4F1502}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
