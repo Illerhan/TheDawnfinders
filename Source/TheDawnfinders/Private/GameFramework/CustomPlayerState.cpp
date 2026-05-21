@@ -272,8 +272,6 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 		NewPS->StashItems = StashItems;
 		NewPS->InventoryItems = InventoryItems;
 	}
-	
-	
 }
 
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
