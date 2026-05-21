@@ -293,10 +293,22 @@ void UHealthComponent::ChangeCurrentMaxHealth(float reduction)
 	CurrentMaxHealth = FMath::Clamp(CurrentMaxHealth, 0, MaxHealth);
 
 
+	if (OwnerController && OwnerController->IsLocalPlayerController())
+	{
+		if (!WorldHealthBar) {
+			WorldHealthBar = IPlayerInterface::Execute_GetPlayerWidget(GetOwner())->GetHealthBar();
+			WorldHealthBar->Setup(3);
+		}
+		WorldHealthBar->ActualiseCurse((float)CurrentMaxHealth / (float)MaxHealth);
+	}
+
 	if (!GetOwner()->HasAuthority())
 	{
 		Server_ChangeCurrentMaxHealth(reduction);
 		LocalChangeHealth();
+
+
+
 		return;
 	}
 
