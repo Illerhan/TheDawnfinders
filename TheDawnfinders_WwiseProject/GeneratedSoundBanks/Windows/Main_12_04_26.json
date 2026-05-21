@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{958E5919-8A55-CCA4-3381-5C3BE08D8EA9}",
+    "Hash": "{AD3A91B7-FD45-EA6D-6706-273AA0FF067F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -37,7 +37,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 3.wav",
-      "CachePath": "77/{779277AF-149C-1276-8030-AA56D9059E9D}.wem"
+      "CachePath": "B2/{B211D1E4-E6CC-21EF-4E93-C2D2B6A227CB}.wem"
      },
      {
       "Id": "9463951",
@@ -109,7 +109,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers2.wav",
-      "CachePath": "28/{28BD4187-B5CA-8C8E-B3E1-713B24DE07B7}.wem"
+      "CachePath": "20/{20EF519D-883E-4562-7981-226EEDCEA892}.wem"
      },
      {
       "Id": "29652185",
@@ -149,7 +149,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers4.wav",
-      "CachePath": "EE/{EE4C4B6B-3CF1-D319-8269-3875E789E442}.wem"
+      "CachePath": "7D/{7DAA18F7-A351-6AF4-BEEF-8E1072A099C1}.wem"
      },
      {
       "Id": "38165049",
@@ -733,7 +733,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone_1.wav",
-      "CachePath": "D6/{D693F61A-5981-3AEC-2A17-5FD2DD77C57D}.wem"
+      "CachePath": "C9/{C9A6CAEF-76E2-05FE-C135-6E852F64B892}.wem"
      },
      {
       "Id": "212425953",
@@ -1477,7 +1477,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whistpers1.wav",
-      "CachePath": "C2/{C2A1C820-3F2E-2DB5-8148-515E14DF88DB}.wem"
+      "CachePath": "8C/{8CC840BD-B7F7-104C-7AB4-916050934A4B}.wem"
      },
      {
       "Id": "423956364",
@@ -1989,7 +1989,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Whispers3.wav",
-      "CachePath": "F4/{F49845C4-BDD8-49E3-DD83-9C24C5C95B06}.wem"
+      "CachePath": "98/{981EEB2B-CD43-18BD-70E3-408DDCC2AF6F}.wem"
      },
      {
       "Id": "566672699",
@@ -2469,7 +2469,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 2.wav",
-      "CachePath": "69/{69345B42-7413-8505-FD64-E808CE9FB2F0}.wem"
+      "CachePath": "9C/{9C4F6651-3C42-3829-0EE9-B577224F08D9}.wem"
      },
      {
       "Id": "705361011",
@@ -2789,7 +2789,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 1.wav",
-      "CachePath": "DB/{DB98AAE5-BAE7-38D8-22BE-91C6727387DD}.wem"
+      "CachePath": "62/{6245F8CE-6C17-FF0F-1AA3-853B8CE92686}.wem"
      },
      {
       "Id": "782318759",
@@ -3413,7 +3413,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 4.wav",
-      "CachePath": "D0/{D0F9F1F2-E026-5B2F-1244-E027A51EFF13}.wem"
+      "CachePath": "9C/{9CAA4C87-7693-E660-A31A-ADF497DAD5D8}.wem"
      },
      {
       "Id": "958557321",
@@ -3637,7 +3637,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "CrazyStatus\\CrazyStatus.wav",
-      "CachePath": "BF/{BFFADFE0-34AD-99D4-0FAA-479E74DEDAAE}.wem"
+      "CachePath": "9C/{9C40686B-49E1-0BE5-766B-733CB3C637EA}.wem"
      },
      {
       "Id": "991140081",
@@ -3837,7 +3837,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SUB1.wav",
-      "CachePath": "99/{99C6697F-DEB5-5645-68E1-5635AA37243B}.wem"
+      "CachePath": "66/{66950664-2AE7-6DE7-6FC7-5C0E0048F9CC}.wem"
      },
      {
       "Id": "1052986331",
@@ -4748,11 +4748,26 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_CrazyStatus",
       "GUID": "{8EFE2D02-E24D-4788-80B3-D994A760EDD9}",
       "DurationType": "OneShot",
-      "DurationMin": "18.990833",
-      "DurationMax": "18.990833",
+      "DurationMin": "7.0051475",
+      "DurationMax": "7.0051475",
       "MediaRefs": [
        {
+        "Id": "25974615"
+       },
+       {
+        "Id": "37215428"
+       },
+       {
+        "Id": "422035676"
+       },
+       {
+        "Id": "559741217"
+       },
+       {
         "Id": "990610795"
+       },
+       {
+        "Id": "1050105765"
        }
       ]
      },
@@ -4786,8 +4801,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_DamagesMadness",
       "GUID": "{CCF1E50A-BD71-4958-88A2-1D4D5AEBB490}",
       "DurationType": "OneShot",
-      "DurationMin": "25.162666",
-      "DurationMax": "25.162666",
+      "DurationMin": "6.3987265",
+      "DurationMax": "6.3987265",
       "MediaRefs": [
        {
         "Id": "25974615"
@@ -8191,8 +8206,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_NewZone",
       "GUID": "{2734FF1A-B6F1-4F14-9DA5-7E8E6E96BF32}",
       "DurationType": "OneShot",
-      "DurationMin": "7.88",
-      "DurationMax": "7.88",
+      "DurationMin": "6.645075",
+      "DurationMax": "6.645075",
       "MediaRefs": [
        {
         "Id": "206468000"
@@ -8655,6 +8670,6 @@
     ]
    }
   ],
-  "FileHash": "{7992F2C4-6743-3AEB-0138-4F84250900CF}"
+  "FileHash": "{FD6AF43A-E65D-88F1-B0E4-4E8A140C4CE5}"
  }
 }
