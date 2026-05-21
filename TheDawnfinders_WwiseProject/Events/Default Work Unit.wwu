@@ -719,6 +719,17 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Event Name="Play_Giant_Chain" ID="{DE3B8273-CD51-415A-A0DE-5FF45660A208}">
+									<ChildrenList>
+										<Action Name="" ID="{05E17516-2050-418B-9BCD-D89341D27B03}" ShortID="815440956">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Giant_Chain" ID="{60FC0B03-7058-44CB-9E54-80FB0E376D6A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
