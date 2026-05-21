@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{AD3A91B7-FD45-EA6D-6706-273AA0FF067F}",
+    "Hash": "{1D8057FC-2099-57DD-AC13-4A5148477AC9}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -37,7 +37,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 3.wav",
-      "CachePath": "B2/{B211D1E4-E6CC-21EF-4E93-C2D2B6A227CB}.wem"
+      "CachePath": "09/{093713CD-FCAE-46D3-5440-892E1D6E19BD}.wem"
      },
      {
       "Id": "9463951",
@@ -512,6 +512,14 @@
       "CachePath": "21/{21CDD7EB-586A-E3D3-66D5-9B2741F478DC}.wem"
      },
      {
+      "Id": "123438908",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GiantChain.wav",
+      "CachePath": "07/{0721C3B1-9308-C2E0-A6EF-AD4F45EECEE5}.wem"
+     },
+     {
       "Id": "125951352",
       "Language": "SFX",
       "Streaming": "false",
@@ -733,7 +741,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone_1.wav",
-      "CachePath": "C9/{C9A6CAEF-76E2-05FE-C135-6E852F64B892}.wem"
+      "CachePath": "4B/{4BA3E7E7-2606-CF65-368C-F811E605C26B}.wem"
      },
      {
       "Id": "212425953",
@@ -2469,7 +2477,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 2.wav",
-      "CachePath": "9C/{9C4F6651-3C42-3829-0EE9-B577224F08D9}.wem"
+      "CachePath": "55/{55C4B016-B088-47F9-7AAB-E221B059C002}.wem"
      },
      {
       "Id": "705361011",
@@ -2789,7 +2797,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 1.wav",
-      "CachePath": "62/{6245F8CE-6C17-FF0F-1AA3-853B8CE92686}.wem"
+      "CachePath": "91/{911B078C-1AFE-75E1-A38F-CA0EEA550438}.wem"
      },
      {
       "Id": "782318759",
@@ -3413,7 +3421,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Player_GrabItem 4.wav",
-      "CachePath": "9C/{9CAA4C87-7693-E660-A31A-ADF497DAD5D8}.wem"
+      "CachePath": "44/{44C15FEF-9C2E-9B44-F6E6-104402A1966E}.wem"
      },
      {
       "Id": "958557321",
@@ -5387,6 +5395,20 @@
       "MediaRefs": [
        {
         "Id": "970556434"
+       }
+      ]
+     },
+     {
+      "Id": "50193659",
+      "Name": "Play_Giant_Chain",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Giant_Chain",
+      "GUID": "{DE3B8273-CD51-415A-A0DE-5FF45660A208}",
+      "DurationType": "OneShot",
+      "DurationMin": "9.825367",
+      "DurationMax": "9.825367",
+      "MediaRefs": [
+       {
+        "Id": "123438908"
        }
       ]
      },
@@ -8670,6 +8692,6 @@
     ]
    }
   ],
-  "FileHash": "{FD6AF43A-E65D-88F1-B0E4-4E8A140C4CE5}"
+  "FileHash": "{0A96AEC7-EC90-E708-B4FB-E1452A7DE412}"
  }
 }

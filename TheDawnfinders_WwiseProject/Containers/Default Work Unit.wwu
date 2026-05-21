@@ -11448,6 +11448,56 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Giant_Chain" ID="{60FC0B03-7058-44CB-9E54-80FB0E376D6A}" ShortID="879799573">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-240</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="GiantChain" ID="{06DECDC2-EFCC-469E-B800-C41EEAD8CFB0}" ShortID="951645673">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="GiantChain" ID="{D29C5DBB-E3F2-4276-8328-57603DBB26C4}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.444213864137369"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.311894840777302"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>GiantChain.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="123438908"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="GiantChain" ID="{D29C5DBB-E3F2-4276-8328-57603DBB26C4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">
@@ -12508,14 +12558,44 @@
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
+											<StateInfo>
+												<StateGroupList>
+													<StateGroupInfo>
+														<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+														<StateGroupInfo Name="" ID="{87067F64-EF5F-497B-9502-45233E7EAA5D}" ShortID="1070789270"/>
+													</StateGroupInfo>
+												</StateGroupList>
+												<CustomStateList>
+													<CustomState>
+														<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+														<CustomState Name="" ID="{10786062-D450-4CAB-9499-8DEC8B132571}" ShortID="817460126"/>
+													</CustomState>
+													<CustomState>
+														<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+														<CustomState Name="" ID="{8276271A-E4BB-456B-AB9D-ED75AE665D3C}" ShortID="914161664"/>
+													</CustomState>
+												</CustomStateList>
+											</StateInfo>
 											<ObjectLists>
 												<ObjectList Name="Effects">
-													<EffectSlot Name="" ID="{206AD907-39B5-4910-8D72-B814C2E87011}" ShortID="995585956">
+													<EffectSlot Name="" ID="{4882B701-19E8-4C92-A583-2E60CF127A16}" ShortID="48892071">
 														<ReferenceList>
 															<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
 																<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
 															</Reference>
 														</ReferenceList>
+														<StateInfo>
+															<CustomStateList>
+																<CustomState>
+																	<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+																	<CustomState Name="" ID="{78D11A6E-0C52-40BB-8A17-A78601E3264E}" ShortID="755988554"/>
+																</CustomState>
+																<CustomState>
+																	<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+																	<CustomState Name="" ID="{4764CBFA-F894-4502-ACF1-9DF27CBBE084}" ShortID="348082617"/>
+																</CustomState>
+															</CustomStateList>
+														</StateInfo>
 													</EffectSlot>
 												</ObjectList>
 											</ObjectLists>
