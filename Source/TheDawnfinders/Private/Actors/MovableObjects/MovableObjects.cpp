@@ -167,7 +167,7 @@ void AMovableObjects::OnTimeLineFinished()
 	ADoors* Door = Cast<ADoors>(this);
 	
 	Multi_StoppingSound();   
-	
+	 
 	OnMovementFinished.Broadcast();
 	if (Door)
 	{
@@ -188,7 +188,7 @@ void AMovableObjects::OnTimeLineFinished()
 
 		// Important : on libère le mouvement dans les deux cas
 		bCanMove = true;
-		// On remet la progress bar à jour parfaitement (0 ou 1)
+		// On remet la progress bar à jour parfaitement (0 ou 1).
 		CurrentTimelineProgress = Timeline.GetPlaybackPosition();
        
 		return;

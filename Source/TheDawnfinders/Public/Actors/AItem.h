@@ -49,10 +49,16 @@ public:
 
 	virtual void Interact_Implementation(AActor* Interactor) override;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DestroyWithDelay();
+
 private:
 	UPROPERTY()
 	float LevitationTime = 0.f;
 
 	UPROPERTY()
 	FVector InitialeLocation;
+
+	UPROPERTY()
+	bool bUsed;
 };
