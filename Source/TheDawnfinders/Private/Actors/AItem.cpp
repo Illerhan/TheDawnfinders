@@ -79,10 +79,14 @@ void AItem::Multicast_Initialise_Implementation(FItemInfos Data)
 
 void AItem::Interact_Implementation(AActor* Interactor)
 {
+	if (bUsed) return;
+
 	if (!IsValid(ItemInfos.ItemData) || !IsValid(ItemData)) {
 		Destroy();
 		return;
 	}
+
+	bUsed = true;
 
 	Super::Interact_Implementation(Interactor);
 
@@ -91,6 +95,10 @@ void AItem::Interact_Implementation(AActor* Interactor)
 	
 	Player->InteractionComponent->PlayInteractSound();
 
-	Destroy();
+	DestroyWithDelay();
+}
+
+void AItem::DestroyWithDelay_Implementation()
+{
 }
 
