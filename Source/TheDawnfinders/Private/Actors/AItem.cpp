@@ -86,13 +86,12 @@ void AItem::Interact_Implementation(AActor* Interactor)
 		return;
 	}
 
-	bUsed = true;
-
 	Super::Interact_Implementation(Interactor);
 
 	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Interactor);
 	if (!Player->InventoryComponent->AddNewItem(ItemInfos)) return;
 	
+	bUsed = true;
 	Player->InteractionComponent->PlayInteractSound();
 
 	DestroyWithDelay();

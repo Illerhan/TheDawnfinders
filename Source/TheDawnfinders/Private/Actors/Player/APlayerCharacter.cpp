@@ -1188,6 +1188,8 @@ void AAPlayerCharacter::OnRevive()
     if (!HasAuthority()) Server_OnRevive(); 
     SetCurrentPlayerState_Implementation(EPlayerState::None, true);
     Client_ResetCamera();
+
+    StopMovementForDuration(2.25f);
 }
 
 void AAPlayerCharacter::Client_ResetCamera_Implementation()
@@ -1200,6 +1202,8 @@ void AAPlayerCharacter::Client_ResetCamera_Implementation()
 void AAPlayerCharacter::Server_OnRevive_Implementation()
 {
     OnRevive();
+
+    StopMovementForDuration(2.25f);
 }
 
 bool AAPlayerCharacter::IsReadyForRPCs() const
