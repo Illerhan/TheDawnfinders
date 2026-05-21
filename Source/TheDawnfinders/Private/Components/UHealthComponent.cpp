@@ -643,8 +643,6 @@ void UHealthComponent::Server_Revive_Implementation()
 	Multicast_HideFallen();
 	Client_Revive();
 
-	Cast<AAPlayerCharacter>(GetOwner())->StopMovementForDuration(2.25f);
-
 	AActor* Owner = GetOwner();
 	if (!Owner || !Owner->HasAuthority()) return;
 	
@@ -652,7 +650,6 @@ void UHealthComponent::Server_Revive_Implementation()
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
-		PC->StopMovementForDuration(1.f);
 		bIsDead = false;
 		ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
 		if (GM)
@@ -671,9 +668,6 @@ void UHealthComponent::Client_Revive_Implementation()
 		ACustomHUD* HUD = Cast<ACustomHUD>(OwnerController->GetHUD());
 		UUSpectateWidget* SpectateWidget = HUD->MainWidget->GetSpectateWidget();
 		SpectateWidget->HideWidget();
-
-		Cast<AAPlayerCharacter>(GetOwner())->InterruptMontage();
-		Cast<AAPlayerCharacter>(GetOwner())->StopMovementForDuration(2.1f);
 
 		HUD->MainWidget->ExitSpectate();
 	}
