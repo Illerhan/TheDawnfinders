@@ -104,8 +104,6 @@ void UMusicManager::ApplyState(EMusicState NewState)
         fadeDuration = 3.f;
     }
 
-    
-
     CurrentMusicComponent = UGameplayStatics::CreateSound2D(
         GetGameInstance(),
         SoundToPlay,
@@ -124,6 +122,28 @@ void UMusicManager::ApplyState(EMusicState NewState)
     );
 
     UE_LOG(LogTemp, Warning, TEXT("[MUSIC] State → %d"), (int)NewState);
+}
+
+void UMusicManager::PlayMusic(USoundBase* musicToPlay)
+{
+    StopCurrent(EMusicState::Extraction);
+
+    CurrentMusicComponent = UGameplayStatics::CreateSound2D(
+        GetGameInstance(),
+        musicToPlay,
+        1.f,
+        1.f,
+        0.f,
+        nullptr,
+        false,
+        true
+    );
+
+    CurrentMusicComponent->FadeIn(
+        1.5f,
+        1.f,
+        0.f
+    );
 }
 
 void UMusicManager::StopCurrent(EMusicState NewState)
