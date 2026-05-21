@@ -188,6 +188,7 @@ public:
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_SetCurrentPlayerState(EPlayerState NewState, bool bOverrideClient);
 
+
 // === INTERACTIBLE INTERFACE ===
 public :
 	void SelectInteractible_Implementation(AActor* Interactor);
@@ -247,6 +248,9 @@ public:
 
 	UFUNCTION()
 	void StopMovementForDuration(float Duration);
+
+	UFUNCTION()
+	void RestartMovement();
 
 
 // === DODGE ===
@@ -319,6 +323,27 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void PlayMontage(UAnimMontage* Montage, float Speed);
 
+	UFUNCTION(Server, Reliable)
+	void ServerPlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayMontageLoop(UAnimMontage* Montage, float Speed);
+
+	UFUNCTION(BlueprintCallable)
+	void InterruptMontage();
+
+	UFUNCTION(Server, Reliable)
+	void Server_InterruptMontage();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_InterruptMontage();
+
+	UFUNCTION()
+	void OnLoopMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
 	UFUNCTION()
 	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 
@@ -340,14 +365,17 @@ public :
 
 // === OTHERS ===
 protected:
-	UFUNCTION(Server, Reliable)
-	void Server_PlaySound(FName SoundTag, float Range, FVector Location = FVector::ZeroVector, bool bLoudNoise = false);
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void Server_PlayNoise(FName SoundTag, float Range, FVector Location = FVector::ZeroVector, bool bLoudNoise = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisplayThrowPreview(FVector Direction, float Strength);
 
 	UFUNCTION()
 	void HideThrowPreview();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void PlayVibrations(bool bStrong, bool bLong);
 
 	UFUNCTION(Server, Unreliable)
 	void Server_SetMoveInputActive(bool bActive);
@@ -389,11 +417,17 @@ public :
 	UPROPERTY()
 	float TargetRotationRate = 360.f;
 
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentNoise;
+
 	UPROPERTY(Replicated)
 	ALitter* CurrentPushedObject = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool bIsCarrying = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bHoldAttackInput = false;
 
 	UPROPERTY(BlueprintReadOnly)
 	float UILoudness;
@@ -403,6 +437,9 @@ public :
 protected :
 	UPROPERTY()
 	UWorldPlayerWidget* PlayerWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAnimMontage* CrawlMontage;
 
 	UPROPERTY(BlueprintReadOnly)
 	FVector CurrentPlayerInput;
@@ -448,7 +485,7 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	FVector CurrentRotationInput;
-
+	
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	FVector CurrentOffsetRotationInput;
 
@@ -464,6 +501,6 @@ protected :
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float NoiseModifier = 1.0f;
 
-	UPROPERTY()
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	float NoMovementTimer;
 };

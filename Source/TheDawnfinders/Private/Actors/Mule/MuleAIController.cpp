@@ -53,16 +53,16 @@ void AMuleAIController::CallMule(AActor* Actor)
 	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition);
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
 	
-	Multi_PlaySound();
+	MyMule->Multicast_PlayTravelSound(SpawnPosition);
 	
 	FTimerHandle TimerHandle_Travel;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor]()
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor, SpawnPosition]()
 	{
-		Multi_PlaySound();
-	}, 0.5f, false);
+		MyMule->Multicast_PlayTravelSound(SpawnPosition);
+	}, 5.f, false);
 
-	MyMule->SetActorLocation(SpawnPosition);
 	MyMule->PlayAppearVFX();
+	MyMule->SetActorLocation(SpawnPosition);
 
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
@@ -73,22 +73,10 @@ void AMuleAIController::CallMule(AActor* Actor)
 	}
 }
 
-void AMuleAIController::Multi_PlaySound_Implementation(FVector Position)
-{
-	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-	if (AudioDevice && MuleTravelSoundID != AK_INVALID_PLAYING_ID)
-	{
-		AudioDevice->StopPlayingID(MuleTravelSoundID, 300, AkCurveInterpolation_Log1);
-		MuleTravelSoundID = AK_INVALID_PLAYING_ID;
-	}
-	MuleTravelSoundID = UAkGameplayStatics::PostEvent(MuleTravelSound,GetOwner(),0,FOnAkPostEventCallback(), false);
-}
-
 void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
 {
 	MyMule->SetActorLocation(SpawnPos);
-	Multi_PlaySound(SpawnPos);
-
+	MyMule->Multicast_PlayTravelSound(SpawnPos);
 	MyMule->DoAppearMovement();
 }
 

@@ -73,6 +73,8 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	ActualiseUseProgress(DeltaTime);
 
+	if (!PlayerCharacter->IsLocallyControlled()) return;
+
 	if (bIsAiming && !bIsReloading) {
 		ActualiseAim(DeltaTime);
 	}
@@ -201,6 +203,12 @@ void UItemComponent::DoMainAction()
 
 	if (EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Consumable)
 	{
+		if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Heal &&
+			HealthComponent->CurrentHealth >= HealthComponent->GetCurrentMaxHealth())
+		{
+			return;
+		}
+
 		if (EquippedItem.CurrentInfos.ItemData->NeededHoldDuration != 0)
 		{
 			if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Revive)
@@ -216,6 +224,10 @@ void UItemComponent::DoMainAction()
 			{
 				ItemUseTimer = EquippedItem.CurrentInfos.ItemData->NeededHoldDuration;
 				bIsUsingItem = true;
+
+				if (EquippedItem.CurrentInfos.ItemData->ImmobiliseOnUse) {
+					PlayerCharacter->StopMovementForDuration(EquippedItem.CurrentInfos.ItemData->NeededHoldDuration);
+				}
 				
 				Multi_PlayHealSound();
 				IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::UsingEquipment, false);
@@ -292,6 +304,12 @@ void UItemComponent::UseConsumable()
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
+
+	if (EquippedItem.CurrentInfos.ItemData->ConsumableEffectType == EConsumableEffectType::Heal && 
+		HealthComponent->CurrentHealth >= HealthComponent->GetCurrentMaxHealth()) 
+	{
+		return;
+	}
 
 	if (EquippedItem.CurrentInfos.ItemData->UseConsumableMontage)
 	{
@@ -422,6 +440,10 @@ void UItemComponent::StopMainAction()
 	{
 		IPlayerInterface::Execute_RequestStateChange(GetOwner(), EPlayerState::None, false);
 		IPlayerInterface::Execute_HideProgress(GetOwner());
+
+		if (EquippedItem.CurrentInfos.ItemData->ImmobiliseOnUse) {
+			PlayerCharacter->RestartMovement();
+		}
 	}
 
 	bIsUsingItem = false;
@@ -555,6 +577,8 @@ void UItemComponent::DoLightAttack()
 	if (EquippedItem.CurrentInfos.ItemData->ItemType != EItemType::Equipment) return;
 	if (EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) return;
 
+	CanCancelAttack = true;
+
 	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment)
 	{
 		PressedAttackInput = true;
@@ -573,13 +597,9 @@ void UItemComponent::DoLightAttack()
 	if (PressedAttackInput)
 	{
 		PressedAttackInput = false;
-
-		if (++ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
-		{
-			ComboIndex = 0;
-		}
 	}
-	else
+
+	if (ComboIndex >= WeaponTypeActions->LightComboActionNames.Num())
 	{
 		ComboIndex = 0;
 	}
@@ -673,10 +693,12 @@ void UItemComponent::AttackAnimEnd()
 	PlayerInterface->SetCurrentPlayerState_Implementation(EPlayerState::None, false);
 
 	PlayerCharacter->SetPlayerAcceleration(4000);
-
 	PlayerCharacter->StopAutoLock();
 
-	if (PressedAttackInput)
+	ComboIndex++;
+	ResetComboCounterDelay(0.2f);
+
+	if (PressedAttackInput || PlayerCharacter->bHoldAttackInput)
 	{
 		DoLightAttack();
 	}
@@ -699,8 +721,9 @@ void UItemComponent::DoAttackCollision()
 	//IPlayerInterface::Execute_PlaySoundOnServer(GetOwner(), "Attack", PlayerCharacter->PlayerConfig->AttackSoundRange, 0.8, FVector::ZeroVector, false);
 
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
-
 	if (!WeaponData) return;
+
+	CanCancelAttack = false;
 
 	TArray<FHitResult> Hit;
 	FVector FinalCollisionCenter = PlayerCharacter->WeaponCollisionPosRef->GetComponentLocation();
@@ -730,6 +753,7 @@ void UItemComponent::DoAttackCollision()
 		AlreadyHitActors.Add(Hit[i].GetActor());
 
 		IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, CurrentWeaponActionData.CameraShakeIntensity);
+		IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::Strong, 0);
 
 		// We hit an enemy
 		if (Hit[i].GetActor()->ActorHasTag("Enemy")) {
@@ -763,8 +787,19 @@ void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Ta
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
-	if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-	InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+	// Durability
+	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+		if (EquippedItem.CurrentInfos.Durability <= 0) {
+			FinalDamage *= Data->UsedDurabilityMultiplier;
+			UseWeaponWithNoDurability(false);
+		}
+		else {
+			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+			if (EquippedItem.CurrentInfos.Durability <= 0)
+				UseWeaponWithNoDurability(true);
+		}
+	}
 
 	FinalDamage *= WeaponData->MineDamageMultiplier;
 
@@ -773,15 +808,23 @@ void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Ta
 
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
-	if (!Enemy || Enemy->IsInvincible) return;
+	if (!Enemy || Enemy->IsInvincible || Enemy->bIsDead) return;
 
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	// Durability
 	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
-		if (EquippedItem.CurrentInfos.Durability <= 0) FinalDamage *= Data->UsedDurabilityMultiplier;
-		InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+		if (EquippedItem.CurrentInfos.Durability <= 0) {
+			FinalDamage *= Data->UsedDurabilityMultiplier;
+			UseWeaponWithNoDurability(false);
+		}
+		else {
+			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+
+			if (EquippedItem.CurrentInfos.Durability <= 0)
+				UseWeaponWithNoDurability(true);
+		}
 	}
 
 	// Enemy Resistances
@@ -807,6 +850,17 @@ void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy
 	Enemy->PushEnemy(CurrentWeaponData.EnemiesPushStrength, PushDir);
 }
 
+void UItemComponent::ResetComboCounterDelay_Implementation(float Delay)
+{
+	if (IPlayerInterface::Execute_GetCurrentPlayerState(GetOwner()) == EPlayerState::UsingEquipment) return;
+
+	ComboIndex = 0;
+}
+
+void UItemComponent::UseWeaponWithNoDurability_Implementation(bool bJustBroke)
+{
+}
+
 #pragma endregion
 
 
@@ -823,8 +877,13 @@ void UItemComponent::StartAim()
 
 	CurrentWeaponData = *WeaponDataTable->FindRow<FWeaponInfos>(EquippedItem.CurrentInfos.ItemData->WeaponDataTableRow, " ");
 
+	if (bIsAiming) return;
+
 	bIsAiming = true;
 	AimCurrentAngle = CurrentWeaponData.MaxAngle;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 }
 
 void UItemComponent::StopAim()
@@ -833,6 +892,9 @@ void UItemComponent::StopAim()
 	if (!bIsReloading) IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, false);
 
 	bIsAiming = false;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 
 	HideAimLines();
 }
@@ -848,6 +910,9 @@ void UItemComponent::Reload()
 	bIsReloading = true;
 	TimerReload = CurrentWeaponData.ReloadDuration;
 
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
+
 	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, EPlayerState::UsingEquipment, false);
 
 	HideAimLines();
@@ -857,6 +922,9 @@ void UItemComponent::CompleteReload()
 {
 	bIsReloading = false;
 	InventoryComponent->ReloadGun(EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.NeededAmmo, CurrentWeaponData.MagazineSize);
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 
 	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
@@ -874,6 +942,9 @@ void UItemComponent::CancelReload()
 
 	bIsReloading = false;
 	TimerReload = 0;
+
+	if (!GetOwner()->HasAuthority()) Server_ActualiseInfos(bIsAiming, bIsReloading);
+	else Multicast_ActualiseInfos(bIsAiming, bIsReloading);
 }
 
 void UItemComponent::ActualiseAim(float DeltaTime)
@@ -908,6 +979,8 @@ void UItemComponent::Shoot()
 	if (ShootDelayTimer > 0) return;
 
 	ShootDelayTimer = CurrentWeaponData.DelayBetweenShots;
+	IPlayerInterface::Execute_PlayVibration(PlayerCharacter, EVibrationType::StrongLong, 0);
+	IPlayerInterface::Execute_DoCameraShake(PlayerCharacter, 1);
 
 	for (int i = 0; i < CurrentWeaponData.NumberOfShots; i++) {
 		FVector ShootDir = GetOwner()->GetActorForwardVector();
@@ -959,6 +1032,22 @@ void UItemComponent::DoShootRaycast(FVector Direction)
 		Server_ApplyDamagesToEnemy(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
 	else
 		Server_ApplyDamagesToEnemy_Implementation(Enemy, EquippedItem.CurrentInfos.ItemData, CurrentWeaponData.BaseDamage * Multiplicator);
+}
+
+void UItemComponent::Server_ActualiseInfos_Implementation(bool Aim, bool Reload)
+{
+	bIsAiming = Aim;
+	bIsReloading = Reload;
+
+	Multicast_ActualiseInfos(Aim, Reload);
+}
+
+void UItemComponent::Multicast_ActualiseInfos_Implementation(bool Aim, bool Reload)
+{
+	if (PlayerCharacter->IsLocallyControlled()) return;
+
+	bIsAiming = Aim;
+	bIsReloading = Reload;
 }
 
 void UItemComponent::PlayShootSound_Implementation()

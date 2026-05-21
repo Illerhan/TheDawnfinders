@@ -46,6 +46,13 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 
 	if (!PlayerCharacter->IsLocallyControlled()) return;
+	if (PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Fallen || PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead) {
+		if (IsValid(NearestInteractible)) {
+			IInteractible::Execute_UnselectInteractible(NearestInteractible, GetOwner());
+		}
+		NearestInteractible = nullptr;
+		return;
+	}
 
 	// If the current interacting object is destroyed
 	if (bIsDoingQTE) {
@@ -144,6 +151,8 @@ AActor* UInteractionComponent::GetNearestInteractible()
 	for (AActor* Player : PlayersAtRange)
 	{
 		if (!IsValid(Player)) continue;
+		if (IPlayerInterface::Execute_GetCurrentPlayerState(Player) != EPlayerState::Fallen) continue;
+
 		float Dist = FVector::DistSquared(
 			Player->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
@@ -193,7 +202,10 @@ void UInteractionComponent::StartInteract()
 	// -> Revive sound integration
 	if (PlayersAtRange.Num() > 0)
 	{
+		bIsInInteraction = true;
 		AAPlayerCharacter* AllyFound = PlayersAtRange[0];
+
+		CurrentHelpedTarget = AllyFound;
 		TryInteractAlly(AllyFound, PlayerCharacter);
 		return;
 	}
@@ -382,6 +394,8 @@ void UInteractionComponent::StopInteract()
 			ServerStopInteract_Implementation(CurrentInteractible, PlayerCharacter);
 		}
 
+		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
 		NearestInteractible = nullptr;
 		CurrentInteractible = nullptr;
 		bIsInInteraction = false;
@@ -397,6 +411,7 @@ void UInteractionComponent::ServerStopInteract_Implementation(AActor* Interactib
 	bIsInInteraction = false;
 
 	IPlayerInterface::Execute_SetCurrentPlayerState(PlayerCharacter, bWasCrouched ? EPlayerState::Sneaking : EPlayerState::None, true);
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
 	IInteractible::Execute_StopInteract(Interactible, Player);
 }
@@ -408,6 +423,8 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 	NearestInteractible = nullptr;
 	CurrentInteractible = nullptr;
 	bIsInInteraction = false;
+
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 }
 
 void UInteractionComponent::CancelInteraction()
@@ -419,7 +436,7 @@ void UInteractionComponent::CancelInteraction()
 	}
 
 	AActor* Nearest = GetNearestInteractible();
-	//if (!Nearest) return;
+	IPlayerInterface::Execute_HideProgress(PlayerCharacter);
 
 	if (bIsDoingQTE && CurrentQTEWidget)
 	{
@@ -553,6 +570,8 @@ void UInteractionComponent::TryInteractAlly(AAPlayerCharacter* AllyParam, AAPlay
 {
 	if (!Player || !Player->IsLocallyControlled()) return;
 
+	PlayerCharacter->StopMovementForDuration(HelpDuration);
+
 	if (AllyParam)
 		ServerStartHelp(AllyParam);
 }
@@ -568,6 +587,7 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 
 	CurrentHelpedTarget = AllyParam;
 
+	bIsInInteraction = true;
 	bIsHelping = true;
 	HelpTimeRemaining = HelpDuration;
 
@@ -578,8 +598,13 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 
 void UInteractionComponent::ServerCancelHelp_Implementation()
 {
+	if (!bIsHelping) return;
+
 	bIsHelping = false;
+	bIsInInteraction = false;
 	CurrentHelpedTarget = nullptr;
+
+	PlayerCharacter->RestartMovement();
 
 	Client_HideHelpProgress();
 }
@@ -597,6 +622,9 @@ void UInteractionComponent::Client_HideHelpProgress_Implementation()
 	if (PlayerCharacter && PlayerCharacter->IsLocallyControlled())
 	{
 		IPlayerInterface::Execute_HideProgress(PlayerCharacter);
+
+		if (!CurrentHelpedTarget) return;
+		IInteractible::Execute_UnselectInteractible(CurrentHelpedTarget, GetOwner());
 	}
 }
 
@@ -605,10 +633,17 @@ void UInteractionComponent::CompleteHelp()
 {
 	if (!CurrentHelpedTarget) return;
 
+	IInteractible::Execute_UnselectInteractible(CurrentHelpedTarget, GetOwner());
 	Client_HideHelpProgress();
 
 	CurrentHelpedTarget->HealthComponent->Server_Revive();
+	CurrentHelpedTarget->HealthComponent->Revive();
+
+	bIsHelping = false;
+	bIsInInteraction = false;
+
 	CurrentHelpedTarget = nullptr;
+	NearestInteractible = nullptr;
 }
 
 #pragma endregion

@@ -168,6 +168,7 @@ void AMovableObjects::OnTimeLineFinished()
 	
 	Multi_StoppingSound();   
 	
+	OnMovementFinished.Broadcast();
 	if (Door)
 	{
 		// CORRECTION : On vérifie où la Timeline s'est arrêtée

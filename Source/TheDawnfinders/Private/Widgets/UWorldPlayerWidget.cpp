@@ -19,3 +19,8 @@ UWorldHealthBar* UWorldPlayerWidget::GetHealthBar_Implementation()
 {
 	return nullptr;
 }
+
+void UWorldPlayerWidget::BreakWeapon_Implementation()
+{
+
+}

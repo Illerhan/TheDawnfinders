@@ -33,7 +33,7 @@ public :
 	void UpdateDistance(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable)
-	void StartForcePosition(FVector NewPos, float Dist);
+	void StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride, bool bOnlySize);
 
 	UFUNCTION(BlueprintCallable)
 	void StartAutomaticControl();
@@ -61,6 +61,12 @@ protected :
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float CameraOffsetLerpSpeed;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ForcedDistanceLerpSpeed;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ForcedOffsetLerpSpeed;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enviro")
@@ -144,10 +150,25 @@ protected :
 	float CurrentPlayerDist = 0;
 
 	UPROPERTY()
-	float bIsOnForcedPosition = false;
+	bool bIsOnForcedPosition = false;
+
+	UPROPERTY()
+	bool bIsOnForcedSize = false;
 
 	UPROPERTY()
 	bool bIsInitialised;
+
+	UPROPERTY()
+	float ForcedPositionOffsetProgress;
+
+	UPROPERTY()
+	float ForcedPositionDistanceProgress;
+
+	UPROPERTY()
+	float StartForcedDist;
+
+	UPROPERTY()
+	FVector StartForcedOffset;
 
 	UPROPERTY()
 	USpringArmComponent* SpringArmComponent;

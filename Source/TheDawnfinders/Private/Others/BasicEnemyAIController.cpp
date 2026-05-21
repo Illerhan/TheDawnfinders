@@ -78,6 +78,11 @@ void ABasicEnemyAIController::EndStun_Implementation()
 
 }
 
+bool ABasicEnemyAIController::GetCanReachPlayer_Implementation()
+{
+    return true;
+}
+
 UEnemyAttackComponent* ABasicEnemyAIController::GetEnemyAttackComponent()
 {
     return EnemyAttackComponent;

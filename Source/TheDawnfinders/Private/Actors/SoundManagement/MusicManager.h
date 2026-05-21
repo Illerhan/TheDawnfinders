@@ -23,6 +23,8 @@ class UMusicManager : public UGameInstanceSubsystem
 	GENERATED_BODY()
 
 public:
+
+
 	// Appelé par la zone quand le joueur entre/sort
 	void EnterZone(AAmbientMusicZone* Zone);
 	void ExitZone(AAmbientMusicZone* Zone);
@@ -34,6 +36,7 @@ public:
 	void OnEnemyCalm();
 
 	// Appelé par l'objectif d'extraction
+	UFUNCTION(BlueprintCallable)
 	void TriggerExtraction();
 	
 	UPROPERTY(EditAnywhere, Category = "Audio")
@@ -52,4 +55,6 @@ private:
 	void EvaluateState();
 	void ApplyState(EMusicState NewState);
 	void StopCurrent(EMusicState NewState);
+	UFUNCTION(BlueprintCallable)
+	void ResetState();
 };

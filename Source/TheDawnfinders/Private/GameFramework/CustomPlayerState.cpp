@@ -220,6 +220,7 @@ void ACustomPlayerState::OverrideWith(APlayerState* PlayerState)
 	
 	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
 	{
+		bIsWoman = NewPS->bIsWoman;
 		ShopItems = NewPS->ShopItems;
 		SavedGold = NewPS->SavedGold;
 		bInSession=NewPS->bInSession;
@@ -253,6 +254,9 @@ void ACustomPlayerState::Client_AddShopItemLocally(FItemInfos Item)
 void ACustomPlayerState::Server_RepairItem_Implementation(int Cost)
 {
 	SavedGold -= Cost;
+
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
@@ -260,6 +264,7 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 	Super::CopyProperties(PlayerState);
 	if (ACustomPlayerState* NewPS = Cast<ACustomPlayerState>(PlayerState))
 	{
+		NewPS->bIsWoman = bIsWoman;
 		NewPS->ShopItems = ShopItems;
 		NewPS->SavedGold = SavedGold;
 		NewPS->bInSession = bInSession;
@@ -267,8 +272,6 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 		NewPS->StashItems = StashItems;
 		NewPS->InventoryItems = InventoryItems;
 	}
-	
-	
 }
 
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
@@ -278,6 +281,8 @@ void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSel
 		
 	SavedGold += SellPrice;
 
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()

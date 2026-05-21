@@ -144,6 +144,9 @@ public :
 	UPROPERTY(Replicated, BlueprintReadOnly)
 	bool bIsReady = false;
 
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	bool bIsWoman = false;
+
 
 // === GETTERS ===
 public :

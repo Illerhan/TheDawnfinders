@@ -331,6 +331,7 @@ void AAPlayerCharacter::SetCurrentPlayerState_Implementation(EPlayerState NewSta
         break;
 
     case EPlayerState::Dead :
+        InterruptMontage();
         break;
     }
 
@@ -422,11 +423,13 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
 
+    CurrentNoise = Range;
+
     if(!HasAuthority())
-        Server_PlaySound(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise(SoundTag, Range, Loc, bLoudNoise);
     
     else
-        Server_PlaySound_Implementation(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise_Implementation(SoundTag, Range, Loc, bLoudNoise);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
@@ -445,7 +448,8 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
     if (!GetController()->IsLocalController()) return;
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
 
-    HealthComponent->TakeDamage(quantity);
+    if(quantity > 0)
+        HealthComponent->TakeDamage(quantity);
 }
 
 #pragma endregion
@@ -534,6 +538,7 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     }
 
     if (NoMovementTimer > 0) {
+        bMoveInputActive = false;
         return;
     }
 
@@ -573,11 +578,21 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
 
     if (CurrentPlayerInput.SquaredLength() > 0.05f) {
         PreviousPlayerInput = CurrentPlayerInput;
+
+        if (!bMoveInputActive && CurrentState == EPlayerState::Fallen) {
+            PlayMontageLoop(CrawlMontage, 1);
+        }
+
         bMoveInputActive = true;
         if (!HasAuthority()) Server_SetMoveInputActive(true);
     }
     else {
         AddMovementInput(FVector(0, 0, 0), 1.0f, true);
+
+        if (bMoveInputActive && CurrentState == EPlayerState::Fallen) {
+            InterruptMontage();
+        }
+
         bMoveInputActive = false;
         if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
@@ -680,8 +695,12 @@ void AAPlayerCharacter::ServerManageRun_Implementation(bool Input)
 void AAPlayerCharacter::StopMovementForDuration(float Duration)
 {
     NoMovementTimer = Duration;
+    PlaySoundOnServer_Implementation("", 0, 0);
+}
 
-    UE_LOG(LogTemp, Display, TEXT("STOP MOVEMENT"));
+void AAPlayerCharacter::RestartMovement()
+{
+    NoMovementTimer = 0;
 }
 
 
@@ -889,6 +908,8 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     CurrentAutoLockStrength = PlayerConfig->AutoLockStrength;
     bAutoLockIsActive = true;
 
+    CurrentAutoLockTarget = nullptr;
+
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams ObjectQueryParams;
 
@@ -896,14 +917,15 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel1);
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
 
-    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(500.f));
+    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(300.f));
     if (!bHit) return;
 
-    float BestDist = 5000.f;
+    float BestDist = 300.f;
 
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
         if (!Actor || (!Actor->ActorHasTag("Enemy") && !Actor->ActorHasTag("Destructible"))) continue;
+        if (Actor->ActorHasTag("Enemy") && Cast<ABaseEnemy>(Actor)->bIsDead) continue;
 
         float CurrentDist = (GetActorLocation() - Actor->GetActorLocation()).Length();
         if (CurrentDist < BestDist) 
@@ -1022,6 +1044,69 @@ void AAPlayerCharacter::PlayMontage(UAnimMontage* Montage, float Speed)
     else MulticastPlayMontage(Montage, Speed); 
 }
 
+
+void AAPlayerCharacter::PlayMontageLoop(UAnimMontage* Montage, float Speed)
+{
+    if (!HasAuthority()) ServerPlayMontageLoop(Montage, Speed);
+    else MulticastPlayMontageLoop(Montage, Speed);
+}
+
+void AAPlayerCharacter::ServerPlayMontageLoop_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (Montage) MulticastPlayMontageLoop(Montage, Speed);
+}
+
+void AAPlayerCharacter::MulticastPlayMontageLoop_Implementation(UAnimMontage* Montage, float Speed)
+{
+    if (!Montage || !GetMesh()) return;
+
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+
+    AnimInstance->StopAllMontages(0.1f);
+    AnimInstance->Montage_Play(Montage, Speed);
+
+    FOnMontageEnded EndDelegate;
+    EndDelegate.BindUObject(this, &AAPlayerCharacter::OnLoopMontageEnded);
+
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
+}
+
+void AAPlayerCharacter::InterruptMontage()
+{
+    if (HasAuthority()) Multicast_InterruptMontage();
+    else Server_InterruptMontage();
+}
+
+void AAPlayerCharacter::Server_InterruptMontage_Implementation()
+{
+    Multicast_InterruptMontage();
+}
+
+void AAPlayerCharacter::Multicast_InterruptMontage_Implementation()
+{
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+    AnimInstance->StopAllMontages(0.1f);
+}
+
+void AAPlayerCharacter::OnLoopMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+    if (bInterrupted) return;
+
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!AnimInstance) return;
+
+    AnimInstance->StopAllMontages(0.1f);
+    AnimInstance->Montage_Play(Montage, 1);
+
+    FOnMontageEnded EndDelegate;
+    EndDelegate.BindUObject(this, &AAPlayerCharacter::OnLoopMontageEnded);
+
+    AnimInstance->Montage_SetBlendingOutDelegate(EndDelegate, Montage);
+}
+
+
 void AAPlayerCharacter::ServerPlayMontage_Implementation(UAnimMontage* Montage, float Speed) 
 { 
     if (Montage) MulticastPlayMontage(Montage, Speed); 
@@ -1050,13 +1135,7 @@ void AAPlayerCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
     if (!Montage) return;
     if (CurrentState == EPlayerState::UsingEquipment) 
     { 
-
-        if (!InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData || !InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon) {
-            SetCurrentPlayerState_Implementation(EPlayerState::None);
-            ItemComponent->AttackAnimEnd();
-        }
-        else if (InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData &&
-            InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon && !ItemComponent->GetIsAiming()) {
+        if (InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData && !InventoryComponent->GetCurrentSlot().CurrentInfos.ItemData->bIsRangedWeapon) {
             SetCurrentPlayerState_Implementation(EPlayerState::None);
             ItemComponent->AttackAnimEnd();
         }
@@ -1128,7 +1207,7 @@ bool AAPlayerCharacter::IsReadyForRPCs() const
     return GetController() != nullptr && Cast<APlayerController>(GetController()) != nullptr;
 }
 
-void AAPlayerCharacter::Server_PlaySound_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
+void AAPlayerCharacter::Server_PlayNoise_Implementation(FName SoundTag, float Range, FVector Loc, bool bLoudNoise)
 {
     if (bLoudNoise) {
         LoudNoiseZone->SetSphereRadius(Range);
@@ -1197,6 +1276,10 @@ void AAPlayerCharacter::DisplayThrowPreview_Implementation(FVector Direction, fl
 void AAPlayerCharacter::HideThrowPreview()
 {
     ThrowablePreviewMeshComponent->SetHiddenInGame(true);
+}
+
+void AAPlayerCharacter::PlayVibrations_Implementation(bool bStrong, bool bLong)
+{
 }
 
 void AAPlayerCharacter::Server_SetMoveInputActive_Implementation(bool bActive)

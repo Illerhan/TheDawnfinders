@@ -10,8 +10,6 @@ UPlayerCameraComponent::UPlayerCameraComponent()
 
 void UPlayerCameraComponent::BeginPlay()
 {
-	Player = Cast<AAPlayerCharacter>(GetOwner());
-
 	Super::BeginPlay();
 }
 
@@ -19,30 +17,42 @@ void UPlayerCameraComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	if (!bIsInitialised) return;
 
-	APawn* Pawn = Cast<APawn>(GetOwner());
-	if (!Pawn) return;
-	if (!Pawn->Controller) return;
-	if (!Pawn->Controller->IsLocalController()) return;
-
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!bIsOnForcedPosition) {
-		ActualiseEnemiesInfos();
-		ActualiseEnviroInfos();
-		ActualisePlayerInfos(DeltaTime);
+	ActualiseEnemiesInfos();
+	ActualiseEnviroInfos();
+	ActualisePlayerInfos(DeltaTime);
 
-		UpdateOffset(DeltaTime);
+	if (!bIsOnForcedSize) {
+		ForcedPositionDistanceProgress = FMath::Lerp(ForcedPositionDistanceProgress, 0, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
+		ForcedPositionDistanceProgress = FMath::Clamp(ForcedPositionDistanceProgress, 0, 1);
+
 		UpdateDistance(DeltaTime);
 
-		SpringArmComponent->TargetArmLength = CurrentTotalDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentTotalOffset);
+		SpringArmComponent->TargetArmLength = FMath::Lerp(CurrentTotalDist, ForcedDist, ForcedPositionDistanceProgress);
 	}
 	else {
-		CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, ForcedDist, DeltaTime * CameraDistanceLerpSpeed);
-		CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, ForcedPosition - GetOwner()->GetActorLocation(), DeltaTime * CameraOffsetLerpSpeed);
+		ForcedPositionDistanceProgress = FMath::Lerp(ForcedPositionDistanceProgress, 1, DeltaTime * (ForcedDistanceLerpSpeed != 0 ? ForcedDistanceLerpSpeed : CameraDistanceLerpSpeed));
+		ForcedPositionDistanceProgress = FMath::Clamp(ForcedPositionDistanceProgress, 0, 1);
 
-		SpringArmComponent->TargetArmLength = CurrentEnviroDist;
-		SpringArmComponent->SetWorldLocation(GetOwner()->GetActorLocation() + CurrentEnviroOffset);
+		SpringArmComponent->TargetArmLength = FMath::Lerp(StartForcedDist, ForcedDist, ForcedPositionDistanceProgress);
+	}
+
+
+	if(!bIsOnForcedPosition) {
+		ForcedPositionOffsetProgress = FMath::Lerp(ForcedPositionOffsetProgress, 0, DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
+		ForcedPositionOffsetProgress = FMath::Clamp(ForcedPositionOffsetProgress, 0, 1);
+
+		UpdateOffset(DeltaTime);
+
+		SpringArmComponent->SetWorldLocation(FMath::Lerp(GetOwner()->GetActorLocation() + CurrentTotalOffset, ForcedPosition, ForcedPositionOffsetProgress));
+	}
+
+	else {
+		ForcedPositionOffsetProgress = FMath::Lerp(ForcedPositionOffsetProgress, 1, DeltaTime * (ForcedOffsetLerpSpeed != 0 ? ForcedOffsetLerpSpeed : CameraOffsetLerpSpeed));
+		ForcedPositionOffsetProgress = FMath::Clamp(ForcedPositionOffsetProgress, 0, 1);
+
+		SpringArmComponent->SetWorldLocation(FMath::Lerp(StartForcedOffset, ForcedPosition, ForcedPositionOffsetProgress));
 	}
 }
 
@@ -52,6 +62,13 @@ void UPlayerCameraComponent::InitialiseComponent(USpringArmComponent* SpringArm)
 {
 	bIsInitialised = true;
 	SpringArmComponent = SpringArm;
+
+	Player = Cast<AAPlayerCharacter>(GetOwner());
+
+	if (Player) {
+		if (!Player->GetController()) bIsInitialised = false;
+	}
+	else bIsInitialised = false;
 }
 
 void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
@@ -59,6 +76,8 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	FVector NewOffset = FVector(0, 0, 0);
 
 	for (int i = 0; i < EnemiesAtRange.Num(); i++) {
+		if (!IFadeable::Execute_GetIsDisplayed(EnemiesAtRange[i])) continue;
+
 		FVector Offset = GetOwner()->GetActorLocation() - EnemiesAtRange[i]->GetActorLocation();
 		Offset.Normalize();
 		NewOffset -= Offset * FMath::Lerp(0, EnemiesOffsetMaxImpact, 1 - (Offset.Length() / EnemiesMaxRange));
@@ -67,9 +86,18 @@ void UPlayerCameraComponent::UpdateOffset(float DeltaTime)
 	if(EnemiesAtRange.Num() != 0)
 		NewOffset /= EnemiesAtRange.Num();
 
+	FVector AveragePos;
+	for (int i = 0; i < NearbyWallsLocations.Num(); i++)
+	{
+		AveragePos += NearbyWallsLocations[i];
+	}
+	AveragePos /= NearbyWallsLocations.Num();
+	NewOffset -= (GetOwner()->GetActorLocation() - AveragePos) * EnviroOffsetMaxImpact;
+
 	CurrentEnviroOffset = FMath::Lerp(CurrentEnviroOffset, NewOffset, DeltaTime * CameraOffsetLerpSpeed);
 	CurrentTotalOffset = CurrentEnviroOffset + CurrentPlayerOffset;
 }
+
 
 void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 {
@@ -85,26 +113,45 @@ void UPlayerCameraComponent::UpdateDistance(float DeltaTime)
 	for (int i = 0; i < NearbyWallsLocations.Num(); i++) 
 	{
 		Distance = (GetOwner()->GetActorLocation() - NearbyWallsLocations[i]).Length();
-		AverageDist += Distance;
+
+		if(Distance < 800)
+			AverageDist += Distance;
+
+		else
+			AverageDist += Distance;
 	}
 	AverageDist /= NearbyWallsLocations.Num();
-	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / 2000.f));
+	NewDistance -= FMath::Lerp(0, EnviroDistanceMaxImpact, 1 - (AverageDist / EnviroRaycastsMaxRange));
 
 	CurrentEnviroDist = FMath::Lerp(CurrentEnviroDist, NewDistance, DeltaTime * CameraDistanceLerpSpeed);
 	CurrentTotalDist = CurrentEnviroDist + CurrentPlayerDist;
 }
 
-void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist)
+
+void UPlayerCameraComponent::StartForcePosition(FVector NewPos, float Dist, float LerpDistSpeedOverride, float LerpOffsetSpeedOverride, bool bOnlySize)
 {
 	ForcedPosition = NewPos;
 	ForcedDist = Dist;
 
-	bIsOnForcedPosition = true;
+	StartForcedDist = CurrentTotalDist;
+	StartForcedOffset = CurrentTotalOffset + GetOwner()->GetActorLocation();
+
+	ForcedDistanceLerpSpeed = LerpDistSpeedOverride;
+	ForcedOffsetLerpSpeed = LerpOffsetSpeedOverride;
+
+	bIsOnForcedSize = true;
+	if (!bOnlySize) {
+		bIsOnForcedPosition = true;
+	}
 }
 
 void UPlayerCameraComponent::StartAutomaticControl()
 {
 	bIsOnForcedPosition = false;
+	bIsOnForcedSize = false;
+
+	ForcedOffsetLerpSpeed *= 1.5f;
+	ForcedDistanceLerpSpeed *= 1.5f;
 }
 
 
@@ -158,12 +205,12 @@ void UPlayerCameraComponent::ActualiseEnemiesInfos()
 void UPlayerCameraComponent::ActualiseEnviroInfos()
 {
 	NearbyWallsLocations.Reset();
-	FVector BasePos = GetOwner()->GetActorLocation();
+	FVector BasePos = GetOwner()->GetActorLocation() + FVector(0, 0, 200.f);
 
-	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 20)
+	for (float CurrentAngle = 0; CurrentAngle <= 360; CurrentAngle += 5)
 	{
 		FVector Dir = FVector(FMath::Cos(CurrentAngle), FMath::Sin(CurrentAngle), 0);
-		FVector EndPos = BasePos + Dir * 2000.f;
+		FVector EndPos = BasePos + Dir * EnviroRaycastsMaxRange;
 
 		FHitResult HitResult;
 		FCollisionQueryParams Params;
@@ -176,12 +223,26 @@ void UPlayerCameraComponent::ActualiseEnviroInfos()
 			ECC_WorldStatic
 		);
 
+		FColor LineColor = bHit ? FColor::Green : FColor::Red;
+		if (bHit) EndPos = HitResult.ImpactPoint;
+
+		/*DrawDebugLine(
+			GetWorld(),
+			BasePos,      // Début
+			EndPos,       // Fin
+			LineColor,    // Couleur
+			false,        // Persistent (reste-t-il indéfiniment ?)
+			0.05f,         // Durée de vie (en secondes)
+			0,            // Priorité de profondeur
+			2.0f          // Épaisseur de la ligne
+		);*/
+
 		if (!bHit) {
-			NearbyWallsLocations.Add(EndPos);
+			NearbyWallsLocations.Add(EndPos - FVector(0, 0, 200.f));
 			continue;
 		}
 
-		NearbyWallsLocations.Add(HitResult.ImpactPoint);
+		NearbyWallsLocations.Add(HitResult.ImpactPoint - FVector(0, 0, 200.f));
 	}
 }
 

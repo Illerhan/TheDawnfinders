@@ -111,6 +111,12 @@ public :
 	UFUNCTION(NetMulticast, Unreliable)
 	void Multi_PlayHitSound();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ResetComboCounterDelay(float Delay);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UseWeaponWithNoDurability(bool bJustBroke);
+
 
 // === RANGED WEAPON ===
 public :
@@ -149,6 +155,12 @@ public :
 	
 	UFUNCTION(Client,Unreliable)
 	void PlayShootSound();
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_ActualiseInfos(bool Aim, bool Reload);
+
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+	void Multicast_ActualiseInfos(bool Aim, bool Reload);
 
 
 // === THROW ===
@@ -233,6 +245,9 @@ protected :
 
 	UPROPERTY()
 	bool PressedHeavyAttackInput = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool CanCancelAttack = false;
 
 	UPROPERTY()
 	int ComboIndex = 0;

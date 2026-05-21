@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <AK/SoundEngine/Common/AkConstants.h>
+
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "Components/UInventoryComponent.h"
@@ -10,6 +12,7 @@
 #include "Mule.generated.h"
 
 
+class UAkAudioEvent;
 class ADangerManager;
 class UWorldInteractibleWidget;
 
@@ -62,5 +65,14 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, Category = Mule)
 	ADangerManager* DangerManager;
+	
+	UPROPERTY()
+	int32 MuleTravelSoundID = AK_INVALID_PLAYING_ID;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	UAkAudioEvent* MuleTravelSound;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_PlayTravelSound(FVector Position);
 			
 };

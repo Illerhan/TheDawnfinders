@@ -47,19 +47,23 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void EndStun();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	bool GetCanReachPlayer();
+
 	UFUNCTION(BlueprintCallable)
 	UEnemyAttackComponent* GetEnemyAttackComponent();
 
 	UPROPERTY(BlueprintReadWrite)
 	int CurrentWaypointIndex;
 
-
-protected :
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> PlayersAtRange;
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<AActor*> NearPlayers;
+
+
+protected :
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float AlertnessWaitDuration;
@@ -75,6 +79,9 @@ protected :
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsTriggered;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bHeardLoud;
 
 	UPROPERTY(BlueprintReadWrite)
 	ABaseEnemy* PossessedPawn;

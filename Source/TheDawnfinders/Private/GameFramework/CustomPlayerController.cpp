@@ -4,12 +4,26 @@
 #include "CustomPlayerController.h"
 
 #include "AkGameplayStatics.h"
+#include "DebugSubsyteme.h"
 #include "Actors/Mule/DangerManager.h"
 #include "Actors/Mule/Mule.h"
 #include "Actors/Mule/MuleAIController.h"
 #include "Actors/Player/APlayerCharacter.h"
 #include "GameFramework/GICustom.h"
 #include "Widgets/Mule/MuleWidget.h"
+
+
+void ACustomPlayerController::ToggleDebugWindow() const
+{
+	if (UGameInstance* GI = GetGameInstance())
+	{
+		if (UDebugSubsyteme* DebugSubsystem =
+			GI->GetSubsystem<UDebugSubsyteme>())
+		{
+			DebugSubsystem->ToggleDebugWindow();
+		}
+	}
+}
 
 void ACustomPlayerController::Server_RequestSwitchPanel_Implementation(int32 PanelIndex)
 {
@@ -71,11 +85,10 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 		Noise->NoiseOriginActor = OwningPlayer;
 		Noise->SetIsConstant(true);
 		NoiseActor = Noise;
+		Multi_PlayCallMule();
 	}
 	NoiseActor->SetActorLocation(OwningPlayer->GetActorLocation());
-	
-	Multi_PlayCallMule();
-		
+
 	OwningPlayer->Execute_ShowProgress(OwningPlayer,HoldTimer);
 	if (HoldTimer <= 0.f)
 	{
@@ -119,19 +132,12 @@ void ACustomPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!IsLocalController() || !MuleWidget || !Mule) return;
+	if (!IsLocalController() || !Mule) return;
 	float ChargesPercent = 0.f;
 	if (Mule->ChargeCooldown > 0.f)
 	{
 		ChargesPercent = Mule->ChargesTimer / Mule->ChargeCooldown;
 	}
-
-	MuleWidget->UpdateMuleWidget(
-		Mule->CallCharges,
-		ChargesPercent,
-		Mule->CooldownTimer,
-		Mule->InventoryComponent->CurrentValue + Mule->InventoryComponent->Gold
-	);
 	
 	if (bIsHolding)
 	{
@@ -148,6 +154,11 @@ void ACustomPlayerController::BeginPlay()
 
 void ACustomPlayerController::Multi_PlayCallMule_Implementation()
 {
-	if (!CallMuleSoundID)
-		CallMuleSoundID = UAkGameplayStatics::PostEventAtLocation(CallMuleSound,GetOwner()->GetActorLocation(),GetOwner()->GetActorRotation(),GetWorld());
+	if (!IsLocalController()) return;
+    
+	if (CallMuleSoundID == AK_INVALID_PLAYING_ID)
+		CallMuleSoundID = UAkGameplayStatics::PostEvent(
+			CallMuleSound, GetOwner(), 0,
+			FOnAkPostEventCallback(), false
+		);
 }

@@ -9,6 +9,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Actors/Interactibles/AContainer.h"
+#include "Actors/SoundManagement/MusicManager.h"
 #include "Interfaces/IDamageable.h"
 #include "Others/BasicEnemyAIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -33,6 +34,13 @@ ABaseEnemy::ABaseEnemy()
     {
         AkComponent->SetupAttachment(GetMesh());
     }
+}
+
+UMusicManager* GetMusicManager(UObject* WorldContext)
+{
+    UGameInstance* GI = UGameplayStatics::GetGameInstance(WorldContext);
+    if (!GI) return nullptr;
+    return GI->GetSubsystem<UMusicManager>();
 }
 
 void ABaseEnemy::BeginPlay()
@@ -171,6 +179,9 @@ void ABaseEnemy::Multicast_HideEye_Implementation()
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
+   if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
+        MM->OnEnemyCalm();
+ 
 }
 
 void ABaseEnemy::Multicast_EnterListening_Implementation()
@@ -190,6 +201,9 @@ void ABaseEnemy::Multicast_EnterSuspicious_Implementation()
 void ABaseEnemy::Multicast_EnterAggressives_Implementation()
 {
     EnemyWidget->PlayAggressiveAnim();
+    
+    if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
+        MM->OnEnemyAggro();
 }
 
 #pragma endregion
@@ -213,7 +227,7 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
 
 void ABaseEnemy::Multi_PlayHitSound_Implementation()
 {
-    HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
+    //HitSoundID = UAkGameplayStatics::PostEvent(HitSound,Owner,0,FOnAkPostEventCallback(), false);
 }
 
 void ABaseEnemy::OnMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
@@ -294,12 +308,22 @@ void ABaseEnemy::OnMontageEnd(UAnimMontage* Montage, bool bInterrupted)
 
 void ABaseEnemy::ReceiveDamage_Implementation(float Quantity, AActor* Origin) 
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
     CurrentHealth -= Quantity;
 
+    if (Origin && !AIController->NearPlayers.Contains(Origin)) {
+        AIController->NearPlayers.Push(Origin);
+        AIController->PlayersAtRange.Push(Origin);
+    }
+
+    if (!HasAuthority()) {
+        Server_TakeDamages(Quantity, Origin);
+        return;
+    }
+
     Multicast_DisplayDamageBar(CurrentHealth / EnemyData->Health);
-    if (CurrentHealth <= 0) {
+    if (CurrentHealth <= 0 && !bIsDead) {
         Die();
     }
 
@@ -313,9 +337,12 @@ void ABaseEnemy::Multicast_DisplayDamageBar_Implementation(float Percent)
 
 void ABaseEnemy::Server_TakeDamages_Implementation(float Quantity, AActor* Origin)
 {
-    if (bIsDead) return;
+    if (CurrentHealth <= 0) return;
 
-    UE_LOG(LogTemp, Display, TEXT("%f"), CurrentHealth);
+    if (Origin && !AIController->NearPlayers.Contains(Origin)) {
+        AIController->NearPlayers.Push(Origin);
+        AIController->PlayersAtRange.Push(Origin);
+    }
 
     CurrentHealth -= Quantity;
     HealthBarWidget->TakeDamage(CurrentHealth / EnemyData->Health, false);
@@ -357,14 +384,18 @@ void ABaseEnemy::Die() {
         AContainer* Container = Cast<AContainer>(GetWorld()->SpawnActor<AActor>(ContainerToSpawn, SpawnLocation, SpawnRotation, SpawnParams));
     }
 
-    GetController()->StopMovement();
-    GetCharacterMovement()->MaxWalkSpeed = 0.0f;
+    if (GetController()) GetController()->StopMovement();
+    if (GetCharacterMovement()) GetCharacterMovement()->MaxWalkSpeed = 0.0f;
     SetLockRotation(true);
     DoDeathDissolve();
 
     MulticastPlayMontage(DeathMontage, 1);
 
     bIsDead = true;
+    if (UMusicManager* MM = GetMusicManager(this))
+    {
+        MM->OnEnemyCalm();
+    }
 }
 
 
@@ -400,12 +431,12 @@ void ABaseEnemy::DoHitEffect_Implementation()
 
 void ABaseEnemy::FadeIn_Implementation()
 {
-    IsDisplayed = true;
+    //IsDisplayed = true;
 }
 
 void ABaseEnemy::FadeOut_Implementation()
 {
-    IsDisplayed = false;
+    //IsDisplayed = false;
 }
 
 bool ABaseEnemy::GetIsDisplayed_Implementation()
@@ -421,14 +452,14 @@ void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
     // Tout couper
     if (AAIController* AIC = Cast<AAIController>(GetController()))
         if (UPathFollowingComponent* PFC = AIC->GetPathFollowingComponent())
-            PFC->SetActive(false); // empêche le re-dispatch de RequestedVelocity
+            PFC->SetActive(false); // empï¿½che le re-dispatch de RequestedVelocity
 
     CMC->StopMovementImmediately();
     CMC->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);
     //CMC->RemoveRootMotionSourceByName(FName("Knockback"));
 
-    // LOG pour vérifier ce qui est appliqué
-    UE_LOG(LogTemp, Warning, TEXT("Force appliquée : %s | HasAnimRM : %d"),
+    // LOG pour vï¿½rifier ce qui est appliquï¿½
+    UE_LOG(LogTemp, Warning, TEXT("Force appliquï¿½e : %s | HasAnimRM : %d"),
         *(Direction * Strength).ToString(),
         GetMesh()->GetAnimInstance()->RootMotionMode == ERootMotionMode::RootMotionFromEverything);
 
@@ -444,7 +475,7 @@ void ABaseEnemy::PushEnemy_Implementation(float Strength, FVector Direction)
 
     uint16 SourceID = CMC->ApplyRootMotionSource(KnockbackSource);
 
-    // LOG pour vérifier que la source est bien enregistrée
+    // LOG pour vï¿½rifier que la source est bien enregistrï¿½e
     UE_LOG(LogTemp, Warning, TEXT("RootMotionSource ID : %d"), SourceID);
     FTimerHandle TH;
     GetWorldTimerManager().SetTimer(TH, [this]()

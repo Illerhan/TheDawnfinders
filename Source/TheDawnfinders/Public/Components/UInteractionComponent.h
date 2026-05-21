@@ -129,7 +129,14 @@ public :
 	AActor* GetCurrentInteractible() 
 	{
 		if (!bIsInInteraction) return nullptr;
-		return CurrentInteractible;
+
+		if(CurrentInteractible)
+			return CurrentInteractible;
+
+		if (InteractingQTEActor)
+			return InteractingQTEActor;
+
+		return (AActor*)CurrentHelpedTarget;
 	}
 
 	UFUNCTION(BlueprintCallable)
@@ -185,7 +192,7 @@ private:
 	UPROPERTY(Replicated)
 	AActor* NearestInteractible;
 
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	AAPlayerCharacter* CurrentHelpedTarget = nullptr;
 
 	UPROPERTY(ReplicatedUsing = OnRep_HelpState)
