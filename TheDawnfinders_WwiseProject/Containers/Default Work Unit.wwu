@@ -9003,6 +9003,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Player_GrabItem 1" ID="{F4A99997-7F8C-4B6C-8657-EAD939111932}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.402558641393047"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Player_GrabItem 1.wav</AudioFile>
 													<MediaIDList>
@@ -9025,6 +9030,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Player_GrabItem 2" ID="{BDB65748-9027-493C-A5EB-A098F9E495C3}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.235820891506382"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Player_GrabItem 2.wav</AudioFile>
 													<MediaIDList>
@@ -9047,6 +9057,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Player_GrabItem 3" ID="{F938C137-0368-4F75-A300-D2AE79ACF89A}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.422174828901474"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Player_GrabItem 3.wav</AudioFile>
 													<MediaIDList>
@@ -9069,6 +9084,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Player_GrabItem 4" ID="{1FA98B1B-6D84-40D3-AD2E-FE8564A0BF3A}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.245629001527961"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Player_GrabItem 4.wav</AudioFile>
 													<MediaIDList>
@@ -16708,6 +16728,11 @@
 									</MediaIDList>
 								</AudioFileSource>
 								<AudioFileSource Name="UI_New_Zone_1" ID="{E37FD4EC-B86C-4333-9943-AED8100946CB}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.646865681036195"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="1.2349253910691"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>UI_New_Zone_1.wav</AudioFile>
 									<MediaIDList>
