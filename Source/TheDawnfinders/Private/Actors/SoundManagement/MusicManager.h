@@ -38,6 +38,9 @@ public:
 	// Appelé par l'objectif d'extraction
 	UFUNCTION(BlueprintCallable)
 	void TriggerExtraction();
+
+	UFUNCTION(BlueprintCallable)
+	void PlayMusic(USoundBase* musicToPlay);
 	
 	UPROPERTY(EditAnywhere, Category = "Audio")
 	USoundBase* ExtractionSound;
