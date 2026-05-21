@@ -695,6 +695,8 @@ void UItemComponent::AttackAnimEnd()
 	PlayerCharacter->SetPlayerAcceleration(4000);
 	PlayerCharacter->StopAutoLock();
 
+	CanCancelAttack = false;
+
 	ComboIndex++;
 	ResetComboCounterDelay(0.2f);
 
