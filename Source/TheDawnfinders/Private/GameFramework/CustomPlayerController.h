@@ -41,6 +41,9 @@ public:
 	
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void Server_StopHoldMule();
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_PlayTravelSound(FVector Position);
 
 	UFUNCTION(BlueprintCallable)
 	void ToggleDebugWindow() const;
@@ -65,6 +68,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<class ANoise> NoiseObject;
 	
+	UPROPERTY()
+	int32 MuleTravelSoundID = AK_INVALID_PLAYING_ID;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	UAkAudioEvent* MuleTravelSound;
+
 	virtual void Tick(float DeltaTime) override;
 	
 	virtual void BeginPlay() override;

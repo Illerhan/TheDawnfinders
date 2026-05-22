@@ -2,7 +2,9 @@
 
 #include "AkGameplayStatics.h"
 #include "Actors/Mule/Mule.h"
+#include "Actors/Player/APlayerCharacter.h"
 #include "EntitySystem/MovieSceneEntitySystemRunner.h"
+#include "GameFramework/CustomPlayerController.h"
 #include "GameFramework/GameSession.h"
 #include "Net/UnrealNetwork.h"
 
@@ -49,21 +51,24 @@ void AMuleAIController::CallMule(AActor* Actor)
 	FVector CorrectedForward = Actor->GetActorForwardVector();
 	FVector SpawnPosition = Actor->GetActorLocation() + (CorrectedForward * SpawnOffset);
 	
+	AAPlayerCharacter* Player = Cast<AAPlayerCharacter>(Actor);
+	ACustomPlayerController* PC = Cast<ACustomPlayerController>(Player->GetController());
+	
+	PC->Multicast_PlayTravelSound(SpawnPosition);
 	FTimerDelegate TimerDelegate;
-	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition);
+	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition, PC);
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
 	
-	MyMule->Multicast_PlayTravelSound(SpawnPosition);
-	
 	FTimerHandle TimerHandle_Travel;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor, SpawnPosition]()
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor, SpawnPosition, PC]()
 	{
-		MyMule->Multicast_PlayTravelSound(SpawnPosition);
-	}, 5.f, false);
+		PC->Multicast_PlayTravelSound(SpawnPosition);
+	}, 1.f, false);
 
 	MyMule->PlayAppearVFX();
 	MyMule->SetActorLocation(SpawnPosition);
 
+	MyMule->CallCharges--;
 	MyMule->CallCharges--;
 	MyMule->CooldownTimer = MyMule->CallCooldown;
 
@@ -73,10 +78,10 @@ void AMuleAIController::CallMule(AActor* Actor)
 	}
 }
 
-void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos)
+void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos, ACustomPlayerController* Player)
 {
 	MyMule->SetActorLocation(SpawnPos);
-	MyMule->Multicast_PlayTravelSound(SpawnPos);
+	Player->Multicast_PlayTravelSound(SpawnPos);
 	MyMule->DoAppearMovement();
 }
 

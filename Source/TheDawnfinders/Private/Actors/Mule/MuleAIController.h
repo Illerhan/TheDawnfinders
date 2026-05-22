@@ -5,6 +5,7 @@
 #include "AkAudioEvent.h"
 #include "Actors/Player/ANoise.h"
 #include "Actors/Mule/Mule.h"
+#include "GameFramework/CustomPlayerController.h"
 #include "MuleAIController.generated.h"
 
 UCLASS()
@@ -27,7 +28,7 @@ public:
 	FTimerHandle TimerHandle_SpawnObject;
 	
 	UFUNCTION(BlueprintCallable, Category = Mule)
-	void OnSpawnTimerExpired(FVector SpawnPos);
+	void OnSpawnTimerExpired(FVector SpawnPos, ACustomPlayerController* Player);
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Mule)
 	float SpawnOffset;
