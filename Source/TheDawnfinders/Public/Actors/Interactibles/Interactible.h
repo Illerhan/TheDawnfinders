@@ -13,13 +13,14 @@
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Curves/CurveFloat.h"
+#include "Widgets/UWorldInteractibleWidget.h"
 #include "Interactible.generated.h"
 
 class UBoxComponent;
 class UItemData;
 class AAPlayerCharacter;
 class ULockpickQTEWidget;
-class UWorldInteractibleWidget;
+class eUWorldInteractibleWidget;
 
 
 UENUM(BlueprintType)
