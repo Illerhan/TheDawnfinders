@@ -37,6 +37,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1847440691	Play_UI_Roll_Over			\Default Work Unit\UI\Play_UI_Roll_Over	
 	1859398249	Play_EndOfReload			\Default Work Unit\Objets\Objets\Play_EndOfReload	
 	1864892471	Play_Player_Hit			\Default Work Unit\Objets\Objets\Play_Player_Hit	
+	2062731269	Play_Extraction			\Default Work Unit\Objets\Elements de LD\Play_Extraction	
 	2079076761	Play_Open_Map			\Default Work Unit\UI\Map\Play_Open_Map	
 	2104164593	Play_UI_NewZone			\Default Work Unit\UI\Play_UI_NewZone	
 	2195438541	Play_BasicEnemySecondaryScream			\Default Work Unit\Ennemis\Fidele\Play_BasicEnemySecondaryScream	
@@ -252,6 +253,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	281151790	OutOfBreath 11	.cache\FB\{FBEE2B6A-6D87-A52B-29B5-5FAC29397BC6}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 11		75116
 	282780422	FootstepsSandRun 15	.cache\3F\{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 15		48384
 	283024977	Crawl_02	.cache\0B\{0B2A1574-0CA2-84DD-015C-F2BA40431647}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Crawl\Crawl_02		245240
+	290626856	Extraction	.cache\37\{373DAA7C-CE9E-FFF0-F74C-2568F2108F46}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Extraction		2747064
 	291662585	FootstepsWoodWalk 10	.cache\5A\{5A1B0E76-8106-7BC1-C7F5-0A6B88DD0192}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 10		136176
 	292026002	FootstepsWoodCrackWalk 14	.cache\76\{76886311-F39A-3592-625C-745C2B47C0FB}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 14		144704
 	292070805	PAPRMisc_Multiple Paper Moving_B00M_ONE-07	.cache\FC\{FC380BB3-9C4A-E178-7430-B26C355159FA}.wem		\Containers\Default Work Unit\UI\Close_Map\PAPRMisc_Multiple Paper Moving_B00M_ONE-07		150624
