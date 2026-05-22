@@ -9206,6 +9206,7 @@
 										<RandomSequenceContainer Name="Palanquin" ID="{61F2836D-AB19-47D1-9327-A2A97CE2413C}" ShortID="663606987">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="8"/>
 												<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 											</PropertyList>
 											<ReferenceList>
