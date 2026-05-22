@@ -37,7 +37,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1847440691	Play_UI_Roll_Over			\Default Work Unit\UI\Play_UI_Roll_Over	
 	1859398249	Play_EndOfReload			\Default Work Unit\Objets\Objets\Play_EndOfReload	
 	1864892471	Play_Player_Hit			\Default Work Unit\Objets\Objets\Play_Player_Hit	
-	2062731269	Play_Extraction			\Default Work Unit\Objets\Elements de LD\Play_Extraction	
+	2062731269	Play_Extraction			\Default Work Unit\Objets\Elements de LD\Extraction\Play_Extraction	
 	2079076761	Play_Open_Map			\Default Work Unit\UI\Map\Play_Open_Map	
 	2104164593	Play_UI_NewZone			\Default Work Unit\UI\Play_UI_NewZone	
 	2195438541	Play_BasicEnemySecondaryScream			\Default Work Unit\Ennemis\Fidele\Play_BasicEnemySecondaryScream	
@@ -78,6 +78,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3710295231	Play_Zeloth_Idle			\Default Work Unit\Ennemis\Zelote\Play_Zeloth_Idle	
 	3737722769	Play_PlayerHealing			\Default Work Unit\Joueur\Feedbakcs\Play_PlayerHealing	
 	3780240352	Play_BasicEnnemyAttack			\Default Work Unit\Ennemis\Fidele\Play_BasicEnnemyAttack	
+	3858448649	Play_Earthquake			\Default Work Unit\Objets\Elements de LD\Extraction\Play_Earthquake	
 	3881217501	Play_Player_PickGold			\Default Work Unit\Objets\Objets\Play_Player_PickGold	
 	3882989320	Play_WoodRun			\Default Work Unit\Joueur\Deplacement\Play_WoodRun	
 	3931500340	Play_StoneRun			\Default Work Unit\Joueur\Deplacement\Play_StoneRun	
@@ -244,6 +245,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	269455372	FootstepsWoodCrackWalk 4	.cache\E7\{E7C9B31A-1967-2E7C-CB49-753B71106B4D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 4		146048
 	272090056	Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01	.cache\DA\{DAF44EBB-EC51-E9CD-8528-FB831B9B39B9}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Turn_Crank\Doors, Hardware, Bathroom Door, Lock With Key, Keyhole, Drop Key, Reinsert, Lock SND108978_03-01		2305416
 	272892538	OutOfBreath 8	.cache\5E\{5EF29464-78D1-8F43-843D-80254C0EC616}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 8		74144
+	274082930	Earthquake	.cache\78\{78A23063-2598-BEA0-B6A8-7E02331F7D38}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Earthquake		24278892
 	274995480	AMB_Sand3	.cache\C4\{C4D4886A-88DA-A704-D6F8-85F5DE80E270}.wem		\Containers\Default Work Unit\Ambiance\AMB_Sandfall\AMB_Sand3		928452
 	275003731	Palanquin_Empty 2	.cache\F2\{F2B435A6-4E7F-466F-895B-E5AA4D045EF9}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 2		288840
 	278825995	FootstepsWoodCrackRun 4	.cache\A1\{A185CD04-8AD2-D611-3B56-40316516AF0D}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 4		87392
@@ -253,7 +255,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	281151790	OutOfBreath 11	.cache\FB\{FBEE2B6A-6D87-A52B-29B5-5FAC29397BC6}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 11		75116
 	282780422	FootstepsSandRun 15	.cache\3F\{3F7CEB23-E4DF-B95B-3233-6118485D170E}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\SandWalk\FootstepsSandRun 15		48384
 	283024977	Crawl_02	.cache\0B\{0B2A1574-0CA2-84DD-015C-F2BA40431647}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Crawl\Crawl_02		245240
-	290626856	Extraction	.cache\37\{373DAA7C-CE9E-FFF0-F74C-2568F2108F46}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Extraction		2747064
+	290626856	Extraction	.cache\37\{373DAA7C-CE9E-FFF0-F74C-2568F2108F46}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Extraction\Extraction		2747064
 	291662585	FootstepsWoodWalk 10	.cache\5A\{5A1B0E76-8106-7BC1-C7F5-0A6B88DD0192}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 10		136176
 	292026002	FootstepsWoodCrackWalk 14	.cache\76\{76886311-F39A-3592-625C-745C2B47C0FB}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 14		144704
 	292070805	PAPRMisc_Multiple Paper Moving_B00M_ONE-07	.cache\FC\{FC380BB3-9C4A-E178-7430-B26C355159FA}.wem		\Containers\Default Work Unit\UI\Close_Map\PAPRMisc_Multiple Paper Moving_B00M_ONE-07		150624

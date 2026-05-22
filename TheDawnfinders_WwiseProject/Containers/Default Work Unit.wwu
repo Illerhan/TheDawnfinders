@@ -1608,9 +1608,14 @@
 								</BlendContainer>
 								<RandomSequenceContainer Name="PlayerPickaxe" ID="{EDF8A43F-685F-437A-ACD6-FE9C638BFFFE}" ShortID="135912541">
 									<PropertyList>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>31</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ValueList>
-												<Value>5</Value>
+												<Value>-310</Value>
 											</ValueList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
@@ -11504,17 +11509,9 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" ShortID="936463299">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
-										</Reference>
-									</ReferenceList>
+								<Folder Name="Extraction" ID="{6B8200BD-7723-4605-AC38-DD225D5F4F12}" ShortID="434925622">
 									<ChildrenList>
-										<Sound Name="Extraction" ID="{AEFBED9B-1227-4475-A9CB-BD1905D8B53E}" ShortID="187661370">
+										<RandomSequenceContainer Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" ShortID="936463299">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -11524,61 +11521,95 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}">
+												<Sound Name="Extraction" ID="{AEFBED9B-1227-4475-A9CB-BD1905D8B53E}" ShortID="187661370">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}">
+															<Language>SFX</Language>
+															<AudioFile>Extraction.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="290626856"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<StateInfo>
+												<StateGroupList>
+													<StateGroupInfo>
+														<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+														<StateGroupInfo Name="" ID="{AEA35322-4F13-41E1-921A-BE068E1193B1}" ShortID="116910786"/>
+													</StateGroupInfo>
+												</StateGroupList>
+												<CustomStateList>
+													<CustomState>
+														<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+														<CustomState Name="" ID="{35613745-7C0E-4FC6-8D39-0735AD359D08}" ShortID="611494635"/>
+													</CustomState>
+													<CustomState>
+														<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+														<CustomState Name="" ID="{F09B8A16-E3B3-4430-A0A5-F5090BEAB6F6}" ShortID="969275634"/>
+													</CustomState>
+												</CustomStateList>
+											</StateInfo>
+											<ObjectLists>
+												<ObjectList Name="Effects">
+													<EffectSlot Name="" ID="{B90D1F75-453F-4096-950D-94A9F1CDBE65}" ShortID="608726381">
+														<ReferenceList>
+															<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+																<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+															</Reference>
+														</ReferenceList>
+														<StateInfo>
+															<CustomStateList>
+																<CustomState>
+																	<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+																	<CustomState Name="" ID="{FC32353D-FEA5-46B9-9047-6584C1A99593}" ShortID="762802581"/>
+																</CustomState>
+																<CustomState>
+																	<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+																	<CustomState Name="" ID="{93190081-7FB4-4CE5-A766-E0FB88F6685D}" ShortID="908566581"/>
+																</CustomState>
+															</CustomStateList>
+														</StateInfo>
+													</EffectSlot>
+												</ObjectList>
+											</ObjectLists>
+										</RandomSequenceContainer>
+										<Sound Name="Earthquake" ID="{E0493E74-BE4B-4B7C-B157-D767525F03CA}" ShortID="56206244">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Earthquake" ID="{D1F1D0E7-1F87-428B-BB73-A3D6E216B131}">
 													<Language>SFX</Language>
-													<AudioFile>Extraction.wav</AudioFile>
+													<AudioFile>Earthquake.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="290626856"/>
+														<MediaID ID="274082930"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}" Platform="Linked"/>
+												<ActiveSource Name="Earthquake" ID="{D1F1D0E7-1F87-428B-BB73-A3D6E216B131}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
-									<StateInfo>
-										<StateGroupList>
-											<StateGroupInfo>
-												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
-												<StateGroupInfo Name="" ID="{AEA35322-4F13-41E1-921A-BE068E1193B1}" ShortID="116910786"/>
-											</StateGroupInfo>
-										</StateGroupList>
-										<CustomStateList>
-											<CustomState>
-												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
-												<CustomState Name="" ID="{35613745-7C0E-4FC6-8D39-0735AD359D08}" ShortID="611494635"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
-												<CustomState Name="" ID="{F09B8A16-E3B3-4430-A0A5-F5090BEAB6F6}" ShortID="969275634"/>
-											</CustomState>
-										</CustomStateList>
-									</StateInfo>
-									<ObjectLists>
-										<ObjectList Name="Effects">
-											<EffectSlot Name="" ID="{B90D1F75-453F-4096-950D-94A9F1CDBE65}" ShortID="608726381">
-												<ReferenceList>
-													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
-														<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
-													</Reference>
-												</ReferenceList>
-												<StateInfo>
-													<CustomStateList>
-														<CustomState>
-															<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
-															<CustomState Name="" ID="{FC32353D-FEA5-46B9-9047-6584C1A99593}" ShortID="762802581"/>
-														</CustomState>
-														<CustomState>
-															<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
-															<CustomState Name="" ID="{93190081-7FB4-4CE5-A766-E0FB88F6685D}" ShortID="908566581"/>
-														</CustomState>
-													</CustomStateList>
-												</StateInfo>
-											</EffectSlot>
-										</ObjectList>
-									</ObjectLists>
-								</RandomSequenceContainer>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">
