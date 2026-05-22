@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{606C3F56-9A42-C15E-7641-8E6BC120384E}",
+    "Hash": "{05F208A0-6826-EDD4-05FF-8E578D0506F4}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1070,6 +1070,14 @@
       "Location": "Memory",
       "ShortName": "Crawl_02.wav",
       "CachePath": "0B/{0B2A1574-0CA2-84DD-015C-F2BA40431647}.wem"
+     },
+     {
+      "Id": "290626856",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Extraction.wav",
+      "CachePath": "37/{373DAA7C-CE9E-FFF0-F74C-2568F2108F46}.wem"
      },
      {
       "Id": "291662585",
@@ -5345,6 +5353,27 @@
       }
      },
      {
+      "Id": "2062731269",
+      "Name": "Play_Extraction",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Extraction",
+      "GUID": "{B4DF2906-1371-4184-ABCE-092A9B516B83}",
+      "DurationType": "OneShot",
+      "DurationMin": "15.572109",
+      "DurationMax": "15.572109",
+      "MediaRefs": [
+       {
+        "Id": "290626856"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1588715066"
+        }
+       ]
+      }
+     },
+     {
       "Id": "170675880",
       "Name": "Play_FireLoop",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireLoop",
@@ -5765,8 +5794,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_PickaxeSwing",
       "GUID": "{FD87EFEA-039C-4C7C-8575-83334D9C93F2}",
       "DurationType": "OneShot",
-      "DurationMin": "0.70469654",
-      "DurationMax": "0.70469654",
+      "DurationMin": "0.84532267",
+      "DurationMax": "0.84532267",
       "MediaRefs": [
        {
         "Id": "106243305"
@@ -8691,6 +8720,6 @@
     ]
    }
   ],
-  "FileHash": "{3A957C57-560A-7974-FD0D-F060AF947CD7}"
+  "FileHash": "{480F5201-D23A-C01D-4FAD-26B1F00DFFCE}"
  }
 }

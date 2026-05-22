@@ -730,6 +730,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Extraction" ID="{B4DF2906-1371-4184-ABCE-092A9B516B83}">
+									<ChildrenList>
+										<Action Name="" ID="{4B2D5F92-45D5-43C8-BD9A-0FA0B19E15E3}" ShortID="1008538996">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">

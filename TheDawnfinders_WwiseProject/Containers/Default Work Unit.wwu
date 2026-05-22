@@ -9205,8 +9205,8 @@
 									<ChildrenList>
 										<RandomSequenceContainer Name="Palanquin" ID="{61F2836D-AB19-47D1-9327-A2A97CE2413C}" ShortID="663606987">
 											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="8"/>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
 												<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 											</PropertyList>
 											<ReferenceList>
@@ -9505,6 +9505,11 @@
 										<RandomSequenceContainer Name="Palanquin_Inventory" ID="{E52A3F27-2009-43C1-BF64-09055EE0FB4D}" ShortID="460352605">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-15</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -11498,6 +11503,81 @@
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" ShortID="936463299">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Extraction" ID="{AEFBED9B-1227-4475-A9CB-BD1905D8B53E}" ShortID="187661370">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}">
+													<Language>SFX</Language>
+													<AudioFile>Extraction.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="290626856"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Extraction" ID="{07A7ABA3-97DE-4B2E-A149-2457F8D5972C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{AEA35322-4F13-41E1-921A-BE068E1193B1}" ShortID="116910786"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{35613745-7C0E-4FC6-8D39-0735AD359D08}" ShortID="611494635"/>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{F09B8A16-E3B3-4430-A0A5-F5090BEAB6F6}" ShortID="969275634"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{B90D1F75-453F-4096-950D-94A9F1CDBE65}" ShortID="608726381">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+														<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+												<StateInfo>
+													<CustomStateList>
+														<CustomState>
+															<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+															<CustomState Name="" ID="{FC32353D-FEA5-46B9-9047-6584C1A99593}" ShortID="762802581"/>
+														</CustomState>
+														<CustomState>
+															<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+															<CustomState Name="" ID="{93190081-7FB4-4CE5-A766-E0FB88F6685D}" ShortID="908566581"/>
+														</CustomState>
+													</CustomStateList>
+												</StateInfo>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
