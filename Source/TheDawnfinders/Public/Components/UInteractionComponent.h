@@ -172,6 +172,9 @@ public:
 public:
 	UPROPERTY(Replicated, EditAnywhere,BlueprintReadWrite,Blueprintable)
 	ACarriable* CarriedItem;
+
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	bool bIsInInteraction;
 	
 private:
 	UPROPERTY()
@@ -185,9 +188,6 @@ private:
 	
 	UPROPERTY()
 	bool bIsDoingQTE;
-
-	UPROPERTY(Replicated)
-	bool bIsInInteraction;
 
 	UPROPERTY(Replicated)
 	AActor* NearestInteractible;
