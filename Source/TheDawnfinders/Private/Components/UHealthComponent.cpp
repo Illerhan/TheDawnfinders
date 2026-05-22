@@ -650,12 +650,16 @@ void UHealthComponent::Server_Revive_Implementation()
 	if (AAPlayerCharacter* PC = Cast<AAPlayerCharacter>(Owner))
 	{
 		PC->OnRevive();
-		bIsDead = false;
-		ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
-		if (GM)
-		{
-			GM->RemoveDeadPlayer();
-			GM->CheckAllDead();
+
+		if (bIsDead) {
+			bIsDead = false;
+
+			ACustomGameMode* GM = Cast<ACustomGameMode>(UGameplayStatics::GetGameMode(this));
+			if (GM)
+			{
+				GM->RemoveDeadPlayer();
+				GM->CheckAllDead();
+			}
 		}
 	}
 	

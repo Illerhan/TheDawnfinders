@@ -77,10 +77,15 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 
 	Client_DoCollisionEffect();
 
+	TArray<AActor*> AlreadyHitActors;
+
 	for (FHitResult& Hit : HitResults)
 	{
 		if (!Hit.GetActor()) continue;
 		if (!Hit.GetActor()->ActorHasTag("Enemy")) continue;
+		if (AlreadyHitActors.Contains(Hit.GetActor())) continue;
+
+		AlreadyHitActors.Add(Hit.GetActor());
 
 		switch (EffectType) {
 		case EThrowableEffectType::Explodes :
@@ -114,15 +119,6 @@ void AThrowableObject::Server_DoCollisionEffect_Implementation()
 void AThrowableObject::Client_DoCollisionEffect_Implementation()
 {
 	// We get the in range actors
-	TArray<FHitResult> HitResults;
-	bool bHit = GetWorld()->SweepMultiByChannel(
-		HitResults,
-		GetActorLocation(),
-		GetActorLocation(),
-		FQuat::Identity,
-		ECC_GameTraceChannel1,
-		FCollisionShape::MakeSphere(EffectRange)
-	);
 
 	/*DrawDebugSphere(
 		GetWorld(),
