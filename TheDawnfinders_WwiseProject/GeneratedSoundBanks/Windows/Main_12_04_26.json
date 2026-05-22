@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{05F208A0-6826-EDD4-05FF-8E578D0506F4}",
+    "Hash": "{FC67F5AB-4F8F-3FE4-BA5E-018999F5690A}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1000,6 +1000,14 @@
       "CachePath": "5E/{5EF29464-78D1-8F43-843D-80254C0EC616}.wem"
      },
      {
+      "Id": "274082930",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Earthquake.wav",
+      "CachePath": "78/{78A23063-2598-BEA0-B6A8-7E02331F7D38}.wem"
+     },
+     {
       "Id": "274995480",
       "Language": "SFX",
       "Streaming": "false",
@@ -1510,6 +1518,14 @@
       "Location": "Memory",
       "ShortName": "Door_Open1.wav",
       "CachePath": "D8/{D8AE9875-C677-D776-C773-3358DA4FA1FF}.wem"
+     },
+     {
+      "Id": "429072146",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Extraction_Scream.wav",
+      "CachePath": "67/{67B4D3F9-7018-13A2-ACB1-5E97373F9E61}.wem"
      },
      {
       "Id": "429962083",
@@ -4984,6 +5000,20 @@
       ]
      },
      {
+      "Id": "3858448649",
+      "Name": "Play_Earthquake",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Extraction\\Play_Earthquake",
+      "GUID": "{F461E883-C0D4-4B47-AFBB-93FCBF560D43}",
+      "DurationType": "OneShot",
+      "DurationMin": "137.63463",
+      "DurationMax": "137.63463",
+      "MediaRefs": [
+       {
+        "Id": "274082930"
+       }
+      ]
+     },
+     {
       "Id": "3968874213",
       "Name": "Play_EliteEnemyAttackStab",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Zelote\\Play_EliteEnemyAttackStab",
@@ -5355,7 +5385,7 @@
      {
       "Id": "2062731269",
       "Name": "Play_Extraction",
-      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Extraction",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Extraction\\Play_Extraction",
       "GUID": "{B4DF2906-1371-4184-ABCE-092A9B516B83}",
       "DurationType": "OneShot",
       "DurationMin": "15.572109",
@@ -5372,6 +5402,20 @@
         }
        ]
       }
+     },
+     {
+      "Id": "2070651310",
+      "Name": "Play_ExtractionScream",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Extraction\\Play_ExtractionScream",
+      "GUID": "{BAB2066F-5446-4B42-B0CE-C39421E34F03}",
+      "DurationType": "OneShot",
+      "DurationMin": "10.975964",
+      "DurationMax": "10.975964",
+      "MediaRefs": [
+       {
+        "Id": "429072146"
+       }
+      ]
      },
      {
       "Id": "170675880",
@@ -8720,6 +8764,6 @@
     ]
    }
   ],
-  "FileHash": "{480F5201-D23A-C01D-4FAD-26B1F00DFFCE}"
+  "FileHash": "{A7EB053C-B69E-AEA3-BC71-1E8A12D09C6B}"
  }
 }
