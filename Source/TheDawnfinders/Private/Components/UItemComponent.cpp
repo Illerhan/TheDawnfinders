@@ -785,22 +785,28 @@ void UItemComponent::DoAttackCollision()
 void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Target, UItemData* Data, float BaseDamages)
 {
 	if (!Target) return;
+	if (!Data) return;
 
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	// Durability
-	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+	if (!Data->bIsRangedWeapon) {
 		if (EquippedItem.CurrentInfos.Durability <= 0) {
 			FinalDamage *= Data->UsedDurabilityMultiplier;
 			UseWeaponWithNoDurability(false);
 		}
 		else {
-			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+			InventoryComponent->UseDurability(1, Data);
 
 			if (EquippedItem.CurrentInfos.Durability <= 0)
 				UseWeaponWithNoDurability(true);
 		}
+	}
+
+	if (!WeaponData) {
+		IDamageable::Execute_ReceiveDamage(Target, FinalDamage, GetOwner());
+		return;
 	}
 
 	FinalDamage *= WeaponData->MineDamageMultiplier;
@@ -811,22 +817,28 @@ void UItemComponent::Server_ApplyDamagesToDestructible_Implementation(AActor* Ta
 void UItemComponent::Server_ApplyDamagesToEnemy_Implementation(ABaseEnemy* Enemy, UItemData* Data, float BaseDamages)
 {
 	if (!Enemy || Enemy->IsInvincible || Enemy->bIsDead) return;
+	if (!Data) return;
 
 	float FinalDamage = BaseDamages;
 	FWeaponInfos* WeaponData = WeaponDataTable->FindRow<FWeaponInfos>(Data->WeaponDataTableRow, " ");
 
 	// Durability
-	if (!EquippedItem.CurrentInfos.ItemData->bIsRangedWeapon) {
+	if (!Data->bIsRangedWeapon) {
 		if (EquippedItem.CurrentInfos.Durability <= 0) {
 			FinalDamage *= Data->UsedDurabilityMultiplier;
 			UseWeaponWithNoDurability(false);
 		}
 		else {
-			InventoryComponent->UseDurability(1, EquippedItem.CurrentInfos.ItemData);
+			InventoryComponent->UseDurability(1, Data);
 
 			if (EquippedItem.CurrentInfos.Durability <= 0)
 				UseWeaponWithNoDurability(true);
 		}
+	}
+
+	if (!WeaponData) {
+		IDamageable::Execute_ReceiveDamage(Enemy, FinalDamage, GetOwner());
+		return;
 	}
 
 	// Enemy Resistances
