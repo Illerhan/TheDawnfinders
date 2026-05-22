@@ -24,7 +24,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Mule)
 	void CallMule(AActor* Actor);
-	
+	UFUNCTION(BlueprintCallable, Category = Mule)
+	void CallMuleExtraction(AActor* Actor);
+
 	FTimerHandle TimerHandle_SpawnObject;
 	
 	UFUNCTION(BlueprintCallable, Category = Mule)
