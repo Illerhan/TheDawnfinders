@@ -78,6 +78,40 @@ void AMuleAIController::CallMule(AActor* Actor)
 	}
 }
 
+void AMuleAIController::CallMuleExtraction(AActor* Actor)
+{
+	if (!HasAuthority()) return;
+
+	if (MyMule->CooldownTimer > 0.f || MyMule->CallCharges <= 0) return;
+	
+	FVector CorrectedForward = Actor->GetActorForwardVector();
+	FVector SpawnPosition = Actor->GetActorLocation() + (CorrectedForward * SpawnOffset);
+	
+	ACustomPlayerController* PC = Cast<ACustomPlayerController>(GetWorld()->GetFirstPlayerController());
+	PC->Multicast_PlayTravelSound(SpawnPosition);
+	FTimerDelegate TimerDelegate;
+	TimerDelegate.BindUFunction(this, FName("OnSpawnTimerExpired"), SpawnPosition, PC);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnObject, TimerDelegate, SpawnDelay, false);
+	
+	FTimerHandle TimerHandle_Travel;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_Travel, [this, Actor, SpawnPosition, PC]()
+	{
+		PC->Multicast_PlayTravelSound(SpawnPosition);
+	}, 1.f, false);
+
+	MyMule->PlayAppearVFX();
+	MyMule->SetActorLocation(SpawnPosition);
+
+	MyMule->CallCharges--;
+	MyMule->CallCharges--;
+	MyMule->CooldownTimer = MyMule->CallCooldown;
+
+	if (MyMule->CallCharges <= 0)
+	{
+		MyMule->ChargesTimer = MyMule->ChargeCooldown;
+	}
+}
+
 void AMuleAIController::OnSpawnTimerExpired(FVector SpawnPos, ACustomPlayerController* Player)
 {
 	MyMule->SetActorLocation(SpawnPos);
