@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{1D8057FC-2099-57DD-AC13-4A5148477AC9}",
+    "Hash": "{606C3F56-9A42-C15E-7641-8E6BC120384E}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -517,7 +517,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "GiantChain.wav",
-      "CachePath": "07/{0721C3B1-9308-C2E0-A6EF-AD4F45EECEE5}.wem"
+      "CachePath": "AE/{AE42D557-6472-1FDD-68FD-CA0F1A3BAEED}.wem"
      },
      {
       "Id": "125951352",
@@ -5639,7 +5639,6 @@
       "Name": "Play_Palanquin",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Palanquin\\Play_Palanquin",
       "GUID": "{1E496A64-4CBC-41A4-B229-85331E9AF8A7}",
-      "MaxAttenuation": "5000",
       "DurationType": "Mixed",
       "DurationMin": "2.0906668",
       "DurationMax": "Infinite",
@@ -8692,6 +8691,6 @@
     ]
    }
   ],
-  "FileHash": "{0A96AEC7-EC90-E708-B4FB-E1452A7DE412}"
+  "FileHash": "{3A957C57-560A-7974-FD0D-F060AF947CD7}"
  }
 }
