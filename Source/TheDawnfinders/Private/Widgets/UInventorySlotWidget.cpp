@@ -55,6 +55,11 @@ void UInventorySlotWidget::SetupNavigation_Implementation(UWidget* TowardWidget)
 
 }
 
+void UInventorySlotWidget::SetIsLocked_Implementation(bool bLocked)
+{
+
+}
+
 #pragma endregion
 
 void UInventorySlotWidget::ActualiseTextOrientations_Implementation(float Angle)

@@ -36,3 +36,8 @@ void UPalanquinInventorySlotWidget::PlayHideAnim_Implementation(float Delay)
 {
 
 }
+
+void UPalanquinInventorySlotWidget::SetIsLocked_Implementation(bool bLocked)
+{
+
+}
