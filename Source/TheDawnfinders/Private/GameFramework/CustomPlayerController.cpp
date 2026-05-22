@@ -13,6 +13,18 @@
 #include "Widgets/Mule/MuleWidget.h"
 
 
+void ACustomPlayerController::Multicast_PlayTravelSound_Implementation(FVector Position)
+{
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	if (AudioDevice && MuleTravelSoundID != AK_INVALID_PLAYING_ID)
+	{
+		AudioDevice->StopPlayingID(MuleTravelSoundID, 300, AkCurveInterpolation_Log1);
+		MuleTravelSoundID = AK_INVALID_PLAYING_ID;
+	}
+	MuleTravelSoundID = UAkGameplayStatics::PostEventAtLocation(
+		MuleTravelSound, Position, FRotator::ZeroRotator, GetWorld());
+}
+
 void ACustomPlayerController::ToggleDebugWindow() const
 {
 	if (UGameInstance* GI = GetGameInstance())
