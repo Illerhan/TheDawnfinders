@@ -40,6 +40,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlayHideAnim(float Delay);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetIsLocked(bool bLocked);
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnSlotClicked OnSlotClicked;
 

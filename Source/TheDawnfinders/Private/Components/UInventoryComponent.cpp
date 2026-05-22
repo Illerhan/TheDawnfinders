@@ -81,7 +81,6 @@ bool UInventoryComponent::AddNewItem(FItemInfos NewItem, int Quantity)
 
 	if (!GetOwner()->HasAuthority())
 	{
-
 		ServerAddNewItem(NewItem, Quantity);
 		return true;
 	}
@@ -99,6 +98,7 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 	}
 
 	bool UseValueableInventory = (NewItem.ItemData->ItemType == EItemType::Valuable && TreasureSlotCount > 0);
+	int RemainingQuantity = Quantity;
 
 	for (int32 i = 0; i < (UseValueableInventory ? TreasureSlotCount : InventorySlotCount); i++)
 	{
@@ -107,16 +107,20 @@ void UInventoryComponent::ServerAddNewItem_Implementation(FItemInfos NewItem, in
 		if (!Slot.CurrentInfos.ItemData)
 		{
 			Slot.CurrentInfos = NewItem;
-			Slot.Quantity = Quantity;
+			Slot.Quantity = RemainingQuantity;
 			CurrentWeight += Slot.CurrentInfos.ItemData->ItemWeight;
 
 			break;
 		}
 		else if (Slot.CurrentInfos.ItemData == NewItem.ItemData && Slot.Quantity < NewItem.ItemData->MaxStackingCapacity)
 		{
-			Slot.Quantity += Quantity;
+			Slot.Quantity += RemainingQuantity;
+			RemainingQuantity = Slot.Quantity - NewItem.ItemData->MaxStackingCapacity;
 
-			break;
+			if(RemainingQuantity <= 0)
+				break;
+
+			Slot.Quantity = NewItem.ItemData->MaxStackingCapacity;
 		}
 	}
 

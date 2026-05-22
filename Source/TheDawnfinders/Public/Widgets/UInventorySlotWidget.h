@@ -52,6 +52,9 @@ public :
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetupNavigation(UWidget* TowardWidget);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetIsLocked(bool bLocked);
+
 
 // === PROTECTED PROPERTIES ===
 protected :

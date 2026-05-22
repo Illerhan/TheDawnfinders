@@ -730,17 +730,32 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_Extraction" ID="{B4DF2906-1371-4184-ABCE-092A9B516B83}">
+								<Folder Name="Extraction" ID="{7C78D8FA-05B6-48A2-9E74-54DEC29FA158}" ShortID="356357032">
 									<ChildrenList>
-										<Action Name="" ID="{4B2D5F92-45D5-43C8-BD9A-0FA0B19E15E3}" ShortID="1008538996">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
+										<Event Name="Play_Extraction" ID="{B4DF2906-1371-4184-ABCE-092A9B516B83}">
+											<ChildrenList>
+												<Action Name="" ID="{4B2D5F92-45D5-43C8-BD9A-0FA0B19E15E3}" ShortID="1008538996">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Extraction" ID="{2EA2811F-35C7-4104-81EA-949ECA9ADBF7}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_Earthquake" ID="{F461E883-C0D4-4B47-AFBB-93FCBF560D43}">
+											<ChildrenList>
+												<Action Name="" ID="{490187F2-4FB4-4D76-8D4D-8199C8649140}" ShortID="920532300">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Earthquake" ID="{E0493E74-BE4B-4B7C-B157-D767525F03CA}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
-								</Event>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
