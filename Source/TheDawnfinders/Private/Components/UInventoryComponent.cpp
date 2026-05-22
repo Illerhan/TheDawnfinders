@@ -784,6 +784,7 @@ void UInventoryComponent::ServerChangeCurrentSlot_Implementation(bool IndexGoUp,
 	}
 	OnRep_CurrentSlotIndex();
 	OnInventoryChange.Broadcast(InventorySlots, CurrentSlotIndex);
+
 }
 
 void UInventoryComponent::ActualiseOverloadedSlots()

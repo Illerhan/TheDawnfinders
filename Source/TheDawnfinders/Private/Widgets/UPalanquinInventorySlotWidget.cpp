@@ -31,3 +31,8 @@ void UPalanquinInventorySlotWidget::PlayAppearAnimation_Implementation(float Del
 {
 
 }
+
+void UPalanquinInventorySlotWidget::PlayHideAnim_Implementation(float Delay)
+{
+
+}

@@ -37,6 +37,9 @@ public :
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlayAppearAnimation(float Delay);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PlayHideAnim(float Delay);
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnSlotClicked OnSlotClicked;
 
