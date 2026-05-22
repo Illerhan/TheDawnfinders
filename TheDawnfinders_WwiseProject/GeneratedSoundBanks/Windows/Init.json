@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{03DEC7C4-AA9F-C5CD-52DE-2D231C240CD7}",
+    "Hash": "{A34E24A9-2B8F-1DBE-7602-2A8D20E1CAFF}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -40,6 +40,26 @@
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "1564184899",
+      "Name": "SFX_Volume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SFX_Volume",
+      "GUID": "{CEC9EF92-A49F-4041-8854-32703DA24EAA}"
+     },
+     {
+      "Id": "4129336153",
+      "Name": "Master_Volune",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Master_Volune",
+      "GUID": "{20B511C9-F15B-427F-BCBF-68637A9E01A8}"
+     },
+     {
+      "Id": "4179668880",
+      "Name": "Master_Volume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Master_Volume",
+      "GUID": "{FA7DCF87-D4B6-45AF-B105-CA9EDD40BF36}"
      }
     ],
     "StateGroups": [
@@ -186,6 +206,6 @@
     ]
    }
   ],
-  "FileHash": "{AA578606-18D9-9220-27DA-93A4824FDC07}"
+  "FileHash": "{08A6CAF2-956C-CBCB-244B-7943FCDF2611}"
  }
 }

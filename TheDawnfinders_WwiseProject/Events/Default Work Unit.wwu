@@ -754,6 +754,17 @@
 												</Action>
 											</ChildrenList>
 										</Event>
+										<Event Name="Play_ExtractionScream" ID="{4763FEE2-DE0A-4FC2-9BC1-9763D4A50FF7}">
+											<ChildrenList>
+												<Action Name="" ID="{BE847064-620B-4EBB-95C4-6589C607B00D}" ShortID="476115983">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Extraction_Scream" ID="{0FD3EACA-D01A-42AA-883B-6FBE9EA76CB1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

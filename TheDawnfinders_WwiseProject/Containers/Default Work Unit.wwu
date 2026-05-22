@@ -11608,6 +11608,28 @@
 												<ActiveSource Name="Earthquake" ID="{D1F1D0E7-1F87-428B-BB73-A3D6E216B131}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="Extraction_Scream" ID="{0FD3EACA-D01A-42AA-883B-6FBE9EA76CB1}" ShortID="138943491">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Extraction_Scream" ID="{2E341B84-39D5-40A6-B361-058B3EF553FE}">
+													<Language>SFX</Language>
+													<AudioFile>Extraction_Scream.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="31991527"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Extraction_Scream" ID="{2E341B84-39D5-40A6-B361-058B3EF553FE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

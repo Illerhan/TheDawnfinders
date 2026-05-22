@@ -110,6 +110,10 @@ State	ID	Name	State Group			Notes
 	229157224	IsFriendly	IsFriendly			
 	748895195	None	IsFriendly			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1564184899	SFX_Volume			\Default Work Unit\SFX_Volume	
+	4179668880	Master_Volume			\Default Work Unit\Master_Volume	
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
 
@@ -137,6 +141,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	25974615	Whispers2	.cache\20\{20EF519D-883E-4562-7981-226EEDCEA892}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers2		729124
 	29652185	Palanquin_Empty 8	.cache\EB\{EBE2A4B8-C154-9269-239A-DC907FE72B9B}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Palanquin\Palanquin_Empty\Palanquin_Empty 8		270608
 	31134778	FootstepsWoodCrackRun 8	.cache\BE\{BE22A5AC-0092-3D39-CD76-AC97F068DD18}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRunCrack\FootstepsWoodCrackRun 8		86256
+	31991527	Extraction_Scream	.cache\26\{26FEBD3B-138C-2ED9-9EC9-4348A5B0111D}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Extraction_Scream		1936304
 	34068047	OutOfBreath 4	.cache\B5\{B58233F9-A523-CEB1-F420-FB796B8E1642}.wem		\Containers\Default Work Unit\Joueur\Etats\OutOfBreath\OutOfBreath 4		71816
 	35075181	GRAB	.cache\E7\{E75FDAA4-E4DE-DD90-C68A-01D4DDBE62B1}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB		100448
 	37215428	Whispers4	.cache\7D\{7DAA18F7-A351-6AF4-BEEF-8E1072A099C1}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whispers4		688212
@@ -311,7 +316,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	422035676	Whistpers1	.cache\8C\{8CC840BD-B7F7-104C-7AB4-916050934A4B}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\DamagesMadness\Whistpers1		1228652
 	423956364	FootstepsWoodWalk 6	.cache\5D\{5DA5EEE2-B677-FF53-02E1-22F1B12DD3A9}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 6		132464
 	424882500	Door_Open1	.cache\D8\{D8AE9875-C677-D776-C773-3358DA4FA1FF}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Door_Open\Door_Open1		1017952
-	429072146	Extraction_Scream	.cache\67\{67B4D3F9-7018-13A2-ACB1-5E97373F9E61}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Extraction\Extraction_Scream		1936304
 	429962083	Dodge_02	.cache\15\{151B3966-4279-3530-74D4-E689287BB9E4}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Dodge_02		140076
 	432039131	ZealotStab_01	.cache\E5\{E5172FAD-CFDF-9D67-72F2-1D3330D482D3}.wem		\Containers\Default Work Unit\Enemis\Zeloth\EliteEnemyAttack_02\ZealotStab_01		190960
 	433727521	FootstepsWoodCrackWalk 3	.cache\BB\{BB47BC98-EA8A-4E55-E034-ADF75F944DE3}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 3		97296
