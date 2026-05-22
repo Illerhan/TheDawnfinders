@@ -25,6 +25,9 @@ void AMiningInteractible::Interact_Implementation(AActor* Interactor)
 	for (int i = 0; i < ItemCount; i++) {
 		FVector ItemLocation = GetPossibleSpawnLocation();
 
+		if (ItemLocation == FVector()) continue;
+		if (!GetWorld()) continue;
+
 		AActor* NewActor = GetWorld()->SpawnActor<AActor>(ItemToSpawn, ItemLocation, FRotator());
 	}
 
@@ -49,7 +52,8 @@ FVector AMiningInteractible::GetPossibleSpawnLocation()
 		FHitResult Hit;
 		FHitResult Hit2;
 		FCollisionQueryParams Params;
-
+		
+		if (!GetWorld()) continue;
 		if (!GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, Params)) continue;
 		if (GetWorld()->LineTraceSingleByChannel(Hit2, GetActorLocation() + FVector(0.f, 0.f, 60.f), Hit.ImpactPoint, ECC_Visibility, Params)) {
 			continue;
@@ -75,5 +79,6 @@ void AMiningInteractible::ReceiveDamage_Implementation(float Quantity, AActor* O
 
 void AMiningInteractible::DamageFeedback_Implementation(float HealthProgress)
 {
-	HealthBarWidget->TakeDamage(HealthProgress, false);
+	if(HealthBarWidget)
+		HealthBarWidget->TakeDamage(HealthProgress, false);
 }
