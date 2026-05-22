@@ -46,6 +46,12 @@ public:
 	USoundBase* ExtractionSound;
 	bool bZoneChanged;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Audio")
+	float masterVolume = 1.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Audio")
+	float musicVolume = 1.0f;
+
 private:
 	EMusicState CurrentState = EMusicState::None;
 	AAmbientMusicZone* CurrentZone = nullptr;

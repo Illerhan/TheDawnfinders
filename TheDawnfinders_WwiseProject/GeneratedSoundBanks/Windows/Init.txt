@@ -11,6 +11,10 @@ State	ID	Name	State Group			Notes
 	748895195	None	Crouch			
 	2655407367	Crouch	Crouch			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1564184899	SFX_Volume			\Default Work Unit\SFX_Volume	
+	4179668880	Master_Volume			\Default Work Unit\Master_Volume	
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
 

@@ -107,7 +107,7 @@ void UMusicManager::ApplyState(EMusicState NewState)
     CurrentMusicComponent = UGameplayStatics::CreateSound2D(
         GetGameInstance(),
         SoundToPlay,
-        1.f,
+        masterVolume * musicVolume,
         1.f,
         0.f,
         nullptr,
