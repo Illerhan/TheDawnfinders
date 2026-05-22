@@ -648,6 +648,7 @@ void AAPlayerCharacter::AutoMoveCharacter()
 {
     FVector Dir = AutoMoveTargetPos - GetActorLocation();
     Dir.Z = 0;
+
     if (Dir.SquaredLength() < 50) {
         StopAutoMoveCharacter(false);
         return;

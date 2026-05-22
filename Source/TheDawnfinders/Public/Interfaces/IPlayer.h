@@ -29,6 +29,10 @@ enum class EVibrationType : uint8
 	MediumLong UMETA(DisplayName = "Medium Long"),
 	Strong UMETA(DisplayName = "Strong"),
 	StrongLong UMETA(DisplayName = "Strong Long"),
+	Extraction UMETA(DisplayName = "Extraction"),
+	UseLever1 UMETA(DisplayName = "Use Lever 1"),
+	UseLever2 UMETA(DisplayName = "Use Lever 2"),
+	OpenChest UMETA(DisplayName = "OpenChest")
 };
 
 
