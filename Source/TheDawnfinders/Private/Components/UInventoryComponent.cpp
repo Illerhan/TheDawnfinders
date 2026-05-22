@@ -196,6 +196,17 @@ void UInventoryComponent::RemoveCurrentItem()
 {
 	if (!GetOwner()->HasAuthority())
 	{
+		TArray<FInventorySlot> NewSlots = InventorySlots;
+
+		FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
+		CurrentSlot.Quantity--;
+		if (CurrentSlot.Quantity <= 0) CurrentSlot.CurrentInfos.ItemData = nullptr;
+
+		InventorySlots = NewSlots;
+
+		SortInventory();
+		VerifyCurrentOverloadCount();
+
 		ServerRemoveCurrentItem();
 		return;
 	}

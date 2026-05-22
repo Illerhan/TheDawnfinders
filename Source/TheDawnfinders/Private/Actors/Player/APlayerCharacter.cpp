@@ -918,10 +918,10 @@ void AAPlayerCharacter::StartAutoLock(float AutoLockStrength)
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel1);
     ObjectQueryParams.AddObjectTypesToQuery(ECC_GameTraceChannel2);
 
-    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(300.f));
+    bool bHit = GetWorld()->OverlapMultiByObjectType(Overlaps, GetActorLocation(), FQuat::Identity, ObjectQueryParams, FCollisionShape::MakeSphere(350.f));
     if (!bHit) return;
 
-    float BestDist = 300.f;
+    float BestDist = 350.f;
 
     for (auto& Result : Overlaps) {
         AActor* Actor = Result.GetActor();
