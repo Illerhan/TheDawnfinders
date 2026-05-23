@@ -260,6 +260,11 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 		return false;
 	}
 
+	if (bSomeoneIsDoingQTE) {
+		DisplayErrorMessage("Already Used By Someone");
+		return false;
+	}
+
 	return bCanBeUsed;
 }
 
