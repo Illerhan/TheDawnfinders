@@ -124,6 +124,13 @@ void UMusicManager::ApplyState(EMusicState NewState)
     UE_LOG(LogTemp, Warning, TEXT("[MUSIC] State → %d"), (int)NewState);
 }
 
+void UMusicManager::ChangeVolume()
+{
+    if (CurrentMusicComponent == nullptr) return;
+
+    CurrentMusicComponent->SetVolumeMultiplier(masterVolume * musicVolume);
+}
+
 void UMusicManager::PlayMusic(USoundBase* musicToPlay)
 {
     StopCurrent(EMusicState::Extraction);

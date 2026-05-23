@@ -41,6 +41,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayMusic(USoundBase* musicToPlay);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeVolume();
 	
 	UPROPERTY(EditAnywhere, Category = "Audio")
 	USoundBase* ExtractionSound;
