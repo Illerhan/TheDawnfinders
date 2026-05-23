@@ -11587,6 +11587,9 @@
 											</ObjectLists>
 										</RandomSequenceContainer>
 										<Sound Name="Earthquake" ID="{E0493E74-BE4B-4B7C-B157-D767525F03CA}" ShortID="56206244">
+											<PropertyList>
+												<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
