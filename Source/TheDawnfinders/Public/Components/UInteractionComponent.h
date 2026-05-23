@@ -114,6 +114,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void StartMashButtonQTE(AInteractibleObjects* Interactible);
 
+	UFUNCTION(Server, Reliable)
+	void Server_ChangeQTEState(AActor* Interactible, bool bStarted);
+
 
 public : 
 	UFUNCTION(BlueprintCallable)
