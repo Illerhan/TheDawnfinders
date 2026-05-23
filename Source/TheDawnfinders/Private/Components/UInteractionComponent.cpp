@@ -136,6 +136,7 @@ AActor* UInteractionComponent::GetNearestInteractible()
 	for (AActor* Inter : InteractiblesAtRange)
 	{
 		if (!IsValid(Inter)) continue;
+		if (!IInteractible::Execute_GetCanBeUsedBool(Inter, GetOwner())) continue;
 		float Dist = FVector::DistSquared(
 			Inter->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
@@ -177,6 +178,7 @@ void UInteractionComponent::StartInteract()
 {
 	if (!PlayerCharacter) return;
 	if (CurrentAnimInteractible) return;
+	if (bIsInInteraction && !bIsDoingQTE) return;
 
 	// If the player is carrying an heavy object
 	if (CarriedItem != nullptr) {
@@ -217,7 +219,7 @@ void UInteractionComponent::StartInteract()
 
 		CurrentQTEWidget = nullptr;
 		bIsInInteraction = false;
-		CurrentInteractible = NearestInteractible;
+		CurrentInteractible = InteractingQTEActor;
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, true);
 
@@ -270,13 +272,22 @@ void UInteractionComponent::TryInteract(AActor* Interactible, AAPlayerCharacter*
 	if (!Player || !Player->IsLocallyControlled()) return;
 	if (!Interactible) return;
 
+	if (bIsInInteraction) return;
+
+	if (Cast<AInteractibleObjects>(Interactible)->GetIsInInteractionStateOnInteract()) {
+		bIsInInteraction = true;
+		CurrentInteractible = Interactible;
+	}
+
 	// Client
 	if (!GetOwner()->HasAuthority()) {
 		ServerInteract(Interactible, Player);
 	}
 	// Server
 	else {
-		ServerInteract_Implementation(Interactible, Player);
+		bWasCrouched = (Player->CurrentState == EPlayerState::Sneaking);
+
+		IInteractible::Execute_Interact(Interactible, Player);
 	}
 }
 

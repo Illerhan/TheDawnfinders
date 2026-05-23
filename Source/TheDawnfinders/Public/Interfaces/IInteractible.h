@@ -33,6 +33,9 @@ public :
 	bool GetCanBeUsed(AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	bool GetCanBeUsedBool(AActor* Interactor);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void DoInteractionAnim(AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
@@ -40,4 +43,13 @@ public :
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
 	bool GetQTEDone();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
+	void StartQTE();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
+	void EndQTE();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "QTE")
+	bool GetIsDoingQTE();
 };
