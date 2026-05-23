@@ -274,6 +274,22 @@ void ACustomPlayerState::CopyProperties(APlayerState* PlayerState)
 	}
 }
 
+void ACustomPlayerState::SellShopItem(UItemData* ItemToSell)
+{
+	if (!ItemToSell) return;
+	int SellPrice = ItemToSell->SellValue;
+
+	SavedGold += SellPrice;
+
+	OnShopItemsChange.Broadcast();
+	OnRep_ShopItems();
+	OnRep_Gold();
+
+	if (!HasAuthority()) {
+		Server_SellShopItem(ItemToSell);
+	}
+}
+
 void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSell)
 {
 	if (!ItemToSell) return;
@@ -283,6 +299,7 @@ void ACustomPlayerState::Server_SellShopItem_Implementation(UItemData* ItemToSel
 
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();
+	OnRep_Gold();
 }
 
 void ACustomPlayerState::SaveInventoryBeforeTravel()
@@ -312,6 +329,7 @@ void ACustomPlayerState::AddShopItem(FItemInfos Item)
 
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();
+	OnRep_Gold();
 
 	if (!HasAuthority()) {
 		Server_AddShopItem(Item);
@@ -324,8 +342,10 @@ void ACustomPlayerState::Server_AddShopItem_Implementation(FItemInfos Item)
 	if (SavedGold < Item.ItemData->ItemValue) return;
 
 	SavedGold-=Item.ItemData->ItemValue;
+
 	OnShopItemsChange.Broadcast();
 	OnRep_ShopItems();
+	OnRep_Gold();
 }
 
 #pragma endregion

@@ -76,6 +76,9 @@ public :
 	UFUNCTION(BlueprintCallable)
 	void SaveInventoryBeforeTravel();
 	
+	UFUNCTION(BlueprintCallable)
+	void SellShopItem(UItemData* ItemToSell);
+
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void Server_SellShopItem(UItemData* ItemToSell);
 
