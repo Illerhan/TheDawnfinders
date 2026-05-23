@@ -136,6 +136,7 @@ AActor* UInteractionComponent::GetNearestInteractible()
 	for (AActor* Inter : InteractiblesAtRange)
 	{
 		if (!IsValid(Inter)) continue;
+		if (!IInteractible::Execute_GetCanBeUsed(Inter, GetOwner())) continue;
 		float Dist = FVector::DistSquared(
 			Inter->GetActorLocation(),
 			PlayerCharacter->GetActorLocation()
