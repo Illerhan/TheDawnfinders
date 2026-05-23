@@ -238,7 +238,7 @@ protected:
 	UPROPERTY()
 	FTimerHandle EnableTimer;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
+	UPROPERTY(EditAnywhere, Replicated, BlueprintReadWrite, Category = "Interactible Parameters")
 	bool bCanBeUsed = true;
 
 	UPROPERTY(Replicated)
