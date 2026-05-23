@@ -217,9 +217,13 @@ void UInteractionComponent::StartInteract()
 	{
 		if (!CurrentQTEWidget->PressButton()) return;
 
+		IInteractible::Execute_EndQTE(InteractingQTEActor);
+		if (!GetOwner()->HasAuthority()) Server_ChangeQTEState(InteractingQTEActor, false);
+
 		CurrentQTEWidget = nullptr;
 		bIsInInteraction = false;
 		CurrentInteractible = InteractingQTEActor;
+		InteractingQTEActor = nullptr;
 		if (IPlayerInterface::Execute_GetCurrentPlayerState(PlayerCharacter) != EPlayerState::Trapped)
 			IPlayerInterface::Execute_RequestStateChange(PlayerCharacter, EPlayerState::None, true);
 
@@ -254,6 +258,9 @@ void UInteractionComponent::StartInteract()
 			StartRotativeQTE(Cast<AInteractibleObjects>(Nearest));
 			break;
 		}
+
+		IInteractible::Execute_StartQTE(Nearest);
+		if (!GetOwner()->HasAuthority()) Server_ChangeQTEState(Nearest, true);
 
 		InteractingQTEActor = Nearest;
 		bIsDoingQTE = true;
@@ -372,6 +379,12 @@ void UInteractionComponent::StartMashButtonQTE(AInteractibleObjects* Interactibl
 	MashQTE->SetLinkedInteractible(Interactible);
 }
 
+void UInteractionComponent::Server_ChangeQTEState_Implementation(AActor* Interactible, bool bStarted)
+{
+	if(bStarted) IInteractible::Execute_StartQTE(Interactible);
+	else IInteractible::Execute_EndQTE(Interactible);
+}
+
 #pragma endregion
 
 
@@ -452,6 +465,9 @@ void UInteractionComponent::CancelInteraction()
 	if (bIsDoingQTE && CurrentQTEWidget)
 	{
 		CurrentQTEWidget->ExitQTE();
+
+		IInteractible::Execute_EndQTE(InteractingQTEActor);
+		if (!GetOwner()->HasAuthority()) Server_ChangeQTEState(InteractingQTEActor, false);
 
 		bIsDoingQTE = false;
 		InteractingQTEActor = nullptr;
