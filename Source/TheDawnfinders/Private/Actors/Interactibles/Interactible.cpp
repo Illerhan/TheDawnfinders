@@ -263,6 +263,11 @@ bool AInteractibleObjects::GetCanBeUsed_Implementation(AActor* Interactor)
 	return bCanBeUsed;
 }
 
+bool AInteractibleObjects::GetCanBeUsedBool_Implementation(AActor* Interactor)
+{
+	return bCanBeUsed;
+}
+
 EQTEType AInteractibleObjects::GetNeededQTE_Implementation()
 {
 	return QTEType;
@@ -271,6 +276,21 @@ EQTEType AInteractibleObjects::GetNeededQTE_Implementation()
 bool AInteractibleObjects::GetQTEDone_Implementation()
 {
 	return bQTEDone;
+}
+
+void AInteractibleObjects::StartQTE_Implementation()
+{
+	bSomeoneIsDoingQTE = true;
+}
+
+void AInteractibleObjects::EndQTE_Implementation()
+{
+	bSomeoneIsDoingQTE = false;
+}
+
+bool AInteractibleObjects::GetIsDoingQTE_Implementation()
+{
+	return bSomeoneIsDoingQTE;
 }
 
 void AInteractibleObjects::FadeIn_Implementation()

@@ -59,8 +59,13 @@ public :
 	virtual void Interact_Implementation(AActor* Interactor) override;
 	virtual void StopInteract_Implementation(AActor* Interactor) override;
 	virtual bool GetCanBeUsed_Implementation(AActor* Interactor) override;
+	virtual bool GetCanBeUsedBool_Implementation(AActor* Interactor) override;
 	virtual EQTEType GetNeededQTE_Implementation() override;
 	virtual bool GetQTEDone_Implementation() override;
+
+	virtual void StartQTE_Implementation() override;
+	virtual void EndQTE_Implementation() override;
+	virtual bool GetIsDoingQTE_Implementation() override;
 	//virtual bool GetQTEDone_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
@@ -201,6 +206,9 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	bool DidInteractionAnim = false;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	bool bSomeoneIsDoingQTE = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactible Parameters")
 	UItemData* NeededInteractItem;
