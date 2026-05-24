@@ -1223,6 +1223,39 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_GainCoin" ID="{96645241-3B1F-4058-8D4D-2947AC396CE5}">
+							<ChildrenList>
+								<Action Name="" ID="{3E1E6E2E-25E9-4AC5-A1A6-02EF1FAC37FC}" ShortID="695519599">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="CoinGain" ID="{EC2147E9-79C8-429C-8EC7-07D45DE369BB}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_LoseCoin" ID="{FBBA880C-DEF3-430E-91B6-F422E5D90957}">
+							<ChildrenList>
+								<Action Name="" ID="{185C61BD-6098-48E4-89CD-1851995AB96D}" ShortID="58045104">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="CoinLost" ID="{7D8B62D0-0975-476B-AE1A-7DEAB23CC8DA}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Navigation" ID="{5ABE0489-8F79-4EED-8A2B-4066E751C1B6}">
+							<ChildrenList>
+								<Action Name="" ID="{84CAB118-97BE-4935-AD7B-4B96D3BB3336}" ShortID="251811010">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Navigation" ID="{68758337-82B0-47BB-BF3B-95509D50969C}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Actions" ID="{42BC2EFF-7A51-4F93-B263-CCA4384A55EE}" ShortID="618588558">
