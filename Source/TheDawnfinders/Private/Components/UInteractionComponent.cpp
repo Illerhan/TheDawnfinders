@@ -612,6 +612,8 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 		|| PlayerCharacter->GetCurrentPlayerState_Implementation() == EPlayerState::Dead)
 		return;
 
+	AllyParam->StopMovementForDuration(HelpDuration);
+
 	CurrentHelpedTarget = AllyParam;
 
 	bIsInInteraction = true;
@@ -626,6 +628,8 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 void UInteractionComponent::ServerCancelHelp_Implementation()
 {
 	if (!bIsHelping) return;
+
+	CurrentHelpedTarget->RestartMovement();
 
 	bIsHelping = false;
 	bIsInInteraction = false;

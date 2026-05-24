@@ -375,6 +375,7 @@ void AAPlayerCharacter::Multicast_SetCurrentPlayerState_Implementation(EPlayerSt
         ItemComponent->CancelReload();
         ItemComponent->StopMainAction();
         InteractionComponent->CancelInteraction();
+        InteractionComponent->ServerCancelHelp();
         StopAutoMoveCharacter(true);
         StopMovementForDuration(4.5f);
         break;
