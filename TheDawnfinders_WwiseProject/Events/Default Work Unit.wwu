@@ -1133,6 +1133,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_OpenInventory_UI" ID="{3E2AA995-0DB5-4300-8213-36D44B048EF5}">
+									<ChildrenList>
+										<Action Name="" ID="{F6E7FB57-F9D0-47D0-9730-9177B921F925}" ShortID="488406487">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Open_Inventory_UI" ID="{196EB9FE-F05C-41CE-971D-57807CD9E289}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Event Name="Play_UI_Back" ID="{11D9B2AC-EE51-46C2-87B3-9E650561FAA7}">
@@ -1173,7 +1184,7 @@
 								<Action Name="" ID="{AF9A0999-4998-465B-832C-4A77963DBF40}" ShortID="599067098">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UI_Screen_Transition" ID="{F4FE8941-7CD0-4AB4-93F5-602C524AF199}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+											<ObjectRef Name="UI_Screen_Transition" ID="{1B4341A7-F63E-4A44-9D47-879C9073CDBA}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
