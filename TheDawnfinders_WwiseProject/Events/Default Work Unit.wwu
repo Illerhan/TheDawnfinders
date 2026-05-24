@@ -1223,6 +1223,65 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_GainCoin" ID="{96645241-3B1F-4058-8D4D-2947AC396CE5}">
+							<ChildrenList>
+								<Action Name="" ID="{3E1E6E2E-25E9-4AC5-A1A6-02EF1FAC37FC}" ShortID="695519599">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="CoinGain" ID="{EC2147E9-79C8-429C-8EC7-07D45DE369BB}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_LoseCoin" ID="{FBBA880C-DEF3-430E-91B6-F422E5D90957}">
+							<ChildrenList>
+								<Action Name="" ID="{185C61BD-6098-48E4-89CD-1851995AB96D}" ShortID="58045104">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="CoinLost" ID="{7D8B62D0-0975-476B-AE1A-7DEAB23CC8DA}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Navigation" ID="{5ABE0489-8F79-4EED-8A2B-4066E751C1B6}">
+							<ChildrenList>
+								<Action Name="" ID="{84CAB118-97BE-4935-AD7B-4B96D3BB3336}" ShortID="251811010">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Navigation" ID="{68758337-82B0-47BB-BF3B-95509D50969C}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="Countdown" ID="{83F1F2FC-0DA3-4F44-B89B-BD5D1B729C84}" ShortID="574604235">
+							<ChildrenList>
+								<Event Name="Play_CountdownStart" ID="{45A673CB-4DA1-46DA-AE03-A13EF2420310}">
+									<ChildrenList>
+										<Action Name="" ID="{437B84AB-0F6E-4B06-972F-B116FC80E3ED}" ShortID="405229635">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="TimerStart" ID="{2BD176D1-EA96-414A-8675-E87F416E06E2}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_CountdownSecond" ID="{EF8616B2-1876-41C1-BCED-202E133576D0}">
+									<ChildrenList>
+										<Action Name="" ID="{9A0201BC-B0AB-4F87-AA44-97EA89222C93}" ShortID="378988951">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="TimerSecond" ID="{DD117EFC-92DA-44D7-983F-0F20A3F5C547}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Actions" ID="{42BC2EFF-7A51-4F93-B263-CCA4384A55EE}" ShortID="618588558">

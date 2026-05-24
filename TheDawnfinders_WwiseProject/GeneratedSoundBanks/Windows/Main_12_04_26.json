@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{4AA2AE0E-F8AF-DEBC-1BA3-E672ED4E84CC}",
+    "Hash": "{83DCF61A-D3D1-5C4D-9A85-B88CD0CD9243}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -134,6 +134,14 @@
       "Location": "Memory",
       "ShortName": "Extraction_Scream.wav",
       "CachePath": "26/{26FEBD3B-138C-2ED9-9EC9-4348A5B0111D}.wem"
+     },
+     {
+      "Id": "33183794",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_01.wav",
+      "CachePath": "77/{773312E0-9B10-05D5-BAEE-5CB876746393}.wem"
      },
      {
       "Id": "34068047",
@@ -310,6 +318,14 @@
       "Location": "Memory",
       "ShortName": "OutOfBreath\\OutOfBreath 9.wav",
       "CachePath": "D2/{D29DFE1F-ED45-D1ED-6778-16E5086D2B71}.wem"
+     },
+     {
+      "Id": "75255928",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinRefill_01.wav",
+      "CachePath": "92/{924D38AA-619F-2A6F-A6C8-4754E91CA035}.wem"
      },
      {
       "Id": "78131397",
@@ -558,6 +574,14 @@
       "Location": "Memory",
       "ShortName": "SF_FollowerChain_05.wav",
       "CachePath": "99/{9948FCB8-CAC6-91F7-A05F-E61E29FB864A}.wem"
+     },
+     {
+      "Id": "137125187",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_03.wav",
+      "CachePath": "AF/{AFF8E7D5-986C-D285-2F22-45D137789091}.wem"
      },
      {
       "Id": "137990748",
@@ -1200,6 +1224,14 @@
       "CachePath": "82/{8236A7F2-A0FB-686F-3B25-F98BB8825D53}.wem"
      },
      {
+      "Id": "315331240",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_02.wav",
+      "CachePath": "9B/{9BAABA9B-FFF0-452F-20FE-8163D71BFFB2}.wem"
+     },
+     {
       "Id": "315756396",
       "Language": "SFX",
       "Streaming": "false",
@@ -1336,6 +1368,14 @@
       "CachePath": "47/{470EED5C-68A0-2CE8-D632-25F52B1585CD}.wem"
      },
      {
+      "Id": "368317146",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Navigation_05.wav",
+      "CachePath": "26/{2693C71D-52E3-3F2C-AC8A-A88EEAC65B7E}.wem"
+     },
+     {
       "Id": "371682056",
       "Language": "SFX",
       "Streaming": "false",
@@ -1376,6 +1416,14 @@
       "CachePath": "7D/{7DB8FAF6-8BCA-6AEF-FC0C-3D872FF2671E}.wem"
      },
      {
+      "Id": "382336194",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_04.wav",
+      "CachePath": "AC/{ACB0C283-127C-8C6D-8B3D-42E1DDB840EE}.wem"
+     },
+     {
       "Id": "385107083",
       "Language": "SFX",
       "Streaming": "false",
@@ -1413,7 +1461,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "94/{94012C7D-677A-194A-F47D-517F41975612}.wem"
+      "CachePath": "EA/{EA30A27A-A02A-D9CA-20EB-B60BCB2F973C}.wem"
+     },
+     {
+      "Id": "389265982",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_05.wav",
+      "CachePath": "4B/{4BCE4367-5C81-A5D9-2DBE-D66BDFBE970B}.wem"
      },
      {
       "Id": "391905191",
@@ -1728,6 +1784,14 @@
       "CachePath": "B9/{B958EBF3-AE3E-5D97-FC69-B9E979DCF363}.wem"
      },
      {
+      "Id": "481290043",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "TimerStart.wav",
+      "CachePath": "C4/{C407BE7B-B7BA-9909-9A98-7FAB814FB20A}.wem"
+     },
+     {
       "Id": "481333015",
       "Language": "SFX",
       "Streaming": "false",
@@ -1773,7 +1837,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "38/{388FE2D9-140D-A2DF-9814-0BC62F7598C7}.wem"
+      "CachePath": "80/{800FB702-CB03-0C10-651A-526240EBBE65}.wem"
      },
      {
       "Id": "492429887",
@@ -1982,6 +2046,14 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_03.wav",
       "CachePath": "33/{33219944-37BD-BD2F-F73C-DCC939B815C5}.wem"
+     },
+     {
+      "Id": "544971020",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinLost_06.wav",
+      "CachePath": "40/{4091BDFD-E07C-6BE7-5F60-604DB5851A29}.wem"
      },
      {
       "Id": "548793177",
@@ -2632,6 +2704,14 @@
       "CachePath": "70/{700BF60C-6A4A-C1AB-F1C1-CB6D5B8A5DE2}.wem"
      },
      {
+      "Id": "730245699",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CoinRefill_02.wav",
+      "CachePath": "9E/{9EEE6CE9-BFE6-C01C-6B2B-2C205B7015CC}.wem"
+     },
+     {
       "Id": "730381189",
       "Language": "SFX",
       "Streaming": "false",
@@ -2669,7 +2749,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "E8/{E88A0B9D-34EA-25BE-F9B4-37844D86CC5A}.wem"
+      "CachePath": "CD/{CDE91BD4-31F1-1C48-267D-B34CD0445E24}.wem"
      },
      {
       "Id": "739553590",
@@ -3054,6 +3134,14 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_09.wav",
       "CachePath": "AF/{AF650145-58ED-5DDD-C362-B561081EB3FF}.wem"
+     },
+     {
+      "Id": "843282687",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "TimerSecond.wav",
+      "CachePath": "88/{88A7EDA4-052A-FEF7-5566-578D6FC37E50}.wem"
      },
      {
       "Id": "845459241",
@@ -3528,6 +3616,14 @@
       "CachePath": "FC/{FCF43D99-A192-1D4D-A882-5D40F8DDE115}.wem"
      },
      {
+      "Id": "970319930",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Navigation_02.wav",
+      "CachePath": "9B/{9BDFBA8F-6A55-0C02-E321-75812B2D0230}.wem"
+     },
+     {
       "Id": "970556434",
       "Language": "SFX",
       "Streaming": "false",
@@ -3704,6 +3800,22 @@
       "CachePath": "D7/{D7D43CCF-D785-DD78-88E1-06CBD4411AD9}.wem"
      },
      {
+      "Id": "993848777",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Navigation_03.wav",
+      "CachePath": "C7/{C7CA66DB-2DD3-5C1E-DBFD-6755DC35DF4E}.wem"
+     },
+     {
+      "Id": "996453948",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Navigation_01.wav",
+      "CachePath": "9E/{9E5D3656-677F-7F6B-5BBF-1FAC65B2EF1F}.wem"
+     },
+     {
       "Id": "997463245",
       "Language": "SFX",
       "Streaming": "false",
@@ -3718,6 +3830,14 @@
       "Location": "Memory",
       "ShortName": "Dodge_03.wav",
       "CachePath": "34/{34F8457B-EF08-7810-F32F-BA5575209BE5}.wem"
+     },
+     {
+      "Id": "999067593",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Navigation_04.wav",
+      "CachePath": "63/{63684AFF-B0A9-9ED3-BEB2-739ABC3102EB}.wem"
      },
      {
       "Id": "1004722242",
@@ -4768,6 +4888,34 @@
       ]
      },
      {
+      "Id": "3349864671",
+      "Name": "Play_CountdownSecond",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Countdown\\Play_CountdownSecond",
+      "GUID": "{EF8616B2-1876-41C1-BCED-202E133576D0}",
+      "DurationType": "OneShot",
+      "DurationMin": "10.688927",
+      "DurationMax": "10.688927",
+      "MediaRefs": [
+       {
+        "Id": "843282687"
+       }
+      ]
+     },
+     {
+      "Id": "3381439381",
+      "Name": "Play_CountdownStart",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Countdown\\Play_CountdownStart",
+      "GUID": "{45A673CB-4DA1-46DA-AE03-A13EF2420310}",
+      "DurationType": "OneShot",
+      "DurationMin": "9.9019165",
+      "DurationMax": "9.9019165",
+      "MediaRefs": [
+       {
+        "Id": "481290043"
+       }
+      ]
+     },
+     {
       "Id": "370706003",
       "Name": "Play_Crawl",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_Crawl",
@@ -5488,6 +5636,23 @@
       ]
      },
      {
+      "Id": "2646372592",
+      "Name": "Play_GainCoin",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_GainCoin",
+      "GUID": "{96645241-3B1F-4058-8D4D-2947AC396CE5}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.4712436",
+      "DurationMax": "2.4712436",
+      "MediaRefs": [
+       {
+        "Id": "75255928"
+       },
+       {
+        "Id": "730245699"
+       }
+      ]
+     },
+     {
       "Id": "50193659",
       "Name": "Play_Giant_Chain",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Giant_Chain",
@@ -5619,6 +5784,61 @@
        },
        {
         "Id": "715538512"
+       }
+      ]
+     },
+     {
+      "Id": "990099990",
+      "Name": "Play_LoseCoin",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_LoseCoin",
+      "GUID": "{FBBA880C-DEF3-430E-91B6-F422E5D90957}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.52678007",
+      "DurationMax": "1.2437868",
+      "MediaRefs": [
+       {
+        "Id": "33183794"
+       },
+       {
+        "Id": "137125187"
+       },
+       {
+        "Id": "315331240"
+       },
+       {
+        "Id": "382336194"
+       },
+       {
+        "Id": "389265982"
+       },
+       {
+        "Id": "544971020"
+       }
+      ]
+     },
+     {
+      "Id": "3849525492",
+      "Name": "Play_Navigation",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_Navigation",
+      "GUID": "{5ABE0489-8F79-4EED-8A2B-4066E751C1B6}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.25480726",
+      "DurationMax": "0.33653063",
+      "MediaRefs": [
+       {
+        "Id": "368317146"
+       },
+       {
+        "Id": "970319930"
+       },
+       {
+        "Id": "993848777"
+       },
+       {
+        "Id": "996453948"
+       },
+       {
+        "Id": "999067593"
        }
       ]
      },
@@ -8820,6 +9040,6 @@
     ]
    }
   ],
-  "FileHash": "{BCA56E6F-F99D-5259-7A19-5C1E9EF41C5A}"
+  "FileHash": "{B0ECBE4E-EAE0-E964-C1B4-AD9EDAC01EFD}"
  }
 }

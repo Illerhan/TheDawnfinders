@@ -16925,7 +16925,7 @@
 									<PropertyList>
 										<Property Name="VolumeOffset" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -17125,6 +17125,13 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Open_Inventory_UI" ID="{196EB9FE-F05C-41CE-971D-57807CD9E289}" ShortID="692336916">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -17205,6 +17212,417 @@
 								</Sound>
 							</ChildrenList>
 						</RandomSequenceContainer>
+						<Folder Name="Coins" ID="{A2502247-0FBD-47AD-93D3-7B05DFF58506}" ShortID="592608080">
+							<ChildrenList>
+								<RandomSequenceContainer Name="CoinLost" ID="{7D8B62D0-0975-476B-AE1A-7DEAB23CC8DA}" ShortID="234387052">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="CoinLost_01" ID="{EB35AEC8-4B2F-46A9-BBC6-8C5E80FEF81F}" ShortID="791078153">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_01" ID="{0C724184-717F-420F-B932-C5BCD613B314}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="33183794"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_01" ID="{0C724184-717F-420F-B932-C5BCD613B314}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinLost_02" ID="{34B8B2E7-8F66-4491-9A7F-EDA4C43F0728}" ShortID="1050569407">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_02" ID="{0FEA0CC3-4A50-4BD3-BC41-A197FDF22D11}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="315331240"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_02" ID="{0FEA0CC3-4A50-4BD3-BC41-A197FDF22D11}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinLost_03" ID="{A3450DC5-F186-434D-A583-6C096869891D}" ShortID="843162561">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_03" ID="{75D24397-5139-4B58-B293-9851A79DA633}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="137125187"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_03" ID="{75D24397-5139-4B58-B293-9851A79DA633}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinLost_04" ID="{781019F0-3CE2-4173-B7DD-5175FA799A5A}" ShortID="373019778">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_04" ID="{30D493E1-6090-4AF0-967E-B2FE23EC14DD}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="382336194"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_04" ID="{30D493E1-6090-4AF0-967E-B2FE23EC14DD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinLost_05" ID="{327673E8-6EFE-4180-83C0-CABB53EB49F0}" ShortID="602614313">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_05" ID="{B62E59BE-1A57-45A6-99C0-74F90AD504AD}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="389265982"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_05" ID="{B62E59BE-1A57-45A6-99C0-74F90AD504AD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinLost_06" ID="{4C6E3380-0AB5-4696-A092-357B33F00742}" ShortID="22847951">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinLost_06" ID="{7B115122-D470-46F0-855A-5B9695E778F0}">
+													<Language>SFX</Language>
+													<AudioFile>CoinLost_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="544971020"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinLost_06" ID="{7B115122-D470-46F0-855A-5B9695E778F0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<BlendContainer Name="CoinGain" ID="{EC2147E9-79C8-429C-8EC7-07D45DE369BB}" ShortID="1019047844">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="CoinRefill_01" ID="{B0B2D16C-3281-41A8-A150-ADE530846ACA}" ShortID="734896652">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinRefill_01" ID="{75BAA8D9-B019-4B8C-8CEC-8E72F23B39DF}">
+													<PropertyList>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.40346837806295"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.87471202839497"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>CoinRefill_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="75255928"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinRefill_01" ID="{75BAA8D9-B019-4B8C-8CEC-8E72F23B39DF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="CoinRefill_02" ID="{FE5F6C2A-A583-4B93-9260-D4562C672632}" ShortID="556030834">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="CoinRefill_02" ID="{0E092B28-29A1-4820-BF61-5BF8DA861F87}">
+													<Language>SFX</Language>
+													<AudioFile>CoinRefill_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="730245699"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="CoinRefill_02" ID="{0E092B28-29A1-4820-BF61-5BF8DA861F87}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</BlendContainer>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Navigation" ID="{C00498A8-317A-4A72-96DA-DFF91192E0E6}" ShortID="459967518">
+							<ChildrenList>
+								<RandomSequenceContainer Name="Navigation" ID="{68758337-82B0-47BB-BF3B-95509D50969C}" ShortID="954094471">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Navigation_01" ID="{9A61DE51-CA08-46A8-B2A7-BA9ADC2B3A7D}" ShortID="411427507">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Navigation_01" ID="{DC43AAF0-D88C-4DEE-B337-BB5FC5179D9B}">
+													<Language>SFX</Language>
+													<AudioFile>Navigation_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="996453948"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Navigation_01" ID="{DC43AAF0-D88C-4DEE-B337-BB5FC5179D9B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Navigation_02" ID="{8D885B5B-FB82-418B-9049-B2F1CBD36339}" ShortID="871484713">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Navigation_02" ID="{A5FF49A6-C34E-46FC-8074-A21525983D6E}">
+													<Language>SFX</Language>
+													<AudioFile>Navigation_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="970319930"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Navigation_02" ID="{A5FF49A6-C34E-46FC-8074-A21525983D6E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Navigation_03" ID="{24FB46A8-790C-4883-B0F3-8288D6A4EAAB}" ShortID="1049831867">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Navigation_03" ID="{D6D211EE-5480-4E6D-8B5F-0E6223B49CDD}">
+													<Language>SFX</Language>
+													<AudioFile>Navigation_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="993848777"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Navigation_03" ID="{D6D211EE-5480-4E6D-8B5F-0E6223B49CDD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Navigation_04" ID="{658A5FED-437C-4013-83BE-EB4D8C877BDD}" ShortID="635410666">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Navigation_04" ID="{4920E0FB-EF53-4C95-834E-5384A30C4BDA}">
+													<Language>SFX</Language>
+													<AudioFile>Navigation_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="999067593"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Navigation_04" ID="{4920E0FB-EF53-4C95-834E-5384A30C4BDA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Navigation_05" ID="{6E1412C1-E679-418B-B94A-85781A814CEE}" ShortID="332651085">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Navigation_05" ID="{DB919072-DD0B-4681-86BC-233E6368DEFE}">
+													<PropertyList>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Navigation_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="368317146"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Navigation_05" ID="{DB919072-DD0B-4681-86BC-233E6368DEFE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Countdown" ID="{3CD9ACEB-AB37-4A9C-873E-C95CF25CA3BF}" ShortID="366615528">
+							<ChildrenList>
+								<Sound Name="TimerSecond" ID="{DD117EFC-92DA-44D7-983F-0F20A3F5C547}" ShortID="679038920">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="TimerSecond" ID="{AB980C50-B55C-44C8-8019-441A0597CD58}">
+											<Language>SFX</Language>
+											<AudioFile>TimerSecond.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="843282687"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="TimerSecond" ID="{AB980C50-B55C-44C8-8019-441A0597CD58}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="TimerStart" ID="{2BD176D1-EA96-414A-8675-E87F416E06E2}" ShortID="498295080">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="TimerStart" ID="{61F1FA74-6457-4C80-85E2-974811B58D51}">
+											<Language>SFX</Language>
+											<AudioFile>TimerStart.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="481290043"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="TimerStart" ID="{61F1FA74-6457-4C80-85E2-974811B58D51}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambiance" ID="{B01C6B88-1D1B-476B-9312-68D0DF5A3089}" ShortID="940732048">
