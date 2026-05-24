@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{346DB1D9-48E2-15F1-D289-0AB7E66F84C3}",
+    "Hash": "{4AA2AE0E-F8AF-DEBC-1BA3-E672ED4E84CC}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1408,6 +1408,14 @@
       "CachePath": "C3/{C362EA4A-D7AF-678D-829C-4C43633D9F6B}.wem"
      },
      {
+      "Id": "389137742",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone.wav",
+      "CachePath": "94/{94012C7D-677A-194A-F47D-517F41975612}.wem"
+     },
+     {
       "Id": "391905191",
       "Language": "SFX",
       "Streaming": "false",
@@ -1765,7 +1773,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "A9/{A97A49AF-9702-C171-FA6F-C50DEC7AE341}.wem"
+      "CachePath": "38/{388FE2D9-140D-A2DF-9814-0BC62F7598C7}.wem"
      },
      {
       "Id": "492429887",
@@ -2654,6 +2662,14 @@
       "Location": "Memory",
       "ShortName": "WoodRun\\FootstepsWoodRun 22.wav",
       "CachePath": "60/{6024A7CF-7B8D-CDD2-936A-D24FC16B320B}.wem"
+     },
+     {
+      "Id": "736538793",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_New_Zone.wav",
+      "CachePath": "E8/{E88A0B9D-34EA-25BE-F9B4-37844D86CC5A}.wem"
      },
      {
       "Id": "739553590",
@@ -5664,6 +5680,26 @@
       ]
      },
      {
+      "Id": "3627445247",
+      "Name": "Play_OpenInventory_UI",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Inventory\\Play_OpenInventory_UI",
+      "GUID": "{3E2AA995-0DB5-4300-8213-36D44B048EF5}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.61537415",
+      "DurationMax": "0.8894331",
+      "MediaRefs": [
+       {
+        "Id": "192665435"
+       },
+       {
+        "Id": "679730392"
+       },
+       {
+        "Id": "987473768"
+       }
+      ]
+     },
+     {
       "Id": "3459422151",
       "Name": "Play_OutOfBreath",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_OutOfBreath",
@@ -8328,11 +8364,17 @@
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Screen_Transition",
       "GUID": "{D1A3646A-0FD7-494B-A24B-A4A744569D05}",
       "DurationType": "OneShot",
-      "DurationMin": "3.68",
-      "DurationMax": "3.68",
+      "DurationMin": "0.6525751",
+      "DurationMax": "0.9847334",
       "MediaRefs": [
        {
+        "Id": "389137742"
+       },
+       {
         "Id": "492083971"
+       },
+       {
+        "Id": "736538793"
        }
       ]
      },
@@ -8342,8 +8384,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_UI_Text_Bubble",
       "GUID": "{344B34DC-8C14-4CB6-994C-D8719F5381D5}",
       "DurationType": "OneShot",
-      "DurationMin": "2.8373334",
-      "DurationMax": "2.8373334",
+      "DurationMin": "3.094134",
+      "DurationMax": "3.094134",
       "MediaRefs": [
        {
         "Id": "652612267"
@@ -8778,6 +8820,6 @@
     ]
    }
   ],
-  "FileHash": "{6E82D0E1-11AF-5F88-6370-63DE9223540C}"
+  "FileHash": "{BCA56E6F-F99D-5259-7A19-5C1E9EF41C5A}"
  }
 }
