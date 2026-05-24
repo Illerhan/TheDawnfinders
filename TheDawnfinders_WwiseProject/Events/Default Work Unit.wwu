@@ -372,6 +372,24 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Poisoned" ID="{8CEFF056-17BC-4C81-B923-251B6AD9A2B2}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{797E7149-EA3B-46CF-AADC-F22AC06B9A62}" ShortID="904812284">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="PoisonState" ID="{5E962BB4-670C-4543-A458-F6DE8E16E626}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>

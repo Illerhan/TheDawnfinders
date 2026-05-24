@@ -697,6 +697,28 @@
 										<ActiveSource Name="CrazyStatus" ID="{BC201B9F-7EE8-43F8-8D51-55C420E8C596}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="PoisonState" ID="{5E962BB4-670C-4543-A458-F6DE8E16E626}" ShortID="305696204">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="PoisonState" ID="{F5BF1855-4135-48C7-B109-5291CC40F595}">
+											<Language>SFX</Language>
+											<AudioFile>PoisonState.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1059746318"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="PoisonState" ID="{F5BF1855-4135-48C7-B109-5291CC40F595}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Feedbacks" ID="{86B833D5-CB9E-4E90-83E7-67D42B97F37E}" ShortID="835450263">
