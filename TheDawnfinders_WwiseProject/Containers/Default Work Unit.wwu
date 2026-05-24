@@ -17522,6 +17522,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Navigation_05" ID="{6E1412C1-E679-418B-B94A-85781A814CEE}" ShortID="332651085">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -17532,6 +17539,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Navigation_05" ID="{DB919072-DD0B-4681-86BC-233E6368DEFE}">
+													<PropertyList>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>-5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Navigation_05.wav</AudioFile>
 													<MediaIDList>
@@ -17545,6 +17559,68 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Countdown" ID="{3CD9ACEB-AB37-4A9C-873E-C95CF25CA3BF}" ShortID="366615528">
+							<ChildrenList>
+								<Sound Name="TimerSecond" ID="{DD117EFC-92DA-44D7-983F-0F20A3F5C547}" ShortID="679038920">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="TimerSecond" ID="{AB980C50-B55C-44C8-8019-441A0597CD58}">
+											<Language>SFX</Language>
+											<AudioFile>TimerSecond.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="843282687"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="TimerSecond" ID="{AB980C50-B55C-44C8-8019-441A0597CD58}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="TimerStart" ID="{2BD176D1-EA96-414A-8675-E87F416E06E2}" ShortID="498295080">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="TimerStart" ID="{61F1FA74-6457-4C80-85E2-974811B58D51}">
+											<Language>SFX</Language>
+											<AudioFile>TimerStart.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="481290043"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="TimerStart" ID="{61F1FA74-6457-4C80-85E2-974811B58D51}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>

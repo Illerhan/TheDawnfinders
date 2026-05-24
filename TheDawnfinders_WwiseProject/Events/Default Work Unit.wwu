@@ -1256,6 +1256,32 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Folder Name="Countdown" ID="{83F1F2FC-0DA3-4F44-B89B-BD5D1B729C84}" ShortID="574604235">
+							<ChildrenList>
+								<Event Name="Play_CountdownStart" ID="{45A673CB-4DA1-46DA-AE03-A13EF2420310}">
+									<ChildrenList>
+										<Action Name="" ID="{437B84AB-0F6E-4B06-972F-B116FC80E3ED}" ShortID="405229635">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="TimerStart" ID="{2BD176D1-EA96-414A-8675-E87F416E06E2}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_CountdownSecond" ID="{EF8616B2-1876-41C1-BCED-202E133576D0}">
+									<ChildrenList>
+										<Action Name="" ID="{9A0201BC-B0AB-4F87-AA44-97EA89222C93}" ShortID="378988951">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="TimerSecond" ID="{DD117EFC-92DA-44D7-983F-0F20A3F5C547}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Actions" ID="{42BC2EFF-7A51-4F93-B263-CCA4384A55EE}" ShortID="618588558">
