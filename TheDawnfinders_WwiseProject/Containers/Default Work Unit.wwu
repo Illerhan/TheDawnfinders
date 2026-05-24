@@ -1679,6 +1679,28 @@
 										</CustomStateList>
 									</StateInfo>
 								</RandomSequenceContainer>
+								<Sound Name="Shatter" ID="{FBA321AB-5453-43FE-8FCE-1B937B73993E}" ShortID="354985955">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Shatter" ID="{5E7E31BF-8810-4E23-94AC-29EABE530417}">
+											<Language>SFX</Language>
+											<AudioFile>Shatter.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1006390661"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Shatter" ID="{5E7E31BF-8810-4E23-94AC-29EABE530417}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Actions" ID="{ADC008C0-B27B-4973-BC4C-A5A0B463EB67}" ShortID="1060201702">
@@ -11639,6 +11661,206 @@
 												<ActiveSource Name="Extraction_Scream" ID="{2E341B84-39D5-40A6-B361-058B3EF553FE}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Boulder" ID="{2F3E8953-36E6-4857-B94E-92063DCA5D08}" ShortID="591854699">
+									<ChildrenList>
+										<Sound Name="RollingBoulder" ID="{AD208BBF-E766-4A51-8D26-FDEA0C68D69E}" ShortID="623300451">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RollingBoulder" ID="{92907E34-F146-44AE-BB40-A3FBB5633359}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.631602223239728"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.832110865538054"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>RollingBoulder.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="444134671"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RollingBoulder" ID="{92907E34-F146-44AE-BB40-A3FBB5633359}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="ImpactBoulder" ID="{ACA03511-6242-427F-B863-A3FDBA2B8F49}" ShortID="124106930">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="BoulderImpact_01" ID="{11EEC3DA-EADD-4CD8-BADB-33A480FD25CD}" ShortID="937385382">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BoulderImpact_01" ID="{B03D3813-D69F-4107-98AD-3CBCFAFBB6DD}">
+															<PropertyList>
+																<Property Name="LoopEnd" Type="Real64" Value="3.18748299319728"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.190298849077367"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>BoulderImpact_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1002902072"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BoulderImpact_01" ID="{B03D3813-D69F-4107-98AD-3CBCFAFBB6DD}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BoulderImpact_02" ID="{016BB13B-EA19-41C4-9842-064FD5892E6F}" ShortID="860042242">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BoulderImpact_02" ID="{4B7732D0-2E1A-4B2B-867E-3BEA193DE7AC}">
+															<Language>SFX</Language>
+															<AudioFile>BoulderImpact_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1068577333"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BoulderImpact_02" ID="{4B7732D0-2E1A-4B2B-867E-3BEA193DE7AC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BoulderImpact_03" ID="{F5475C3F-0F11-4FD6-A199-9839011171BA}" ShortID="631946783">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BoulderImpact_03" ID="{FBB09A40-C320-442B-AF9B-E78FADE9CF87}">
+															<PropertyList>
+																<Property Name="LoopEnd" Type="Real64" Value="3.139410430839"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.0736327603427586"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>BoulderImpact_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="609335814"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BoulderImpact_03" ID="{FBB09A40-C320-442B-AF9B-E78FADE9CF87}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="BoulderImpact_04" ID="{A7545921-806F-4848-8EAA-D78291FB479E}" ShortID="170950334">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="BoulderImpact_04" ID="{8638B967-FBC6-42CC-9D6C-1F5FF8029544}">
+															<PropertyList>
+																<Property Name="LoopEnd" Type="Real64" Value="3.35573696145125"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.0715513778393711"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>BoulderImpact_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="602957601"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="BoulderImpact_04" ID="{8638B967-FBC6-42CC-9D6C-1F5FF8029544}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+											<StateInfo>
+												<StateGroupList>
+													<StateGroupInfo>
+														<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+														<StateGroupInfo Name="" ID="{7AA8B621-1831-4E41-9B94-669C7AD83977}" ShortID="315859702"/>
+													</StateGroupInfo>
+												</StateGroupList>
+												<CustomStateList>
+													<CustomState>
+														<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+														<CustomState Name="" ID="{61E68FE8-E131-44AD-B9EA-B603C925BD06}" ShortID="380821531"/>
+													</CustomState>
+													<CustomState>
+														<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+														<CustomState Name="" ID="{567374C0-06C3-4C84-8E52-C099E6CFDE79}" ShortID="17123075"/>
+													</CustomState>
+												</CustomStateList>
+											</StateInfo>
+											<ObjectLists>
+												<ObjectList Name="Effects">
+													<EffectSlot Name="" ID="{2E8FD202-2FB2-4D9D-B299-0E2A9C11268D}" ShortID="704028457">
+														<ReferenceList>
+															<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+																<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+															</Reference>
+														</ReferenceList>
+														<StateInfo>
+															<CustomStateList>
+																<CustomState>
+																	<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+																	<CustomState Name="" ID="{D1656090-2BF1-4B36-B036-566A9A64FDDC}" ShortID="658530738"/>
+																</CustomState>
+																<CustomState>
+																	<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+																	<CustomState Name="" ID="{0FDC7CAF-DE7D-4A1D-A24D-C0F2C8F74BFD}" ShortID="57771299"/>
+																</CustomState>
+															</CustomStateList>
+														</StateInfo>
+													</EffectSlot>
+												</ObjectList>
+											</ObjectLists>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

@@ -257,6 +257,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Shatter" ID="{E5B9BB36-7661-477D-AD9F-54FAEF1C45B2}">
+									<ChildrenList>
+										<Action Name="" ID="{0B45AFD5-6174-4B49-A15C-D0CB0810D365}" ShortID="749011189">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Shatter" ID="{FBA321AB-5453-43FE-8FCE-1B937B73993E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Actions" ID="{68901D95-CD16-4BB7-BA38-CA1811FAF341}" ShortID="310585558">
@@ -760,6 +771,50 @@
 													<ReferenceList>
 														<Reference Name="Target">
 															<ObjectRef Name="Extraction_Scream" ID="{0FD3EACA-D01A-42AA-883B-6FBE9EA76CB1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Boulder" ID="{0D4D2900-A980-4CCF-9067-5456E01133C0}" ShortID="806567370">
+									<ChildrenList>
+										<Event Name="Play_BoulderRoll" ID="{CA0B4DFE-CC57-474D-A977-E144E9155423}">
+											<ChildrenList>
+												<Action Name="" ID="{12E80DF9-5FF6-4994-A7E0-4CC77C447B5B}" ShortID="631646792">
+													<PropertyList>
+														<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RollingBoulder" ID="{AD208BBF-E766-4A51-8D26-FDEA0C68D69E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_BoulderImpact" ID="{B2F33C5F-8916-4571-9023-173F3339A5B2}">
+											<ChildrenList>
+												<Action Name="" ID="{0E8FCB00-009E-44D5-9F91-7D0345C7B0CC}" ShortID="998774322">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ImpactBoulder" ID="{ACA03511-6242-427F-B863-A3FDBA2B8F49}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Stop_BoulderRoll" ID="{B4284433-5A03-4684-BF41-603C2F0356C3}">
+											<ChildrenList>
+												<Action Name="" ID="{7D188856-6DAA-4D90-AD5E-C05117B69DE7}" ShortID="278787619">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+														<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RollingBoulder" ID="{AD208BBF-E766-4A51-8D26-FDEA0C68D69E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
