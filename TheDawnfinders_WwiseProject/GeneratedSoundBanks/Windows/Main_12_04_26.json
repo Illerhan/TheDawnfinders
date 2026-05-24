@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{AD6254AA-427D-4F25-C500-0F33F819D4D6}",
+    "Hash": "{83DCF61A-D3D1-5C4D-9A85-B88CD0CD9243}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -325,7 +325,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "CoinRefill_01.wav",
-      "CachePath": "5F/{5F8D3484-18A4-7154-FBED-388998CE4F74}.wem"
+      "CachePath": "92/{924D38AA-619F-2A6F-A6C8-4754E91CA035}.wem"
      },
      {
       "Id": "78131397",
@@ -1461,7 +1461,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "94/{94012C7D-677A-194A-F47D-517F41975612}.wem"
+      "CachePath": "EA/{EA30A27A-A02A-D9CA-20EB-B60BCB2F973C}.wem"
      },
      {
       "Id": "389265982",
@@ -1837,7 +1837,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "38/{388FE2D9-140D-A2DF-9814-0BC62F7598C7}.wem"
+      "CachePath": "80/{800FB702-CB03-0C10-651A-526240EBBE65}.wem"
      },
      {
       "Id": "492429887",
@@ -2749,7 +2749,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "UI_New_Zone.wav",
-      "CachePath": "E8/{E88A0B9D-34EA-25BE-F9B4-37844D86CC5A}.wem"
+      "CachePath": "CD/{CDE91BD4-31F1-1C48-267D-B34CD0445E24}.wem"
      },
      {
       "Id": "739553590",
@@ -9040,6 +9040,6 @@
     ]
    }
   ],
-  "FileHash": "{DB7D3F15-6203-A372-90DB-B356392DF14B}"
+  "FileHash": "{B0ECBE4E-EAE0-E964-C1B4-AD9EDAC01EFD}"
  }
 }
