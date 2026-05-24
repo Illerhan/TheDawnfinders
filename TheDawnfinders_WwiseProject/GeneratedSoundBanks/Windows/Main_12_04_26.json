@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{83DCF61A-D3D1-5C4D-9A85-B88CD0CD9243}",
+    "Hash": "{AE8CFA1F-53CD-BAE6-6B7C-02BE0B87230A}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -5769,6 +5769,7 @@
       "Name": "Play_Lever_Use",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Lever_Use",
       "GUID": "{576A6CF1-7620-47E0-88DA-E793AE4D3573}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.9810833",
       "DurationMax": "2.2",
@@ -6225,6 +6226,7 @@
       "Name": "Play_Player_Lever",
       "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Lever",
       "GUID": "{60FC232E-6E32-44FA-AC7C-524F024FF2AF}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.9810833",
       "DurationMax": "2.2",
@@ -9040,6 +9042,6 @@
     ]
    }
   ],
-  "FileHash": "{B0ECBE4E-EAE0-E964-C1B4-AD9EDAC01EFD}"
+  "FileHash": "{9C5AB083-B3AE-72C4-EA43-CB1F9AB52EDD}"
  }
 }
