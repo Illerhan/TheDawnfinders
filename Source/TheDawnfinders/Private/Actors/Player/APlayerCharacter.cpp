@@ -424,13 +424,13 @@ void AAPlayerCharacter::PlaySoundOnServer_Implementation(FName SoundTag, float R
     LoudnessTimer = 0.8f;
     UILoudness = WaveStrength;
 
-    CurrentNoise = Range;
+    CurrentNoise = Range * NoiseModifier;
 
     if(!HasAuthority())
-        Server_PlayNoise(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise(SoundTag, CurrentNoise, Loc, bLoudNoise);
     
     else
-        Server_PlayNoise_Implementation(SoundTag, Range, Loc, bLoudNoise);
+        Server_PlayNoise_Implementation(SoundTag, CurrentNoise, Loc, bLoudNoise);
 }
 
 UWorldPlayerWidget* AAPlayerCharacter::GetPlayerWidget_Implementation()
