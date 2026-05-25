@@ -701,6 +701,14 @@ void UHealthComponent::Client_Revive_Implementation()
 		SpectateWidget->HideWidget();
 
 		HUD->MainWidget->ExitSpectate();
+
+		APlayerController* LocalPC = GEngine->GetFirstLocalPlayerController(GetWorld());
+
+		if (LocalPC && OwnerController == LocalPC)
+		{
+			DyingSoundID = UAkGameplayStatics::PostEvent(FallenBreath, GetOwner(), 0, FOnAkPostEventCallback(), false);
+			HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen, GetOwner(), 0, FOnAkPostEventCallback(), false);
+		}
 	}
 }
 
