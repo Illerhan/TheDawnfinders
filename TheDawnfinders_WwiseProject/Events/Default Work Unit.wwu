@@ -1024,6 +1024,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Player_SuppressedShot" ID="{A9FF0394-CE0E-48E7-87D8-25113EC937CC}">
+									<ChildrenList>
+										<Action Name="" ID="{FCB923E6-1A87-450A-9333-956B114B3274}" ShortID="145322931">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="SuppressedGun" ID="{45DFC29A-2B9A-48D1-BA5B-6B31EBC0F18E}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>

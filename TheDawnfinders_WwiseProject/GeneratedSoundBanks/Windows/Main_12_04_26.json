@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{FC7BD382-EC40-D63B-37A7-8FD681DAB3B7}",
+    "Hash": "{1D418D58-FAED-1D38-0D2E-69EE211D5761}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -117,7 +117,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Gear_01.wav",
-      "CachePath": "D0/{D0EE9A49-A5F8-B333-41DF-1E0F8784A686}.wem"
+      "CachePath": "F9/{F91CE983-1E03-E369-A0CB-80F5271B0F19}.wem"
      },
      {
       "Id": "25974615",
@@ -589,7 +589,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage5.wav",
-      "CachePath": "B9/{B9418D34-918A-4172-C755-C4191A93A7E3}.wem"
+      "CachePath": "ED/{ED6EF4C6-337A-A358-DCCB-A9740D870668}.wem"
      },
      {
       "Id": "132985292",
@@ -712,12 +712,20 @@
       "CachePath": "B7/{B7FD4DD5-121C-06E5-0F4F-BEC090BCD3F7}.wem"
      },
      {
+      "Id": "179360045",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SuppressedGun.wav",
+      "CachePath": "85/{85E48137-3171-2FCC-C913-FFFFEB8A3E5D}.wem"
+     },
+     {
       "Id": "179511228",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Audio 6_02-01.wav",
-      "CachePath": "B9/{B97634EA-F385-5769-B6EB-2E71D2091967}.wem"
+      "CachePath": "59/{597D1AD1-7299-6CAE-D981-95D98F359E80}.wem"
      },
      {
       "Id": "185216176",
@@ -901,7 +909,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MetalDoor_01.wav",
-      "CachePath": "94/{94F83347-77C3-B1A1-9CA4-A331159D161F}.wem"
+      "CachePath": "4D/{4D40BDEF-5BBA-BFCD-92E7-ECEE65F53684}.wem"
      },
      {
       "Id": "227417322",
@@ -965,7 +973,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Gear_04.wav",
-      "CachePath": "67/{671D851D-8B23-C5EF-1CC0-B19EB926E2C7}.wem"
+      "CachePath": "B0/{B02AF2E2-50E6-96BE-9C14-53981C6B0F1E}.wem"
      },
      {
       "Id": "248778167",
@@ -973,7 +981,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerDeath_04.wav",
-      "CachePath": "89/{892FA6DE-699E-88E0-E555-E177D2BA713C}.wem"
+      "CachePath": "9A/{9AA4ABEF-2886-C92F-1B4C-4FCD575ACAC3}.wem"
      },
      {
       "Id": "249614893",
@@ -1357,7 +1365,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerDeath_02.wav",
-      "CachePath": "E8/{E8224F1F-BC48-B990-1069-636242F84A65}.wem"
+      "CachePath": "0B/{0B1ED618-3555-3406-3C90-EBCC7319D323}.wem"
      },
      {
       "Id": "349519976",
@@ -1509,7 +1517,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage3.wav",
-      "CachePath": "62/{622E187A-A349-AD13-7DB7-61E4A36B5A12}.wem"
+      "CachePath": "13/{13698038-4BFF-A8C1-9038-8C1CF5C7910C}.wem"
      },
      {
       "Id": "382336194",
@@ -1533,7 +1541,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage7.wav",
-      "CachePath": "AA/{AAC33900-F1B2-10F9-2DBB-DDFCD11B21F8}.wem"
+      "CachePath": "C7/{C7C0379E-4F36-3202-50DB-AB2032E40EC9}.wem"
      },
      {
       "Id": "386978507",
@@ -1573,7 +1581,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ZealotSuspicion_03.wav",
-      "CachePath": "A3/{A3985D56-0CF1-4CCC-173B-8E0347350546}.wem"
+      "CachePath": "25/{25988B45-62D7-744C-3FDF-E650D3A54544}.wem"
      },
      {
       "Id": "391905191",
@@ -1637,7 +1645,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage4.wav",
-      "CachePath": "B4/{B4C28A29-2B97-E5C6-A535-DFF5451D56B5}.wem"
+      "CachePath": "03/{03068D4F-6585-F3CF-F096-4E87BE4889DD}.wem"
      },
      {
       "Id": "416500249",
@@ -1893,7 +1901,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerSuspicion_03.wav",
-      "CachePath": "B1/{B1E67C66-4E3B-1CA0-9E85-037DA74515BC}.wem"
+      "CachePath": "33/{33D37931-FD20-867C-5B17-7664FF35C67F}.wem"
      },
      {
       "Id": "480985582",
@@ -2045,7 +2053,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage1.wav",
-      "CachePath": "B9/{B987FFCB-C8B4-9837-8A25-C9AEA84D7CB9}.wem"
+      "CachePath": "F2/{F2F23C37-8A24-51C1-16AE-2F737FCB71C4}.wem"
      },
      {
       "Id": "510163991",
@@ -2325,7 +2333,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerSuspicion_04.wav",
-      "CachePath": "1D/{1D480F1C-E818-F07E-B120-B7359D682F46}.wem"
+      "CachePath": "E9/{E9753674-DD5E-CD44-A90D-ACED22F82290}.wem"
      },
      {
       "Id": "577296003",
@@ -2829,7 +2837,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav",
-      "CachePath": "8F/{8FB0F628-EE7E-007A-F7EE-E8B6B8574BFD}.wem"
+      "CachePath": "45/{454B8F01-015F-178F-0353-1F7F931EA916}.wem"
      },
      {
       "Id": "714890982",
@@ -2941,7 +2949,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage2.wav",
-      "CachePath": "E4/{E42DE2E5-A71A-4574-561D-F1A626861A90}.wem"
+      "CachePath": "5A/{5ADF00D1-3CD5-FF84-3EFD-EF56321E8ED6}.wem"
      },
      {
       "Id": "735284195",
@@ -2949,7 +2957,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerSuspicion_02.wav",
-      "CachePath": "05/{05CCD4D9-E54C-A09B-39E7-E5A14D0D4ED0}.wem"
+      "CachePath": "5F/{5FC9A34C-A0E8-D4A5-3C70-05293CA5D5D0}.wem"
      },
      {
       "Id": "736053400",
@@ -3301,7 +3309,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerDeath_03.wav",
-      "CachePath": "B1/{B11CC645-EA6E-9FA5-7C97-3D10DB89356E}.wem"
+      "CachePath": "03/{0391CEC9-249E-3C11-282D-BD4531950406}.wem"
      },
      {
       "Id": "819086688",
@@ -3309,7 +3317,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ZealotScream.wav",
-      "CachePath": "5E/{5E7CB11D-685F-B00B-5AA5-B10E78E708A0}.wem"
+      "CachePath": "22/{22D488DB-BF0C-7484-009F-69D2BF8FB653}.wem"
      },
      {
       "Id": "819944367",
@@ -3733,7 +3741,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerSuspicion_01.wav",
-      "CachePath": "20/{205813E1-FD36-8449-CDAB-C0E9A18EF70D}.wem"
+      "CachePath": "53/{53E3D99C-C2EF-96FF-FFB1-EF25EF662A32}.wem"
      },
      {
       "Id": "927203698",
@@ -3821,7 +3829,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Zeloth_Damage6.wav",
-      "CachePath": "E0/{E03FC551-E941-460D-A524-D15ECF5FD0CA}.wem"
+      "CachePath": "7D/{7D58E15D-4497-3DD1-0FFE-E854897948CE}.wem"
      },
      {
       "Id": "943584154",
@@ -3925,7 +3933,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Gear_05.wav",
-      "CachePath": "5F/{5F684FD5-80F9-F4BE-B131-19BBF2A993BE}.wem"
+      "CachePath": "F3/{F3D87CB8-2757-BC65-F481-A5D1183286C5}.wem"
      },
      {
       "Id": "967157273",
@@ -4029,7 +4037,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Audio 7.cm_01-01.wav",
-      "CachePath": "E5/{E5931CE9-7DAE-7597-EBC5-98759F81A6C6}.wem"
+      "CachePath": "46/{46E7B57E-551D-D516-F534-82D3D1835E8F}.wem"
      },
      {
       "Id": "978672313",
@@ -4069,7 +4077,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ZealotSuspicion_02.wav",
-      "CachePath": "2B/{2BDC1537-AC39-5D11-0084-1387CB814C8A}.wem"
+      "CachePath": "F1/{F1F58890-177E-FF19-E839-0631ADAF46BB}.wem"
      },
      {
       "Id": "985944095",
@@ -4117,7 +4125,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "FollowerDeath_01.wav",
-      "CachePath": "0E/{0E9F50A6-3172-8DD2-99AB-E219A4FF490A}.wem"
+      "CachePath": "77/{7782C763-1ED8-26F2-8CBB-C0CBE8DA62F9}.wem"
      },
      {
       "Id": "989610776",
@@ -4253,7 +4261,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "beast_attack-kHsFrqS_01-01.wav",
-      "CachePath": "39/{395E9B96-3C83-08DD-B30F-51A0ECB8665F}.wem"
+      "CachePath": "D1/{D1C4FB4D-680F-97C3-3DDD-FAB40E875A6B}.wem"
      },
      {
       "Id": "1016179183",
@@ -4277,7 +4285,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Gear_03.wav",
-      "CachePath": "98/{9844771C-058E-6A83-BACB-FF45529FC121}.wem"
+      "CachePath": "9B/{9B749360-395A-769F-24E9-E1D533E8CCFD}.wem"
      },
      {
       "Id": "1018491526",
@@ -4405,7 +4413,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Gear_02.wav",
-      "CachePath": "B9/{B9AEEEDA-7F36-F136-C9B6-E280C753CDE5}.wem"
+      "CachePath": "D3/{D3265DFF-74B3-6254-CA90-83F390FA8DC1}.wem"
      },
      {
       "Id": "1056063868",
@@ -7000,6 +7008,20 @@
         }
        ]
       }
+     },
+     {
+      "Id": "3928138014",
+      "Name": "Play_Player_SuppressedShot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Play_Player_SuppressedShot",
+      "GUID": "{A9FF0394-CE0E-48E7-87D8-25113EC937CC}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.75123817",
+      "DurationMax": "0.75123817",
+      "MediaRefs": [
+       {
+        "Id": "179360045"
+       }
+      ]
      },
      {
       "Id": "3575087421",
@@ -9832,6 +9854,6 @@
     ]
    }
   ],
-  "FileHash": "{CBDD0BCF-1731-008F-F679-F8337D75A9A8}"
+  "FileHash": "{8EBA21BA-10C2-C378-68B3-166EE9161749}"
  }
 }
