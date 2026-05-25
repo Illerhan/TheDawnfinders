@@ -1028,11 +1028,11 @@
 						</Folder>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="Ennemis" ID="{561CE68B-46B0-4675-B41A-235295D46A7B}" ShortID="979282281">
+				<Folder Name="Enemis" ID="{561CE68B-46B0-4675-B41A-235295D46A7B}" ShortID="979282281">
 					<ChildrenList>
 						<Folder Name="Fidele" ID="{E7F71B35-8B9E-4E70-B249-6986182628C9}" ShortID="46726563">
 							<ChildrenList>
-								<Event Name="Play_BasicEnnemyAttack" ID="{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}">
+								<Event Name="Play_BasicEnemyAttack" ID="{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}">
 									<PropertyList>
 										<Property Name="CooldownTime" Type="Real32">
 											<ValueList>
@@ -1065,7 +1065,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_BasicEnnemyMovement" ID="{7A700EAE-6822-45A5-83BE-3E233F0B7658}">
+								<Event Name="Play_BasicEnemyMovement" ID="{7A700EAE-6822-45A5-83BE-3E233F0B7658}">
 									<ChildrenList>
 										<Action Name="" ID="{5A136806-77D5-4C21-861B-B70D7E6904E1}" ShortID="865077812">
 											<PropertyList>
@@ -1100,7 +1100,14 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_BasicEnnemyDamage" ID="{19C687C6-674D-4B92-AA82-DB12AEF39EAA}">
+								<Event Name="Play_BasicEnemyDamage" ID="{19C687C6-674D-4B92-AA82-DB12AEF39EAA}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>0.5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ChildrenList>
 										<Action Name="" ID="{9291407C-63AD-4587-9553-9CACFA35FD69}" ShortID="927170490">
 											<ReferenceList>
@@ -1157,11 +1164,40 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_BasicEnemySuspicion" ID="{E694CBD1-0065-411B-8B04-119CF5F7E923}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{1520576F-66C8-4C87-8848-053B1723B137}" ShortID="720666468">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnemySuspicion" ID="{6207765B-5721-47EB-B474-E0FD04937FE4}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_BasicEnemyDeath" ID="{CE9A5DF9-7CB8-48FE-8025-7EF56ED8AD12}">
+									<ChildrenList>
+										<Action Name="" ID="{E86CF3F9-E991-4858-9B1E-F9AE6184E8F9}" ShortID="701027630">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="BasicEnemyDeath" ID="{D2989388-7890-4535-BB8D-3629E9EF49C4}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Zelote" ID="{E5068A34-6FF1-4BD2-9E4F-63E802603958}" ShortID="39062731">
 							<ChildrenList>
-								<Event Name="Play_EliteEnnemyMovement" ID="{5B3B3798-EA6C-4457-BFBC-BC5C2C8397C0}">
+								<Event Name="Play_EliteEnemyMovement" ID="{5B3B3798-EA6C-4457-BFBC-BC5C2C8397C0}">
 									<ChildrenList>
 										<Action Name="" ID="{3268B4D0-B380-4773-B33E-48366443B832}" ShortID="12821278">
 											<ReferenceList>
@@ -1195,6 +1231,13 @@
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_EliteEnemyDamage" ID="{5C155D14-FD6D-4922-8321-CE64DBBA3055}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>0.5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ChildrenList>
 										<Action Name="" ID="{CA4FF709-BA01-4D83-8BA0-53B6C8BA615B}" ShortID="480465408">
 											<ReferenceList>
@@ -1244,6 +1287,46 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="EliteEnemyAttack_02" ID="{1EA2907F-07D9-416D-901C-AB056B4DDAC9}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemySuspicion" ID="{C3438086-6B38-42B2-999A-301D2745EED6}">
+									<PropertyList>
+										<Property Name="CooldownTime" Type="Real32">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{D814EA72-DF10-4814-AE0A-FE408F268E08}" ShortID="111889092">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemySuspicion" ID="{78EEDD3B-983D-4899-97FD-A7C892CD7538}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemyScream" ID="{9C5D4E32-2078-451A-900D-B7A3733821FA}">
+									<ChildrenList>
+										<Action Name="" ID="{34280F0A-B713-4C20-AD93-A8CAC6CC48BE}" ShortID="822686950">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemyScream" ID="{EF34F28A-3895-41D7-9439-4E51E8099EB3}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_EliteEnemySecondaryScream" ID="{1686C517-8E41-4831-B00D-DF606B1B3297}">
+									<ChildrenList>
+										<Action Name="" ID="{936E1056-579E-4416-9FC5-C81DD906C2B5}" ShortID="451661124">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="EliteEnemySecondaryScream" ID="{3CFBEF73-B4EC-475F-BFA3-26DF07D5004A}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
