@@ -512,6 +512,7 @@ void UHealthComponent::Fallen()
 
 	bIsFallen = true;
 	bIsPoisoned = false;
+	bStopFallenTimer = false;
 
 	Multicast_DisplayFallen();
 	Multicast_ActualiseFallen(1);
@@ -540,6 +541,8 @@ void UHealthComponent::FallenLoseHP(float DeltaTime)
 	if (!GetOwner()->HasAuthority()) return;
 
 	Multicast_ActualiseFallen(FallenTimer / FallenDuration);
+
+	if (bStopFallenTimer) return;
 
 	FallenTimer -= DeltaTime;
 	if (FallenTimer <= 0)
@@ -578,6 +581,30 @@ void UHealthComponent::Die()
 		HeartBeatSoundID = AK_INVALID_PLAYING_ID;
 	}
 	Client_DieSound();
+}
+
+void UHealthComponent::StartRevive()
+{
+	bStopFallenTimer = true;
+
+	if (!GetOwner()->HasAuthority()) Server_StartRevive();
+}
+
+void UHealthComponent::StopRevive()
+{
+	bStopFallenTimer = false;
+
+	if (!GetOwner()->HasAuthority()) Server_StopRevive();
+}
+
+void UHealthComponent::Server_StartRevive_Implementation()
+{
+	bStopFallenTimer = true;
+}
+
+void UHealthComponent::Server_StopRevive_Implementation()
+{
+	bStopFallenTimer = false;
 }
 
 void UHealthComponent::Client_Die_Implementation()

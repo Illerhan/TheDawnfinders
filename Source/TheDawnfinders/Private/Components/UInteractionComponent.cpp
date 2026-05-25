@@ -613,6 +613,7 @@ void UInteractionComponent::ServerStartHelp_Implementation(AAPlayerCharacter* Al
 		return;
 
 	AllyParam->StopMovementForDuration(HelpDuration);
+	AllyParam->HealthComponent->StartRevive();
 
 	CurrentHelpedTarget = AllyParam;
 
@@ -630,6 +631,7 @@ void UInteractionComponent::ServerCancelHelp_Implementation()
 	if (!bIsHelping) return;
 
 	CurrentHelpedTarget->RestartMovement();
+	CurrentHelpedTarget->HealthComponent->StopRevive();
 
 	bIsHelping = false;
 	bIsInInteraction = false;
@@ -668,6 +670,7 @@ void UInteractionComponent::CompleteHelp()
 	Client_HideHelpProgress();
 
 	CurrentHelpedTarget->HealthComponent->Server_Revive();
+	CurrentHelpedTarget->HealthComponent->StopRevive();
 	CurrentHelpedTarget->HealthComponent->Revive();
 
 	bIsHelping = false;

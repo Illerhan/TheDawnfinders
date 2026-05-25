@@ -539,7 +539,13 @@ void AAPlayerCharacter::MoveCharacter(FVector2D Input)
     }
 
     if (NoMovementTimer > 0) {
+        if (bMoveInputActive && CurrentState == EPlayerState::Fallen) {
+            InterruptMontage();
+        }
+
         bMoveInputActive = false;
+
+        if (!HasAuthority()) Server_SetMoveInputActive(false);
         return;
     }
 
