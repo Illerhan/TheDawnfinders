@@ -10,6 +10,11 @@
 								<RandomSequenceContainer Name="DownedBreath" ID="{73D9E7AD-0AA7-40F1-BC3E-66BAF12EE6BE}" ShortID="82570201">
 									<PropertyList>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-300</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -719,6 +724,202 @@
 										<ActiveSource Name="PoisonState" ID="{F5BF1855-4135-48C7-B109-5291CC40F595}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<RandomSequenceContainer Name="DownedBreath_Female" ID="{4EE404C2-033D-48BB-ADAF-E5F80F8D3CB6}" ShortID="496737632">
+									<PropertyList>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>300</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="DownedBreath 1" ID="{752788D2-5752-4C2A-8C93-D5AC66D41E88}" ShortID="1067383438">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 1" ID="{1B1F2A2D-A732-4714-90D3-F0C943A85AFD}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="436998747"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 1" ID="{1B1F2A2D-A732-4714-90D3-F0C943A85AFD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 2" ID="{68D6202A-8C52-41BD-96F8-D720FF04287F}" ShortID="382631588">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 2" ID="{3ED84C1C-F2CA-44CD-A2F3-F3BF8E4F12AD}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="101298648"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 2" ID="{3ED84C1C-F2CA-44CD-A2F3-F3BF8E4F12AD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 3" ID="{5567E2F9-A615-4E00-8991-6DB81D68AACD}" ShortID="73541553">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 3" ID="{A18E1DA3-38A2-41AE-AE42-032160FE5CE3}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="475726858"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 3" ID="{A18E1DA3-38A2-41AE-AE42-032160FE5CE3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 4" ID="{77E87D66-CB44-4D59-B5AF-1BE3891C7AF5}" ShortID="314471386">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 4" ID="{D44992E0-659F-4901-B4C0-10B483688686}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="761029887"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 4" ID="{D44992E0-659F-4901-B4C0-10B483688686}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 5" ID="{6B24E074-A6EA-4622-81BC-2348341DECC5}" ShortID="363668756">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 5" ID="{1A52A3F2-885C-42ED-B9B7-4CAD16476348}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 5.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="331545351"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 5" ID="{1A52A3F2-885C-42ED-B9B7-4CAD16476348}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 6" ID="{37C3E9FF-A900-4C31-82A1-6EB7E836B531}" ShortID="404810022">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 6" ID="{3DB13309-531A-4A08-A46D-AF67A33637EA}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 6.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="376331356"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 6" ID="{3DB13309-531A-4A08-A46D-AF67A33637EA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 7" ID="{8301798B-2883-4A0E-B01E-44BBD13AE751}" ShortID="1072431467">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 7" ID="{9300AFA1-A195-4890-B036-4E9F439C8091}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 7.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="652194251"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 7" ID="{9300AFA1-A195-4890-B036-4E9F439C8091}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="DownedBreath 8" ID="{2043C867-1280-48D7-B7FB-47870FCBBF1B}" ShortID="998162492">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DownedBreath 8" ID="{A8214F25-9701-4EB3-8826-7E8A797E8786}">
+													<Language>SFX</Language>
+													<AudioFile>DownedBreath\DownedBreath 8.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="216827798"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="DownedBreath 8" ID="{A8214F25-9701-4EB3-8826-7E8A797E8786}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Feedbacks" ID="{86B833D5-CB9E-4E90-83E7-67D42B97F37E}" ShortID="835450263">

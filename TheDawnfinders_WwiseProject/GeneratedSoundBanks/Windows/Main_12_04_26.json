@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{1D418D58-FAED-1D38-0D2E-69EE211D5761}",
+    "Hash": "{8E424F01-4FF7-CBD5-74AB-9CE7B5FDF106}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -717,7 +717,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SuppressedGun.wav",
-      "CachePath": "85/{85E48137-3171-2FCC-C913-FFFFEB8A3E5D}.wem"
+      "CachePath": "98/{98CB0046-E536-B715-F34E-1D63D4B2C72F}.wem"
      },
      {
       "Id": "179511228",
@@ -5558,8 +5558,43 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedBreath",
       "GUID": "{490678ED-6B7F-4FDB-8A75-7B817113C191}",
       "DurationType": "OneShot",
-      "DurationMin": "1.32",
-      "DurationMax": "3.6095417",
+      "DurationMin": "1.5697534",
+      "DurationMax": "4.2924924",
+      "MediaRefs": [
+       {
+        "Id": "101298648"
+       },
+       {
+        "Id": "216827798"
+       },
+       {
+        "Id": "331545351"
+       },
+       {
+        "Id": "376331356"
+       },
+       {
+        "Id": "436998747"
+       },
+       {
+        "Id": "475726858"
+       },
+       {
+        "Id": "652194251"
+       },
+       {
+        "Id": "761029887"
+       }
+      ]
+     },
+     {
+      "Id": "3866885082",
+      "Name": "Play_DownedBreath_Female",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedBreath_Female",
+      "GUID": "{9B15390F-CF22-4FDA-92CE-D76F745E3228}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.5697534",
+      "DurationMax": "4.2924924",
       "MediaRefs": [
        {
         "Id": "101298648"
@@ -9854,6 +9889,6 @@
     ]
    }
   ],
-  "FileHash": "{8EBA21BA-10C2-C378-68B3-166EE9161749}"
+  "FileHash": "{6DC594F1-13B2-9041-4090-30C12FB3BED9}"
  }
 }

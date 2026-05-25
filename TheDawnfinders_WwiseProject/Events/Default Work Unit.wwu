@@ -408,6 +408,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_DownedBreath_Female" ID="{9B15390F-CF22-4FDA-92CE-D76F745E3228}">
+									<ChildrenList>
+										<Action Name="" ID="{927F8854-7C86-45A7-BC1F-9DECC6B7B5F7}" ShortID="871265498">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DownedBreath" ID="{73D9E7AD-0AA7-40F1-BC3E-66BAF12EE6BE}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
