@@ -119,6 +119,18 @@ public :
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void Client_Die();
 
+	UFUNCTION(BlueprintCallable)
+	void StartRevive();
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_StartRevive();
+
+	UFUNCTION(BlueprintCallable)
+	void StopRevive();
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Server_StopRevive();
+
 	UFUNCTION(Server,Reliable,BlueprintCallable)
 	void Server_Revive();
 
@@ -202,6 +214,9 @@ public :
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsFallen, BlueprintReadWrite)
 	bool bIsFallen;
+
+	UPROPERTY(Replicated, BlueprintReadWrite)
+	bool bStopFallenTimer;
 
 	UPROPERTY(EditAnywhere)
 	float PostProcessFallenOpacity = 2500.f;
