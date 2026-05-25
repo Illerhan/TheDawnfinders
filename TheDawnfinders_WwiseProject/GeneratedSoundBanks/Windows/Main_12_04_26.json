@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{E41BC638-C337-D4D2-A78C-BAFA644C0047}",
+    "Hash": "{C1B5F1CF-3622-FA9C-A430-3A56C5806672}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -110,6 +110,14 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_04.wav",
       "CachePath": "0A/{0AF16ABB-2DF0-BF5D-CACD-0ECB8DB32C29}.wem"
+     },
+     {
+      "Id": "22117339",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gear_01.wav",
+      "CachePath": "D0/{D0EE9A49-A5F8-B333-41DF-1E0F8784A686}.wem"
      },
      {
       "Id": "25974615",
@@ -950,6 +958,14 @@
       "Location": "Memory",
       "ShortName": "Player_Hit-05.wav",
       "CachePath": "08/{086E2547-7495-2501-09FF-FCB7C11F42D6}.wem"
+     },
+     {
+      "Id": "241614933",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gear_04.wav",
+      "CachePath": "67/{671D851D-8B23-C5EF-1CC0-B19EB926E2C7}.wem"
      },
      {
       "Id": "249614893",
@@ -3760,6 +3776,14 @@
       "CachePath": "2D/{2D0FBD37-6B87-696F-FEF5-2FCA3307B917}.wem"
      },
      {
+      "Id": "966875969",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gear_05.wav",
+      "CachePath": "5F/{5F684FD5-80F9-F4BE-B131-19BBF2A993BE}.wem"
+     },
+     {
       "Id": "967157273",
       "Language": "SFX",
       "Streaming": "false",
@@ -4088,6 +4112,14 @@
       "CachePath": "89/{89F9E38B-7C78-4C16-8606-2FE5C11F7684}.wem"
      },
      {
+      "Id": "1017521344",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gear_03.wav",
+      "CachePath": "98/{9844771C-058E-6A83-BACB-FF45529FC121}.wem"
+     },
+     {
       "Id": "1018491526",
       "Language": "SFX",
       "Streaming": "false",
@@ -4206,6 +4238,14 @@
       "Location": "Memory",
       "ShortName": "Paper, Handle, Item Pick Up, Paper Map, Gameplay x4 SND103750-06.wav",
       "CachePath": "27/{27AF5CF0-E89B-A65F-9995-0F1BB00CAC66}.wem"
+     },
+     {
+      "Id": "1054997685",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gear_02.wav",
+      "CachePath": "B9/{B9AEEEDA-7F36-F136-C9B6-E280C753CDE5}.wem"
      },
      {
       "Id": "1056063868",
@@ -5893,6 +5933,32 @@
        },
        {
         "Id": "730245699"
+       }
+      ]
+     },
+     {
+      "Id": "552780603",
+      "Name": "Play_Gear",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Gear",
+      "GUID": "{7853483D-05F3-4B2C-8BD3-B12254D86DED}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.5437107",
+      "DurationMax": "2.6262908",
+      "MediaRefs": [
+       {
+        "Id": "22117339"
+       },
+       {
+        "Id": "241614933"
+       },
+       {
+        "Id": "966875969"
+       },
+       {
+        "Id": "1017521344"
+       },
+       {
+        "Id": "1054997685"
        }
       ]
      },
@@ -9470,6 +9536,6 @@
     ]
    }
   ],
-  "FileHash": "{B4004EB0-3B77-1CAE-5777-DFFED141652F}"
+  "FileHash": "{F2D91DA5-6C43-9BFD-477E-3F44874575FB}"
  }
 }
