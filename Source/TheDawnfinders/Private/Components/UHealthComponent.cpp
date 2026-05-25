@@ -621,6 +621,17 @@ void UHealthComponent::Client_Die_Implementation()
 		SpectateWidget->ActualiseInfos(Player->PlayerIndex + 1, false);
 
 		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
+
+		if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(BreathSoundID);
+			BreathSoundID = AK_INVALID_PLAYING_ID;
+		}
+		if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HeartBeatSoundID);
+			HeartBeatSoundID = AK_INVALID_PLAYING_ID;
+		}
 	}
 }
 
@@ -702,12 +713,15 @@ void UHealthComponent::Client_Revive_Implementation()
 
 		HUD->MainWidget->ExitSpectate();
 
-		APlayerController* LocalPC = GEngine->GetFirstLocalPlayerController(GetWorld());
-
-		if (LocalPC && OwnerController == LocalPC)
+		if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
 		{
-			DyingSoundID = UAkGameplayStatics::PostEvent(FallenBreath, GetOwner(), 0, FOnAkPostEventCallback(), false);
-			HeartBeatSoundID = UAkGameplayStatics::PostEvent(HeartBeatFallen, GetOwner(), 0, FOnAkPostEventCallback(), false);
+			AudioDevice->StopPlayingID(BreathSoundID);
+			BreathSoundID = AK_INVALID_PLAYING_ID;
+		}
+		if (AudioDevice && HeartBeatSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HeartBeatSoundID);
+			HeartBeatSoundID = AK_INVALID_PLAYING_ID;
 		}
 	}
 }

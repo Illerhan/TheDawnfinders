@@ -107,7 +107,7 @@ public :
 	UFUNCTION()
 	void Fallen();
 	
-	UFUNCTION(Client,Unreliable)
+	UFUNCTION(Client, Reliable)
 	void Client_HeartbeatSound();
 
 	UFUNCTION(BlueprintCallable)
