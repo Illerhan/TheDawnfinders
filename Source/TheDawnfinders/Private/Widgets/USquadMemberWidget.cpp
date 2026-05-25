@@ -4,7 +4,7 @@ void USquadMemberWidget::Initialise_Implementation(bool IsMainSlot)
 {
 }
 
-void USquadMemberWidget::ActualisePlayersFace_Implementation(int Index)
+void USquadMemberWidget::ActualisePlayersFace_Implementation(int Index, const FString& PlayerName)
 {
 }
 

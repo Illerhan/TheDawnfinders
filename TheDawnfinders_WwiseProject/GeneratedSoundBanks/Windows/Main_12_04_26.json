@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{83DCF61A-D3D1-5C4D-9A85-B88CD0CD9243}",
+    "Hash": "{7EA65FB8-6A15-C285-E232-61F40AC9CAFA}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1664,6 +1664,14 @@
       "CachePath": "CC/{CC69FF85-B64C-5557-CEED-88D32C5D71EA}.wem"
      },
      {
+      "Id": "444134671",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RollingBoulder.wav",
+      "CachePath": "DE/{DE08AEF5-CF6C-5BEB-C014-02922CA698C2}.wem"
+     },
+     {
       "Id": "444785981",
       "Language": "SFX",
       "Streaming": "false",
@@ -2288,12 +2296,28 @@
       "CachePath": "F4/{F4C966DA-11D9-7AB0-DA00-E89B672AFB90}.wem"
      },
      {
+      "Id": "602957601",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BoulderImpact_04.wav",
+      "CachePath": "CC/{CCA9C89C-711C-38FD-F444-5FE756BA3FE6}.wem"
+     },
+     {
       "Id": "606111130",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandWalk\\FootstepsSandWalk 3.wav",
       "CachePath": "A7/{A750C6D5-FCD7-3401-EEE7-362A878C9DDE}.wem"
+     },
+     {
+      "Id": "609335814",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BoulderImpact_03.wav",
+      "CachePath": "BA/{BA449893-20C6-800D-A052-542EFC0E43CA}.wem"
      },
      {
       "Id": "614599972",
@@ -3840,6 +3864,14 @@
       "CachePath": "63/{63684AFF-B0A9-9ED3-BEB2-739ABC3102EB}.wem"
      },
      {
+      "Id": "1002902072",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BoulderImpact_01.wav",
+      "CachePath": "41/{419EABC8-EE50-FF85-E698-26DB8F9BF4B2}.wem"
+     },
+     {
       "Id": "1004722242",
       "Language": "SFX",
       "Streaming": "false",
@@ -3854,6 +3886,14 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-03.wav",
       "CachePath": "2C/{2C2DC184-D360-5CC2-9D94-6D3EC2DFDA0E}.wem"
+     },
+     {
+      "Id": "1006390661",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Shatter.wav",
+      "CachePath": "A8/{A876CCD3-8022-8EF3-B177-C0FB08AE5222}.wem"
      },
      {
       "Id": "1006815413",
@@ -4038,6 +4078,22 @@
       "Location": "Memory",
       "ShortName": "FS_Zealot_09.wav",
       "CachePath": "F9/{F95D302D-D44A-5CD2-F908-6667760D9A27}.wem"
+     },
+     {
+      "Id": "1059746318",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PoisonState.wav",
+      "CachePath": "40/{40F1B8CA-509E-55E5-8C02-95376D286DB0}.wem"
+     },
+     {
+      "Id": "1068577333",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BoulderImpact_02.wav",
+      "CachePath": "8D/{8D31496C-8F24-EC68-3580-163ACE38CDC0}.wem"
      },
      {
       "Id": "1069593655",
@@ -4832,6 +4888,50 @@
           "Id": "693285485"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "3862831059",
+      "Name": "Play_BoulderImpact",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Boulder\\Play_BoulderImpact",
+      "GUID": "{B2F33C5F-8916-4571-9023-173F3339A5B2}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.9663491",
+      "DurationMax": "3.2842083",
+      "MediaRefs": [
+       {
+        "Id": "602957601"
+       },
+       {
+        "Id": "609335814"
+       },
+       {
+        "Id": "1002902072"
+       },
+       {
+        "Id": "1068577333"
+       }
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "1588715066"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "529627428",
+      "Name": "Play_BoulderRoll",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Boulder\\Play_BoulderRoll",
+      "GUID": "{CA0B4DFE-CC57-474D-A977-E144E9155423}",
+      "MaxAttenuation": "5000",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "444134671"
        }
       ]
      },
@@ -5769,6 +5869,7 @@
       "Name": "Play_Lever_Use",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Lever_Use",
       "GUID": "{576A6CF1-7620-47E0-88DA-E793AE4D3573}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.9810833",
       "DurationMax": "2.2",
@@ -6225,6 +6326,7 @@
       "Name": "Play_Player_Lever",
       "ObjectPath": "\\Events\\Default Work Unit\\Actions\\Play_Player_Lever",
       "GUID": "{60FC232E-6E32-44FA-AC7C-524F024FF2AF}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.9810833",
       "DurationMax": "2.2",
@@ -6431,6 +6533,20 @@
        },
        {
         "Id": "877758046"
+       }
+      ]
+     },
+     {
+      "Id": "2697771757",
+      "Name": "Play_Poisoned",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_Poisoned",
+      "GUID": "{8CEFF056-17BC-4C81-B923-251B6AD9A2B2}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.519229",
+      "DurationMax": "3.519229",
+      "MediaRefs": [
+       {
+        "Id": "1059746318"
        }
       ]
      },
@@ -7190,6 +7306,20 @@
        },
        {
         "Id": "797158678"
+       }
+      ]
+     },
+     {
+      "Id": "3783233185",
+      "Name": "Play_Shatter",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Feedbakcs\\Play_Shatter",
+      "GUID": "{E5B9BB36-7661-477D-AD9F-54FAEF1C45B2}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.3557596",
+      "DurationMax": "3.3557596",
+      "MediaRefs": [
+       {
+        "Id": "1006390661"
        }
       ]
      },
@@ -8941,6 +9071,21 @@
       ]
      },
      {
+      "Id": "410641890",
+      "Name": "Stop_BoulderRoll",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Boulder\\Stop_BoulderRoll",
+      "GUID": "{B4284433-5A03-4684-BF41-603C2F0356C3}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "MediaRefs": [
+       {
+        "Id": "444134671"
+       }
+      ]
+     },
+     {
       "Id": "2256731510",
       "Name": "Stop_PoisonGaz",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\PoisonStatues\\Stop_PoisonGaz",
@@ -9040,6 +9185,6 @@
     ]
    }
   ],
-  "FileHash": "{B0ECBE4E-EAE0-E964-C1B4-AD9EDAC01EFD}"
+  "FileHash": "{F3150CC4-4414-228C-1697-3D482DF010D9}"
  }
 }

@@ -98,7 +98,7 @@ void USquadWidget::ActualiseSquadInfos()
                         CustomPS->GetCurrentEquippedItem()
                     );
                     SquadMemberWidgets[0]->SetPoisoned(CustomPS->GetIsPoisoned());
-                    SquadMemberWidgets[0]->ActualisePlayersFace(CustomPS->GetPlayerId() % 4);
+                    SquadMemberWidgets[0]->ActualisePlayersFace(CustomPS->GetPlayerId() % 4, CustomPS->GetPlayerName());
                 }
             }
             WidgetIndex = 1; // Commencer à 1 pour les autres joueurs
@@ -133,7 +133,7 @@ void USquadWidget::ActualiseSquadInfos()
                     FInventorySlot()
                 );
                 SquadMemberWidgets[WidgetIndex]->SetPoisoned(CustomPS->GetIsPoisoned());
-                SquadMemberWidgets[WidgetIndex]->ActualisePlayersFace(CustomPS->GetPlayerId() % 4);
+                SquadMemberWidgets[WidgetIndex]->ActualisePlayersFace(CustomPS->GetPlayerId() % 4, CustomPS->GetPlayerName());
             }
             WidgetIndex++;
         }
