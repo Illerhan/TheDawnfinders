@@ -622,6 +622,7 @@ void UHealthComponent::Client_Die_Implementation()
 
 		UE_LOG(LogTemp, Display, TEXT("DISPLAY SPECTATE"));
 
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
 		if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
 		{
 			AudioDevice->StopPlayingID(BreathSoundID);
@@ -713,6 +714,7 @@ void UHealthComponent::Client_Revive_Implementation()
 
 		HUD->MainWidget->ExitSpectate();
 
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
 		if (AudioDevice && BreathSoundID != AK_INVALID_PLAYING_ID)
 		{
 			AudioDevice->StopPlayingID(BreathSoundID);
