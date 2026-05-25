@@ -448,6 +448,16 @@ void UItemComponent::StopMainAction()
 
 	bIsUsingItem = false;
 
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}
+	}
+
 	if (!PlayerCharacter) return;
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (!PC) return;
