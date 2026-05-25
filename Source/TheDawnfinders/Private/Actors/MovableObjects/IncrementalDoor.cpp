@@ -62,6 +62,8 @@ void AIncrementalDoor::StartOpening()
     bMovingToStep = true;
     bCanMove      = false;
 
+    Multi_OpeningSound();
+
     UE_LOG(LogTemp, Warning, TEXT("[IncrementalDoor] '%s' Activation %d/%d - En route vers %.3f"), *GetName(), ActivationCount, NeededTriggerCount, TargetCurvePos);
 }
 

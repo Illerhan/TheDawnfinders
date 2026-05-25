@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{2C193CCD-6C16-BBCE-2A73-DA2FBA0AF40F}",
+    "Hash": "{E41BC638-C337-D4D2-A78C-BAFA644C0047}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -94,6 +94,14 @@
       "Location": "Memory",
       "ShortName": "KS_Gun Foley_1-08.wav",
       "CachePath": "AA/{AA7862DB-73F8-3BB9-EBBC-C165B45589F3}.wem"
+     },
+     {
+      "Id": "17611559",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_04.wav",
+      "CachePath": "3C/{3C34F817-5A86-B36A-860A-401FBBB98C93}.wem"
      },
      {
       "Id": "18456633",
@@ -544,12 +552,28 @@
       "CachePath": "AE/{AE42D557-6472-1FDD-68FD-CA0F1A3BAEED}.wem"
      },
      {
+      "Id": "125460741",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_03.wav",
+      "CachePath": "F8/{F8D1E105-22A6-5DF4-6B13-7A56DADE06FF}.wem"
+     },
+     {
       "Id": "125951352",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Audio 8.cm_01.wav",
       "CachePath": "DB/{DBB5B5CF-8F64-11FF-9898-F460CDEC068B}.wem"
+     },
+     {
+      "Id": "129534121",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_01.wav",
+      "CachePath": "06/{063FC870-3A9A-35DB-B681-FAD1E0D6E4FE}.wem"
      },
      {
       "Id": "131189783",
@@ -832,6 +856,14 @@
       "CachePath": "E8/{E856C60C-5E3F-D6F9-1CF5-2AFA83BBBCAA}.wem"
      },
      {
+      "Id": "221749602",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_08.wav",
+      "CachePath": "41/{418F6ABF-1B27-8D8A-6699-01C382BEA1F9}.wem"
+     },
+     {
       "Id": "222051633",
       "Language": "SFX",
       "Streaming": "false",
@@ -854,6 +886,14 @@
       "Location": "Memory",
       "ShortName": "PAPRMisc_Multiple Paper Moving_B00M_ONE-14.wav",
       "CachePath": "1C/{1C5C007B-16AD-731A-62DD-42ADF616B7A5}.wem"
+     },
+     {
+      "Id": "224714595",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MetalDoor_01.wav",
+      "CachePath": "94/{94F83347-77C3-B1A1-9CA4-A331159D161F}.wem"
      },
      {
       "Id": "227417322",
@@ -1224,6 +1264,14 @@
       "CachePath": "82/{8236A7F2-A0FB-686F-3B25-F98BB8825D53}.wem"
      },
      {
+      "Id": "309534495",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_07.wav",
+      "CachePath": "FD/{FDF92B6A-5395-40EB-2915-6342B60F9602}.wem"
+     },
+     {
       "Id": "315331240",
       "Language": "SFX",
       "Streaming": "false",
@@ -1254,6 +1302,14 @@
       "Location": "Memory",
       "ShortName": "Zeloth_Attack2.wav",
       "CachePath": "0E/{0EA8525E-E0D2-EABF-E1B8-31F8B9EC3825}.wem"
+     },
+     {
+      "Id": "335762502",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_06.wav",
+      "CachePath": "96/{96873C9A-16DA-80E2-FAB7-4D39EE04BB3B}.wem"
      },
      {
       "Id": "337621557",
@@ -1840,6 +1896,14 @@
       "CachePath": "55/{551343DE-F333-CA05-3821-4B88FFE99CAF}.wem"
      },
      {
+      "Id": "491442918",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MetalCage_01.wav",
+      "CachePath": "B7/{B714153A-A454-E6FA-AABE-FA79DCECAEA8}.wem"
+     },
+     {
       "Id": "492083971",
       "Language": "SFX",
       "Streaming": "false",
@@ -2304,12 +2368,28 @@
       "CachePath": "65/{65ECACAB-5BC7-3996-BDDE-CC1F2DAFB976}.wem"
      },
      {
+      "Id": "605250251",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_06.wav",
+      "CachePath": "B4/{B49593E7-CE08-265D-AEC7-141D0ABC10A4}.wem"
+     },
+     {
       "Id": "606111130",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SandWalk\\FootstepsSandWalk 3.wav",
       "CachePath": "A7/{A750C6D5-FCD7-3401-EEE7-362A878C9DDE}.wem"
+     },
+     {
+      "Id": "607543959",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_05.wav",
+      "CachePath": "12/{1226C7AF-5B53-3682-B1EF-72CF636A9F20}.wem"
      },
      {
       "Id": "609335814",
@@ -2342,6 +2422,14 @@
       "Location": "Memory",
       "ShortName": "FS_Follower_05.wav",
       "CachePath": "50/{506444A0-298D-8080-AD7E-722C61225442}.wem"
+     },
+     {
+      "Id": "621299877",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_02.wav",
+      "CachePath": "9F/{9FCDEC1E-D1F7-D6C9-5E3D-E652F7C45D40}.wem"
      },
      {
       "Id": "622100660",
@@ -2672,6 +2760,14 @@
       "CachePath": "66/{6610083E-2ED3-D4B8-E9EF-A163821CAEEC}.wem"
      },
      {
+      "Id": "714890982",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_03.wav",
+      "CachePath": "8B/{8B258DC5-B4D7-2C75-E07A-492A8398DFD1}.wem"
+     },
+     {
       "Id": "715538512",
       "Language": "SFX",
       "Streaming": "false",
@@ -2726,6 +2822,14 @@
       "Location": "Memory",
       "ShortName": "FollowerGrunt_03.wav",
       "CachePath": "70/{700BF60C-6A4A-C1AB-F1C1-CB6D5B8A5DE2}.wem"
+     },
+     {
+      "Id": "726642813",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MetalCage_03.wav",
+      "CachePath": "76/{7654A0C9-62C3-5000-6C86-6D9B02407221}.wem"
      },
      {
       "Id": "730245699",
@@ -2862,6 +2966,14 @@
       "Location": "Memory",
       "ShortName": "Player_Shot-14.wav",
       "CachePath": "4C/{4C04747A-6A98-37A9-3277-E9C5C8301CAB}.wem"
+     },
+     {
+      "Id": "758399838",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_04.wav",
+      "CachePath": "8E/{8E54D619-1C16-5244-08CE-6E38713E39B4}.wem"
      },
      {
       "Id": "761029887",
@@ -3120,6 +3232,14 @@
       "CachePath": "85/{85C6DD40-7126-E3D2-84BD-429D1B4FB58F}.wem"
      },
      {
+      "Id": "831849530",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_05.wav",
+      "CachePath": "87/{872CAAAA-4D9B-2044-3F05-ED2DC0F27464}.wem"
+     },
+     {
       "Id": "832841224",
       "Language": "SFX",
       "Streaming": "false",
@@ -3206,6 +3326,14 @@
       "Location": "Memory",
       "ShortName": "SF_FollowerChain_01.wav",
       "CachePath": "02/{0274F1E7-DB06-56B9-3363-0297834ADF33}.wem"
+     },
+     {
+      "Id": "853776202",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MetalCage_02.wav",
+      "CachePath": "15/{15D908F2-CF0D-2F7D-934F-E9C4325115B3}.wem"
      },
      {
       "Id": "854938390",
@@ -3334,6 +3462,14 @@
       "Location": "Memory",
       "ShortName": "KS_Zombie Dystopia_3-02.wav",
       "CachePath": "DA/{DAD95589-421A-7029-7F03-31D6E1B9214D}.wem"
+     },
+     {
+      "Id": "888594016",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockCrumble_01.wav",
+      "CachePath": "60/{60D562E5-2CC8-9B22-7070-FFBF8F2275E6}.wem"
      },
      {
       "Id": "891952933",
@@ -3734,6 +3870,14 @@
       "Location": "Memory",
       "ShortName": "DamagesHit_2.wav",
       "CachePath": "2F/{2F17A4E5-7C1A-A4CC-E671-2BCDCF857C92}.wem"
+     },
+     {
+      "Id": "981099259",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RockImpact_02.wav",
+      "CachePath": "10/{1094B904-9DA8-0139-3352-DC10F8A0E75E}.wem"
      },
      {
       "Id": "981871743",
@@ -5918,6 +6062,42 @@
       ]
      },
      {
+      "Id": "3273061807",
+      "Name": "Play_MetalCage",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Metal\\Play_MetalCage",
+      "GUID": "{6B0DD5B7-AE2A-4E6C-967E-8E05A6B81E2B}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "5.769229",
+      "DurationMax": "7.5096145",
+      "MediaRefs": [
+       {
+        "Id": "491442918"
+       },
+       {
+        "Id": "726642813"
+       },
+       {
+        "Id": "853776202"
+       }
+      ]
+     },
+     {
+      "Id": "3121211507",
+      "Name": "Play_MetalDoor",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Metal\\Play_MetalDoor",
+      "GUID": "{1B9F364A-5205-4561-A75B-C3CAA0034882}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "3.8902285",
+      "DurationMax": "3.8902285",
+      "MediaRefs": [
+       {
+        "Id": "224714595"
+       }
+      ]
+     },
+     {
       "Id": "3849525492",
       "Name": "Play_Navigation",
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_Navigation",
@@ -6602,6 +6782,72 @@
        },
        {
         "Id": "900053916"
+       }
+      ]
+     },
+     {
+      "Id": "1193022435",
+      "Name": "Play_RockCrumble",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Rocks\\Play_RockCrumble",
+      "GUID": "{5B458B83-A529-414B-B745-253E32C6B3E8}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "3.7644217",
+      "DurationMax": "5.05288",
+      "MediaRefs": [
+       {
+        "Id": "125460741"
+       },
+       {
+        "Id": "605250251"
+       },
+       {
+        "Id": "621299877"
+       },
+       {
+        "Id": "758399838"
+       },
+       {
+        "Id": "831849530"
+       },
+       {
+        "Id": "888594016"
+       }
+      ]
+     },
+     {
+      "Id": "2667821383",
+      "Name": "Play_RockImpact",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Rocks\\Play_RockImpact",
+      "GUID": "{7DC2EACF-CD63-4ECF-9314-13EBEA6FFF75}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.18750566",
+      "DurationMax": "1.8028798",
+      "MediaRefs": [
+       {
+        "Id": "17611559"
+       },
+       {
+        "Id": "129534121"
+       },
+       {
+        "Id": "221749602"
+       },
+       {
+        "Id": "309534495"
+       },
+       {
+        "Id": "335762502"
+       },
+       {
+        "Id": "607543959"
+       },
+       {
+        "Id": "714890982"
+       },
+       {
+        "Id": "981099259"
        }
       ]
      },
@@ -9224,6 +9470,6 @@
     ]
    }
   ],
-  "FileHash": "{B110D5A2-A3E9-4B7B-00B2-A7A4F72F818F}"
+  "FileHash": "{B4004EB0-3B77-1CAE-5777-DFFED141652F}"
  }
 }

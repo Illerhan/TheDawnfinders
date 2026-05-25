@@ -321,6 +321,8 @@ void ADoors::CloseDoor()
 }
 void ADoors::Multi_OpeningSound_Implementation()
 {
+    UE_LOG(LogTemp, Warning, TEXT("Playing sound"));
+
     if (MovableSoundID)
     {
         FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
