@@ -335,6 +335,9 @@
 								<Event Name="Play_DownedHeartbeat" ID="{7D23A7D5-C14B-4A71-9A18-E693CC57E477}">
 									<ChildrenList>
 										<Action Name="" ID="{3DF3607B-BF6F-4593-A89F-E270AEA0FE9F}" ShortID="549399850">
+											<PropertyList>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="DownedHeartbeat" ID="{C130BEE8-49BB-491E-BD61-7A729C6153E8}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
@@ -385,6 +388,21 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="PoisonState" ID="{5E962BB4-670C-4543-A458-F6DE8E16E626}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_DownedHeartbeat" ID="{64900742-8DF5-4E18-B255-B289847DC0AC}">
+									<ChildrenList>
+										<Action Name="" ID="{1C3690BD-1EC5-4728-A462-6471F6E931BC}" ShortID="408407232">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="DownedHeartbeat" ID="{C130BEE8-49BB-491E-BD61-7A729C6153E8}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
