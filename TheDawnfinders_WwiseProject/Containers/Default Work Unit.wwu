@@ -14021,6 +14021,52 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<Sound Name="SuppressedGun" ID="{45DFC29A-2B9A-48D1-BA5B-6B31EBC0F18E}" ShortID="142801129">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SuppressedGun" ID="{7C834701-1A76-457B-BE29-6E19787574DC}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0486207455714374"/>
+												<Property Name="LoopEnd" Type="Real64" Value="0.89421768707483"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.143002192857169"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>SuppressedGun.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="179360045"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{C27FA0C1-CEC3-4AC4-A1E6-536571E1F01C}" ShortID="1058859665"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{74115E07-F176-49EA-9F7B-2B6916AAA496}" ShortID="922362219"/>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{C2C0B949-E890-447B-8CE6-19779A498682}" ShortID="157423159"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+									<ActiveSourceList>
+										<ActiveSource Name="SuppressedGun" ID="{7C834701-1A76-457B-BE29-6E19787574DC}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
