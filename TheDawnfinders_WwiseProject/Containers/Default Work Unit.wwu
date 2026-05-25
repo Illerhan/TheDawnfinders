@@ -14025,7 +14025,7 @@
 						</Folder>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="Enemis" ID="{D2B5F6CB-103A-4A17-A634-FDC06F2A5A3A}" ShortID="878342698">
+				<Folder Name="Enemies" ID="{D2B5F6CB-103A-4A17-A634-FDC06F2A5A3A}" ShortID="878342698">
 					<ChildrenList>
 						<Folder Name="Zeloth" ID="{5E8E1F81-19D2-409D-8237-D3BA34F2C25A}" ShortID="275436581">
 							<ChildrenList>
@@ -14035,7 +14035,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -14690,7 +14690,11 @@
 								</SwitchContainer>
 								<RandomSequenceContainer Name="EliteEnemyDamage" ID="{8CA4DD63-1E9F-4F01-9F4C-B0A5F922D862}" ShortID="376885108">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-100</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{A6DAAA1D-FE10-4218-A56B-2C94A600DCF8}">
@@ -14704,6 +14708,9 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{0942AEA4-BE32-4FBE-AA0E-B618C1BA4274}">
@@ -14717,6 +14724,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -14736,6 +14746,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage1" ID="{7E04268F-326B-4452-A12C-66CF2AC6E9E0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.138166307640482"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.138166307640482"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage1.wav</AudioFile>
 													<MediaIDList>
@@ -14758,6 +14773,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage2" ID="{C2C75FDA-4AB9-4622-A915-48EABC1722C0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0964605508328501"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0964605508328501"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage2.wav</AudioFile>
 													<MediaIDList>
@@ -14780,6 +14800,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage3" ID="{F611EF79-AC71-4FAE-ADF9-79D67CCE352E}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0751812360179958"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0751812360179958"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage3.wav</AudioFile>
 													<MediaIDList>
@@ -14802,6 +14827,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage4" ID="{D15B2C78-ED40-4A9E-B0BD-0EB2F62A4461}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.154029853308379"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.154029853308379"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage4.wav</AudioFile>
 													<MediaIDList>
@@ -14824,6 +14854,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage5" ID="{8601F5AC-6D51-4A4C-BF1F-7E5B4168D5A2}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.123582085693823"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.123582085693823"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage5.wav</AudioFile>
 													<MediaIDList>
@@ -14846,6 +14881,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage6" ID="{ACD7D645-275E-4182-8AA8-6A1D1A7F5100}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.10567163849182"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.10567163849182"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage6.wav</AudioFile>
 													<MediaIDList>
@@ -14877,6 +14917,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Zeloth_Damage7" ID="{62796EB4-DA8E-475F-A620-00281F4B0237}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0773134343405522"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0773134343405522"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Zeloth_Damage7.wav</AudioFile>
 													<MediaIDList>
@@ -14891,7 +14936,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<BlendContainer Name="EliteEnemyDeath" ID="{A0F5BAB0-3AA1-4348-A2EE-9E38995F5F87}" ShortID="345871748">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -14911,6 +14962,16 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Audio 6_02-01" ID="{DCC8B673-EB1F-46C1-9766-C69EC59A8DA4}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="1.43273515010744"/>
+														<Property Name="VolumeOffset" Type="Real64">
+															<ValueList>
+																<Value>5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Audio 6_02-01.wav</AudioFile>
 													<MediaIDList>
@@ -14934,9 +14995,9 @@
 											<ChildrenList>
 												<AudioFileSource Name="Audio 7_cm_01-01" ID="{66176AD1-BB8A-4410-9709-3C11683D5C3B}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.258222209082709"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.27404305291554"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="1.61540313938686"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Audio 7.cm_01-01.wav</AudioFile>
@@ -14961,9 +15022,9 @@
 											<ChildrenList>
 												<AudioFileSource Name="beast_attack-kHsFrqS_01-01" ID="{4AE089D0-571A-4B0E-9C6F-735E766F1F33}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.329455921933112"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.572261879727301"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.51725383976528"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>beast_attack-kHsFrqS_01-01.wav</AudioFile>
@@ -14988,9 +15049,11 @@
 											<ChildrenList>
 												<AudioFileSource Name="Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01" ID="{CE08E762-08A2-4314-8DBA-3A8BA7D0F939}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.639690917570472"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="1.08670644261944"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.24566102981595"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="1.11882584486435"/>
+														<Property Name="TrimEnd" Type="Real64" Value="4.37359205472766"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Creatures, Ethereal, Airy Gasp, Zombie 01 SND104000-01.wav</AudioFile>
@@ -15018,6 +15081,7 @@
 								</BlendContainer>
 								<RandomSequenceContainer Name="EliteEnemyGrunt" ID="{FDDB4367-F6B7-493E-ABD7-EB9E360F4D06}" ShortID="18010893">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
@@ -15032,6 +15096,9 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{24E7D1E7-1461-4A90-A68E-CCBFF756DC7E}">
@@ -15045,6 +15112,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -15145,6 +15215,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="EliteEnemyIdle" ID="{9240ED66-0C39-4BEF-800B-0B9EA46FC58A}" ShortID="701316458">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Pitch" Type="int32">
 											<ValueList>
 												<Value>-80</Value>
@@ -15157,6 +15228,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -15438,6 +15512,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="EliteEnemyAttack_01" ID="{827C7110-C2E3-4C53-81A6-367CDFA16354}" ShortID="78578038">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-5</Value>
@@ -15445,6 +15520,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -15501,6 +15579,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="EliteEnemyAttack_02" ID="{1EA2907F-07D9-416D-901C-AB056B4DDAC9}" ShortID="373940226">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-5</Value>
@@ -15508,6 +15587,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -15558,6 +15640,398 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="ZealotStab_02" ID="{B9FD19F5-7499-4449-936E-083C6194EAE6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemySuspicion" ID="{78EEDD3B-983D-4899-97FD-A7C892CD7538}" ShortID="853393629">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="ZealotSuspicion_01" ID="{8826628F-4558-4B5E-A514-36F412488D66}" ShortID="97012569">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotSuspicion_01" ID="{60605FC1-5CA9-495B-A5BE-7B22F359FD15}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0879932743654068"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>ZealotSuspicion_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="729155130"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotSuspicion_01" ID="{60605FC1-5CA9-495B-A5BE-7B22F359FD15}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ZealotSuspicion_02" ID="{6247458D-921A-4B94-B266-F5BBD2E058FE}" ShortID="292546053">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotSuspicion_02" ID="{F73EF946-8E55-4330-8FF7-5B0CB0898653}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0781688005176942"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>ZealotSuspicion_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="982508163"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotSuspicion_02" ID="{F73EF946-8E55-4330-8FF7-5B0CB0898653}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ZealotSuspicion_03" ID="{BF3E9258-0873-47AF-8515-BA2E8AE9DDAB}" ShortID="484198771">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotSuspicion_03" ID="{A3D3918B-9FE5-4B2E-A9F6-00298B2B53A1}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.135477010629324"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>ZealotSuspicion_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="390988599"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotSuspicion_03" ID="{A3D3918B-9FE5-4B2E-A9F6-00298B2B53A1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemyScream" ID="{EF34F28A-3895-41D7-9439-4E51E8099EB3}" ShortID="744673653">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-500</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="ZealotScream" ID="{640F4E00-2954-4961-B81E-B90836C14B98}" ShortID="942598947">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotScream" ID="{779CE8C3-C8AF-43DA-8B1A-4A579E3ADAC9}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0955645270439099"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0955645270439099"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.23273462660192"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>ZealotScream.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="819086688"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotScream" ID="{779CE8C3-C8AF-43DA-8B1A-4A579E3ADAC9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{5C327E68-0E64-430F-9F07-70B49F9038B7}" ShortID="606307031"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{28F16DFE-496F-4B27-A8B6-026E08F0CE7A}" ShortID="765262151"/>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{F4FC626D-A9B6-49A9-9999-BD759B455FF8}" ShortID="140330680"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{C16BF3D5-39B9-47AB-B1C3-8B98A7BE2765}" ShortID="787759984">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+														<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+												<StateInfo>
+													<CustomStateList>
+														<CustomState>
+															<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+															<CustomState Name="" ID="{1B6A387B-28A3-45B3-BA22-3D3090B320E6}" ShortID="549847632"/>
+														</CustomState>
+														<CustomState>
+															<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+															<CustomState Name="" ID="{7548812B-84FF-4FB5-A5E4-018B01E53516}" ShortID="465523166"/>
+														</CustomState>
+													</CustomStateList>
+												</StateInfo>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemySecondaryScream" ID="{3CFBEF73-B4EC-475F-BFA3-26DF07D5004A}" ShortID="389789184">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-120</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="ZealotGrunt" ID="{1DBE36CF-912F-41EB-A40D-2704FEB732DA}" ShortID="792155211">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotGrunt" ID="{F2F99AB3-69DA-4FEE-935E-02418D21A3B4}">
+													<Language>SFX</Language>
+													<AudioFile>ZealotGrunt.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="825461838"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotGrunt" ID="{F2F99AB3-69DA-4FEE-935E-02418D21A3B4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="IsFriendly" ID="{2AF90670-3A34-4A56-BA72-567F2D2B562D}"/>
+												<StateGroupInfo Name="" ID="{4C646B1C-641B-4120-BFB3-6B06C425E050}" ShortID="745082109"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+												<CustomState Name="" ID="{B5CB6807-FC8B-4DDE-94D4-8B0D3405400F}" ShortID="987585244"/>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+												<CustomState Name="" ID="{9B6B230D-B085-459E-9322-0C38F6898570}" ShortID="680146080"/>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+									<ObjectLists>
+										<ObjectList Name="Effects">
+											<EffectSlot Name="" ID="{345C9C47-7424-4F42-AEE2-D7A0ECD62798}" ShortID="482601158">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+														<ObjectRef Name="Echoes_Linear" ID="{D20F3717-EBA2-4E3A-84F8-C8BD431563FB}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+												<StateInfo>
+													<CustomStateList>
+														<CustomState>
+															<StateRef Name="IsFriendly" ID="{D33A8436-7CEE-42B4-9D67-B4654AA7794E}"/>
+															<CustomState Name="" ID="{661BEB94-439F-4EBD-9B31-4C179CB72C43}" ShortID="260390524"/>
+														</CustomState>
+														<CustomState>
+															<StateRef Name="None" ID="{48F648E1-590F-480A-B3CE-F980EE93392C}"/>
+															<CustomState Name="" ID="{436BF01B-3887-48AC-B7BE-43BA86B9DC37}" ShortID="214363160"/>
+														</CustomState>
+													</CustomStateList>
+												</StateInfo>
+											</EffectSlot>
+										</ObjectList>
+									</ObjectLists>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EliteEnemyHurt" ID="{0E96B354-D5AE-4EF1-88E8-8B5BFBF39019}" ShortID="248338903">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="ZealotDeath_01" ID="{13DA0447-D44F-451C-B9E3-D722F244B87F}" ShortID="927265830">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotDeath_01" ID="{35B6B27B-1F4B-432B-AFC0-9D0BBC97BBE7}">
+													<Language>SFX</Language>
+													<AudioFile>ZealotDeath_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="844977041"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotDeath_01" ID="{35B6B27B-1F4B-432B-AFC0-9D0BBC97BBE7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ZealotDeath_02" ID="{BD15422F-A950-4426-8B48-E213D5289F01}" ShortID="822674175">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotDeath_02" ID="{3E1A0BC4-BA6C-48DB-A3E1-29E41E933D54}">
+													<Language>SFX</Language>
+													<AudioFile>ZealotDeath_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="760784244"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotDeath_02" ID="{3E1A0BC4-BA6C-48DB-A3E1-29E41E933D54}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ZealotDeath_03" ID="{67D2F955-676C-43E4-AFA1-6D6390E6DD89}" ShortID="780561487">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotDeath_03" ID="{FC4A41F4-71DC-4B1C-9E5F-074E1EE6BDAB}">
+													<Language>SFX</Language>
+													<AudioFile>ZealotDeath_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="682173826"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotDeath_03" ID="{FC4A41F4-71DC-4B1C-9E5F-074E1EE6BDAB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ZealotDeath_04" ID="{03BF99C0-6D22-4622-B53E-2FE0F51C528B}" ShortID="783171284">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ZealotDeath_04" ID="{2AA51DD1-D68A-49EB-8CBC-A09564C1DA3B}">
+													<Language>SFX</Language>
+													<AudioFile>ZealotDeath_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="795297328"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ZealotDeath_04" ID="{2AA51DD1-D68A-49EB-8CBC-A09564C1DA3B}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -16010,7 +16484,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16175,13 +16649,13 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16191,7 +16665,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="EnemyHit_01" ID="{6D6ADC41-7623-4FAB-AE68-8798BC3D2912}" ShortID="603210207">
+										<Sound Name="FollowerHurt_01" ID="{CDBA8541-BAB7-405C-B208-AA36D27C5135}" ShortID="351799708">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16201,19 +16675,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="EnemyHit_01" ID="{6A545795-5E5B-4068-AC0C-88CB08EA6AC5}">
+												<AudioFileSource Name="FollowerHurt_01" ID="{133991C0-49F0-4E96-921E-7B6164ECB92C}">
 													<Language>SFX</Language>
-													<AudioFile>EnemyHit_01.wav</AudioFile>
+													<AudioFile>FollowerHurt_01.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="804429153"/>
+														<MediaID ID="563882451"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="EnemyHit_01" ID="{6A545795-5E5B-4068-AC0C-88CB08EA6AC5}" Platform="Linked"/>
+												<ActiveSource Name="FollowerHurt_01" ID="{133991C0-49F0-4E96-921E-7B6164ECB92C}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="EnemyHit_02" ID="{F644D475-16B3-40CB-B2C1-97DBFE75E930}" ShortID="885604475">
+										<Sound Name="FollowerHurt_02" ID="{C3463874-FF14-45CB-94DC-CCF3ECD1F1A0}" ShortID="364769329">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16223,19 +16697,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="EnemyHit_02" ID="{A9350EBE-B65F-4CEB-B62B-B8BA7C18986C}">
+												<AudioFileSource Name="FollowerHurt_02" ID="{CF5380A0-DDDA-4EA8-8F14-C0E130EF85B4}">
 													<Language>SFX</Language>
-													<AudioFile>EnemyHit_02.wav</AudioFile>
+													<AudioFile>FollowerHurt_02.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="591875995"/>
+														<MediaID ID="916772813"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="EnemyHit_02" ID="{A9350EBE-B65F-4CEB-B62B-B8BA7C18986C}" Platform="Linked"/>
+												<ActiveSource Name="FollowerHurt_02" ID="{CF5380A0-DDDA-4EA8-8F14-C0E130EF85B4}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="EnemyHit_03" ID="{919D333D-4CEF-48A7-8D28-63B72580AC20}" ShortID="138584533">
+										<Sound Name="FollowerHurt_03" ID="{23268361-3B8B-40F1-BCE0-5CAE42809435}" ShortID="17852287">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16245,22 +16719,94 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="EnemyHit_03" ID="{13CCBE2A-6CEC-4A0F-9BB8-090F58C8F61F}">
+												<AudioFileSource Name="FollowerHurt_03" ID="{6B733ED5-350A-4A46-8757-94914BD18BC5}">
 													<Language>SFX</Language>
-													<AudioFile>EnemyHit_03.wav</AudioFile>
+													<AudioFile>FollowerHurt_03.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="762119326"/>
+														<MediaID ID="327113303"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="EnemyHit_03" ID="{13CCBE2A-6CEC-4A0F-9BB8-090F58C8F61F}" Platform="Linked"/>
+												<ActiveSource Name="FollowerHurt_03" ID="{6B733ED5-350A-4A46-8757-94914BD18BC5}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerHurt_04" ID="{9241F621-9CBA-4044-B7BE-8EF1CA24830D}" ShortID="578704426">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerHurt_04" ID="{2535122F-5842-4237-A154-6220CC9FF163}">
+													<Language>SFX</Language>
+													<AudioFile>FollowerHurt_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="774068103"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerHurt_04" ID="{2535122F-5842-4237-A154-6220CC9FF163}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerHurt_05" ID="{E75F0110-5588-46D5-B187-518DFDE73A1E}" ShortID="715177649">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerHurt_05" ID="{55367D92-1DF3-4092-BCA7-E629AAAC3E00}">
+													<Language>SFX</Language>
+													<AudioFile>FollowerHurt_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="845793554"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerHurt_05" ID="{55367D92-1DF3-4092-BCA7-E629AAAC3E00}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerHurt_06" ID="{2BBBC5E3-AC42-4D58-9153-8F19833F5D44}" ShortID="32784932">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerHurt_06" ID="{D66CB85F-E267-4488-8D97-DB4E7DDEFD1F}">
+													<Language>SFX</Language>
+													<AudioFile>FollowerHurt_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="797860521"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerHurt_06" ID="{D66CB85F-E267-4488-8D97-DB4E7DDEFD1F}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<BlendContainer Name="BasicEnemyIdleOLD" ID="{1968BD70-0585-4325-B70D-D8FAD942FBB8}" ShortID="870253011">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -16488,7 +17034,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
-											<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
 										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -16787,7 +17333,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnemyScream" ID="{4554BC39-CDC2-4A27-BFC8-AFB9F695B0A7}" ShortID="475537957">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -16832,6 +17384,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnemySecondaryScream" ID="{CD0C9F8F-6762-42E2-A3BB-B09369F01F0A}" ShortID="804158554">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-10</Value>
@@ -16839,6 +17392,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -16963,6 +17519,7 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnemyChain" ID="{CC6F7557-3541-406E-93DB-903626BFA740}" ShortID="688822132">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-20</Value>
@@ -16970,6 +17527,9 @@
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -17234,7 +17794,13 @@
 									</ObjectLists>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="BasicEnemyGrunt" ID="{C57E4904-9326-4719-887F-820DA4FDD837}" ShortID="423310230">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
 										</Reference>
@@ -17377,6 +17943,274 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="BasicEnemyDeath" ID="{D2989388-7890-4535-BB8D-3629E9EF49C4}" ShortID="885666068">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>120</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="FollowerDeath_01" ID="{561C616B-42D1-438A-9F66-A8672543E87A}" ShortID="210464823">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerDeath_01" ID="{DA272772-49FE-450A-8B1A-9CD00C5ADBED}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.47957782298009"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.79804988662132"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0536943564791161"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerDeath_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="989421711"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerDeath_01" ID="{DA272772-49FE-450A-8B1A-9CD00C5ADBED}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerDeath_02" ID="{6589E865-C92A-4832-88C4-FBD745EB0339}" ShortID="935561449">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerDeath_02" ID="{3CBE08B3-2E25-468A-A0EA-75F8415DF0DD}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.71693446615866"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0601114911565394"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.9341922742056"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerDeath_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="346444006"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerDeath_02" ID="{3CBE08B3-2E25-468A-A0EA-75F8415DF0DD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerDeath_03" ID="{4C4F2366-DB77-4B37-87E2-B6D072261814}" ShortID="183708566">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerDeath_03" ID="{EA4829C0-16B7-44C8-B202-2B15CAD0178D}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="2.05110624400792"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.172522955103469"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.14375159800079"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerDeath_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="816965951"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerDeath_03" ID="{EA4829C0-16B7-44C8-B202-2B15CAD0178D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerDeath_04" ID="{7FC7E6F4-B312-4EED-9FD1-5E1BFBF78584}" ShortID="529287753">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerDeath_04" ID="{B4642FB7-7BDF-4950-B2EE-598966E67A6B}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.88800663124524"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.125005005265096"/>
+														<Property Name="TrimEnd" Type="Real64" Value="3.28461423968601"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerDeath_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="248778167"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerDeath_04" ID="{B4642FB7-7BDF-4950-B2EE-598966E67A6B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="BasicEnemySuspicion" ID="{6207765B-5721-47EB-B474-E0FD04937FE4}" ShortID="969612743">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>120</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Att_EnnemiesMoves" ID="{5D4D0D14-2747-416C-B804-BD2450BC0AB4}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="FollowerSuspicion_01" ID="{1DC14C0D-C3DE-4A30-8D99-A804C789DDE9}" ShortID="754473063">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerSuspicion_01" ID="{8F2EE618-6D1F-42B3-A1F9-A46660D54D9F}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.16237544352566"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerSuspicion_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="926524546"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerSuspicion_01" ID="{8F2EE618-6D1F-42B3-A1F9-A46660D54D9F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerSuspicion_02" ID="{49E64A78-6E97-4A41-ACE7-2D9A236F8F5F}" ShortID="278793857">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerSuspicion_02" ID="{70D55799-F413-4D8E-87BA-100B916CF247}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.101853271791421"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerSuspicion_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="735284195"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerSuspicion_02" ID="{70D55799-F413-4D8E-87BA-100B916CF247}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerSuspicion_03" ID="{28FE46F2-D0D3-45B5-814C-61B93E827EF3}" ShortID="755404104">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerSuspicion_03" ID="{934F7669-3CBE-4120-8BFE-13119C7BD2E9}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.140724946695096"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerSuspicion_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="479312331"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerSuspicion_03" ID="{934F7669-3CBE-4120-8BFE-13119C7BD2E9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="FollowerSuspicion_04" ID="{219E7B7C-0128-4D84-B024-DFB050334BF4}" ShortID="38504273">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="FollowerSuspicion_04" ID="{F22F591A-CA8E-4C6F-99E9-E1317E4FF285}">
+													<PropertyList>
+														<Property Name="TrimBegin" Type="Real64" Value="0.093938765876583"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>FollowerSuspicion_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="575358783"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="FollowerSuspicion_04" ID="{F22F591A-CA8E-4C6F-99E9-E1317E4FF285}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -17384,6 +18218,13 @@
 				<Folder Name="UI" ID="{4A4565C0-9048-47CE-99DA-47CBC3D1C3A1}" ShortID="237652625">
 					<ChildrenList>
 						<RandomSequenceContainer Name="Open_Map" ID="{50243145-834B-4540-B027-7EE8CC326166}" ShortID="851345608">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
@@ -17484,6 +18325,13 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Close_Map" ID="{5DBDC4F3-0491-4D4D-976A-B4671741EFC5}" ShortID="403182401">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
