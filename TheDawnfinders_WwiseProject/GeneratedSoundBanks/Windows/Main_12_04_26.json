@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{C1B5F1CF-3622-FA9C-A430-3A56C5806672}",
+    "Hash": "{6B58438C-7910-47A8-5A28-5101CCC555AC}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -4524,6 +4524,7 @@
       "Name": "Play_BasicEnemyScream",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnemyScream",
       "GUID": "{5BC52A8E-6864-4850-B5DF-D7F6C3236D21}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "6.698622",
       "DurationMax": "6.698622",
@@ -4538,6 +4539,7 @@
       "Name": "Play_BasicEnemySecondaryScream",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnemySecondaryScream",
       "GUID": "{425EF8A8-1133-4E6C-A829-88BC6EE9DACA}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "2.268",
       "DurationMax": "2.2866666",
@@ -4561,6 +4563,7 @@
       "Name": "Play_BasicEnnemyAttack",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyAttack",
       "GUID": "{F54A26C4-D82B-4DB9-AA19-D6A1583F4802}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.2451928",
       "DurationMax": "1.480771",
@@ -4636,6 +4639,7 @@
       "Name": "Play_BasicEnnemyMovement",
       "ObjectPath": "\\Events\\Default Work Unit\\Ennemis\\Fidele\\Play_BasicEnnemyMovement",
       "GUID": "{7A700EAE-6822-45A5-83BE-3E233F0B7658}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.65385485",
       "DurationMax": "0.9903855",
@@ -4923,6 +4927,7 @@
       "Name": "Play_BonesWalk",
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Deplacement\\Play_BonesWalk",
       "GUID": "{1FF1C13B-C137-460F-9621-18A3CB6497FD}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.16",
       "DurationMax": "0.49066666",
@@ -5883,6 +5888,7 @@
       "Name": "Play_FireOff",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireOff",
       "GUID": "{B2E5925C-EFD2-4CC1-8480-5F502C4948FF}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "2.493694",
       "DurationMax": "2.493694",
@@ -5897,6 +5903,7 @@
       "Name": "Play_FireOn",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Braseros\\Play_FireOn",
       "GUID": "{F00EDF90-B4EE-43F7-A36D-8BA23B83AB8E}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.8684797",
       "DurationMax": "1.8684797",
@@ -6217,6 +6224,7 @@
       "Name": "Play_OpenChest",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Chest\\Play_OpenChest",
       "GUID": "{2E422635-D660-49BC-BF7A-4C889E9BEFB7}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "3.4908383",
       "DurationMax": "3.4908383",
@@ -9073,6 +9081,7 @@
       "Name": "Play_VivianiteMining",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Vivianite\\Play_VivianiteMining",
       "GUID": "{64333224-A773-4AF6-AE33-D79671DDCC6E}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "1.019229",
       "DurationMax": "1.019229",
@@ -9536,6 +9545,6 @@
     ]
    }
   ],
-  "FileHash": "{F2D91DA5-6C43-9BFD-477E-3F44874575FB}"
+  "FileHash": "{4A37C3A0-3A2E-8C45-6005-E8C6319B883F}"
  }
 }
