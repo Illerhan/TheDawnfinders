@@ -16,6 +16,7 @@ ALock::ALock()
 void ALock::Tick(float DeltaTime)
 {
 	if (!bIsInteracting) return;
+	if (!HasAuthority()) return;
 
 	HoldTimer(DeltaTime);
 	Super::Tick(DeltaTime);

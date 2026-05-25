@@ -151,6 +151,12 @@ public:
 
 	virtual void HideProgress_Implementation() override;
 
+	UFUNCTION(Client, Reliable)
+	void ClientShowProgress(float CurrentValue);
+
+	UFUNCTION(Client, Reliable)
+	void ClientHideProgress();
+
 	virtual void SetEquippedMesh_Implementation(UStaticMesh* NewMesh, bool bIsRanged) override;
 
 	virtual UInventoryComponent* GetInventoryComponent_Implementation() override;

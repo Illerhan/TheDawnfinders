@@ -237,8 +237,12 @@ void AAPlayerCharacter::DoDamagePostProcess_Implementation(float Duration) {}
 
 void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 {
-    if(!GetController()) return;
-    if(!GetController()->IsLocalController()) return;
+    if (!GetController()) { 
+        ClientShowProgress(CurrentValue); return; 
+    }
+    if (!GetController()->IsLocalController()) {
+        ClientShowProgress(CurrentValue); return;
+    }
 
     if (!PlayerWidget->GetProgressBar()) return;
 
@@ -247,6 +251,36 @@ void AAPlayerCharacter::ShowProgress_Implementation(float CurrentValue)
 }
 
 void AAPlayerCharacter::HideProgress_Implementation()
+{
+    if (!GetController()) {
+        ClientHideProgress();
+        return;
+    }
+    if (!GetController()->IsLocalController()) { 
+        ClientHideProgress(); 
+        return;
+    }
+
+    if (!PlayerWidget->GetProgressBar()) return;
+
+    UE_LOG(LogTemp, Display, TEXT("STOOOOOP"));
+
+    UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
+    ProgressBar->Hide();
+}
+
+void AAPlayerCharacter::ClientShowProgress_Implementation(float CurrentValue)
+{
+    if (!GetController()) return;
+    if (!GetController()->IsLocalController()) return;
+
+    if (!PlayerWidget->GetProgressBar()) return;
+
+    UWorldProgressBar* ProgressBar = PlayerWidget->GetProgressBar();
+    ProgressBar->ActualiseProgress(CurrentValue);
+}
+
+void AAPlayerCharacter::ClientHideProgress_Implementation()
 {
     if (!GetController()) return;
     if (!GetController()->IsLocalController()) return;

@@ -105,6 +105,8 @@ void ACustomPlayerController::Server_HoldMule_Implementation(float DeltaTime)
 	if (HoldTimer <= 0.f)
 	{
 		Server_CallMule(OwningPlayer);
+
+		OwningPlayer->Execute_HideProgress(OwningPlayer);
 		Server_StopHoldMule();
 	}
 		
