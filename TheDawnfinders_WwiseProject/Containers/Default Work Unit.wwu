@@ -12371,6 +12371,157 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
+								<RandomSequenceContainer Name="Gear" ID="{49295A3B-ED71-47ED-B3D7-3721B1825EB1}" ShortID="1037412738">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Gear_01" ID="{71716814-7854-4EE6-B77D-E5F0BC89F69A}" ShortID="759533608">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Gear_01" ID="{BC31CEC9-4867-403B-AF74-4C8AE9436FA1}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.152867219087157"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.819368294307164"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.59874289562405"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Gear_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="22117339"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Gear_01" ID="{BC31CEC9-4867-403B-AF74-4C8AE9436FA1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Gear_02" ID="{0E0828B9-EAC9-4BC2-AB10-DDF8005176CE}" ShortID="476891870">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Gear_02" ID="{26DF4337-0B0A-4959-98F4-F9B0AB834938}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.275160994356883"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.02115302350221"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.56816945180662"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Gear_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1054997685"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Gear_02" ID="{26DF4337-0B0A-4959-98F4-F9B0AB834938}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Gear_03" ID="{7298807A-946E-49CE-917E-9840592AF20F}" ShortID="148975720">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Gear_03" ID="{605B6C74-71DD-43A4-B4B1-1E69894320D9}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.360766637045692"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.14344679877194"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.54371069675267"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Gear_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1017521344"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Gear_03" ID="{605B6C74-71DD-43A4-B4B1-1E69894320D9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Gear_04" ID="{3A8C5449-D832-4C73-A43E-46503B6DB4BF}" ShortID="950503091">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Gear_04" ID="{137238C6-84D8-4A1F-A0E6-DEACD3AA6371}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.10710150143231"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.62629087365492"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Gear_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="241614933"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Gear_04" ID="{137238C6-84D8-4A1F-A0E6-DEACD3AA6371}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Gear_05" ID="{6C9065AA-46D8-47C0-8A56-80F0635145F1}" ShortID="691566146">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Gear_05" ID="{197A49EC-49B8-4682-94BA-9AC22E8625D6}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.366881325809178"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="1.22905244146075"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.61097227315102"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Gear_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="966875969"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Gear_05" ID="{197A49EC-49B8-4682-94BA-9AC22E8625D6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">

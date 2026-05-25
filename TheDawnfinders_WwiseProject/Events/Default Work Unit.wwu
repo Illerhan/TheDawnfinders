@@ -917,6 +917,17 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Event Name="Play_Gear" ID="{7853483D-05F3-4B2C-8BD3-B12254D86DED}">
+									<ChildrenList>
+										<Action Name="" ID="{C1E04841-AF77-4F43-8E25-08282A83502D}" ShortID="728197760">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Gear" ID="{49295A3B-ED71-47ED-B3D7-3721B1825EB1}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">
