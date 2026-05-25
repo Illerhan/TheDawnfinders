@@ -858,6 +858,65 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Metal" ID="{AB4A312C-B420-4364-90A0-B8EEAD7CEE90}" ShortID="760196797">
+									<ChildrenList>
+										<Event Name="Play_MetalDoor" ID="{1B9F364A-5205-4561-A75B-C3CAA0034882}">
+											<ChildrenList>
+												<Action Name="" ID="{3E0DB6FD-2270-40E2-9957-CCF65DEE274A}" ShortID="517069177">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="MetalDoor" ID="{3AFC10BD-4A2B-4B41-B7EE-67B277F784CF}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_MetalCage" ID="{6B0DD5B7-AE2A-4E6C-967E-8E05A6B81E2B}">
+											<ChildrenList>
+												<Action Name="" ID="{BD3A1351-44EA-4E87-BCA1-04AE38292C96}" ShortID="88621139">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="MetalCage" ID="{1F5D6A1C-9BDF-4F61-94AF-52D57C43EFFF}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Rocks" ID="{7C1B6854-1CB8-4600-8302-F2B11FA9E2F7}" ShortID="229482146">
+									<ChildrenList>
+										<Event Name="Play_RockCrumble" ID="{5B458B83-A529-414B-B745-253E32C6B3E8}">
+											<PropertyList>
+												<Property Name="CooldownTime" Type="Real32">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{424094DE-7B3C-4678-A9A2-F98B6F685347}" ShortID="437603603">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Crumble" ID="{B5259F4D-7CF6-40F2-930D-447F70071DB5}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_RockImpact" ID="{7DC2EACF-CD63-4ECF-9314-13EBEA6FFF75}">
+											<ChildrenList>
+												<Action Name="" ID="{705F2B77-62E7-4627-B261-EE2D95D9EEF8}" ShortID="712182942">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Impact" ID="{72A3CD52-3274-424B-B8C5-7DE7E6199D81}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{C6CD643B-EC58-4CC7-8667-53478C40EBCF}" ShortID="585071304">

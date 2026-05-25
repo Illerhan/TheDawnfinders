@@ -11885,6 +11885,492 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Metal" ID="{C5D5315D-A5BD-4230-AABC-740A48869C36}" ShortID="690752876">
+									<ChildrenList>
+										<RandomSequenceContainer Name="MetalDoor" ID="{3AFC10BD-4A2B-4B41-B7EE-67B277F784CF}" ShortID="86803420">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="MetalDoor_01" ID="{CB8A1B3E-56EF-4DE1-BBE0-A13E77B69AD4}" ShortID="394731169">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MetalDoor_01" ID="{E4F01516-3402-40E0-8FC4-8A79A7BE9413}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="2.1475703319761"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="3.89022862751794"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>MetalDoor_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="224714595"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MetalDoor_01" ID="{E4F01516-3402-40E0-8FC4-8A79A7BE9413}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MetalCage" ID="{1F5D6A1C-9BDF-4F61-94AF-52D57C43EFFF}" ShortID="655451090">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="MetalCage_01" ID="{C07E5A0A-6E91-4A7D-A3AF-F3DD6D7BDF9B}" ShortID="868212285">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MetalCage_01" ID="{91A6F27F-48C0-472F-BC11-9A385EE31597}">
+															<Language>SFX</Language>
+															<AudioFile>MetalCage_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="491442918"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MetalCage_01" ID="{91A6F27F-48C0-472F-BC11-9A385EE31597}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MetalCage_02" ID="{71B8E37D-87DD-4232-88E9-D01CB1751F3D}" ShortID="33865170">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MetalCage_02" ID="{20847670-0AD7-4D37-B4ED-3FF9EDD765FE}">
+															<Language>SFX</Language>
+															<AudioFile>MetalCage_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="853776202"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MetalCage_02" ID="{20847670-0AD7-4D37-B4ED-3FF9EDD765FE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MetalCage_03" ID="{71320914-350B-4548-8839-F2721D88C499}" ShortID="953911425">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MetalCage_03" ID="{B532BA5A-C39A-4133-B937-78FAA0CEB3DB}">
+															<Language>SFX</Language>
+															<AudioFile>MetalCage_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="726642813"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MetalCage_03" ID="{B532BA5A-C39A-4133-B937-78FAA0CEB3DB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Rocks" ID="{D74F5C36-9ECA-44B7-A3AC-74DE4A0246CB}" ShortID="389249493">
+									<ChildrenList>
+										<RandomSequenceContainer Name="Crumble" ID="{B5259F4D-7CF6-40F2-930D-447F70071DB5}" ShortID="226772739">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="RockCrumble_01" ID="{B3A512EF-C514-4F21-A96E-6622C671620C}" ShortID="356612494">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_01" ID="{60E6D76B-688A-454C-858D-EE788CDA93FD}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="888594016"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_01" ID="{60E6D76B-688A-454C-858D-EE788CDA93FD}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockCrumble_02" ID="{3ADE2169-2ECA-42CF-88D5-9E6A44896DEF}" ShortID="238130831">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_02" ID="{3EC53B26-CFDD-4446-8261-A822F469C7C5}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="621299877"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_02" ID="{3EC53B26-CFDD-4446-8261-A822F469C7C5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockCrumble_03" ID="{377511AF-055B-438E-95D3-81C0DD4892EA}" ShortID="913288832">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_03" ID="{59751E41-D94D-4139-A03A-81890B97242A}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="125460741"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_03" ID="{59751E41-D94D-4139-A03A-81890B97242A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockCrumble_04" ID="{0AA170B0-EC54-49C7-AAFB-2E06821D8FE1}" ShortID="163356644">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_04" ID="{083B06C0-689C-4ED8-BDBD-8D085A39EC7C}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="758399838"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_04" ID="{083B06C0-689C-4ED8-BDBD-8D085A39EC7C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockCrumble_05" ID="{586E8954-F94F-44C5-B367-970BBE49FDEF}" ShortID="918659864">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_05" ID="{70CF9511-7E86-4928-AA5F-CF28FEAFDF1E}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="831849530"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_05" ID="{70CF9511-7E86-4928-AA5F-CF28FEAFDF1E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockCrumble_06" ID="{7BEA8FC1-2922-4A81-8979-2B1772DC7B24}" ShortID="472457652">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockCrumble_06" ID="{7A14C751-9E6D-4A31-B700-F9AB68ED5DA2}">
+															<Language>SFX</Language>
+															<AudioFile>RockCrumble_06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="605250251"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockCrumble_06" ID="{7A14C751-9E6D-4A31-B700-F9AB68ED5DA2}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Impact" ID="{72A3CD52-3274-424B-B8C5-7DE7E6199D81}" ShortID="974756995">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Att_Global" ID="{34A5C513-0CEE-48AF-B12F-2813C4AE1AB3}" WorkUnitID="{C9B78DE8-5F26-4F70-897E-710AB2BCF3BD}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="RockImpact_01" ID="{CB6245A6-8B3E-4820-9319-BEE1D305D49A}" ShortID="311481912">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_01" ID="{62DF1900-0E0C-44DB-AD6C-6E4FB4E8AB27}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="129534121"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_01" ID="{62DF1900-0E0C-44DB-AD6C-6E4FB4E8AB27}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_02" ID="{8CF8CF9C-AE26-46AF-BFF8-979C59257597}" ShortID="363453903">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_02" ID="{8DC4E081-C589-4E85-B755-F30758BC0FF9}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="981099259"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_02" ID="{8DC4E081-C589-4E85-B755-F30758BC0FF9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_03" ID="{AEB40220-2529-4FEB-84A1-16040543F4A2}" ShortID="752684163">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_03" ID="{7130A765-B5DC-406A-AFBB-09DC49EDE156}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="714890982"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_03" ID="{7130A765-B5DC-406A-AFBB-09DC49EDE156}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_04" ID="{6BCBFF46-D038-48AC-8767-26B8414DCA91}" ShortID="376455010">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_04" ID="{6751751D-19A3-430D-9952-3BDA5D43C306}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="17611559"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_04" ID="{6751751D-19A3-430D-9952-3BDA5D43C306}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_05" ID="{A0BD67A0-56DE-4260-AAED-17AFC5D71ADC}" ShortID="233540386">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_05" ID="{B550FEA6-ADE7-44D7-B557-26DCA5DB2BB9}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="607543959"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_05" ID="{B550FEA6-ADE7-44D7-B557-26DCA5DB2BB9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_06" ID="{BFF8E5C2-2350-4955-8381-16149C7646BA}" ShortID="288434577">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_06" ID="{94E59DA4-AC81-4BDF-9EF2-57E4D40BF29D}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="335762502"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_06" ID="{94E59DA4-AC81-4BDF-9EF2-57E4D40BF29D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_07" ID="{189C298D-26FB-4880-817E-90459F8B553B}" ShortID="531061596">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_07" ID="{F2B2A437-5513-4886-B5C4-3E202F26363C}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_07.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="309534495"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_07" ID="{F2B2A437-5513-4886-B5C4-3E202F26363C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RockImpact_08" ID="{B53FA1E2-2096-426C-9F44-24A119E46795}" ShortID="761150383">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BA1A5EF-DD21-4A17-9654-FEA351FAE16F}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{21DE3849-150C-4489-B764-B8BB1265AE3B}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RockImpact_08" ID="{F79E059B-25A7-4FC1-9152-04DD94B595FC}">
+															<Language>SFX</Language>
+															<AudioFile>RockImpact_08.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="221749602"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RockImpact_08" ID="{F79E059B-25A7-4FC1-9152-04DD94B595FC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Objets" ID="{81A1F9EC-20C9-4F98-8415-187159346623}" ShortID="33775413">
