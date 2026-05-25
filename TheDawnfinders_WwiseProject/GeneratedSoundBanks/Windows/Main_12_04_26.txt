@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	2355043	Play_UI_Text_Bubble			\Default Work Unit\UI\Play_UI_Text_Bubble	
+	39388429	Stop_DownedHeartbeat			\Default Work Unit\Joueur\Etats\Stop_DownedHeartbeat	
 	50193659	Play_Giant_Chain			\Default Work Unit\Objets\Elements de LD\Play_Giant_Chain	
 	170675880	Play_FireLoop			\Default Work Unit\Objets\Elements de LD\Braseros\Play_FireLoop	
 	188892210	Play_PoisonOpen			\Default Work Unit\Objets\Elements de LD\PoisonStatues\Play_PoisonOpen	
@@ -344,7 +345,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	438766142	Dodge_01	.cache\75\{75F998F0-A3D3-0877-6801-1DE473C07D9F}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Dodge_01		139228
 	439295761	FlameLoop	.cache\87\{8727051C-89EE-76CD-0FB3-BEF549A360DA}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Braseros\FlameLoop\FlameLoop		10395872
 	441052588	FlameOn	.cache\CC\{CC69FF85-B64C-5557-CEED-88D32C5D71EA}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Braseros\FlameOn\FlameOn		329744
-	444134671	RollingBoulder	.cache\DE\{DE08AEF5-CF6C-5BEB-C014-02922CA698C2}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\RollingBoulder		829564
+	444134671	RollingBoulder	.cache\73\{73A26DBC-9865-9EBF-2C8A-A144ED5137F5}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\RollingBoulder		829564
 	444785981	GRAB8	.cache\68\{68EC7D32-176A-8F93-C82E-3E89EA03F9BF}.wem		\Containers\Default Work Unit\Joueur\Actions\Player_Interact\Basic2\GRAB8		139872
 	449139959	BonesWalk 1	.cache\A0\{A02C4FA2-6C51-28CC-C642-252F5DA8CE87}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\BonesWalk\BonesRun\BonesWalk 1		41312
 	450663081	DynamiteFuse_02	.cache\A0\{A0377B70-33B6-5980-C741-44379B1298B6}.wem		\Containers\Default Work Unit\Objets\Objets\Grenades\DynamiteFuse\DynamiteFuse_02		447928
@@ -423,9 +424,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	596878634	DownedFall 3	.cache\BD\{BD695707-2502-7441-C3AB-62E92373472D}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 3		243808
 	598258762	Gold_Grab-09	.cache\30\{301A16D2-97E7-6021-B8A5-BC9FF6193B38}.wem		\Containers\Default Work Unit\Objets\Objets\Player_PickGold\Gold\Gold_Grab-09		99552
 	602489578	Player_Shot-07	.cache\F4\{F4C966DA-11D9-7AB0-DA00-E89B672AFB90}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-07		240672
-	602957601	BoulderImpact_04	.cache\CC\{CCA9C89C-711C-38FD-F444-5FE756BA3FE6}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_04		579480
+	602957601	BoulderImpact_04	.cache\65\{65ECACAB-5BC7-3996-BDDE-CC1F2DAFB976}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_04		579480
 	606111130	FootstepsSandWalk 3	.cache\A7\{A750C6D5-FCD7-3401-EEE7-362A878C9DDE}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\SandWalkOLD\FootstepsSandWalk 3		128624
-	609335814	BoulderImpact_03	.cache\BA\{BA449893-20C6-800D-A052-542EFC0E43CA}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_03		540952
+	609335814	BoulderImpact_03	.cache\57\{570182BE-A302-380A-85DC-1BC524F85415}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_03		540952
 	614599972	ZELOTH_CLAC-cm-01	.cache\84\{84E5CA5A-9284-8E90-73EB-A5FCF0E538B8}.wem		\Containers\Default Work Unit\Enemis\Zeloth\Zeloth_IdleOLD\ZELOTH_CLAC-cm-01		992864
 	614606467	FootstepsWoodRun 7	.cache\95\{95FC8603-4F24-8172-3DF7-364E2EA750F0}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Run\WoodRun\FootstepsWoodRun 7		54896
 	616655438	FS_Follower_05	.cache\50\{506444A0-298D-8080-AD7E-722C61225442}.wem		\Containers\Default Work Unit\Enemis\Fidele\BasicEnemyMovement\BasicEnnemyWalk\FS_Follower_05		114636
@@ -619,7 +620,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	997463245	Audio 4_cm_02	.cache\AD\{AD5354AD-DCAD-F3B8-BF71-2E793EFF0D37}.wem		\Containers\Default Work Unit\Enemis\Zeloth\Zeloth_IdleOLD\Audio 4_cm_02		3232864
 	997730831	Dodge_03	.cache\34\{34F8457B-EF08-7810-F32F-BA5575209BE5}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Roll\Dodge_03		168912
 	999067593	Navigation_04	.cache\63\{63684AFF-B0A9-9ED3-BEB2-739ABC3102EB}.wem		\Containers\Default Work Unit\UI\Navigation\Navigation\Navigation_04		59508
-	1002902072	BoulderImpact_01	.cache\41\{419EABC8-EE50-FF85-E698-26DB8F9BF4B2}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_01		528852
+	1002902072	BoulderImpact_01	.cache\E3\{E3D5BD1A-10B9-1BC5-8D3C-55DCDB4068E5}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Boulder\ImpactBoulder\BoulderImpact_01		528852
 	1004722242	Vivianite_03	.cache\1B\{1B01C60D-0A4E-33BF-3875-1B4FE83E3ED2}.wem		\Containers\Default Work Unit\Objets\Elements de LD\Vivianite\Vivianite\Vivianite_03		179936
 	1005848849	Player_Shot-03	.cache\2C\{2C2DC184-D360-5CC2-9D94-6D3EC2DFDA0E}.wem		\Containers\Default Work Unit\Objets\Objets\Player_Shot\Player_Shot-03		220064
 	1006390661	Shatter	.cache\A8\{A876CCD3-8022-8EF3-B177-C0FB08AE5222}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\Shatter		592100

@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{7EA65FB8-6A15-C285-E232-61F40AC9CAFA}",
+    "Hash": "{2C193CCD-6C16-BBCE-2A73-DA2FBA0AF40F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -1669,7 +1669,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "RollingBoulder.wav",
-      "CachePath": "DE/{DE08AEF5-CF6C-5BEB-C014-02922CA698C2}.wem"
+      "CachePath": "73/{73A26DBC-9865-9EBF-2C8A-A144ED5137F5}.wem"
      },
      {
       "Id": "444785981",
@@ -2301,7 +2301,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BoulderImpact_04.wav",
-      "CachePath": "CC/{CCA9C89C-711C-38FD-F444-5FE756BA3FE6}.wem"
+      "CachePath": "65/{65ECACAB-5BC7-3996-BDDE-CC1F2DAFB976}.wem"
      },
      {
       "Id": "606111130",
@@ -2317,7 +2317,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BoulderImpact_03.wav",
-      "CachePath": "BA/{BA449893-20C6-800D-A052-542EFC0E43CA}.wem"
+      "CachePath": "57/{570182BE-A302-380A-85DC-1BC524F85415}.wem"
      },
      {
       "Id": "614599972",
@@ -3869,7 +3869,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BoulderImpact_01.wav",
-      "CachePath": "41/{419EABC8-EE50-FF85-E698-26DB8F9BF4B2}.wem"
+      "CachePath": "E3/{E3D5BD1A-10B9-1BC5-8D3C-55DCDB4068E5}.wem"
      },
      {
       "Id": "1004722242",
@@ -9086,6 +9086,45 @@
       ]
      },
      {
+      "Id": "39388429",
+      "Name": "Stop_DownedHeartbeat",
+      "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Stop_DownedHeartbeat",
+      "GUID": "{64900742-8DF5-4E18-B255-B289847DC0AC}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "MediaRefs": [
+       {
+        "Id": "39757222"
+       },
+       {
+        "Id": "108070285"
+       },
+       {
+        "Id": "111688257"
+       },
+       {
+        "Id": "260955044"
+       },
+       {
+        "Id": "657732204"
+       },
+       {
+        "Id": "710575632"
+       },
+       {
+        "Id": "794803150"
+       },
+       {
+        "Id": "797744101"
+       },
+       {
+        "Id": "1030339949"
+       }
+      ]
+     },
+     {
       "Id": "2256731510",
       "Name": "Stop_PoisonGaz",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\PoisonStatues\\Stop_PoisonGaz",
@@ -9185,6 +9224,6 @@
     ]
    }
   ],
-  "FileHash": "{F3150CC4-4414-228C-1697-3D482DF010D9}"
+  "FileHash": "{B110D5A2-A3E9-4B7B-00B2-A7A4F72F818F}"
  }
 }
