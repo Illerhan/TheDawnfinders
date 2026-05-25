@@ -92,7 +92,7 @@ protected :
 	float CurrentAddedSpeed = 1;
 	
 	UFUNCTION(NetMulticast,Unreliable, Category = "Doors")
-	void Multi_OpeningSound();
+	virtual void Multi_OpeningSound();
 
 	
 };
