@@ -40,6 +40,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1432112630	Play_OpenInventory			\Default Work Unit\UI\Inventory\Play_OpenInventory	
 	1503317502	Play_BasicEnemyDeath			\Default Work Unit\Enemis\Fidele\Play_BasicEnemyDeath	
 	1554430565	Play_BulletReload			\Default Work Unit\Objets\Objets\Play_BulletReload	
+	1579094162	Play_Flashbang			\Default Work Unit\Objets\Objets\Grenades\Play_Flashbang	
 	1653748802	Play_StoneWalk			\Default Work Unit\Joueur\Deplacement\Play_StoneWalk	
 	1660008929	Play_Door_Open			\Default Work Unit\Objets\Elements de LD\Door_Open\Play_Door_Open	
 	1662667678	Play_WoodWalk			\Default Work Unit\Joueur\Deplacement\Play_WoodWalk	
@@ -617,6 +618,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	916772813	FollowerHurt_02	.cache\4F\{4FDD80DD-0DA3-107D-6247-1DC71298A7EF}.wem		\Containers\Default Work Unit\Enemies\Fidele\BasicEnemyDamage\FollowerHurt_02		211316
 	925504207	DownedFall 1	.cache\C5\{C53F64FE-A034-A938-27EA-C9188D2190C7}.wem		\Containers\Default Work Unit\Joueur\Feedbacks\PlayerDying\DownedFall 1		225376
 	926524546	FollowerSuspicion_01	.cache\53\{53E3D99C-C2EF-96FF-FFB1-EF25EF662A32}.wem		\Containers\Default Work Unit\Enemies\Fidele\BasicEnemySuspicion\FollowerSuspicion_01		270024
+	926551357	Flashbang	.cache\72\{72181ECC-E69B-94DA-5AA7-CDD4BC7E4B1B}.wem		\Containers\Default Work Unit\Objets\Objets\Grenades\Flashbang		583272
 	927203698	FootstepsWoodCrackWalk 9	.cache\64\{6444D874-F220-3DD7-F783-622D8A361DF8}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalkCrack\FootstepsWoodCrackWalk 9		155552
 	927531506	Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01	.cache\94\{948AA6C1-CCDA-2DB8-EDF4-A9434127C5F8}.wem		\Containers\Default Work Unit\Ambiance\AMB_Hallucination\Creatures, Ethereal, Ghosts, Whispers In The Walls, Voices In Head 02 SND145550_02-01		847316
 	928559674	FootstepsWoodWalk 1	.cache\87\{8728F29D-3CFA-8823-E722-FAB54C573874}.wem		\Containers\Default Work Unit\Joueur\Actions\Deplacement\Walk\WoodWalk\FootstepsWoodWalk 1		131048

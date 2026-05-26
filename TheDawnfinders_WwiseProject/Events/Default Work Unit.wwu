@@ -1000,6 +1000,17 @@
 												</Action>
 											</ChildrenList>
 										</Event>
+										<Event Name="Play_Flashbang" ID="{439144AC-AB8D-4B56-B4C6-8D1680FFB6F6}">
+											<ChildrenList>
+												<Action Name="" ID="{45E1EF3D-0F6E-4F1F-B646-3A874AFC2A8B}" ShortID="802521943">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Flashbang" ID="{0D1BA187-95BB-4571-A9C0-15CC8D2B3B46}" WorkUnitID="{B1A76AD8-B2D5-49A2-B57C-E9F41449CA03}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 								<Event Name="Play_GunReload" ID="{1F73DD82-1C1C-41A8-9CE6-964A6123548A}">

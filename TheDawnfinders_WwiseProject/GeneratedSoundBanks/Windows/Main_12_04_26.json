@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B33C0B64-9757-4442-B1FF-C2FB452ECECB}",
     "Language": "SFX",
-    "Hash": "{8E424F01-4FF7-CBD5-74AB-9CE7B5FDF106}",
+    "Hash": "{6F34F9A5-FBC7-FA3D-3775-72C1918338F6}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_12_04_26",
     "ShortName": "Main_12_04_26",
     "Path": "Main_12_04_26.bnk",
@@ -3744,6 +3744,14 @@
       "CachePath": "53/{53E3D99C-C2EF-96FF-FFB1-EF25EF662A32}.wem"
      },
      {
+      "Id": "926551357",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Flashbang.wav",
+      "CachePath": "72/{72181ECC-E69B-94DA-5AA7-CDD4BC7E4B1B}.wem"
+     },
+     {
       "Id": "927203698",
       "Language": "SFX",
       "Streaming": "false",
@@ -5558,8 +5566,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedBreath",
       "GUID": "{490678ED-6B7F-4FDB-8A75-7B817113C191}",
       "DurationType": "OneShot",
-      "DurationMin": "1.5697534",
-      "DurationMax": "4.2924924",
+      "DurationMin": "1.1896507",
+      "DurationMax": "3.253101",
       "MediaRefs": [
        {
         "Id": "101298648"
@@ -5593,8 +5601,8 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Joueur\\Etats\\Play_DownedBreath_Female",
       "GUID": "{9B15390F-CF22-4FDA-92CE-D76F745E3228}",
       "DurationType": "OneShot",
-      "DurationMin": "1.5697534",
-      "DurationMax": "4.2924924",
+      "DurationMin": "1.1896507",
+      "DurationMax": "3.253101",
       "MediaRefs": [
        {
         "Id": "101298648"
@@ -6256,6 +6264,21 @@
       ]
      },
      {
+      "Id": "1579094162",
+      "Name": "Play_Flashbang",
+      "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Objets\\Grenades\\Play_Flashbang",
+      "GUID": "{439144AC-AB8D-4B56-B4C6-8D1680FFB6F6}",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "3.3057187",
+      "DurationMax": "3.3057187",
+      "MediaRefs": [
+       {
+        "Id": "926551357"
+       }
+      ]
+     },
+     {
       "Id": "2646372592",
       "Name": "Play_GainCoin",
       "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_GainCoin",
@@ -6277,6 +6300,7 @@
       "Name": "Play_Gear",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Gear",
       "GUID": "{7853483D-05F3-4B2C-8BD3-B12254D86DED}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "2.5437107",
       "DurationMax": "2.6262908",
@@ -6303,6 +6327,7 @@
       "Name": "Play_Giant_Chain",
       "ObjectPath": "\\Events\\Default Work Unit\\Objets\\Elements de LD\\Play_Giant_Chain",
       "GUID": "{DE3B8273-CD51-415A-A0DE-5FF45660A208}",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "9.825367",
       "DurationMax": "9.825367",
@@ -9889,6 +9914,6 @@
     ]
    }
   ],
-  "FileHash": "{6DC594F1-13B2-9041-4090-30C12FB3BED9}"
+  "FileHash": "{C6FBF913-2527-C23E-87EE-ACDDE05BA0D5}"
  }
 }
