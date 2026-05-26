@@ -179,7 +179,7 @@ void ABaseEnemy::Multicast_HideEye_Implementation()
 void ABaseEnemy::Multicast_EnterIdle_Implementation()
 {
     EnterIdleState();
-   if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
+    if (UMusicManager* MM = GetGameInstance()->GetSubsystem<UMusicManager>())
         MM->OnEnemyCalm();
  
 }
@@ -213,6 +213,13 @@ void ABaseEnemy::MulticastPlayMontage_Implementation(UAnimMontage* Montage, floa
 {
     UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
     if (!AnimInstance) return;
+
+    if (Montage == DeathMontage) {
+        if (UMusicManager* MM = GetMusicManager(this))
+        {
+            MM->OnEnemyCalm();
+        }
+    }
 
     AnimInstance->StopAllMontages(0.1f);
     AnimInstance->Montage_Play(Montage, Speed);
@@ -392,10 +399,6 @@ void ABaseEnemy::Die() {
     MulticastPlayMontage(DeathMontage, 1);
 
     bIsDead = true;
-    if (UMusicManager* MM = GetMusicManager(this))
-    {
-        MM->OnEnemyCalm();
-    }
 }
 
 

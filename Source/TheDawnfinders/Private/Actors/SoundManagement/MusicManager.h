@@ -58,8 +58,6 @@ public:
 private:
 	EMusicState CurrentState = EMusicState::None;
 	AAmbientMusicZone* CurrentZone = nullptr;
-
-	UPROPERTY(Replicated)
 	int32 AggroCount = 0; // Nombre d'ennemis en aggro
 
 	AkPlayingID CurrentMusicID = AK_INVALID_PLAYING_ID;
