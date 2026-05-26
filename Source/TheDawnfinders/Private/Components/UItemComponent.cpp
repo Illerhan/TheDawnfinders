@@ -407,6 +407,17 @@ void UItemComponent::UseConsumable()
 		case EConsumableEffectType::PlaceTrap:
 		{
 			if (!PlayerCharacter) return;
+
+			if (HealingSoundID)
+			{
+				FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+				if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+				{
+					AudioDevice->StopPlayingID(HealingSoundID);
+					HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+				}
+			}
+
 			if (PlayerCharacter->HasAuthority())
 				Server_PlaceLandmine_Implementation();
 			else
