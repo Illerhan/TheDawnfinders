@@ -93,6 +93,8 @@ void UItemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UItemComponent::SetEquippedItem(const TArray<FInventorySlot>& Slots, int CurrentSlotIndex)
 {
+
+
 	if (EquippedItem.CurrentInfos.ItemData != nullptr && EquippedItem.CurrentInfos.ItemData->ItemType == EItemType::Equipment)
 	{
 		UnequipWeapon();
