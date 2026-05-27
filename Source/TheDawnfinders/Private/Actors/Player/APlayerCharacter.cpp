@@ -482,6 +482,7 @@ void AAPlayerCharacter::ReceiveDamage_Implementation(float quantity, AActor* Ori
     if (!GetController()) return;
     if (!GetController()->IsLocalController()) return;
     if (CurrentState == EPlayerState::Fallen || CurrentState == EPlayerState::Dead) return;
+    if (InteractionComponent && InteractionComponent->GetCurrentAnimInteractible()) return;
 
     if(quantity > 0)
         HealthComponent->TakeDamage(quantity);
