@@ -1097,6 +1097,7 @@ void UItemComponent::Server_ActualiseInfos_Implementation(bool Aim, bool Reload)
 
 void UItemComponent::Multicast_ActualiseInfos_Implementation(bool Aim, bool Reload)
 {
+	if (!PlayerCharacter) return;
 	if (PlayerCharacter->IsLocallyControlled()) return;
 
 	bIsAiming = Aim;
