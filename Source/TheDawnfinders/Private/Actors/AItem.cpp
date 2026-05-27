@@ -72,7 +72,8 @@ void AItem::Multicast_Initialise_Implementation(FItemInfos Data)
 	ItemData = Data.ItemData;
 	ItemInfos = Data;
 
-	ItemMesh->SetVisibility(false);
+	if(ItemMesh)
+		ItemMesh->SetVisibility(false);
 
 	bShouldLevitate = true;
 }

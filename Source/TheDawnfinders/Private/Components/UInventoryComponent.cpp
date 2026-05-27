@@ -194,6 +194,8 @@ bool UInventoryComponent::HasRoomForItem(FItemInfos NewItem)
 
 void UInventoryComponent::RemoveCurrentItem()
 {
+	if (!InventorySlots.IsValidIndex(CurrentSlotIndex)) return;
+
 	if (!GetOwner()->HasAuthority())
 	{
 		TArray<FInventorySlot> NewSlots = InventorySlots;
@@ -216,6 +218,8 @@ void UInventoryComponent::RemoveCurrentItem()
 
 void UInventoryComponent::ServerRemoveCurrentItem_Implementation()
 {
+	if (!InventorySlots.IsValidIndex(CurrentSlotIndex)) return;
+
 	TArray<FInventorySlot> NewSlots = InventorySlots;
 
 	FInventorySlot& CurrentSlot = NewSlots[CurrentSlotIndex];
@@ -345,6 +349,8 @@ void UInventoryComponent::ServerThrow_Implementation()
 		FVector SpawnLocation = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 100.f;
 		FRotator SpawnRotation = FRotator::ZeroRotator;
 
+		if (!Cast<APawn>(GetOwner())) return;
+		
 		FActorSpawnParameters SpawnInfo;
 		SpawnInfo.Instigator = Cast<APawn>(GetOwner());
 
@@ -358,7 +364,6 @@ void UInventoryComponent::ServerThrow_Implementation()
 		if (DroppedItem)
 		{
 			DroppedItem->ItemData = CurrentSlot.CurrentInfos.ItemData;
-
 			DroppedItem->Initialise(CurrentSlot.CurrentInfos);
 
 			if (DroppedItem->ItemMesh && CurrentSlot.CurrentInfos.ItemData->ItemMesh)
@@ -371,6 +376,7 @@ void UInventoryComponent::ServerThrow_Implementation()
 
 			DroppedItem->bShouldLevitate = true;
 
+			if (!DroppedItem->GetRootComponent()) return;
 			if (UPrimitiveComponent* RootComponent = Cast<UPrimitiveComponent>(DroppedItem->GetRootComponent()))
 			{
 				if (RootComponent->IsSimulatingPhysics())
@@ -672,6 +678,8 @@ void UInventoryComponent::VerifyCurrentOverloadCount()
 
 int UInventoryComponent::GetCurrentOverloadCount()
 {
+	if (OverloadSlotBaseCount == 0) return 0;
+
 	int Count = 0;
 
 	for (int i = InventorySlotCount - 1; i >= InventorySlotCount - CurrentOverloadSlotCount; i--) {
