@@ -954,6 +954,7 @@ void UItemComponent::StopAim()
 
 void UItemComponent::Reload()
 {
+	if (!InventoryComponent->GetCurrentItem()) return;
 	if (!InventoryComponent->VerifyHasItemInInventory(CurrentWeaponData.NeededAmmo)) return;
 	if (CurrentWeaponData.MagazineSize == EquippedItem.CurrentInfos.AmmoInMagazine) return;
 	if (!(InventoryComponent->GetCurrentItem()->ItemType == EItemType::Equipment)) return;
