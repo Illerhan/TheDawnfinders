@@ -454,6 +454,7 @@ void UInteractionComponent::ClientStopInteract_Implementation(AActor* Interactib
 void UInteractionComponent::CancelInteraction()
 {
 	if (CurrentAnimInteractible) {
+		if (!Cast<AInteractibleObjects>(CurrentAnimInteractible)) return;
 		if (Cast<AInteractibleObjects>(CurrentAnimInteractible)->GetAnimationIsActive()) {
 			return;
 		}
