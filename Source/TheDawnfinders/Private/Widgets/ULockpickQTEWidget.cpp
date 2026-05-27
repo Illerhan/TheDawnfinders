@@ -57,7 +57,7 @@ bool ULockpickQTEWidget::PressButton()
 
     DoQTEStep();   // Consumes durability if needed
 
-    if (!(CurrentAngle > 360 - SuccessPercent * 0.5f) && !(CurrentAngle < SuccessPercent * 0.5f)) {
+    if (!(CurrentAngle > 360 - SuccessPercent * 0.75f) && !(CurrentAngle < SuccessPercent * 0.75f)) {
         PlayFailAnim();
         FailQTEStep();   // Consumes durability if needed
 
