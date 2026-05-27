@@ -267,6 +267,19 @@ void UItemComponent::Multi_PlayHealSound_Implementation()
 				
 }
 
+void UItemComponent::Multi_StopHealSound_Implementation()
+{
+	if (HealingSoundID)
+	{
+		FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+		if (AudioDevice && HealingSoundID != AK_INVALID_PLAYING_ID)
+		{
+			AudioDevice->StopPlayingID(HealingSoundID);
+			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
+		}
+	}
+}
+
 void UItemComponent::ActualiseUseProgress(float DeltaTime)
 {
 	if (!bIsUsingItem) return;
@@ -303,6 +316,8 @@ void UItemComponent::UseConsumable()
 	{
 		IPlayerInterface::Execute_HideProgress(GetOwner());
 		IPlayerInterface::Execute_SetCurrentPlayerState(GetOwner(), EPlayerState::None, false);
+
+		Multi_StopHealSound();
 	}
 
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
@@ -437,7 +452,6 @@ void UItemComponent::UseConsumable()
 	}
 }
 
-
 void UItemComponent::StopMainAction()
 {
 	if (EquippedItem.CurrentInfos.ItemData == nullptr) return;
@@ -470,6 +484,8 @@ void UItemComponent::StopMainAction()
 			HealingSoundID = AK_INVALID_PLAYING_ID; // Reset
 		}
 	}
+
+	Multi_StopHealSound();
 
 	if (!PlayerCharacter) return;
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
