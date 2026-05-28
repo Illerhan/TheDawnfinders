@@ -152,10 +152,10 @@ public :
 
 // === PUBLIC PROPERTIES ===
 public:
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	AActor* CurrentInteractible = nullptr;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	AActor* CurrentAnimInteractible = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
@@ -170,8 +170,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	AAPlayerCharacter* AllyPlayer;
 
-
-// === PRIVATE PROPERTIES ===
 public:
 	UPROPERTY(Replicated, EditAnywhere,BlueprintReadWrite,Blueprintable)
 	ACarriable* CarriedItem;
@@ -179,6 +177,8 @@ public:
 	UPROPERTY(Replicated, BlueprintReadWrite)
 	bool bIsInInteraction;
 	
+
+	// === PRIVATE PROPERTIES ===
 private:
 	UPROPERTY()
 	FTimerHandle HelpTimer;
