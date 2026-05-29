@@ -39,6 +39,7 @@ void AAmbientMusicZone::OnPlayerEnter(UPrimitiveComponent* OverlappedComp, AActo
 
 	MM->EnterZone(this);
 
+	UE_LOG(LogTemp, Display, TEXT("START MUSIC"));
 }
 
 void AAmbientMusicZone::OnPlayerExit(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
